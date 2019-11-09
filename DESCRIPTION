@@ -1,0 +1,11 @@
+Package: RcppCGAL
+Type: Package
+Title: Rcpp Integration for CGAL (Computational Geometry Algorithms Library)
+Version: 0.5
+Date: 2019-11-09
+Author: Eric Dunipace
+Maintainer: Eric Dunipace <edunipace@g.harvard.edu>
+Description: Creates a header only package for linking to CGAL 5.0 in Rcpp (https://www.cgal.org
+License: What license is it under?
+Imports: Rcpp (>= 1.0.3), RcppEigen (>= 0.3.3.5.0)
+LinkingTo: Rcpp, RcppEigen, BH
