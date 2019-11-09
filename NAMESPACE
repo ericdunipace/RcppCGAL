@@ -1,4 +1,3 @@
-useDynLib(RcppCGAL)
-import(RcppEigen)
-importFrom(Rcpp, evalCpp)
+#import(RcppEigen)
+#importFrom(Rcpp, evalCpp)
 exportPattern("^[[:alpha:]]+")
