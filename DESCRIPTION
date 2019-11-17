@@ -6,7 +6,7 @@ Date: 2019-11-09
 Author: Eric Dunipace
 Maintainer: Eric Dunipace <edunipace@g.harvard.edu>
 Description: Creates a header only package to link to CGAL 5.0 in Rcpp (https://www.cgal.org
-License: GPL (>=4)
+License: GPL (>=3)
 LinkingTo: RcppEigen, BH
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
