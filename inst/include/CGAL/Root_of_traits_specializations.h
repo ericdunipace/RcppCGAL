@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/Root_of_traits_specializations.h $
-// $Id: Root_of_traits_specializations.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Root_of_traits_specializations.h $
+// $Id: Root_of_traits_specializations.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -93,11 +93,11 @@ public:
           return new Lazy_exact_ro2<NT>(a, b, c, smaller);
         };
     };
-  
+
 private:
   typedef CGAL::Algebraic_structure_traits<Root_of_2> AST;
 public:
-  typedef typename AST::Square  Square; 
+  typedef typename AST::Square  Square;
   typedef typename AST::Inverse Inverse;
 
   struct Make_sqrt{

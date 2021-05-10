@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_construction_ss_visitor.h $
-// $Id: Arr_construction_ss_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_construction_ss_visitor.h $
+// $Id: Arr_construction_ss_visitor.h becf548 2020-08-12T12:46:49+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -142,6 +142,9 @@ public:
   /* A notification issued before the sweep process starts. */
   inline void before_sweep();
 
+  /* A notification issued after the sweep process stops. */
+  inline void after_sweep();
+
   /*!
    * A notification invoked before the sweep-line starts handling the given
    * event.
@@ -267,7 +270,21 @@ private:
 // Notifies the helper that the sweep process now starts.
 template <typename Hlpr, typename Vis>
 void Arr_construction_ss_visitor<Hlpr, Vis>::before_sweep()
-{ m_helper.before_sweep(); }
+{
+  m_helper.before_sweep();
+  m_arr->set_sweep_mode(true);
+}
+
+
+//-----------------------------------------------------------------------------
+// A notification issued after the sweep process stops.
+template <typename Hlpr, typename Vis>
+void Arr_construction_ss_visitor<Hlpr, Vis>::after_sweep()
+{
+  m_arr->clean_inner_ccbs_after_sweep();
+  m_arr->set_sweep_mode(false);
+}
+
 
 //-----------------------------------------------------------------------------
 // A notification invoked before the sweep-line starts handling the given

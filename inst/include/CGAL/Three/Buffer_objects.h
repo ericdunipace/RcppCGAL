@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Three/include/CGAL/Three/Buffer_objects.h $
-// $Id: Buffer_objects.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Three/include/CGAL/Three/Buffer_objects.h $
+// $Id: Buffer_objects.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -46,16 +46,16 @@ struct Vao{
   {
     vao->create();
   }
-  
+
   //!
   //! \brief Creates a `Vao` from another one.
-  //! \param program the `QOpenGLShaderProgram` corresponding to the one of `vao` but from 
+  //! \param program the `QOpenGLShaderProgram` corresponding to the one of `vao` but from
   //! the right viewer.
-  //! \param vao the Vao to copy. 
-  //! 
-  //! All `vao`'s vbos will be shared. Use it for shared viewers. 
+  //! \param vao the Vao to copy.
+  //!
+  //! All `vao`'s vbos will be shared. Use it for shared viewers.
   //! `initializeBuffers()` will have to be called again.
-  //! 
+  //!
   //! \attention This must be called within a valid OpenGLContext.
   //! Most of the time, initGL() functions are safe places to do so.
   //!

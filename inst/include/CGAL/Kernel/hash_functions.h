@@ -3,13 +3,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_23/include/CGAL/Kernel/hash_functions.h $
-// $Id: hash_functions.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Kernel/hash_functions.h $
+// $Id: hash_functions.h 9bf61b7 2020-04-22T11:02:16+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Simon Giraudot
- 
+
 #ifndef CGAL_KERNEL_HASH_FUNCTIONS_H
 #define CGAL_KERNEL_HASH_FUNCTIONS_H
 
@@ -57,8 +57,8 @@ template <typename K>
 inline std::enable_if_t<std::is_same<typename K::Rep_tag, Cartesian_tag>::value, std::size_t>
 hash_value (const Iso_rectangle_2<K>& iso_rectangle)
 {
-  std::size_t result = hash_value(iso_rectangle.min());
-  boost::hash_combine(result, hash_value(iso_rectangle.max()));
+  std::size_t result = hash_value((iso_rectangle.min)());
+  boost::hash_combine(result, hash_value((iso_rectangle.max)()));
   return result;
 }
 
@@ -126,8 +126,8 @@ template <typename K>
 inline std::enable_if_t<std::is_same<typename K::Rep_tag, Cartesian_tag>::value, std::size_t>
 hash_value (const Iso_cuboid_3<K>& iso_cuboid)
 {
-  std::size_t result = hash_value(iso_cuboid.min());
-  boost::hash_combine(result, hash_value(iso_cuboid.max()));
+  std::size_t result = hash_value((iso_cuboid.min)());
+  boost::hash_combine(result, hash_value((iso_cuboid.max)()));
   return result;
 }
 

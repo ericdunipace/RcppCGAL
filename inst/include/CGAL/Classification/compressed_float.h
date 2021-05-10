@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Classification/include/CGAL/Classification/compressed_float.h $
-// $Id: compressed_float.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/compressed_float.h $
+// $Id: compressed_float.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -39,18 +39,18 @@ typedef unsigned short compressed_float;
 #  else // Default = compress with unsigned char
 typedef unsigned char compressed_float;
 #  endif
- 
-inline compressed_float compress_float (const float& f, const float& min = 0.f, const float& max = 1.f)
+
+inline compressed_float compress_float (const float& f, const float& fmin = 0.f, const float& fmax = 1.f)
 {
   return static_cast<compressed_float>
-    (float(std::numeric_limits<compressed_float>::max()) * (f - min) / (max - min));
+    (float((std::numeric_limits<compressed_float>::max)()) * (f - fmin) / (fmax - fmin));
 }
 
-inline float decompress_float (const compressed_float& t, const float& min = 0.f, const float& max = 1.f)
+inline float decompress_float (const compressed_float& t, const float& fmin = 0.f, const float& fmax = 1.f)
 {
-  return ((max - min) * (t / float(std::numeric_limits<compressed_float>::max())) + min);
+  return ((fmax - fmin) * (t / float((std::numeric_limits<compressed_float>::max)())) + fmin);
 }
-  
+
 #endif
 
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Snap_rounding_2/include/CGAL/Snap_rounding_kd_2.h $
-// $Id: Snap_rounding_kd_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Snap_rounding_2/include/CGAL/Snap_rounding_kd_2.h $
+// $Id: Snap_rounding_kd_2.h 3c7eb2c 2020-01-07T15:31:07+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,6 +25,7 @@
 #include <CGAL/utility.h>
 #include <CGAL/assertions.h>
 #include <CGAL/Dimension.h>
+#include <CGAL/number_type_config.h>
 
 #include <boost/type_traits/is_pointer.hpp>
 
@@ -394,7 +395,7 @@ public:
   Multiple_kd_tree(const Point_saved_pair_list & inp_points_list,
                    int inp_number_of_trees,
                    const Segment_list & seg_list) :
-    pi(3.1415), half_pi(1.57075),
+    pi(CGAL_PI), half_pi(0.5 * CGAL_PI),
     number_of_trees(inp_number_of_trees), input_points_list(inp_points_list)
   {
 

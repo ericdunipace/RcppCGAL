@@ -3,11 +3,11 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_inactive_trapezoid.h $
-// $Id: Td_inactive_trapezoid.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_inactive_trapezoid.h $
+// $Id: Td_inactive_trapezoid.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-// Author(s)	 : Oren Nechushtan <theoren@math.tau.ac.il>
+// Author(s)         : Oren Nechushtan <theoren@math.tau.ac.il>
 //               updated by: Michal Balas <balasmic@post.tau.ac.il>
 
 #ifndef CGAL_TD_INACTIVE_TRAPEZOID_H
@@ -34,7 +34,7 @@ namespace CGAL {
 
 /*! \class
  */
-class Td_inactive_trapezoid 
+class Td_inactive_trapezoid
 {
 public:
   /*! Operator==. */

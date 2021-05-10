@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polyhedron_IO/include/CGAL/IO/print_OFF.h $
-// $Id: print_OFF.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polyhedron_IO/include/CGAL/IO/print_OFF.h $
+// $Id: print_OFF.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Lutz Kettner  <kettner@mpi-sb.mpg.de>
 
@@ -25,7 +25,7 @@
 namespace CGAL {
 
 template <class Polyhedron, class Vpm>
-void print_polyhedron_with_header_OFF( std::ostream& out, 
+void print_polyhedron_with_header_OFF( std::ostream& out,
                                        const Polyhedron& P,
                                        const File_header_OFF& header,
                                        const Vpm& vpm) {
@@ -36,15 +36,15 @@ void print_polyhedron_with_header_OFF( std::ostream& out,
 }
 
 template <class Polyhedron>
-void print_polyhedron_with_header_OFF( std::ostream& out, 
+void print_polyhedron_with_header_OFF( std::ostream& out,
                                        const Polyhedron& P,
-                                       const File_header_OFF& header) 
+                                       const File_header_OFF& header)
 {
   print_polyhedron_with_header_OFF(out, P, header, get(CGAL::vertex_point, P));
 }
 
 template <class Polyhedron>
-void print_polyhedron_OFF( std::ostream& out, 
+void print_polyhedron_OFF( std::ostream& out,
                            const Polyhedron& P,
                            bool verbose = false) {
     File_header_OFF header( verbose);

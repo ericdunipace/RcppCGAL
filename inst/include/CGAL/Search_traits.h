@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Spatial_searching/include/CGAL/Search_traits.h $
-// $Id: Search_traits.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Spatial_searching/include/CGAL/Search_traits.h $
+// $Id: Search_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Hans Tangelder (<hanst@cs.uu.nl>)
 
@@ -22,7 +22,7 @@
 namespace CGAL {
   template <class FT_, class Point, class CartesianCoordinateIterator, class ConstructCartesianCoordinateIterator, typename D = Dynamic_dimension_tag>
   class Search_traits {
-    
+
   public:
 
     typedef D Dimension;
@@ -31,13 +31,13 @@ namespace CGAL {
     typedef ConstructCartesianCoordinateIterator Construct_cartesian_const_iterator_d;
     typedef Point Point_d;
     typedef FT_ FT;
-    
+
     Construct_cartesian_const_iterator_d construct_cartesian_const_iterator_d_object() const {
        return Construct_cartesian_const_iterator_d();
     }
-  
+
   };
 
-  
+
 } // namespace CGAL
 #endif //  KD_TREE_TRAITS_POINT_H

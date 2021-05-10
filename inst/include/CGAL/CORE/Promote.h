@@ -21,8 +21,8 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/Promote.h $
- * $Id: Promote.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/Promote.h $
+ * $Id: Promote.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -31,7 +31,7 @@
 
 #include <CGAL/CORE/Impl.h>
 
-namespace CORE { 
+namespace CORE {
 
 /// hasExactDivision()
 ///   CHECKING if NT has exact division
@@ -39,10 +39,10 @@ namespace CORE {
 ///   prove theorems about arithmetic identities like "x*(y/x) == y"
 ///   USAGE:  If you want to check if a number type NT has exact division, do for example,
 ///            if (hasExactDivision< NT >::check()) ...
-///   		We use this in Polynomial<NT> class.
+///                   We use this in Polynomial<NT> class.
 template < class NT >
 struct hasExactDivision {
-  static bool check() {		// This default function is supposed to work for NT other than BigRat or Expr
+  static bool check() {                // This default function is supposed to work for NT other than BigRat or Expr
      return false;
   }
 };
@@ -67,53 +67,53 @@ class Promotion<T, T> {
     typedef T ResultT;
 };
 
-#define MAX_TYPE(T1, T2)		\
+#define MAX_TYPE(T1, T2)                \
   typename Promotion<T1, T2>::ResultT
 
-#define DEFINE_MAX_TYPE(T1, T2, Tr)	\
-  template<> class Promotion<T1, T2> {	\
-    public:				\
-      typedef Tr ResultT;		\
-  };					\
-  template<> class Promotion<T2, T1> {	\
-    public:				\
-      typedef Tr ResultT;		\
+#define DEFINE_MAX_TYPE(T1, T2, Tr)        \
+  template<> class Promotion<T1, T2> {        \
+    public:                                \
+      typedef Tr ResultT;                \
+  };                                        \
+  template<> class Promotion<T2, T1> {        \
+    public:                                \
+      typedef Tr ResultT;                \
   };
 
 /*
  * For example:
  *
- * DEFINE_MAX_TYPE(BigInt, BigRat, BigRat)   	// define the promotion
+ * DEFINE_MAX_TYPE(BigInt, BigRat, BigRat)           // define the promotion
  *
- * template<typename T1, typename T2> 		// define function f with type templates
+ * template<typename T1, typename T2>                 // define function f with type templates
  *   MAX_TYPE(T1, T2) f(T1& , T2& );
  *
  * or
  *
- * template<typename T1, typename T2> 		// define function f with type templates
+ * template<typename T1, typename T2>                 // define function f with type templates
  *   const MAX_TYPE(T1, T2)& f(T1& , T2& );
  *
  * BigInt  a  =  1;
  * BigRat  b  = "1/3";
- * BigRat  c  =  f(a, b);			// or, typename Promotion<BigInt, BigRat>::ResultT c = f(a,b);
+ * BigRat  c  =  f(a, b);                        // or, typename Promotion<BigInt, BigRat>::ResultT c = f(a,b);
  *
  * REMARK: this mechanism is used by the eval function for polynomial evaluation (see Poly.tcc)
  * where the two types are NT (type of coefficients) and N (type of evaluation point).
  */
 
-/* 
+/*
  * primary types: (11)
  *
- * 	bool, 
- *	char, unsigned char, 
- *	short, unsigned short,
- * 	int, unsigned int, 
- *	long, unsigned long, 
- *	float, double
+ *         bool,
+ *        char, unsigned char,
+ *        short, unsigned short,
+ *         int, unsigned int,
+ *        long, unsigned long,
+ *        float, double
  *
  * CORE types: (5)
  *
- * 	BigInt < BigFloat < BigRat < Real < Expr
+ *         BigInt < BigFloat < BigRat < Real < Expr
  *
  *      (NOTE: BigFloat here must be error-free)
  *

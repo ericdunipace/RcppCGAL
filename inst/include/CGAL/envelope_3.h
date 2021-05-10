@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Envelope_3/include/CGAL/envelope_3.h $
-// $Id: envelope_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Envelope_3/include/CGAL/envelope_3.h $
+// $Id: envelope_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ron Wein           <wein@post.tau.ac.il>
 //                 Baruch Zukerman    <baruchzu@post.tau.ac.il>
@@ -33,13 +33,13 @@ namespace CGAL {
 template <typename InputIterator, typename GeomTraits,
           class TopTraits>
 void lower_envelope_3 (InputIterator begin, InputIterator end,
-                       Envelope_diagram_on_surface_2<GeomTraits, TopTraits>& 
+                       Envelope_diagram_on_surface_2<GeomTraits, TopTraits>&
                          min_diagram)
 {
   typedef GeomTraits                                        Traits_3;
-  typedef typename Envelope_diagram_on_surface_2<Traits_3, 
+  typedef typename Envelope_diagram_on_surface_2<Traits_3,
     TopTraits>::Arrangement                                 Envelope_diagram_2;
-  typedef Envelope_divide_and_conquer_3<Traits_3, Envelope_diagram_2> 
+  typedef Envelope_divide_and_conquer_3<Traits_3, Envelope_diagram_2>
                                                             Envelope_algorithm;
   Envelope_algorithm   env_alg (min_diagram.geometry_traits(), ENVELOPE_LOWER);
   env_alg.construct_lu_envelope (begin, end, min_diagram);
@@ -55,13 +55,13 @@ void lower_envelope_3 (InputIterator begin, InputIterator end,
 template <class InputIterator, class GeomTraits,
           class TopTraits>
 void upper_envelope_3 (InputIterator begin, InputIterator end,
-                       Envelope_diagram_on_surface_2<GeomTraits, TopTraits>& 
+                       Envelope_diagram_on_surface_2<GeomTraits, TopTraits>&
                          max_diagram)
 {
   typedef GeomTraits                                         Traits_3;
   typedef typename Envelope_diagram_on_surface_2<
   Traits_3, TopTraits>::Arrangement                          Envelope_diagram_2;
-  typedef Envelope_divide_and_conquer_3<Traits_3, Envelope_diagram_2> 
+  typedef Envelope_divide_and_conquer_3<Traits_3, Envelope_diagram_2>
                                                             Envelope_algorithm;
 
   Envelope_algorithm   env_alg (max_diagram.geometry_traits(), ENVELOPE_UPPER);
@@ -80,13 +80,13 @@ template <class InputIterator, class GeomTraits,
           class TopTraits>
 void
 lower_envelope_xy_monotone_3 (InputIterator begin, InputIterator end,
-                              Envelope_diagram_on_surface_2<GeomTraits, 
+                              Envelope_diagram_on_surface_2<GeomTraits,
                               TopTraits>& min_diagram)
 {
   typedef GeomTraits                                         Traits_3;
   typedef typename Envelope_diagram_on_surface_2<
   Traits_3, TopTraits>::Arrangement                          Envelope_diagram_2;
-  typedef Envelope_divide_and_conquer_3<Traits_3, Envelope_diagram_2> 
+  typedef Envelope_divide_and_conquer_3<Traits_3, Envelope_diagram_2>
                                                             Envelope_algorithm;
   Envelope_algorithm   env_alg (min_diagram.geometry_traits(), ENVELOPE_LOWER);
   env_alg.construct_envelope_xy_monotone (begin, end, min_diagram);
@@ -110,7 +110,7 @@ upper_envelope_xy_monotone_3 (InputIterator begin, InputIterator end,
   typedef GeomTraits                                         Traits_3;
   typedef typename Envelope_diagram_on_surface_2<
   Traits_3, TopTraits>::Arrangement                          Envelope_diagram_2;
-  typedef Envelope_divide_and_conquer_3<Traits_3, Envelope_diagram_2> 
+  typedef Envelope_divide_and_conquer_3<Traits_3, Envelope_diagram_2>
                                                             Envelope_algorithm;
 
   Envelope_algorithm   env_alg (max_diagram.geometry_traits(), ENVELOPE_UPPER);

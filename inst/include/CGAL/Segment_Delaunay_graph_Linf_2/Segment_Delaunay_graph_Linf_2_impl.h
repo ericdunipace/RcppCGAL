@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Segment_Delaunay_graph_Linf_2_impl.h $
-// $Id: Segment_Delaunay_graph_Linf_2_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Segment_Delaunay_graph_Linf_2_impl.h $
+// $Id: Segment_Delaunay_graph_Linf_2_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Panagiotis Cheilaris, Sandeep Kumar Dey, Evanthia Papadopoulou
 //philaris@gmail.com, sandeep.kr.dey@gmail.com, evanthia.papadopoulou@usi.ch
@@ -18,7 +18,7 @@ template<class Gt, class ST, class D_S, class LTag>
 void
 Segment_Delaunay_graph_Linf_2<Gt,ST,D_S,LTag>::
 face_output(const char *before, Face_handle f,
-	    const char *after) const
+            const char *after) const
 {
   std::cout << before;
   if (is_infinite(f->vertex(0))) {
@@ -288,7 +288,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
     // before it was:
     //   os1 == ON_POSITIVE_SIDE && os2 != ON_POSITIVE_SIDE
     if ( !found_f2 &&
-	 os1 != ON_NEGATIVE_SIDE && os2 == ON_NEGATIVE_SIDE ) {
+         os1 != ON_NEGATIVE_SIDE && os2 == ON_NEGATIVE_SIDE ) {
       f2 = ff2;
       found_f2 = true;
       count_pon_zeros = count_zeros;
@@ -476,7 +476,7 @@ template<class Gt, class ST, class D_S, class LTag>
 typename Segment_Delaunay_graph_Linf_2<Gt,ST,D_S,LTag>::Vertex_triple
 Segment_Delaunay_graph_Linf_2<Gt,ST,D_S,LTag>::
 insert_exact_point_on_segment(const Storage_site_2& ss, const Site_2& t,
-			      Vertex_handle v)
+                              Vertex_handle v)
 {
   // splits the segment site v->site() in two and inserts represented by t
   // on return the three vertices are, respectively, the vertex
@@ -615,7 +615,7 @@ template<class Gt, class ST, class D_S, class LTag>
 typename Segment_Delaunay_graph_Linf_2<Gt,ST,D_S,LTag>::Vertex_triple
 Segment_Delaunay_graph_Linf_2<Gt,ST,D_S,LTag>::
 insert_point_on_segment(const Storage_site_2& ss, const Site_2& ,
-			Vertex_handle v, const Tag_true&)
+                        Vertex_handle v, const Tag_true&)
 {
   // splits the segment site v->site() in two and inserts the point of
   // intersection of t and v->site()

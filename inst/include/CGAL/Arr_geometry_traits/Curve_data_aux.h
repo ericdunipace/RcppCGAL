@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Curve_data_aux.h $
-// $Id: Curve_data_aux.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Curve_data_aux.h $
+// $Id: Curve_data_aux.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ron Wein          <wein@post.tau.ac.il>
 //                 Efi Fogel         <efif@post.tau.ac.il>
@@ -61,11 +61,11 @@ public:
   /*! Default constructor. */
   _Curve_data_ex ()
   {}
-    
+
   /*!
    * Construct an extended curve from a base curve.
    * \param cv The base curve.
-   */ 
+   */
   _Curve_data_ex (const BaseCurveType& cv) :
     BaseCurveType (cv)
   {}
@@ -74,7 +74,7 @@ public:
    * Construct an extended curve from a base curve and a data object.
    * \param cv The base curve.
    * \param data The data object.
-   */ 
+   */
   _Curve_data_ex (const BaseCurveType& cv, const Data& data) :
     BaseCurveType (cv),
     m_data (data)

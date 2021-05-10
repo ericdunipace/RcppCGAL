@@ -6,7 +6,7 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/keyFrameInterpolator.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/keyFrameInterpolator.h $
 // $Id: keyFrameInterpolator.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-only
 #ifndef QGLVIEWER_KEY_FRAME_INTERPOLATOR_H

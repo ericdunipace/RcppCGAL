@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/Sqrt_extension/Real_embeddable_traits.h $
-// $Id: Real_embeddable_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Sqrt_extension/Real_embeddable_traits.h $
+// $Id: Real_embeddable_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -33,24 +33,24 @@ class Real_embeddable_traits< Sqrt_extension<COEFF, ROOT, ACDE_TAG,FP_TAG> >
             return x.sign();
         }
     };
-    
+
     class Compare
         : public CGAL::cpp98::binary_function< Type, Type, Comparison_result > {
     public:
         Comparison_result operator()( const Type& x, const Type& y) const {
-            // must be from the same extension 
+            // must be from the same extension
             return x.compare(y);
         }
         Comparison_result operator()( const Type& x, const COEFF& y) const {
-            // must be from the same extension 
+            // must be from the same extension
             return x.compare(y);
         }
         Comparison_result operator()( const COEFF& x, const Type& y) const {
-            // must be from the same extension 
+            // must be from the same extension
             return CGAL::opposite( y.compare(x) );
         }
-        
-        CGAL_IMPLICIT_INTEROPERABLE_BINARY_OPERATOR_WITH_RT( Type, 
+
+        CGAL_IMPLICIT_INTEROPERABLE_BINARY_OPERATOR_WITH_RT( Type,
                 Comparison_result )
     };
 

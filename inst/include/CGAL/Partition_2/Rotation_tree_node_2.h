@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Partition_2/include/CGAL/Partition_2/Rotation_tree_node_2.h $
-// $Id: Rotation_tree_node_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Partition_2/include/CGAL/Partition_2/Rotation_tree_node_2.h $
+// $Id: Rotation_tree_node_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Susan Hert <hert@mpi-sb.mpg.de>
 
@@ -49,7 +49,7 @@ public:
 
 
    Rotation_tree_node_2(Base_point p) : point(p)
-   { 
+   {
       _parent.second = false;
       _left_sibling.second = false;
       _right_sibling.second = false;
@@ -58,7 +58,7 @@ public:
 
    operator Base_point() const
    { return point;}
-  
+
    bool has_left_sibling() const
    {  return _left_sibling.second; }
 
@@ -146,16 +146,16 @@ std::ostream& operator<<(std::ostream& os,
 {
    os << node.x() << " " << node.y() << " ";
    if (node.has_parent())
-      os << "  parent " << (*node.parent()).x() 
+      os << "  parent " << (*node.parent()).x()
          << " " << (*node.parent()).y() << " ";
    if (node.has_left_sibling())
-      os << "  left sibling " << (*node.left_sibling()).x() 
+      os << "  left sibling " << (*node.left_sibling()).x()
          << " " << (*node.left_sibling()).y() << " ";
    if (node.has_right_sibling())
-      os << "  right sibling " << (*node.right_sibling()).x() 
+      os << "  right sibling " << (*node.right_sibling()).x()
          << " " << (*node.right_sibling()).y() << " ";
    if (node.has_children())
-      os << "  rightmost child " << (*node.rightmost_child()).x() 
+      os << "  rightmost child " << (*node.rightmost_child()).x()
          << " " << (*node.rightmost_child()).y();
    return os;
 }

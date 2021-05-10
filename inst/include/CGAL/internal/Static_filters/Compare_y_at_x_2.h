@@ -3,13 +3,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Filtered_kernel/include/CGAL/internal/Static_filters/Compare_y_at_x_2.h $
-// $Id: Compare_y_at_x_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Filtered_kernel/include/CGAL/internal/Static_filters/Compare_y_at_x_2.h $
+// $Id: Compare_y_at_x_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Meyer
 
-#ifndef CGAL_INTERNAL_STATIC_FILTERS_COMPARE_Y_AT_X_2_H 
+#ifndef CGAL_INTERNAL_STATIC_FILTERS_COMPARE_Y_AT_X_2_H
 #define CGAL_INTERNAL_STATIC_FILTERS_COMPARE_Y_AT_X_2_H
 
 #include <CGAL/Profile_counter.h>
@@ -30,18 +30,18 @@ class Compare_y_at_x_2
 public:
 
   using Base::operator();
-  
+
   Comparison_result
   operator()( const Point_2& p, const Segment_2& s ) const {
     // compares the y-coordinates of p and the vertical projection of p on s.
     // Precondition : p is in the x-range of s.
-    
+
     typename Kernel::Less_x_2 less_x = Kernel().less_x_2_object();
     typename Kernel::Less_y_2 less_y = Kernel().less_y_2_object();
     typename Kernel::Orientation_2 orientation = Kernel().orientation_2_object();
 
     CGAL_kernel_precondition( are_ordered(s.source(), p, s.target(), less_x) );
-    
+
     if( less_x( s.source(), s.target() ) )
       return orientation(p, s.source(), s.target());
     else if ( less_x( s.target(), s.source() ) )

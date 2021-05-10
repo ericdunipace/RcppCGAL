@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_event_base.h $
-// $Id: No_overlap_event_base.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_event_base.h $
+// $Id: No_overlap_event_base.h 702b477 2020-11-03T08:18:07+01:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi        <talizvi@post.tau.ac.il>,
@@ -26,6 +26,60 @@
 
 namespace CGAL {
 namespace Surface_sweep_2 {
+
+// This class is used to test if `void* T::for_compact_container()`
+// exists, to avoid adding a void* pointer to the Event_base structure
+// if Point_2 can already be used as a handle for this
+template<typename T>
+struct has_for_compact_container
+{
+private:
+
+  template<typename U> static
+  auto test(void*) -> decltype(std::declval<U>().for_compact_container() == nullptr, Tag_true());
+
+  template<typename> static Tag_false test(...);
+
+public:
+
+  static constexpr bool value = std::is_same<decltype(test<T>(nullptr)),Tag_true>::value;
+};
+
+template <typename Point_2, bool HasFor>
+class Event_base_for_compact_container { };
+
+template <typename Point_2>
+class Event_base_for_compact_container<Point_2, false>
+{
+  void* p = nullptr;
+public:
+
+  void* operator()(const Point_2&) const
+  {
+    return p;
+  }
+  void operator() (Point_2&, void* ptr)
+  {
+    p = ptr;
+  }
+};
+
+template <typename Point_2>
+class Event_base_for_compact_container<Point_2, true>
+{
+
+public:
+
+  void* operator()(const Point_2& p) const
+  {
+    return p.for_compact_container();
+  }
+  void operator() (Point_2& p, void* ptr)
+  {
+    p.for_compact_container(ptr);
+  }
+};
+
 
 /*! \class No_overlap_event_base
  *
@@ -71,6 +125,9 @@ public:
   typedef typename Subcurve_container::reverse_iterator
     Subcurve_reverse_iterator;
 
+  typedef Event_base_for_compact_container
+  <Point_2, has_for_compact_container<Point_2>::value>    For_compact_container;
+
   /*! \enum The event type (with other information bits). */
 
   enum Attribute {
@@ -102,6 +159,10 @@ protected:
   char m_closed;                    // Is the event closed (associated with
                                     // a valid point.
 
+  // A handle for the compact container (either using the functions of
+  // `m_point` if available, or an additional pointer)
+  For_compact_container m_for_compact_container;
+
 public:
   /*! Default constructor. */
   No_overlap_event_base() :
@@ -110,6 +171,16 @@ public:
     m_ps_y(static_cast<char>(ARR_INTERIOR)),
     m_closed(1)
   {}
+
+  /*! Squat the content of Point_2 for the pointer of Compact Container */
+  void* for_compact_container() const
+  {
+    return m_for_compact_container(m_point);
+  }
+  void for_compact_container (void* p)
+  {
+    m_for_compact_container(m_point, p);
+  }
 
   /*! Initialize an event that is associated with a valid point. */
   void init(const Point_2& point, Attribute type,

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesher_level/include/CGAL/Meshes/Double_map_container.h $
-// $Id: Double_map_container.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesher_level/include/CGAL/Meshes/Double_map_container.h $
+// $Id: Double_map_container.h 6fe18d8 2021-01-20T15:32:23+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -27,7 +27,7 @@ namespace CGAL {
   namespace Meshes {
 
     template <typename Elt, class Quality>
-    class Double_map_container 
+    class Double_map_container
     {
     public:
       typedef Elt Element;
@@ -42,12 +42,25 @@ namespace CGAL {
         return m.empty();
       }
 
+#if CGAL_MESHES_DEBUG_DOUBLE_MAP
+      template <typename Element_type>
+      std::ostream& debug_element(std::ostream& os, const Element_type& e) {
+        return os << (void*)(e.operator->());
+      }
+
+      template <typename Cell_handle>
+      std::ostream& debug_element(std::ostream& os, const std::pair<Cell_handle, int>& e) {
+        return os << "Facet{" << (void*)(e.first.operator->()) << ", " << e.second << "}";
+      }
+#endif
+
       Element get_next_element_impl()
       {
         CGAL_assertion(!m.empty());
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-	std::cerr << "get_next_element_impl(" << &*(m.front()->second)
-		  << ")\n";
+        std::cerr << "get_next_element_impl(";
+        debug_element(std::cerr, m.front()->second);
+        std::cerr << ")\n";
 #endif
         return m.front()->second;
 
@@ -56,7 +69,9 @@ namespace CGAL {
       void add_bad_element(const Element& e, const Quality& q)
       {
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-	std::cerr << "add_bad_element(" << &*e << ")\n";
+        std::cerr << "add_bad_element(";
+        debug_element(std::cerr, e);
+        std::cerr << ")\n";
 #endif
         m.insert(e, q);
       }
@@ -69,7 +84,9 @@ namespace CGAL {
       void remove_element(const Element& e)
       {
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-	std::cerr << "remove_element(" << &*e << ")\n";
+        std::cerr << "remove_element(";
+        debug_element(std::cerr, e);
+        std::cerr << ")\n";
 #endif
         m.erase(e);
       }
@@ -77,10 +94,10 @@ namespace CGAL {
       typename Double_map<Element, Quality>::size_type
       size() const
       {
-	return m.size();
+        return m.size();
       }
     }; // end Double_map_container
-    
+
   } // end namespace Meshes
 } // end namespace CGAL
 

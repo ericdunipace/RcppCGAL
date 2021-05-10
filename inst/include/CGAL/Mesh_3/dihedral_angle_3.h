@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/dihedral_angle_3.h $
-// $Id: dihedral_angle_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/dihedral_angle_3.h $
+// $Id: dihedral_angle_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -39,10 +39,10 @@ dihedral_angle(const typename K::Point_3& a,
   return k.compute_approximate_dihedral_angle_3_object()(a, b, c, d);
 }
 
-  
+
 /**
  * Computes dihedral angle of planes (a,b,c) and (a,b,d)
- */  
+ */
 template <typename Point_3>
 typename Kernel_traits<Point_3>::Kernel::FT
 dihedral_angle(const Point_3& a, const Point_3& b,
@@ -52,7 +52,7 @@ dihedral_angle(const Point_3& a, const Point_3& b,
     CGAL::Mesh_3::dihedral_angle(a, b, c, d,
                                  typename Kernel_traits<Point_3>::Kernel());
 }
-  
+
 } // end namespace Mesh_3
 } // end namespace CGAL
 

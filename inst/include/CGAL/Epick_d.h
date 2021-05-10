@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/NewKernel_d/include/CGAL/Epick_d.h $
-// $Id: Epick_d.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/NewKernel_d/include/CGAL/Epick_d.h $
+// $Id: Epick_d.h 7929c7d 2020-04-08T14:42:47+02:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -40,7 +40,12 @@ struct Epick_d_help1
 };
 #undef CGAL_BASE
 #define CGAL_BASE \
-  Cartesian_static_filters<Dim,Epick_d_help1<Dim>,Epick_d_help2<Dim> >
+  Cartesian_filter_K< \
+    Epick_d_help1<Dim>, \
+    Cartesian_base_d<Interval_nt_advanced, Dim>, \
+    Cartesian_base_d<internal::Exact_ring_selector<double>::Type, Dim>, \
+    typename Functors_without_division<Dim>::type \
+  >
 template<class Dim>
 struct Epick_d_help2
 : CGAL_BASE
@@ -50,9 +55,20 @@ struct Epick_d_help2
 };
 #undef CGAL_BASE
 #define CGAL_BASE \
+  Cartesian_static_filters<Dim,Epick_d_help2<Dim>,Epick_d_help3<Dim> >
+
+template<class Dim>
+struct Epick_d_help3
+: CGAL_BASE
+{
+  constexpr Epick_d_help3(){}
+  constexpr Epick_d_help3(int d):CGAL_BASE(d){}
+};
+#undef CGAL_BASE
+#define CGAL_BASE \
   Kernel_d_interface< \
     Cartesian_wrap< \
-      Epick_d_help2<Dim>, \
+      Epick_d_help3<Dim>, \
       Epick_d<Dim> > >
 template<class Dim>
 struct Epick_d

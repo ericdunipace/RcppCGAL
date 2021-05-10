@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_3/include/CGAL/Regular_triangulation_cell_base_with_weighted_circumcenter_3.h $
-// $Id: Regular_triangulation_cell_base_with_weighted_circumcenter_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/Regular_triangulation_cell_base_with_weighted_circumcenter_3.h $
+// $Id: Regular_triangulation_cell_base_with_weighted_circumcenter_3.h dbbee66 2020-04-02T18:31:00+05:30 rathod-sahaab
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -54,7 +54,7 @@ public:
   template < typename TDS2 >
   struct Rebind_TDS {
     typedef typename Cb::template Rebind_TDS<TDS2>::Other         Cb2;
-    typedef 
+    typedef
       Regular_triangulation_cell_base_with_weighted_circumcenter_3<GT, Cb2>
       Other;
   };
@@ -64,8 +64,8 @@ public:
 
   Regular_triangulation_cell_base_with_weighted_circumcenter_3
         (const Regular_triangulation_cell_base_with_weighted_circumcenter_3 &c)
-    : Cb(c), 
-      weighted_circumcenter_(c.weighted_circumcenter_ != nullptr ? 
+    : Cb(c),
+      weighted_circumcenter_(c.weighted_circumcenter_ != nullptr ?
                              new Point_3(*(c.weighted_circumcenter_)) :
                              nullptr)
   {}
@@ -80,12 +80,12 @@ public:
   }
 
   Regular_triangulation_cell_base_with_weighted_circumcenter_3(
-	                    Vertex_handle v0, Vertex_handle v1,
+                            Vertex_handle v0, Vertex_handle v1,
                             Vertex_handle v2, Vertex_handle v3)
     : Cb(v0, v1, v2, v3), weighted_circumcenter_(nullptr) {}
 
   Regular_triangulation_cell_base_with_weighted_circumcenter_3(
-	                    Vertex_handle v0, Vertex_handle v1,
+                            Vertex_handle v0, Vertex_handle v1,
                             Vertex_handle v2, Vertex_handle v3,
                             Cell_handle   n0, Cell_handle   n1,
                             Cell_handle   n2, Cell_handle   n3)
@@ -122,7 +122,7 @@ public:
   weighted_circumcenter(const Geom_traits& gt = Geom_traits()) const
   {
       if (weighted_circumcenter_ == nullptr) {
-    	  weighted_circumcenter_ 
+              weighted_circumcenter_
             = new Point_3(this->Cb::weighted_circumcenter(gt));
       } else {
         CGAL_expensive_assertion(
@@ -132,7 +132,7 @@ public:
       return *weighted_circumcenter_;
   }
 
-  void swap (Regular_triangulation_cell_base_with_weighted_circumcenter_3& other) throw()
+  void swap (Regular_triangulation_cell_base_with_weighted_circumcenter_3& other) noexcept
   {
     std::swap(static_cast<Cb&>(*this), static_cast<Cb&>(other));
     std::swap(weighted_circumcenter_, other.weighted_circumcenter_);

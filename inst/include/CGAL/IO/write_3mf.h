@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Stream_support/include/CGAL/IO/write_3mf.h $
-// $Id: write_3mf.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Stream_support/include/CGAL/IO/write_3mf.h $
+// $Id: write_3mf.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Maxime Gimeno
@@ -107,7 +107,7 @@ bool export_model_to_file(const std::string& file_name,
     NMR::lib3mf_release(p3MFWriter);
     return false;
   }
-  
+
   // Release Model Writer
   NMR::lib3mf_release(p3MFWriter);
   return true;
@@ -143,12 +143,12 @@ bool write_mesh_to_model( const PointRange& points,
   {
     pVertices.push_back(tmf_internal::fnCreateVertex(point.x(), point.y(), point.z()));
   }
-  
+
   for( auto triangle : polygons)
   {
     pTriangles.push_back(tmf_internal::fnCreateTriangle(triangle[0], triangle[1], triangle[2]));
   }
-  
+
   hResult = NMR::lib3mf_meshobject_setgeometry(*pMeshObject, pVertices.data(),
                                           pVertices.size(), pTriangles.data(),
                                           pTriangles.size());
@@ -359,6 +359,8 @@ bool write_polyline_to_model(const PointRange& points,
  *  soups in `file_name`.
  * \param names will contains the name of each mesh in `file_name`.
  * \return `true` if the writing is successful, `false` otherwise.
+ *
+ * \attention Only versions inferior to 2.0 of lib3mf are supported.
  */
 template<typename PointRanges, typename PolygonRanges>
 bool write_triangle_soups_to_3mf(const std::string& file_name,
@@ -406,6 +408,8 @@ bool write_triangle_soups_to_3mf(const std::string& file_name,
  * must be available for each mesh.
  * \param names will contains the name of each mesh in `file_name`.
  * \return `true` if the writing is successful, `false` otherwise.
+ *
+ * \attention Only versions inferior to 2.0 of lib3mf are supported.
  */
 template<typename TriangleMeshRange>
 bool write_triangle_meshes_to_3mf(const std::string& file_name,

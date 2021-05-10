@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/SFace_separator.h $
-// $Id: SFace_separator.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/SFace_separator.h $
+// $Id: SFace_separator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     :  Peter Hachenberger <hachenberger@mpi-sb.mpg.de>
 #ifndef CGAL_CD3_SFACE_SEPARATOR_H
@@ -22,18 +22,18 @@ namespace CGAL {
 
 template<typename Nef_>
 class SFace_separator : public Modifier_base<typename Nef_::SNC_structure> {
-  
+
   typedef Nef_                                   Nef_polyhedron;
   typedef typename Nef_polyhedron::SNC_structure SNC_structure;
   typedef typename SNC_structure::Items          Items;
   typedef CGAL::SNC_decorator<SNC_structure>     Base;
   typedef CGAL::SNC_point_locator<Base>          SNC_point_locator;
-  typedef CGAL::SNC_constructor<Items, SNC_structure>   
+  typedef CGAL::SNC_constructor<Items, SNC_structure>
     SNC_constructor;
 
   typedef typename SNC_structure::Sphere_map     Sphere_map;
-  typedef CGAL::SM_decorator<Sphere_map>         SM_decorator;  
-  typedef CGAL::SM_point_locator<SM_decorator>   SM_point_locator; 
+  typedef CGAL::SM_decorator<Sphere_map>         SM_decorator;
+  typedef CGAL::SM_point_locator<SM_decorator>   SM_point_locator;
   typedef CGAL::SM_walls<Sphere_map>             SM_walls;
 
   typedef typename Base::SHalfedge_handle        SHalfedge_handle;
@@ -51,28 +51,28 @@ class SFace_separator : public Modifier_base<typename Nef_::SNC_structure> {
     SFace_iterator sf;
     CGAL_forall_sfaces(sf, snc) {
       if(!sf->mark() ||
-	 sf->sface_cycles_begin() == 
-	 sf->sface_cycles_end()) continue;
+         sf->sface_cycles_begin() ==
+         sf->sface_cycles_end()) continue;
 
       SM_decorator SD(&*sf->center_vertex());
 
       SFace_cycle_iterator sfci
-	(++sf->sface_cycles_begin());
+        (++sf->sface_cycles_begin());
       while(sfci != sf->sface_cycles_end()) {
-	SFace_handle sf_new = SD.new_sface();
-	sf_new->mark() = sf->mark();
-	sf_new->volume() = sf->volume();
-	if(sfci.is_shalfedge()) {
-	  SHalfedge_handle se = sfci;
-	  SD.unlink_as_face_cycle(se);
-	  SD.link_as_face_cycle(se,sf_new);
-	} else if(sfci.is_shalfloop()) {
-       	  SHalfloop_handle sl = sfci;
-	  SD.unlink_as_loop(sl);
-	  SD.link_as_loop(sl, sf_new);
-	} else
-	  CGAL_error_msg("there should be no isolated edges");
-	sfci = ++sf->sface_cycles_begin();
+        SFace_handle sf_new = SD.new_sface();
+        sf_new->mark() = sf->mark();
+        sf_new->volume() = sf->volume();
+        if(sfci.is_shalfedge()) {
+          SHalfedge_handle se = sfci;
+          SD.unlink_as_face_cycle(se);
+          SD.link_as_face_cycle(se,sf_new);
+        } else if(sfci.is_shalfloop()) {
+                 SHalfloop_handle sl = sfci;
+          SD.unlink_as_loop(sl);
+          SD.link_as_loop(sl, sf_new);
+        } else
+          CGAL_error_msg("there should be no isolated edges");
+        sfci = ++sf->sface_cycles_begin();
       }
     }
   }

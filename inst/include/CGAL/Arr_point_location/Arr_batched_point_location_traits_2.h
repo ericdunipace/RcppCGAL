@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_batched_point_location_traits_2.h $
-// $Id: Arr_batched_point_location_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_batched_point_location_traits_2.h $
+// $Id: Arr_batched_point_location_traits_2.h 7ad0ffa 2020-06-14T10:45:27+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -42,6 +42,7 @@ public:
 
   typedef typename Base_traits_2::X_monotone_curve_2   Base_x_monotone_curve_2;
   typedef typename Base_traits_2::Point_2              Base_point_2;
+  typedef typename Base_traits_2::Multiplicity         Multiplicity;
 
   typedef typename Base_traits_2::Construct_min_vertex_2
                                                     Base_construct_min_vertex_2;
@@ -411,7 +412,7 @@ public:
   Compare_y_at_x_right_2 compare_y_at_x_right_2_object () const
   {
     return (Compare_y_at_x_right_2
-	    (m_base_traits->compare_y_at_x_right_2_object()));
+            (m_base_traits->compare_y_at_x_right_2_object()));
   }
 
   /*! A functor that checks whether two points and two x-monotone curves are
@@ -442,7 +443,7 @@ public:
   public:
     /*! Check if two curves are the same. */
     bool operator() (const X_monotone_curve_2& xcv1,
-		     const X_monotone_curve_2& xcv2) const
+                     const X_monotone_curve_2& xcv2) const
     {
       if (xcv1.halfedge_handle() == xcv2.halfedge_handle() &&
           xcv1.halfedge_handle() != invalid_he)
@@ -923,7 +924,7 @@ public:
     {
       return m_base->compare_x_near_boundary_2_object()(xcv1.base(),
                                                         xcv2.base(),
-							ce);
+                                                        ce);
     }
   };
 

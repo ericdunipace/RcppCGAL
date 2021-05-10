@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Bounded_side_of_ccw_circle_C2.h $
-// $Id: Bounded_side_of_ccw_circle_C2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Bounded_side_of_ccw_circle_C2.h $
+// $Id: Bounded_side_of_ccw_circle_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -61,9 +61,9 @@ public:
       // the existence test
       Sign sign_of_root;
       if ( is_first_root ) {
-	sign_of_root = sign_of_first_root(s_beta, s_gamma);
+        sign_of_root = sign_of_first_root(s_beta, s_gamma);
       } else {
-	sign_of_root = sign_of_second_root(s_beta, s_gamma);
+        sign_of_root = sign_of_second_root(s_beta, s_gamma);
       }
       return sign_of_root;
     }

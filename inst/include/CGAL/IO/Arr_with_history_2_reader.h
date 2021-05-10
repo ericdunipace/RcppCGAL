@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/IO/Arr_with_history_2_reader.h $
-// $Id: Arr_with_history_2_reader.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/IO/Arr_with_history_2_reader.h $
+// $Id: Arr_with_history_2_reader.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ron Wein           <wein@post.tau.ac.il>
 #ifndef CGAL_ARR_WITH_HISTORY_2_READER_H
@@ -37,7 +37,7 @@ public:
   typedef Arr_with_history_2_reader<Arr_with_history_2>   Self;
 
 protected:
- 
+
   typedef Arrangement_2_reader<Arr_with_history_2>        Base;
   typedef typename Arr_with_history_2::Size               Size;
   typedef typename Arr_with_history_2::Curve_handle       Curve_handle;
@@ -72,7 +72,7 @@ public:
   {
     // Read the arrangement (without history).
     Base::operator() (formatter);
-    
+
     // Read the inducing curves.
     formatter.read_curves_begin();
 
@@ -121,7 +121,7 @@ protected:
     formatter.read_curve_end();
     return;
   }
-   
+
 };
 
 } //namespace CGAL

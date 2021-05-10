@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation/include/CGAL/Triangulation_full_cell.h $
-// $Id: Triangulation_full_cell.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation/include/CGAL/Triangulation_full_cell.h $
+// $Id: Triangulation_full_cell.h 2d18b6e 2020-08-26T11:30:59+02:00 Marc Glisse
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -42,7 +42,7 @@ public:
     typedef typename TriangulationTraits::Point_d       Point_d;
 
 private: // DATA MEMBERS
-    Data    data_;
+    CGAL_NO_UNIQUE_ADDRESS Data    data_;
 
 public:
 
@@ -55,7 +55,7 @@ public:
         typedef typename Base::template Rebind_TDS<TDS2>::Other TDSFullCell2;
         typedef Triangulation_full_cell<TriangulationTraits, Data_, TDSFullCell2> Other;
     };
- 
+
     Triangulation_full_cell(const int d)
         : Base(d), data_() {}
 

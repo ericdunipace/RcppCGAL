@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Classification/include/CGAL/Classification/Feature/Gradient_of_feature.h $
-// $Id: Gradient_of_feature.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Feature/Gradient_of_feature.h $
+// $Id: Gradient_of_feature.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -38,7 +38,7 @@ class Gradient_of_feature : public Feature_base
   ItemMap m_map;
   Feature_handle m_feature;
   boost::shared_ptr<NeighborQuery> m_query;
-  
+
 public:
   /*!
     TODO
@@ -61,7 +61,7 @@ public:
 
     if (neighborhood.empty())
       return 0.f;
-    
+
     float mean = 0.f;
 
     for (std::size_t i = 0; i < neighborhood.size(); ++ i)

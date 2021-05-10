@@ -8,12 +8,12 @@
 // https://www.boost.org/LICENSE_1_0.txt)
 //=======================================================================
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/internal/boost/mutable_heap.hpp $
-// $Id: mutable_heap.hpp a472c24 2019-03-20T08:59:22+01:00 Andreas Fabri
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/internal/boost/mutable_heap.hpp $
+// $Id: mutable_heap.hpp 590612a 2020-03-26T13:25:16+01:00 Sébastien Loriot
 // SPDX-License-Identifier: BSL-1.0
 //
 // NOTE: this file have been taken from boost 1.46.1 for using
-//       with Modificable_priority_queue (to enhance the 
+//       with Modificable_priority_queue (to enhance the
 //       non-documented mutable_queue).
 //       original file is <boost/pending/mutable_heap.hpp>
 //
@@ -40,7 +40,7 @@
  */
 
 namespace CGAL{ namespace internal {
-  
+
 namespace boost_ {
 
   template <class TreeNode, class Compare, class ExternalData>
@@ -53,9 +53,9 @@ namespace boost_ {
   template <class TreeNode, class Compare, class ExternalData>
   inline TreeNode down_heap(TreeNode x, const Compare& comp, ExternalData& edata) {
     while (x.children().size() > 0) {
-      typename TreeNode::children_type::iterator 
+      typename TreeNode::children_type::iterator
         child_iter = std::min_element(x.children().begin(),
-                                      x.children().end(), 
+                                      x.children().end(),
                                       comp);
       if (comp(*child_iter, x))
         x.swap(*child_iter, edata);

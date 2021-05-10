@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Combinatorial_map/include/CGAL/Dart.h $
-// $Id: Dart.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Combinatorial_map/include/CGAL/Dart.h $
+// $Id: Dart.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -105,15 +105,15 @@ namespace CGAL {
 
     void * for_compact_container() const
     { return mf[0].for_compact_container(); }
-    void * & for_compact_container()
-    { return mf[0].for_compact_container(); }
+    void for_compact_container(void *p)
+    { mf[0].for_compact_container(p); }
 
     Dart_handle get_f(unsigned int i) const
     {
       assert(i<=dimension);
       return mf[i];
     }
-    
+
   protected:
     /** Default constructor: no real initialisation,
      *  because this is done in the combinatorial map class.

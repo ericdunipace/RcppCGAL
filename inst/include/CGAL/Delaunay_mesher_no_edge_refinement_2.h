@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_2/include/CGAL/Delaunay_mesher_no_edge_refinement_2.h $
-// $Id: Delaunay_mesher_no_edge_refinement_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_2/include/CGAL/Delaunay_mesher_no_edge_refinement_2.h $
+// $Id: Delaunay_mesher_no_edge_refinement_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -23,7 +23,7 @@
 namespace CGAL {
 
 template <typename Tr, typename Crit>
-class Delaunay_mesher_no_edge_refinement_2 
+class Delaunay_mesher_no_edge_refinement_2
 {
 
   /** \name \c Tr types */
@@ -36,7 +36,7 @@ class Delaunay_mesher_no_edge_refinement_2
   /** \name Types needed for private member datas */
   typedef Mesh_2::Do_not_refine_edges<Tr,
     Mesh_2::Is_locally_conforming_Gabriel<Tr> > Edges_level_base;
-  typedef Mesh_2::Refine_edges<Tr, 
+  typedef Mesh_2::Refine_edges<Tr,
                                Mesh_2::Is_locally_conforming_Gabriel<Tr>,
                                Edges_level_base> Edges_level;
 
@@ -68,7 +68,7 @@ public:
   /** \name CONSTRUCTORS */
   Delaunay_mesher_no_edge_refinement_2(Tr& tr_, const Criteria& criteria_ = Criteria())
     : tr(tr_),
-      criteria(criteria_), 
+      criteria(criteria_),
       null_level(),
       null_visitor(),
       edges_level(tr, null_level),
@@ -80,7 +80,7 @@ public:
   Delaunay_mesher_no_edge_refinement_2(Tr& tr_, Edges_level& edges_level_,
                     const Criteria& criteria_ = Criteria())
     : tr(tr_),
-      criteria(criteria_), 
+      criteria(criteria_),
       null_level(),
       null_visitor(),
       edges_level(edges_level_),
@@ -95,7 +95,7 @@ public:
   {
     return seeds.begin();
   }
-  
+
   Seeds_const_iterator seeds_end() const
   {
     return seeds.end();
@@ -143,7 +143,7 @@ public:
 
   /** Procedure that marks facets according to a list of seeds. */
   template <typename Seeds_it>
-  static void mark_facets(Tr& tr, 
+  static void mark_facets(Tr& tr,
                           Seeds_it begin,
                           Seeds_it end,
                           bool mark = false)
@@ -162,7 +162,7 @@ public:
             if(fh!=nullptr)
               propagate_marks(fh, mark);
           }
-	propagate_marks(tr.infinite_face(), false);
+        propagate_marks(tr.infinite_face(), false);
       }
     else
       mark_convex_hull(tr);
@@ -219,12 +219,12 @@ public:
                     bool recalculate_bad_faces = true)
   {
     criteria = criteria_;
-    if (recalculate_bad_faces) faces_level.scan_triangulation();  
+    if (recalculate_bad_faces) faces_level.scan_triangulation();
   }
 
-  const Criteria& get_criteria() const 
+  const Criteria& get_criteria() const
   {
-    return criteria;  
+    return criteria;
   }
 
   template <class Fh_it>
@@ -250,7 +250,7 @@ public:
 
   bool is_refinement_done ()
   {
-    return faces_level.is_algorithm_done();  
+    return faces_level.is_algorithm_done();
   }
 
   bool
@@ -280,17 +280,17 @@ public:
     return edges_level.is_algorithm_done();
   }
 
-  Edge next_encroached_edge() 
+  Edge next_encroached_edge()
   {
     return edges_level.get_next_element();
   }
 
-  const Face_handle next_bad_face() 
+  const Face_handle next_bad_face()
   {
     return faces_level.get_next_element();
   }
 
-  const Point next_refinement_point() 
+  const Point next_refinement_point()
   {
     if( !edges_level.is_algorithm_done() )
       return edges_level.refinement_point(next_encroached_edge());
@@ -303,7 +303,7 @@ public:
 
   typedef typename Faces_level::Bad_faces_const_iterator
     Bad_faces_const_iterator;
-  
+
   Encroached_edges_const_iterator encroached_edges_begin() const
   {
     return edges_level.begin();
@@ -318,7 +318,7 @@ public:
   {
     return faces_level.begin();
   }
-  
+
   Bad_faces_const_iterator bad_faces_end() const
   {
     return faces_level.end();

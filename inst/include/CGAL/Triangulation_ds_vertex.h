@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation/include/CGAL/Triangulation_ds_vertex.h $
-// $Id: Triangulation_ds_vertex.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation/include/CGAL/Triangulation_ds_vertex.h $
+// $Id: Triangulation_ds_vertex.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -26,7 +26,7 @@ namespace CGAL {
  * 'Triangulation_ds_vertex<TDS>'
  */
 template< class TDS = void >
-class Triangulation_ds_vertex 
+class Triangulation_ds_vertex
 {
     typedef Triangulation_ds_vertex<TDS>    Self;
 
@@ -102,7 +102,7 @@ public:
 public: // FOR MEMORY MANAGEMENT
 
     void*   for_compact_container() const { return full_cell_.for_compact_container(); }
-    void* & for_compact_container()       { return full_cell_.for_compact_container(); }
+    void    for_compact_container(void *p){ full_cell_.for_compact_container(p); }
 
 };  // end of Triangulation_ds_vertex
 

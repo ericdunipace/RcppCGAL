@@ -4,10 +4,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_2/include/CGAL/Mesh_2/Uniform_sizing_field_2.h $
-// $Id: Uniform_sizing_field_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_2/include/CGAL/Mesh_2/Uniform_sizing_field_2.h $
+// $Id: Uniform_sizing_field_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s) : Jane Tournois, Pierre Alliez
 //
@@ -23,16 +23,16 @@
 namespace CGAL {
 
 namespace Mesh_2 {
-  
+
 template <typename Tr>
 class Uniform_sizing_field_2
   : public virtual Sizing_field_2<Tr>
 {
   typedef typename Tr::Geom_traits::Point_2       Point_2;
   typedef typename Tr::Geom_traits::FT            FT;
-  
+
 public:
-  // Vertices of mesh triangulation do not need to be updated 
+  // Vertices of mesh triangulation do not need to be updated
   static const bool is_vertex_update_needed = false;
 
 public:
@@ -41,8 +41,8 @@ public:
 public:
   FT operator()(const Point_2&) const { return FT(1); }
 };
-  
-  
+
+
 } // end namespace Mesh_2
 
 } //namespace CGAL

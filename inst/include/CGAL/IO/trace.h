@@ -2,8 +2,8 @@
 // All rights reserved.
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Stream_support/include/CGAL/IO/trace.h $
-// $Id: trace.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Stream_support/include/CGAL/IO/trace.h $
+// $Id: trace.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Laurent Saboret
@@ -38,7 +38,7 @@ inline void CGAL_print_stderr(const char *fmt, ...)
   #define CGAL_TRACE  if (false) CGAL_print_stderr
 #endif
 
-// CGAL_TRACE_STREAM = C++ stream that prints to std::cerr 
+// CGAL_TRACE_STREAM = C++ stream that prints to std::cerr
 // if DEBUG_TRACE is defined (ignored otherwise)
 #ifdef DEBUG_TRACE
   #define CGAL_TRACE_STREAM  std::cerr

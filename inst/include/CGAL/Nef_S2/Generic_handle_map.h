@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_S2/include/CGAL/Nef_S2/Generic_handle_map.h $
-// $Id: Generic_handle_map.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_S2/include/CGAL/Nef_S2/Generic_handle_map.h $
+// $Id: Generic_handle_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel  <seel@mpi-sb.mpg.de>
 
@@ -21,14 +21,14 @@
 namespace CGAL {
 
 struct Void_handle_hash_function {
-    std::size_t operator() (void* h) const { 
+    std::size_t operator() (void* h) const {
         return std::size_t(h);
     }
 };
 
 
 template <class I>
-class Generic_handle_map : public 
+class Generic_handle_map : public
   Unique_hash_map<void*,I,Void_handle_hash_function>
 { typedef Unique_hash_map<void*,I,Void_handle_hash_function> Base;
 public:
@@ -36,11 +36,11 @@ public:
   Generic_handle_map(I i) : Base(i) {}
 
   template <class H>
-  const I& operator[](H h) const 
+  const I& operator[](H h) const
   { return Base::operator[](&*h); }
 
   template <class H>
-  I& operator[](H h) 
+  I& operator[](H h)
   { return Base::operator[](&*h); }
 
 };

@@ -2,7 +2,7 @@
 /*
  * author:  Bruno Levy, INRIA, project ALICE
  * website: http://www.loria.fr/~levy/software
- * 
+ *
  * This file is part of CGAL (www.cgal.org)
  *
  * Scientific work that use this software can reference the website and
@@ -20,8 +20,8 @@
  *      - Added OpenNL namespace
  *      - SparseMatrix is now a model of the SparseLinearAlgebraTraits_d::Matrix concept
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/OpenNL/include/CGAL/OpenNL/sparse_matrix.h $
- * $Id: sparse_matrix.h fcd0529 2019-10-20T00:47:56+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/OpenNL/include/CGAL/OpenNL/sparse_matrix.h $
+ * $Id: sparse_matrix.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
 */
 
@@ -90,7 +90,7 @@ public:
         //
         // Optimization:
         // - Caller can optimize this call by setting 'new_coef' to true
-        //   if the coefficient does not already exists in the matrix. 
+        //   if the coefficient does not already exists in the matrix.
         void set_coef(unsigned int index, T val, bool new_coef)
         {
             if (!new_coef)
@@ -203,7 +203,7 @@ public:
     //
     // Optimization:
     // - Caller can optimize this call by setting 'new_coef' to true
-    //   if the coefficient does not already exists in the matrix. 
+    //   if the coefficient does not already exists in the matrix.
     //
     // Preconditions:
     // - 0 <= i < row_dimension().
@@ -235,7 +235,7 @@ private:
 } ;
 
 /** y <- M*x */
-template <class T> 
+template <class T>
 void mult(const SparseMatrix<T>& M, const FullVector<T>& x, FullVector<T>& y) {
     unsigned int N = M.dimension() ;
     CGAL_assertion(x.dimension() == N) ;

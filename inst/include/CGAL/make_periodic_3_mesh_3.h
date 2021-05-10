@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_mesh_3/include/CGAL/make_periodic_3_mesh_3.h $
-// $Id: make_periodic_3_mesh_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_mesh_3/include/CGAL/make_periodic_3_mesh_3.h $
+// $Id: make_periodic_3_mesh_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stéphane Tayeb,
@@ -182,7 +182,7 @@ C3T3 make_periodic_3_mesh_3(const MD& md, const MC& mc, const T& ...t)
 #  pragma warning(push)
 #  pragma warning(disable:4003) // not enough actual parameters for macro
 #endif
-  
+
 // see <CGAL/config.h>
 CGAL_PRAGMA_DIAG_PUSH
 // see <CGAL/boost/parameter.h>

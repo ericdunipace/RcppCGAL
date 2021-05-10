@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_2/include/CGAL/convex_hull_traits_2.h $
-// $Id: convex_hull_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_2/include/CGAL/convex_hull_traits_2.h $
+// $Id: convex_hull_traits_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Stefan Schirra
 
-// This file's name must begin with a lower-case letter for backward 
-// compatability.  Unfortunately, you can't have a file that differs only 
+// This file's name must begin with a lower-case letter for backward
+// compatability.  Unfortunately, you can't have a file that differs only
 // in capitalization on the Windows platforms.
 
 #ifndef CGAL_CONVEX_HULL_TRAITS_2_H

@@ -6,7 +6,7 @@
  * This file is part of CGAL (www.cgal.org).
  *
  * File: RefCount.h
- * Synopsis: 
+ * Synopsis:
  *     1. This file defines two templated classes:
  *               RCRepImpl<class N>
  *     to create Reps of the class N.  The basic functions provided by
@@ -30,16 +30,16 @@
  *         class BigRat : public RCBigRat {
  *         ...
  *         }
- * 
- * Written by 
+ *
+ * Written by
  *       Zilin Du <zilin@cs.nyu.edu>
  *       Chee Yap <yap@cs.nyu.edu>
  *
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/RefCount.h $
- * $Id: RefCount.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/RefCount.h $
+ * $Id: RefCount.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -47,7 +47,7 @@
 #ifndef _CORE_REFCOUNT_H_
 #define _CORE_REFCOUNT_H_
 
-namespace CORE { 
+namespace CORE {
 
 template<class Deriving>
 class RCRepImpl {
@@ -86,16 +86,16 @@ public:
     return *rep;
   }
 
-  
+
   /// clone data
   void makeCopy() {
     if (rep->getRefCount() > 1) {
       T* oldValue = rep;
       rep->decRef(); // safe since rep has been referred at least once.
-      rep = oldValue ? new T(*oldValue) : 0; 
+      rep = oldValue ? new T(*oldValue) : 0;
     }
   }
- 
+
 #ifdef CORE_RC_DEBUG
   /// get counter
   int getRefCount() const {

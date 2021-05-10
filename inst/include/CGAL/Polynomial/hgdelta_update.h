@@ -2,12 +2,12 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polynomial/include/CGAL/Polynomial/hgdelta_update.h $
-// $Id: hgdelta_update.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polynomial/include/CGAL/Polynomial/hgdelta_update.h $
+// $Id: hgdelta_update.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
-// Author(s)     : Michael Hemmer 
+// Author(s)     : Michael Hemmer
 // ============================================================================
 
 // TODO: The comments are all original EXACUS comments and aren't adapted. So
@@ -23,7 +23,7 @@ namespace internal {
     template <class NT> inline
     void hgdelta_update(NT& h, const NT& g, int delta) {
         typename Algebraic_structure_traits<NT>::Integral_division idiv;
-    
+
         // compute h = h^(1-delta) * g^delta
         switch (delta) {
         case 0:

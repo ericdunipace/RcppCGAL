@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Orientation8_C2.h $
-// $Id: Orientation8_C2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Orientation8_C2.h $
+// $Id: Orientation8_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -46,18 +46,18 @@ public:
 public:
   inline
   Orientation operator()(const Site_2& s1, const Site_2& s2,
-			 const Site_2& s3) const
+                         const Site_2& s3) const
   {
     return Kernel().orientation_2_object()(s1.point(), s2.point(),
-					   s3.point());
+                                           s3.point());
   }
 
   inline
   Sign sqrt_ext_sign(const FT& A, const FT& B,
-		     const FT& Exp, const FT& Eyp, const FT& Erp,
-		     const FT& Exy2, const FT& Exr, const FT& Eyr,
-		     const FT dx, const FT& dy,
-		     const Field_with_sqrt_tag&) const
+                     const FT& Exp, const FT& Eyp, const FT& Erp,
+                     const FT& Exy2, const FT& Exr, const FT& Eyr,
+                     const FT dx, const FT& dy,
+                     const Field_with_sqrt_tag&) const
   {
     FT G = CGAL::square(Exp) + CGAL::square(Eyp) - CGAL::square(Erp);
     return CGAL::sign(A + B * CGAL::sqrt(G));
@@ -65,10 +65,10 @@ public:
 
   inline
   Sign sqrt_ext_sign(const FT& A, const FT& B,
-		     const FT& Exp, const FT& Eyp, const FT& Erp,
-		     const FT& Exy2, const FT& Exr, const FT& Eyr,
-		     const FT dx, const FT& dy,
-		     const Integral_domain_without_division_tag&) const
+                     const FT& Exp, const FT& Eyp, const FT& Erp,
+                     const FT& Exy2, const FT& Exr, const FT& Eyr,
+                     const FT dx, const FT& dy,
+                     const Integral_domain_without_division_tag&) const
   {
     Sign sA = CGAL::sign(A);
     Sign sB = CGAL::sign(B);
@@ -78,14 +78,14 @@ public:
     if ( sA == sB ) { return sA; }
 
     Sign s = CGAL::sign(CGAL::square(Exy2 * Exr - Erp * dy)
-			+ CGAL::square(Exy2 * Eyr + Erp * dx)
-			- CGAL::square(B));
+                        + CGAL::square(Exy2 * Eyr + Erp * dx)
+                        - CGAL::square(B));
     return sA * s;
   }
 
   Orientation predicate(const Site_2& s1, const Site_2& s2,
-			 const Site_2& s3, const Site_2& p1,
-			 const Site_2& p2) const
+                         const Site_2& s3, const Site_2& p1,
+                         const Site_2& p2) const
   {
     // computes the orientation of the Voronoi vertex of s1, s2, s3 and
     // the points p1 and p2
@@ -127,12 +127,12 @@ public:
     FT B = Exy * Exy2 - Exp * dx - Eyp * dy;
 
     return sqrt_ext_sign(A, B, Exp, Eyp, Erp,
-			 Exy2, Exr, Eyr, dx, dy, Method_tag());
+                         Exy2, Exr, Eyr, dx, dy, Method_tag());
   }
 
   Orientation operator()(const Site_2& s1, const Site_2& s2,
-			 const Site_2& s3, const Site_2& p1,
-			 const Site_2& p2) const
+                         const Site_2& s3, const Site_2& p1,
+                         const Site_2& p2) const
   {
     Orientation o = predicate(s1, s2, s3, p1, p2);
 #ifndef NDEBUG
@@ -168,11 +168,11 @@ private:
 
 public:
   Constructive_orientation8_C2(const Site_2& s1, const Site_2& s2,
-			       const Site_2& s3, bool use_xj)
+                               const Site_2& s3, bool use_xj)
   {
     s1x = s1.x();
     s1y = s1.y();
-    
+
     xj = s2.x() - s1.x();
     xk = s3.x() - s1.x();
 
@@ -214,9 +214,9 @@ public:
 
 private:
   inline
-  Sign sqrt_ext_sign(const FT& A, const FT& B, const FT& Exy2, 
-		     const FT& dx, const FT& dy,
-		     const Field_with_sqrt_tag&) const
+  Sign sqrt_ext_sign(const FT& A, const FT& B, const FT& Exy2,
+                     const FT& dx, const FT& dy,
+                     const Field_with_sqrt_tag&) const
   {
     FT G = CGAL::square(Exp) + CGAL::square(Eyp) - CGAL::square(Erp);
     return CGAL::sign(A + B * CGAL::sqrt(G));
@@ -224,7 +224,7 @@ private:
 
   inline
   Sign sqrt_ext_sign(const FT& A, const FT& B, const FT&,
-		     const Field_with_sqrt_tag&) const
+                     const Field_with_sqrt_tag&) const
   {
     FT G = CGAL::square(Exp) + CGAL::square(Eyp) - CGAL::square(Erp);
     return CGAL::sign(A + B * CGAL::sqrt(G));
@@ -233,7 +233,7 @@ private:
 
   inline
   Sign sqrt_ext_sign(const FT& A, const FT& B, const FT& norm,
-		     const Integral_domain_without_division_tag&) const
+                     const Integral_domain_without_division_tag&) const
   {
     Sign sA = CGAL::sign(A);
     Sign sB = CGAL::sign(B);
@@ -249,8 +249,8 @@ private:
 
   inline
   Sign sqrt_ext_sign(const FT& A, const FT& B, const FT& Exy2,
-		     const FT dx, const FT& dy,
-		     const Integral_domain_without_division_tag&) const
+                     const FT dx, const FT& dy,
+                     const Integral_domain_without_division_tag&) const
   {
     Sign sA = CGAL::sign(A);
     Sign sB = CGAL::sign(B);
@@ -260,8 +260,8 @@ private:
     if ( sA == sB ) { return sA; }
 
     Sign s = CGAL::sign(CGAL::square(Exy2 * Exr - Erp * dy)
-			+ CGAL::square(Exy2 * Eyr + Erp * dx)
-			- CGAL::square(B));
+                        + CGAL::square(Exy2 * Eyr + Erp * dx)
+                        - CGAL::square(B));
     return sA * s;
   }
 
@@ -289,10 +289,10 @@ private:
 public:
   inline
   Orientation operator()(const Site_2& s1, const Site_2& s2,
-			 const Site_2& s3) const
+                         const Site_2& s3) const
   {
     return Kernel().orientation_2_object()(s1.point(), s2.point(),
-					   s3.point());
+                                           s3.point());
   }
 
   inline

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Linear_cell_complex/include/CGAL/Linear_cell_complex_for_bgl_combinatorial_map_helper.h $
-// $Id: Linear_cell_complex_for_bgl_combinatorial_map_helper.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Linear_cell_complex/include/CGAL/Linear_cell_complex_for_bgl_combinatorial_map_helper.h $
+// $Id: Linear_cell_complex_for_bgl_combinatorial_map_helper.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -33,7 +33,7 @@ namespace CGAL {
              class CMap = Combinatorial_map_base,
              class Storage_ = CMap_linear_cell_complex_storage_1
              <d_, ambient_dim, Traits_,
-              CGAL::Linear_cell_complex_bgl_min_items, Alloc_> >  
+              CGAL::Linear_cell_complex_bgl_min_items, Alloc_> >
   struct Linear_cell_complex_for_bgl_combinatorial_map_helper
   {
   public:
@@ -41,7 +41,7 @@ namespace CGAL {
     typedef Linear_cell_complex_for_combinatorial_map
             <d_, ambient_dim, Traits_, CGAL::Linear_cell_complex_bgl_min_items,
              Alloc_, CMap, Storage_> type;
-  }; 
+  };
 
 } // namespace CGAL
 

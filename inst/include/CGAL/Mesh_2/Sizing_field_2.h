@@ -4,10 +4,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_2/include/CGAL/Mesh_2/Sizing_field_2.h $
-// $Id: Sizing_field_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_2/include/CGAL/Mesh_2/Sizing_field_2.h $
+// $Id: Sizing_field_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s) : Jane Tournois, Pierre Alliez
 //
@@ -27,7 +27,7 @@ namespace CGAL
 
 template <typename Tr>
 class Sizing_field_2 // pure virtual class
-{    
+{
 public:
   typedef typename Tr::Geom_traits::Point_2 Point_2;
   typedef typename Tr::Geom_traits::FT      FT;

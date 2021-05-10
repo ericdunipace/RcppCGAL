@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_constant_domain_field_3.h $
-// $Id: Mesh_constant_domain_field_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_constant_domain_field_3.h $
+// $Id: Mesh_constant_domain_field_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Stephane Tayeb
 //
 //******************************************************************************
-// File Description : 
+// File Description :
 //******************************************************************************
 
 #ifndef CGAL_MESH_3_MESH_CONSTANT_DOMAIN_FIELD_3_H
@@ -39,11 +39,11 @@ public:
       boost::mpl::identity<typename Gt::Point_3>
     >::type                       Point_3;
   typedef Index_                  Index;
-  
+
 private:
   // Map to store field values
   typedef std::map<std::pair<int,Index>,FT> Values;
-  
+
 public:
   /// Constructor
   Mesh_constant_domain_field_3(const FT& d) : d_(d) {}
@@ -53,10 +53,10 @@ public:
   {
     typename Values::const_iterator it = values_.find(std::make_pair(dim,index));
     if ( it != values_.end() ) { return it->second; }
-    
+
     return d_;
   }
-  
+
   /// Sets size at any point of dimension \c dim and index \c index
   void set_size(const FT& size, const int dim, const Index& index)
   {

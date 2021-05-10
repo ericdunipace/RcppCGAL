@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Envelope_3/include/CGAL/Env_surface_data_traits_3.h $
-// $Id: Env_surface_data_traits_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Envelope_3/include/CGAL/Env_surface_data_traits_3.h $
+// $Id: Env_surface_data_traits_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ron Wein          <wein@post.tau.ac.il>
 #ifndef CGAL_ENV_SURFACE_DATA_TRAITS_3_H
@@ -35,7 +35,7 @@ template <class Traits_, class XyMonotoneSurfaceData_,
           class SurfaceData_ = XyMonotoneSurfaceData_,
           class Convert_ = _Default_convert_func<SurfaceData_,
                                                  XyMonotoneSurfaceData_> >
-class Env_surface_data_traits_3 : public Traits_ 
+class Env_surface_data_traits_3 : public Traits_
 {
 public:
 
@@ -43,27 +43,27 @@ public:
   typedef XyMonotoneSurfaceData_                   Xy_monotone_surface_data;
   typedef SurfaceData_                             Surface_data;
   typedef Convert_                                 Convert;
-  
+
   typedef typename Base_traits_3::Surface_3        Base_surface_3;
-  typedef typename Base_traits_3::Xy_monotone_surface_3  
+  typedef typename Base_traits_3::Xy_monotone_surface_3
                                                    Base_xy_monotone_surface_3;
 
   // Representation of a surface with an addtional data field:
   typedef _Curve_data_ex<Base_surface_3, Surface_data>  Surface_3;
-  
+
   // Representation of an xy-monotone surface with an addtional data field:
   typedef _Curve_data_ex<Base_xy_monotone_surface_3,
                          Xy_monotone_surface_data>      Xy_monotone_surface_3;
-  
+
 public:
-  
+
   /// \name Construction.
   //@{
 
   /*! Default constructor. */
   Env_surface_data_traits_3 ()
   {}
-  
+
   /*! Constructor from a base-traits class. */
   Env_surface_data_traits_3 (const Base_traits_3 & traits) :
     Base_traits_3 (traits)
@@ -83,12 +83,12 @@ public:
     /*! Constructor. */
     Make_xy_monotone_3 (const Base_traits_3 * _base) : base (_base)
     {}
-    
+
     /*!
      * Subdivide the given surface into xy-monotone surfaces and insert them
      * to the given output iterator.
      * \param S The surface.
-     * \param oi The output iterator, 
+     * \param oi The output iterator,
      *           whose value-type is Xy_monotone_surface_2.
      * \return The past-the-end iterator.
      */
@@ -99,7 +99,7 @@ public:
       // Make the original surface xy-monotone.
       std::list<Base_xy_monotone_surface_3>                     xy_surfaces;
       typename std::list<Base_xy_monotone_surface_3>::iterator  xys_it;
-    
+
       base->make_xy_monotone_3_object()
         (S, is_lower, std::back_inserter (xy_surfaces));
 

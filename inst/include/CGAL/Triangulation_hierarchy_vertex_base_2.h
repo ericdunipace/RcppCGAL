@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_2/include/CGAL/Triangulation_hierarchy_vertex_base_2.h $
-// $Id: Triangulation_hierarchy_vertex_base_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_2/include/CGAL/Triangulation_hierarchy_vertex_base_2.h $
+// $Id: Triangulation_hierarchy_vertex_base_2.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Olivier Devillers <Olivivier.Devillers@sophia.inria.fr>
 //                 Mariette Yvinec  <Mariette.Yvinec@sophia.inria.fr>
@@ -41,13 +41,13 @@ public:
   };
 
   Triangulation_hierarchy_vertex_base_2()
-    : Base(), _up(0), _down(0)
+    : Base()
     {}
   Triangulation_hierarchy_vertex_base_2(const Point & p, Face_handle f)
-    : Base(p,f), _up(0), _down(0)
+    : Base(p,f)
     {}
   Triangulation_hierarchy_vertex_base_2(const Point & p)
-    : Base(p), _up(0), _down(0)
+    : Base(p)
     {}
 
   Vertex_handle up() {return _up;}
@@ -57,8 +57,8 @@ public:
 
 
  private:
-  Vertex_handle  _up;    // same vertex one level above
-  Vertex_handle  _down;  // same vertex one level below
+  Vertex_handle  _up   = nullptr;    // same vertex one level above
+  Vertex_handle  _down = nullptr;  // same vertex one level below
 };
 
 } //namespace CGAL

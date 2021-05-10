@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Generator/include/CGAL/random_convex_hull_in_disc_2.h $
-// $Id: random_convex_hull_in_disc_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Generator/include/CGAL/random_convex_hull_in_disc_2.h $
+// $Id: random_convex_hull_in_disc_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -179,7 +179,7 @@ void random_convex_hull_in_disc_2(std::size_t n, double radius, std::list<typena
   do {  // Initialization
     long init =
         static_cast<long>((std::min)(static_cast<std::size_t>(100), n - simulated_points));
-    
+
     generate_points_annulus(init, -CGAL_PI, CGAL_PI, 0, radius, l,
                             gen);
 
@@ -193,7 +193,7 @@ void random_convex_hull_in_disc_2(std::size_t n, double radius, std::list<typena
 
   std::size_t T = n;
   if (!fast) T = static_cast<std::size_t>(std::floor(n / std::pow(std::log(static_cast<double>(n)), 2)));
-  
+
   while (simulated_points < n) {
     // l is a list coming from a convex hull operation. we are moving the
     // points s.t the angles are from -pi to pi.

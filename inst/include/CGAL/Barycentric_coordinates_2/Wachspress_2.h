@@ -3,8 +3,8 @@
 //
 // This file is a part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Wachspress_2.h $
-// $Id: Wachspress_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Wachspress_2.h $
+// $Id: Wachspress_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Dmitry Anisimov, David Bommes, Kai Hormann, and Pierre Alliez.
@@ -53,8 +53,8 @@ namespace Barycentric_coordinates {
 \pre The provided polygon is strictly convex.
 
 */
- 
-template<class Traits> 
+
+template<class Traits>
     class Wachspress_2
 {
 
@@ -101,10 +101,10 @@ public:
     // Computation of Wachspress Basis Functions
 
     // This function computes Wachspress barycentric coordinates for a chosen query point on the bounded side of a strictly convex polygon.
-    // \pre The provided polygon is strictly convex. 
+    // \pre The provided polygon is strictly convex.
     template<class OutputIterator>
         inline boost::optional<OutputIterator> coordinates_on_bounded_side(const Point_2 &query_point, OutputIterator &output, const Type_of_algorithm type_of_algorithm)
-    {   
+    {
         switch(type_of_algorithm)
         {
             case PRECISE:
@@ -127,7 +127,7 @@ public:
     // \pre The provided polygon is strictly convex.
     template<class OutputIterator>
         inline boost::optional<OutputIterator> coordinates_on_unbounded_side(const Point_2 &query_point, OutputIterator &output, const Type_of_algorithm type_of_algorithm, const bool warning_tag = true)
-    {   
+    {
         switch(type_of_algorithm)
         {
             case PRECISE:
@@ -177,7 +177,7 @@ private:
     // WEIGHTS.
 
     // Compute Wachspress weights without normalization.
-    template<class OutputIterator> 
+    template<class OutputIterator>
         boost::optional<OutputIterator> weights_2(const Point_2 &query_point, OutputIterator &output)
     {
         // Get the number of vertices in the polygon.
@@ -390,7 +390,7 @@ private:
             // Index of the last polygon's vertex.
             const int last = int(number_of_vertices) - 1;
 
-            // Test all the consequent triplets of the polygon's vertices on collinearity. 
+            // Test all the consequent triplets of the polygon's vertices on collinearity.
             // In case we find at least one, return WEAKLY_CONVEX polygon.
             if(collinear_2(vertex[last], vertex[0], vertex[1]))
                 return WEAKLY_CONVEX;

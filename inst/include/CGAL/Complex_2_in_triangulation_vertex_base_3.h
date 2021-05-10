@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesher/include/CGAL/Complex_2_in_triangulation_vertex_base_3.h $
-// $Id: Complex_2_in_triangulation_vertex_base_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/Complex_2_in_triangulation_vertex_base_3.h $
+// $Id: Complex_2_in_triangulation_vertex_base_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,9 +24,9 @@
 
 namespace CGAL {
 
-  template < class GT, class Vb = Triangulation_vertex_base_3 <GT> > 
-  class Complex_2_in_triangulation_vertex_base_3 : public Vb {    
-    
+  template < class GT, class Vb = Triangulation_vertex_base_3 <GT> >
+  class Complex_2_in_triangulation_vertex_base_3 : public Vb {
+
   public:
     typedef Complex_2_in_triangulation_vertex_base_3 <GT, Vb> Self;
 
@@ -50,7 +50,7 @@ namespace CGAL {
     // Constructors
 
     Complex_2_in_triangulation_vertex_base_3()
-      : Vb(), 
+      : Vb(),
         number_of_incident_facets_(0),
         number_of_components_(0),
         cache_validity(false)
@@ -76,7 +76,7 @@ namespace CGAL {
     {
       return number_of_incident_facets_;
     }
-    
+
     int cached_number_of_components() const
     {
       return number_of_components_;

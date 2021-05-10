@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/ApolloniusGraphGraphicsItem.h $
-// $Id: ApolloniusGraphGraphicsItem.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/ApolloniusGraphGraphicsItem.h $
+// $Id: ApolloniusGraphGraphicsItem.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -41,13 +41,13 @@ public:
   ApolloniusGraphGraphicsItem(AG* ag);
 
 
-  QRectF 
+  QRectF
   boundingRect() const;
-  
-  void 
+
+  void
   paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  
-  void 
+
+  void
   modelChanged();
 
   const QPen& edgesPen() const
@@ -85,7 +85,7 @@ ApolloniusGraphGraphicsItem<AG,K>::ApolloniusGraphGraphicsItem(AG * ag)
 }
 
 template <typename AG, typename K>
-QRectF 
+QRectF
 ApolloniusGraphGraphicsItem<AG,K>::boundingRect() const
 {
   QRectF rect = CGAL::Qt::viewportsBbox(scene());
@@ -94,7 +94,7 @@ ApolloniusGraphGraphicsItem<AG,K>::boundingRect() const
 
 
 template <typename AG, typename K>
-void 
+void
 ApolloniusGraphGraphicsItem<AG,K>::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * /*w*/)
 {
 
@@ -102,7 +102,7 @@ ApolloniusGraphGraphicsItem<AG,K>::paint(QPainter *painter, const QStyleOptionGr
   QRectF rect = option->exposedRect;
   PainterOstream<K> pos(painter, rect);
   for(typename AG::Sites_iterator it = ag->sites_begin();
-	 it != ag->sites_end(); it++ ) {
+         it != ag->sites_end(); it++ ) {
     pos << typename K::Circle_2(it->point(), square( it->weight()));
   }
 
@@ -112,7 +112,7 @@ ApolloniusGraphGraphicsItem<AG,K>::paint(QPainter *painter, const QStyleOptionGr
 
 
   template <typename AG, typename K>
-void 
+void
   ApolloniusGraphGraphicsItem<AG,K>::modelChanged()
 {
   update();

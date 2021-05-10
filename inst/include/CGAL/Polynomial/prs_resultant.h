@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polynomial/include/CGAL/Polynomial/prs_resultant.h $
-// $Id: prs_resultant.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polynomial/include/CGAL/Polynomial/prs_resultant.h $
+// $Id: prs_resultant.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Arno Eigenwillig <arno@mpi-inf.mpg.de>
 //
@@ -45,12 +45,12 @@ NT prs_resultant_integral_domain(Polynomial<NT> A, Polynomial<NT> B) {
     } else {
         signflip = 0;
     }
-    
+
     typedef CGAL::Scalar_factor_traits<Polynomial<NT> > SFT;
-    typedef typename SFT::Scalar Scalar; 
+    typedef typename SFT::Scalar Scalar;
     typename SFT::Scalar_factor scalar_factor;
-    typename CGAL::Coercion_traits<Scalar, NT>::Cast cast_scalar_nt; 
-    
+    typename CGAL::Coercion_traits<Scalar, NT>::Cast cast_scalar_nt;
+
     Scalar a = scalar_factor(A), b = scalar_factor(B);
     NT g(1), h(1);
     NT t = cast_scalar_nt (CGAL::ipower(a, B.degree()) * CGAL::ipower(b, A.degree()));
@@ -183,7 +183,7 @@ namespace INTERN_PRS_RESULTANT {
     template <class NT> inline
     NT prs_resultant_(Polynomial<NT> A, Polynomial<NT> B, Field_tag) {
         typedef typename Fraction_traits<NT>::Is_fraction Is_decomposable;
-        return prs_resultant_(A, B, Is_decomposable());     
+        return prs_resultant_(A, B, Is_decomposable());
     }
 
     template <class NT> inline
@@ -199,7 +199,7 @@ NT prs_resultant_decompose(Polynomial<NT> A, Polynomial<NT> B){
     typedef typename Fraction_traits<POLY>::Denominator_type DENOM;
     typename Fraction_traits<POLY>::Decompose decompose;
     typedef typename INTPOLY::NT RES;
-    
+
     DENOM a, b;
     A.simplify_coefficients();
     B.simplify_coefficients();
@@ -248,7 +248,7 @@ template <class NT> inline
 NT prs_resultant(Polynomial<NT> A, Polynomial<NT> B) {
     typedef typename Algebraic_structure_traits<NT>::Algebraic_category
                                                                    Algebraic_category;
-    return INTERN_PRS_RESULTANT::prs_resultant_(A, B, Algebraic_category());     
+    return INTERN_PRS_RESULTANT::prs_resultant_(A, B, Algebraic_category());
 }
 
 } //namespace CGAL

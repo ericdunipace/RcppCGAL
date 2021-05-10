@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Voronoi_diagram_2/include/CGAL/Segment_Delaunay_graph_adaptation_policies_2.h $
-// $Id: Segment_Delaunay_graph_adaptation_policies_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Voronoi_diagram_2/include/CGAL/Segment_Delaunay_graph_adaptation_policies_2.h $
+// $Id: Segment_Delaunay_graph_adaptation_policies_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -36,7 +36,7 @@ struct Segment_Delaunay_graph_degeneracy_removal_policy_2
    CGAL_VORONOI_DIAGRAM_2_INS::Segment_Delaunay_graph_edge_tester_2<SDG2>,
    CGAL_VORONOI_DIAGRAM_2_INS::Segment_Delaunay_graph_face_tester_2<SDG2>,
    CGAL_VORONOI_DIAGRAM_2_INS::Default_site_inserter<typename SDG2::Site_2,
-						     SDG2>,
+                                                     SDG2>,
    CGAL_VORONOI_DIAGRAM_2_INS::Default_site_remover<SDG2> >
 {
   typedef typename SDG2::Point_2                   Point_2;

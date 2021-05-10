@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_do_intersect_functor.h $
-// $Id: Gps_do_intersect_functor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_do_intersect_functor.h $
+// $Id: Gps_do_intersect_functor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
 
@@ -19,7 +19,7 @@
 namespace CGAL {
 
 template <class Arrangement_>
-class Gps_do_intersect_functor 
+class Gps_do_intersect_functor
 {
 public:
 
@@ -45,7 +45,7 @@ public:
   {
     if(f1->contained() && f2->contained())
       // found intersection
-      m_found_reg_intersection = true;    
+      m_found_reg_intersection = true;
   }
 
 

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_2/include/CGAL/ch_melkman.h $
-// $Id: ch_melkman.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_2/include/CGAL/ch_melkman.h $
+// $Id: ch_melkman.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Lutz Kettner
 
@@ -31,12 +31,12 @@ ch_melkman( InputIterator first, InputIterator last,
 template <class InputIterator, class OutputIterator>
 OutputIterator
 ch_melkman( InputIterator first, InputIterator last,  OutputIterator result)
-{ 
+{
     typedef std::iterator_traits<InputIterator>   ITraits;
     typedef typename ITraits::value_type          value_type;
     typedef CGAL::Kernel_traits<value_type>       KTraits;
     typedef typename KTraits::Kernel              Kernel;
-    return ch_melkman( first, last, result, Kernel()); 
+    return ch_melkman( first, last, result, Kernel());
 }
 
 } //namespace CGAL

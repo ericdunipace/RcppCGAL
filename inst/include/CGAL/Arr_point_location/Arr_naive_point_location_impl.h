@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_naive_point_location_impl.h $
-// $Id: Arr_naive_point_location_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_naive_point_location_impl.h $
+// $Id: Arr_naive_point_location_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ron Wein   <wein@post.tau.ac.il>
 //                 (based on old version by Eyal Flato)
@@ -46,9 +46,9 @@ Arr_naive_point_location<Arrangement>::locate(const Point_2& p) const
 
   // Go over arrangement halfedges and check whether one of them contains
   // the query point in its interior.
-  typename Traits_adaptor_2::Is_in_x_range_2    is_in_x_range = 
+  typename Traits_adaptor_2::Is_in_x_range_2    is_in_x_range =
     geom_traits->is_in_x_range_2_object();
-  typename Traits_adaptor_2::Compare_y_at_x_2   compare_y_at_x = 
+  typename Traits_adaptor_2::Compare_y_at_x_2   compare_y_at_x =
     geom_traits->compare_y_at_x_2_object();
   typename Arrangement_2::Edge_const_iterator   eit;
   Halfedge_const_handle                         hh;
@@ -66,10 +66,10 @@ Arr_naive_point_location<Arrangement>::locate(const Point_2& p) const
   Face_const_handle                             fh;
   Face_const_handle                             f_inner;
   const Face_const_handle                       invalid_f;
-  
+
   for (fit = p_arr->faces_begin(); fit != p_arr->faces_end(); ++fit) {
     fh = fit;
-  
+
     if (top_traits->is_in_face(&(*fh), p, nullptr)) {
       // The current face contains p in its interior.
       if (f_inner == invalid_f ||

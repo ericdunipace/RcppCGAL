@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/exceptions.h $
-// $Id: exceptions.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/exceptions.h $
+// $Id: exceptions.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Kerber <mkerber@mpi-inf.mpg.de>
 //
@@ -22,22 +22,22 @@ namespace CGAL {
 
   namespace internal {
 
-    /*! 
+    /*!
      * \brief Exception class for not sufficiently generic positions.
      *
      * Must be thrown whenever a curve cannot be analysed because its position
      * is not "good enough".
      */
     class Non_generic_position_exception {
-      
+
     public:
 
       //! Default constructible
       Non_generic_position_exception() {}
-      
+
     };
 
-    /*! 
+    /*!
      * \brief Exception class for not sufficiently generic positions.
      *
      * Must be thrown whenever a curve cannot be analysed because its position
@@ -45,7 +45,7 @@ namespace CGAL {
      */
     template<typename Polynomial>
     class Zero_resultant_exception {
-      
+
       Polynomial curve1,curve2;
       bool one_curve_failure;
 
@@ -54,11 +54,11 @@ namespace CGAL {
       Zero_resultant_exception(Polynomial c)
         : curve1(c), curve2(c),one_curve_failure(true)
         {}
-        
+
       Zero_resultant_exception(Polynomial c1,Polynomial c2)
         : curve1(c1),curve2(c2),one_curve_failure(false)
         {}
-      
+
     };
 
   } // namespace internal

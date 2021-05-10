@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/constraint_impl.h $
-// $Id: constraint_impl.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/constraint_impl.h $
+// $Id: constraint_impl.h 23b1024 2021-02-18T13:51:04+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY
@@ -59,7 +59,7 @@ void AxisPlaneConstraint::setTranslationConstraintDirection(
   if ((translationConstraintType() != AxisPlaneConstraint::FREE) &&
       (translationConstraintType() != AxisPlaneConstraint::FORBIDDEN)) {
     const qreal norm = direction.norm();
-    if (norm < 1E-8) {
+    if (norm == 0) {
       qWarning("AxisPlaneConstraint::setTranslationConstraintDir: null vector "
                "for translation constraint");
       translationConstraintType_ = AxisPlaneConstraint::FREE;

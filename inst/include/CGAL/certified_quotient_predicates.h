@@ -2,22 +2,22 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Straight_skeleton_2/include/CGAL/certified_quotient_predicates.h $
-// $Id: certified_quotient_predicates.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Straight_skeleton_2/include/CGAL/certified_quotient_predicates.h $
+// $Id: certified_quotient_predicates.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
 //
-#ifndef CGAL_CERTIFIED_QUOTIENT_PREDICATES_H 
+#ifndef CGAL_CERTIFIED_QUOTIENT_PREDICATES_H
 #define CGAL_CERTIFIED_QUOTIENT_PREDICATES_H
 
 #include <CGAL/certified_numeric_predicates.h>
 #include <CGAL/Quotient.h>
 
-namespace CGAL { 
+namespace CGAL {
 
 template <class NT>
-inline Uncertain<bool> certified_quotient_is_positive(const Quotient<NT>& x) 
+inline Uncertain<bool> certified_quotient_is_positive(const Quotient<NT>& x)
 {
   Uncertain<Sign> signum = CGAL_NTS certified_sign(x.num) ;
   Uncertain<Sign> sigden = CGAL_NTS certified_sign(x.den) ;
@@ -25,7 +25,7 @@ inline Uncertain<bool> certified_quotient_is_positive(const Quotient<NT>& x)
   return ( signum != zero ) & ( signum == sigden );
 }
 
-template <class NT> 
+template <class NT>
 inline Uncertain<bool> certified_quotient_is_negative(const Quotient<NT>& x)
 {
   Uncertain<Sign> signum = CGAL_NTS certified_sign(x.num) ;
@@ -38,10 +38,10 @@ inline Uncertain<bool> certified_quotient_is_negative(const Quotient<NT>& x)
 template <class NT>
 inline Uncertain<bool> certified_quotient_is_zero(const Quotient<NT>& x)
 {
-  return CGAL_NTS certified_is_zero(x.num) ; 
+  return CGAL_NTS certified_is_zero(x.num) ;
 }
- 
-template <class NT> 
+
+template <class NT>
 CGAL_MEDIUM_INLINE
 Uncertain<Sign> certified_quotient_sign(const Quotient<NT>& x)
 {

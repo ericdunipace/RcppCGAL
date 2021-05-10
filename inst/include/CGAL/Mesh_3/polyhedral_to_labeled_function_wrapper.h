@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/polyhedral_to_labeled_function_wrapper.h $
-// $Id: polyhedral_to_labeled_function_wrapper.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/polyhedral_to_labeled_function_wrapper.h $
+// $Id: polyhedral_to_labeled_function_wrapper.h 0fa0c4f 2019-12-05T11:05:35+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -90,7 +90,7 @@ public:
     , step_size_(step_size)
     , first_level_(first_level)
   {
-    tree_->accelerate_distance_queries();
+
   }
 
   // Default copy constructor and assignment operator are ok
@@ -207,7 +207,6 @@ public:
     , sq_tolerance_size_(tolerance_size*tolerance_size)
     , hint_(p.facets_begin()->halfedge()->vertex()->point())
   {
-    tree_->accelerate_distance_queries();
   }
 
   // Default copy constructor and assignment operator are ok
@@ -283,7 +282,6 @@ public:
     , sq_tolerance_size_(tolerance_size*tolerance_size)
     , hint_(p.facets_begin()->halfedge()->vertex()->point())
   {
-    tree_->accelerate_distance_queries();
   }
 
   // Default copy constructor and assignment operator are ok

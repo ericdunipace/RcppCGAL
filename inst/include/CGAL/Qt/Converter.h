@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/Converter.h $
-// $Id: Converter.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/Converter.h $
+// $Id: Converter.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -64,7 +64,7 @@ public:
 private:
   bool clippingRectIsInitialized;
   CGAL_Iso_rectangle_2 clippingRect;
-  
+
 
 public:
 
@@ -99,18 +99,18 @@ public:
     return QPointF(to_double(p.x()), to_double(p.y()));
   }
 
-      
+
   CGAL_Segment_2 operator()(const QLineF& qs) const
   {
     return CGAL_Segment_2(operator()(qs.p1()), operator()(qs.p2()));
   }
- 
+
   QLineF operator()(const CGAL_Segment_2 &s) const
   {
     return QLineF(operator()(s.source()), operator()(s.target()));
   }
 
-  
+
   CGAL_Iso_rectangle_2 operator()(const QRectF& qr) const
   {
     return CGAL_Iso_rectangle_2(operator()(qr.bottomLeft()), operator()(qr.topRight()));
@@ -126,12 +126,12 @@ public:
   QRectF operator()(const CGAL::Bbox_2& bb) const
   {
     return QRectF(bb.xmin(),
-		  bb.ymin(),
-		  bb.xmax()-bb.xmin(),
-		  bb.ymax()-bb.ymin());
+                  bb.ymin(),
+                  bb.xmax()-bb.xmin(),
+                  bb.ymax()-bb.ymin());
   }
 
-     
+
   QLineF operator()(const CGAL_Ray_2 &r) const
   {
     CGAL_assertion(clippingRectIsInitialized);

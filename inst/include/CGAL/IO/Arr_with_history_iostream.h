@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/IO/Arr_with_history_iostream.h $
-// $Id: Arr_with_history_iostream.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/IO/Arr_with_history_iostream.h $
+// $Id: Arr_with_history_iostream.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ron Wein           <wein@post.tau.ac.il>
 
@@ -40,7 +40,7 @@ namespace CGAL {
 template <class GeomTraits, class TopTraits, class Formatter>
 std::ostream& write
     (const Arrangement_on_surface_with_history_2<GeomTraits,TopTraits>& arr,
-     std::ostream& os, 
+     std::ostream& os,
      Formatter& format)
 {
   typedef Arrangement_on_surface_with_history_2<GeomTraits,TopTraits>
@@ -61,7 +61,7 @@ std::ostream& write
  */
 template <class GeomTraits, class TopTraits>
 std::ostream& operator<<
-    (std::ostream& os, 
+    (std::ostream& os,
      const Arrangement_on_surface_with_history_2<GeomTraits,TopTraits>& arr)
 {
   typedef Arrangement_on_surface_with_history_2<GeomTraits,TopTraits>
@@ -87,7 +87,7 @@ std::ostream& operator<<
 template <class GeomTraits, class TopTraits, class Formatter>
 std::istream& read
     (Arrangement_on_surface_with_history_2<GeomTraits,TopTraits>& arr,
-     std::istream& is, 
+     std::istream& is,
      Formatter& format)
 {
   typedef Arrangement_on_surface_with_history_2<GeomTraits,TopTraits>
@@ -108,7 +108,7 @@ std::istream& read
  */
 template <class GeomTraits, class TopTraits>
 std::istream& operator>>
-    (std::istream& is, 
+    (std::istream& is,
      Arrangement_on_surface_with_history_2<GeomTraits,TopTraits>& arr)
 {
   typedef Arrangement_on_surface_with_history_2<GeomTraits,TopTraits>
@@ -119,7 +119,7 @@ std::istream& operator>>
 
   Text_formatter  text_format (is);
   Arr_reader      reader (arr);
-  
+
   reader (text_format);
   return (is);
 }

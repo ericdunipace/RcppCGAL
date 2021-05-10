@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arr_do_intersect_zone_visitor.h $
-// $Id: Arr_do_intersect_zone_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arr_do_intersect_zone_visitor.h $
+// $Id: Arr_do_intersect_zone_visitor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ophir Setter      <ophirset@post.tau.ac.il>
 //
@@ -84,7 +84,7 @@ public:
                          Face_handle,
                          Vertex_handle left_v, Halfedge_handle left_he,
                          Vertex_handle right_v, Halfedge_handle right_he)
-  { 
+  {
     if ((left_v == invalid_v) && (right_v == invalid_v) &&
         (left_he == invalid_he) && (right_he == invalid_he))
     {

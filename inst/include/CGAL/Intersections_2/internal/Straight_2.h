@@ -1,16 +1,16 @@
-// Copyright (c) 2000  
+// Copyright (c) 2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Intersections_2/include/CGAL/Intersections_2/internal/Straight_2.h $
-// $Id: Straight_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_2/include/CGAL/Intersections_2/internal/Straight_2.h $
+// $Id: Straight_2.h 2549b58 2020-09-30T09:58:12+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Geert-Jan Giezeman
 
@@ -23,7 +23,7 @@
 #include <CGAL/Kernel/global_functions_internal_2.h>
 
 namespace CGAL {
-  
+
 namespace Intersections {
 
 namespace internal {
@@ -257,8 +257,8 @@ bool Straight_2_<K>::operator==(const Straight_2_<K>& s) const
 template <class K>
 int
 sign_of_cross(typename K::Direction_2 const &dir1,
-	      typename K::Direction_2 const &dir2,
-	      const K&)
+              typename K::Direction_2 const &dir2,
+              const K&)
 {
   return static_cast<int>(CGAL::internal::orientation(dir1.to_vector(),
                                                       dir2.to_vector(), K()));
@@ -275,6 +275,7 @@ cut_right_off(typename K::Line_2 const & cutter)
     Line_2_Line_2_pair<K> pair(&support_, &cutter);
     switch (pair.intersection_type()) {
     case Line_2_Line_2_pair<K>::NO_INTERSECTION:
+    default:
         if (cutter.has_on_negative_side(support_.point()))
             bound_state_ = LINE_EMPTY;
         break;

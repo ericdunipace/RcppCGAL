@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_rat_arc/Singleton.h $
-// $Id: Singleton.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_rat_arc/Singleton.h $
+// $Id: Singleton.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Oren Salzman <orenzalz@post.tau.ac.il >
@@ -26,14 +26,14 @@ template <class T>
 class Singleton
 {
 public:
-  static T* instance() 
+  static T* instance()
   {
-    if(!m_pInstance) 
+    if(!m_pInstance)
       m_pInstance = new T;
     CGAL_assertion(m_pInstance !=nullptr);
     return m_pInstance;
   }
-      
+
   static void DestroyInstance()
   {
     delete m_pInstance;
@@ -49,5 +49,5 @@ private:
 template <class T> T* Singleton<T>::m_pInstance=nullptr;
 
 }   // namespace Arr_rational_arc
-}   //namespace CGAL { 
+}   //namespace CGAL {
 #endif // CGAL_SINGLETON_H_

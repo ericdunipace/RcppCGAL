@@ -1,12 +1,12 @@
-// Copyright (c) 1997-2001  
+// Copyright (c) 1997-2001
 // ETH Zurich (Switzerland).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Bounding_volumes/include/CGAL/Min_ellipse_2/Min_ellipse_2_adapterH2.h $
-// $Id: Min_ellipse_2_adapterH2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Bounding_volumes/include/CGAL/Min_ellipse_2/Min_ellipse_2_adapterH2.h $
+// $Id: Min_ellipse_2_adapterH2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Sven Schoenherr <sven@inf.ethz.ch>, Bernd Gaertner
 
@@ -97,7 +97,7 @@ class Min_ellipse_2_adapterH2 {
     orientation( const Point& p, const Point& q, const Point& r) const
     {
         typedef  typename DA_::RT  RT;
-    
+
         RT  phx;
         RT  phy;
         RT  phw;
@@ -107,11 +107,11 @@ class Min_ellipse_2_adapterH2 {
         RT  rhx;
         RT  rhy;
         RT  rhw;
-    
+
         dao.get( p, phx, phy, phw);
         dao.get( q, qhx, qhy, qhw);
         dao.get( r, rhx, rhy, rhw);
-    
+
         return( static_cast< CGAL::Orientation>(
                  CGAL_NTS sign( ( phx*rhw - rhx*phw) * ( qhy*rhw - rhy*qhw)
                               - ( phy*rhw - rhy*phw) * ( qhx*rhw - rhx*qhw))));
@@ -386,7 +386,7 @@ operator >> ( std::istream& is,
 
       case CGAL::IO::PRETTY:
         std::cerr << std::endl;
-	std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+        std::cerr << "Stream must be in ascii or binary mode" << std::endl;
         break;
 
       case CGAL::IO::ASCII:

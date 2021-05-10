@@ -1,8 +1,8 @@
 // Copyright (c) 2012  GeometryFactory Sarl (France)
 // All rights reserved.
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/is_streamable.h $
-// $Id: is_streamable.h bff5db6 2019-10-31T14:17:20+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/is_streamable.h $
+// $Id: is_streamable.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: BSL-1.0
 //
 // Author(s)     : Laurent Rineau, Philipp Moeller
@@ -17,7 +17,7 @@
 
 namespace CGAL {
 namespace internal {
-namespace is_streamable 
+namespace is_streamable
 {
   // A tag type returned by operator == for the any struct in this namespace
   // when T does not support ==.
@@ -37,7 +37,7 @@ namespace is_streamable
 
   // Two overloads to distinguish whether T supports a certain operator expression.
   // The first overload returns a reference to a two-element character array and is chosen if
-  // T does not support the expression, such as ==, whereas the second overload returns a char 
+  // T does not support the expression, such as ==, whereas the second overload returns a char
   // directly and is chosen if T supports the expression. So using sizeof(check(<expression>))
   // returns 2 for the first overload and 1 for the second overload.
   typedef char yes;
@@ -53,8 +53,8 @@ namespace is_streamable
   {
     static typename boost::remove_cv<typename boost::remove_reference<T>::type>::type const & x;
     static typename boost::remove_cv<typename boost::remove_reference<T>::type>::type  & y;
-    
-    static const bool value = 
+
+    static const bool value =
       sizeof(is_streamable::check(std::cout << x)) == sizeof(is_streamable::yes) &&
       sizeof(is_streamable::check(std::cin >> y)) == sizeof(is_streamable::yes);
   };
@@ -64,7 +64,7 @@ namespace is_streamable
 
 
 /// is_streamable is a meta-function that checks if a type is streamable
-/// 
+///
 /// is_streamable<T>::value is true iff the type T has stream operators <<
 /// and >>. Otherwise it is false.
 template <class T>

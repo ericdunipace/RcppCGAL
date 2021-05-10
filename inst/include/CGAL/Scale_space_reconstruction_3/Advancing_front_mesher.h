@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Scale_space_reconstruction_3/include/CGAL/Scale_space_reconstruction_3/Advancing_front_mesher.h $
-// $Id: Advancing_front_mesher.h 8c4f590 2019-10-19T16:20:43+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Scale_space_reconstruction_3/include/CGAL/Scale_space_reconstruction_3/Advancing_front_mesher.h $
+// $Id: Advancing_front_mesher.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s):      Simon Giraudot
@@ -23,7 +23,7 @@ namespace CGAL
 
 namespace Scale_space_reconstruction_3
 {
-  
+
 /** \ingroup PkgScaleSpaceReconstruction3Classes
  *
  *  Surface mesher for scale space reconstruction based on
@@ -32,7 +32,7 @@ namespace Scale_space_reconstruction_3
  *  This class applies the advancing front reconstruction algorithm
  *  with the possibility of using an upper bound on the length of the
  *  produced facets.
- * 
+ *
  *  \cgalModels CGAL::Scale_space_reconstruction_3::Mesher
  *
  *  \tparam Geom_traits geometric traits class. It must be a
@@ -45,7 +45,7 @@ class Advancing_front_mesher
 {
   typedef typename Geom_traits::FT FT;
   typedef typename Geom_traits::Point_3                        Point;          ///< defines the point type.
-  
+
   typedef std::array< unsigned int, 3 >       Facet;
 private:
 
@@ -83,7 +83,7 @@ private:
   Priority m_priority;
   FT m_radius_ratio_bound;
   FT m_beta;
-  
+
 public:
 
   /**
@@ -120,7 +120,7 @@ public:
 
 };
 
-  
+
 } // namespace Scale_space_reconstruction_3
 
 } // namespace CGAL

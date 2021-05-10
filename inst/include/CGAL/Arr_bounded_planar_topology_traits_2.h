@@ -3,17 +3,18 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_bounded_planar_topology_traits_2.h $
-// $Id: Arr_bounded_planar_topology_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_bounded_planar_topology_traits_2.h $
+// $Id: Arr_bounded_planar_topology_traits_2.h 3849f5e 2020-06-14T00:41:25+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-//
-// Author(s) : Ron Wein        <wein@post.tau.ac.il>
-//             Efi Fogel       <efif@post.tau.ac.il>
-//             Eric Berberich  <ericb@post.tau.ac.il>
+// Author(s): Ron Wein        <wein@post.tau.ac.il>
+//            Efi Fogel       <efif@post.tau.ac.il>
+//            Eric Berberich  <ericb@post.tau.ac.il>
 
 #ifndef CGAL_ARR_BOUNDED_PLANAR_TOPOLOGY_TRAITS_2_H
 #define CGAL_ARR_BOUNDED_PLANAR_TOPOLOGY_TRAITS_2_H
+
+#include <boost/variant.hpp>
 
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
@@ -306,17 +307,18 @@ public:
    * \param ps_x The boundary condition of the curve end in x.
    * \param ps_y The boundary condition of the curve end in y.
    * \pre The curve has a boundary condition in either x or y.
-   * \return An object that contains the curve end.
+   * \return An object that wraps the curve end.
    */
-  CGAL::Object place_boundary_vertex(Face*,
-                                     const X_monotone_curve_2&,
-                                     Arr_curve_end,
-                                     Arr_parameter_space /* ps_x */,
-                                     Arr_parameter_space /* ps_y */)
+  boost::optional<boost::variant<Vertex*, Halfedge*> >
+  place_boundary_vertex(Face*,
+                        const X_monotone_curve_2&,
+                        Arr_curve_end,
+                        Arr_parameter_space /* ps_x */,
+                        Arr_parameter_space /* ps_y */)
   {
     // This function should never be called:
     CGAL_error();
-    return Object();
+    return boost::none;
   }
 
   /*! Locate the predecessor halfedge for the given curve around a given
@@ -349,14 +351,17 @@ public:
    * \pre The curve end is incident to the boundary.
    * \return An object that contains the curve end.
    */
-  CGAL::Object locate_curve_end(const X_monotone_curve_2&,
-                                Arr_curve_end,
-                                Arr_parameter_space /* ps_x */,
-                                Arr_parameter_space /* ps_y */)
+  boost::variant<Vertex*, Halfedge*, Face*>
+  locate_curve_end(const X_monotone_curve_2&,
+                   Arr_curve_end,
+                   Arr_parameter_space /* ps_x */,
+                   Arr_parameter_space /* ps_y */)
   {
+    typedef boost::variant<Vertex*, Halfedge*, Face*>   Result;
     // This function should never be called:
     CGAL_error();
-    return Object();
+    Vertex* v(nullptr);
+    return Result(v);
   }
 
   /*! Split a fictitious edge using the given vertex.

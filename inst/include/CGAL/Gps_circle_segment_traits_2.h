@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Boolean_set_operations_2/include/CGAL/Gps_circle_segment_traits_2.h $
-// $Id: Gps_circle_segment_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Boolean_set_operations_2/include/CGAL/Gps_circle_segment_traits_2.h $
+// $Id: Gps_circle_segment_traits_2.h e2a77e5 2020-05-24T11:18:01+02:00 Marc Glisse
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,7 +27,7 @@ class Gps_circle_segment_traits_2 :
   public Gps_traits_2<Arr_circle_segment_traits_2<Kernel_, Filer_> >
 {
 public:
-  Gps_circle_segment_traits_2<Kernel_, Filer_>(bool use_cache = false) :
+  Gps_circle_segment_traits_2(bool use_cache = false) :
     Gps_traits_2<Arr_circle_segment_traits_2<Kernel_, Filer_> >()
   {
     this->m_use_cache = use_cache;

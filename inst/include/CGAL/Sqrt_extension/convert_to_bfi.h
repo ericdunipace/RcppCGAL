@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/Sqrt_extension/convert_to_bfi.h $
-// $Id: convert_to_bfi.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Sqrt_extension/convert_to_bfi.h $
+// $Id: convert_to_bfi.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,13 +38,13 @@ class Sqrt_extension_bfi_cache {
   typedef std::pair<long , ROOT> Input;
   typedef BFI                    Output;
   typedef typename Coercion_traits<ROOT,BFI>::Cast Cast;
-  typedef typename Algebraic_structure_traits<BFI>::Sqrt Sqrt; 
+  typedef typename Algebraic_structure_traits<BFI>::Sqrt Sqrt;
 
   struct Creator : public CGAL::cpp98::unary_function<BFI,Input> {
     BFI operator()(const Input& pair){
-      return Sqrt()(Cast()(pair.second)); 
+      return Sqrt()(Cast()(pair.second));
     }
-  };    
+  };
 
 public:
   typedef Cache<Input,Output,Creator> Cache_type;
@@ -53,11 +53,11 @@ public:
   {
     CGAL_STATIC_THREAD_LOCAL_VARIABLE_0(Cache_type, cache_);
     return cache_;
-  } 
+  }
 
 };
 
-} // namespace INTERN_SQRT_EXTENSION 
+} // namespace INTERN_SQRT_EXTENSION
 
 
 template <typename NT, typename ROOT, typename ACDE_TAG, typename FP_TAG>
@@ -93,12 +93,12 @@ convert_to_bfi(const CGAL::Sqrt_extension<NT,ROOT,ACDE_TAG,FP_TAG>& x) {
   CGAL_assertion(lower(result) == lower(result_));
   CGAL_assertion(upper(result) == upper(result_));
 #endif
-  return result; 
+  return result;
 }
 
-} // namespace CGAL 
+} // namespace CGAL
 
-#endif 
+#endif
 
 
 #endif  // CGAL_SQRT_EXTENSION_CONVERT_TO_BFI_H

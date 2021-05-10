@@ -1,16 +1,16 @@
-// Copyright (c) 1997-2000  
+// Copyright (c) 1997-2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Hash_map/include/CGAL/Handle_hash_function.h $
-// $Id: Handle_hash_function.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Hash_map/include/CGAL/Handle_hash_function.h $
+// $Id: Handle_hash_function.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel <seel@mpi-sb.mpg.de>
 //                 Lutz Kettner <kettner@inf.ethz.ch>
@@ -42,7 +42,7 @@ namespace internal{
 
 struct Handle_hash_function {
     typedef std::size_t result_type;
-    template <class H> 
+    template <class H>
     std::size_t operator() (const H& h) const {
       return ::CGAL::internal::handle::Hash_functor<H>()(h);
     }

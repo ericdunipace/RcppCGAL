@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Skin_surface_3/include/CGAL/triangulate_mixed_complex_3.h $
-// $Id: triangulate_mixed_complex_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Skin_surface_3/include/CGAL/triangulate_mixed_complex_3.h $
+// $Id: triangulate_mixed_complex_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -363,23 +363,23 @@ construct_anchor_vor(Rt_Simplex const &sVor)
 //    it = find_anchor(anchor_vor2, it);
 //    typename Compute_anchor::Simplex_iterator degenerate_it;
 //    for (degenerate_it = compute_anchor_obj.equivalent_anchors_begin();
-//	 degenerate_it != compute_anchor_obj.equivalent_anchors_end();
-//	 degenerate_it++) {
+//         degenerate_it != compute_anchor_obj.equivalent_anchors_end();
+//         degenerate_it++) {
 //      Anchor_map_iterator tmp;
 //      it2 = anchor_vor2.find(*degenerate_it);
 //      // Possibly not found for 2 Voronoi vertices with the same center,
 //      // If the first vertex is inserted and the second is already found.
 //      // see compute_anchor_obj.anchor_vor(Cell_handle)
 //      if (it2 != anchor_vor2.end()) {
-//	CGAL_assertion(it2 != anchor_vor2.end());
-//	// Merge sets:
-//	while (it2 != it2->second) {
-//	  tmp = it2->second;
-//	  it2->second = it->second;
-//	  it2 = tmp;
-//	  CGAL_assertion(it2 != anchor_vor2.end());
-//	}
-//	it2->second = it->second;
+//        CGAL_assertion(it2 != anchor_vor2.end());
+//        // Merge sets:
+//        while (it2 != it2->second) {
+//          tmp = it2->second;
+//          it2->second = it->second;
+//          it2 = tmp;
+//          CGAL_assertion(it2 != anchor_vor2.end());
+//        }
+//        it2->second = it->second;
 //      }
 //    }
 //  }

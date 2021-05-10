@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polyhedron_IO/include/CGAL/IO/Polyhedron_iostream.h $
-// $Id: Polyhedron_iostream.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polyhedron_IO/include/CGAL/IO/Polyhedron_iostream.h $
+// $Id: Polyhedron_iostream.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Lutz Kettner  <kettner@mpi-sb.mpg.de>
 
@@ -38,9 +38,9 @@ write_off( std::ostream& out, const Polyhedron_3<Traits,Items,HDS,Alloc>& P, con
   // writes P to `out' in PRETTY, ASCII or BINARY format
     // as the stream indicates.
     File_header_OFF header( is_binary( out), ! is_pretty( out), false);
-    typename CGAL::Polygon_mesh_processing::GetVertexPointMap<Polyhedron_3<Traits,Items,HDS,Alloc>, NamedParameters>::const_type 
+    typename CGAL::GetVertexPointMap<Polyhedron_3<Traits,Items,HDS,Alloc>, NamedParameters>::const_type
         vpm = choose_parameter(get_parameter(np, internal_np::vertex_point),
-                           get_const_property_map(CGAL::vertex_point, P));
+                               get_const_property_map(CGAL::vertex_point, P));
     CGAL::print_polyhedron_with_header_OFF( out, P, header, vpm);
     return out.good();
 }
@@ -59,17 +59,17 @@ template < class Traits,
            template < class T, class I, class A>
            class HDS, class Alloc,
            class NamedParameters>
-bool 
+bool
 read_off(std::istream& in,
          Polyhedron_3<Traits,Items,HDS,Alloc>& P,
          NamedParameters np) {
     // reads a polyhedron from `in' and appends it to P.
-    typedef typename CGAL::Polygon_mesh_processing::GetVertexPointMap<Polyhedron_3<Traits,Items,HDS,Alloc>, NamedParameters>::type Vpm;
+    typedef typename CGAL::GetVertexPointMap<Polyhedron_3<Traits,Items,HDS,Alloc>, NamedParameters>::type Vpm;
     using parameters::choose_parameter;
     using parameters::get_parameter;
 
     Vpm vpm = choose_parameter(get_parameter(np, internal_np::vertex_point),
-                           get_property_map(CGAL::vertex_point, P));
+                               get_property_map(CGAL::vertex_point, P));
     CGAL::scan_OFF( in, P);
     if(!parameters::is_default_parameter(get_parameter(np, internal_np::vertex_point)))
     {
@@ -88,9 +88,9 @@ template < class Traits,
            class Items,
            template < class T, class I, class A>
            class HDS, class Alloc>
-bool 
+bool
 read_off(std::istream& in,
-         Polyhedron_3<Traits,Items,HDS,Alloc>& P) 
+         Polyhedron_3<Traits,Items,HDS,Alloc>& P)
 {
   return read_off(in, P, parameters::all_default());
 }

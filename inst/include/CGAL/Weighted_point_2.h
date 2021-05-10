@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_23/include/CGAL/Weighted_point_2.h $
-// $Id: Weighted_point_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Weighted_point_2.h $
+// $Id: Weighted_point_2.h e5019d0 2020-10-20T13:27:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -171,7 +171,7 @@ public:
 
   Weighted_point_2 transform(const Aff_transformation_2 &t) const
   {
-    return Weighted_point_2(t.transform(point(),weight()));
+    return Weighted_point_2(t.transform(point()),weight());
   }
 
 };

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/BGL/include/CGAL/boost/graph/properties_OpenMesh.h $
-// $Id: properties_OpenMesh.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/BGL/include/CGAL/boost/graph/properties_OpenMesh.h $
+// $Id: properties_OpenMesh.h bd3f47c 2020-03-24T11:02:57+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -423,7 +423,11 @@ template<typename K>
 void
 put(boost::vertex_point_t p, OPEN_MESH_CLASS& g,
     typename boost::graph_traits< OPEN_MESH_CLASS >::vertex_descriptor vd,
+#if defined(CGAL_USE_OM_POINTS)
     const typename K::Point& point)
+#else
+    const CGAL::Exact_predicates_inexact_constructions_kernel::Point_3& point)
+#endif
 {
   put(get(p,g), vd, point);
 }

@@ -1,16 +1,16 @@
-// Copyright (c) 1997  
+// Copyright (c) 1997
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Generator/include/CGAL/generators.h $
-// $Id: generators.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Generator/include/CGAL/generators.h $
+// $Id: generators.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Lutz Kettner  <kettner@inf.ethz.ch>
 
@@ -84,10 +84,10 @@ class Random_double_in_interval : public Random_generator_base<double> {
     // <= p.x() < \frac{a}{2} and -\frac{a}{2} <= p.y() < \frac{a}{2}
     // . Two random numbers are needed from `rnd' for each point.
     : Random_generator_base<double>( a, rnd)
-    { 
+    {
       this->d_item = this->d_range * (2 * this->_rnd.get_double() - 1.0);
     }
-  
+
   This& operator++() {
     this->d_item = this->d_range * (2 * this->_rnd.get_double() - 1.0);
     return *this;

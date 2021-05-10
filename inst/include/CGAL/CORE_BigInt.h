@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/CORE_BigInt.h $
-// $Id: CORE_BigInt.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/CORE_BigInt.h $
+// $Id: CORE_BigInt.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -129,8 +129,8 @@ template <> class Real_embeddable_traits< CORE::BigInt >
 };
 
 /*! \ingroup NiX_Modular_traits_spec
- *  \brief a model of concept ModularTraits, 
- *  specialization of NiX::Modular_traits. 
+ *  \brief a model of concept ModularTraits,
+ *  specialization of NiX::Modular_traits.
  */
 template<>
 class Modular_traits< ::CORE::BigInt > {
@@ -155,7 +155,7 @@ class Modular_traits< ::CORE::BigInt > {
         NT operator()(const Residue_type& x){
             return NT(x.get_value());
         }
-    };    
+    };
 };
 
 
@@ -166,7 +166,7 @@ struct Needs_parens_as_product<CORE::BigInt>{
     }
 };
 
-// Benchmark_rep specialization 
+// Benchmark_rep specialization
 template<>
 class Benchmark_rep< CORE::BigInt > {
     const CORE::BigInt& t;
@@ -174,11 +174,11 @@ public:
     //! initialize with a const reference to \a t.
     Benchmark_rep( const CORE::BigInt& tt) : t(tt) {}
     //! perform the output, calls \c operator\<\< by default.
-    std::ostream& operator()( std::ostream& out) const { 
+    std::ostream& operator()( std::ostream& out) const {
             out << t;
             return out;
     }
-    
+
     static std::string get_benchmark_name() {
         return "Integer";
     }

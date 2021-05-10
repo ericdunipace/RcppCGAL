@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_storage_traits_with_info_2.h $
-// $Id: Segment_Delaunay_graph_storage_traits_with_info_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_storage_traits_with_info_2.h $
+// $Id: Segment_Delaunay_graph_storage_traits_with_info_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -37,9 +37,9 @@ private:
   typedef typename Base::Storage_site_2                Base_storage_site_2;
 
   typedef Segment_Delaunay_graph_storage_traits_with_info_2<Gt,
-							    Info,
-							    Convert_info,
-							    Merge_info>
+                                                            Info,
+                                                            Convert_info,
+                                                            Merge_info>
   Self;
 
 public:
@@ -47,8 +47,8 @@ public:
 
   typedef
   Segment_Delaunay_graph_storage_site_with_info_2<Self,
-						  Info,
-						  Base_storage_site_2>
+                                                  Info,
+                                                  Base_storage_site_2>
   Storage_site_2;
 
   typedef

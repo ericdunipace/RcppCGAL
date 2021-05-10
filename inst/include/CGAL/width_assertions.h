@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polytope_distance_d/include/CGAL/width_assertions.h $
-// $Id: width_assertions.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polytope_distance_d/include/CGAL/width_assertions.h $
+// $Id: width_assertions.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Thomas Herrmann
 
@@ -21,7 +21,7 @@
 
 #ifdef DEBUG
 
-//Turn assertion output on/off 
+//Turn assertion output on/off
 #define ASSERTION_OUTPUT 0
 #define EXPENSIVE_CHECKS_OUTPUT 0
 

@@ -5,8 +5,8 @@
  *
  * This file is part of CGAL (www.cgal.org).
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/Gmp.h $
- * $Id: Gmp.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/Gmp.h $
+ * $Id: Gmp.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -17,7 +17,7 @@
 #include <CGAL/CORE/Impl.h>
 #include <gmp.h>
 
-namespace CORE { 
+namespace CORE {
 
 CGAL_CORE_EXPORT std::ostream& io_write (std::ostream &, mpz_srcptr);
 CGAL_CORE_EXPORT std::ostream& io_write (std::ostream &, mpq_srcptr);

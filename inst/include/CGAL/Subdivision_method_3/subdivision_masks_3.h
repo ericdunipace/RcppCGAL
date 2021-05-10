@@ -1,17 +1,14 @@
-// ======================================================================
-//
 // Copyright (c) 2005-2017 GeometryFactory (France).  All Rights Reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Subdivision_method_3/include/CGAL/Subdivision_method_3/subdivision_masks_3.h $
-// $Id: subdivision_masks_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Subdivision_method_3/include/CGAL/Subdivision_method_3/subdivision_masks_3.h $
+// $Id: subdivision_masks_3.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s): Le-Jeng Shiue <Andy.Shiue@gmail.com>
 //
-// ======================================================================
 
 #ifndef CGAL_SUBDIVISION_MASKS_3_H
 #define CGAL_SUBDIVISION_MASKS_3_H
@@ -340,7 +337,7 @@ public:
 
     for (size_t i = 0; i < n; i++, ++vcir) {
       Point_ref p = get(this->vpmap,target(opposite(*vcir, *(this->pmesh)), *(this->pmesh)));
-      R[0] += p[0]; 	R[1] += p[1]; 	R[2] += p[2];
+      R[0] += p[0];         R[1] += p[1];         R[2] += p[2];
     }
     if (n == 6) {
       pt = Point((10*S[0]+R[0])/16, (10*S[1]+R[1])/16, (10*S[2]+R[2])/16);

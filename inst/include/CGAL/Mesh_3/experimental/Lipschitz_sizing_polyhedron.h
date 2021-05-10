@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_polyhedron.h $
-// $Id: Lipschitz_sizing_polyhedron.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_polyhedron.h $
+// $Id: Lipschitz_sizing_polyhedron.h 0fa0c4f 2019-12-05T11:05:35+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -131,7 +131,6 @@ public:
 
     m_own_ptree.reset(new Tree(triangles.begin(), triangles.end()));
     m_own_ptree->build();
-    m_own_ptree->accelerate_distance_queries();
   }
 
 private:

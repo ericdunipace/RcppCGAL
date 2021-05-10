@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Interval_skip_list/include/CGAL/Interval_skip_list_interval.h $
-// $Id: Interval_skip_list_interval.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Interval_skip_list/include/CGAL/Interval_skip_list_interval.h $
+// $Id: Interval_skip_list_interval.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,9 +38,9 @@ namespace CGAL {
 
     Interval_skip_list_interval(){}
     Interval_skip_list_interval(const Value& inf_,
-				const Value& sup_,
-				bool lb = true,
-				bool rb = true);
+                                const Value& sup_,
+                                bool lb = true,
+                                bool rb = true);
 
     const Value& inf() const {return inf_;}
 
@@ -58,7 +58,7 @@ namespace CGAL {
     bool operator==(const Interval_skip_list_interval& I) const
     {
       return ( (inf() == I.inf()) && (sup() == I.sup()) &&
-	       (inf_closed() == I.inf_closed()) && (sup_closed() == I.sup_closed()) );
+               (inf_closed() == I.inf_closed()) && (sup_closed() == I.sup_closed()) );
     }
 
     bool operator!=(const Interval_skip_list_interval& I) const
@@ -71,7 +71,7 @@ namespace CGAL {
 
   template <class V>
   std::ostream& operator<<(std::ostream& os,
-			   const Interval_skip_list_interval<V>& i)
+                           const Interval_skip_list_interval<V>& i)
   {
     os << (i.inf_closed()?"[":"(") << i.inf() << ", " << i.sup() << (i.sup_closed()?"]":")");
     return os;
@@ -80,9 +80,9 @@ namespace CGAL {
 
   template <class V>
   Interval_skip_list_interval<V>::Interval_skip_list_interval(
-							      const Value& i,
-							      const Value& s,
-							      bool lb, bool rb)
+                                                              const Value& i,
+                                                              const Value& s,
+                                                              bool lb, bool rb)
     : lbound_(lb), rbound_(rb), inf_(i), sup_(s)
   {
     CGAL_precondition( !(inf_ > sup_) );
@@ -92,7 +92,7 @@ namespace CGAL {
   template <class V>
   bool
   Interval_skip_list_interval<V>::contains_interval(const Value& i,
-						    const Value& s) const
+                                                    const Value& s) const
     // true iff this contains (l,r)
   {
     return( (inf() <= i) && (sup() >= s) );

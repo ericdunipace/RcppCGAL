@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Reconstruction_face_base_2.h $
-// $Id: Reconstruction_face_base_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Reconstruction_face_base_2.h $
+// $Id: Reconstruction_face_base_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando de Goes, Pierre Alliez, Ivo Vigan, Clément Jamin
@@ -42,7 +42,7 @@ public:
   typedef typename Base::Face_handle    Face_handle;
 
   template < typename TDS2 >
-  struct Rebind_TDS 
+  struct Rebind_TDS
   {
     typedef typename Base::template Rebind_TDS<TDS2>::Other   Fb2;
     typedef Reconstruction_face_base_2<Traits_,Fb2>           Other;
@@ -159,7 +159,7 @@ public:
 
   const Cost_& cost(int edge) const
   {
-    if (plan(edge) == 0) 
+    if (plan(edge) == 0)
       return vertex_cost(edge);
     return edge_cost(edge);
   }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_3/include/CGAL/Convex_hull_3/dual/Convex_hull_traits_dual_3.h $
-// $Id: Convex_hull_traits_dual_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_3/include/CGAL/Convex_hull_3/dual/Convex_hull_traits_dual_3.h $
+// $Id: Convex_hull_traits_dual_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -66,10 +66,10 @@ namespace CGAL
           //Traits
           Traits_xy_3 construct_traits_xy_3_object()const
           {return Traits_xy_3();}
-          
+
           Traits_yz_3 construct_traits_yz_3_object()const
           {return Traits_yz_3();}
-          
+
           Traits_xz_3 construct_traits_xz_3_object()const
           {return Traits_xz_3();}
           // Segment_3

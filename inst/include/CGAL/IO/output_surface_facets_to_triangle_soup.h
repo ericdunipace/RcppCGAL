@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Poisson_surface_reconstruction_3/include/CGAL/IO/output_surface_facets_to_triangle_soup.h $
-// $Id: output_surface_facets_to_triangle_soup.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Poisson_surface_reconstruction_3/include/CGAL/IO/output_surface_facets_to_triangle_soup.h $
+// $Id: output_surface_facets_to_triangle_soup.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez
@@ -27,7 +27,7 @@ namespace CGAL {
 /// This variant exports the surface as a triangle soup.
 ///
 /// @commentheading Template Parameters:
-/// @tparam OutputIteratorValueType value_type of OutputIterator. 
+/// @tparam OutputIteratorValueType value_type of OutputIterator.
 ///        It is default to value_type_traits<OutputIterator>::type, and can be omitted when the default is fine.
 /// @tparam SurfaceMeshComplex_2InTriangulation_3 model of the SurfaceMeshComplex_2InTriangulation_3 concept.
 /// @tparam OutputIterator value_type must be convertible from Triangle_3<Kernel>.

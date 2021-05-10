@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/BGL/include/CGAL/boost/graph/graph_concepts.h $
-// $Id: graph_concepts.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/BGL/include/CGAL/boost/graph/graph_concepts.h $
+// $Id: graph_concepts.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Philipp Moeller
 
@@ -54,9 +54,9 @@ BOOST_concept(HalfedgeGraph,(G))
     h = next(h, cg);
     h = prev(h, cg);
   }
-  
+
   G g;
-  
+
   typename boost::graph_traits<G>::vertex_descriptor v, u;
   typename boost::graph_traits<G>::edge_descriptor e;
   typename boost::graph_traits<G>::halfedge_descriptor h;
@@ -68,7 +68,7 @@ BOOST_concept(HalfedgeListGraph,(G))
 {
   typedef typename boost::graph_traits<G>::halfedge_iterator   halfedge_iterator;
   typedef typename boost::graph_traits<G>::halfedges_size_type halfedges_size_type;
-  
+
   BOOST_CONCEPT_USAGE(HalfedgeListGraph)
   {
     // BOOST_CONCEPT_ASSERT((boost::BidirectionalIterator<halfedge_iterator>));
@@ -84,7 +84,7 @@ BOOST_concept(HalfedgeListGraph,(G))
     p = halfedges(cg);
     this->h = *p.first;
   }
-  
+
   G g;
   halfedges_size_type h_num;
   std::pair<halfedge_iterator, halfedge_iterator> p;

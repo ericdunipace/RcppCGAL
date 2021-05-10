@@ -5,8 +5,8 @@
  *
  * This file is part of CGAL (www.cgal.org).
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/Impl.h $
- * $Id: Impl.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/Impl.h $
+ * $Id: Impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -18,9 +18,9 @@
 // The following lines only for MS Visual C++
 #ifdef _MSC_VER
   #pragma warning(disable: 4291) // no matching operator delete found
-  #pragma warning(disable: 4146) 
+  #pragma warning(disable: 4146)
   #pragma warning(disable: 4267)
-  #pragma warning(disable: 4244) 
+  #pragma warning(disable: 4244)
 #endif
 
 // condition preprocessor for inline function

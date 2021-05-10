@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/TDS_2/include/CGAL/Triangulation_ds_vertex_2.h $
-// $Id: Triangulation_ds_vertex_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/TDS_2/include/CGAL/Triangulation_ds_vertex_2.h $
+// $Id: Triangulation_ds_vertex_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Mariette Yvinec
 
@@ -22,8 +22,8 @@
 namespace CGAL {
 
 template <class Vb>
-class  Triangulation_ds_vertex_2 
-  : public Vb 
+class  Triangulation_ds_vertex_2
+  : public Vb
 {
   typedef typename Vb::Triangulation_data_structure Tds;
 public:
@@ -35,7 +35,7 @@ public:
   typedef typename Tds::Vertex_circulator  Vertex_circulator;
   typedef typename Tds::Face_circulator    Face_circulator;
   typedef typename Tds::Edge_circulator    Edge_circulator;
- 
+
   //CREATORS
   Triangulation_ds_vertex_2() : Vb() {}
 
@@ -45,26 +45,26 @@ public:
   //Deprecated access to circulators - for bacward compatibility
   // the following should be const
   // when Face_circulator, Vertex_circulator and Edge_circulator
-  // are created from 
+  // are created from
   // Face_const_handle and Face_const_vertex
-  Vertex_circulator incident_vertices()     
+  Vertex_circulator incident_vertices()
     {return Vertex_circulator(handle());}
- 
-  Vertex_circulator incident_vertices( Face_handle f)  
+
+  Vertex_circulator incident_vertices( Face_handle f)
     {return Vertex_circulator(handle(),f);}
-  
-  Face_circulator incident_faces()  
+
+  Face_circulator incident_faces()
     { return Face_circulator(handle()) ;}
-  
-  Face_circulator incident_faces( Face_handle f)    
+
+  Face_circulator incident_faces( Face_handle f)
     { return Face_circulator(handle(), f);}
-  
-  Edge_circulator incident_edges()   
+
+  Edge_circulator incident_edges()
     { return Edge_circulator(handle());}
-  
-  Edge_circulator incident_edges( Face_handle f)  
+
+  Edge_circulator incident_edges( Face_handle f)
     { return Edge_circulator(handle(), f);}
-  
+
   bool is_valid(bool verbose = false, int level = 0);
 
 private:
@@ -80,7 +80,7 @@ degree() //const
   int count = 0;
   Vertex_circulator vc = incident_vertices(), done(vc);
   if ( ! vc.is_empty()) {
-    do { 
+    do {
       count += 1;
     } while (++vc != done);
   }
@@ -96,20 +96,20 @@ handle()
   for(int i = 0 ; i < 3 ; ++i){
     if ( &*fh->vertex(i) == this) return fh->vertex(i);
   }
-  return Vertex_handle();				    
+  return Vertex_handle();
 }
-    
+
 template <class Vb>
-bool 
-Triangulation_ds_vertex_2<Vb> ::  
-is_valid(bool verbose, int level) 
+bool
+Triangulation_ds_vertex_2<Vb> ::
+is_valid(bool verbose, int level)
 {
   bool result = Vb::is_valid(verbose, level);
   CGAL_triangulation_assertion(result);
   if (this->face() != Face_handle()) { // face==nullptr if dim <0
     result = result && ( &*this->face()->vertex(0) == this ||
-			 &*this->face()->vertex(1) == this ||
-			 &*this->face()->vertex(2) == this );
+                         &*this->face()->vertex(1) == this ||
+                         &*this->face()->vertex(2) == this );
   }
   CGAL_triangulation_assertion(result);
   return result;

@@ -1,16 +1,16 @@
-// Copyright (c) 2000,2001  
+// Copyright (c) 2000,2001
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_d/include/CGAL/Kernel_d/Point_d.h $
-// $Id: Point_d.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_d/include/CGAL/Kernel_d/Point_d.h $
+// $Id: Point_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel
 
@@ -45,19 +45,19 @@ public:
   typedef CGAL::Dynamic_dimension_tag Ambient_dimension;
   typedef CGAL::Dimension_tag<0>      Feature_dimension;
     template < typename Kernel2 >
-	struct WithAnotherKernel
-	{
-	    typedef Point_d<Kernel2>  Type;
-	};
+        struct WithAnotherKernel
+        {
+            typedef Point_d<Kernel2>  Type;
+        };
 
   Point_d(int d=0) : Base(d) {}
   Point_d(int d, const Origin &o) : Base(d,o) {}
 
-  Point_d(int a, int b, int c = 1) : 
-    Base(RT(a),RT(b),RT(c)) {} 
+  Point_d(int a, int b, int c = 1) :
+    Base(RT(a),RT(b),RT(c)) {}
   Point_d(const RT& a, const RT& b, const RT& c = 1) :
-    Base(a,b,c) {}  
-  Point_d(int a, int b, int c, int d) : 
+    Base(a,b,c) {}
+  Point_d(int a, int b, int c, int d) :
     Base(RT(a),RT(b),RT(c),RT(d)) {}
   Point_d(const RT& a, const RT& b, const RT& c, const RT& d) :
     Base(a,b,c,d) {}
@@ -70,8 +70,8 @@ public:
     : Base (d, first, last, D) {}
 
   Point_d(const Base& p) : Base(p) {}
-  
-  Vector_d<R> operator-(const Origin& o) const 
+
+  Vector_d<R> operator-(const Origin& o) const
   { return Base::operator-(o); }
   Vector_d<R> operator-(const Self& q) const
   { return Base::operator-(q); }
@@ -79,11 +79,11 @@ public:
   { return Base::operator+(v); }
   Self operator-(const Vector_d<R>& v) const
   { return Base::operator-(v); }
-  Self& operator+=(const Vector_d<R>& v) 
+  Self& operator+=(const Vector_d<R>& v)
   { return static_cast<Self&>(Base::operator+=(v)); }
   Self& operator-=(const Vector_d<R>& v)
   { return static_cast<Self&>(Base::operator-=(v)); }
-  
+
   inline bool operator<(const Self& q) const
   { return R().less_lexicographically_d_object()(*this, q); }
   inline bool operator>(const Self& q) const

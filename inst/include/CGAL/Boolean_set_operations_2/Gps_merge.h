@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_merge.h $
-// $Id: Gps_merge.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_merge.h $
+// $Id: Gps_merge.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
@@ -51,17 +51,17 @@ public:
    void operator()(unsigned int i,
                    unsigned int j,
                    unsigned int jump,
-                   std::vector<Arr_entry>& arr_vec)                     
+                   std::vector<Arr_entry>& arr_vec)
   {
     if(i==j)
       return;
 
-    const typename Arrangement_2::Geometry_traits_2 * tr = 
+    const typename Arrangement_2::Geometry_traits_2 * tr =
       arr_vec[i].first->geometry_traits();
     Arrangement_2              *res = new Arrangement_2(tr);
     std::vector<Vertex_handle> *verts = new std::vector<Vertex_handle>;
 
-    Gps_agg_op<Arrangement_2, Visitor> 
+    Gps_agg_op<Arrangement_2, Visitor>
       agg_op(*res, *verts, *(res->traits_adaptor()));
     agg_op.sweep_arrangements(i, j, jump, arr_vec);
 
@@ -70,7 +70,7 @@ public:
       delete (arr_vec[count].first);
       delete (arr_vec[count].second);
     }
-    
+
     arr_vec[i].first = res;
     arr_vec[i].second = verts;
   }
@@ -78,30 +78,30 @@ public:
 };
 
 //! Join_merge
-/*! Join_merge is used to join two sets of polygons together in the D&C 
+/*! Join_merge is used to join two sets of polygons together in the D&C
     algorithm. It is a base merge with a visitor that joins faces.
  */
 template <class Arrangement_>
-class Join_merge : public Base_merge<Arrangement_, 
+class Join_merge : public Base_merge<Arrangement_,
   Gps_bfs_join_visitor<Arrangement_> >
 {};
 
 
 //! Intersection_merge
-/*! Intersection_merge is used to merge two sets of polygons creating their 
+/*! Intersection_merge is used to merge two sets of polygons creating their
     intersection.
  */
 template <class Arrangement_>
-class Intersection_merge : public Base_merge<Arrangement_, 
+class Intersection_merge : public Base_merge<Arrangement_,
   Gps_bfs_intersection_visitor<Arrangement_> >
 {};
 
 //! Xor_merge
-/*! Xor_merge is used to merge two sets of polygons creating their 
+/*! Xor_merge is used to merge two sets of polygons creating their
     symmetric difference.
  */
 template <class Arrangement_>
-class Xor_merge : public Base_merge<Arrangement_, 
+class Xor_merge : public Base_merge<Arrangement_,
   Gps_bfs_xor_visitor<Arrangement_> >
 {
 };

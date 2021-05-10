@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_graph_hierarchy_vertex_base_2.h $
-// $Id: Apollonius_graph_hierarchy_vertex_base_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_hierarchy_vertex_base_2.h $
+// $Id: Apollonius_graph_hierarchy_vertex_base_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -43,7 +43,7 @@ public:
     : Base(), _up(), _down()
     {}
   Apollonius_graph_hierarchy_vertex_base_2(const Site_2& p,
-					   Face_handle f)
+                                           Face_handle f)
     : Base(p,f), _up(), _down()
     {}
   Apollonius_graph_hierarchy_vertex_base_2(const Site_2& p)

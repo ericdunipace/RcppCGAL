@@ -3,14 +3,14 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/GraphicsViewPolylineInput_impl.h $
-// $Id: GraphicsViewPolylineInput_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/GraphicsViewPolylineInput_impl.h $
+// $Id: GraphicsViewPolylineInput_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
-   
+
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
@@ -21,7 +21,7 @@
 #endif
 
 #include <QGraphicsItem>
-#include <QGraphicsPathItem> 
+#include <QGraphicsPathItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
@@ -46,7 +46,7 @@ GraphicsViewPolylineInput_non_templated_base(QObject* parent,
 CGAL_INLINE_FUNCTION
 bool
 GraphicsViewPolylineInput_non_templated_base::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{ 
+{
   if( event->modifiers() ){
     return false;
   }
@@ -90,7 +90,7 @@ GraphicsViewPolylineInput_non_templated_base::mousePressEvent(QGraphicsSceneMous
 
 
 CGAL_INLINE_FUNCTION
-void 
+void
 GraphicsViewPolylineInput_non_templated_base::rubberbands(const QPointF& p)
 {
   if(polygon.empty()){
@@ -102,7 +102,7 @@ GraphicsViewPolylineInput_non_templated_base::rubberbands(const QPointF& p)
     scene_->addItem(b);
   }
   if( !e){
-    e = new QGraphicsLineItem();    
+    e = new QGraphicsLineItem();
     e->setPen(QPen(::Qt::red, 0, ::Qt::SolidLine, ::Qt::RoundCap, ::Qt::RoundJoin));
     scene_->addItem(e);
   }
@@ -111,12 +111,12 @@ GraphicsViewPolylineInput_non_templated_base::rubberbands(const QPointF& p)
     b->setLine(bLine);
   }
   QLineF eLine(polygon.back(), p);
-  e->setLine(eLine); 
+  e->setLine(eLine);
 }
 
 
 CGAL_INLINE_FUNCTION
-void 
+void
 GraphicsViewPolylineInput_non_templated_base::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
   sp = event->scenePos();
@@ -126,7 +126,7 @@ GraphicsViewPolylineInput_non_templated_base::mouseMoveEvent(QGraphicsSceneMouse
 
 CGAL_INLINE_FUNCTION
 bool
-GraphicsViewPolylineInput_non_templated_base::keyPressEvent ( QKeyEvent * event ) 
+GraphicsViewPolylineInput_non_templated_base::keyPressEvent ( QKeyEvent * event )
 {
   if( event->modifiers() )
     return false;
@@ -174,7 +174,7 @@ GraphicsViewPolylineInput_non_templated_base::keyPressEvent ( QKeyEvent * event 
 
 
 CGAL_INLINE_FUNCTION
-bool 
+bool
 GraphicsViewPolylineInput_non_templated_base::eventFilter(QObject *obj, QEvent *event)
 {
   if (event->type() == QEvent::GraphicsSceneMousePress) {

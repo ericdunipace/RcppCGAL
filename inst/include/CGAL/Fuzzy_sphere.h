@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Spatial_searching/include/CGAL/Fuzzy_sphere.h $
-// $Id: Fuzzy_sphere.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Spatial_searching/include/CGAL/Fuzzy_sphere.h $
+// $Id: Fuzzy_sphere.h 65cde3c 2019-12-03T19:18:15+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -70,6 +70,21 @@ public:
     }
 
     return (distance <= sq_radius);
+  }
+
+  template <typename Coord_iterator>
+  bool contains_point_given_as_coordinates(Coord_iterator it_coord_begin, Coord_iterator /*unused*/) const {
+    // test whether the distance between c and p is less than the radius
+    FT distance = FT(0);
+    typename SearchTraits::Construct_cartesian_const_iterator_d construct_it =
+      traits.construct_cartesian_const_iterator_d_object();
+    typename SearchTraits::Cartesian_const_iterator_d cit = construct_it(c),
+      end = construct_it(c, 0);
+
+    for (; cit != end && (distance <= sq_radius); ++cit, ++it_coord_begin)
+      distance += ((*cit) - (*it_coord_begin))*((*cit) - (*it_coord_begin));
+
+    return (distance < sq_radius);
   }
 
   bool inner_range_intersects(const Kd_tree_rectangle<FT,Dimension>& rectangle) const {

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Output_builder_for_autorefinement.h $
-// $Id: Output_builder_for_autorefinement.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Output_builder_for_autorefinement.h $
+// $Id: Output_builder_for_autorefinement.h ea80a64 2020-03-24T14:30:45+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -214,9 +214,6 @@ public:
     const boost::dynamic_bitset<>& is_node_of_degree_one,
     const Mesh_to_map_node&)
   {
-    // this will initialize face indices if the face index map is writable.
-    helpers::init_face_indices(tm, fids);
-
     // first build an unordered_map mapping a vertex to its node id + a set
     // of all intersection edges
     typedef boost::unordered_set<edge_descriptor> Intersection_edge_map;
@@ -239,8 +236,13 @@ public:
       intersection_edges.insert(edge(p.second.h2, tm));
     }
 
-    // this will initialize face indices if the face index map is writable.
-    helpers::init_face_indices(tm, fids);
+    // The property map must be either writable or well-initialized
+    if( CGAL::internal::Is_writable_property_map<FaceIdMap>::value &&
+        !BGL::internal::is_index_map_valid(fids, num_faces(tm), faces(tm)) )
+    {
+      BGL::internal::initialize_face_index_map(fids, tm);
+    }
+    CGAL_assertion(BGL::internal::is_index_map_valid(fids, num_faces(tm), faces(tm)));
 
     // bitset to identify coplanar faces
     boost::dynamic_bitset<> tm_coplanar_faces(num_faces(tm), 0);

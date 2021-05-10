@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Segment_3_do_intersect.h $
-// $Id: Bbox_3_Segment_3_do_intersect.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Segment_3_do_intersect.h $
+// $Id: Bbox_3_Segment_3_do_intersect.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -33,17 +33,17 @@
 // source of the segment, and for t=1 that is its target), where the line
 // intersects the three slabs of the bounding box.
 
-// For a segment, the intersection is non-empty iff 
+// For a segment, the intersection is non-empty iff
 //    [t1, t2] intersects [0, 1].
 
 namespace CGAL {
-  
+
 namespace Intersections {
 
 namespace internal {
 
   template <typename FT, bool bounded_0, bool use_static_filters = false>
-  struct Do_intersect_bbox_segment_aux_is_greater 
+  struct Do_intersect_bbox_segment_aux_is_greater
   {
     typedef typename Same_uncertainty<bool, FT>::type result_type;
 
@@ -116,7 +116,7 @@ namespace internal {
   }; // end specialization Do_intersect_bbox_segment_aux_is_greater<FT, true>
 
 
-  
+
   template <typename FT,
             typename BFT,
             bool bounded_0,
@@ -400,7 +400,7 @@ namespace internal {
     return true;
   }
 
-  
+
   template <typename FT,
             bool bounded_0,
             bool bounded_1,
@@ -426,7 +426,7 @@ namespace internal {
 
 
 
-  
+
   template <class K>
   bool do_intersect(const typename K::Segment_3& segment,
     const CGAL::Bbox_3& bbox,

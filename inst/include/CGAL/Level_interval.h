@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Interval_skip_list/include/CGAL/Level_interval.h $
-// $Id: Level_interval.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Interval_skip_list/include/CGAL/Level_interval.h $
+// $Id: Level_interval.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri
 
@@ -34,7 +34,7 @@ namespace CGAL {
 
 
   private:
-    FaceHandle fh_; 
+    FaceHandle fh_;
     Value inf_;
     Value sup_;  // left and right boundary values
   public:
@@ -47,15 +47,15 @@ namespace CGAL {
     bool contains(const Value& V) const;
 
     // true iff this contains (l,r)
-    bool contains_interval(const Value& l, const Value& r) const;  
+    bool contains_interval(const Value& l, const Value& r) const;
 
-    bool operator==(const Level_interval& I) const 
+    bool operator==(const Level_interval& I) const
     {
       // there is no need to compare inf and sup, as these are derived from the face
       return face_handle() == I.face_handle();
     }
 
-    bool operator!=(const Level_interval& I) const 
+    bool operator!=(const Level_interval& I) const
     {
       return face_handle() != I.face_handle();
     }
@@ -64,12 +64,12 @@ namespace CGAL {
 
 
   template <class V>
-  std::ostream& operator<<(std::ostream& os, 
-			   const Level_interval<V>& i)
+  std::ostream& operator<<(std::ostream& os,
+                           const Level_interval<V>& i)
   {
-    os << i.face_handle()->vertex(0)->point() << ", " << 
-      i.face_handle()->vertex(1)->point() << ", " << 
-      i.face_handle()->vertex(2)->point() << std::endl; 
+    os << i.face_handle()->vertex(0)->point() << ", " <<
+      i.face_handle()->vertex(1)->point() << ", " <<
+      i.face_handle()->vertex(2)->point() << std::endl;
     return os;
   }
 
@@ -89,8 +89,8 @@ namespace CGAL {
 
   template <class FaceHandle>
   bool
-  Level_interval<FaceHandle>::contains_interval(const Value& i, 
-					       const Value& s) const
+  Level_interval<FaceHandle>::contains_interval(const Value& i,
+                                               const Value& s) const
     // true iff this contains (l,r)
   {
     return( (inf() <= i) && (sup() >= s) );

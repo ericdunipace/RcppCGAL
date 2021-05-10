@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/manipulatedCameraFrame_impl.h $
-// $Id: manipulatedCameraFrame_impl.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/manipulatedCameraFrame_impl.h $
+// $Id: manipulatedCameraFrame_impl.h dcbb50a 2020-10-06T12:58:45+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY
@@ -371,8 +371,7 @@ void ManipulatedCameraFrame::mouseMoveEvent(QMouseEvent *const event,
     break;
   }
 
-  case ZOOM_ON_REGION:
-  case NO_MOUSE_ACTION:
+  default:
     break;
   }
 
@@ -421,9 +420,26 @@ void ManipulatedCameraFrame::wheelEvent(QWheelEvent *const event,
   case MOVE_BACKWARD:
     //#CONNECTION# mouseMoveEvent() MOVE_FORWARD case
     translate(
-        inverseTransformOf(Vec(0.0, 0.0, 0.2 * flySpeed() * event->delta())));
+        inverseTransformOf(Vec(0.0, 0.0, 0.2 * flySpeed() * event->angleDelta().y())));
     Q_EMIT manipulated();
     break;
+  case ZOOM_FOV:
+  {
+    qreal delta = - wheelDelta(event);//- sign to keep the same behavior as for the ZOOM action.
+    qreal new_fov = delta/100 + camera->fieldOfView();
+    if(new_fov > CGAL_PI/180.0)
+    {
+      new_fov = delta + camera->fieldOfView();
+    }
+    if(new_fov > CGAL_PI/4.0)
+      new_fov = CGAL_PI/4.0;
+    if( new_fov >= 0.0)
+    {
+      camera->setFieldOfView(new_fov);
+    }
+    Q_EMIT manipulated();
+    break;
+  }
   default:
     break;
   }
@@ -447,7 +463,10 @@ void ManipulatedCameraFrame::wheelEvent(QWheelEvent *const event,
   // isManipulated() returns false. But then fastDraw would not be used with
   // wheel. Detecting the last wheel event and forcing a final draw() is done
   // using the timer_.
-  action_ = NO_MOUSE_ACTION;
+  if(action_ != ZOOM_FOV)
+    action_ = NO_MOUSE_ACTION;
+  //else done after postDraw().
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////

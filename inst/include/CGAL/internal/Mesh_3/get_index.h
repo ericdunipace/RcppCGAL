@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/internal/Mesh_3/get_index.h $
-// $Id: get_index.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/internal/Mesh_3/get_index.h $
+// $Id: get_index.h 4dda7b6 2020-05-27T15:53:05+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau
@@ -17,7 +17,7 @@
 #ifndef CGAL_INTERNAL_MESH_3_GET_INDEX_3_H
 #define CGAL_INTERNAL_MESH_3_GET_INDEX_3_H
 
-#include <CGAL/license/Mesh_3.h>
+#include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/internal/Mesh_3/indices_management.h>
 

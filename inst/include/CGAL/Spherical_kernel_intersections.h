@@ -3,18 +3,18 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Circular_kernel_3/include/CGAL/Spherical_kernel_intersections.h $
-// $Id: Spherical_kernel_intersections.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Circular_kernel_3/include/CGAL/Spherical_kernel_intersections.h $
+// $Id: Spherical_kernel_intersections.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado
 
-// Partially supported by the IST Programme of the EU as a 
-// STREP (FET Open) Project under Contract No  IST-006413 
+// Partially supported by the IST Programme of the EU as a
+// STREP (FET Open) Project under Contract No  IST-006413
 // (ACS -- Algorithms for Complex Shapes)
 
 #ifndef CGAL_SPHERICAL_KERNEL_INTERNAL_FUNCTIONS_ON_INTERSECTION_3_H
-#define CGAL_SPHERICAL_KERNEL_INTERNAL_FUNCTIONS_ON_INTERSECTION_3_H 
+#define CGAL_SPHERICAL_KERNEL_INTERNAL_FUNCTIONS_ON_INTERSECTION_3_H
 
 #include <CGAL/license/Circular_kernel_3.h>
 

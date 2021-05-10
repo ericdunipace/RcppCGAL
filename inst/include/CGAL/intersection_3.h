@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Intersections_3/include/CGAL/intersection_3.h $
-// $Id: intersection_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/intersection_3.h $
+// $Id: intersection_3.h 90d2e03 2020-01-15T13:32:11+01:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -82,6 +82,7 @@
 #include <CGAL/Intersections_3/Sphere_3_Triangle_3.h>
 
 #include <CGAL/Intersections_3/Tetrahedron_3_Tetrahedron_3.h>
+#include <CGAL/Intersections_3/Tetrahedron_3_Triangle_3.h>
 #include <CGAL/Intersections_3/Tetrahedron_3_Triangle_3.h>
 
 #include <CGAL/Intersections_3/Triangle_3_Triangle_3.h>

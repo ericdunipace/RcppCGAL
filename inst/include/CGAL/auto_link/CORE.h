@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Installation/include/CGAL/auto_link/CORE.h $
-// $Id: CORE.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Installation/include/CGAL/auto_link/CORE.h $
+// $Id: CORE.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Fernando Cacciola (fernando.cacciola@geometryfactry.com)
 
@@ -15,7 +15,7 @@
 #include <CGAL/config.h>
 
 #ifndef CGAL_NO_AUTOLINK_CORE
-#if ( ! defined( CGAL_EXPORTS ) ) && (! defined ( CGAL_Core_EXPORTS ) ) 
+#if ( ! defined( CGAL_EXPORTS ) ) && (! defined ( CGAL_Core_EXPORTS ) )
 
 // If CGAL_EXPORTS is defined it means that we are building the CGAL
 // library as a DLL. The CGAL.dll does not really depend on CGAL_Core,

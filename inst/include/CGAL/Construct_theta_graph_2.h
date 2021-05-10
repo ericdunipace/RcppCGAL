@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Cone_spanners_2/include/CGAL/Construct_theta_graph_2.h $
-// $Id: Construct_theta_graph_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Cone_spanners_2/include/CGAL/Construct_theta_graph_2.h $
+// $Id: Construct_theta_graph_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -185,7 +185,7 @@ protected:
 
         // Rotational transformation of cw 90 degree
         CGAL_STATIC_THREAD_LOCAL_VARIABLE_4(Transformation, cw90, 0, 1, -1,  0);
-        
+
         // Ordering
         // here D1 is the reverse of D1 in the book, we find this is easier to implement
         const Less_by_direction  orderD1 (g, ccwBound);

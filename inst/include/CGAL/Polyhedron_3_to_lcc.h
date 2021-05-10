@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polyhedron/include/CGAL/Polyhedron_3_to_lcc.h $
-// $Id: Polyhedron_3_to_lcc.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polyhedron/include/CGAL/Polyhedron_3_to_lcc.h $
+// $Id: Polyhedron_3_to_lcc.h 9a50c0f 2019-11-26T13:22:03+01:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYHEDRON_3_TO_LCC_H
 #define CGAL_POLYHEDRON_3_TO_LCC_H
 
+#include <CGAL/Polyhedron_3.h>
 #include <CGAL/assertions.h>
 #include <iostream>
 #include <map>

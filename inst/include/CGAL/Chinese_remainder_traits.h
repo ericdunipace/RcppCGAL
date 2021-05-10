@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Algebraic_foundations/include/CGAL/Chinese_remainder_traits.h $
-// $Id: Chinese_remainder_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Algebraic_foundations/include/CGAL/Chinese_remainder_traits.h $
+// $Id: Chinese_remainder_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,7 +25,7 @@
 namespace CGAL{
 namespace internal{
 
-template <class T_, class TAG> 
+template <class T_, class TAG>
 class Chinese_remainder_traits_base{
 public:
     typedef T_ Type;
@@ -40,20 +40,20 @@ template <class T> class Chinese_remainder_traits
 
 
 namespace internal {
-template <class NT> 
+template <class NT>
 class  Chinese_remainder_traits_base<NT,Euclidean_ring_tag>{
 public:
     typedef NT Type;
-    typedef NT Scalar_type; 
-    
+    typedef NT Scalar_type;
+
     struct Chinese_remainder{
         void operator() (
-                const Scalar_type& m1, const Scalar_type& m2, const Scalar_type& m, 
-                const Scalar_type& s,  const Scalar_type& CGAL_precondition_code(t),  
-                NT u1, NT u2, 
+                const Scalar_type& m1, const Scalar_type& m2, const Scalar_type& m,
+                const Scalar_type& s,  const Scalar_type& CGAL_precondition_code(t),
+                NT u1, NT u2,
                 NT& u) const {
 
-#ifndef CGAL_NDEBUG 
+#ifndef CGAL_NDEBUG
             NT tmp,s_,t_;
             tmp = CGAL::extended_euclidean_algorithm(m1,m2,s_,t_);
             CGAL_precondition(tmp == NT(1));
@@ -64,34 +64,34 @@ public:
             typedef Algebraic_structure_traits<NT> AST;
             typename AST::Mod mod;
             //typename AST::Unit_part unit_part;
-            typename AST::Integral_division idiv; 
+            typename AST::Integral_division idiv;
 
             if(u1 < NT(0) ) u1 += m1;
             if(u2 < NT(0) ) u2 += m2;
-            
+
             CGAL_precondition(0  < m1);
             CGAL_precondition(u1 < m1);
             CGAL_precondition(u1 >= NT(0));
-        
+
             CGAL_precondition(0  < m2);
             CGAL_precondition(u2 < m2);
             CGAL_precondition(u2 >= NT(0));
-    
+
             NT v = mod(s*(u2-u1),m2);
             u = m1*v + u1;
-    
+
             // u is not unique yet!
             NT m_half = idiv(m-mod(m,NT(2)),NT(2));
             if (u  >  m_half) u -= m ;
-            if (u <= -m_half) u += m ; 
+            if (u <= -m_half) u += m ;
         }
-        
+
         void operator() (
                 const Scalar_type& m1, const Type& u1,
                 const Scalar_type& m2, const Type& u2,
                 Scalar_type& m, Type& u) const {
-            Scalar_type s,t; 
-            
+            Scalar_type s,t;
+
             CGAL::extended_euclidean_algorithm(m1,m2,s,t);
             m = m1 * m2;
             this->operator()(m1,m2,m,s,t,u1,u2,u);

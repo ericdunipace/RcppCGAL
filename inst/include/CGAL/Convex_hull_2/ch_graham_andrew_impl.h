@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_2/include/CGAL/Convex_hull_2/ch_graham_andrew_impl.h $
-// $Id: ch_graham_andrew_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_2/include/CGAL/Convex_hull_2/ch_graham_andrew_impl.h $
+// $Id: ch_graham_andrew_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Stefan Schirra
 
@@ -62,9 +62,9 @@ ch_graham_andrew_scan( BidirectionalIterator first,
   if ( iter != last )
   {
       S.push_back( iter );
-      typedef typename std::vector<BidirectionalIterator>::reverse_iterator  
+      typedef typename std::vector<BidirectionalIterator>::reverse_iterator
               rev_iterator;
-      rev_iterator  stack_rev_iter = S.rbegin(); 
+      rev_iterator  stack_rev_iter = S.rbegin();
       alpha = iter;
       beta  = *++stack_rev_iter;
 
@@ -154,9 +154,9 @@ ch__ref_graham_andrew_scan( BidirectionalIterator first,
   if ( iter != last )
   {
       S.push_back( iter );
-      typedef typename std::vector<BidirectionalIterator>::reverse_iterator  
+      typedef typename std::vector<BidirectionalIterator>::reverse_iterator
               rev_iterator;
-      rev_iterator  stack_rev_iter = S.rbegin(); 
+      rev_iterator  stack_rev_iter = S.rbegin();
       alpha = iter;
       beta  = *++stack_rev_iter;
 
@@ -195,9 +195,9 @@ ch_graham_andrew( InputIterator  first,
                        const Traits&  ch_traits)
 {
   typedef  typename Traits::Point_2     Point_2;
-  typedef  typename Traits::Equal_2      Equal_2;  
-  
-  Equal_2      equal_points = ch_traits.equal_2_object();  
+  typedef  typename Traits::Equal_2      Equal_2;
+
+  Equal_2      equal_points = ch_traits.equal_2_object();
 
   if (first == last) return result;
   std::vector< Point_2 >  V (first, last);
@@ -241,9 +241,9 @@ ch_lower_hull_scan( InputIterator  first,
                          const Traits&  ch_traits)
 {
   typedef  typename Traits::Point_2      Point_2;
-  typedef  typename Traits::Equal_2      Equal_2;  
-  
-  Equal_2      equal_points = ch_traits.equal_2_object();    
+  typedef  typename Traits::Equal_2      Equal_2;
+
+  Equal_2      equal_points = ch_traits.equal_2_object();
 
   if (first == last) return result;
   std::vector< Point_2 >  V (first, last);
@@ -276,9 +276,9 @@ ch_upper_hull_scan( InputIterator  first,
                          const Traits&  ch_traits)
 {
   typedef  typename Traits::Point_2      Point_2;
-  typedef  typename Traits::Equal_2      Equal_2;  
-  
-  Equal_2      equal_points = ch_traits.equal_2_object();     
+  typedef  typename Traits::Equal_2      Equal_2;
+
+  Equal_2      equal_points = ch_traits.equal_2_object();
 
   if (first == last) return result;
   std::vector< Point_2 >  V (first, last);

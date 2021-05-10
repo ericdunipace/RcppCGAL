@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Three/include/CGAL/Three/Point_container.h $
-// $Id: Point_container.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Three/include/CGAL/Three/Point_container.h $
+// $Id: Point_container.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -79,7 +79,7 @@ struct DEMO_FRAMEWORK_EXPORT Point_container :public Primitive_container
   /// If the shaders of this program doesn't need one, you can ignore it.
   /// The others should be filled at each `draw()` from the item.
   ///@{
-  
+
   //! getter for the "plane" parameter
   QVector4D getPlane()const;
   //! getter for the "f_matrix" parameter

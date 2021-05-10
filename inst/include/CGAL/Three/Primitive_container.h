@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Three/include/CGAL/Three/Primitive_container.h $
-// $Id: Primitive_container.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Three/include/CGAL/Three/Primitive_container.h $
+// $Id: Primitive_container.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -150,7 +150,7 @@ public:
   //!
   //! \name Setters for the shaders parameters.
   //!@{
-  
+
   //! Setter for the "selected" uniform parameter.
   void setSelected(bool);
   //! Setter for the "color" parameter.
@@ -163,7 +163,7 @@ public:
   void setTupleSize(int ts);
   //!setter for the clipping. If `b` is `false`, then the clipping box will have no effect.
   void setClipping(bool b);
-  
+
   //!@}
 
   //!
@@ -236,10 +236,10 @@ public:
   //! \brief getCenterSize returns the number of instances of
   //! the item in this container.
   std::size_t getCenterSize()const;
-  
+
   //! \name Getters for the shaders parameters.
   //!@{
-  
+
   //! getter for the "selected" parameter
   bool isSelected()const;
   //! getter for the "color" parameter

@@ -3,16 +3,16 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Algebraic_kernel_for_circles/include/CGAL/Polynomials_1_2.h $
-// $Id: Polynomials_1_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Algebraic_kernel_for_circles/include/CGAL/Polynomials_1_2.h $
+// $Id: Polynomials_1_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion
 
 // Partially supported by the IST Programme of the EU as a Shared-cost
-// RTD (FET Open) Project under Contract No  IST-2000-26473 
-// (ECG - Effective Computational Geometry for Curves and Surfaces) 
-// and a STREP (FET Open) Project under Contract No  IST-006413 
+// RTD (FET Open) Project under Contract No  IST-2000-26473
+// (ECG - Effective Computational Geometry for Curves and Surfaces)
+// and a STREP (FET Open) Project under Contract No  IST-006413
 // (ACS -- Algorithms for Complex Shapes)
 
 #ifndef CGAL_ALGEBRAIC_KERNEL_FOR_CIRCLES_POLYNOMIALS_1_2_H
@@ -29,15 +29,15 @@ template < typename RT_ >
 class Polynomial_1_2
 {
   RT_ rep[3]; // stores a, b, c for line ax+by+c=0
-  
+
 public:
-  
+
   typedef RT_ RT;
-  
+
   Polynomial_1_2(){}
-  
+
   Polynomial_1_2(const RT & a, const RT & b, const RT & c)
-  { 
+  {
     rep[0]=a;
     rep[1]=b;
     rep[2]=c;
@@ -54,15 +54,15 @@ public:
 };
 
 template < typename RT >
-bool 
+bool
 operator == ( const Polynomial_1_2<RT> & p1,
-	      const Polynomial_1_2<RT> & p2 )
+              const Polynomial_1_2<RT> & p2 )
 {
-  return( (p1.a() == p2.a()) && 
+  return( (p1.a() == p2.a()) &&
               (p1.b() == p2.b()) &&
               (p1.c() == p2.c()) );
 }
-    
+
 } //namespace CGAL
 
 #endif //CGAL_ALGEBRAIC_KERNEL_FOR_CIRCLES_POLYNOMIALS_1_2_H

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/AABB_tree/include/CGAL/internal/AABB_tree/AABB_ray_intersection.h $
-// $Id: AABB_ray_intersection.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/AABB_tree/include/CGAL/internal/AABB_tree/AABB_ray_intersection.h $
+// $Id: AABB_ray_intersection.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -215,7 +215,7 @@ template<typename Ray, typename SkipFunctor>
 boost::optional< typename AABB_tree<AABBTraits>::template Intersection_and_primitive_id<Ray>::Type >
 AABB_tree<AABBTraits>::first_intersection(const Ray& query,
                                           const SkipFunctor& skip) const {
-  CGAL_static_assertion_msg((boost::is_same<Ray, typename AABBTraits::Ray_3>::value), 
+  CGAL_static_assertion_msg((boost::is_same<Ray, typename AABBTraits::Ray_3>::value),
                             "Ray and Ray_3 must be the same type");
 
   switch(size()) // copy-paste from AABB_tree::traversal

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Poisson_surface_reconstruction_3/include/CGAL/poisson_refine_triangulation.h $
-// $Id: poisson_refine_triangulation.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Poisson_surface_reconstruction_3/include/CGAL/poisson_refine_triangulation.h $
+// $Id: poisson_refine_triangulation.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent RINEAU, Laurent Saboret
@@ -190,7 +190,7 @@ public:
 /// @param Sizing_field A sizing field functor type
 /// @param Second_sizing_field A sizing field functor type
 ///
-/// @commentheading Sizing fields 
+/// @commentheading Sizing fields
 /// - The first sizing field is the real sizing field that is targeted by
 /// the refinement process. It may be costly to use.
 /// - The second sizing field is supposed to be a sizing field that is less
@@ -227,7 +227,7 @@ unsigned int poisson_refine_triangulation(
   std::size_t nb_vertices = tr.number_of_vertices(); // get former #vertices
 
   // Delaunay refinement
-  Tets_criteria tets_criteria(radius_edge_ratio_bound*radius_edge_ratio_bound, 
+  Tets_criteria tets_criteria(radius_edge_ratio_bound*radius_edge_ratio_bound,
                               sizing_field,
                               second_sizing_field);
   Oracle oracle;

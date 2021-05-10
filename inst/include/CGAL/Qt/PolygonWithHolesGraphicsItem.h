@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/PolygonWithHolesGraphicsItem.h $
-// $Id: PolygonWithHolesGraphicsItem.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/PolygonWithHolesGraphicsItem.h $
+// $Id: PolygonWithHolesGraphicsItem.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -41,16 +41,16 @@ public:
 
 public:
   QRectF boundingRect() const;
-  
+
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  
+
 
   const QBrush& brush() const
   {
     return brush_;
   }
 
-  
+
   void setBrush(const QBrush& b)
   {
     brush_ = b;
@@ -108,7 +108,7 @@ protected:
 template <typename P>
 PolygonWithHolesGraphicsItem<P>::PolygonWithHolesGraphicsItem(P * p_)
   :  poly(p_), painterostream(0),
-     draw_vertices(true)   
+     draw_vertices(true)
 {
   setVerticesPen(QPen(::Qt::red, 3.));
   if(poly->outer_boundary().size() == 0){
@@ -119,7 +119,7 @@ PolygonWithHolesGraphicsItem<P>::PolygonWithHolesGraphicsItem(P * p_)
 }
 
 template <typename P>
-QRectF 
+QRectF
 PolygonWithHolesGraphicsItem<P>::boundingRect() const
 {
   return bounding_rect;
@@ -129,10 +129,10 @@ PolygonWithHolesGraphicsItem<P>::boundingRect() const
 
 
 template <typename P>
-void 
-PolygonWithHolesGraphicsItem<P>::paint(QPainter *painter, 
-				       const QStyleOptionGraphicsItem * /*option*/,
-				       QWidget * /*widget*/)
+void
+PolygonWithHolesGraphicsItem<P>::paint(QPainter *painter,
+                                       const QStyleOptionGraphicsItem * /*option*/,
+                                       QWidget * /*widget*/)
 {
   Converter<Traits> convert;
   QPainterPath border;
@@ -147,11 +147,11 @@ PolygonWithHolesGraphicsItem<P>::paint(QPainter *painter,
   for(++it;
       it != poly->outer_boundary().vertices_end();
       ++it){
-    border.lineTo(convert(*it)); 
+    border.lineTo(convert(*it));
   }
   border.lineTo(firstPoint);
 
- 
+
   for(typename P::Hole_const_iterator hit = poly->holes_begin();
       hit != poly->holes_end();
       ++hit){
@@ -159,13 +159,13 @@ PolygonWithHolesGraphicsItem<P>::paint(QPainter *painter,
     QPointF firstPoint = convert(*it);
     border.moveTo(firstPoint);
     for(++it;
-	it != hit->vertices_end();
-	++it){
-      border.lineTo(convert(*it)); 
+        it != hit->vertices_end();
+        ++it){
+      border.lineTo(convert(*it));
     }
     border.lineTo(firstPoint);
   }
-  
+
   painter->setBrush(this->brush());
   painter->drawPath(border);
 
@@ -186,7 +186,7 @@ PolygonWithHolesGraphicsItem<P>::paint(QPainter *painter,
 // We let the bounding box only grow, so that when vertices get removed
 // the maximal bbox gets refreshed in the GraphicsView
 template <typename P>
-void 
+void
 PolygonWithHolesGraphicsItem<P>::updateBoundingBox()
 {
   Converter<Traits> convert;
@@ -199,7 +199,7 @@ PolygonWithHolesGraphicsItem<P>::updateBoundingBox()
 
 
 template <typename P>
-void 
+void
 PolygonWithHolesGraphicsItem<P>::modelChanged()
 {
   if((poly->outer_boundary().size() == 0) ){

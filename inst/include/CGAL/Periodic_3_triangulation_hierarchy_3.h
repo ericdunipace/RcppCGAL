@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_hierarchy_3.h $
-// $Id: Periodic_3_triangulation_hierarchy_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_hierarchy_3.h $
+// $Id: Periodic_3_triangulation_hierarchy_3.h a049e63 2020-09-25T16:55:18+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Olivier Devillers <Olivier.Devillers@sophia.inria.fr>
@@ -523,7 +523,7 @@ random_level()
        && hierarchy[level_mult_cover]->number_of_sheets() == make_array(1,1,1) )
     ++level_mult_cover;
 
-  boost::geometric_distribution<> proba(1.0/ratio);
+  boost::geometric_distribution<> proba(1.0/static_cast<double>(ratio));
   boost::variate_generator<boost::rand48&, boost::geometric_distribution<> >
       die(random, proba);
   return (std::min)(die()-1, level_mult_cover);

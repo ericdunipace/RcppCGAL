@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/TDS_2/include/CGAL/Triangulation_ds_vertex_base_2.h $
-// $Id: Triangulation_ds_vertex_base_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/TDS_2/include/CGAL/Triangulation_ds_vertex_base_2.h $
+// $Id: Triangulation_ds_vertex_base_2.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Mariette Yvinec
 
@@ -24,7 +24,7 @@
 namespace CGAL {
 
 template < class TDS = void >
-class Triangulation_ds_vertex_base_2 
+class Triangulation_ds_vertex_base_2
 {
 
 public:
@@ -42,14 +42,14 @@ public:
   void set_face(Face_handle f) { _f = f ;}
 
   //the following trivial is_valid to allow
-  // the user of derived face base classes 
+  // the user of derived face base classes
   // to add their own purpose checking
   bool is_valid(bool /*verbose*/=false, int /*level*/= 0) const
     {return face() != Face_handle();}
 
     // For use by the Compact_container.
   void *   for_compact_container() const { return _f.for_compact_container(); }
-  void * & for_compact_container()       { return _f.for_compact_container(); }
+  void for_compact_container(void* p) { _f.for_compact_container(p); }
 
 private:
   Face_handle _f;

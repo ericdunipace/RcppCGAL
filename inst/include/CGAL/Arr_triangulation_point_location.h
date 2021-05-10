@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_triangulation_point_location.h $
-// $Id: Arr_triangulation_point_location.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_triangulation_point_location.h $
+// $Id: Arr_triangulation_point_location.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Idit Haran   <haranidi@post.tau.ac.il>
@@ -50,9 +50,9 @@ public:
   typedef typename Arrangement_2::Vertex_const_handle   Vertex_const_handle;
   typedef typename Arrangement_2::Halfedge_const_handle Halfedge_const_handle;
   typedef typename Arrangement_2::Face_const_handle     Face_const_handle;
-  typedef typename Arrangement_2::Vertex_handle		Vertex_handle;
-  typedef typename Arrangement_2::Halfedge_handle	Halfedge_handle;
-  typedef typename Arrangement_2::Face_handle		Face_handle;
+  typedef typename Arrangement_2::Vertex_handle                Vertex_handle;
+  typedef typename Arrangement_2::Halfedge_handle        Halfedge_handle;
+  typedef typename Arrangement_2::Face_handle                Face_handle;
 
   typedef typename Arrangement_2::Vertex_const_iterator Vertex_const_iterator;
   typedef typename Arrangement_2::Edge_const_iterator   Edge_const_iterator;

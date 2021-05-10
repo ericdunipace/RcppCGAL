@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_23/include/CGAL/Dimension.h $
-// $Id: Dimension.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Dimension.h $
+// $Id: Dimension.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sylvain Pion
@@ -25,13 +25,13 @@ namespace CGAL {
 #ifdef CGAL_EIGEN3_ENABLED
 const int UNKNOWN_DIMENSION=Eigen::Dynamic;
 #else
-const int UNKNOWN_DIMENSION=std::numeric_limits<int>::max();
+const int UNKNOWN_DIMENSION=(std::numeric_limits<int>::max)();
 #endif
 
 // Check that dimension d1 is fine for a kernel of dimension d2.
 // If d2 is unknown, any d1 is fine.
 inline bool check_dimension_eq(int d1, int d2){
-	return d2==UNKNOWN_DIMENSION || d1==d2;
+        return d2==UNKNOWN_DIMENSION || d1==d2;
 }
 
 // These tag classes help dispatching functions based on a geometric dimension.
@@ -95,18 +95,18 @@ template<int d1,int d2>struct Product_dimension<Dimension_tag<d1>,Dimension_tag<
 #ifdef CGAL_EIGEN3_ENABLED
 // Convert to Eigen's notion of dimension
 template <class Dim_> struct Eigen_dimension {
-	enum { value=Eigen::Dynamic };
+        enum { value=Eigen::Dynamic };
 };
 template <int d> struct Eigen_dimension<Dimension_tag<d> > {
-	enum { value=d };
+        enum { value=d };
 };
 
 // and convert back
 template <int d> struct Dimension_eigen {
-	typedef Dimension_tag<d> type;
+        typedef Dimension_tag<d> type;
 };
 template <> struct Dimension_eigen<Eigen::Dynamic> {
-	typedef Dynamic_dimension_tag type;
+        typedef Dynamic_dimension_tag type;
 };
 #endif
 

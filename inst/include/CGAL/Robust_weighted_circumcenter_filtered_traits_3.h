@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_3/include/CGAL/Robust_weighted_circumcenter_filtered_traits_3.h $
-// $Id: Robust_weighted_circumcenter_filtered_traits_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/Robust_weighted_circumcenter_filtered_traits_3.h $
+// $Id: Robust_weighted_circumcenter_filtered_traits_3.h 5c8df66 2020-09-25T14:25:14+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -49,27 +49,7 @@ public:
       traits(k)
   { }
 
-#ifndef CGAL_CFG_MATCHING_BUG_6
   using Base::operator();
-#else // CGAL_CFG_MATCHING_BUG_6
-  typedef typename Kernel::Sphere_3                    Sphere_3;
-  typedef typename Kernel::Circle_3                    Circle_3;
-
-  result_type operator()(const Sphere_3& s) const
-  { return this->Base::operator()(s); }
-
-  result_type operator()(const Circle_3& c) const
-  { return this->Base::operator()(c); }
-
-  result_type operator()(const Point_3& p, const Point_3& q, const Point_3& r) const
-  { return this->Base::operator()(p,q,r); }
-
-  result_type operator()(const Point_3& p, const Point_3& q) const
-  { return this->Base::operator()(p,q); }
-
-  result_type operator()(const Point_3& p) const
-  { return this->Base::operator()(p); }
-#endif // CGAL_CFG_MATCHING_BUG_6
 
   FT operator()(const Point_3& p,
                 const Point_3& q,

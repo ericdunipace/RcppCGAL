@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Partition_2/include/CGAL/Partition_2/is_degenerate_polygon_2.h $
-// $Id: is_degenerate_polygon_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Partition_2/include/CGAL/Partition_2/is_degenerate_polygon_2.h $
+// $Id: is_degenerate_polygon_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Susan Hert <hert@mpi-sb.mpg.de>
 
@@ -21,8 +21,8 @@ namespace CGAL {
 // tests if a sequence of points represents a degenerate polygon (i.e.
 // one of zero area)
 template<class BidirectionalIterator, class Traits>
-bool 
-is_degenerate_polygon_2(BidirectionalIterator first, 
+bool
+is_degenerate_polygon_2(BidirectionalIterator first,
                         BidirectionalIterator last,
                         const Traits& traits)
 {
@@ -35,8 +35,8 @@ is_degenerate_polygon_2(BidirectionalIterator first,
    next++;
 
    // fewer than three vertices
-   if (prev == first) return true; 
-   if (next == last) return true; 
+   if (prev == first) return true;
+   if (next == last) return true;
 
    typedef typename Traits::Orientation_2                Orientation_2;
 
@@ -50,7 +50,7 @@ is_degenerate_polygon_2(BidirectionalIterator first,
      prev++;
      if (prev == last)
         prev = first;
-     next++;   
+     next++;
      if (next == last)
        next = first;
      curr++;
@@ -60,7 +60,7 @@ is_degenerate_polygon_2(BidirectionalIterator first,
 }
 
 template<class InputIterator>
-bool 
+bool
 is_degenerate_polygon_2(InputIterator first, InputIterator last)
 {
    if (first == last) return true;

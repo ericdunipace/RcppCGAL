@@ -1,16 +1,16 @@
-// Copyright (c) 2000  
+// Copyright (c) 2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Cartesian_kernel/include/CGAL/Cartesian/predicates_on_planes_3.h $
-// $Id: predicates_on_planes_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Cartesian_kernel/include/CGAL/Cartesian/predicates_on_planes_3.h $
+// $Id: predicates_on_planes_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri, Herve Bronnimann
 
@@ -26,18 +26,18 @@ inline
 typename K::Oriented_side
 side_of_oriented_plane(const PlaneC3<K> &h,
                        const PointC3<K> &p)
-{ 
+{
   return side_of_oriented_planeC3(h.a(), h.b(), h.c(), h.d(),
-	                          p.x(), p.y(), p.z());
+                                  p.x(), p.y(), p.z());
 }
 
 template < class K >
 inline
 typename K::Boolean
 equal_plane(const PlaneC3<K> &h, const PlaneC3<K> &p)
-{ 
+{
   return equal_planeC3(h.a(), h.b(), h.c(), h.d(),
-	               p.a(), p.b(), p.c(), p.d());
+                       p.a(), p.b(), p.c(), p.d());
 }
 
 } //namespace CGAL

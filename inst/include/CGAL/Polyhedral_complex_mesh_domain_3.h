@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Polyhedral_complex_mesh_domain_3.h $
-// $Id: Polyhedral_complex_mesh_domain_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Polyhedral_complex_mesh_domain_3.h $
+// $Id: Polyhedral_complex_mesh_domain_3.h c1a42c7 2020-03-26T18:58:21+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -750,8 +750,7 @@ detect_features(FT angle_in_degree,
   for(Polyhedron_type& p : poly)
   {
     initialize_ts(p);
-    using Mesh_3::internal::Get_face_index_pmap;
-    Get_face_index_pmap<Polyhedron_type> get_face_index_pmap(p);
+
 #ifdef CGAL_MESH_3_VERBOSE
     std::size_t poly_id = &p-&poly[0];
     std::cerr << "Polyhedron #" << poly_id << " :\n";
@@ -768,9 +767,9 @@ detect_features(FT angle_in_degree,
       , eif
       , pid_map
       , PMP::parameters::first_index(nb_of_patch_plus_one)
-      .face_index_map(get_face_index_pmap(p))
-      .vertex_incident_patches_map(vip_map)
-      .vertex_feature_degree_map(vertex_feature_degree_map));
+                        .face_index_map(get_initialized_face_index_map(p))
+                        .vertex_incident_patches_map(vip_map)
+                        .vertex_feature_degree_map(vertex_feature_degree_map));
 
     Mesh_3::internal::Is_featured_edge<Polyhedron_type> is_featured_edge(p);
 
@@ -990,7 +989,7 @@ add_featured_edges_to_graph(const Polyhedron_type& p,
     }
   }
 
-#if CGAL_MESH_3_PROTECTION_DEBUG > 1
+#if CGAL_MESH_3_PROTECTION_DEBUG & 2
   {// DEBUG
     Mesh_3::internal::dump_graph_edges("edges-graph.polylines.txt", g_copy);
   }

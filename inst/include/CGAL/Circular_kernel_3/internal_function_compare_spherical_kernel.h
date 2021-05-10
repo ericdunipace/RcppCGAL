@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Circular_kernel_3/include/CGAL/Circular_kernel_3/internal_function_compare_spherical_kernel.h $
-// $Id: internal_function_compare_spherical_kernel.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Circular_kernel_3/include/CGAL/Circular_kernel_3/internal_function_compare_spherical_kernel.h $
+// $Id: internal_function_compare_spherical_kernel.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-// Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado, 
+// Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,
 //             Julien Hazebrouck, Damien Leroy
 
-// Partially supported by the IST Programme of the EU as a 
-// STREP (FET Open) Project under Contract No  IST-006413 
+// Partially supported by the IST Programme of the EU as a
+// STREP (FET Open) Project under Contract No  IST-006413
 // (ACS -- Algorithms for Complex Shapes)
 
 #ifndef CGAL_SPHERICAL_KERNEL_PREDICATES_COMPARE_3_H
@@ -23,12 +23,12 @@
 namespace CGAL {
   namespace SphericalFunctors {
 
-  // we can optimize those functions by comparing 
+  // we can optimize those functions by comparing
   // the references before doing the comparison
   // as in CK
   template < class SK >
   inline
-  Comparison_result 
+  Comparison_result
   compare_x(const typename SK::Circular_arc_point_3 &p0,
             const typename SK::Circular_arc_point_3 &p1)
   {
@@ -38,7 +38,7 @@ namespace CGAL {
 
   template < class SK >
   inline
-  Comparison_result 
+  Comparison_result
   compare_y(const typename SK::Circular_arc_point_3 &p0,
             const typename SK::Circular_arc_point_3 &p1)
   {
@@ -48,7 +48,7 @@ namespace CGAL {
 
   template < class SK >
   inline
-  Comparison_result 
+  Comparison_result
   compare_z(const typename SK::Circular_arc_point_3 &p0,
             const typename SK::Circular_arc_point_3 &p1)
   {
@@ -58,7 +58,7 @@ namespace CGAL {
 
   template < class SK >
   inline
-  Comparison_result 
+  Comparison_result
   compare_xy(const typename SK::Circular_arc_point_3 &p0,
              const typename SK::Circular_arc_point_3 &p1)
   {
@@ -68,7 +68,7 @@ namespace CGAL {
 
   template < class SK >
   inline
-  Comparison_result 
+  Comparison_result
   compare_xyz(const typename SK::Circular_arc_point_3 &p0,
               const typename SK::Circular_arc_point_3 &p1)
   {

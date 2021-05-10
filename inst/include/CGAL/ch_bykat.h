@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_2/include/CGAL/ch_bykat.h $
-// $Id: ch_bykat.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_2/include/CGAL/ch_bykat.h $
+// $Id: ch_bykat.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Stefan Schirra
 
@@ -22,12 +22,12 @@
 
 namespace CGAL {
 
-// same as |convex_hull_2(first,last,result)|. {\sc traits}: 
+// same as |convex_hull_2(first,last,result)|. {\sc traits}:
 // uses |Traits::Point_2|, |Traits::Less_signed_distance_to_line_2|,
 // |Traits::Left_turn_2|,, |Traits::Equal_2| and |Traits::Less_xy_2|.
 template <class InputIterator, class OutputIterator, class Traits>
 OutputIterator
-ch_bykat(InputIterator first, InputIterator last, 
+ch_bykat(InputIterator first, InputIterator last,
          OutputIterator  result,
          const Traits& ch_traits);
 
@@ -46,14 +46,14 @@ ch_bykat(InputIterator first, InputIterator last, OutputIterator  result)
 
 template <class InputIterator, class OutputIterator, class Traits>
 OutputIterator
-ch_bykat_with_threshold(InputIterator first, InputIterator last, 
+ch_bykat_with_threshold(InputIterator first, InputIterator last,
                              OutputIterator  result,
                              const Traits& ch_traits);
 
 template <class InputIterator, class OutputIterator>
 inline
 OutputIterator
-ch_bykat_with_threshold(InputIterator first, InputIterator last, 
+ch_bykat_with_threshold(InputIterator first, InputIterator last,
                         OutputIterator  result)
 {
     typedef std::iterator_traits<InputIterator>   ITraits;

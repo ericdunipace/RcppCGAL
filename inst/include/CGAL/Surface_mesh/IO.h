@@ -1,12 +1,11 @@
-//=============================================================================
 // Copyright (C) 2001-2005 by Computer Graphics Group, RWTH Aachen
 // Copyright (C) 2011 by Graphics & Geometry Group, Bielefeld University
 // Copyright (C) 2014 GeometryFactory
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesh/include/CGAL/Surface_mesh/IO.h $
-// $Id: IO.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh/include/CGAL/Surface_mesh/IO.h $
+// $Id: IO.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 
@@ -148,7 +147,7 @@ bool read_off_ascii(Surface_mesh<Point_3>& mesh,
     // properties
     typename Mesh::template Property_map<typename Mesh::Vertex_index, Normal>                 normals;
     typename Mesh::template Property_map<typename Mesh::Vertex_index, Texture_coordinate>     texcoords;
-    
+
     if (has_normals)   normals   = mesh.template add_property_map<typename Mesh::Vertex_index, Normal>("v:normal").first;
     if (has_texcoords) texcoords = mesh.template add_property_map<typename Mesh::Vertex_index, Texture_coordinate>("v:texcoord").first;
 
@@ -164,7 +163,7 @@ bool read_off_ascii(Surface_mesh<Point_3>& mesh,
     }while(1);
 
     // #Vertice, #Faces, #Edges
-    in >> nV >> nF >> nE; 
+    in >> nV >> nF >> nE;
     getline(in,line); // reads eol
 
     mesh.clear();
@@ -246,7 +245,7 @@ bool read_off_ascii(Surface_mesh<Point_3>& mesh,
 /// This function reads an `OFF` file into a `Surface_mesh`. It
 /// supports the `OFF` vertex properties normal, color, and vertex
 /// coordinates. If a property is detected in the `OFF` file, it will be
-/// read into the `mesh` as a vertex property with the name 
+/// read into the `mesh` as a vertex property with the name
 /// `"v:normal"`, `"v:color"`, and `"v:texcoord"`, respectivly.
 ///
 /// @param mesh The mesh that should contain the file contents.
@@ -314,7 +313,7 @@ bool read_off(Surface_mesh<K>& mesh, const std::string& filename)
 ///
 /// @returns `true`, if reading succeeded, `false` otherwise
 ///
-#endif 
+#endif
 template <typename K>
 bool write_off(const Surface_mesh<K>& mesh, const std::string& filename)
 {
@@ -340,7 +339,7 @@ bool write_off(const Surface_mesh<K>& mesh, const std::string& filename)
 ///
 /// @return `true`, if reading succeeded, `false` otherwise
 ///
-#endif 
+#endif
 template <typename K>
 bool read_mesh(Surface_mesh<K>& mesh, const std::string& filename) {
       // clear mesh before reading from file
@@ -376,7 +375,7 @@ bool read_mesh(Surface_mesh<K>& mesh, const std::string& filename) {
 ///
 #endif
 template <typename K>
-bool write_mesh(const Surface_mesh<K>& mesh, const std::string& filename) 
+bool write_mesh(const Surface_mesh<K>& mesh, const std::string& filename)
 {
       // extract file extension
     std::string::size_type dot(filename.rfind("."));

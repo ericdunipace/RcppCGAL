@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesher_level/include/CGAL/Meshes/Simple_queue_container.h $
-// $Id: Simple_queue_container.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesher_level/include/CGAL/Meshes/Simple_queue_container.h $
+// $Id: Simple_queue_container.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -20,7 +20,7 @@ namespace CGAL {
   namespace Mesh_3 {
 
     template <typename Elt>
-    class Simple_queue_container 
+    class Simple_queue_container
     {
     public:
       typedef Elt Element;
@@ -54,10 +54,10 @@ namespace CGAL {
 
       size_type size() const
       {
-	return q.size();
+        return q.size();
       }
     }; // end Simple_queue_container
-    
+
   } // end namespace Mesh_3
 } // end namespace CGAL
 

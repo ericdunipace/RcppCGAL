@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Three/include/CGAL/Three/TextRenderer.h $
-// $Id: TextRenderer.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Three/include/CGAL/Three/TextRenderer.h $
+// $Id: TextRenderer.h af7e1a8 2020-10-16T14:32:12+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -139,7 +139,7 @@ public:
     {
     }
     //!Draws all the `TextItem`s
-    void draw(CGAL::Three::Viewer_interface* viewer);
+    void draw(CGAL::Three::Viewer_interface* viewer, const QVector3D &scaler);
     //!\brief Adds a single TextItem to TextRenderer::local_textItems
     //!
     //! @see addText(float p_x, float p_y, float p_z, QString p_text, bool p_3D = true,  QFont font = QFont(), QColor p_color = Qt::black)

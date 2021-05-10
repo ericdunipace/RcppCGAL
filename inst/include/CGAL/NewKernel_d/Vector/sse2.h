@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/NewKernel_d/include/CGAL/NewKernel_d/Vector/sse2.h $
-// $Id: sse2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/NewKernel_d/include/CGAL/NewKernel_d/Vector/sse2.h $
+// $Id: sse2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -47,48 +47,48 @@ namespace CGAL {
     typedef __m128d Vector;
     struct Construct_vector {
       struct Dimension {
-	// Initialize with NaN?
-	Vector operator()(unsigned d) const {
-	  CGAL_assertion(d==2);
-	  return Vector();
-	}
+        // Initialize with NaN?
+        Vector operator()(unsigned d) const {
+          CGAL_assertion(d==2);
+          return Vector();
+        }
       };
 
       struct Iterator {
-	template<typename Iter>
-	  Vector operator()(unsigned d,Iter const& f,Iter const& e) const {
-	    CGAL_assertion(d==2);
-	    double x0 = *f;
-	    double x1 = *++f;
-	    CGAL_assertion(++f==e);
-	    Vector a = { x0, x1 };
-	    return a;
-	  }
+        template<typename Iter>
+          Vector operator()(unsigned d,Iter const& f,Iter const& e) const {
+            CGAL_assertion(d==2);
+            double x0 = *f;
+            double x1 = *++f;
+            CGAL_assertion(++f==e);
+            Vector a = { x0, x1 };
+            return a;
+          }
       };
 
       struct Iterator_and_last {
-	template<typename Iter,typename T>
-	  Vector operator()(unsigned d,Iter const& f,Iter const& e,double t) const {
-	    CGAL_assertion(d==2);
-	    Vector a = { *f, t };
-	    CGAL_assertion(++f==e);
-	    return a;
-	  }
+        template<typename Iter,typename T>
+          Vector operator()(unsigned d,Iter const& f,Iter const& e,double t) const {
+            CGAL_assertion(d==2);
+            Vector a = { *f, t };
+            CGAL_assertion(++f==e);
+            return a;
+          }
       };
 
       struct Values {
-	  Vector operator()(double a,double b) const {
-	    Vector r = { a, b };
-	    return r;
-	  }
+          Vector operator()(double a,double b) const {
+            Vector r = { a, b };
+            return r;
+          }
       };
 
       struct Values_divide {
-	Vector operator()(double h,double a,double b) const {
-	  // {a,b}/{h,h} is probably slower
-	  Vector r = { a/h, b/h };
-	  return r;
-	}
+        Vector operator()(double h,double a,double b) const {
+          // {a,b}/{h,h} is probably slower
+          Vector r = { a/h, b/h };
+          return r;
+        }
       };
     };
 

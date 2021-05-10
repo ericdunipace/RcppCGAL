@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/Triangulation_helpers.h $
-// $Id: Triangulation_helpers.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Triangulation_helpers.h $
+// $Id: Triangulation_helpers.h 53d4c9b 2019-10-28T11:29:08+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,7 +21,7 @@
 
 #include <CGAL/enum.h>
 #include <CGAL/internal/Has_nested_type_Bare_point.h>
-#include <CGAL/Hash_handles_with_or_without_timestamps.h>
+#include <CGAL/Time_stamper.h>
 
 #include <boost/mpl/if.hpp>
 #include <boost/mpl/identity.hpp>

@@ -3,13 +3,13 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/resources_impl.h $
-// $Id: resources_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/resources_impl.h $
+// $Id: resources_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent Rineau <Laurent.Rineau@geometryfactory.com>
-   
+
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
@@ -26,7 +26,7 @@
 CGAL_INLINE_FUNCTION
 void CGAL_Qt_init_resources() {
   Q_INIT_RESOURCE(File);
-  Q_INIT_RESOURCE(Triangulation_2); 
+  Q_INIT_RESOURCE(Triangulation_2);
   Q_INIT_RESOURCE(Input);
   Q_INIT_RESOURCE(CGAL);
 }

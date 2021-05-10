@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Classification/include/CGAL/Classification/Feature/Eigenvalue.h $
-// $Id: Eigenvalue.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Feature/Eigenvalue.h $
+// $Id: Eigenvalue.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -28,7 +28,7 @@ namespace Feature {
     \ingroup PkgClassificationFeatures
 
     %Feature based on the eigenvalues of the covariance matrix of a
-    local neighborhood. 
+    local neighborhood.
 
     Its default name is "eigenvalue_0", "eigenvalue_1" or
     "eigenvalue_2", depending on which eigenvalue is chosen in the
@@ -40,7 +40,7 @@ protected:
 
   const Classification::Local_eigen_analysis& eigen;
   unsigned int m_idx;
-  
+
 public:
 
   /*!

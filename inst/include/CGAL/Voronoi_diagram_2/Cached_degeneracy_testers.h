@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Cached_degeneracy_testers.h $
-// $Id: Cached_degeneracy_testers.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Cached_degeneracy_testers.h $
+// $Id: Cached_degeneracy_testers.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -95,22 +95,22 @@ public:
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const Face_handle& f,	int i) const {
+                  const Face_handle& f,        int i) const {
     return operator()(dual, Edge(f,i));
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const Edge_circulator& ec) const {
+                  const Edge_circulator& ec) const {
     return operator()(dual, *ec);
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const All_edges_iterator& eit) const {
+                  const All_edges_iterator& eit) const {
     return operator()(dual, *eit);
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const Finite_edges_iterator& eit) const {
+                  const Finite_edges_iterator& eit) const {
     return operator()(dual, *eit);
   }
 
@@ -144,7 +144,7 @@ public:
     typename Edge_map::iterator it;
     for (it = emap.begin(); it != emap.end(); ++it) {
       valid = valid && dual.tds().is_edge(it->first.first,
-					  it->first.second);
+                                          it->first.second);
     }
     return valid;
   }
@@ -210,22 +210,22 @@ public:
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const Face_handle& f,	int i) const {
+                  const Face_handle& f,        int i) const {
     return operator()(dual, Edge(f,i));
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const Edge_circulator& ec) const {
+                  const Edge_circulator& ec) const {
     return operator()(dual, *ec);
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const All_edges_iterator& eit) const {
+                  const All_edges_iterator& eit) const {
     return operator()(dual, *eit);
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const Finite_edges_iterator& eit) const {
+                  const Finite_edges_iterator& eit) const {
     return operator()(dual, *eit);
   }
 
@@ -415,7 +415,7 @@ public:
     bool valid = true;
     typename Delaunay_graph::All_vertices_iterator vit;
     for (vit = dual.all_vertices_begin();
-	 vit != dual.all_vertices_end(); ++vit) {
+         vit != dual.all_vertices_end(); ++vit) {
       bool b = !vmap.is_defined(vit) || (vmap[vit] != UNDEFINED);
       valid = valid && b;
     }

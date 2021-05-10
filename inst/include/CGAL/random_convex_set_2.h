@@ -1,16 +1,16 @@
-// Copyright (c) 1998  
+// Copyright (c) 1998
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Generator/include/CGAL/random_convex_set_2.h $
-// $Id: random_convex_set_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Generator/include/CGAL/random_convex_set_2.h $
+// $Id: random_convex_set_2.h b796e6d 2021-01-08T14:52:28+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Hoffmann <hoffmann@inf.ethz.ch>
 
@@ -23,7 +23,6 @@
 #include <algorithm>
 #include <numeric>
 #include <CGAL/Random_convex_set_traits_2.h>
-#include <boost/functional.hpp>
 
 namespace CGAL {
 
@@ -80,7 +79,7 @@ random_convex_set_2( std::size_t n,
     points.begin(),
     points.end(),
     points.begin(),
-    boost::bind2nd( Sum(), scale( centroid, FT( -1))));
+    [&centroid, &sum, &scale](const Point_2& p) { return sum(p, scale(centroid, FT( -1))); });
 
   // sort them according to their direction's angle
   // w.r.t. the positive x-axis:
@@ -102,8 +101,9 @@ random_convex_set_2( std::size_t n,
     points.begin(),
     points.end(),
     points.begin(),
-    boost::bind2nd( Sum(), sum( centroid,
-                         scale( new_centroid, FT( -1)))));
+    [&centroid, &new_centroid, &sum, &scale](const Point_2& p)
+    {return sum(p, sum( centroid, scale(new_centroid, FT( -1)))); }
+  );
 
   // compute maximal coordinate:
   FT maxcoord( max_coordinate(
@@ -118,7 +118,7 @@ random_convex_set_2( std::size_t n,
     points.begin(),
     points.end(),
     o,
-    boost::bind2nd( Scale(), FT( pg.range()) / maxcoord));
+    [&pg, &maxcoord, &scale](const Point_2& p){ return scale(p, FT( pg.range()) / maxcoord); });
 
 } // random_convex_set_2( n, o, pg, t)
 

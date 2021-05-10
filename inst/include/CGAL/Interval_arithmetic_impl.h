@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/Interval_arithmetic_impl.h $
-// $Id: Interval_arithmetic_impl.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Interval_arithmetic_impl.h $
+// $Id: Interval_arithmetic_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,8 +25,8 @@ double init_min_double()
     double d = 1;
     double e = 1;
     do {
-	d = e;
-	e = CGAL_IA_FORCE_TO_DOUBLE(e/2);
+        d = e;
+        e = CGAL_IA_FORCE_TO_DOUBLE(e/2);
     } while (e != 0);
     return d;
 }

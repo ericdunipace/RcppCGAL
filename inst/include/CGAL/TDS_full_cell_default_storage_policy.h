@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation/include/CGAL/TDS_full_cell_default_storage_policy.h $
-// $Id: TDS_full_cell_default_storage_policy.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation/include/CGAL/TDS_full_cell_default_storage_policy.h $
+// $Id: TDS_full_cell_default_storage_policy.h 378554e 2020-03-06T16:42:23+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -44,7 +44,7 @@ struct TFC_data< Vertex_handle, Full_cell_handle, Dimen, TDS_full_cell_default_s
     : vertices_(dmax+1), neighbors_(dmax+1)
     {}
     void*   for_compact_container() const { return vertices_.for_compact_container(); }
-    void* & for_compact_container()       { return vertices_.for_compact_container(); }
+    void    for_compact_container(void *p){ vertices_.for_compact_container(p); }
     int dimension() const { return ( vertices_.size() - 1 ); }
     void set_mirror_index(const int, const int) {}
 #ifdef BOOST_NO_INT64_T

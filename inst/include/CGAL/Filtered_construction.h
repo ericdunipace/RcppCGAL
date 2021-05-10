@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Filtered_kernel/include/CGAL/Filtered_construction.h $
-// $Id: Filtered_construction.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Filtered_kernel/include/CGAL/Filtered_construction.h $
+// $Id: Filtered_construction.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -19,7 +19,7 @@
 namespace CGAL {
 
 template <class AC, class EC, class FC, class C2E, class C2F,
-	  class E2C, class F2C,	bool Protection = true>
+          class E2C, class F2C,        bool Protection = true>
 class Filtered_construction
 {
 private:
@@ -64,13 +64,13 @@ public:
     try
     {
       return From_Filtered( Filter_construction(To_Filtered(a1),
-						To_Filtered(a2)) );
+                                                To_Filtered(a2)) );
     }
     catch (Uncertain_conversion_exception&)
     {
       Protect_FPU_rounding<!Protection> P(CGAL_FE_TONEAREST);
       return From_Exact( Exact_construction(To_Exact(a1),
-					    To_Exact(a2)) );
+                                            To_Exact(a2)) );
     }
   }
 
@@ -82,15 +82,15 @@ public:
     try
     {
       return From_Filtered( Filter_construction(To_Filtered(a1),
-						To_Filtered(a2),
-						To_Filtered(a3)) );
+                                                To_Filtered(a2),
+                                                To_Filtered(a3)) );
     }
     catch (Uncertain_conversion_exception&)
     {
       Protect_FPU_rounding<!Protection> P(CGAL_FE_TONEAREST);
       return From_Exact( Exact_construction(To_Exact(a1),
-					    To_Exact(a2),
-					    To_Exact(a3)) );
+                                            To_Exact(a2),
+                                            To_Exact(a3)) );
     }
   }
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Boolean_set_operations_2/include/CGAL/Gps_traits_2.h $
-// $Id: Gps_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Boolean_set_operations_2/include/CGAL/Gps_traits_2.h $
+// $Id: Gps_traits_2.h 7436c14 2020-04-06T01:23:45+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -35,6 +35,8 @@ public:
 
   typedef typename Base::Point_2                        Point_2;
   typedef typename Base::X_monotone_curve_2             X_monotone_curve_2;
+  typedef typename Base::Multiplicity                   Multiplicity;
+
   //Polygon_2 type is required by GeneralPolygonSetTraits Concept
   typedef General_polygon_t                             Polygon_2;
   //Polygon_2 is a model of the GeneralPolygon2 concept

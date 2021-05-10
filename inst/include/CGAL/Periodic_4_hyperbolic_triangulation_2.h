@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Periodic_4_hyperbolic_triangulation_2.h $
-// $Id: Periodic_4_hyperbolic_triangulation_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Periodic_4_hyperbolic_triangulation_2.h $
+// $Id: Periodic_4_hyperbolic_triangulation_2.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Iordan Iordanov  <Iordan.Iordanov@loria.fr>
@@ -608,15 +608,15 @@ protected:
     }
 
     // Now we know that all vertices lie in different regions.
-    Hyperbolic_translation min(7, 2, 5);
+    Hyperbolic_translation vmin(7, 2, 5);
     Hyperbolic_translation trans;
     for(int i=0; i<3; ++i)
     {
       int j = (i + 1) % 3; // the index of the 'next' vertex
       Hyperbolic_translation tmp = fh->translation(i).inverse() * fh->translation(j);
-      if(tmp < min)
+      if(tmp < vmin)
       {
-        min = tmp;
+        vmin = tmp;
         trans = fh->translation(i).inverse();
       }
     }

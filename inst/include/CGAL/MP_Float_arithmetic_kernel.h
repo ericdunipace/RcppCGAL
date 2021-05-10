@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arithmetic_kernel/include/CGAL/MP_Float_arithmetic_kernel.h $
-// $Id: MP_Float_arithmetic_kernel.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arithmetic_kernel/include/CGAL/MP_Float_arithmetic_kernel.h $
+// $Id: MP_Float_arithmetic_kernel.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 // Author(s)     : Sebastien Loriot
 //
 // ============================================================================
 //
-//    \brief provide class Arithmetic_kernel, a collection of number types. 
+//    \brief provide class Arithmetic_kernel, a collection of number types.
 //
 
 #ifndef CGAL_MP_FLOAT_ARITHMETIC_KERNEL_H
@@ -21,7 +21,7 @@
 #include <CGAL/Arithmetic_kernel/Arithmetic_kernel_base.h>
 #include <CGAL/Get_arithmetic_kernel.h>
 
-#define CGAL_HAS_MP_FLOAT_ARITHMETIC_KERNEL 
+#define CGAL_HAS_MP_FLOAT_ARITHMETIC_KERNEL
 
 #include <CGAL/MP_Float.h>
 #include <CGAL/Quotient.h>

@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesher/include/CGAL/Surface_mesher_generator.h $
-// $Id: Surface_mesher_generator.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/Surface_mesher_generator.h $
+// $Id: Surface_mesher_generator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau
@@ -135,17 +135,17 @@ namespace CGAL {
       SurfaceMeshTraits_3,
       Criteria,
       Tag>::Mesher_base Mesher_base;
-  
+
     typedef Surface_mesher::Surface_mesher<
       Mesher_base,
       typename Surface_mesher::details::Facet_generator<Mesher_base>::type,
       Null_mesher_level,
       verbosity> Mesher;
-  
+
     typedef Mesher type;
     typedef Mesher Type;
   }; // end struct Surface_mesher_generator
-  
+
 } // end namespace CGAL
 
 #endif // CGAL_SURFACE_MESH_GENERATOR_H

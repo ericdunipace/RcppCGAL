@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_2_triangulation_2/include/CGAL/Periodic_2_triangulation_2.h $
-// $Id: Periodic_2_triangulation_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_2_triangulation_2/include/CGAL/Periodic_2_triangulation_2.h $
+// $Id: Periodic_2_triangulation_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Nico Kruithof <Nico@nghk.nl>
@@ -665,7 +665,7 @@ public:
   /// begin iterator over the non-virtual vertices
   Unique_vertex_iterator unique_vertices_begin() const
   {
-    return CGAL::filter_iterator(vertices_end(), 
+    return CGAL::filter_iterator(vertices_end(),
                                  Periodic_2_triangulation_2_internal::Domain_tester<Self>(this),
                                  vertices_begin());
   }
@@ -1960,10 +1960,10 @@ void Periodic_2_triangulation_2<Gt, Tds>::flip(Face_handle f, int i)
             vh2_copy = v2s[i2 - 1];
 
           bool found = is_edge(vh1_copy, vh2_copy, fh, index);
-	  CGAL_USE(found);
+          CGAL_USE(found);
           CGAL_assertion(found);
-	  if (found)
-	    flip_single_edge(fh, index);
+          if (found)
+            flip_single_edge(fh, index);
         }
     }
 

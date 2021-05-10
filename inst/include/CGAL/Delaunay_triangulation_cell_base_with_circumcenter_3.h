@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_3/include/CGAL/Delaunay_triangulation_cell_base_with_circumcenter_3.h $
-// $Id: Delaunay_triangulation_cell_base_with_circumcenter_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/Delaunay_triangulation_cell_base_with_circumcenter_3.h $
+// $Id: Delaunay_triangulation_cell_base_with_circumcenter_3.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -63,6 +63,12 @@ public:
     : Cb(c), circumcenter_(c.circumcenter_ != nullptr ? new Point(*(c.circumcenter_)) : nullptr)
   {}
 
+  Delaunay_triangulation_cell_base_with_circumcenter_3
+        (Delaunay_triangulation_cell_base_with_circumcenter_3 &&c)
+    : Cb(std::move(c)), circumcenter_(std::exchange(c.circumcenter_, nullptr))
+  {
+  }
+
   Delaunay_triangulation_cell_base_with_circumcenter_3&
   operator=(const Delaunay_triangulation_cell_base_with_circumcenter_3 &c)
   {
@@ -71,13 +77,21 @@ public:
       return *this;
   }
 
+  Delaunay_triangulation_cell_base_with_circumcenter_3&
+  operator=(Delaunay_triangulation_cell_base_with_circumcenter_3 &&c)
+  {
+      Cb::operator=(std::move(c));
+      circumcenter_ = std::exchange(c.circumcenter_, nullptr);
+      return *this;
+  }
+
   Delaunay_triangulation_cell_base_with_circumcenter_3(
-	                    Vertex_handle v0, Vertex_handle v1,
+                            Vertex_handle v0, Vertex_handle v1,
                             Vertex_handle v2, Vertex_handle v3)
     : Cb(v0, v1, v2, v3), circumcenter_(nullptr) {}
 
   Delaunay_triangulation_cell_base_with_circumcenter_3(
-	                    Vertex_handle v0, Vertex_handle v1,
+                            Vertex_handle v0, Vertex_handle v1,
                             Vertex_handle v2, Vertex_handle v3,
                             Cell_handle   n0, Cell_handle   n1,
                             Cell_handle   n2, Cell_handle   n3)

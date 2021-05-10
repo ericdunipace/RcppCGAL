@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Point_set_processing_3/include/CGAL/vcm_estimate_edges.h $
-// $Id: vcm_estimate_edges.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Point_set_processing_3/include/CGAL/vcm_estimate_edges.h $
+// $Id: vcm_estimate_edges.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jocelyn Meyron and Quentin Mérigot
@@ -25,7 +25,7 @@ namespace CGAL {
 /// determines if a point is on a sharp feature edge from a point set
 /// for which the Voronoi covariance Measures have been computed.
 ///
-/// The sharpness of the edge, specified by parameter `threshold`, 
+/// The sharpness of the edge, specified by parameter `threshold`,
 /// is used to filtered points according to the external angle around a sharp feature.
 ///
 /// A point is considered to be on a sharp feature if the external angle `alpha` at the edge is such that
@@ -71,7 +71,7 @@ vcm_is_on_feature_edge (std::array<FT,6> &cov,
                         double threshold)
 {
   return vcm_is_on_feature_edge(cov, threshold,
-				CGAL::Default_diagonalize_traits<double, 3>());
+                                CGAL::Default_diagonalize_traits<double, 3>());
 
 }
 

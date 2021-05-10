@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Is_hidden_C2.h $
-// $Id: Is_hidden_C2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Is_hidden_C2.h $
+// $Id: Is_hidden_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -41,23 +41,23 @@ public:
 
 private:
   bool is_hidden(const Site_2& p, const Site_2& q,
-		 const Integral_domain_without_division_tag&) const
+                 const Integral_domain_without_division_tag&) const
   {
     RT w1 = p.weight();
     RT w2 = q.weight();
     Sign s = CGAL::sign( CGAL::square(p.x() - q.x())
-			 + CGAL::square(p.y() - q.y())
-			 - CGAL::square(w1 - w2)
-			 );
+                         + CGAL::square(p.y() - q.y())
+                         - CGAL::square(w1 - w2)
+                         );
     if ( s == POSITIVE ) { return false; }
     return (CGAL::compare(w1, w2) != SMALLER);
   }
 
   bool is_hidden(const Site_2& p, const Site_2& q,
-		 const Field_with_sqrt_tag&) const
+                 const Field_with_sqrt_tag&) const
   {
     RT d = CGAL::sqrt(CGAL::square(p.x() - q.x())
-		      + CGAL::square(p.y() - q.y()));
+                      + CGAL::square(p.y() - q.y()));
     Sign s = CGAL::sign(d - p.weight() + q.weight());
 
     return ( s != POSITIVE );

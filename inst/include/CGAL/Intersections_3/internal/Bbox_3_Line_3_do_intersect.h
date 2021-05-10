@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Line_3_do_intersect.h $
-// $Id: Bbox_3_Line_3_do_intersect.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Line_3_do_intersect.h $
+// $Id: Bbox_3_Line_3_do_intersect.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,7 +21,7 @@
 // inspired from http://cag.csail.mit.edu/~amy/papers/box-jgt.pdf
 
 namespace CGAL {
-  
+
 namespace Intersections {
 
 namespace internal {
@@ -72,10 +72,10 @@ namespace internal {
       tmax_ = py - bymin;
       d_ = -vy;
     }
-    
-    
-    
-    
+
+
+
+
     if ( d_ == FT(0) ){
       //if py is not in the y-slab
       if( (tmin_ > FT(0) || tmax_ < FT(0)) ) return false;
@@ -111,11 +111,11 @@ namespace internal {
       tmax_ = pz - bzmin;
       d_ = -vz;
     }
-    
+
     //if pz is not in the z-slab
     //if ( d_ == FT(0) && (tmin_ > FT(0) || tmax_ < FT(0)) ) return false;
-    //The previous line is not needed as either dmin or d_ are not 0 
-    //(otherwise the direction of the line would be null). 
+    //The previous line is not needed as either dmin or d_ are not 0
+    //(otherwise the direction of the line would be null).
     // The following is equivalent to the in z-slab test if d_=0.
 
     return ( (dmin*tmax_) >= (d_*tmin) && (dmax*tmin_) <= (d_*tmax) );

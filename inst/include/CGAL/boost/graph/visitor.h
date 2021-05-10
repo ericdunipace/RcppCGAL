@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/BGL/include/CGAL/boost/graph/visitor.h $
-// $Id: visitor.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/BGL/include/CGAL/boost/graph/visitor.h $
+// $Id: visitor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -122,7 +122,7 @@ inline void out_edges(typename boost::graph_traits<Graph>::vertex_descriptor u
 
 //
 // MutableHalfedgeGraph
-// 
+//
 template <class Graph>
 void add_vertex(Visitor_base<Graph> & w)
 {}
@@ -153,7 +153,7 @@ void set_next(typename boost::graph_traits< Graph >::halfedge_descriptor h1
 {}
 
 //
-// MutableFaceGraph 
+// MutableFaceGraph
 //
 template <class Graph>
 void add_face(Visitor_base<Graph> & w)
@@ -377,7 +377,7 @@ out_edges(typename boost::graph_traits<Graph>::vertex_descriptor u
 
 //
 // MutableHalfedgeGraph
-// 
+//
 
 template <class Graph, class Visitor>
 typename boost::graph_traits< Graph >::vertex_descriptor
@@ -450,7 +450,7 @@ set_next(typename boost::graph_traits< Graph >::halfedge_descriptor h1
 }
 
 //
-// MutableFaceGraph 
+// MutableFaceGraph
 //
 template <class Graph, class Visitor>
 typename boost::graph_traits< Graph >::face_descriptor

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/face_graph_utils.h $
-// $Id: face_graph_utils.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/face_graph_utils.h $
+// $Id: face_graph_utils.h 3254365 2021-03-03T17:10:16+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -145,6 +145,207 @@ void copy_edge_mark(G&,
                     const No_mark<G>&,
                           No_mark<G>&)
 {} // nothing to do
+
+
+// For exact side_of_triangle_mesh
+template <class Node_id_map,
+          class VertexPointMap,
+          class NodeVector>
+struct Node_vector_exact_vertex_point_map
+{
+// map type definitions
+  typedef typename boost::property_traits<VertexPointMap>::key_type key_type;
+  typedef typename NodeVector::Exact_kernel Exact_kernel;
+  typedef typename Exact_kernel::Point_3 value_type;
+  typedef value_type reference;
+  typedef boost::readable_property_map_tag category;
+// internal type definitions
+  typedef std::size_t Node_id;
+
+  Node_vector_exact_vertex_point_map(){}
+
+  Node_vector_exact_vertex_point_map(const Node_id_map& node_ids,
+                                     const VertexPointMap& vpm,
+                                     const NodeVector& node_vector)
+    : node_ids(&node_ids)
+    , vpm(&vpm)
+    , node_vector(&node_vector)
+  {}
+
+  friend value_type get(Node_vector_exact_vertex_point_map m, key_type k)
+  {
+    typename Node_id_map::const_iterator it = m.node_ids->find(k);
+    if (it == m.node_ids->end())
+      return m.node_vector->to_exact( get(*(m.vpm), k) );
+    return m.node_vector->exact_node(it->second);
+  }
+
+  const Node_id_map* node_ids;
+  const VertexPointMap* vpm;
+  const NodeVector* node_vector;
+};
+
+// For exact side_of_triangle_mesh
+template <class TriangleMesh, class PPM, class TreeTraits>
+struct Split_primitives
+{
+  Split_primitives(TriangleMesh& tm, PPM ppm)
+    : tm(tm)
+    , ppm(ppm)
+  {}
+
+  template<typename PrimitiveIterator>
+  void operator()(PrimitiveIterator first,
+                  PrimitiveIterator beyond,
+                  const CGAL::Bbox_3& bbox) const
+    {
+      typedef typename std::iterator_traits<PrimitiveIterator>::value_type Prmtv;
+      PrimitiveIterator middle = first + (beyond - first)/2;
+      typedef typename std::iterator_traits<PrimitiveIterator>::value_type Prmtv;
+      switch(TreeTraits::longest_axis(bbox))
+      {
+      case TreeTraits::CGAL_AXIS_X: // sort along x
+        std::nth_element(first, middle, beyond, [this](const Prmtv& p1, const Prmtv& p2){ return get(ppm, p1.id()).x() < get(ppm,p2.id()).x(); });
+        break;
+      case TreeTraits::CGAL_AXIS_Y: // sort along y
+        std::nth_element(first, middle, beyond, [this](const Prmtv& p1, const Prmtv& p2){ return get(ppm, p1.id()).y() < get(ppm,p2.id()).y(); });
+        break;
+      case TreeTraits::CGAL_AXIS_Z: // sort along z
+        std::nth_element(first, middle, beyond, [this](const Prmtv& p1, const Prmtv& p2){ return get(ppm, p1.id()).z() < get(ppm,p2.id()).z(); });
+        break;
+      default:
+        CGAL_error();
+      }
+    }
+  TriangleMesh& tm;
+  PPM ppm;
+};
+
+// For exact side_of_triangle_mesh
+template <class BPM>
+struct Compute_bbox {
+  Compute_bbox(const BPM& bpm)
+    : bpm(bpm)
+  {}
+
+  template<typename ConstPrimitiveIterator>
+  CGAL::Bbox_3 operator()(ConstPrimitiveIterator first,
+                          ConstPrimitiveIterator beyond) const
+  {
+    CGAL::Bbox_3 bbox = get(bpm, first->id());
+    for(++first; first != beyond; ++first)
+    {
+      bbox += get(bpm, first->id());
+    }
+    return bbox;
+  }
+  BPM bpm;
+};
+
+// For exact side_of_triangle_mesh
+template <class TriangleMesh,
+          class Node_id_map,
+          class VertexPointMap,
+          class NodeVector,
+          class Input_Kernel>
+struct Side_of_helper
+{
+  typedef Node_vector_exact_vertex_point_map<Node_id_map, VertexPointMap, NodeVector> VPM;
+
+  typedef CGAL::AABB_face_graph_triangle_primitive<TriangleMesh, VPM> Primitive;
+  typedef CGAL::AABB_traits<typename NodeVector::Exact_kernel, Primitive> Traits;
+  typedef CGAL::AABB_tree<Traits> Tree_type;
+
+  static
+  VPM get_vpm(const Node_id_map& node_ids,
+               const VertexPointMap& vpm,
+               const NodeVector& node_vector)
+  {
+    return VPM(node_ids, vpm, node_vector);
+  }
+
+  template <class FaceIdMap>
+  static
+  void build_tree(TriangleMesh& tm,
+                  Tree_type& tree,
+                  const Node_id_map& node_ids,
+                  FaceIdMap fid,
+                  const VertexPointMap& vpm,
+                  const NodeVector& node_vector)
+  {
+    typedef typename boost::graph_traits<TriangleMesh>::face_descriptor face_descriptor;
+    typedef typename boost::graph_traits<TriangleMesh>::halfedge_descriptor halfedge_descriptor;
+    typedef typename boost::graph_traits<TriangleMesh>::vertex_descriptor vertex_descriptor;
+
+    // add primitives
+    tree.insert(faces(tm).begin(), faces(tm).end(), tm, get_vpm(node_ids, vpm, node_vector));
+
+    // pre-build bboxes (using approximation)
+    std::vector<Bbox_3> face_bboxes(num_faces(tm));
+
+    auto get_v_box = [&node_ids, &node_vector, &vpm](vertex_descriptor v)
+    {
+      typename Node_id_map::const_iterator it = node_ids.find(v);
+      if (it == node_ids.end())
+        return get(vpm, v).bbox();
+      return approx(node_vector.exact_node(it->second)).bbox();
+    };
+
+    for (face_descriptor f : faces(tm))
+    {
+      halfedge_descriptor h = halfedge(f, tm);
+      face_bboxes[get(fid, f)] = get_v_box( source(h, tm) ) +
+                                 get_v_box( target(h, tm) ) +
+                                 get_v_box( target(next(h, tm), tm) );
+    }
+
+    typedef CGAL::Pointer_property_map<CGAL::Bbox_3>::type Id_to_box;
+    Id_to_box id_to_box = CGAL::make_property_map(face_bboxes);
+    typedef Property_map_binder<FaceIdMap, Id_to_box> BPM;
+    BPM bpm(fid, id_to_box);
+    Compute_bbox<BPM> compute_bbox(bpm);
+
+    typedef One_point_from_face_descriptor_map<TriangleMesh, VertexPointMap> PPM;
+    PPM ppm(&tm, vpm);
+
+    Split_primitives<TriangleMesh, PPM, Traits> split_primitives(tm, ppm);
+    tree.custom_build(compute_bbox, split_primitives);
+  }
+};
+
+template <class TriangleMesh,
+          class Node_id_map,
+          class VertexPointMap,
+          class NodeVector>
+struct Side_of_helper<TriangleMesh, Node_id_map, VertexPointMap, NodeVector, typename NodeVector::Exact_kernel>
+{
+  typedef VertexPointMap VPM;
+  static
+  VPM get_vpm(const Node_id_map&,
+              const VertexPointMap& vpm,
+              const NodeVector&)
+  {
+    return vpm;
+  }
+
+  typedef CGAL::AABB_face_graph_triangle_primitive<TriangleMesh, VPM> Primitive;
+  typedef CGAL::AABB_traits<typename NodeVector::Exact_kernel, Primitive> Traits;
+  typedef CGAL::AABB_tree<Traits> Tree_type;
+
+
+  template <class FaceIdMap>
+  static
+  void build_tree(TriangleMesh& tm,
+                  Tree_type& tree,
+                  const Node_id_map& /* node_ids */,
+                  FaceIdMap /* fid */,
+                  const VertexPointMap& vpm,
+                  const NodeVector& /* node_vector */)
+  {
+    tree.insert(faces(tm).begin(), faces(tm).end(), tm, vpm);
+    tree.build();
+  }
+};
 
 // Parts to get default property maps for output meshes based on the value type
 // of input vertex point maps.
@@ -420,12 +621,9 @@ struct Patch_description{
 // shared_edges will be filled by halfedges pointing in the patch
 // that are inside `is_intersection_edge`, thus mesh boundary halfedges
 // are not necessarily inside.
-template <class PolygonMesh, class FaceIndexMap, class IsIntersectionEdge>
+template <class PolygonMesh, class IsIntersectionEdge>
 void extract_patch_simplices(
-  std::size_t patch_id,
   PolygonMesh& pm,
-  const FaceIndexMap& fids,
-  const std::vector<std::size_t>& patch_ids,
   std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& patch_faces,
   std::set<typename boost::graph_traits<PolygonMesh>::vertex_descriptor>& interior_vertices,
   std::vector<typename boost::graph_traits<PolygonMesh>::halfedge_descriptor>& interior_edges,
@@ -437,22 +635,18 @@ void extract_patch_simplices(
   typedef typename GT::vertex_descriptor vertex_descriptor;
   typedef typename GT::face_descriptor face_descriptor;
 
-  for(face_descriptor f : faces(pm))
+  for(face_descriptor f : patch_faces)
   {
-    if ( patch_ids[ get(fids, f) ]==patch_id )
+    for(halfedge_descriptor h :
+                  halfedges_around_face(halfedge(f, pm),pm))
     {
-      patch_faces.push_back( f );
-      for(halfedge_descriptor h :
-                    halfedges_around_face(halfedge(f, pm),pm))
+      if ( !is_intersection_edge.count(edge(h, pm)) )
       {
-        if ( !is_intersection_edge.count(edge(h, pm)) )
-        {
-          if ( h < opposite(h,pm) || is_border(opposite(h,pm),pm) )
-            interior_edges.push_back( h );
-        }
-        else
-          shared_edges.push_back(h);
+        if ( h < opposite(h,pm) || is_border(opposite(h,pm),pm) )
+          interior_edges.push_back( h );
       }
+      else
+        shared_edges.push_back(h);
     }
   }
 
@@ -480,13 +674,13 @@ struct Patch_container{
 // external data members
   PolygonMesh& pm;
   const std::vector<std::size_t>& patch_ids;
-  const FaceIndexMap& fids;
+  const FaceIndexMap fids;
   const IsIntersectionEdge& is_intersection_edge;
 // constructor
   Patch_container(
     PolygonMesh& pm,
     const std::vector<std::size_t>& patch_ids,
-    const FaceIndexMap& fids,
+    const FaceIndexMap fids,
     const IsIntersectionEdge& is_intersection_edge,
     std::size_t nb_patches
   ) : patches(nb_patches)
@@ -494,14 +688,19 @@ struct Patch_container{
     , patch_ids(patch_ids)
     , fids(fids)
     , is_intersection_edge(is_intersection_edge)
-  {}
+  {
+    typedef boost::graph_traits<PolygonMesh> GT;
+    typedef typename GT::face_descriptor face_descriptor;
+
+    for(face_descriptor f : faces(pm))
+      patches[patch_ids[ get(fids, f) ]].faces.push_back( f );
+  }
 
   Patch_description<PolygonMesh>& operator[](std::size_t i) {
     if ( !patches[i].is_initialized )
     {
       extract_patch_simplices(
-        i, pm,
-        fids, patch_ids,
+        pm,
         patches[i].faces, patches[i].interior_vertices,
         patches[i].interior_edges, patches[i].shared_edges,
         is_intersection_edge
@@ -583,7 +782,8 @@ next_marked_halfedge_around_target_vertex(
 template <class PolygonMesh,
           class EdgeMap,
           class VertexMap,
-          class VertexPointMap,
+          class VertexPointMap1,
+          class VertexPointMap2,
           class VertexPointMapOut,
           class IntersectionEdgeMap>
 void import_polyline(
@@ -598,8 +798,8 @@ void import_polyline(
   VertexMap& pm1_to_output_vertices,
   const IntersectionEdgeMap& intersection_edges1,
   const IntersectionEdgeMap& intersection_edges2,
-  const VertexPointMap& vpm1,
-  const VertexPointMap& /*vpm2*/,
+  const VertexPointMap1& vpm1,
+  const VertexPointMap2& /*vpm2*/,
   const VertexPointMapOut& vpm_out,
   std::vector<typename boost::graph_traits<PolygonMesh>
                 ::edge_descriptor>& output_shared_edges)
@@ -1004,27 +1204,29 @@ void append_patches_to_triangle_mesh(
 
 template < class TriangleMesh,
            class IntersectionEdgeMap,
-           class VertexPointMap,
+           class VertexPointMap1,
+           class VertexPointMap2,
            class VertexPointMapOut,
            class EdgeMarkMap1,
            class EdgeMarkMap2,
            class EdgeMarkMapOut,
            class IntersectionPolylines,
-           class PatchContainer,
+           class PatchContainer1,
+           class PatchContainer2,
            class UserVisitor>
 void fill_new_triangle_mesh(
   TriangleMesh& output,
   const boost::dynamic_bitset<>& patches_of_tm1_to_import,
   const boost::dynamic_bitset<>& patches_of_tm2_to_import,
-  PatchContainer& patches_of_tm1,
-  PatchContainer& patches_of_tm2,
+  PatchContainer1& patches_of_tm1,
+  PatchContainer2& patches_of_tm2,
   bool reverse_orientation_of_patches_from_tm1,
   bool reverse_orientation_of_patches_from_tm2,
   const IntersectionPolylines& polylines,
   const IntersectionEdgeMap& intersection_edges1,
   const IntersectionEdgeMap& intersection_edges2,
-  const VertexPointMap& vpm1,
-  const VertexPointMap& vpm2,
+  const VertexPointMap1& vpm1,
+  const VertexPointMap2& vpm2,
   const VertexPointMapOut& vpm_out,
   const EdgeMarkMap1& edge_mark_map1,
   const EdgeMarkMap2& edge_mark_map2,
@@ -1256,10 +1458,12 @@ void disconnect_patches(
 }
 
 template <class TriangleMesh,
-          class PatchContainer,
+          class PatchContainer1,
+          class PatchContainer2,
           class IntersectionPolylines,
           class EdgeMap,
-          class VertexPointMap,
+          class VertexPointMap1,
+          class VertexPointMap2,
           class EdgeMarkMapIn1,
           class EdgeMarkMapIn2,
           class EdgeMarkMapOut,
@@ -1269,12 +1473,12 @@ void compute_inplace_operation_delay_removal_and_insideout(
   TriangleMesh& tm2,
   const boost::dynamic_bitset<>& patches_of_tm1_to_keep,
   const boost::dynamic_bitset<>& patches_of_tm2_to_import,
-  PatchContainer& patches_of_tm1,
-  PatchContainer& patches_of_tm2,
+  PatchContainer1& patches_of_tm1,
+  PatchContainer2& patches_of_tm2,
   bool reverse_patch_orientation_tm2,
   const IntersectionPolylines& polylines,
-  const VertexPointMap& vpm1,
-  const VertexPointMap& vpm2,
+  const VertexPointMap1& vpm1,
+  const VertexPointMap2& vpm2,
         EdgeMarkMapIn1&,
   const EdgeMarkMapIn2& edge_mark_map2,
   const EdgeMarkMapOut& edge_mark_map_out1,
@@ -1416,8 +1620,10 @@ remove_patches(TriangleMesh& tm,
 }
 
 template <class TriangleMesh,
-          class PatchContainer,
-          class VertexPointMap,
+          class PatchContainer1,
+          class PatchContainer2,
+          class VertexPointMap1,
+          class VertexPointMap2,
           class EdgeMarkMapIn1,
           class EdgeMarkMapIn2,
           class EdgeMarkMapOut1,
@@ -1427,12 +1633,12 @@ void compute_inplace_operation(
   const TriangleMesh& /*tm2*/,
   const boost::dynamic_bitset<>& patches_of_tm1_to_keep,
   const boost::dynamic_bitset<>& patches_of_tm2_to_import,
-  PatchContainer& patches_of_tm1,
-  PatchContainer& patches_of_tm2,
+  PatchContainer1& patches_of_tm1,
+  PatchContainer2& patches_of_tm2,
   bool reverse_patch_orientation_tm1,
   bool reverse_patch_orientation_tm2,
-  const VertexPointMap& vpm1,
-  const VertexPointMap& vpm2,
+  const VertexPointMap1& vpm1,
+  const VertexPointMap2& vpm2,
         EdgeMarkMapIn1& edge_mark_map_in1,
   const EdgeMarkMapIn2& edge_mark_map_in2,
         EdgeMarkMapOut1& edge_mark_map_out1,
@@ -1485,14 +1691,15 @@ void compute_inplace_operation(
 
 template <class TriangleMesh,
           class IntersectionPolylines,
-          class PatchContainer,
+          class PatchContainer1,
+          class PatchContainer2,
           class EdgeMap>
 void compute_border_edge_map(
   const TriangleMesh& tm1,
   const TriangleMesh& tm2,
   const IntersectionPolylines& polylines,
-  PatchContainer& patches_of_tm1,
-  PatchContainer& patches_of_tm2,
+  PatchContainer1& patches_of_tm1,
+  PatchContainer2& patches_of_tm2,
   EdgeMap& tm2_edge_to_tm1_edge)
 {
   typedef boost::graph_traits<TriangleMesh> GT;
@@ -1520,9 +1727,11 @@ void compute_border_edge_map(
 
 
 template <class TriangleMesh,
-          class PatchContainer,
+          class PatchContainer1,
+          class PatchContainer2,
           class IntersectionPolylines,
-          class VertexPointMap,
+          class VertexPointMap1,
+          class VertexPointMap2,
           class EdgeMarkMapIn1,
           class EdgeMarkMapIn2,
           class EdgeMarkMapOut1,
@@ -1532,12 +1741,12 @@ void compute_inplace_operation(
   const TriangleMesh& tm2,
   const boost::dynamic_bitset<>& patches_of_tm1_to_keep,
   const boost::dynamic_bitset<>& patches_of_tm2_to_import,
-  PatchContainer& patches_of_tm1,
-  PatchContainer& patches_of_tm2,
+  PatchContainer1& patches_of_tm1,
+  PatchContainer2& patches_of_tm2,
   bool reverse_patch_orientation_tm1,
   bool reverse_patch_orientation_tm2,
-  const VertexPointMap& vpm1,
-  const VertexPointMap& vpm2,
+  const VertexPointMap1& vpm1,
+  const VertexPointMap2& vpm2,
   const EdgeMarkMapIn1& edge_mark_map_in1,
   const EdgeMarkMapIn2& edge_mark_map_in2,
   const EdgeMarkMapOut1& edge_mark_map_out1,
@@ -1631,9 +1840,22 @@ void remove_unused_polylines(
     halfedge_descriptor h = halfedge(v, tm), start=GT::null_halfedge();
 
     do{
+
+      halfedge_descriptor tmp_start = h;
       while ( !is_border(h, tm) || is_border(opposite(h, tm), tm) )
+      {
         h = opposite(next(h, tm), tm);
+        if (tmp_start==h) break;
+      }
+      if( !is_border(h, tm) )
+      {
+        // nothing to do: the vertex has already been updated and is now in the middle of a patch kept.
+        // This function can be called after the stitching of the patches kept, the vertex halfedge
+        // can have been updated and no border halfedge might be found
+        break;
+      }
       halfedge_descriptor in = h;
+
       if (start==GT::null_halfedge())
         start=in;
       else

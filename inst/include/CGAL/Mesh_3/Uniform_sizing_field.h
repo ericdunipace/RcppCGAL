@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/Uniform_sizing_field.h $
-// $Id: Uniform_sizing_field.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Uniform_sizing_field.h $
+// $Id: Uniform_sizing_field.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Stephane Tayeb
 //
 //******************************************************************************
-// File Description : 
+// File Description :
 //******************************************************************************
 
 #ifndef CGAL_MESH_3_UNIFORM_SIZING_FIELD_H
@@ -23,28 +23,28 @@
 namespace CGAL {
 
 namespace Mesh_3 {
-  
+
 template <typename Tr>
 class Uniform_sizing_field
 {
   typedef typename Tr::Geom_traits    Gt;
   typedef typename Tr::Weighted_point Weighted_point;
   typedef typename Gt::FT             FT;
-  
+
 public:
-  // Vertices of mesh triangulation do not need to be updated 
+  // Vertices of mesh triangulation do not need to be updated
   static const bool is_vertex_update_needed = false;
-  
+
 public:
   Uniform_sizing_field(const Tr&) {}
   void fill(const std::map<Weighted_point,FT>&) {}
-  
+
   FT operator()(const Weighted_point&) const { return FT(1); }
   template <typename Handle>
   FT operator()(const Weighted_point&, const Handle&) const { return FT(1); }
 };
-  
-  
+
+
 } // end namespace Mesh_3
 
 

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_2/include/CGAL/Nef_polynomial_fwd.h $
-// $Id: Nef_polynomial_fwd.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_2/include/CGAL/Nef_polynomial_fwd.h $
+// $Id: Nef_polynomial_fwd.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri, Stefan Schirra, Sylvain Pion
 
@@ -19,7 +19,7 @@
 
 namespace CGAL {
 
-namespace Nef { 
+namespace Nef {
 template <typename> class Polynomial;
 
 template <typename ET> double to_double(const Polynomial<ET> &);

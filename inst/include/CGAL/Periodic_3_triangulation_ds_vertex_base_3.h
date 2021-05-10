@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_ds_vertex_base_3.h $
-// $Id: Periodic_3_triangulation_ds_vertex_base_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_ds_vertex_base_3.h $
+// $Id: Periodic_3_triangulation_ds_vertex_base_3.h 378554e 2020-03-06T16:42:23+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -80,8 +80,8 @@ public:
   // For use by the Compact_container.
   void *   for_compact_container() const
   { return _c.for_compact_container(); }
-  void * & for_compact_container()
-  { return _c.for_compact_container(); }
+  void for_compact_container(void *p)
+  { _c.for_compact_container(p); }
 
 private:
   Cell_handle _c;

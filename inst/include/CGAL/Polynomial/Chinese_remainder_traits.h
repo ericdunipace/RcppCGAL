@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polynomial/include/CGAL/Polynomial/Chinese_remainder_traits.h $
-// $Id: Chinese_remainder_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polynomial/include/CGAL/Polynomial/Chinese_remainder_traits.h $
+// $Id: Chinese_remainder_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,31 +18,31 @@
 
 namespace CGAL {
 
-template <class NT> 
+template <class NT>
 class Chinese_remainder_traits<Polynomial<NT> >{
 public:
     typedef Polynomial<NT> Type;
     typedef Chinese_remainder_traits<NT> CRT_NT;
-   
+
     typedef typename CRT_NT::Scalar_type Scalar_type;
-    
+
     struct Chinese_remainder{
         void operator()(
-                const Scalar_type& m1, const Scalar_type& m2, 
-                const Scalar_type& m, 
-                const Scalar_type& s,  const Scalar_type& t,  
-                const Type& u1, const Type& u2, 
+                const Scalar_type& m1, const Scalar_type& m2,
+                const Scalar_type& m,
+                const Scalar_type& s,  const Scalar_type& t,
+                const Type& u1, const Type& u2,
                 Type& u) const {
-            
+
             typename CRT_NT::Chinese_remainder chinese_remainder_nt;
-            
+
             CGAL_precondition(u1.degree() == u2.degree());
-            
+
             std::vector<NT> coeffs(u1.degree()+1);
             for(int i = 0; i <= u1.degree(); i++){
-                NT c; 
+                NT c;
                 chinese_remainder_nt(m1,m2,m,s,t,u1[i],u2[i],c);
-                coeffs[i] = c;  
+                coeffs[i] = c;
             }
             u = Polynomial<NT>(coeffs.begin(),coeffs.end());
         }
@@ -51,8 +51,8 @@ public:
                 const Scalar_type& m1, const Type& u1,
                 const Scalar_type& m2, const Type& u2,
                 Scalar_type& m, Type& u) const {
-            Scalar_type s,t; 
-            
+            Scalar_type s,t;
+
             CGAL::extended_euclidean_algorithm(m1,m2,s,t);
             m = m1 * m2;
             this->operator()(m1,m2,m,s,t,u1,u2,u);
@@ -61,6 +61,6 @@ public:
 };
 
 
-} // namespace CGAL 
+} // namespace CGAL
 
 #endif // CGAL_POLYNOMIAL_CHINESE_REMAINDER_TRAITS

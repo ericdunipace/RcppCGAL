@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm_initializer_visitor.h $
-// $Id: Arr_polyhedral_sgm_initializer_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm_initializer_visitor.h $
+// $Id: Arr_polyhedral_sgm_initializer_visitor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Efi Fogel          <efif@post.tau.ac.il>
 
@@ -37,7 +37,7 @@ public:
 
   /*! Destructor */
   virtual ~Arr_polyhedral_sgm_initializer_visitor() {}
-  
+
   /*! Pass information from a polyhedron vertex to its dual - a sgm-face */
   virtual void update_dual_vertex(Polyhedron_vertex_const_handle /*src*/,
                                   Sgm_face_handle /*trg*/)

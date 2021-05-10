@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/Sqrt_extension/Fraction_traits.h $
-// $Id: Fraction_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Sqrt_extension/Fraction_traits.h $
+// $Id: Fraction_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -106,10 +106,10 @@ public:
                 decompose(ext.a1(),a1_num,a1_den);
                 common_den=common_factor(a0_den,a1_den);
                 typename CGAL::Coercion_traits<NUM,DEN>::Cast cast;
-                a0_num = cast(a0_num) * 
+                a0_num = cast(a0_num) *
                          cast(CGAL::integral_division(a1_den,common_den));
-                a1_num = cast(a1_num) * 
-                         cast(CGAL::integral_division(a0_den,common_den)); 
+                a1_num = cast(a1_num) *
+                         cast(CGAL::integral_division(a0_den,common_den));
                 den = CGAL::integral_division(a0_den,common_den)*a1_den;
                 num = Numerator_type(a0_num,a1_num,ext.root());
             }else{

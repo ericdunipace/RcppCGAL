@@ -4,13 +4,13 @@
 // This file is part of CGAL (www.cgal.org).
 //
 // Partially supported by the IST Programme of the EU as a Shared-cost
-// RTD (FET Open) Project under Contract No  IST-2000-26473 
-// (ECG - Effective Computational Geometry for Curves and Surfaces) 
-// and a STREP (FET Open) Project under Contract No  IST-006413 
+// RTD (FET Open) Project under Contract No  IST-2000-26473
+// (ECG - Effective Computational Geometry for Curves and Surfaces)
+// and a STREP (FET Open) Project under Contract No  IST-006413
 // (ACS -- Algorithms for Complex Shapes)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Algebraic_kernel_for_spheres/include/CGAL/Algebraic_kernel_for_spheres_2_3.h $
-// $Id: Algebraic_kernel_for_spheres_2_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Algebraic_kernel_for_spheres/include/CGAL/Algebraic_kernel_for_spheres_2_3.h $
+// $Id: Algebraic_kernel_for_spheres_2_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -45,7 +45,7 @@ namespace CGAL {
 
     typedef RT_                                        RT;
     typedef typename Root_of_traits< RT >::RootOf_1    FT;
-            
+
     typedef CGAL::Polynomials_for_line_3<FT>           Polynomials_for_line_3;
     typedef CGAL::Polynomial_for_spheres_2_3<FT>       Polynomial_for_spheres_2_3;
     typedef CGAL::Polynomial_1_3<FT>                   Polynomial_1_3;
@@ -101,16 +101,16 @@ namespace CGAL {
 
     Compare_x compare_x_object() const
     { return Compare_x(); }
-    
+
     Compare_y compare_y_object() const
     { return Compare_y(); }
 
     Compare_z compare_z_object() const
     { return Compare_z(); }
-    
+
     Compare_xy compare_xy_object() const
     { return Compare_xy(); }
-    
+
     Compare_xyz compare_xyz_object() const
     { return Compare_xyz(); }
 

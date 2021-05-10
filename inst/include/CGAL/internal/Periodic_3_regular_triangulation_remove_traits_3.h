@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_triangulation_3/include/CGAL/internal/Periodic_3_regular_triangulation_remove_traits_3.h $
-// $Id: Periodic_3_regular_triangulation_remove_traits_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/internal/Periodic_3_regular_triangulation_remove_traits_3.h $
+// $Id: Periodic_3_regular_triangulation_remove_traits_3.h 2e8a59d 2020-07-21T15:25:54+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -49,7 +49,15 @@ public:
 
   using Base::operator(); // for K::Weighted_point_3 to Point_3
 
-  Point_3 operator()(const Weighted_point_3& wp) {
+  template<typename F>
+  struct result : Base::template result<F> {};
+
+  template<typename F>
+  struct result<F(Weighted_point_3)> {
+    typedef Point_3 type;
+  };
+
+  Point_3 operator()(const Weighted_point_3& wp) const {
     return std::make_pair(operator()(wp.first), wp.second /* offset */);
   }
 };

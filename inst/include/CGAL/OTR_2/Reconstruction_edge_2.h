@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Reconstruction_edge_2.h $
-// $Id: Reconstruction_edge_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Reconstruction_edge_2.h $
+// $Id: Reconstruction_edge_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando de Goes, Pierre Alliez, Ivo Vigan, Clément Jamin
@@ -30,14 +30,14 @@ protected:
   FT m_total_weight;
 
 public:
-  Reconstruction_edge_2() 
+  Reconstruction_edge_2()
   : m_edge(Face_handle(), 0),
     m_before_cost(0),
     m_after_cost(0),
     m_total_weight(0)
   {}
 
-  Reconstruction_edge_2(const Reconstruction_edge_2& pedge) 
+  Reconstruction_edge_2(const Reconstruction_edge_2& pedge)
   : m_edge(pedge.edge()),
     m_source(pedge.source()),
     m_target(pedge.target()),
@@ -61,7 +61,7 @@ public:
     m_after_cost(priority),
     m_total_weight (0)
   {
-    get_vertices(); 
+    get_vertices();
   }
 
   Reconstruction_edge_2(Vertex_handle source, Vertex_handle target)
@@ -91,7 +91,7 @@ public:
       && m_target->id() == pedge.target()->id());
   }
 
-  bool operator< (const Reconstruction_edge_2& pedge) const 
+  bool operator< (const Reconstruction_edge_2& pedge) const
   {
     if (m_source->id() < pedge.source()->id())
       return true;

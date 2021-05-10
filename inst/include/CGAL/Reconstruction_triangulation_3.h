@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Poisson_surface_reconstruction_3/include/CGAL/Reconstruction_triangulation_3.h $
-// $Id: Reconstruction_triangulation_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Poisson_surface_reconstruction_3/include/CGAL/Reconstruction_triangulation_3.h $
+// $Id: Reconstruction_triangulation_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -342,7 +342,7 @@ public:
     Vertex_handle v = Base::insert(p, lt, ch, li, lj);
     v->type() = static_cast<unsigned char>(type);
     return v;
-    
+
   }
 
   /// Insert the [first, beyond) range of points in the triangulation using a spatial sort.
@@ -392,14 +392,14 @@ public:
 
     fractions.clear();
     fractions.push_back(1.0);
-    
+
     double m = static_cast<double>(n);
-    
+
     while(m > 500){
       m /= 2;
       fractions.push_front(m/n);
     }
-    
+
     insert_fraction(visitor);
     return 0;
   }
@@ -455,7 +455,7 @@ public:
   template <class CellIt>
   Vertex_handle
   insert_in_hole(const Point_with_normal& p, CellIt cell_begin, CellIt cell_end,
-	         Cell_handle begin, int i,
+                 Cell_handle begin, int i,
                  Point_type type = STEINER)
   {
       Vertex_handle v = Base::insert_in_hole(p, cell_begin, cell_end, begin, i);
@@ -491,7 +491,7 @@ public:
   {
     constrained_vertex = v;
   }
-  
+
 
 }; // end of Reconstruction_triangulation_3
 

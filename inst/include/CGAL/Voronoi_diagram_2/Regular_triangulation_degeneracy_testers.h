@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Regular_triangulation_degeneracy_testers.h $
-// $Id: Regular_triangulation_degeneracy_testers.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Regular_triangulation_degeneracy_testers.h $
+// $Id: Regular_triangulation_degeneracy_testers.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -51,7 +51,7 @@ class Regular_triangulation_edge_tester_2
 
  public:
   bool operator()(const Delaunay_graph& dual,
-		  const Face_handle& f, int i) const
+                  const Face_handle& f, int i) const
   {
     if ( dual.dimension() == 1 ) { return false; }
 
@@ -81,17 +81,17 @@ class Regular_triangulation_edge_tester_2
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const All_edges_iterator& eit) const {
+                  const All_edges_iterator& eit) const {
     return operator()(dual, *eit);
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const Finite_edges_iterator& eit) const {
+                  const Finite_edges_iterator& eit) const {
     return operator()(dual, *eit);
   }
 
   bool operator()(const Delaunay_graph& dual,
-		  const Edge_circulator& ec) const {
+                  const Edge_circulator& ec) const {
     return operator()(dual, *ec);
   }
 };

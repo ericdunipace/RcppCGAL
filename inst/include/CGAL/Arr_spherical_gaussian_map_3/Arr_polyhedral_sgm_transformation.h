@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm_transformation.h $
-// $Id: Arr_polyhedral_sgm_transformation.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm_transformation.h $
+// $Id: Arr_polyhedral_sgm_transformation.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 // Author(s)     : Naama mayer         <naamamay@post.tau.ac.il>
 
 
@@ -28,7 +28,7 @@ public:
   typedef typename Arrangement::Face_handle   Face_handle;
 
   void rotate_face(Face_handle f, const Transformation_3 & aff)
-  {			
+  {
     //Transform all the vertices of the original polyhedron.
     f->set_point(aff.transform(f->point()));
   }

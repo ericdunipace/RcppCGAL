@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/VoronoiGraphicsItem.h $
-// $Id: VoronoiGraphicsItem.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/VoronoiGraphicsItem.h $
+// $Id: VoronoiGraphicsItem.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -43,13 +43,13 @@ public:
   VoronoiGraphicsItem(DT  * dt_);
 
 
-  QRectF 
+  QRectF
   boundingRect() const;
-  
-  void 
+
+  void
   paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  
-  void 
+
+  void
   modelChanged();
 
   const QPen& edgesPen() const
@@ -77,7 +77,7 @@ VoronoiGraphicsItem<DT>::VoronoiGraphicsItem(DT * dt_)
 }
 
 template <typename DT>
-QRectF 
+QRectF
 VoronoiGraphicsItem<DT>::boundingRect() const
 {
   QRectF rect = CGAL::Qt::viewportsBbox(scene());
@@ -86,12 +86,12 @@ VoronoiGraphicsItem<DT>::boundingRect() const
 
 
 template <typename DT>
-void 
+void
 VoronoiGraphicsItem<DT>::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * /*w*/)
 {
   QRectF rect = option->exposedRect;
   PainterOstream<typename DT::Geom_traits> pos(painter, rect);
-  
+
   painter->setPen(edgesPen());
   for(typename DT::Finite_edges_iterator eit = dt->finite_edges_begin();
       eit != dt->finite_edges_end();
@@ -106,13 +106,13 @@ VoronoiGraphicsItem<DT>::paint(QPainter *painter, const QStyleOptionGraphicsItem
       pos << r;
     }else if(CGAL::assign(l,o)) {
       pos << l;
-    } 
+    }
   }
 }
 
 
 template <typename T>
-void 
+void
 VoronoiGraphicsItem<T>::modelChanged()
 {
   update();

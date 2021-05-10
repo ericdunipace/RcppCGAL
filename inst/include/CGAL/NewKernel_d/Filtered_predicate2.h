@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/NewKernel_d/include/CGAL/NewKernel_d/Filtered_predicate2.h $
-// $Id: Filtered_predicate2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/NewKernel_d/include/CGAL/NewKernel_d/Filtered_predicate2.h $
+// $Id: Filtered_predicate2.h 822bc55 2020-03-27T08:28:48+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -40,7 +40,7 @@ namespace CGAL {
 // - Some caching could be done at the Point_2 level.
 
 
-template <class EP, class AP, class C2E, class C2A, bool Protection = true>
+template <class K, class EP, class AP, class C2E, class C2A, bool Protection = true>
 class Filtered_predicate2
 {
 //TODO: pack (at least use a tuple)
@@ -65,7 +65,6 @@ public:
   Filtered_predicate2()
   {}
 
-  template <class K>
   Filtered_predicate2(const K& k)
     : ep(k.exact_kernel()), ap(k.approximate_kernel()), c2e(k,k.exact_kernel()), c2a(k,k.approximate_kernel())
   {}
@@ -79,12 +78,12 @@ public:
     {
       Protect_FPU_rounding<Protection> p;
       try
-	{
-	  // No forward here, the arguments may still be needed
-	  auto res = ap(c2a(args)...);
-	  if (is_certain(res))
-	    return get_certain(res);
-	}
+        {
+          // No forward here, the arguments may still be needed
+          auto res = ap(c2a(args)...);
+          if (is_certain(res))
+            return get_certain(res);
+        }
       catch (Uncertain_conversion_exception&) {}
     }
     CGAL_BRANCH_PROFILER_BRANCH(tmp);

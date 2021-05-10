@@ -11,7 +11,7 @@
  *
  *      Here is an example of how to use it:
  *
- *		Timer timer;
+ *                Timer timer;
  *
  *              timer.start();
  *              .. do some tasks for timing ..
@@ -20,14 +20,14 @@
  *              long clock = timer.getClocks();     // get CPU clocks
  *              long seconds = time.getSeconds();   // get seconds
  *
- * Written by 
+ * Written by
  *       Zilin Du <zilin@cs.nyu.edu>
  *
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/Timer.h $
- * $Id: Timer.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/Timer.h $
+ * $Id: Timer.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -37,7 +37,7 @@
 #include <CGAL/CORE/Impl.h>
 #include <ctime>
 
-namespace CORE { 
+namespace CORE {
 
 class Timer {
 private:

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/CORE_BigRat.h $
-// $Id: CORE_BigRat.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/CORE_BigRat.h $
+// $Id: CORE_BigRat.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -203,7 +203,7 @@ public:
     }
 };
 
-// Benchmark_rep specialization 
+// Benchmark_rep specialization
 template<>
 class Benchmark_rep< CORE::BigRat > {
     const CORE::BigRat& t;
@@ -211,11 +211,11 @@ public:
     //! initialize with a const reference to \a t.
     Benchmark_rep( const CORE::BigRat& tt) : t(tt) {}
     //! perform the output, calls \c operator\<\< by default.
-    std::ostream& operator()( std::ostream& out) const { 
+    std::ostream& operator()( std::ostream& out) const {
             out << "Rational(" << numerator(t) << "," << denominator(t) << ")";
             return out;
     }
-    
+
     static std::string get_benchmark_name() {
         return "Rational";
     }

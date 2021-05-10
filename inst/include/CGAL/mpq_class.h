@@ -1,14 +1,14 @@
-// Copyright (c) 2002,2003  
+// Copyright (c) 2002,2003
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/mpq_class.h $
-// $Id: mpq_class.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/mpq_class.h $
+// $Id: mpq_class.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -203,33 +203,33 @@ class Real_embeddable_traits< mpq_class >
         std::pair<double, double>
         operator()( const mpq_class& x ) const {
 #if MPFR_VERSION_MAJOR >= 3
-	  mpfr_exp_t emin = mpfr_get_emin();
-	  mpfr_set_emin(-1073);
-	  MPFR_DECL_INIT (y, 53); /* Assume IEEE-754 */
-	  int r = mpfr_set_q (y, x.get_mpq_t(), MPFR_RNDA);
-	  r = mpfr_subnormalize (y, r, MPFR_RNDA); /* Round subnormals */
-	  double i = mpfr_get_d (y, MPFR_RNDA); /* EXACT but can overflow */
-	  mpfr_set_emin(emin); /* Restore old value, users may care */
-	  // With mpfr_set_emax(1024) we could drop the is_finite test
-	  if (r == 0 && is_finite (i))
-	    return std::pair<double, double>(i, i);
-	  else
-	    {
-	      double s = nextafter (i, 0);
-	      if (i < 0)
-		return std::pair<double, double>(i, s);
-	      else
-		return std::pair<double, double>(s, i);
-	    }
+          mpfr_exp_t emin = mpfr_get_emin();
+          mpfr_set_emin(-1073);
+          MPFR_DECL_INIT (y, 53); /* Assume IEEE-754 */
+          int r = mpfr_set_q (y, x.get_mpq_t(), MPFR_RNDA);
+          r = mpfr_subnormalize (y, r, MPFR_RNDA); /* Round subnormals */
+          double i = mpfr_get_d (y, MPFR_RNDA); /* EXACT but can overflow */
+          mpfr_set_emin(emin); /* Restore old value, users may care */
+          // With mpfr_set_emax(1024) we could drop the is_finite test
+          if (r == 0 && is_finite (i))
+            return std::pair<double, double>(i, i);
+          else
+            {
+              double s = nextafter (i, 0);
+              if (i < 0)
+                return std::pair<double, double>(i, s);
+              else
+                return std::pair<double, double>(s, i);
+            }
 #else
-	  mpfr_t y;
-	  mpfr_init2 (y, 53); /* Assume IEEE-754 */
-	  mpfr_set_q (y, x.get_mpq_t(), GMP_RNDD);
-	  double i = mpfr_get_d (y, GMP_RNDD); /* EXACT but can overflow */
-	  mpfr_set_q (y, x.get_mpq_t(), GMP_RNDU);
-	  double s = mpfr_get_d (y, GMP_RNDU); /* EXACT but can overflow */
-	  mpfr_clear (y);
-	  return std::pair<double, double>(i, s);
+          mpfr_t y;
+          mpfr_init2 (y, 53); /* Assume IEEE-754 */
+          mpfr_set_q (y, x.get_mpq_t(), GMP_RNDD);
+          double i = mpfr_get_d (y, GMP_RNDD); /* EXACT but can overflow */
+          mpfr_set_q (y, x.get_mpq_t(), GMP_RNDU);
+          double s = mpfr_get_d (y, GMP_RNDU); /* EXACT but can overflow */
+          mpfr_clear (y);
+          return std::pair<double, double>(i, s);
 #endif
         }
     };
@@ -242,7 +242,7 @@ class Real_embeddable_traits< mpq_class >
 #include <CGAL/Fraction_traits.h>
 
 namespace CGAL {
-  
+
 /*! \ingroup NiX_Fraction_traits_spec
  *  \brief Specialization of Fraction_traits for mpq_class
  */

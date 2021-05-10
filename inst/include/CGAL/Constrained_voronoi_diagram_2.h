@@ -4,10 +4,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_2/include/CGAL/Constrained_voronoi_diagram_2.h $
-// $Id: Constrained_voronoi_diagram_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_2/include/CGAL/Constrained_voronoi_diagram_2.h $
+// $Id: Constrained_voronoi_diagram_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 // Author(s) : Jane Tournois, Raul Gallegos, Pierre Alliez
 //
 
@@ -45,7 +45,7 @@ private:
   std::vector<Segment> m_segments;
   std::vector<Ray>     m_rays;
   bool m_is_valid;
-  
+
 public:
   Cvd_cell_2(Vertex_handle v)
     : m_vertex(v)
@@ -64,7 +64,7 @@ public:
   bool is_valid() const { return m_is_valid; }
   bool& is_valid()      { return m_is_valid; }
 
-  bool is_infinite() const 
+  bool is_infinite() const
   {
     return !m_rays.empty();
   }
@@ -155,7 +155,7 @@ public:
   typedef typename Cvd_cell::Construction_dispatcher Construction_dispatcher;
 
 public:
-  // typedefs for basic primitives 
+  // typedefs for basic primitives
   typedef typename Cdt::Geom_traits       Geom_traits;
   typedef typename Cdt::Intersection_tag Intersection_tag;
 
@@ -194,7 +194,7 @@ public:
 
 public:
   // blind = false IFF each face sees its circumcenter
-  void tag_all_faces_blind(const bool blind) 
+  void tag_all_faces_blind(const bool blind)
   {
     for(All_faces_iterator f = m_cdt.all_faces_begin();
          f != m_cdt.all_faces_end();
@@ -228,7 +228,7 @@ public:
 private:
   // test face for blindness with respect to the edge constraint
   void tag_face_blind(Face_handle& f, const Edge& constraint)
-  {  
+  {
     if(segment_hides_circumcenter(m_cdt.segment(constraint),
                                   m_cdt.triangle(f)))
     {
@@ -270,8 +270,8 @@ private:
     CGAL_assertion(m_cdt.is_constrained(constraint));
     Face_handle seed = constraint.first;
 
-    if(!m_cdt.is_infinite(seed) 
-       && !seed->is_blind() 
+    if(!m_cdt.is_infinite(seed)
+       && !seed->is_blind()
        && !m_cdt.triangle(seed).is_degenerate() )
        //to avoid flat triangles outside the domain
     {
@@ -299,7 +299,7 @@ private:
       Edge edge_i = Edge(f, i);
       if(!m_cdt.is_constrained(edge_i) &&
           !fi->is_blind() &&
-          !m_cdt.is_infinite(fi)) 
+          !m_cdt.is_infinite(fi))
         faces.push(fi);
     }
   }
@@ -312,7 +312,7 @@ public:
   Cvd_cell cvd_cell(Vertex_handle v) const
   {
     Cvd_cell cell(v);
-    
+
     typename Cvd_cell::Construction_dispatcher oit =
       CGAL::dispatch_output<typename Cvd_cell::Segment,
                             typename Cvd_cell::Ray>(
@@ -343,7 +343,7 @@ private:
   OutputIterator finite_cvd_cell(Vertex_handle v, OutputIterator oit) const
   {
     std::vector<Point> polygon;
-    
+
     CGAL_assertion(!m_cdt.is_infinite(v));
     Face_circulator face = m_cdt.incident_faces(v);
     Face_circulator end = face;

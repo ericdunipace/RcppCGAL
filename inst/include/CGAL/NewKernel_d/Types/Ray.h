@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/NewKernel_d/include/CGAL/NewKernel_d/Types/Ray.h $
-// $Id: Ray.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/NewKernel_d/include/CGAL/NewKernel_d/Types/Ray.h $
+// $Id: Ray.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -16,28 +16,28 @@
 #include <CGAL/Kernel/mpl.h>
 namespace CGAL {
 template <class R_> class Ray {
-	typedef typename Get_type<R_, FT_tag>::type FT_;
-	typedef typename Get_type<R_, Point_tag>::type	Point_;
-	typedef typename Get_type<R_, Vector_tag>::type	Vector_;
-	typedef std::pair<Point_,Vector_> Data_;
-	Data_ data;
-	public:
-	Ray(){}
-	Ray(Point_ const&a, Vector_ const&b): data(a,b) {}
-	Point_ source()const{
-	  return data.first;
-	}
-	// FIXME: return a R_::Direction?
-	Vector_ direction()const{
-	  return data.second;
-	}
+        typedef typename Get_type<R_, FT_tag>::type FT_;
+        typedef typename Get_type<R_, Point_tag>::type        Point_;
+        typedef typename Get_type<R_, Vector_tag>::type        Vector_;
+        typedef std::pair<Point_,Vector_> Data_;
+        Data_ data;
+        public:
+        Ray(){}
+        Ray(Point_ const&a, Vector_ const&b): data(a,b) {}
+        Point_ source()const{
+          return data.first;
+        }
+        // FIXME: return a R_::Direction?
+        Vector_ direction()const{
+          return data.second;
+        }
 };
 namespace CartesianDKernelFunctors {
   template <class R_> struct Construct_ray : Store_kernel<R_> {
     CGAL_FUNCTOR_INIT_STORE(Construct_ray)
-    typedef typename Get_type<R_, Ray_tag>::type	result_type;
-    typedef typename Get_type<R_, Point_tag>::type	Point;
-    typedef typename Get_type<R_, Vector_tag>::type	Vector;
+    typedef typename Get_type<R_, Ray_tag>::type        result_type;
+    typedef typename Get_type<R_, Point_tag>::type        Point;
+    typedef typename Get_type<R_, Vector_tag>::type        Vector;
     typedef typename Get_functor<R_, Difference_of_points_tag>::type Dp_;
     //typedef typename Get_functor<R_, Translated_point_tag>::type Tp_;
     //typedef typename Get_functor<R_, Scaled_vector_tag>::type Sv_;

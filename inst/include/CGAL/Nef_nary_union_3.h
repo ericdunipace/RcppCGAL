@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_3/include/CGAL/Nef_nary_union_3.h $
-// $Id: Nef_nary_union_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_3/include/CGAL/Nef_nary_union_3.h $
+// $Id: Nef_nary_union_3.h a86712d 2020-06-07T15:25:18+02:00 Thomas Krijnen
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     :     Peter Hachenberger  <hachenberger@mpi-sb.mpg.de>
 
@@ -31,7 +31,7 @@ class Nef_nary_union_3 {
 
  public:
   Nef_nary_union_3() : inserted(0) {}
-  
+
   void unite() {
     pit i1(queue.begin()), i2(i1);
     ++i2;
@@ -52,7 +52,8 @@ class Nef_nary_union_3 {
   }
 
   Polyhedron get_union() {
-
+    if (queue.empty())
+      return empty;
     while(queue.size() > 1)
       unite();
     inserted = 0;

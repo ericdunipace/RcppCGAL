@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Bounding_volumes/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_pivot_impl.h $
-// $Id: Min_sphere_of_spheres_d_pivot_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Bounding_volumes/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_pivot_impl.h $
+// $Id: Min_sphere_of_spheres_d_pivot_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Kaspar Fischer
 
@@ -35,9 +35,9 @@ namespace CGAL_MINIBALL_NAMESPACE {
 
     template<class Traits>
     bool Support_set<Traits>::pivot(std::vector<const typename
-				    Traits::Sphere *>& l,
-				    int& e,
-				    const int d) {
+                                    Traits::Sphere *>& l,
+                                    int& e,
+                                    const int d) {
 
       // remember old radius:
       const Result old = radius();

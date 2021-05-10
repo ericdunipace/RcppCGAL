@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_point_location_result.h $
-// $Id: Arr_point_location_result.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location_result.h $
+// $Id: Arr_point_location_result.h 0626eb0 2020-06-11T12:32:33+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Efi Fogel   <efif@post.tau.ac.il>
@@ -78,32 +78,34 @@ struct Arr_point_location_result {
   // lead to conversion overhead, and so we rather go for the real type.
   // Overloads for empty returns are also provided.
 #if CGAL_ARR_POINT_LOCATION_VERSION < 2
-  template<typename T>
+  template <typename T>
   static
-  inline CGAL::Object make_result(T t) { return CGAL::make_object(t); }
+  inline Type make_result(T t) { return CGAL::make_object(t); }
 
   static
   inline CGAL::Object empty_optional_result() { return CGAL::Object(); }
 
-  template<typename T>
-  const T* assign(CGAL::Object obj) const { return CGAL::object_cast<T>(&obj); }
+  template <typename T>
+  static
+  inline const T* assign(const Type* obj) { return CGAL::object_cast<T>(obj); }
 #else
-  template<typename T>
+  template <typename T>
   static
   inline Type make_result(T t) { return Type(t); }
 
-  inline
   static
-  boost::optional<Type> empty_optional_result() { return boost::optional<Type>(); }
+  inline boost::optional<Type> empty_optional_result()
+  { return boost::optional<Type>(); }
 
-  template<typename T>
-  const T* assign(const Type& obj) const { return boost::get<T>(&obj); }
+  template <typename T>
+  static
+  inline const T* assign(const Type* obj) { return boost::get<T>(obj); }
 #endif // CGAL_ARR_POINT_LOCATION_VERSION < 2
 
   //this one is only to remove warnings in functions
   static
   inline Type default_result(){
-    CGAL_error_msg("This functions should never have been called!");
+    CGAL_error_msg("This functions should have never been called!");
     return Type();
   }
 };

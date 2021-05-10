@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Traits_base_2.h $
-// $Id: Traits_base_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Traits_base_2.h $
+// $Id: Traits_base_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Panagiotis Cheilaris, Sandeep Kumar Dey, Evanthia Papadopoulou
 //philaris@gmail.com, sandeep.kr.dey@gmail.com, evanthia.papadopoulou@usi.ch
@@ -39,7 +39,7 @@ public:
 
   // BASIC TYPES
   //------------
-  
+
   typedef Segment_Delaunay_graph_traits_base_2<R, MTag, ITag> Base;
 
   typedef typename Base::Kernel Kernel;
@@ -87,7 +87,7 @@ public:
   // PREDICATES
   //-----------
 
-  // used by triangulation 
+  // used by triangulation
   //typedef
   //CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_NS::Orientation_Linf_C2<K>
   //Orientation_2;
@@ -120,7 +120,7 @@ public:
   // CONSTRUCTIONS
   //--------------
   Construct_svd_vertex_2
-  construct_svd_vertex_2_object() const { 
+  construct_svd_vertex_2_object() const {
     return Construct_svd_vertex_2();
   }
 

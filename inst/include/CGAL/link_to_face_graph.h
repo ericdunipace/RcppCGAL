@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_3/include/CGAL/link_to_face_graph.h $
-// $Id: link_to_face_graph.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/link_to_face_graph.h $
+// $Id: link_to_face_graph.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri
 //
@@ -30,7 +30,7 @@ template<class Triangulation_3,class FG>
 typename boost::graph_traits<FG>::vertex_descriptor
 link_to_face_graph(const Triangulation_3& t,
                    typename Triangulation_3::Vertex_handle vh,
-                   FG& fg, 
+                   FG& fg,
                    bool no_infinite_faces = true)
 {
   typedef typename Triangulation_3::Cell_handle Cell_handle;
@@ -59,7 +59,7 @@ link_to_face_graph(const Triangulation_3& t,
       if(no_infinite_faces && t.is_infinite(vhj)){
         infinite_face = true;
       } else {
-        std::pair<typename Vertex_map::iterator,bool> res 
+        std::pair<typename Vertex_map::iterator,bool> res
           = vertex_map.insert(std::make_pair(vhj,nullvertex));
         if(res.second){
           res.first->second = add_vertex(fg);

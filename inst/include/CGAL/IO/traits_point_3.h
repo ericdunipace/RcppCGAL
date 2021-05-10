@@ -6,8 +6,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Stream_support/include/CGAL/IO/traits_point_3.h $
-// $Id: traits_point_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Stream_support/include/CGAL/IO/traits_point_3.h $
+// $Id: traits_point_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -43,12 +43,12 @@ struct access<CGAL::Point_3<K> , 0>
   {
     return CGAL::to_double(p.x());
   }
-  
+
   static void set(CGAL::Point_3<K> & p, typename K::FT c)
   {
     p = CGAL::Point_3<K> (c, p.y(), p.z());
   }
-  
+
 };
 
 template< typename K >
@@ -58,12 +58,12 @@ struct access<CGAL::Point_3<K> , 1>
   {
     return CGAL::to_double(p.y());
   }
-  
+
   static void set(CGAL::Point_3<K> & p, typename K::FT c)
   {
     p = CGAL::Point_3<K> (p.x(), c, p.z());
   }
-  
+
 };
 template< typename K >
 struct access<CGAL::Point_3<K> , 2>
@@ -72,12 +72,12 @@ struct access<CGAL::Point_3<K> , 2>
   {
     return CGAL::to_double(p.z());
   }
-  
+
   static void set(CGAL::Point_3<K> & p, typename K::FT c)
   {
     p = CGAL::Point_3<K> (p.x(), p.y(), c);
   }
-  
+
 };
 
 }}}//end namespaces

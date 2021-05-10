@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Solver_interface/include/CGAL/Default_diagonalize_traits.h $
-// $Id: Default_diagonalize_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Solver_interface/include/CGAL/Default_diagonalize_traits.h $
+// $Id: Default_diagonalize_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -44,7 +44,7 @@ public:
   typedef std::array<FT, dim>                         Vector;
   typedef std::array<FT, dim*dim>                     Matrix;
   typedef std::array<FT, (dim * (dim+1) / 2)>         Covariance_matrix;
-  
+
   /// Fill `eigenvalues` with the eigenvalues of the covariance matrix represented by `cov`.
   /// Eigenvalues are sorted by increasing order.
   /// \return `true` if the operation was successful and `false` otherwise.

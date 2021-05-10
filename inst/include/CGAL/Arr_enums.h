@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_enums.h $
-// $Id: Arr_enums.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_enums.h $
+// $Id: Arr_enums.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s): Ron Wein          <wein@post.tau.ac.il>
 //            Efi Fogel         <efif@post.tau.ac.il>
@@ -42,7 +42,7 @@ inline
 OutputStream& operator<<(
         OutputStream& os,
         const Arr_curve_end& ce) {
-    
+
     switch(ce) {
     case CGAL::ARR_MIN_END:
         os << "ARR_MIN_END";
@@ -74,7 +74,7 @@ inline
 OutputStream& operator<<(
         OutputStream& os,
         const Arr_halfedge_direction& dir) {
-    
+
     switch(dir) {
     case CGAL::ARR_LEFT_TO_RIGHT:
         os << "ARR_LEFT_TO_RIGHT";
@@ -107,7 +107,7 @@ inline
 OutputStream& operator<<(
         OutputStream& os,
         const Arr_boundary_type& bt) {
-    
+
     switch(bt) {
     case CGAL::ARR_OPEN:
         os << "ARR_OPEN";
@@ -154,7 +154,7 @@ inline
 OutputStream& operator<<(
         OutputStream& os,
         const Arr_parameter_space& ps) {
-  
+
   switch (::CGAL::get_mode(os)) {
   case ::CGAL::IO::PRETTY:
     switch(ps) {
@@ -183,7 +183,7 @@ OutputStream& operator<<(
   default:
     os << static_cast< int >(ps);
   }
-  
+
   return os;
 }
 
@@ -200,9 +200,9 @@ InputStream& operator>>(
   int i;
   is >> i;
   ps = static_cast< Arr_parameter_space >(i);
-  
+
   return is;
-  
+
 }
 
 

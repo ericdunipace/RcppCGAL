@@ -1,16 +1,16 @@
-// Copyright (c) 1997  
+// Copyright (c) 1997
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon/include/CGAL/draw_polygon_2.h $
-// $Id: draw_polygon_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon/include/CGAL/draw_polygon_2.h $
+// $Id: draw_polygon_2.h a85cf6e 2021-01-26T09:45:18+01:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
 
@@ -38,20 +38,20 @@ void draw(const P& ap);
 #endif
 
 #ifdef CGAL_USE_BASIC_VIEWER
-
+#include <CGAL/Qt/init_ogl_context.h>
 #include <CGAL/Polygon_2.h>
 #include <CGAL/Random.h>
 
 namespace CGAL
 {
-  
-// Viewer class for Polygon_2 
+
+// Viewer class for Polygon_2
 template<class P2>
 class SimplePolygon2ViewerQt : public Basic_viewer_qt
 {
   typedef Basic_viewer_qt      Base;
   typedef typename P2::Point_2 Point;
- 
+
 public:
   /// Construct the viewer.
   /// @param ap2 the polygon to view
@@ -59,7 +59,7 @@ public:
   SimplePolygon2ViewerQt(QWidget* parent, const P2& ap2,
                          const char* title="Basic Polygon_2 Viewer") :
     // First draw: vertices; edges, faces; multi-color; no inverse normal
-    Base(parent, title, true, true, true, false, false), 
+    Base(parent, title, true, true, true, false, false),
     p2(ap2)
   {
     compute_elements();
@@ -71,9 +71,9 @@ protected:
     clear();
 
     if (p2.is_empty()) return;
-    
+
     Point prev=p2.vertex(p2.size()-1);
-      
+
     CGAL::Color c(75,160,255);
     face_begin(c);
 
@@ -94,7 +94,7 @@ protected:
     // Test key pressed:
     //    const ::Qt::KeyboardModifiers modifiers = e->modifiers();
     //    if ((e->key()==Qt::Key_PageUp) && (modifiers==Qt::NoButton)) { ... }
-    
+
     // Call: * compute_elements() if the model changed, followed by
     //       * redraw() if some viewing parameters changed that implies some
     //                  modifications of the buffers
@@ -119,9 +119,10 @@ void draw(const CGAL::Polygon_2<T, C>& ap2,
 #else
   bool cgal_test_suite=qEnvironmentVariableIsSet("CGAL_TEST_SUITE");
 #endif
-  
+
   if (!cgal_test_suite)
   {
+    CGAL::Qt::init_ogl_context(4,3);
     int argc=1;
     const char* argv[2]={"t2_viewer","\0"};
     QApplication app(argc,const_cast<char**>(argv));

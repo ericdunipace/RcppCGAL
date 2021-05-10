@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/debug.h $
-// $Id: debug.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/debug.h $
+// $Id: debug.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -37,7 +37,7 @@ CGAL_QT_EXPORT void traverse_resources(const QString& name,
                                         int indent = 0);
 
 /**
- * Call this in the end of an OpenGL implementation to check if it returns errors. 
+ * Call this in the end of an OpenGL implementation to check if it returns errors.
  */
 template <typename QtOpenGLFunctions>
 void opengl_check_errors(QtOpenGLFunctions* gl,

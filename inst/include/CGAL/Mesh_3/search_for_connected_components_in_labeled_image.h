@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/search_for_connected_components_in_labeled_image.h $
-// $Id: search_for_connected_components_in_labeled_image.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/search_for_connected_components_in_labeled_image.h $
+// $Id: search_for_connected_components_in_labeled_image.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -32,8 +32,8 @@
 #  include <boost/format.hpp>
 #endif // CGAL_MESH_3_SEARCH_FOR_CONNECTED_COMPONENTS_IN_LABELED_IMAGE_VERBOSE
 template <typename PointsOutputIterator,
-	  typename DomainsOutputIterator,
-	  typename TransformOperator,
+          typename DomainsOutputIterator,
+          typename TransformOperator,
           typename Construct_point,
           typename Image_word_type>
 void
@@ -81,7 +81,7 @@ search_for_connected_components_in_labeled_image(const CGAL::Image_3& image,
         const Label current_label =
           transform(static_evaluate<Image_word_type>(image.image(),
                                                      voxel_index));
-	*dom_it++ = current_label;
+        *dom_it++ = current_label;
         if(current_label == Label()) {
           visited[voxel_index] = true;
           second_pass[voxel_index] = true;
@@ -209,18 +209,18 @@ search_for_connected_components_in_labeled_image(const CGAL::Image_3& image,
             }
             else // end of second pass, return the last visited voxel
             {
-// 	      if(nb_voxels >= 100)
-	      {
-		*it++ = std::make_pair(point(i, j, k),
+//               if(nb_voxels >= 100)
+              {
+                *it++ = std::make_pair(point(i, j, k),
                                        depth+1);
 #if CGAL_MESH_3_SEARCH_FOR_CONNECTED_COMPONENTS_IN_LABELED_IMAGE_VERBOSE > 1
-		std::cerr << boost::format("Found seed %5%, which is voxel "
+                std::cerr << boost::format("Found seed %5%, which is voxel "
                                            "(%1%, %2%, %3%), value=%4%\n")
-		  % i % j % k
+                  % i % j % k
                   % (long)static_evaluate<Image_word_type>(image.image(), i, j, k)
                   % point(i, j, k);
 #endif // CGAL_MESH_3_SEARCH_FOR_CONNECTED_COMPONENTS_IN_LABELED_IMAGE_VERBOSE>1
-	      }
+              }
             }
           } // end if queue.empty()
         } // end while !queue.empty() (with local indices i, j, k)

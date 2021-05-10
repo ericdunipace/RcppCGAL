@@ -1,16 +1,16 @@
-// Copyright (c) 1997  
+// Copyright (c) 1997
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon/include/CGAL/Polygon_2/Polygon_2_impl.h $
-// $Id: Polygon_2_impl.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon/include/CGAL/Polygon_2/Polygon_2_impl.h $
+// $Id: Polygon_2_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Wieger Wesselink <wieger@cs.ruu.nl>
 
@@ -86,7 +86,7 @@ operator>>(std::istream &is, Polygon_2<Traits_P,Container_P>& p)
   int n = 0; // number of vertices
   is >> n;
   typename Traits_P::Point_2 point;
-  
+
   if (is) {
     p.erase(p.vertices_begin(),p.vertices_end());
     for (int i=0; i<n; i++) {

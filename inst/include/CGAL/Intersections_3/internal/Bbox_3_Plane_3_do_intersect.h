@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Plane_3_do_intersect.h $
-// $Id: Bbox_3_Plane_3_do_intersect.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Plane_3_do_intersect.h $
+// $Id: Bbox_3_Plane_3_do_intersect.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,7 +21,7 @@
 // Opcode like
 
 namespace CGAL {
-  
+
 namespace Intersections {
 
 namespace internal {
@@ -34,11 +34,11 @@ namespace internal {
   {
     if(certainly(p.x() > 0)) {
       if(certainly(p.y() > 0)) {
-	if(certainly(p.z() > 0)) { 
+        if(certainly(p.z() > 0)) {
             p_min = typename K::Point_3(bbox.xmin(), bbox.ymin(),bbox.zmin());
             p_max = typename K::Point_3(bbox.xmax(), bbox.ymax(),bbox.zmax());
             return true;
-        } else if(certainly(p.z() <= 0)) {							    
+        } else if(certainly(p.z() <= 0)) {
           p_min = typename K::Point_3(bbox.xmin(), bbox.ymin(),bbox.zmax());
           p_max = typename K::Point_3(bbox.xmax(), bbox.ymax(),bbox.zmin());
           return true;
@@ -57,23 +57,23 @@ namespace internal {
     }
     else if(certainly(p.x() <= 0)) {
       if(certainly(p.y() > 0)) {
-	if(certainly(p.z() > 0)) { 
+        if(certainly(p.z() > 0)) {
           p_min = typename K::Point_3(bbox.xmax(), bbox.ymin(),bbox.zmin());
           p_max = typename K::Point_3(bbox.xmin(), bbox.ymax(),bbox.zmax());
           return true;}
-	else if(certainly(p.z() <= 0)) {
+        else if(certainly(p.z() <= 0)) {
           p_min = typename K::Point_3(bbox.xmax(), bbox.ymin(),bbox.zmax());
           p_max = typename K::Point_3(bbox.xmin(), bbox.ymax(),bbox.zmin());
           return true;
         }
       }
       else if(certainly(p.y() <= 0)) {
-	if(certainly(p.z() > 0)) { 
+        if(certainly(p.z() > 0)) {
           p_min = typename K::Point_3(bbox.xmax(), bbox.ymax(),bbox.zmin());
           p_max = typename K::Point_3(bbox.xmin(), bbox.ymin(),bbox.zmax());
           return true;
         }
-	else if(certainly(p.z() <= 0)) {
+        else if(certainly(p.z() <= 0)) {
           p_min = typename K::Point_3(bbox.xmax(), bbox.ymax(),bbox.zmax());
           p_max = typename K::Point_3(bbox.xmin(), bbox.ymin(),bbox.zmin());
           return true;
@@ -113,7 +113,7 @@ namespace internal {
     if(s != side) return true;
     return false;
   }
-  
+
   template <class K>
   bool do_intersect(const typename K::Plane_3& plane,
                     const Bbox_3& bbox,
@@ -127,7 +127,7 @@ namespace internal {
                     const K&) {
     return do_intersect_plane_box(plane, bbox, K());
   }
-  
+
   template <class K>
   bool do_intersect(const Bbox_3& bbox,
                     const typename K::Plane_3& plane,

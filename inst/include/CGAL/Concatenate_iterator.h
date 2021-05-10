@@ -1,16 +1,16 @@
-// Copyright (c) 2003  
+// Copyright (c) 2003
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/Concatenate_iterator.h $
-// $Id: Concatenate_iterator.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Concatenate_iterator.h $
+// $Id: Concatenate_iterator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@cse.nd.edu>
 
@@ -32,7 +32,7 @@ template <class It1, class It2> class Concatenate_iterator;
 
 template <class It1, class It2>
 bool operator==(const Concatenate_iterator<It1,It2>&,
-		const Concatenate_iterator<It1,It2>&);
+                const Concatenate_iterator<It1,It2>&);
 
 
 template <class It1, class It2>
@@ -93,7 +93,7 @@ public:
     return tmp;
   }
 
-  
+
   reference  operator*()  const
   {
     if ( i1_ == e1_ ) {
@@ -124,7 +124,7 @@ protected:
 template<class It1, class It2>
 inline
 bool operator==(const Concatenate_iterator<It1, It2>& it1,
-		const Concatenate_iterator<It1, It2>& it2)
+                const Concatenate_iterator<It1, It2>& it2)
 {
   return (it1.i1_ == it2.i1_ && it1.i2_ == it2.i2_);
 }
@@ -132,7 +132,7 @@ bool operator==(const Concatenate_iterator<It1, It2>& it1,
 template<class It1, class It2>
 inline
 bool operator!=(const Concatenate_iterator<It1, It2>& it1,
-		const Concatenate_iterator<It1, It2>& it2)
+                const Concatenate_iterator<It1, It2>& it2)
 {
   return !(it1 == it2);
 }

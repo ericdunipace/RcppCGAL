@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation/include/CGAL/Triangulation_face.h $
-// $Id: Triangulation_face.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation/include/CGAL/Triangulation_face.h $
+// $Id: Triangulation_face.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -37,14 +37,14 @@ protected:
 
 public:
     explicit Triangulation_face(Full_cell_handle s) /* Concept */
-    : full_cell_(s), indices_(s->maximal_dimension()+2) 
+    : full_cell_(s), indices_(s->maximal_dimension()+2)
     {
         CGAL_assertion( Full_cell_handle() != s );
         clear();
     }
 
     explicit Triangulation_face(const int maximal_dim) /* Concept */
-    : full_cell_(), indices_(maximal_dim+2) 
+    : full_cell_(), indices_(maximal_dim+2)
     {
         clear();
     }
@@ -79,10 +79,10 @@ public:
         return full_cell()->vertex(j);
     }
 
-// - - - - - - - - - - - - - - - - - -  UPDATE FUNCTIONS	
+// - - - - - - - - - - - - - - - - - -  UPDATE FUNCTIONS
 
     void clear() /* Concept */
-    {    
+    {
         const std::size_t d = indices_.size();
         for(std::size_t i = 0; i < d; ++i )
             indices_[i] = -1;

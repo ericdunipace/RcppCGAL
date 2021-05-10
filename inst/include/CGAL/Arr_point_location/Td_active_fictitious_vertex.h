@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_active_fictitious_vertex.h $
-// $Id: Td_active_fictitious_vertex.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_active_fictitious_vertex.h $
+// $Id: Td_active_fictitious_vertex.h 319383c 2020-05-20T09:47:58+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Oren Nechushtan   <theoren@math.tau.ac.il>

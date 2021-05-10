@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_triangulation_3/include/CGAL/Periodic_3_regular_triangulation_3.h $
-// $Id: Periodic_3_regular_triangulation_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_regular_triangulation_3.h $
+// $Id: Periodic_3_regular_triangulation_3.h 1003046 2020-03-12T20:58:44+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@inria.fr>
@@ -27,13 +27,13 @@
 #include <CGAL/Regular_triangulation_cell_base_3.h>
 
 #include <CGAL/enum.h>
-#include <CGAL/internal/boost/function_property_map.hpp>
 #include <CGAL/internal/Has_nested_type_Bare_point.h>
 #include <CGAL/spatial_sort.h>
 #include <CGAL/utility.h>
 
 #include <boost/mpl/if.hpp>
 #include <boost/mpl/identity.hpp>
+#include <boost/property_map/function_property_map.hpp>
 #include <boost/unordered_set.hpp>
 
 #include <cstdlib>
@@ -498,12 +498,12 @@ public:
     // Spatial sorting can only be applied to bare points, so we need an adaptor
     typedef typename Geom_traits::Construct_point_3 Construct_point_3;
     typedef typename boost::result_of<const Construct_point_3(const Weighted_point&)>::type Ret;
-    typedef CGAL::internal::boost_::function_property_map<Construct_point_3, Weighted_point, Ret> fpmap;
+    typedef boost::function_property_map<Construct_point_3, Weighted_point, Ret> fpmap;
     typedef CGAL::Spatial_sort_traits_adapter_3<Geom_traits, fpmap> Search_traits_3;
 
     spatial_sort(pbegin, points.end(),
                  Search_traits_3(
-                   CGAL::internal::boost_::make_function_property_map<Weighted_point, Ret, Construct_point_3>(
+                   boost::make_function_property_map<Weighted_point, Ret, Construct_point_3>(
                        geom_traits().construct_point_3_object()), geom_traits()));
 
     Cell_handle hint;

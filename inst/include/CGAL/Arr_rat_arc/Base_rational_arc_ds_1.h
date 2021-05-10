@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_rat_arc/Base_rational_arc_ds_1.h $
-// $Id: Base_rational_arc_ds_1.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_rat_arc/Base_rational_arc_ds_1.h $
+// $Id: Base_rational_arc_ds_1.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Oren Salzman <orenzalz@post.tau.ac.il >
@@ -41,20 +41,20 @@ public:
   //typedef typename Algebraic_kernel::Multiplicity_type  Multiplicity;
   typedef unsigned int                                  Multiplicity;
   typedef typename Algebraic_kernel::Coefficient        Coefficient;
-  
+
   typedef typename Get_arithmetic_kernel<Coefficient>::Arithmetic_kernel
                                                         Arithmetic_kernel;
-  typedef typename Arithmetic_kernel::Rational          Rational; 
+  typedef typename Arithmetic_kernel::Rational          Rational;
   typedef typename Arithmetic_kernel::Integer           Integer;
   typedef typename Algebraic_kernel::Algebraic_real_1   Algebraic_real_1;
-  
+
   typedef typename Algebraic_kernel::Polynomial_1       Polynomial_1;
   typedef Polynomial_traits_d<Polynomial_1>             Polynomial_traits_1;
   typedef Fraction_traits<Rational>                     FT_rat_1;
   typedef typename Algebraic_kernel::Solve_1            Solve_1;
   typedef typename Algebraic_kernel::Bound              Bound;
   typedef Algebraic_structure_traits<Polynomial_1>      AT_poly;
-  
+
   typedef Polynomial<Rational>                          Poly_rat_1;
   typedef Polynomial_traits_d<Poly_rat_1>               PT_rat_1;
   typedef Fraction_traits <Poly_rat_1>                  FT_poly_rat_1;
@@ -68,17 +68,17 @@ public:
                        typename FT_poly_rat_1::Numerator_type>::value));
 
 public:
-   
+
   //---------------------------------------------------------------------
   // Print a polynomial nicely.
 
   static std::ostream& print_polynomial(std::ostream& os,
                                         const Polynomial_1& poly,
-                                        char var) 
+                                        char var)
   {
     // Get the degree.
     const int    deg = CGAL::degree(poly);
-   
+
     Integer     coeff;
     CGAL::Sign  sgn;
     int         k;
@@ -90,10 +90,10 @@ public:
     }
 
     for (k = deg; k >= 0; k--)
-    { 
+    {
       //coeff = pt::Get_coefficient()(poly, k);
       coeff = CGAL::get_coefficient(poly, k);
-  
+
       if (k == deg)
         os << coeff;
       else if ((sgn = CGAL::sign (coeff)) == POSITIVE)
@@ -102,7 +102,7 @@ public:
         os << " - " << -coeff;
       else
         continue;
-     
+
       if (k > 1)
         os << '*' << var << '^' << k;
       else if (k == 1)

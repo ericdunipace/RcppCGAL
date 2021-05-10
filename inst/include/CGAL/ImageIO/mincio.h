@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_ImageIO/include/CGAL/ImageIO/mincio.h $
-// $Id: mincio.h 07c4ada 2019-10-19T15:50:09+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_ImageIO/include/CGAL/ImageIO/mincio.h $
+// $Id: mincio.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -33,9 +33,9 @@
     @param Zcosine 3 dimensional array containing Z axis cosine directions
     @return a negative value in case of failure */
 int readMincHeader(_image *im, const char* name,
-		   double *startx, double *starty, double *startz,
-		   double *stepx, double *stepy, double *stepz,
-		   double *Xcosine, double *Ycosine, double *Zcosine);
+                   double *startx, double *starty, double *startz,
+                   double *stepx, double *stepy, double *stepz,
+                   double *Xcosine, double *Ycosine, double *Zcosine);
 
 /** write an image in a minc file
     @param im image structure
@@ -53,10 +53,10 @@ int readMincHeader(_image *im, const char* name,
     @param range 2 dimensional array containing min an max image intensity
     @return a negative value in case of failure */
 int writeMincFile( const _image* im, const char *name, const char *sourceName,
-		   double startx, double starty, double startz,
-		   double stepx, double stepy, double stepz,
-		   const double *Xcosine, const double *Ycosine,
-		   const double *Zcosine, const double *range );
+                   double startx, double starty, double startz,
+                   double stepx, double stepy, double stepz,
+                   const double *Xcosine, const double *Ycosine,
+                   const double *Zcosine, const double *range );
 
 
 #endif

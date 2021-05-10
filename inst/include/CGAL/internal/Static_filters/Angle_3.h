@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Filtered_kernel/include/CGAL/internal/Static_filters/Angle_3.h $
-// $Id: Angle_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Filtered_kernel/include/CGAL/internal/Static_filters/Angle_3.h $
+// $Id: Angle_3.h 5c8df66 2020-09-25T14:25:14+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -41,25 +41,7 @@ public:
 
   typedef typename Base::result_type  result_type;
 
-
-#ifndef CGAL_CFG_MATCHING_BUG_6
   using Base::operator();
-#else // CGAL_CFG_MATCHING_BUG_6
-  template <typename T1, typename T2>
-  result_type
-  operator()(const T1& t1, const T2& t2) const
-  {
-    return Base()(t1,t2);
-  }
-
-  template <typename T1, typename T2, typename T3, typename T4>
-  result_type
-  operator()(const T1& t1, const T2& t2, const T3& t3, const T4& t4) const
-  {
-    return Base()(t1,t2,t3,t4);
-  }
-#endif // CGAL_CFG_MATCHING_BUG_6
-
 
   Sign sign_with_error(const double x, const double error) const {
     if(x > error) return POSITIVE;
@@ -80,7 +62,7 @@ public:
         fit_in_double(get_approx(q).x(), qx) && fit_in_double(get_approx(q).y(), qy) &&
         fit_in_double(get_approx(q).z(), qz) &&
         fit_in_double(get_approx(r).x(), rx) && fit_in_double(get_approx(r).y(), ry) &&
-        fit_in_double(get_approx(r).z(), rz) )      
+        fit_in_double(get_approx(r).z(), rz) )
     {
       CGAL_BRANCH_PROFILER_BRANCH_1(tmp);
 
@@ -137,14 +119,14 @@ public:
     //   ((t1 - t1) * (t1 - t1));
     F t1 = F(1, F::ulp()/2);         // First translation
     F f = t1*t1 + t1*t1 + t1*t1;
-      
+
     double err = f.error();
     err += err * 2 * F::ulp(); // Correction due to "eps * m * m ".
     std::cerr << "*** epsilon for Angle_3(Point_3, Point_3, Point_3) = "
               << err << std::endl;
     std::cerr << "\n"
               << "Now for underflow/overflows...\n"
-              << "       min_double/eps  = " 
+              << "       min_double/eps  = "
               << (std::numeric_limits<double>::min)() / err << std::endl
               << "  sqrt(min_double/eps) = "
               << CGAL::sqrt((std::numeric_limits<double>::min)() / err) << std::endl

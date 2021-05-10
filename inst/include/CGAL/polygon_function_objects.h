@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Partition_2/include/CGAL/polygon_function_objects.h $
-// $Id: polygon_function_objects.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Partition_2/include/CGAL/polygon_function_objects.h $
+// $Id: polygon_function_objects.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Susan Hert <hert@mpi-sb.mpg.de>
 
@@ -21,7 +21,7 @@
 namespace CGAL {
 
 template <class Traits>
-class Is_vacuously_valid 
+class Is_vacuously_valid
 {
   public:
 
@@ -39,7 +39,7 @@ class Is_convex_2
 {
   public:
      Is_convex_2(const Traits& t): traits(t) {}
-  
+
      template <class ForwardIterator>
      bool operator()(ForwardIterator first, ForwardIterator last)
      {  return is_convex_2(first, last, traits); }
@@ -53,7 +53,7 @@ class Is_y_monotone_2
 {
   public:
      Is_y_monotone_2(const Traits& t): traits(t) {}
-  
+
      template <class ForwardIterator>
      bool operator()(ForwardIterator first, ForwardIterator last)
      {  return is_y_monotone_2(first, last, traits); }

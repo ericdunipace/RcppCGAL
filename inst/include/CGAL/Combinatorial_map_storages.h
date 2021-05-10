@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Combinatorial_map/include/CGAL/Combinatorial_map_storages.h $
-// $Id: Combinatorial_map_storages.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Combinatorial_map/include/CGAL/Combinatorial_map_storages.h $
+// $Id: Combinatorial_map_storages.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -36,7 +36,7 @@ namespace CGAL {
   // Storage of darts with compact container, beta with handles
   template<unsigned int d_, class Items_, class Alloc_ >
   class Combinatorial_map_storage_1
-  {  
+  {
   public:
     typedef Combinatorial_map_storage_1<d_, Items_, Alloc_> Self;
     typedef CGAL::Tag_false Use_index;
@@ -127,6 +127,8 @@ namespace CGAL {
       CGAL_assertion(i <= dimension);
       return dh->mf[i]==null_dart_handle;
     }
+    bool is_perforated(Dart_const_handle /*dh*/) const
+    { return false; }
 
     /// Set simultaneously all the marks of this dart to a given value.
     void set_dart_marks(Dart_const_handle ADart,
@@ -226,7 +228,7 @@ namespace CGAL {
       CGAL_assertion( ah!=nullptr );
       return ah->is_valid();
     }
-    
+
     // accessors and modifiers to the attribute ref counting given its handle
     template<unsigned int i>
     std::size_t get_attribute_ref_counting

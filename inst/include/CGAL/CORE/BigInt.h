@@ -6,10 +6,10 @@
  * This file is part of CGAL (www.cgal.org).
  *
  * File: BigInt.h
- * Synopsis: 
- * 		a wrapper class for mpz from GMP
- * 
- * Written by 
+ * Synopsis:
+ *                 a wrapper class for mpz from GMP
+ *
+ * Written by
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
@@ -17,8 +17,8 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/BigInt.h $
- * $Id: BigInt.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/BigInt.h $
+ * $Id: BigInt.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 #ifndef _CORE_BIGINT_H_
@@ -29,7 +29,7 @@
 #include <CGAL/CORE/MemoryPool.h>
 #include <string>
 
-namespace CORE { 
+namespace CORE {
 
 
 class BigIntRep : public RCRepImpl<BigIntRep> {
@@ -469,7 +469,7 @@ inline void divexact(BigInt& z, const BigInt& x, const BigInt& y) {
 // Chee (1/12/2004)   The definition of div_exact(x,y) next
 //   ensure that in Polynomials<NT> works with both NT=BigInt and NT=int:
 inline BigInt div_exact(const BigInt& x, const BigInt& y) {
-  BigInt z;	     // precodition: isDivisible(x,y)
+  BigInt z;             // precodition: isDivisible(x,y)
   divexact(z, x, y); // z is set to x/y;
   return z;
 }
@@ -511,14 +511,14 @@ inline int bitLength(const BigInt& a) {
   return mpz_sizeinbase(a.get_mp(), 2);
 }
 /// floorLg -- floor of log_2(a)
-/** Convention: a=0, floorLg(a) returns -1. 
+/** Convention: a=0, floorLg(a) returns -1.
  *  This makes sense for integer a.
  */
 inline long floorLg(const BigInt& a) {
   return (sign(a) == 0) ? (-1) : (bitLength(a)-1);
 }
 /// ceilLg -- ceiling of log_2(a) where a=BigInt, int or long
-/** Convention: a=0, ceilLg(a) returns -1. 
+/** Convention: a=0, ceilLg(a) returns -1.
  *  This makes sense for integer a.
  */
 inline long ceilLg(const BigInt& a) {

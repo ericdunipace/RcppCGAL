@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/Cell_criteria_visitor_with_balls.h $
-// $Id: Cell_criteria_visitor_with_balls.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Cell_criteria_visitor_with_balls.h $
+// $Id: Cell_criteria_visitor_with_balls.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -37,7 +37,7 @@ public:
   typedef Abstract_criterion<Tr, Self> Criterion;
   typedef Mesh_3::Cell_radius_criterion<Tr, Self> Cell_radius_criterion;
   typedef Mesh_3::Cell_radius_edge_criterion<Tr, Self> Cell_radius_edge_criterion;
-        
+
   typedef typename Base::Quality Cell_quality;
   typedef typename Base::Is_bad  Is_cell_bad;
   typedef typename Base::Handle  Handle;
@@ -51,7 +51,7 @@ public:
   int nb_weighted_points;
   std::vector<Weighted_point> points;
   double radius_ortho_shpere;
-        
+
   typedef typename Tr::Cell::Surface_patch_index Surface_patch_index;
   typedef typename Tr::Vertex_handle Vertex_handle;
 
@@ -104,7 +104,7 @@ public:
       Base::do_visit(criterion);
     else
       Base::do_visit(criterion);
-                                
+
   }
 
   void visit(const Cell_radius_edge_criterion& criterion)
@@ -123,7 +123,7 @@ public:
 
 };  // end class Cell_criterion_visitor
 
-} // end namespace Mesh_3 
+} // end namespace Mesh_3
 } // end namespace CGAL
 
 #endif // CGAL_MESH_3_CELL_CRITERIA_VISITOR_WITH_BALLS_H

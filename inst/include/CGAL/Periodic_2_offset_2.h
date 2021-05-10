@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_2_triangulation_2/include/CGAL/Periodic_2_offset_2.h $
-// $Id: Periodic_2_offset_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_2_triangulation_2/include/CGAL/Periodic_2_offset_2.h $
+// $Id: Periodic_2_offset_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Nico Kruithof <Nico@nghk.nl>
@@ -27,7 +27,7 @@ class Periodic_2_offset_2
 {
   //  template <class K2>
   //  friend std::ostream & operator<<(std::ostream &os,
-  //				   const Periodic_2_offset_2 &off);
+  //                                   const Periodic_2_offset_2 &off);
 
 public:
   /// Default constructor.

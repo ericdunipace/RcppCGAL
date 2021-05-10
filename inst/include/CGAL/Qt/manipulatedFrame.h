@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/manipulatedFrame.h $
-// $Id: manipulatedFrame.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/manipulatedFrame.h $
+// $Id: manipulatedFrame.h 1968f2c 2020-01-02T10:00:05+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifndef QGLVIEWER_MANIPULATED_FRAME_H
@@ -21,6 +21,7 @@
 #include <QDateTime>
 #include <QString>
 #include <QTimer>
+#include <QElapsedTimer>
 
 namespace CGAL{
 namespace qglviewer {
@@ -348,7 +349,7 @@ private:
   qreal zoomSensitivity_;
 
   // Mouse speed and spinning
-  QTime last_move_time;
+  QElapsedTimer last_move_time;
   qreal mouseSpeed_;
   int delay_;
   bool isSpinning_;

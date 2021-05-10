@@ -2,7 +2,7 @@
 /*
  * author:  Bruno Levy, INRIA, project ALICE
  * website: http://www.loria.fr/~levy/software
- * 
+ *
  * This file is part of CGAL (www.cgal.org)
  *
  * Scientific work that use this software can reference the website and
@@ -23,8 +23,8 @@
  *      - added comments
  *      - copied Conjugate Gradient algorithm WITH preconditioner from Graphite 1.9 code
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/OpenNL/include/CGAL/OpenNL/conjugate_gradient.h $
- * $Id: conjugate_gradient.h fcd0529 2019-10-20T00:47:56+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/OpenNL/include/CGAL/OpenNL/conjugate_gradient.h $
+ * $Id: conjugate_gradient.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  */
 
@@ -53,7 +53,7 @@ namespace OpenNL {
  *
  * @param A generic square matrix; a function
  *   mult(const MATRIX& M, const double* x, double* y)
- * and a member function 
+ * and a member function
  *   int dimension() const
  * must to be defined.
  * @param b right hand side of the system.
@@ -81,7 +81,7 @@ public:
 
     // Solve the sparse linear system "A*x = b" for A symmetric positive definite
     // Return true on success
-    bool solve(const MATRIX &A, const VECTOR& b, VECTOR& x) 
+    bool solve(const MATRIX &A, const VECTOR& b, VECTOR& x)
     {
 #ifdef DEBUG_TRACE
         std::cerr << "  Call Conjugate Gradient" << std::endl;
@@ -148,7 +148,7 @@ private:
  *
  * @param A generic square matrix; a function
  *   mult(const MATRIX& M, const double* x, double* y)
- * and a member function 
+ * and a member function
  *   int dimension() const
  * must to be defined.
  * @param C preconditioner; a function
@@ -160,8 +160,8 @@ private:
  * @param max_iter maximum number of iterations.
  */
 
-template< class MATRIX, class PC_MATRIX, class VECTOR > 
-class Solver_preconditioned_CG 
+template< class MATRIX, class PC_MATRIX, class VECTOR >
+class Solver_preconditioned_CG
 {
 public:
     typedef MATRIX Matrix ;
@@ -182,7 +182,7 @@ public:
 
     // Solve the sparse linear system "A*x = b" for A symmetric positive definite
     // Return true on success
-    bool solve(const MATRIX &A, const PC_MATRIX &C, const VECTOR& b, VECTOR& x) 
+    bool solve(const MATRIX &A, const PC_MATRIX &C, const VECTOR& b, VECTOR& x)
     {
 #ifdef DEBUG_TRACE
         std::cerr << "  Call Conjugate Gradient with preconditioner" << std::endl;

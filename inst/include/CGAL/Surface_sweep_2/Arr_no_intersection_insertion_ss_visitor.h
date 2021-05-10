@@ -3,14 +3,14 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_no_intersection_insertion_ss_visitor.h $
-// $Id: Arr_no_intersection_insertion_ss_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_no_intersection_insertion_ss_visitor.h $
+// $Id: Arr_no_intersection_insertion_ss_visitor.h 3849f5e 2020-06-14T00:41:25+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
-// Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
-//                 Ron Wein <wein@post.tau.ac.il>
-//                 Efi Fogel <efif@post.tau.ac.il>
+// Author(s): Baruch Zukerman <baruchzu@post.tau.ac.il>
+//            Ron Wein <wein@post.tau.ac.il>
+//            Efi Fogel <efif@post.tau.ac.il>
 
 #ifndef CGAL_ARR_NO_INTERSECTION_INSERTION_SS_VISITOR_H
 #define CGAL_ARR_NO_INTERSECTION_INSERTION_SS_VISITOR_H

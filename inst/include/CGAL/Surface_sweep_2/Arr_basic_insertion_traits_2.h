@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_basic_insertion_traits_2.h $
-// $Id: Arr_basic_insertion_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_basic_insertion_traits_2.h $
+// $Id: Arr_basic_insertion_traits_2.h 0626eb0 2020-06-11T12:32:33+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,6 @@
  * Defintion of the Arr_basic_insertion_traits_2<Traits,Arrangement> class.
  */
 
-#include <CGAL/Object.h>
 #include <CGAL/Arr_tags.h>
 
 #include <list>
@@ -411,7 +410,7 @@ public:
   Compare_y_at_x_right_2 compare_y_at_x_right_2_object() const
   {
     return (Compare_y_at_x_right_2
-	    (m_base_traits->compare_y_at_x_right_2_object()));
+            (m_base_traits->compare_y_at_x_right_2_object()));
   }
 
   /*! A functor that checks whether two points and two x-monotone curves are

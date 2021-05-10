@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Partition_2/include/CGAL/Partition_is_valid_traits_2.h $
-// $Id: Partition_is_valid_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Partition_2/include/CGAL/Partition_is_valid_traits_2.h $
+// $Id: Partition_is_valid_traits_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Susan Hert <hert@mpi-sb.mpg.de>
 
@@ -36,7 +36,7 @@ public:
   Partition_is_valid_traits_2(const Traits& traits)
     : Traits(traits)
   {}
-public:   
+public:
    Is_valid
    is_valid_object(const Traits& traits) const
    {  return Is_valid(traits); }

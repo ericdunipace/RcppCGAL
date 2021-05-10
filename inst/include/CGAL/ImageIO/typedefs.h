@@ -3,25 +3,25 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_ImageIO/include/CGAL/ImageIO/typedefs.h $
-// $Id: typedefs.h 07c4ada 2019-10-19T15:50:09+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_ImageIO/include/CGAL/ImageIO/typedefs.h $
+// $Id: typedefs.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
 // Author(s)     :  ASCLEPIOS Project (INRIA Sophia-Antipolis), Laurent Rineau
 
 /*************************************************************************
- * typedefs.h - 
+ * typedefs.h -
  *
- * $Id: typedefs.h 07c4ada 2019-10-19T15:50:09+02:00 Sébastien Loriot
+ * $Id: typedefs.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  *
  * Copyright©INRIA 1998
  *
  * AUTHOR:
  * Gregoire Malandain (greg@sophia.inria.fr)
  * http://www.inria.fr/epidaure/personnel/malandain/
- * 
- * CREATION DATE: 
+ *
+ * CREATION DATE:
  * June, 9 1998
  *
  *

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Insert_vertex_into_edge.h $
-// $Id: Insert_vertex_into_edge.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Insert_vertex_into_edge.h $
+// $Id: Insert_vertex_into_edge.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     :  Peter Hachenberger <hachenberger@mpi-sb.mpg.de>
 
@@ -34,18 +34,18 @@ class Insert_vertex_into_edge {
 
  public:
   Insert_vertex_into_edge(SNC_structure& snc_,
-			  SNC_point_locator& pl_) 
+                          SNC_point_locator& pl_)
     : snc(snc_), pl(pl_) {}
 
-  SVertex_handle operator() 
-    (SVertex_handle e, const Point_3 ip) 
+  SVertex_handle operator()
+    (SVertex_handle e, const Point_3 ip)
   {
     CGAL::SNC_constructor<Items, SNC_structure> C(snc);
     Vertex_handle v;
     v = C.create_from_edge(e, ip);
-    
+
     pl.add_vertex(v);
-    
+
     SVertex_iterator svi = v->svertices_begin();
     SVertex_handle svf, svb;
     if(svi->point() == e->point()) {
@@ -55,12 +55,12 @@ class Insert_vertex_into_edge {
       svb = svi;
       svf = ++svi;
     }
-    
+
     svb->twin() = e;
     svf->twin() = e->twin();
     e->twin()->twin() = svf;
     e->twin() = svb;
-    
+
     pl.add_edge(svf);
     pl.add_edge(svb);
 

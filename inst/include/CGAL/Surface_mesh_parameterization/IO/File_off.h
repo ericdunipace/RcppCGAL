@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/IO/File_off.h $
-// $Id: File_off.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/IO/File_off.h $
+// $Id: File_off.h efc0c52 2021-01-15T10:02:00+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,7 @@
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 #include <CGAL/circulator.h>
 
-#include <boost/function_output_iterator.hpp>
+#include <boost/iterator/function_output_iterator.hpp>
 #include <boost/property_map/property_map.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/unordered_set.hpp>

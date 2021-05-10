@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Intersections_3/include/CGAL/Intersections_3/Point_3_Triangle_3.h $
-// $Id: Point_3_Triangle_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/Point_3_Triangle_3.h $
+// $Id: Point_3_Triangle_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Philippe Guigue
 
@@ -23,26 +23,26 @@
 namespace CGAL {
 
 namespace Intersections {
-  
+
 namespace internal {
 
 template <class K>
-bool do_intersect(const typename K::Triangle_3 &t, 
-		  const typename K::Point_3    &p,
-		  const K & k )
+bool do_intersect(const typename K::Triangle_3 &t,
+                  const typename K::Point_3    &p,
+                  const K & k )
 {
 
   CGAL_kernel_precondition( ! k.is_degenerate_3_object()(t));
 
   typedef typename K::Point_3 Point_3;
-  
+
   typename K::Construct_vertex_3 vertex_on =
     k.construct_vertex_3_object();
-  
-  typename K::Orientation_3 orientation = 
+
+  typename K::Orientation_3 orientation =
     k.orientation_3_object();
 
-  typename K::Coplanar_orientation_3 coplanar_orientation = 
+  typename K::Coplanar_orientation_3 coplanar_orientation =
     k.coplanar_orientation_3_object();
 
 
@@ -50,21 +50,21 @@ bool do_intersect(const typename K::Triangle_3 &t,
   const Point_3 & a = vertex_on(t,0);
   const Point_3 & b = vertex_on(t,1);
   const Point_3 & c = vertex_on(t,2);
-  
+
 
   if (orientation(a,b,c,p) != COPLANAR)
     return false;
-  
+
 
   const Orientation abp = coplanar_orientation(a,b,p);
   const Orientation bcp = coplanar_orientation(b,c,p);
-  
-  
+
+
   switch ( abp ) {
-  case POSITIVE: return  bcp != NEGATIVE 
-		   &&   coplanar_orientation(c,a,p) != NEGATIVE ;
-  case NEGATIVE: return  bcp != POSITIVE  
-		   &&   coplanar_orientation(c,a,p) != POSITIVE ;
+  case POSITIVE: return  bcp != NEGATIVE
+                   &&   coplanar_orientation(c,a,p) != NEGATIVE ;
+  case NEGATIVE: return  bcp != POSITIVE
+                   &&   coplanar_orientation(c,a,p) != POSITIVE ;
   case COLLINEAR:
     switch ( bcp ) {
     case POSITIVE: return  coplanar_orientation(c,a,p) != NEGATIVE ;
@@ -78,14 +78,14 @@ bool do_intersect(const typename K::Triangle_3 &t,
     CGAL_kernel_assertion(false);
     return false;
   }
-  
+
 }
 
 
 template <class K>
 bool do_intersect(const typename K::Point_3    &p,
-		  const typename K::Triangle_3 &t, 
-		  const K & k )
+                  const typename K::Triangle_3 &t,
+                  const K & k )
 {
   return do_intersect(t, p, k);
 }
@@ -116,7 +116,7 @@ intersection( const typename K::Triangle_3 &tr,
 }
 } // namespace internal
 } // namespace Intersections
- 
+
 CGAL_DO_INTERSECT_FUNCTION(Triangle_3, Point_3, 3)
 CGAL_INTERSECTION_FUNCTION(Triangle_3, Point_3, 3)
 

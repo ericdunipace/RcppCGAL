@@ -1,14 +1,14 @@
-// Copyright (c) 2003  
+// Copyright (c) 2003
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/algorithm.h $
-// $Id: algorithm.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/algorithm.h $
+// $Id: algorithm.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -277,10 +277,10 @@ lexicographical_compare_three_valued( InputIterator1 first1, InputIterator1 last
     produces \c (1):(2):(3)
  */
 template <class InputIterator>
-std::ostream& 
+std::ostream&
 output_range(std::ostream& os,
              InputIterator first, InputIterator beyond,
-             const char* sep = ", ", const char* pre = "", const char* post = "") 
+             const char* sep = ", ", const char* pre = "", const char* post = "")
 {
     InputIterator it = first;
     if (it != beyond) {
@@ -366,12 +366,12 @@ void nth_element(RandomAccessIterator left,
   if(left == right) return; // exit if there is only one element
   while(true) {
     RandomAccessIterator pivot_it = left + ((right - left) / 2);
-    RandomAccessIterator new_pivot_it = 
-      internal::algorithm::partition(left, right, pivot_it, comp);    
+    RandomAccessIterator new_pivot_it =
+      internal::algorithm::partition(left, right, pivot_it, comp);
     if(new_pivot_it == nth) return;
-    if(nth < new_pivot_it) 
+    if(nth < new_pivot_it)
       right = new_pivot_it - 1;
-    else 
+    else
       left = new_pivot_it + 1;
   } // end while(true)
 }

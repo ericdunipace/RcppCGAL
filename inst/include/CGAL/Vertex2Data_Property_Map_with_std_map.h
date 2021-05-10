@@ -3,14 +3,14 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Ridges_3/include/CGAL/Vertex2Data_Property_Map_with_std_map.h $
-// $Id: Vertex2Data_Property_Map_with_std_map.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Ridges_3/include/CGAL/Vertex2Data_Property_Map_with_std_map.h $
+// $Id: Vertex2Data_Property_Map_with_std_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Pouget and Frédéric Cazals
 
 #ifndef CGAL_VERTEX2DATA_PROPERTY_MAP_WITH_STD_MAP_H
-#define CGAL_VERTEX2DATA_PROPERTY_MAP_WITH_STD_MAP_H 
+#define CGAL_VERTEX2DATA_PROPERTY_MAP_WITH_STD_MAP_H
 
 #include <CGAL/license/Ridges_3.h>
 
@@ -30,7 +30,7 @@ class associative_property_map;
 // defines models for Vertex2FTPropertyMap and Vertex2VectorPropertyMap
 //--------------------------------------------------------------------------
 template < class TriangulatedSurfaceMesh >
-class Vertex2Data_Property_Map_with_std_map 
+class Vertex2Data_Property_Map_with_std_map
 {
  public:
   typedef typename TriangulatedSurfaceMesh::Traits::FT        FT;

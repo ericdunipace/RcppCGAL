@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_3/include/CGAL/normal_vector_newell_3.h $
-// $Id: normal_vector_newell_3.h 30b02ee 2019-10-25T16:26:13+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_3/include/CGAL/normal_vector_newell_3.h $
+// $Id: normal_vector_newell_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel    <seel@mpi-sb.mpg.de>
 //                 Miguel Granados <granados@mpi-sb.mpg.de>
@@ -26,7 +26,7 @@
 
 namespace CGAL {
 
-namespace internal_nef 
+namespace internal_nef
 {
 template <class Handle, class Vector>
 CGAL_MEDIUM_INLINE

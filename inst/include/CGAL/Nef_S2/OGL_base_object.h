@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_S2/include/CGAL/Nef_S2/OGL_base_object.h $
-// $Id: OGL_base_object.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_S2/include/CGAL/Nef_S2/OGL_base_object.h $
+// $Id: OGL_base_object.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Peter Hachenberger  <hachenberger@mpi-sb.mpg.de>
 
@@ -19,10 +19,10 @@ namespace CGAL {
 
 namespace OGL {
 
-  class OGL_base_object {    
+  class OGL_base_object {
   public:
 
-    typedef CGAL::Simple_cartesian<double>       Double_kernel;  
+    typedef CGAL::Simple_cartesian<double>       Double_kernel;
     typedef Double_kernel::Point_3               Double_point;
     typedef Double_kernel::Vector_3              Double_vector;
     typedef Double_kernel::Segment_3             Double_segment;

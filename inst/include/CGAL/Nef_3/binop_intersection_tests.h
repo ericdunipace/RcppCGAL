@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_3/include/CGAL/Nef_3/binop_intersection_tests.h $
-// $Id: binop_intersection_tests.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_3/include/CGAL/Nef_3/binop_intersection_tests.h $
+// $Id: binop_intersection_tests.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Meyer  <ameyer@mpi-sb.mpg.de>
 #ifndef CGAL_BINOP_INTERSECTION_TESTS_H
@@ -35,7 +35,7 @@ struct binop_intersection_test_segment_tree {
   typedef typename SNC_decorator::Point_3                 Point_3;
 
   typedef CGAL::SNC_const_decorator<SNC_structure>        Const_decorator;
-  typedef CGAL::Nef_box<SNC_decorator>                    Nef_box; 
+  typedef CGAL::Nef_box<SNC_decorator>                    Nef_box;
 
   template<class Callback>
   struct Bop_edge0_face1_callback {
@@ -144,7 +144,7 @@ struct binop_intersection_test_segment_tree {
 #ifdef CGAL_NEF3_BOX_INTERSECTION_CUTOFF
     box_intersection_d( a.begin(), a.end(), b.begin(), b.end(),
                         callback_edge0_edge1,
-			CGAL_NEF3_BOX_INTERSECTION_CUTOFF,);
+                        CGAL_NEF3_BOX_INTERSECTION_CUTOFF,);
 #else
     box_intersection_d( a.begin(), a.end(), b.begin(), b.end(),
                         callback_edge0_edge1);
@@ -159,7 +159,7 @@ struct binop_intersection_test_segment_tree {
 #ifdef CGAL_NEF3_BOX_INTERSECTION_CUTOFF
     box_intersection_d( a.begin(), a.end(), b.begin(), b.end(),
                         callback_edge0_face1,
-			CGAL_NEF3_BOX_INTERSECTION_CUTOFF);
+                        CGAL_NEF3_BOX_INTERSECTION_CUTOFF);
 #else
     box_intersection_d( a.begin(), a.end(), b.begin(), b.end(),
                         callback_edge0_face1);
@@ -174,7 +174,7 @@ struct binop_intersection_test_segment_tree {
 #ifdef CGAL_NEF3_BOX_INTERSECTION_CUTOFF
     box_intersection_d( a.begin(), a.end(), b.begin(), b.end(),
                         callback_edge1_face0,
-			CGAL_NEF3_BOX_INTERSECTION_CUTOFF);
+                        CGAL_NEF3_BOX_INTERSECTION_CUTOFF);
 #else
     box_intersection_d( a.begin(), a.end(), b.begin(), b.end(),
                         callback_edge1_face0);

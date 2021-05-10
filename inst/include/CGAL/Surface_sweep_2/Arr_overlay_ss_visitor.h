@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_overlay_ss_visitor.h $
-// $Id: Arr_overlay_ss_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_overlay_ss_visitor.h $
+// $Id: Arr_overlay_ss_visitor.h 2f9cdd0 2020-07-23T14:37:18+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -552,6 +552,8 @@ Arr_overlay_ss_visitor<OvlHlpr, OvlTr, Vis>::update_event(Event* e,
 template <typename OvlHlpr, typename OvlTr, typename Vis>
 void Arr_overlay_ss_visitor<OvlHlpr, OvlTr, Vis>::after_sweep()
 {
+  Base::after_sweep();
+
   // Notify boundary vertices:
   typename Vertex_map::iterator it;
   for (it = m_vertices_map.begin(); it != m_vertices_map.end(); ++it) {

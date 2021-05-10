@@ -6,30 +6,32 @@
  * This file is part of CGAL (www.cgal.org).
  *
  * File: Real.h
- * 
- * Synopsis: The Real class is a superclass for all the number 
+ *
+ * Synopsis: The Real class is a superclass for all the number
  *           systems in the Core Library (int, long, float, double,
  *           BigInt, BigRat, BigFloat, etc)
- * 
- * Written by 
+ *
+ * Written by
  *       Koji Ouchi <ouchi@simulation.nyu.edu>
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
- *       Sylvain Pion <pion@cs.nyu.edu> 
+ *       Sylvain Pion <pion@cs.nyu.edu>
  *
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/Real.h $
- * $Id: Real.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/Real.h $
+ * $Id: Real.h 10e99cb 2020-07-22T09:51:07+02:00 Laurent Rineau
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 #ifndef _CORE_REAL_H_
 #define _CORE_REAL_H_
-#include "RealRep.h"
 
-namespace CORE { 
+#include "RealRep.h"
+#include <CGAL/use.h>
+
+namespace CORE {
 // class Real
 typedef RCImpl<RealRep> RCReal;
 class Real : public RCReal {
@@ -169,7 +171,7 @@ public:
   /// \name Aprroximation Function
   //@{
   /// approximation
-  Real approx(const extLong& r=get_static_defRelPrec(), 
+  Real approx(const extLong& r=get_static_defRelPrec(),
               const extLong& a=get_static_defAbsPrec()) const {
     return rep->approx(r, a);
   }
@@ -481,6 +483,12 @@ inline Real Realbase_for<T>::operator-() const {
 template <>
 inline Real RealLong::operator-() const {
   return ker < -LONG_MAX ? -BigInt(ker) : -ker;
+}
+
+inline void init_CORE() {
+  using RealRep = CORE::RealDouble;
+  CGAL_STATIC_THREAD_LOCAL_VARIABLE(MemoryPool<RealRep>*, pool_real_rep, &MemoryPool<RealRep>::global_allocator());
+  CGAL_USE(pool_real_rep);
 }
 
 } //namespace CORE

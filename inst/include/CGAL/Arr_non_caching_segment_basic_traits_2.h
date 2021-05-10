@@ -3,18 +3,18 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_non_caching_segment_basic_traits_2.h $
-// $Id: Arr_non_caching_segment_basic_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_non_caching_segment_basic_traits_2.h $
+// $Id: Arr_non_caching_segment_basic_traits_2.h 708469f 2020-06-12T14:06:58+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-// Author(s)     : Efi Fogel <efif@post.tau.ac.il>
-//                 Ron Wein  <wein@post.tau.ac.il>
-//                 (based on old version by: Iddo Hanniel,
-//                                           Eyal Flato,
-//                                           Oren Nechushtan,
-//                                           Ester Ezra,
-//                                           Shai Hirsch,
-//                                           and Eugene Lipovetsky)
+// Author(s): Efi Fogel <efif@post.tau.ac.il>
+//            Ron Wein  <wein@post.tau.ac.il>
+//            (based on old version by: Iddo Hanniel,
+//                                      Eyal Flato,
+//                                      Oren Nechushtan,
+//                                      Ester Ezra,
+//                                      Shai Hirsch,
+//                                      and Eugene Lipovetsky)
 
 #ifndef CGAL_ARR_NON_CACHING_SEGMENT_BASIC_TRAITS_2_H
 #define CGAL_ARR_NON_CACHING_SEGMENT_BASIC_TRAITS_2_H
@@ -250,9 +250,9 @@ public:
       CGAL_precondition (i == 0 || i == 1);
 
       if (i == 0)
-	return (CGAL::to_double(p.x()));
+        return (CGAL::to_double(p.x()));
       else
-	return (CGAL::to_double(p.y()));
+        return (CGAL::to_double(p.y()));
     }
   };
 

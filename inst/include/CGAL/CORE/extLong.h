@@ -6,10 +6,10 @@
  * This file is part of CGAL (www.cgal.org).
  *
  * File: extLong.h
- * Synopsis: 
- * 		An extended class for long
+ * Synopsis:
+ *                 An extended class for long
  *
- * Written by 
+ * Written by
  *       Koji Ouchi <ouchi@simulation.nyu.edu>
  *       Chee Yap <yap@cs.nyu.edu>
  *       Igor Pechtchanski <pechtcha@cs.nyu.edu>,
@@ -20,8 +20,8 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/extLong.h $
- * $Id: extLong.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/extLong.h $
+ * $Id: extLong.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -31,7 +31,7 @@
 #include <CGAL/CORE/Impl.h>
 #include <CGAL/CORE/CoreAux.h>
 
-namespace CORE { 
+namespace CORE {
 
 #ifndef LONG_MAX
 #error "haven't define LONG_MAX"
@@ -102,7 +102,7 @@ public:
     std::stringstream st;
     st << (*this);
     return st.str();
-  }    
+  }
   long toLong() const;
   //@}
 

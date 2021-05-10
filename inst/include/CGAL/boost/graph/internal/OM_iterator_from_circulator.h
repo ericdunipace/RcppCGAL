@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/BGL/include/CGAL/boost/graph/internal/OM_iterator_from_circulator.h $
-// $Id: OM_iterator_from_circulator.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/BGL/include/CGAL/boost/graph/internal/OM_iterator_from_circulator.h $
+// $Id: OM_iterator_from_circulator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Philipp Moeller
 
@@ -46,19 +46,19 @@ public:
 
   typedef typename I__traits::iterator_category iterator_category;
 
-  typedef typename 
+  typedef typename
   boost::mpl::if_c<  Prevent_deref
                    , C
                    , typename C::value_type
                   >::type             value_type;
 
   typedef typename C::difference_type difference_type;
-  typedef typename 
+  typedef typename
   boost::mpl::if_c<  Prevent_deref
                    , C&
                    , typename C::reference
                   >::type             reference;
-  typedef typename 
+  typedef typename
   boost::mpl::if_c<  Prevent_deref
                    , C*
                    , typename C::reference
@@ -80,7 +80,7 @@ public:
     CGAL_assertion( m_anchor == i.m_anchor);  // same anchor?
     return (done() && i.done()) || (((!done()) && (!i.done())) && ( current == i.current));
   }
-  
+
   bool operator!=( const Self& i) const {
     return !(*this == i);
   }
@@ -105,7 +105,7 @@ public:
   reference operator*() const {
     return indirection<Prevent_deref>();
   }
-  
+
 private:
   template <bool Prevent_deref_>
   typename boost::disable_if_c<Prevent_deref_, pointer>::type

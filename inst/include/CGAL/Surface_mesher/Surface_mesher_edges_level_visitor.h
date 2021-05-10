@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher_edges_level_visitor.h $
-// $Id: Surface_mesher_edges_level_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher_edges_level_visitor.h $
+// $Id: Surface_mesher_edges_level_visitor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -41,7 +41,7 @@ namespace CGAL {
       typedef Previous_level Previous_visitor;
 
       Edges_level_visitor(Surface_mesher* surface_mesher_,
-	      Previous_visitor* p)
+              Previous_visitor* p)
         : surface_mesher(surface_mesher_), previous(p) {}
 
       template <typename E, typename P>
@@ -52,12 +52,12 @@ namespace CGAL {
                             const Point& p,
                             Zone zone)
       {
-	surface_mesher->remove_edges(p, zone);
+        surface_mesher->remove_edges(p, zone);
       }
 
       void after_insertion(const Vertex_handle& v)
       {
-	surface_mesher->after_insertion_impl(v);
+        surface_mesher->after_insertion_impl(v);
       }
 
       template <typename E, typename P, typename Z>

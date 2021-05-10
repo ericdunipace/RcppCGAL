@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Smoothing/curvature_flow_impl.h $
-// $Id: curvature_flow_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Smoothing/curvature_flow_impl.h $
+// $Id: curvature_flow_impl.h 7e12992 2020-06-15T17:12:04+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -35,6 +35,7 @@
 #include <iostream>
 #include <utility>
 #include <vector>
+#include <unordered_map>
 
 namespace CGAL {
 namespace Polygon_mesh_processing {
@@ -170,7 +171,7 @@ public:
     // calls compute once to factorize with the preconditioner
     if(!solver.factor(A, D))
     {
-#ifdef CGAL_PMP_SMOOTHING_VERBOSE
+#ifdef CGAL_PMP_SMOOTHING_DEBUG
       std::cerr << "Could not factorize linear system with preconditioner." << std::endl;
 #endif
       return false;
@@ -180,7 +181,7 @@ public:
        !solver.linear_solver(by, Xy) ||
        !solver.linear_solver(bz, Xz))
     {
-#ifdef CGAL_PMP_SMOOTHING_VERBOSE
+#ifdef CGAL_PMP_SMOOTHING_DEBUG
       std::cerr << "Could not solve linear system." << std::endl;
 #endif
       return false;

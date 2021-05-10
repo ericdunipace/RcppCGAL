@@ -3,12 +3,12 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_spherical_vert_decomp_helper.h $
-// $Id: Arr_spherical_vert_decomp_helper.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_spherical_vert_decomp_helper.h $
+// $Id: Arr_spherical_vert_decomp_helper.h 436ba5f 2020-06-30T21:23:16+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-// Author(s)     : Ron Wein <wein@post.tau.ac.il>
-//                 Efi Fogel <efif@post.tau.ac.il>
+// Author(s): Ron Wein <wein@post.tau.ac.il>
+//            Efi Fogel <efif@post.tau.ac.il>
 
 #ifndef CGAL_ARR_SPHERICAL_VERT_DECOMP_HELPER_H
 #define CGAL_ARR_SPHERICAL_VERT_DECOMP_HELPER_H
@@ -44,8 +44,13 @@ private:
 public:
   typedef typename Gt2::X_monotone_curve_2              X_monotone_curve_2;
 
-  typedef typename Arrangement_2::Face_const_handle     Face_const_handle;
   typedef typename Arrangement_2::Vertex_const_handle   Vertex_const_handle;
+  typedef typename Arrangement_2::Halfedge_const_handle Halfedge_const_handle;
+  typedef typename Arrangement_2::Face_const_handle     Face_const_handle;
+
+  typedef boost::variant<Vertex_const_handle, Halfedge_const_handle,
+                         Face_const_handle>             Cell_type;
+  typedef boost::optional<Cell_type>                    Vert_type;
 
 protected:
   typedef typename Arrangement_2::Topology_traits       Topology_traits;
@@ -80,17 +85,17 @@ public:
   //@}
 
   /*! Get the current top object. */
-  CGAL::Object top_object () const
+  Vert_type top_object () const
   {
     return (m_valid_north_pole) ?
-      CGAL::make_object (m_north_pole) : CGAL::make_object (m_north_face);
+      Vert_type(m_north_pole) : Vert_type(m_north_face);
   }
 
   /*! Get the current bottom object. */
-  CGAL::Object bottom_object () const
+  Vert_type bottom_object () const
   {
     return (m_valid_south_pole) ?
-      CGAL::make_object(m_south_pole) : CGAL::make_object(m_south_face);
+      Vert_type(m_south_pole) : Vert_type(m_south_face);
   }
 };
 

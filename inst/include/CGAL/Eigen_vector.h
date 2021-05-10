@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Solver_interface/include/CGAL/Eigen_vector.h $
-// $Id: Eigen_vector.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Solver_interface/include/CGAL/Eigen_vector.h $
+// $Id: Eigen_vector.h d6c1aba 2020-03-27T18:17:06+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Gael Guennebaud
@@ -33,9 +33,9 @@ which is a simple array of numbers.
 \sa `CGAL::Eigen_sparse_symmetric_matrix<T>`
 */
 
-template<class T>
+template<class T, int D = ::Eigen::Dynamic>
 class Eigen_vector
-  : public Eigen::Matrix<T, Eigen::Dynamic, 1>
+  : public ::Eigen::Matrix<T, D, 1>
 {
 // Public types
 public:
@@ -44,24 +44,24 @@ public:
   typedef T                                      NT;
 
   /// The internal vector type from \ref thirdpartyEigen "Eigen".
-  typedef Eigen::Matrix<T, Eigen::Dynamic, 1>    EigenType;
+  typedef ::Eigen::Matrix<T, D, 1>               EigenType;
   /// @}
 
 // Public operations
 public:
-  Eigen_vector<T>& operator=(const Eigen_vector<T>& other)
+  Eigen_vector& operator=(const Eigen_vector& other)
   {
     return static_cast<EigenType&>(*this) = other.eigen_object();
   }
 
-  Eigen_vector<T>& operator=(const EigenType& other)
+  Eigen_vector& operator=(const EigenType& other)
   {
-    return static_cast<Eigen_vector<T>&>(static_cast<EigenType&>(*this) = other);
+    return static_cast<Eigen_vector&>(static_cast<EigenType&>(*this) = other);
   }
-  Eigen_vector()
-    : EigenType()
-  {}
-  
+
+  /// Constructs a null vector.
+  Eigen_vector() : EigenType() {}
+
   /// Create a vector initialized with zeros.
   Eigen_vector(std::size_t dimension)
     : EigenType(static_cast<int>(dimension))

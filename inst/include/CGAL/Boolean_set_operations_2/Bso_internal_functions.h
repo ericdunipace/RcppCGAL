@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Bso_internal_functions.h $
-// $Id: Bso_internal_functions.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Bso_internal_functions.h $
+// $Id: Bso_internal_functions.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
 //                 Ron Wein        <wein@post.tau.ac.il>
@@ -88,7 +88,7 @@ inline OutputIterator _intersection(const Pgn1& pgn1, const Pgn2& pgn2,
 //@{
 
 template <class Traits>
-inline bool _is_empty (const typename Traits:: Polygon_2& pgn, Traits& tr) 
+inline bool _is_empty (const typename Traits:: Polygon_2& pgn, Traits& tr)
 {
   typedef typename Traits::Curve_const_iterator Curve_const_iterator;
   const std::pair<Curve_const_iterator, Curve_const_iterator>& itr_pair =

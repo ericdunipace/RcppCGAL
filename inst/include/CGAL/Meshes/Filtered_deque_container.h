@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Meshes/Filtered_deque_container.h $
-// $Id: Filtered_deque_container.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Meshes/Filtered_deque_container.h $
+// $Id: Filtered_deque_container.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement JAMIN
@@ -288,7 +288,7 @@ namespace Meshes {
 
     size_type size() const
     {
-	    return container.size();
+            return container.size();
     }
 
     // Warning: no_longer_element_to_refine_impl must have been called

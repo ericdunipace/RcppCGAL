@@ -1,16 +1,16 @@
-// Copyright (c) 1997-2001  
+// Copyright (c) 1997-2001
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Optimisation_basic/include/CGAL/Optimisation/Access_coordinates_begin_d.h $
-// $Id: Access_coordinates_begin_d.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Optimisation_basic/include/CGAL/Optimisation/Access_coordinates_begin_d.h $
+// $Id: Access_coordinates_begin_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Sven Schoenherr <sven@inf.ethz.ch>
 
@@ -52,17 +52,17 @@ class Access_coordinates_begin_d {
     // operations
 private:
     Coordinate_iterator
-    access( const Point& p, const Cartesian_tag&) const 
+    access( const Point& p, const Cartesian_tag&) const
     { return p.cartesian_begin(); }
-  
+
     Coordinate_iterator
-    access( const Point& p, const Homogeneous_tag&) const 
+    access( const Point& p, const Homogeneous_tag&) const
     { return p.homogeneous_begin(); }
-  
-  
+
+
 public:
     Coordinate_iterator
-    operator() ( const Point& p) const { 
+    operator() ( const Point& p) const {
       return p.homogeneous_begin();
     }
 };

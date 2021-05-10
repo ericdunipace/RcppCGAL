@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/de_Casteljau_2.h $
-// $Id: de_Casteljau_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/de_Casteljau_2.h $
+// $Id: de_Casteljau_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ron Wein     <wein@post.tau.ac.il>
 //                 Iddo Hanniel <iddoh@cs.technion.ac.il>
@@ -185,7 +185,7 @@ typename InputIterator::value_type de_Casteljau_2
 
   // The first control point goes to the (front of) the right subcurve,
   // while the last control point goes to the (back of) the left subcurve.
-  const _NT              comp_t0 = _NT(1) - t0; 
+  const _NT              comp_t0 = _NT(1) - t0;
   unsigned int           last_index = n_pts - 1;
 
   *left_ctrl_pts = vec[0];

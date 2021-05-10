@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Classification/include/CGAL/Classification/Feature/Simple_feature.h $
-// $Id: Simple_feature.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Feature/Simple_feature.h $
+// $Id: Simple_feature.h 0e934b1 2020-08-04T13:16:13+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -39,10 +39,10 @@ class Simple_feature : public Feature_base
 {
   const InputRange& m_input;
   PropertyMap m_pmap;
-  
+
 public:
   /*!
-    \brief Constructs the feature using an input range and a property map.
+    \brief constructs the feature using an input range and a property map.
 
     \param input point range.
     \param property_map property map to access scalar field.

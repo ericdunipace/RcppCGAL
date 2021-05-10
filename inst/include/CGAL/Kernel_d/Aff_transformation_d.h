@@ -1,16 +1,16 @@
-// Copyright (c) 1997-2000  
+// Copyright (c) 1997-2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_d/include/CGAL/Kernel_d/Aff_transformation_d.h $
-// $Id: Aff_transformation_d.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_d/include/CGAL/Kernel_d/Aff_transformation_d.h $
+// $Id: Aff_transformation_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 // Author(s)     : Michael Seel <seel@mpi-sb.mpg.de>
 
 #ifndef CGAL_AFF_TRANSFORMATION_D_H
@@ -40,14 +40,14 @@ class Aff_transformation_d : public pR::Aff_transformation_d_base
   Aff_transformation_d(int d, Identity_transformation tag) : Base(d,tag) {}
   Aff_transformation_d(const typename LA::Matrix& M) : Base(M) {}
   Aff_transformation_d(Translation tag, const Vector_d<R>& v) : Base(tag,v) {}
-  Aff_transformation_d(int d, Scaling tag, const RT& num, const RT& den) 
+  Aff_transformation_d(int d, Scaling tag, const RT& num, const RT& den)
     : Base(d,tag,num,den) {}
-  Aff_transformation_d(int d, Rotation tag, 
-		       const RT& sin_num, const RT& cos_num, 
+  Aff_transformation_d(int d, Rotation tag,
+                       const RT& sin_num, const RT& cos_num,
                        const RT& den, int e1 = 0, int e2 = 1)
     : Base(d,tag,sin_num,cos_num,den,e1,e2) {}
-  Aff_transformation_d(int d, Rotation tag, const Direction_d<R>& dir, 
-                       const RT& num, const RT& den, 
+  Aff_transformation_d(int d, Rotation tag, const Direction_d<R>& dir,
+                       const RT& num, const RT& den,
                        int e1 = 0, int e2 = 1)
     : Base(d,tag,dir,num,den,e1,e2) {}
   Aff_transformation_d(const Base& a) : Base(a) {}
@@ -64,7 +64,7 @@ class Aff_transformation_d : public pR::Aff_transformation_d_base
   bool operator==(const Self& a) const
   { return Base::operator==(a); }
   bool operator!=(const Self& a) const
-  { return Base::operator!=(a); } 
+  { return Base::operator!=(a); }
 
 };
 

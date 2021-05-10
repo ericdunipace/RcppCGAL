@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/shear.h $
-// $Id: shear.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/shear.h $
+// $Id: shear.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Kerber <mkerber@mpi-inf.mpg.de>
 //
@@ -32,9 +32,9 @@ namespace internal {
 
 /*! \ingroup NiX_bivariate_polynomial_hacks
  *  \brief Computes the polynomial f(x+sy,y)
- */ 
+ */
 template<class NT>
-CGAL::Polynomial<CGAL::Polynomial<NT> > 
+CGAL::Polynomial<CGAL::Polynomial<NT> >
 shear(const CGAL::Polynomial<CGAL::Polynomial<NT> >& f,NT s) {
     typedef CGAL::Polynomial<NT> Poly_1;
     typedef CGAL::Polynomial<Poly_1> Poly_2;
@@ -51,7 +51,7 @@ shear(const CGAL::Polynomial<CGAL::Polynomial<NT> >& f,NT s) {
 
     return typename CGAL::Polynomial_traits_d<Poly_2>::Substitute()
         (f,coeffs.begin(), coeffs.end());
-    
+
 }
 
 } // namespace internal

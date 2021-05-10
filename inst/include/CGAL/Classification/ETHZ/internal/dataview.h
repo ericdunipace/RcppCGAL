@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Classification/include/CGAL/Classification/ETHZ/internal/dataview.h $
-// $Id: dataview.h 0228f1e 2019-10-20T10:43:11+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/ETHZ/internal/dataview.h $
+// $Id: dataview.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LicenseRef-RFL
 // License notice in Installation/LICENSE.RFL
 //
@@ -21,7 +21,7 @@
 #include <vector>
 
 namespace CGAL { namespace internal {
-    
+
 namespace liblearning {
 //! \brief A view for one-dimensional data
 //
@@ -49,7 +49,7 @@ struct DataView1D {
         data(&vec[0]), step(1), num_elements(vec.size())
     {
     }
-    
+
     //! \brief Construct empty view
     DataView1D() : data(0), step(1), num_elements(0)
     {

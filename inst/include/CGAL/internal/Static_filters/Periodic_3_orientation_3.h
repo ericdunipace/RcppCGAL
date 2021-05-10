@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_triangulation_3/include/CGAL/internal/Static_filters/Periodic_3_orientation_3.h $
-// $Id: Periodic_3_orientation_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/internal/Static_filters/Periodic_3_orientation_3.h $
+// $Id: Periodic_3_orientation_3.h 5c8df66 2020-09-25T14:25:14+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -53,21 +53,7 @@ public:
    : Base(o3b), _dom(dom)
  { }
 
-#ifndef CGAL_CFG_MATCHING_BUG_6
   using Base::operator();
-#else
-  result_type
-  operator()(const Vector_3& u, const Vector_3& v, const Vector_3& w) const
-  {
-    return Base::operator()(u,v,w);
-  }
-
-  result_type
-  operator()(const Sphere_3& s) const
-  {
-    return Base::operator()(s);
-  }
-#endif
 
   result_type
   operator()(const Point_3 &p, const Point_3 &q,

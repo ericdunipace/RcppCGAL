@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/vertex_perturbation.h $
-// $Id: vertex_perturbation.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/vertex_perturbation.h $
+// $Id: vertex_perturbation.h 315a0b5 2020-01-29T16:27:53+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,12 +24,13 @@
 
 #include <CGAL/Mesh_3/C3T3_helpers.h>
 #include <CGAL/Mesh_3/Triangulation_helpers.h>
+#include <CGAL/Time_stamper.h>
 
 #ifdef CGAL_MESH_3_PERTURBER_VERBOSE
   #include <CGAL/Timer.h>
   #ifdef CGAL_LINKED_WITH_TBB
     #include <tbb/enumerable_thread_specific.h>
-    #include <tbb/atomic.h>
+    #include <atomic>
   #endif
 #endif
 
@@ -192,7 +193,7 @@ public:
 #endif
   {
 #ifdef CGAL_MESH_3_PERTURBER_VERBOSE
-    // Initialized here in case it's some tbb::atomic
+    // Initialized here in case it's some std::atomic
     total_counter_ = 0;
     total_time_ = 0;
 #endif
@@ -353,8 +354,8 @@ private:
   mutable int counter_;
 #ifdef CGAL_LINKED_WITH_TBB
   mutable tbb::enumerable_thread_specific<CGAL::Timer> timer_;
-  tbb::atomic<int> total_counter_;
-  tbb::atomic<std::size_t> total_time_;
+  std::atomic<int> total_counter_;
+  std::atomic<std::size_t> total_time_;
 #else
   mutable CGAL::Timer timer_;
   int total_counter_;

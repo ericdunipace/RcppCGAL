@@ -1,17 +1,14 @@
-// ======================================================================
-//
 // Copyright (c) 2005-2017 GeometryFactory (France).  All Rights Reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Subdivision_method_3/include/CGAL/Subdivision_method_3/internal/subdivision_hosts_impl_3.h $
-// $Id: subdivision_hosts_impl_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Subdivision_method_3/include/CGAL/Subdivision_method_3/internal/subdivision_hosts_impl_3.h $
+// $Id: subdivision_hosts_impl_3.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s): Le-Jeng Shiue <Andy.Shiue@gmail.com>
 //
-// ======================================================================
 
 #ifndef CGAL_SUBDIVISION_HOSTS_IMPL_3_H
 #define CGAL_SUBDIVISION_HOSTS_IMPL_3_H

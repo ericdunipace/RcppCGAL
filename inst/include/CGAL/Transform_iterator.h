@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Matrix_search/include/CGAL/Transform_iterator.h $
-// $Id: Transform_iterator.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Matrix_search/include/CGAL/Transform_iterator.h $
+// $Id: Transform_iterator.h 4b472db 2021-02-03T10:57:36+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Hoffmann <hoffmann@inf.ethz.ch>
 
@@ -30,11 +30,10 @@ namespace CGAL {
 template < class OutputIterator, class Operation >
 struct Transform_iterator {
   // Workaround. Added this non standard iterator category for VC8.
-  // Strange that no other iterator complains about this "feature" missing  
+  // Strange that no other iterator complains about this "feature" missing
   typedef std::_Unchecked_iterator_tag _Checked_iterator_category;
   typedef std::output_iterator_tag             iterator_category;
   typedef Transform_iterator< OutputIterator, Operation >   self;
-  typedef typename Operation::argument_type        argument_type;
 
   typedef typename std::iterator_traits<OutputIterator>::difference_type difference_type;
   typedef typename std::iterator_traits<OutputIterator>::value_type      value_type;
@@ -54,6 +53,7 @@ struct Transform_iterator {
 
   self& operator++( int) { return *this; }
 
+  template <typename argument_type>
   self& operator=( const argument_type& a) {
     *(o_++) = op_( a);
     return *this;

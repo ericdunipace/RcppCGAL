@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_2/include/CGAL/ch_graham_andrew.h $
-// $Id: ch_graham_andrew.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_2/include/CGAL/ch_graham_andrew.h $
+// $Id: ch_graham_andrew.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Stefan Schirra
 
@@ -23,14 +23,14 @@
 
 namespace CGAL {
 
-// computes the sorted sequence of extreme points which are not left 
+// computes the sorted sequence of extreme points which are not left
 // of $pq$ and reports this sequence in a range starting at |result|,
 // where $p$ is the value of |first| and $q$ is the value of |last| $-1$.
 // The sequence reported starts with $p$, point $q$ is omitted.
 // {\it Precondition:} The points in [|first|,|last|) are sorted with respect
-// to $pq$ and the range [|first|,|last|) contains at least two different 
+// to $pq$ and the range [|first|,|last|) contains at least two different
 // points.
-// {\sc traits}: uses |Traits::Left_turn_2| and |Traits::Equal_2| operating on the 
+// {\sc traits}: uses |Traits::Left_turn_2| and |Traits::Equal_2| operating on the
 // point type |Traits::Point_2|.
 template <class BidirectionalIterator, class OutputIterator, class Traits>
 OutputIterator
@@ -45,12 +45,12 @@ OutputIterator
 ch_graham_andrew_scan( BidirectionalIterator first,
                        BidirectionalIterator last,
                        OutputIterator        result )
-{ 
+{
     typedef std::iterator_traits<BidirectionalIterator> ITraits;
     typedef typename ITraits::value_type          value_type;
     typedef CGAL::Kernel_traits<value_type>       KTraits;
     typedef typename KTraits::Kernel              Kernel;
-    return ch_graham_andrew_scan( first, last, result, Kernel()); 
+    return ch_graham_andrew_scan( first, last, result, Kernel());
 }
 
 template <class BidirectionalIterator, class OutputIterator, class Traits>
@@ -77,12 +77,12 @@ OutputIterator
 ch_graham_andrew( InputIterator  first,
                   InputIterator  last,
                   OutputIterator result )
-{ 
+{
     typedef std::iterator_traits<InputIterator>   ITraits;
     typedef typename ITraits::value_type          value_type;
     typedef CGAL::Kernel_traits<value_type>       KTraits;
     typedef typename KTraits::Kernel              Kernel;
-    return ch_graham_andrew( first, last, result, Kernel()); 
+    return ch_graham_andrew( first, last, result, Kernel());
 }
 
 

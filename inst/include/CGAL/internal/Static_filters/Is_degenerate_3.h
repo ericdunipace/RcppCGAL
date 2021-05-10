@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Filtered_kernel/include/CGAL/internal/Static_filters/Is_degenerate_3.h $
-// $Id: Is_degenerate_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Filtered_kernel/include/CGAL/internal/Static_filters/Is_degenerate_3.h $
+// $Id: Is_degenerate_3.h 5c8df66 2020-09-25T14:25:14+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,33 +38,22 @@ public:
 
   typedef typename Base::result_type  result_type;
 
-
-#ifndef CGAL_CFG_MATCHING_BUG_6
   using Base::operator();
-#else // CGAL_CFG_MATCHING_BUG_6
-  template <typename T>
+
   result_type
-  operator()(const T& t) const
-  {
-    return Base()(t);
-  }
-#endif // end CGAL_CFG_MATCHING_BUG_6
-
-
-  result_type 
   operator()(const Segment_3& s) const
   {
     return Equal_3()(Construct_source_3()(s), Construct_target_3()(s));
   }
 
 
-  result_type 
+  result_type
   operator()(const Ray_3& r) const
   {
     return Equal_3()(Construct_source_3()(r), Construct_second_point_3()(r));
   }
 
-  result_type 
+  result_type
   operator()(const Plane_3& p) const
   {
     CGAL_BRANCH_PROFILER(std::string("semi-static attempts/calls to   : ") +

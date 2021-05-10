@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/Protect_edges_sizing_field.h $
-// $Id: Protect_edges_sizing_field.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/Protect_edges_sizing_field.h $
+// $Id: Protect_edges_sizing_field.h f69be33 2021-01-29T18:44:50+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stephane Tayeb, Laurent Rineau, Mael Rouxel-Labbé
@@ -40,18 +40,16 @@
 #include <CGAL/Mesh_3/Triangulation_helpers.h>
 
 #include <CGAL/enum.h>
-#include <CGAL/Has_timestamp.h>
-#include <CGAL/Hash_handles_with_or_without_timestamps.h>
 #include <CGAL/internal/Has_member_visited.h>
 #include <CGAL/iterator.h>
 #include <CGAL/number_utils.h>
 #include <CGAL/Periodic_3_Delaunay_triangulation_traits_3.h>
 #include <CGAL/Periodic_3_Delaunay_triangulation_3.h>
+#include <CGAL/Time_stamper.h>
 
 #include <CGAL/boost/iterator/transform_iterator.hpp>
 
-#include <boost/bind.hpp>
-#include <boost/function_output_iterator.hpp>
+#include <boost/iterator/function_output_iterator.hpp>
 #ifndef CGAL_NO_ASSERTIONS
 #  include <boost/math/special_functions/next.hpp> // for float_prior
 #endif
@@ -2893,7 +2891,7 @@ next_vertex_along_curve(const Vertex_handle& start,
   adjacent_vertices.erase
     (std::remove_if(adjacent_vertices.begin(),
                     adjacent_vertices.end(),
-                    boost::bind(&Adjacent_vertices::value_type::second, _1) != curve_index),
+                    [curve_index](const auto& p){ return p.second != curve_index;}),
      adjacent_vertices.end());
 
 //  typename Adjacent_vertices::const_iterator iv = adjacent_vertices.begin();

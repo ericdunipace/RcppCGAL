@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation/include/CGAL/Delaunay_triangulation.h $
-// $Id: Delaunay_triangulation.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation/include/CGAL/Delaunay_triangulation.h $
+// $Id: Delaunay_triangulation.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -729,9 +729,9 @@ Delaunay_triangulation<DCTraits, TDS>
         // consistent with the rest of the cells
         if (current_dimension() == 1)
         {
-            // Is "inf_v_cell" the right infinite cell? 
+            // Is "inf_v_cell" the right infinite cell?
             // Then inf_v_index should be 1
-            if (inf_v_cell->neighbor(inf_v_index)->index(inf_v_cell) == 0 
+            if (inf_v_cell->neighbor(inf_v_index)->index(inf_v_cell) == 0
                 && inf_v_index == 0)
             {
                 inf_v_cell->swap_vertices(
@@ -742,9 +742,9 @@ Delaunay_triangulation<DCTraits, TDS>
             {
                 inf_v_cell = inf_v_cell->neighbor((inf_v_index + 1) % 2);
                 inf_v_index = inf_v_cell->index(infinite_vertex());
-                // Is "inf_v_cell" the right infinite cell? 
+                // Is "inf_v_cell" the right infinite cell?
                 // Then inf_v_index should be 1
-                if (inf_v_cell->neighbor(inf_v_index)->index(inf_v_cell) == 0 
+                if (inf_v_cell->neighbor(inf_v_index)->index(inf_v_cell) == 0
                     && inf_v_index == 0)
                 {
                     inf_v_cell->swap_vertices(

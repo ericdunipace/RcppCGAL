@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/Mesher_level_default_implementations.h $
-// $Id: Mesher_level_default_implementations.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Mesher_level_default_implementations.h $
+// $Id: Mesher_level_default_implementations.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU, Clement JAMIN
 
@@ -27,10 +27,10 @@ class Triangulation_ref_impl
 {
   Tr& tr;
 public:
-  Triangulation_ref_impl(Tr& t) : tr(t) 
+  Triangulation_ref_impl(Tr& t) : tr(t)
   {
   }
-  
+
   Tr& triangulation_ref_impl()
   {
     return tr;
@@ -44,11 +44,11 @@ public:
 
 /** This struct implements an empty private_test_point_conflict_impl()
     function. */
-struct No_private_test_point_conflict 
+struct No_private_test_point_conflict
 {
   template <typename Point, typename Zone>
   Mesher_level_conflict_status
-  private_test_point_conflict_impl(const Point&, const Zone&) const 
+  private_test_point_conflict_impl(const Point&, const Zone&) const
   {
     return NO_CONFLICT;
   }
@@ -61,7 +61,7 @@ struct No_test_point_conflict_from_superior
   // For sequential
   template <typename Point, typename Zone>
   Mesher_level_conflict_status
-  test_point_conflict_from_superior_impl(const Point&, const Zone&) const 
+  test_point_conflict_from_superior_impl(const Point&, const Zone&) const
   {
     return NO_CONFLICT;
   }
@@ -69,7 +69,7 @@ struct No_test_point_conflict_from_superior
   // For parallel
   template <typename Point, typename Zone, typename Mesh_visitor>
   Mesher_level_conflict_status
-  test_point_conflict_from_superior_impl(const Point&, const Zone&, 
+  test_point_conflict_from_superior_impl(const Point&, const Zone&,
                                          Mesh_visitor &) const
   {
     return NO_CONFLICT;
@@ -80,7 +80,7 @@ struct No_test_point_conflict_from_superior
       - private_test_point_conflict_impl() and
       - test_point_conflict_from_superior_impl().
 */
-struct No_test_point_conflict : 
+struct No_test_point_conflict :
   public No_private_test_point_conflict,
   public No_test_point_conflict_from_superior
 {

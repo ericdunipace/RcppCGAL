@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_rat_arc/Rational_function_pair.h $
-// $Id: Rational_function_pair.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_rat_arc/Rational_function_pair.h $
+// $Id: Rational_function_pair.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Oren Salzman <orenzalz@post.tau.ac.il >
@@ -42,24 +42,24 @@ public:
   typedef typename Base::Multiplicity                 Multiplicity;
   typedef typename Base::Multiplicity_vector          Multiplicity_vector;
   typedef typename Base::Root_multiplicity_vector     Root_multiplicity_vector;
- 
+
 public:
   Rational_function_pair(const Rational_function_canonicalized_pair& rat_pair,
                          bool is_opposite = false) :
     _rat_pair(rat_pair), _is_opposite(is_opposite)
   {}
-       
+
   Comparison_result compare_f_g_at(const Algebraic_real_1& x ,
                                    CGAL::Sign epsilon = CGAL::ZERO)
   {
     Comparison_result cr =  _rat_pair.compare_f_g_at(x,epsilon);
-    return (_is_opposite) ? -cr : cr ; 
+    return (_is_opposite) ? -cr : cr ;
   }
 
   Comparison_result compare_f_g_at(Arr_parameter_space boundary)
   {
     Comparison_result cr =  _rat_pair.compare_f_g_at(boundary);
-    return (_is_opposite) ? -cr : cr ; 
+    return (_is_opposite) ? -cr : cr ;
   }
 
   bool is_intersecting_in_range(const Arr_parameter_space left_parameter_space,
@@ -81,13 +81,13 @@ public:
     return _rat_pair.multiplicities();
   }
 
-private:   
+private:
   const Rational_function_canonicalized_pair& _rat_pair;
   bool                   _is_opposite;
 }; // Rational_function_pair
 
 
 }   //namespace Arr_rational_arc
-}   //namespace CGAL {   
+}   //namespace CGAL {
 
 #endif //CGAL_RATIONAL_FUNCTION_ORDERED_PAIR_H

@@ -1,16 +1,16 @@
-// Copyright (c) 2000,2001  
+// Copyright (c) 2000,2001
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_d/include/CGAL/Kernel_d/Direction_d.h $
-// $Id: Direction_d.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_d/include/CGAL/Kernel_d/Direction_d.h $
+// $Id: Direction_d.h 127d76c 2020-06-10T17:57:54+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel
 
@@ -51,7 +51,7 @@ class Direction_d : public pR::Direction_d_base
 
 
   Direction_d(const Vector_d<R> &v) : Base(v) {}
-  Direction_d(int d, Base_direction, int i) : 
+  Direction_d(int d, Base_direction, int i) :
     Base(d,Base_direction(),i) {}
   Direction_d(const Base& p) : Base(p) {}
 
@@ -61,6 +61,10 @@ class Direction_d : public pR::Direction_d_base
   bool operator==(const Self& w) const
   { return Base::operator==(w); }
   bool operator!=(const Self& w) const
+  { return Base::operator!=(w); }
+  bool operator==(const Base& w) const
+  { return Base::operator==(w); }
+  bool operator!=(const Base& w) const
   { return Base::operator!=(w); }
 };
 

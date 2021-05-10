@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesher/include/CGAL/Surface_mesher/Vertices_on_the_same_surface_criterion.h $
-// $Id: Vertices_on_the_same_surface_criterion.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/Surface_mesher/Vertices_on_the_same_surface_criterion.h $
+// $Id: Vertices_on_the_same_surface_criterion.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -23,7 +23,7 @@ namespace CGAL {
   namespace Surface_mesher {
 
 template <typename Tr>
-class Vertices_on_the_same_surface_criterion : 
+class Vertices_on_the_same_surface_criterion :
     public Refine_criterion <Tr> {
   public:
     typedef Refine_criterion <Tr> Criterion;
@@ -44,10 +44,10 @@ class Vertices_on_the_same_surface_criterion :
 
       const int& number = v1->point().surface_index();
       if ( number == 0 ||
-	   (v2->point().surface_index() != number) ||
+           (v2->point().surface_index() != number) ||
            (v3->point().surface_index() != number ) )
       {
-	q = Quality(0);
+        q = Quality(0);
         return true;
       }
       else
@@ -55,7 +55,7 @@ class Vertices_on_the_same_surface_criterion :
         q = Quality(1);
         return false;
       }
-    } 
+    }
 }; // end Vertices_on_the_same_surface_criterion
 
 

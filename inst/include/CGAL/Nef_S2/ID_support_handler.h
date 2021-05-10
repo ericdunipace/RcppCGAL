@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_S2/include/CGAL/Nef_S2/ID_support_handler.h $
-// $Id: ID_support_handler.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_S2/include/CGAL/Nef_S2/ID_support_handler.h $
+// $Id: ID_support_handler.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     :     Peter Hachenberger  <hachenberger@mpi-sb.mpg.de>
 
@@ -30,77 +30,77 @@ class ID_support_handler {
 
   typedef typename Decorator::SVertex_handle SVertex_handle;
   typedef typename Decorator::SHalfedge_handle SHalfedge_handle;
-  
+
   typedef typename Decorator::SVertex_const_handle SVertex_const_handle;
   typedef typename Decorator::SHalfedge_const_handle SHalfedge_const_handle;
   typedef typename Decorator::SHalfloop_const_handle SHalfloop_const_handle;
-  
+
  public:
   ID_support_handler() {}
 
   int get_hash(int) { return 0; }
   template<typename Handle> void initialize_hash(Handle /*h*/) {}
   void initialize_hash(int /*i*/) {}
-  void handle_support(SVertex_handle , 
-		      SHalfedge_const_handle ,
-		      SHalfedge_const_handle ) {} 
-  
   void handle_support(SVertex_handle ,
-		      SHalfloop_const_handle ,
-		      SHalfloop_const_handle ) {}
-  
+                      SHalfedge_const_handle ,
+                      SHalfedge_const_handle ) {}
+
+  void handle_support(SVertex_handle ,
+                      SHalfloop_const_handle ,
+                      SHalfloop_const_handle ) {}
+
   void handle_support(SVertex_handle,
-		      SHalfloop_const_handle,
-		      SHalfedge_const_handle) {} 
-  
+                      SHalfloop_const_handle,
+                      SHalfedge_const_handle) {}
+
   void handle_support(SVertex_handle,
-		      SHalfedge_const_handle,
-		      SHalfloop_const_handle) {}
-  
+                      SHalfedge_const_handle,
+                      SHalfloop_const_handle) {}
+
   void handle_support(SVertex_handle,
-		      SHalfedge_const_handle,
-		      SVertex_const_handle) {}
-  
+                      SHalfedge_const_handle,
+                      SVertex_const_handle) {}
+
   void handle_support(SVertex_handle,
-		      SVertex_const_handle,
-		      SHalfedge_const_handle) {}
-  
+                      SVertex_const_handle,
+                      SHalfedge_const_handle) {}
+
   void handle_support(SVertex_handle,
-		      SVertex_const_handle,
-		      SVertex_const_handle) {}
-  
+                      SVertex_const_handle,
+                      SVertex_const_handle) {}
+
   void handle_support(SVertex_handle,
-		      SVertex_const_handle) {}
-  
+                      SVertex_const_handle) {}
+
   void handle_support(SVertex_handle,
-		      SVertex_const_handle,
-		      SHalfloop_const_handle) {}
-  
+                      SVertex_const_handle,
+                      SHalfloop_const_handle) {}
+
   void handle_support(SVertex_handle,
-		      SHalfloop_const_handle,
-		      SVertex_const_handle) {}
-  
+                      SHalfloop_const_handle,
+                      SVertex_const_handle) {}
+
   void handle_support(SHalfedge_handle,
-		      SHalfedge_const_handle,
-		      SHalfedge_const_handle) {}
-  
+                      SHalfedge_const_handle,
+                      SHalfedge_const_handle) {}
+
   void handle_support(SHalfedge_handle,
-		      SHalfedge_const_handle) {}
-  
+                      SHalfedge_const_handle) {}
+
   void handle_support(SHalfedge_handle,
-		      SHalfloop_const_handle) {}
-  
+                      SHalfloop_const_handle) {}
+
   void handle_support(SHalfedge_handle,
-		      SHalfedge_const_handle,
-		      SHalfloop_const_handle) {}
-  
+                      SHalfedge_const_handle,
+                      SHalfloop_const_handle) {}
+
   void handle_support(SHalfedge_handle,
-		      SHalfloop_const_handle,
-		      SHalfedge_const_handle) {}
-  
+                      SHalfloop_const_handle,
+                      SHalfedge_const_handle) {}
+
   void handle_support(SHalfedge_handle,
-		      SHalfloop_const_handle,
-		      SHalfloop_const_handle) {}
+                      SHalfloop_const_handle,
+                      SHalfloop_const_handle) {}
 };
 
 

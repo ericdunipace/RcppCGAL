@@ -4,10 +4,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesher/include/CGAL/Surface_mesher/Vertices_on_the_same_psc_element_criterion.h $
-// $Id: Vertices_on_the_same_psc_element_criterion.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/Surface_mesher/Vertices_on_the_same_psc_element_criterion.h $
+// $Id: Vertices_on_the_same_psc_element_criterion.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -24,19 +24,19 @@ namespace CGAL {
 namespace Surface_mesher {
 
 template <typename Tr, typename Surface>
-class Vertices_on_the_same_psc_element_criterion : 
+class Vertices_on_the_same_psc_element_criterion :
     public Refine_criterion <Tr> {
 public:
   typedef Refine_criterion <Tr> Criterion;
   typedef typename Criterion::Quality Quality;
-  
+
 private:
   typedef typename Tr::Facet Facet;
   typedef typename Tr::Vertex_handle Vertex_handle;
   typedef typename Tr::Cell_handle Cell_handle;
 
   const Surface& surface;
-  
+
 public:
   Vertices_on_the_same_psc_element_criterion(const Surface& surface)
     : surface(surface)
@@ -50,7 +50,7 @@ public:
     const Vertex_handle& v2 = ch->vertex((i+2)&3);
     const Vertex_handle& v3 = ch->vertex((i+3)&3);
 
-    const bool is_bad = 
+    const bool is_bad =
       surface.vertices_not_on_same_surface_patch(v1, v2, v3);
 
     q = (is_bad ? Quality(0) : Quality(1));

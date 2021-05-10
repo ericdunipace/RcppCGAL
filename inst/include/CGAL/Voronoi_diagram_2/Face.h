@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Face.h $
-// $Id: Face.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Face.h $
+// $Id: Face.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -87,7 +87,7 @@ class Face
     // testing for infinity):
     //           vda_->edge_rejector()(vda_->dual(), ec)
     while ( vda_->edge_rejector()(vda_->dual(), ec) ||
-	    vda_->dual().is_infinite(ec) ) {
+            vda_->dual().is_infinite(ec) ) {
       ++ec;
       CGAL_assertion( ec != ec_start );
     }
@@ -102,9 +102,9 @@ class Face
 #endif
 
     return
-      Halfedge_handle( 
-		      Halfedge(vda_, ec->first->neighbor(ec->second), i_mirror)
-		      );
+      Halfedge_handle(
+                      Halfedge(vda_, ec->first->neighbor(ec->second), i_mirror)
+                      );
   }
 
   Ccb_halfedge_circulator ccb() const {

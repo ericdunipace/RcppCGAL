@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Iterator_adaptors.h $
-// $Id: Iterator_adaptors.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Iterator_adaptors.h $
+// $Id: Iterator_adaptors.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -117,9 +117,9 @@ class Iterator_adaptor_base
 template<class VDA, class Base_it, class Tag = CGAL::Tag_true>
 class Edge_iterator_adaptor
   : public Iterator_adaptor_base<VDA,
-				 Edge_iterator_adaptor<VDA,Base_it,Tag>,
-				 Base_it,
-				 typename VDA::Halfedge>
+                                 Edge_iterator_adaptor<VDA,Base_it,Tag>,
+                                 Base_it,
+                                 typename VDA::Halfedge>
 {
  protected:
   typedef Triangulation_cw_ccw_2   CW_CCW_2;
@@ -162,8 +162,8 @@ class Edge_iterator_adaptor
       int cw_i  = CW_CCW_2::cw( this->cur_->second );
       int ccw_i = CW_CCW_2::ccw( this->cur_->second );
       this->value_ =
-	Halfedge(this->vda_, this->cur_->first->vertex(ccw_i),
-		 this->cur_->first->vertex(cw_i));
+        Halfedge(this->vda_, this->cur_->first->vertex(ccw_i),
+                 this->cur_->first->vertex(cw_i));
       return;
     }
 
@@ -200,9 +200,9 @@ class Edge_iterator_adaptor
 template<class VDA, class Base_it>
 class Halfedge_iterator_adaptor
   : public Iterator_adaptor_base<VDA,
-				 Halfedge_iterator_adaptor<VDA,Base_it>,
-				 Base_it,
-				 typename VDA::Halfedge>
+                                 Halfedge_iterator_adaptor<VDA,Base_it>,
+                                 Base_it,
+                                 typename VDA::Halfedge>
 {
 private:
   typedef Halfedge_iterator_adaptor<VDA,Base_it>   Self;
@@ -300,9 +300,9 @@ private:
 template<class VDA, class Base_it>
 class Face_iterator_adaptor
   : public Iterator_adaptor_base<VDA,
-				 Face_iterator_adaptor<VDA,Base_it>,
-				 Base_it,
-				 typename VDA::Face>
+                                 Face_iterator_adaptor<VDA,Base_it>,
+                                 Base_it,
+                                 typename VDA::Face>
 {
  private:
   typedef Face_iterator_adaptor<VDA,Base_it>    Self;
@@ -321,7 +321,7 @@ class Face_iterator_adaptor
   Face_iterator_adaptor(const VDA* vda = nullptr) : Base(vda) {}
 
   Face_iterator_adaptor(const VDA* vda,
-			const Base_iterator& cur)
+                        const Base_iterator& cur)
     : Base(vda, cur) {}
 
   operator Face_handle() const {
@@ -350,9 +350,9 @@ class Face_iterator_adaptor
 template<class VDA, class Base_it>
 class Vertex_iterator_adaptor :
   public Iterator_adaptor_base<VDA,
-			       Vertex_iterator_adaptor<VDA,Base_it>,
-			       Base_it,
-			       typename VDA::Vertex>
+                               Vertex_iterator_adaptor<VDA,Base_it>,
+                               Base_it,
+                               typename VDA::Vertex>
 {
  private:
   typedef Vertex_iterator_adaptor<VDA,Base_it>    Self;

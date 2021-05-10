@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/assertions_impl.h $
-// $Id: assertions_impl.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/assertions_impl.h $
+// $Id: assertions_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -30,8 +30,6 @@
 
 namespace CGAL {
 
-namespace {
-
 #ifdef CGAL_HEADER_ONLY
 
 inline Failure_behaviour& get_static_error_behaviour()
@@ -47,6 +45,8 @@ inline Failure_behaviour& get_static_warning_behaviour()
 
 #else // CGAL_HEADER_ONLY
 
+namespace {
+
 // behaviour variables
 // -------------------
 
@@ -58,7 +58,11 @@ inline Failure_behaviour& get_static_error_behaviour()
 inline Failure_behaviour& get_static_warning_behaviour()
 { return _warning_behaviour; }
 
+} // anonymous namespace
+
 #endif // CGAL_HEADER_ONLY
+
+namespace {
 
 // standard error handlers
 // -----------------------
@@ -82,7 +86,7 @@ _standard_error_handler(
          << "Line       : " << line << std::endl
          << "Explanation: " << msg << std::endl
          << "Refer to the bug-reporting instructions at https://www.cgal.org/bug_report.html"
-	 << std::endl;
+         << std::endl;
 }
 
 
@@ -107,8 +111,10 @@ _standard_warning_handler( const char *,
          << "Line       : " << line << std::endl
          << "Explanation: " << msg << std::endl
          << "Refer to the bug-reporting instructions at https://www.cgal.org/bug_report.html"
-	 << std::endl;
+         << std::endl;
 }
+
+} // anonymous namespace
 
 #ifdef CGAL_HEADER_ONLY
 
@@ -124,6 +130,9 @@ inline Failure_function& get_static_warning_handler()
 }
 
 #else // CGAL_HEADER_ONLY
+
+namespace {
+
 // default handler settings
 // ------------------------
 Failure_function _error_handler   = _standard_error_handler;
@@ -134,9 +143,9 @@ inline Failure_function& get_static_error_handler()
 inline Failure_function& get_static_warning_handler()
 { return _warning_handler; }
 
-#endif // CGAL_HEADER_ONLY
-
 } // anonymous namespace
+
+#endif // CGAL_HEADER_ONLY
 
 // failure functions
 // -----------------

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_site_2.h $
-// $Id: Apollonius_site_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_site_2.h $
+// $Id: Apollonius_site_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -36,9 +36,9 @@ public:
 
 public:
   Apollonius_site_2(const Point_2& p = Point_2(),
-		    const Weight& w = Weight(0))
+                    const Weight& w = Weight(0))
     : _p(p), _w(w) {}
-  
+
   const Point_2& point() const { return _p; }
   const Weight&  weight() const { return _w; }
   RT      x() const { return _p.x(); }

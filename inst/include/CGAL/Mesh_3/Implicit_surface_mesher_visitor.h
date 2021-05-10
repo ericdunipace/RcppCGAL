@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/Implicit_surface_mesher_visitor.h $
-// $Id: Implicit_surface_mesher_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Implicit_surface_mesher_visitor.h $
+// $Id: Implicit_surface_mesher_visitor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -51,7 +51,7 @@ namespace CGAL {
 //           CGAL_MESHES_OUTPUT_STREAM << "?";
 //           v->point().set_surface_index(1);
 //         }
-// 	CGAL_MESHES_OUTPUT_STREAM << v->point().surface_index();
+//         CGAL_MESHES_OUTPUT_STREAM << v->point().surface_index();
       }
 
       template <typename E, typename P, typename Z>

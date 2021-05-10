@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/internal/Mesh_3/helpers.h $
-// $Id: helpers.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/internal/Mesh_3/helpers.h $
+// $Id: helpers.h 98e4838 2021-02-17T15:49:48+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -45,7 +45,7 @@ void dump_graph_edges(std::ostream& out, const Graph& g)
   typedef typename boost::graph_traits<Graph>::edge_descriptor edge_descriptor;
 
   out.precision(17);
-  for(edge_descriptor e : edges(g))
+  for(edge_descriptor e : CGAL::make_range(edges(g)))
   {
     vertex_descriptor s = source(e, g);
     vertex_descriptor t = target(e, g);
@@ -82,7 +82,7 @@ struct Angle_tester
       const typename Kernel::Point_3& p1 = g[v1];
       const typename Kernel::Point_3& p2 = g[v2];
 
-      return (CGAL::angle(p1, p, p2) == CGAL::ACUTE);
+      return (CGAL::angle(p1, p, p2) != CGAL::OBTUSE);
     }
   }
 };

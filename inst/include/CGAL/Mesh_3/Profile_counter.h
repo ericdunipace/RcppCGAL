@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/Profile_counter.h $
-// $Id: Profile_counter.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Profile_counter.h $
+// $Id: Profile_counter.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sylvain Pion, Laurent Rineau
@@ -40,9 +40,9 @@
 #  define CGAL_MESH_3_HISTOGRAM_PROFILER(Y, Z)
 #  define CGAL_MESH_3_BRANCH_PROFILER(Y, NAME)
 #  define CGAL_MESH_3_BRANCH_PROFILER_BRANCH(NAME)
-#  define CGAL_MESH_3_BRANCH_PROFILER_3(Y, NAME) 
+#  define CGAL_MESH_3_BRANCH_PROFILER_3(Y, NAME)
 #  define CGAL_MESH_3_BRANCH_PROFILER_BRANCH_1(NAME)
-#  define CGAL_MESH_3_BRANCH_PROFILER_BRANCH_2(NAME) 
+#  define CGAL_MESH_3_BRANCH_PROFILER_BRANCH_2(NAME)
 #endif
 
 #endif // CGAL_MESH_3_PROFILE_COUNTER_H

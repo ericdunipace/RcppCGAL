@@ -8,12 +8,12 @@
 // https://www.boost.org/LICENSE_1_0.txt)
 //=======================================================================
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/internal/boost/array_binary_tree.hpp $
-// $Id: array_binary_tree.hpp a472c24 2019-03-20T08:59:22+01:00 Andreas Fabri
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/internal/boost/array_binary_tree.hpp $
+// $Id: array_binary_tree.hpp 2876ad9 2020-04-10T18:15:32+02:00 Sébastien Loriot
 // SPDX-License-Identifier: BSL-1.0
 //
 // NOTE: this file have been taken from boost 1.46.1 for using
-//       with Modificable_priority_queue (to enhance the 
+//       with Modificable_priority_queue (to enhance the
 //       non-documented mutable_queue).
 //       original file is <boost/graph/detail/array_binary_tree.hpp>
 //
@@ -23,6 +23,7 @@
 #include <CGAL/iterator.h>
 
 #include <boost/config.hpp>
+#include <boost/iterator.hpp>
 
 #include <functional>
 

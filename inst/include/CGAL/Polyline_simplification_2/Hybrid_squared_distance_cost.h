@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polyline_simplification_2/include/CGAL/Polyline_simplification_2/Hybrid_squared_distance_cost.h $
-// $Id: Hybrid_squared_distance_cost.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polyline_simplification_2/include/CGAL/Polyline_simplification_2/Hybrid_squared_distance_cost.h $
+// $Id: Hybrid_squared_distance_cost.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri, Fernando Cacciola
@@ -38,7 +38,7 @@ public:
   Hybrid_squared_distance_cost( FT ratio ) : mSquaredRatio(ratio*ratio) {}
 
   /// Compute the hybrid squared distance cost.
-  /// 
+  ///
   /// Given a vertex in constraint iterator `vicq` computes `vicp=std::prev(vicq)` and `vicr=std::next(vicq)`,
   /// returns the maximal square distance between each point along the original subpolyline,
   /// between `vicp` and `vicr`,
@@ -59,14 +59,14 @@ public:
     typedef typename Geom_traits::Compute_squared_distance_2 Compute_squared_distance;
     typedef typename Geom_traits::Construct_segment_2        Construct_segment;
     typedef typename Geom_traits::Segment_2                  Segment;
-    typedef typename Geom_traits::Point_2                    Point;                   
+    typedef typename Geom_traits::Point_2                    Point;
 
     Compute_squared_distance compute_squared_distance = pct.geom_traits().compute_squared_distance_2_object() ;
     Construct_segment        construct_segment        = pct.geom_traits().construct_segment_2_object() ;
     typedef typename Constrained_triangulation_plus_2<CDT>::Vertices_in_constraint_iterator Vertices_in_constraint_iterator;
 
-    Vertices_in_constraint_iterator vicp = boost::prior(vicq); 
-    Vertices_in_constraint_iterator vicr = boost::next(vicq); 
+    Vertices_in_constraint_iterator vicp = boost::prior(vicq);
+    Vertices_in_constraint_iterator vicr = boost::next(vicq);
 
     Point const& lP = (*vicp)->point();
     Point const& lR = (*vicr)->point();
@@ -85,7 +85,7 @@ public:
     Vertex_circulator vc = pct.incident_vertices(*vicq), done(vc);
     do {
       if((vc != pct.infinite_vertex()) && (vc != *vicp) && (vc != *vicr)){
-	d2 = (std::min)(d2, compute_squared_distance(vc->point(), (*vicq)->point()));
+        d2 = (std::min)(d2, compute_squared_distance(vc->point(), (*vicq)->point()));
       }
       ++vc;
     }while(vc != done);

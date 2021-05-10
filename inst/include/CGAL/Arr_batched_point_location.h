@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_batched_point_location.h $
-// $Id: Arr_batched_point_location.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_batched_point_location.h $
+// $Id: Arr_batched_point_location.h 0626eb0 2020-06-11T12:32:33+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
@@ -41,11 +41,9 @@ namespace Ss2 = Surface_sweep_2;
  * \param oi Output: An output iterator for the query results.
  * \pre The value-type of PointsIterator is Arrangement::Point_2,
  *      and the value-type of OutputIterator is is pair<Point_2, Result>,
- *      where Result is either
- *       (i) Object or
- *      (ii) boost::optional<boost::variant<Vertex_const_handle,
- *                                          Halfedge_const_handle,
- *                                          Face_const_handle> >.
+ *      where Result is boost::optional<boost::variant<Vertex_const_handle,
+ *                                      Halfedge_const_handle,
+ *                                      Face_const_handle> >.
  *      It represents the arrangement feature containing the point.
  */
 template <typename GeometryTraits_2, typename TopologyTraits,

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/in_place_edge_list.h $
-// $Id: in_place_edge_list.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/in_place_edge_list.h $
+// $Id: in_place_edge_list.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -75,7 +75,7 @@ public:
 
   inline bool is_first(const Edge& e) const {
     return ( (e.first == _front.first &&
-	      e.second == _front.second) );
+              e.second == _front.second) );
   }
 
 public:

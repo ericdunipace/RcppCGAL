@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygonal_surface_reconstruction/include/CGAL/internal/parameters.h $
-// $Id: parameters.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygonal_surface_reconstruction/include/CGAL/internal/parameters.h $
+// $Id: parameters.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan
@@ -15,16 +15,16 @@
 
 namespace CGAL {
 
-	/// When an intersecting point (at an edge, computed from a plane and an edge)
-	/// is very close to an existing vertex (i.e., an end point of an edge), we
-	/// snap the intersecting point to the existing vertex. This way we can avoid
-	/// many thin faces.
-	/// \note Value really doesn't matter as long as it is small (default is 1e-10).
-	///       So this parameter is not intended to be changed by the user.
-	template <class FT>
-	FT snap_squared_distance_threshold() {
-		return FT(1e-10);
-	}
+        /// When an intersecting point (at an edge, computed from a plane and an edge)
+        /// is very close to an existing vertex (i.e., an end point of an edge), we
+        /// snap the intersecting point to the existing vertex. This way we can avoid
+        /// many thin faces.
+        /// \note Value really doesn't matter as long as it is small (default is 1e-10).
+        ///       So this parameter is not intended to be changed by the user.
+        template <class FT>
+        FT snap_squared_distance_threshold() {
+                return FT(1e-10);
+        }
 
 
 } //namespace CGAL

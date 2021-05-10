@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Is_degenerate_edge_C2.h $
-// $Id: Is_degenerate_edge_C2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Is_degenerate_edge_C2.h $
+// $Id: Is_degenerate_edge_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -58,7 +58,7 @@ public:
   typedef bool               result_type;
 
   bool operator()(const Site_2& p1, const Site_2& p2,
-		  const Site_2& p3, const Site_2& p4) const
+                  const Site_2& p3, const Site_2& p4) const
   {
     Method_tag tag;
 

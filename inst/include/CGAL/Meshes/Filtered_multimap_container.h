@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Meshes/Filtered_multimap_container.h $
-// $Id: Filtered_multimap_container.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Meshes/Filtered_multimap_container.h $
+// $Id: Filtered_multimap_container.h 4fc2f59 2020-07-31T16:17:56+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement JAMIN
@@ -120,10 +120,16 @@ namespace CGAL {
     template<typename Container>
     void splice_local_lists_impl(Container &container)
     {
+#ifdef CGAL_MESH_3_VERY_VERBOSE
+      std::cerr << "Filtered_multimap_container::splice_local_lists_impl()\n";
+#endif
       for(typename LocalList::iterator it_list = m_local_lists.begin() ;
           it_list != m_local_lists.end() ;
           ++it_list )
       {
+#ifdef CGAL_MESH_3_VERY_VERBOSE
+        std::cerr << "  - " << it_list->size() << " elements\n";
+#endif
         container.insert(it_list->begin(), it_list->end());
         it_list->clear();
       }
@@ -262,7 +268,7 @@ namespace CGAL {
 
     size_type size() const
     {
-	    return container.size();
+            return container.size();
     }
 
     // Clear

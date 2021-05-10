@@ -3,11 +3,11 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_vertical_decomposition_2.h $
-// $Id: Arr_vertical_decomposition_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_vertical_decomposition_2.h $
+// $Id: Arr_vertical_decomposition_2.h 3c5552b 2020-06-30T21:22:40+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-// Author(s)     : Ron Wein <wein@post.tau.ac.il>
+// Author(s): Ron Wein <wein@post.tau.ac.il>
 
 #ifndef CGAL_ARR_VERTICAL_DECOMPOSITION_2_H
 #define CGAL_ARR_VERTICAL_DECOMPOSITION_2_H
@@ -34,14 +34,13 @@ namespace Ss2 = Surface_sweep_2;
 /*! Perform a vertical decomposition of an arrangement, by performing a
  * "batched vertical ray-shooting" query from all arrangement vertices.
  * \param arr The arrangement.
- * \param oi Output: An output iterator of the vertices, each paired with
- *                   a pair of arrangement features that lie below and above
- *                   it, respectively.
- *                   The vertices are sorted by increasing xy-order.
+ * \param oi An output iterator of the vertices, each paired with a pair of
+ *           arrangement features that lie below and above it, respectively.
+ *           The vertices are sorted by increasing xy-order.
+ *           The OutputIterator dereferences the type \c
+ *           pair<Vertex_const_handle, pair<Vert_type, Vert_type> >, where
+ *           \c Vert_type is an optional handle to an arrangement feature.
  * \return A past-the-end iterator for the ordered arrangement vertices.
- * \pre The value-type of OutputIterator is
- *      pair<Vertex_const_handle, pair<Object, Object> >, where
- *      the Object represents a handle to an arrangement feature.
  */
 template <typename GeometryTraits_2, typename TopologyTraits,
           typename OutputIterator>

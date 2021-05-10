@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_triangulation_3/include/CGAL/internal/Periodic_3_triangulation_dummy_36.h $
-// $Id: Periodic_3_triangulation_dummy_36.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/internal/Periodic_3_triangulation_dummy_36.h $
+// $Id: Periodic_3_triangulation_dummy_36.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,7 +16,7 @@ template < class GT, class TDS >
 inline std::vector<typename Periodic_3_triangulation_3<GT,TDS>::Vertex_handle >
 Periodic_3_triangulation_3<GT,TDS>::insert_dummy_points() {
 
-    
+
 static const unsigned V[216][4] = {
   { 3, 9, 4, 12 },
   { 28, 8, 3, 6 },
@@ -236,7 +236,7 @@ static const unsigned V[216][4] = {
   { 35, 0, 34, 32 }
 };
 
-  
+
 static const unsigned N[216][4] = {
    { 48, 7, 76, 55 },
    { 69, 118, 79, 149 },
@@ -674,7 +674,7 @@ static const int O[216][4] = {
   { 0,5,5,4 },
   { 6,7,2,4 }
 };
- 
+
   clear();
 
   Vertex_handle vertices[36];

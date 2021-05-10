@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/BGL/include/CGAL/boost/graph/Named_function_parameters.h $
-// $Id: Named_function_parameters.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/BGL/include/CGAL/boost/graph/Named_function_parameters.h $
+// $Id: Named_function_parameters.h 2556196 2020-03-23T08:56:47+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -194,6 +194,7 @@ get_parameter(const Named_function_parameters<T, Tag, Base>& np, Query_tag tag)
   return internal_np::get_parameter_impl(static_cast<const internal_np::Named_params_impl<T, Tag, Base>&>(np), tag);
 }
 
+// Two parameters, non-trivial default value
 template <typename D>
 D choose_parameter(const internal_np::Param_not_found&, const D& d)
 {
@@ -201,8 +202,20 @@ D choose_parameter(const internal_np::Param_not_found&, const D& d)
 }
 
 template <typename T, typename D>
-const T&
-choose_parameter(const T& t, const D&)
+const T& choose_parameter(const T& t, const D&)
+{
+  return t;
+}
+
+// single parameter so that we can avoid a default construction
+template <typename D>
+D choose_parameter(const internal_np::Param_not_found&)
+{
+  return D();
+}
+
+template <typename D, typename T>
+const T& choose_parameter(const T& t)
 {
   return t;
 }

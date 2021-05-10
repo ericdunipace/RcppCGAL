@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Classification/include/CGAL/Classification/Feature/Verticality.h $
-// $Id: Verticality.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Feature/Verticality.h $
+// $Id: Verticality.h 0e934b1 2020-08-04T13:16:13+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -43,10 +43,10 @@ class Verticality : public Feature_base
   const typename GeomTraits::Vector_3 vertical;
   std::vector<compressed_float> verticality_feature;
   const Local_eigen_analysis* eigen;
-  
+
 public:
   /*!
-    \brief Constructs the feature using local eigen analysis.
+    \brief constructs the feature using local eigen analysis.
 
     \tparam InputRange model of `ConstRange`. Its iterator type
     is `RandomAccessIterator`.
@@ -64,7 +64,7 @@ public:
 
 
   /*!
-    \brief Constructs the feature using provided normals of points.
+    \brief constructs the feature using provided normals of points.
 
     \tparam PointRange model of `ConstRange`. Its iterator type
     is `RandomAccessIterator` and its value type is the key type of

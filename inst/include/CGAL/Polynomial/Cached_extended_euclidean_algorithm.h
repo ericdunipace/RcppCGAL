@@ -2,13 +2,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polynomial/include/CGAL/Polynomial/Cached_extended_euclidean_algorithm.h $
-// $Id: Cached_extended_euclidean_algorithm.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polynomial/include/CGAL/Polynomial/Cached_extended_euclidean_algorithm.h $
+// $Id: Cached_extended_euclidean_algorithm.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Michael Hemmer <mhemmer@uni-mainz.de>
-//                 
+//
 // ============================================================================
 
 #ifndef CGAL_POLYNOMIAL_CACHED_EXTENDED_EUCLIDEAN_ALGORITHM_H
@@ -21,21 +21,21 @@
 namespace CGAL {
 namespace internal{
 
-template <class UFD, int i = 0 > 
+template <class UFD, int i = 0 >
 struct Cached_extended_euclidean_algorithm{
 
   struct Extended_euclidean_algorithm{
     typedef std::pair<UFD,UFD> result_type;
-    typedef std::pair<UFD,UFD> first_argument_type; 
+    typedef std::pair<UFD,UFD> first_argument_type;
     result_type operator()(const first_argument_type& pq){
-      result_type result; 
+      result_type result;
       CGAL::extended_euclidean_algorithm(
           pq.first, pq.second, result.first, result.second);
       return result;
     }
   };
-  
-  typedef std::pair<UFD,UFD> PAIR; 
+
+  typedef std::pair<UFD,UFD> PAIR;
   typedef Extended_euclidean_algorithm FUNC;
   typedef CGAL::Cache<PAIR,PAIR,FUNC> CACHE;
   static CACHE& get_cache()

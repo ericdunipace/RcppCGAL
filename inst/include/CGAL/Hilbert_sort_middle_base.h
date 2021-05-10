@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Spatial_sorting/include/CGAL/Hilbert_sort_middle_base.h $
-// $Id: Hilbert_sort_middle_base.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Spatial_sorting/include/CGAL/Hilbert_sort_middle_base.h $
+// $Id: Hilbert_sort_middle_base.h 5c41b10 2020-01-02T10:26:44+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     :  Olivier Devillers
@@ -19,16 +19,18 @@ namespace CGAL {
 
 namespace internal {
 
-    template <class RandomAccessIterator, class Cmp>
-    RandomAccessIterator
-    fixed_hilbert_split (RandomAccessIterator begin, RandomAccessIterator end,
-                   Cmp cmp = Cmp ())
-    {
-        if (begin >= end) return begin;
+template <class RandomAccessIterator, class Cmp>
+RandomAccessIterator
+fixed_hilbert_split (RandomAccessIterator begin, RandomAccessIterator end,
+                     Cmp cmp = Cmp ())
+{
+  if (begin >= end)
+    return begin;
 
-        return std::partition (begin, end, cmp);
-    }
+  return std::partition (begin, end, cmp);
 }
+
+} // namespace internal
 
 } // namespace CGAL
 

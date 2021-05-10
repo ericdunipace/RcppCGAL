@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Combinatorial_map/include/CGAL/Cell_iterators.h $
-// $Id: Cell_iterators.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Combinatorial_map/include/CGAL/Cell_iterators.h $
+// $Id: Cell_iterators.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -433,7 +433,7 @@ namespace CGAL {
     {}
     /// Constructor with a dart in parameter (for end iterator).
     CMap_one_dart_per_cell_iterator(Map& amap, Dart_handle adart):
-	     Base(amap, adart)
+             Base(amap, adart)
     {}
   };
 //****************************************************************************

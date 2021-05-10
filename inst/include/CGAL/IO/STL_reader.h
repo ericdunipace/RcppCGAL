@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polyhedron_IO/include/CGAL/IO/STL_reader.h $
-// $Id: STL_reader.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polyhedron_IO/include/CGAL/IO/STL_reader.h $
+// $Id: STL_reader.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri,
@@ -15,7 +15,9 @@
 #include <CGAL/IO/io.h>
 #include <CGAL/IO/reader_helpers.h>
 
-#include <boost/cstdint.hpp> 
+#include <CGAL/Container_helper.h>
+
+#include <boost/cstdint.hpp>
 
 #include <cctype>
 #include <iostream>
@@ -43,7 +45,7 @@ bool read_ASCII_facet(std::istream& input,
   double x,y,z;
   Point p;
   Triangle ijk;
-  IO::internal::resize(ijk, 3);
+  CGAL::internal::resize(ijk, 3);
 
   while(input >> s)
   {
@@ -213,7 +215,7 @@ bool parse_binary_STL(std::istream& input,
     }
 
     Triangle ijk;
-    IO::internal::resize(ijk, 3);
+    CGAL::internal::resize(ijk, 3);
 
     for(int j=0; j<3; ++j)
     {

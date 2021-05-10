@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_ImageIO/include/CGAL/ImageIO/analyze.h $
-// $Id: analyze.h 07c4ada 2019-10-19T15:50:09+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_ImageIO/include/CGAL/ImageIO/analyze.h $
+// $Id: analyze.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -34,7 +34,7 @@ int testAnalyzeHeader(char *magic,const char *name);
 /** creates an return the file format structure associated with the Analyze file format */
 PTRIMAGE_FORMAT createAnalyzeFormat();
 
-/* 
+/*
    return:
    -1: error
     1: success
@@ -42,7 +42,7 @@ PTRIMAGE_FORMAT createAnalyzeFormat();
 int writeAnalyze( char *basename, _image* im ) ;
 
 
-/* 
+/*
    return:
    -1: error
     1: success
@@ -51,7 +51,7 @@ int writeAnalyzeHeader( const _image* im ) ;
 
 
 
-/* 
+/*
    return:
    -1: error
     1: success

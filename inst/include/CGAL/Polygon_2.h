@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon/include/CGAL/Polygon_2.h $
-// $Id: Polygon_2.h b9a079b 2019-11-04T11:34:53+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon/include/CGAL/Polygon_2.h $
+// $Id: Polygon_2.h ad00738 2020-08-13T14:44:45+02:00 Simon Giraudot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -132,7 +132,10 @@ class Polygon_2 {
     typedef Polygon_2_edge_iterator<Traits_P,Container_P> Edge_const_iterator;
     typedef Polygon_2_const_edge_circulator<Traits_P,
                                             Container_P> Edge_const_circulator;
-#endif // DOXYGEN_RUNNING    
+
+    typedef Polygon_2_edge_iterator<Traits_P,Container_P,
+                                    Tag_false> Vertex_pair_iterator;
+#endif // DOXYGEN_RUNNING
     /// @}
 
     /// \name Creation
@@ -140,7 +143,7 @@ class Polygon_2 {
 
     /// Creates an empty polygon.
     Polygon_2() : traits() {}
-  
+
     /// Creates an empty polygon.
     Polygon_2(const Traits & p_traits) : traits(p_traits) {}
 
@@ -159,11 +162,11 @@ class Polygon_2 {
       // Sun STL switches off member templates for binary backward compat.
       std::copy(first, last, std::back_inserter(d_container));
     }
-  
+
 #ifndef DOXYGEN_RUNNING
   Polygon_2& operator=(const Polygon_2&)=default;
 #endif
-  
+
     /// @}
 
     /// \name Modifiers
@@ -296,6 +299,13 @@ class Polygon_2 {
       { return Edge_const_circulator(vertices_circulator()); }
 
     /// @}
+
+    /// \cond SKIP_IN_MANUAL
+    Vertex_pair_iterator vertex_pairs_begin() const
+    { return Vertex_pair_iterator(&d_container, d_container.begin()); }
+    Vertex_pair_iterator vertex_pairs_end() const
+    { return Vertex_pair_iterator(&d_container, d_container.end()); }
+    /// \endcond
 
     /// \name Predicates
     /// @{

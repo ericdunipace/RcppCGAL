@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Arrangement_type_non_intersecting_C2.h $
-// $Id: Arrangement_type_non_intersecting_C2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Arrangement_type_non_intersecting_C2.h $
+// $Id: Arrangement_type_non_intersecting_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -135,15 +135,15 @@ public:
 
     if ( p.is_point() ) {
       if ( q.is_point() ) {
-	return arrangement_type_pp(p, q);
+        return arrangement_type_pp(p, q);
       } else {
-	return arrangement_type_ps(p, q);
+        return arrangement_type_ps(p, q);
       }
     } else {
       if ( q.is_point() ) {
-	return opposite( arrangement_type_ps(q, p) );
+        return opposite( arrangement_type_ps(q, p) );
       } else {
-	return arrangement_type_ss(p, q);
+        return arrangement_type_ss(p, q);
       }
     }
   }

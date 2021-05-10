@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/HalfedgeDS/include/CGAL/HalfedgeDS_face_max_base_with_id.h $
-// $Id: HalfedgeDS_face_max_base_with_id.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/HalfedgeDS/include/CGAL/HalfedgeDS_face_max_base_with_id.h $
+// $Id: HalfedgeDS_face_max_base_with_id.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri, Fernando Cacciola
 
@@ -20,21 +20,21 @@ template < class Refs, class Pln, class ID>
 class HalfedgeDS_face_max_base_with_id : public HalfedgeDS_face_base< Refs, Tag_true, Pln>
 {
 public:
-    
+
     typedef HalfedgeDS_face_base< Refs, Tag_true, Pln> Base ;
-    
+
     typedef ID size_type ;
-    
+
 private:
 
     size_type mID ;
-    
+
 public:
 
     HalfedgeDS_face_max_base_with_id() : mID ( size_type(-1) ) {}
     HalfedgeDS_face_max_base_with_id( Pln const& p) : Base(p), mID ( size_type(-1) ) {}
     HalfedgeDS_face_max_base_with_id( Pln const& p, size_type i ) : Base(p), mID (i) {}
-    
+
     size_type&       id()       { return mID; }
     size_type const& id() const { return mID; }
 };

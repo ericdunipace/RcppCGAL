@@ -7,7 +7,7 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at https://www.boost.org/LICENSE_1_0.txt)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_2/include/CGAL/internal/container_fwd_fixed.hpp $
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_2/include/CGAL/internal/container_fwd_fixed.hpp $
 // $Id: container_fwd_fixed.hpp a472c24 2019-03-20T08:59:22+01:00 Andreas Fabri
 // SPDX-License-Identifier: BSL-1.0
 //

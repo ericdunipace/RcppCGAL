@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/Refine_tets_visitor.h $
-// $Id: Refine_tets_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Refine_tets_visitor.h $
+// $Id: Refine_tets_visitor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -29,7 +29,7 @@ namespace Mesh_3 {
     class Refine_facets_visitor {
       Refine_tets* refine_tets;
       Previous_level* previous;
-      
+
     public:
       typedef typename Tr::Vertex_handle Vertex_handle;
       typedef typename Tr::Cell_handle Cell_handle;
@@ -41,7 +41,7 @@ namespace Mesh_3 {
       typedef Previous_level Previous_visitor;
 
       Refine_facets_visitor(Refine_tets* refine_tets_,
-			    Previous_visitor* p)
+                            Previous_visitor* p)
         : refine_tets(refine_tets_), previous(p), active_(false)
       {
       }
@@ -52,7 +52,7 @@ namespace Mesh_3 {
       template <typename E, typename P>
       void before_insertion(const E&,
                             const P&,
-                            Zone& zone) 
+                            Zone& zone)
       {
         if ( active_ )
           refine_tets->before_insertion_handle_cells_in_conflict_zone(zone);
@@ -71,20 +71,20 @@ namespace Mesh_3 {
       {
         return *previous;
       }
-      
+
       void activate()
       {
         active_=true;
       }
-      
+
       bool is_active() const
       {
         return active_;
       }
-      
+
     private:
       bool active_;
-      
+
     }; // end class Refine_facets_visitor
 
   } // end namespace Mesh_3::tets

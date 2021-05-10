@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_ImageIO/include/CGAL/ImageIO/convert.h $
-// $Id: convert.h 07c4ada 2019-10-19T15:50:09+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_ImageIO/include/CGAL/ImageIO/convert.h $
+// $Id: convert.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -13,15 +13,15 @@
 /*************************************************************************
  * convert.h - conversion between types
  *
- * $Id: convert.h 07c4ada 2019-10-19T15:50:09+02:00 Sébastien Loriot
+ * $Id: convert.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  *
  * Copyright©INRIA 1998
  *
  * AUTHOR:
  * Gregoire Malandain (greg@sophia.inria.fr)
  * http://www.inria.fr/epidaure/personnel/malandain/
- * 
- * CREATION DATE: 
+ *
+ * CREATION DATE:
  * June, 9 1998
  *
  * ADDITIONS, CHANGES
@@ -50,14 +50,14 @@
  *
  * DESCRIPTION:
  *
- * Conversions from types DOUBLE or FLOAT to 
+ * Conversions from types DOUBLE or FLOAT to
  * others types are all implemented. I hope
  * I do not make mistakes.
  *
  * - When a real value is converted into an integer
  *   one, we take the nearest integer, i.e.
  *   (int)(real value - 0.5) for negative
- *   numbers, and (int)(real value + 0.5) for 
+ *   numbers, and (int)(real value + 0.5) for
  *   positive ones.
  *
  * - Some conversions are not yet implemented.
@@ -66,27 +66,27 @@
  *   done.
  */
 extern void ConvertBuffer( void *bufferIn, /* buffer to be converted */
-			   bufferType typeIn, /* type of this buffer */
-			   void *bufferOut, /* result buffer */
-			   bufferType typeOut, /* type of this buffer */
-			   int bufferLength /* buffers' length */
-			   );
+                           bufferType typeIn, /* type of this buffer */
+                           void *bufferOut, /* result buffer */
+                           bufferType typeOut, /* type of this buffer */
+                           int bufferLength /* buffers' length */
+                           );
 
 extern void Convert_r32_to_s8( r32 *theBuf,
-			       s8 *resBuf,
-			       int size );
+                               s8 *resBuf,
+                               int size );
 
 extern void Convert_r32_to_u8( r32 *theBuf,
-			       u8 *resBuf,
-			       int size );
+                               u8 *resBuf,
+                               int size );
 
 extern void Convert_r32_to_s16( r32 *theBuf,
-				s16 *resBuf,
-				int size );
+                                s16 *resBuf,
+                                int size );
 
 extern void Convert_r32_to_u16( r32 *theBuf,
-				u16 *resBuf,
-				int size );
+                                u16 *resBuf,
+                                int size );
 
 
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation/include/CGAL/Triangulation_ds_full_cell.h $
-// $Id: Triangulation_ds_full_cell.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation/include/CGAL/Triangulation_ds_full_cell.h $
+// $Id: Triangulation_ds_full_cell.h 378554e 2020-03-06T16:42:23+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -204,7 +204,7 @@ public:
     TDS_data & tds_data() { return tds_data_; } /* Concept */
 
     void*   for_compact_container() const { return combinatorics_.for_compact_container(); }
-    void* & for_compact_container() { return combinatorics_.for_compact_container(); }
+    void    for_compact_container(void* p){ combinatorics_.for_compact_container(p); }
 
     bool is_valid(bool verbose = false, int = 0) const /* Concept */
     {

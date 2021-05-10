@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_2/include/CGAL/ch_akl_toussaint.h $
-// $Id: ch_akl_toussaint.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_2/include/CGAL/ch_akl_toussaint.h $
+// $Id: ch_akl_toussaint.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Stefan Schirra
 
@@ -23,25 +23,25 @@
 namespace CGAL {
 
 // same as |convex_hull_2(first,last,result)|.
-// {\sc traits}: operates on |Traits::Point_2| using |Traits::Less_xy_2|, 
+// {\sc traits}: operates on |Traits::Point_2| using |Traits::Less_xy_2|,
 // |Traits::Less_yx_2|, |Traits::Equal_2| and |Traits::Left_turn_2|.
 template <class ForwardIterator, class OutputIterator, class Traits>
 OutputIterator
-ch_akl_toussaint(ForwardIterator first, ForwardIterator last, 
+ch_akl_toussaint(ForwardIterator first, ForwardIterator last,
                  OutputIterator  result,
                  const Traits&   ch_traits);
 
 template <class ForwardIterator, class OutputIterator>
 inline
 OutputIterator
-ch_akl_toussaint(ForwardIterator first, ForwardIterator last, 
+ch_akl_toussaint(ForwardIterator first, ForwardIterator last,
                  OutputIterator  result)
 {
     typedef std::iterator_traits<ForwardIterator> ITraits;
     typedef typename ITraits::value_type          value_type;
     typedef CGAL::Kernel_traits<value_type>       KTraits;
     typedef typename KTraits::Kernel              Kernel;
-    return ch_akl_toussaint( first, last, result, Kernel()); 
+    return ch_akl_toussaint( first, last, result, Kernel());
 }
 
 } //namespace CGAL

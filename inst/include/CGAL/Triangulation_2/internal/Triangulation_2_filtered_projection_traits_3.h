@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_2/include/CGAL/Triangulation_2/internal/Triangulation_2_filtered_projection_traits_3.h $
-// $Id: Triangulation_2_filtered_projection_traits_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_2/include/CGAL/Triangulation_2/internal/Triangulation_2_filtered_projection_traits_3.h $
+// $Id: Triangulation_2_filtered_projection_traits_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent Rineau
 
@@ -62,17 +62,17 @@ public:
                                                side_of_oriented_circle_2_object,
                                                normal)
   CGAL_TRIANGULATION_2_PROJ_TRAITS_FILTER_PRED(Less_x_2,
-					       less_x_2_object,
-					       base1)
+                                               less_x_2_object,
+                                               base1)
   CGAL_TRIANGULATION_2_PROJ_TRAITS_FILTER_PRED(Less_y_2,
-					       less_y_2_object,
-					       base2)
+                                               less_y_2_object,
+                                               base2)
   CGAL_TRIANGULATION_2_PROJ_TRAITS_FILTER_PRED(Compare_x_2,
-					       compare_x_2_object,
-					       base1)
+                                               compare_x_2_object,
+                                               base1)
   CGAL_TRIANGULATION_2_PROJ_TRAITS_FILTER_PRED(Compare_y_2,
-					       compare_y_2_object,
-					       base2)
+                                               compare_y_2_object,
+                                               base2)
 }; // end class Triangulation_2_projection_traits_base_3<Filtered_kernel>
 
 } // end namespace CGAL

@@ -4,10 +4,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/MP_Float_impl.h $
-// $Id: MP_Float_impl.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/MP_Float_impl.h $
+// $Id: MP_Float_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Sylvain Pion
 
@@ -34,7 +34,7 @@ const double trunc_min = double(-base)*(base/2)/double(base-1);
 // We face portability issues with the ISO C99 functions "nearbyint",
 // so I re-implement it for my need.
 template < typename T >
-inline 
+inline
 int my_nearbyint(const T& d)
 {
   int z = int(d);
@@ -280,7 +280,7 @@ INTERN_MP_FLOAT::square(const MP_Float &a)
       if (tmp > 0 && tmp0 < 0 && tmp1 < 0)
       {
         // If my calculations are correct, this case should never happen.
-	CGAL_error();
+        CGAL_error();
       }
       else if (tmp < 0 && tmp0 > 0 && tmp1 > 0)
         carry2 = 1;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesher/include/CGAL/Surface_mesh_default_triangulation_3.h $
-// $Id: Surface_mesh_default_triangulation_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/Surface_mesh_default_triangulation_3.h $
+// $Id: Surface_mesh_default_triangulation_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -57,10 +57,10 @@ namespace CGAL {
 
   } // end Surface_mesher
 
-  typedef Surface_mesher::Surface_mesh_default_triangulation_3_generator<>::Type 
+  typedef Surface_mesher::Surface_mesh_default_triangulation_3_generator<>::Type
      Surface_mesh_default_triangulation_3;
 
-} // end namespace CGAL  
+} // end namespace CGAL
 
 #include <CGAL/enable_warnings.h>
 

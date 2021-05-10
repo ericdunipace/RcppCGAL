@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Filtered_kernel/include/CGAL/internal/Static_filters/Side_of_oriented_circle_2.h $
-// $Id: Side_of_oriented_circle_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Filtered_kernel/include/CGAL/internal/Static_filters/Side_of_oriented_circle_2.h $
+// $Id: Side_of_oriented_circle_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Sylvain Pion
 
@@ -29,7 +29,7 @@ class Side_of_oriented_circle_2
 public:
 
   Oriented_side operator()(const Point_2 &p, const Point_2 &q,
-	                   const Point_2 &r, const Point_2 &t) const
+                           const Point_2 &r, const Point_2 &t) const
   {
       CGAL_BRANCH_PROFILER_3("semi-static failures/attempts/calls to   : Side_of_oriented_circle_2", tmp);
 
@@ -40,7 +40,7 @@ public:
           fit_in_double(r.x(), rx) && fit_in_double(r.y(), ry) &&
           fit_in_double(t.x(), tx) && fit_in_double(t.y(), ty))
       {
-	  CGAL_BRANCH_PROFILER_BRANCH_1(tmp);
+          CGAL_BRANCH_PROFILER_BRANCH_1(tmp);
 
           double qpx = qx-px;
           double qpy = qy-py;
@@ -49,10 +49,10 @@ public:
           double tpx = tx-px;
           double tpy = ty-py;
 
-	  double tqx = tx-qx;
-	  double tqy = ty-qy;
-	  double rqx = rx-qx;
-	  double rqy = ry-qy;
+          double tqx = tx-qx;
+          double tqy = ty-qy;
+          double rqx = rx-qx;
+          double rqy = ry-qy;
 
           double det = CGAL::determinant(qpx*tpy - qpy*tpx, tpx*tqx + tpy*tqy,
                                          qpx*rpy - qpy*rpx, rpx*rqx + rpy*rqy);
@@ -96,7 +96,7 @@ public:
             if (det < -eps) return ON_NEGATIVE_SIDE;
           }
 
-	  CGAL_BRANCH_PROFILER_BRANCH_2(tmp);
+          CGAL_BRANCH_PROFILER_BRANCH_2(tmp);
       }
 
       return Base::operator()(p, q, r, t);

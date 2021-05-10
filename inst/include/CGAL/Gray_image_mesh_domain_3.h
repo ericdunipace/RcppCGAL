@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Gray_image_mesh_domain_3.h $
-// $Id: Gray_image_mesh_domain_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Gray_image_mesh_domain_3.h $
+// $Id: Gray_image_mesh_domain_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -64,7 +64,7 @@ public:
                            const Image_word_type value_outside = 0.,
                            const FT& error_bound = FT(1e-3),
                            CGAL::Random* p_rng = nullptr)
-    : Base(Wrapper(image, 
+    : Base(Wrapper(image,
                    Transform(iso_value),
                    Transform(iso_value)(value_outside)),
            Mesh_3::internal::compute_bounding_box(image),

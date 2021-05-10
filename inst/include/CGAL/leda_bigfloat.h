@@ -1,14 +1,14 @@
-// Copyright (c) 1999,2007  
+// Copyright (c) 1999,2007
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/leda_bigfloat.h $
-// $Id: leda_bigfloat.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/leda_bigfloat.h $
+// $Id: leda_bigfloat.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -62,7 +62,7 @@ template <> class Algebraic_structure_traits< leda_bigfloat >
 template <> class Real_embeddable_traits< leda_bigfloat >
   : public INTERN_RET::Real_embeddable_traits_base< leda_bigfloat , CGAL::Tag_true > {
 public:
-  
+
     class Abs
       : public CGAL::cpp98::unary_function< Type, Type > {
       public:
@@ -87,8 +87,8 @@ public:
                                             const Type& y ) const {
           return (Comparison_result) CGAL_LEDA_SCOPE::compare( x, y );
         }
-        
-        CGAL_IMPLICIT_INTEROPERABLE_BINARY_OPERATOR_WITH_RT( Type, 
+
+        CGAL_IMPLICIT_INTEROPERABLE_BINARY_OPERATOR_WITH_RT( Type,
                 Comparison_result )
     };
 

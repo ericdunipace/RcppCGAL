@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polyhedron/include/CGAL/Polyhedron_items_with_id_3.h $
-// $Id: Polyhedron_items_with_id_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polyhedron/include/CGAL/Polyhedron_items_with_id_3.h $
+// $Id: Polyhedron_items_with_id_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri, Fernando Cacciola
 
@@ -41,24 +41,24 @@ void set_halfedgeds_items_id ( HalfedgeDS_with_id& hds )
   std::size_t vertex_id   = 0 ;
   std::size_t halfedge_id = 0 ;
   std::size_t face_id     = 0 ;
-  
+
   for ( typename HalfedgeDS_with_id::Vertex_iterator vit = hds.vertices_begin(), evit = hds.vertices_end()
       ; vit != evit
       ; ++  vit
       )
-    vit->id() = vertex_id ++ ;    
-    
+    vit->id() = vertex_id ++ ;
+
   for ( typename HalfedgeDS_with_id::Halfedge_iterator hit = hds.halfedges_begin(), ehit = hds.halfedges_end()
       ; hit != ehit
       ; ++  hit
       )
-    hit->id() = halfedge_id ++ ;    
-    
+    hit->id() = halfedge_id ++ ;
+
   for ( typename HalfedgeDS_with_id::Face_iterator fit = hds.facets_begin(), efit = hds.facets_end()
       ; fit != efit
       ; ++  fit
       )
-    fit->id() = face_id ++ ;    
+    fit->id() = face_id ++ ;
 }
 
 } //namespace CGAL

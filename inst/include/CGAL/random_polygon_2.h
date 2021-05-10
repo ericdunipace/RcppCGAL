@@ -1,14 +1,14 @@
-// Copyright (c) 2000  
+// Copyright (c) 2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Generator/include/CGAL/random_polygon_2.h $
-// $Id: random_polygon_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Generator/include/CGAL/random_polygon_2.h $
+// $Id: random_polygon_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Susan Hert <hert@mpi-sb.mpg.de>
@@ -26,16 +26,16 @@
 namespace CGAL {
 
 //
-// Using the provided point generator, generates a set of n points and 
-// produces  a simple polygon from the unique subset of points within this 
+// Using the provided point generator, generates a set of n points and
+// produces  a simple polygon from the unique subset of points within this
 // set.
-// 
-// Each of the p possible simple polygons for the unique point set is 
-// generated with probability greater than 0 but the polygons are not 
+//
+// Each of the p possible simple polygons for the unique point set is
+// generated with probability greater than 0 but the polygons are not
 // generated with uniform probability.
 //
 template <class PointGenerator, class OutputIterator, class Traits>
-OutputIterator random_polygon_2(std::size_t n,  OutputIterator result, 
+OutputIterator random_polygon_2(std::size_t n,  OutputIterator result,
                                 const PointGenerator& pg, const Traits& traits)
 {
    typedef typename Traits::Point_2           Point_2;
@@ -62,7 +62,7 @@ OutputIterator random_polygon_2(std::size_t n,  OutputIterator result,
 
 template <class PointGenerator, class OutputIterator>
 inline
-OutputIterator random_polygon_2( std::size_t n,  OutputIterator result, 
+OutputIterator random_polygon_2( std::size_t n,  OutputIterator result,
                                  const PointGenerator& pg )
 {
    typedef typename std::iterator_traits<PointGenerator>::value_type  Point_2;
@@ -71,7 +71,7 @@ OutputIterator random_polygon_2( std::size_t n,  OutputIterator result,
 }
 
 template <class ForwardIterator, class Traits>
-bool duplicate_points(ForwardIterator first, ForwardIterator beyond, 
+bool duplicate_points(ForwardIterator first, ForwardIterator beyond,
                       const Traits& )
 {
    typedef typename Traits::Point_2      Point_2;
@@ -95,7 +95,7 @@ bool duplicate_points(ForwardIterator first, ForwardIterator beyond)
 // removing any duplicates.  Thus fewer than n points may be inserted into
 // the output iterator.
 template <class InputIterator, class Size, class OutputIterator, class Traits>
-OutputIterator copy_n_unique(InputIterator first, Size n, 
+OutputIterator copy_n_unique(InputIterator first, Size n,
                              OutputIterator result,
                              const Traits& )
 {
@@ -109,7 +109,7 @@ OutputIterator copy_n_unique(InputIterator first, Size n,
       {
           *result = *first;
           result++;
-      }   
+      }
       first++;
    }
    return result;
@@ -117,7 +117,7 @@ OutputIterator copy_n_unique(InputIterator first, Size n,
 
 template <class InputIterator, class Size, class OutputIterator>
 inline
-OutputIterator copy_n_unique(InputIterator first, Size n, 
+OutputIterator copy_n_unique(InputIterator first, Size n,
                              OutputIterator result)
 {
    typedef typename std::iterator_traits<InputIterator>::value_type  Point_2;

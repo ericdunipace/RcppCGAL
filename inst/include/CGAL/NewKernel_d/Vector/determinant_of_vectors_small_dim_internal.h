@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/NewKernel_d/include/CGAL/NewKernel_d/Vector/determinant_of_vectors_small_dim_internal.h $
-// $Id: determinant_of_vectors_small_dim_internal.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/NewKernel_d/include/CGAL/NewKernel_d/Vector/determinant_of_vectors_small_dim_internal.h $
+// $Id: determinant_of_vectors_small_dim_internal.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -24,8 +24,8 @@
 namespace CGAL {
 
 template <class LA, class Dim_=typename LA::Dimension,
-	 class Max_dim_=typename LA::Max_dimension,
-	 bool=LA::template Property<CGAL_TAG>::value>
+         class Max_dim_=typename LA::Max_dimension,
+         bool=LA::template Property<CGAL_TAG>::value>
 struct CGAL_CLASS : LA {
   template< class D2, class D3=D2 >
     struct Rebind_dimension {

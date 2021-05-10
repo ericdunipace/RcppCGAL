@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/hash_openmesh.h $
-// $Id: hash_openmesh.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/hash_openmesh.h $
+// $Id: hash_openmesh.h fa44e3c 2021-03-05T08:18:45+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri
 
@@ -43,7 +43,10 @@ public:
   }
 
   bool
-  operator!=(const OMesh_edge& other) { return !(*this == other); }
+  operator!=(const OMesh_edge& other) const
+  {
+    return !(*this == other);
+  }
 
   Halfedge_handle
   opposite() const { return Halfedge_handle((halfedge_.idx() & 1) ? halfedge_.idx()-1 : halfedge_.idx()+1); }
@@ -82,7 +85,7 @@ namespace std {
 
 #if defined(BOOST_MSVC)
 #  pragma warning(push)
-#  pragma warning(disable:4099) // For VC10 it is class hash 
+#  pragma warning(disable:4099) // For VC10 it is class hash
 #endif
 
 #ifndef CGAL_CFG_NO_STD_HASH

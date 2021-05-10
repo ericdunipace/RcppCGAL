@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Skin_surface_3/include/CGAL/make_skin_surface_mesh_3.h $
-// $Id: make_skin_surface_mesh_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Skin_surface_3/include/CGAL/make_skin_surface_mesh_3.h $
+// $Id: make_skin_surface_mesh_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Nico Kruithof <Nico@cs.rug.nl>
 
@@ -26,8 +26,8 @@
 namespace CGAL {
 
 template <class WP_iterator,
-	  class Polyhedron_3>
-void make_skin_surface_mesh_3(Polyhedron_3 &p, 
+          class Polyhedron_3>
+void make_skin_surface_mesh_3(Polyhedron_3 &p,
                               WP_iterator begin, WP_iterator end,
                               double shrink_factor=.5,
                               int nSubdivisions=0,
@@ -39,10 +39,10 @@ void make_skin_surface_mesh_3(Polyhedron_3 &p,
 
   typedef typename WP_iterator::value_type               Weighted_point;
   typedef typename Kernel_traits<Weighted_point>::Kernel K;
-  
+
   typedef Skin_surface_traits_3<K>                       Traits;
   typedef Skin_surface_3<Traits>                         Skin_surface;
-  
+
   Skin_surface skin_surface(begin, end, shrink_factor, grow_balls);
 
   mesh_skin_surface_3(skin_surface, p);

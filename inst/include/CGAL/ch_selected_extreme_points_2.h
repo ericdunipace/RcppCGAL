@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_2/include/CGAL/ch_selected_extreme_points_2.h $
-// $Id: ch_selected_extreme_points_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_2/include/CGAL/ch_selected_extreme_points_2.h $
+// $Id: ch_selected_extreme_points_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Stefan Schirra
 
@@ -26,9 +26,9 @@ namespace CGAL {
 
 // traverses the range [|first|,|last|). After execution, the value of |n| is
 // an iterator in the range such that |*n| $\ge_{\rm yx}$ |*it| for
-// all iterators |it| in the range. Similarly, for |s|, |w|, and |e| 
+// all iterators |it| in the range. Similarly, for |s|, |w|, and |e|
 // the inequations |*s| $\le_{\rm yx}$ |*it|, |*w| $\le_{\rm xy}$ |*it|,
-// and |*e| $\ge_{\rm yx}$ |*it| hold respectively for all iterators 
+// and |*e| $\ge_{\rm yx}$ |*it| hold respectively for all iterators
 // |it| in the range.
 // {\sc traits}: uses |Traits::Less_xy_2| and |Traits::Less_yx_2|.
 template <class ForwardIterator, class Traits>
@@ -113,7 +113,7 @@ ch_we_point( ForwardIterator first, ForwardIterator last,
 
 // traverses the range [|first|,|last|). After execution, the value of |n| is
 // an iterator in the range such that |*n| $\ge_{\rm yx}$ |*it| for
-// all iterators |it| in the range. 
+// all iterators |it| in the range.
 // {\sc traits}: uses |Traits::Less_yx_2|.
 template <class ForwardIterator, class Traits>
 void
@@ -136,7 +136,7 @@ ch_n_point( ForwardIterator first, ForwardIterator last, ForwardIterator& n)
 
 // traverses the range [|first|,|last|). After execution, the value of |s| is
 // an iterator in the range such that |*s| $\le_{\rm yx}$ |*it| for
-// all iterators |it| in the range. 
+// all iterators |it| in the range.
 // {\sc traits}: uses |Traits::Less_yx_2|.
 template <class ForwardIterator, class Traits>
 void

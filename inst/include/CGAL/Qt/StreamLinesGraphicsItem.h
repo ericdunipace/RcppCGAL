@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/StreamLinesGraphicsItem.h $
-// $Id: StreamLinesGraphicsItem.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/StreamLinesGraphicsItem.h $
+// $Id: StreamLinesGraphicsItem.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -47,13 +47,13 @@ public:
   StreamLinesGraphicsItem(SL* sl);
 
 
-  QRectF 
+  QRectF
   boundingRect() const;
-  
-  void 
+
+  void
   paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  
-  void 
+
+  void
   modelChanged();
 
   const QPen& edgesPen() const
@@ -81,7 +81,7 @@ StreamLinesGraphicsItem<SL,K>::StreamLinesGraphicsItem(SL * sl)
 }
 
 template <typename SL, typename K>
-QRectF 
+QRectF
 StreamLinesGraphicsItem<SL,K>::boundingRect() const
 {
   QRectF rect = CGAL::Qt::viewportsBbox(scene());
@@ -90,7 +90,7 @@ StreamLinesGraphicsItem<SL,K>::boundingRect() const
 
 
 template <typename SL, typename K>
-void 
+void
 StreamLinesGraphicsItem<SL,K>::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * /*w*/)
 {
   painter->setPen(this->edgesPen());
@@ -110,7 +110,7 @@ StreamLinesGraphicsItem<SL,K>::paint(QPainter *painter, const QStyleOptionGraphi
 
 
   template <typename SL, typename K>
-void 
+void
   StreamLinesGraphicsItem<SL,K>::modelChanged()
 {
   update();

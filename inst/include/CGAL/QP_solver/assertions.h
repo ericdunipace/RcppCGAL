@@ -3,14 +3,14 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/QP_solver/include/CGAL/QP_solver/assertions.h $
-// $Id: assertions.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/QP_solver/include/CGAL/QP_solver/assertions.h $
+// $Id: assertions.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Sven Schoenherr
 //                 Bernd Gaertner <gaertner@inf.ethz.ch>
-//                 Franz Wessendorp 
+//                 Franz Wessendorp
 //                 Kaspar Fischer
 
 #ifndef CGAL_QP_ASSERTIONS_H

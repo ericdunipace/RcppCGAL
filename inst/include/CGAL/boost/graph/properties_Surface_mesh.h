@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesh/include/CGAL/boost/graph/properties_Surface_mesh.h $
-// $Id: properties_Surface_mesh.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh/include/CGAL/boost/graph/properties_Surface_mesh.h $
+// $Id: properties_Surface_mesh.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Philipp Möller
 
@@ -31,7 +31,7 @@
 namespace CGAL {
 
 template <typename Point>
-class SM_edge_weight_pmap 
+class SM_edge_weight_pmap
   : public boost::put_get_helper<typename CGAL::Kernel_traits<Point>::type::FT, SM_edge_weight_pmap<Point> >
 {
   typedef CGAL::Surface_mesh<Point> SM;
@@ -205,7 +205,7 @@ struct property_map<CGAL::Surface_mesh<P>, CGAL::vertex_point_t >
     SM::template Property_map< typename SM::Vertex_index,
                                P
                                > type;
-  
+
   typedef type const_type;
 
 };

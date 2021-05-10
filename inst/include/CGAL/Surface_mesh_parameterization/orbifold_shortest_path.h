@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/orbifold_shortest_path.h $
-// $Id: orbifold_shortest_path.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/orbifold_shortest_path.h $
+// $Id: orbifold_shortest_path.h d5185e6 2020-07-21T13:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -103,7 +103,7 @@ public:
 
 /// \ingroup PkgSurfaceMeshParameterizationOrbifoldHelperFunctions
 ///
-/// Compute the shortest path between `source` and `target` over `mesh`, using
+/// computes the shortest path between `source` and `target` over `mesh`, using
 /// <a href="https://www.boost.org/doc/libs/release/libs/graph/doc/dijkstra_shortest_paths.html">
 /// boost::dijkstra_shortest_paths()</a>.
 ///

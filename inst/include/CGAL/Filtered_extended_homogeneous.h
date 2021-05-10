@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_2/include/CGAL/Filtered_extended_homogeneous.h $
-// $Id: Filtered_extended_homogeneous.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_2/include/CGAL/Filtered_extended_homogeneous.h $
+// $Id: Filtered_extended_homogeneous.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -90,12 +90,12 @@ public:
 
 
   // only for visualization:
-  
+
   static RT& R()
   {
     CGAL_STATIC_THREAD_LOCAL_VARIABLE(RT,R_,0);
   }
-  
+
   static void set_R(const RT& r) { R() = r; }
   RT eval_at(const RT& r) const { return _m*r+_n; }
   RT eval_at_R() const { return _m*R()+_n; }
@@ -1253,7 +1253,7 @@ void determine_frame_radius(Forward_iterator start, Forward_iterator end,
     Point_2 p = *start;
     if ( is_standard(p) ) {
       R = (CGAL::max)(CGAL_NTS abs(p.mx())/p.hw(),
-		      CGAL_NTS abs(p.my())/p.hw());
+                      CGAL_NTS abs(p.my())/p.hw());
     } else {
       RT rx = CGAL_NTS abs(p.hx()), ry = CGAL_NTS abs(p.hy());
       if ( rx[1] > ry[1] )      R = CGAL_NTS abs(ry[0]-rx[0])/(rx[1]-ry[1]);

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm.h $
-// $Id: Arr_polyhedral_sgm.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm.h $
+// $Id: Arr_polyhedral_sgm.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel         <efif@post.tau.ac.il>
@@ -708,7 +708,7 @@ public:
  // template <typename SgmIterator>
  // void minkowski_sum(SgmIterator begin, SgmIterator end)
  // {
-	//typename SgmIterator::value_type* sgm1 = *begin++;
+        //typename SgmIterator::value_type* sgm1 = *begin++;
  //   typename SgmIterator::value_type* sgm2 = *begin;
  //   minkowski_sum(sgm1, sgm2);
  // }

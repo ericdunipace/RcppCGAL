@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Classification/include/CGAL/Classification/Feature/Cluster_vertical_extent.h $
-// $Id: Cluster_vertical_extent.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Feature/Cluster_vertical_extent.h $
+// $Id: Cluster_vertical_extent.h 19004a7 2020-08-04T13:41:48+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -36,11 +36,11 @@ namespace Feature {
 class Cluster_vertical_extent : public CGAL::Classification::Feature_base
 {
   std::vector<float> m_values;
-  
+
 public:
 
   /*!
-    \brief Constructs the feature.
+    \brief constructs the feature.
 
     \tparam ClusterRange model of `ConstRange`. Its iterator type
     is `RandomAccessIterator` and its value type is the key type of
@@ -52,15 +52,15 @@ public:
   Cluster_vertical_extent (const ClusterRange& clusters)
   {
     typedef typename ClusterRange::const_iterator::value_type::Item Item;
-    
+
     this->set_name ("cluster_vertical_extent");
 
     m_values.reserve (clusters.size());
     for (std::size_t i = 0; i < clusters.size(); ++ i)
     {
-      float min_z = std::numeric_limits<float>::max();
-      float max_z = -std::numeric_limits<float>::min();
-        
+      float min_z = (std::numeric_limits<float>::max)();
+      float max_z = -(std::numeric_limits<float>::min)();
+
       for (std::size_t j = 0; j < clusters[i].size(); ++ j)
       {
         const Item& item = clusters[i][j];
@@ -75,7 +75,7 @@ public:
   /// \cond SKIP_IN_MANUAL
   virtual float value (std::size_t cluster_index) { return m_values[cluster_index]; }
   /// \endcond
-    
+
 };
 
 } // namespace Feature

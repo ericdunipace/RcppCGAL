@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_spherical_insertion_helper.h $
-// $Id: Arr_spherical_insertion_helper.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_spherical_insertion_helper.h $
+// $Id: Arr_spherical_insertion_helper.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -88,7 +88,7 @@ public:
   virtual void before_handle_event(Event* event);
 
   //@}
-  
+
   /*! A notification invoked when a new subcurve is created. */
   virtual void add_subcurve(Halfedge_handle he, Subcurve* sc);
 

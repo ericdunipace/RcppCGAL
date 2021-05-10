@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Boolean_set_operations_2/include/CGAL/General_polygon_2.h $
-// $Id: General_polygon_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Boolean_set_operations_2/include/CGAL/General_polygon_2.h $
+// $Id: General_polygon_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
 
@@ -111,7 +111,7 @@ public:
     Gps_traits_adaptor<Traits_2>  tr;
     return (tr.orientation_2_object()(m_xcurves.begin(), m_xcurves.end()));
   }
-  
+
   void reverse_orientation()
   {
     m_xcurves.reverse();
@@ -149,7 +149,7 @@ public:
     {
       result = result + first->bbox();
     }
-      
+
     return result;
   }
 };
@@ -165,7 +165,7 @@ std::istream &operator>>(std::istream &is, General_polygon_2<Traits>& p)
   int n; // number of edges
   is >> n;
   typename Traits::X_monotone_curve_2 cv;
- 
+
   if (is) {
       p.clear();
       for (int i=0; i<n; i++) {
@@ -173,7 +173,7 @@ std::istream &operator>>(std::istream &is, General_polygon_2<Traits>& p)
         p.push_back(cv);
       }
   }
- 
+
   return is;
 }
 

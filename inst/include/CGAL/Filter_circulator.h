@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_2/include/CGAL/Filter_circulator.h $
-// $Id: Filter_circulator.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_2/include/CGAL/Filter_circulator.h $
+// $Id: Filter_circulator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -51,15 +51,15 @@ public:
     {
       Circ circ(c);
       if(test(circ))
-	is_null=false;
+        is_null=false;
       else
-	{
-	  Circ end(c);
-	  do { 
-	    ++circ;
-	  } while( !test(circ) && end != circ );
-	  is_null = (end == circ);
-	}
+        {
+          Circ end(c);
+          do {
+            ++circ;
+          } while( !test(circ) && end != circ );
+          is_null = (end == circ);
+        }
       static_cast<Circ&>(*this) = circ;
       CGAL_assertion(is_null || test(*this));
     }
@@ -72,7 +72,7 @@ public:
     return !is_null;
   }
 
-  bool operator==(const Self& c) const 
+  bool operator==(const Self& c) const
     {
       return is_null==c.is_null && this->Circ::operator==(c);
     }

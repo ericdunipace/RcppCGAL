@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/AABB_tree/include/CGAL/AABB_triangle_primitive.h $
-// $Id: AABB_triangle_primitive.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/AABB_tree/include/CGAL/AABB_triangle_primitive.h $
+// $Id: AABB_triangle_primitive.h 5ec5ad6 2020-04-22T16:23:57+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -88,7 +88,7 @@ class AABB_triangle_primitive
                           Tag_false,
                           CacheDatum > Base;
 public:
-  ///Constructor from an iterator
+  ///constructor from an iterator
   AABB_triangle_primitive(Iterator it) : Base(it){}
 };
 

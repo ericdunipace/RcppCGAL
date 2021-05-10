@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/manipulatedFrame_impl.h $
-// $Id: manipulatedFrame_impl.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/manipulatedFrame_impl.h $
+// $Id: manipulatedFrame_impl.h a28dd52 2020-10-07T09:59:18+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY
@@ -251,7 +251,7 @@ CGAL_INLINE_FUNCTION
 void ManipulatedFrame::computeMouseSpeed(const QMouseEvent *const e) {
   const QPoint delta = (e->pos() - prevPos_);
   const qreal dist = sqrt(qreal(delta.x() * delta.x() + delta.y() * delta.y()));
-  delay_ = last_move_time.restart();
+  delay_ = static_cast<int>(last_move_time.restart());
   if (delay_ == 0)
     // Less than a millisecond: assume delay = 1ms
     mouseSpeed_ = dist;
@@ -295,7 +295,7 @@ qreal ManipulatedFrame::deltaWithPrevPos(QMouseEvent *const event,
 CGAL_INLINE_FUNCTION
 qreal ManipulatedFrame::wheelDelta(const QWheelEvent *event) const {
   static const qreal WHEEL_SENSITIVITY_COEF = 8E-4;
-  return event->delta() * wheelSensitivity() * WHEEL_SENSITIVITY_COEF;
+  return event->angleDelta().y() * wheelSensitivity() * WHEEL_SENSITIVITY_COEF;
 }
 
 CGAL_INLINE_FUNCTION
@@ -458,7 +458,7 @@ void ManipulatedFrame::mouseMoveEvent(QMouseEvent *const event,
     // These MouseAction values make no sense for a manipulatedFrame
     break;
 
-  case NO_MOUSE_ACTION:
+  default:
     // Possible when the ManipulatedFrame is a MouseGrabber. This method is then
     // called without startAction because of mouseTracking.
     break;

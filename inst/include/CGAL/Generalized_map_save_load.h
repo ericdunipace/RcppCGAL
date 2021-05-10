@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Generalized_map/include/CGAL/Generalized_map_save_load.h $
-// $Id: Generalized_map_save_load.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Generalized_map/include/CGAL/Generalized_map_save_load.h $
+// $Id: Generalized_map_save_load.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -70,11 +70,11 @@ namespace CGAL {
   template < class GMap >
   boost::property_tree::ptree gmap_save_darts
   (const GMap& amap,
-   std::map<typename GMap::Dart_const_handle, 
+   std::map<typename GMap::Dart_const_handle,
               typename GMap::size_type>& myDarts)
   {
     CGAL_assertion( myDarts.empty() );
-    
+
     // First we numbered each dart by using the std::map.
     typename GMap::Dart_range::const_iterator it(amap.darts().begin());
     for(typename GMap::size_type num=1; num<=amap.number_of_darts();
@@ -108,7 +108,7 @@ namespace CGAL {
       // function)
       write_cmap_dart_node(ndart, it);
     }
-    
+
     return pt;
   }
 
@@ -141,7 +141,7 @@ namespace CGAL {
     std::ofstream output(filename);
     if (!output) return false;
     return save_generalized_map(amap, output);
-  }  
+  }
 
   template < class GMap >
   bool gmap_load_darts(boost::property_tree::ptree &pt, GMap& amap,
@@ -172,7 +172,7 @@ namespace CGAL {
           {
             index = v2.second.get("<xmlattr>.i", 0);
             nextDartInt = boost::lexical_cast< int >(v2.second.data())-1;
-            
+
             if ( index<=amap.dimension )
             {
               amap.basic_link_alpha(myDarts[currentDartInt],
@@ -201,7 +201,7 @@ namespace CGAL {
     cmap_load_attributes(pt,amap,myDarts);
     return true;
   }
-  
+
   template < class GMap >
   bool load_generalized_map(const char* filename, GMap& amap)
   {

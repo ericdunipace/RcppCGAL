@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Three/include/CGAL/Three/Scene_draw_interface.h $
-// $Id: Scene_draw_interface.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Three/include/CGAL/Three/Scene_draw_interface.h $
+// $Id: Scene_draw_interface.h af7e1a8 2020-10-16T14:32:12+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,6 +16,7 @@
 #include <CGAL/license/Three.h>
 
 #include <QPoint>
+#include <QVector3D>
 class QKeyEvent;
 class QPoint;
 namespace CGAL
@@ -71,7 +72,7 @@ public:
   ///\brief displays all the primitive ids if there are less than max_textItems.
   virtual void printAllIds() = 0;
 
-  //!\brief moves the camera orthogonally to the picked sface.
+  //!\brief moves the camera orthogonally to the picked face.
   //!
   //! \param point the picked point
   //! \param viewer the active viewer

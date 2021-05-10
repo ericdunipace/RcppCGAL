@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesher/include/CGAL/vtkSurfaceMesherContourFilter.h $
-// $Id: vtkSurfaceMesherContourFilter.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/vtkSurfaceMesherContourFilter.h $
+// $Id: vtkSurfaceMesherContourFilter.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -46,7 +46,7 @@ private:
   vtkCGALSurfaceMesherContourFilter(const vtkCGALSurfaceMesherContourFilter&);  // Not implemented.
   void operator=(const vtkCGALSurfaceMesherContourFilter&);  // Not implemented.
 };
-  
+
 // IMPLEMENTATION
 
 #include "vtkCellArray.h"
@@ -77,12 +77,12 @@ vtkCGALSurfaceMesherContourFilter::vtkCGALSurfaceMesherContourFilter()
 {
   Value = 0.;
 }
-  
+
 vtkCGALSurfaceMesherContourFilter::~vtkCGALSurfaceMesherContourFilter()
 {
 }
 
-int 
+int
 vtkCGALSurfaceMesherContourFilter::
 FillInputPortInformation(int, vtkInformation *info)
 {
@@ -130,8 +130,8 @@ int vtkCGALSurfaceMesherContourFilter::RequestData(
     return 0;
   Gray_level_image gray_level_image(image, Value);
 
-  GT::FT radius = std::max(image.xdim() * image.vx(),
-                           std::max(image.ydim() * image.vy(),
+  GT::FT radius = (std::max)(image.xdim() * image.vx(),
+                           (std::max)(image.ydim() * image.vy(),
                                     image.zdim() * image.vz())
                            );
   GT::Sphere_3 bounding_sphere(GT::Point_3(image.xdim() * image.vx()/2.,

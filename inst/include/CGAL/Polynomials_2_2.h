@@ -3,16 +3,16 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Algebraic_kernel_for_circles/include/CGAL/Polynomials_2_2.h $
-// $Id: Polynomials_2_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Algebraic_kernel_for_circles/include/CGAL/Polynomials_2_2.h $
+// $Id: Polynomials_2_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion
 
 // Partially supported by the IST Programme of the EU as a Shared-cost
-// RTD (FET Open) Project under Contract No  IST-2000-26473 
-// (ECG - Effective Computational Geometry for Curves and Surfaces) 
-// and a STREP (FET Open) Project under Contract No  IST-006413 
+// RTD (FET Open) Project under Contract No  IST-2000-26473
+// (ECG - Effective Computational Geometry for Curves and Surfaces)
+// and a STREP (FET Open) Project under Contract No  IST-006413
 // (ACS -- Algorithms for Complex Shapes)
 
 #ifndef CGAL_ALGEBRAIC_KERNEL_FOR_CIRCLES_POLYNOMIALS_2_2_H
@@ -32,15 +32,15 @@ template < typename FT_ >
 class Polynomial_for_circles_2_2
 {
   FT_ rep[3]; // stores a, b, R^2
-  
+
 public:
-  
+
   typedef FT_ FT;
-  
+
   Polynomial_for_circles_2_2(){}
-  
+
   Polynomial_for_circles_2_2(const FT & a, const FT & b, const FT & rsq)
-  { 
+  {
     rep[0]=a;
     rep[1]=b;
     rep[2]=rsq;
@@ -51,17 +51,17 @@ public:
 
   const FT & b() const
   { return rep[1]; }
-  
+
   const FT & r_sq() const
   { return rep[2]; }
 };
 
 template < typename FT >
-bool 
+bool
 operator == ( const Polynomial_for_circles_2_2<FT> & p1,
-	      const Polynomial_for_circles_2_2<FT> & p2 )
+              const Polynomial_for_circles_2_2<FT> & p2 )
 {
-  return( (p1.a() == p2.a()) && 
+  return( (p1.a() == p2.a()) &&
               (p1.b() == p2.b()) &&
               (p1.r_sq() == p2.r_sq()) );
 }

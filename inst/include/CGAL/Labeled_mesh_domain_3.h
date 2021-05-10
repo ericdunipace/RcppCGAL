@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Labeled_mesh_domain_3.h $
-// $Id: Labeled_mesh_domain_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Labeled_mesh_domain_3.h $
+// $Id: Labeled_mesh_domain_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -371,7 +371,7 @@ public:
 #if defined(BOOST_MSVC)
 #  pragma warning(push)
 #  pragma warning(disable: 4003)
-#endif  
+#endif
   BOOST_PARAMETER_MEMBER_FUNCTION(
                                   (Labeled_mesh_domain_3),
                                   static create_gray_image_mesh_domain,
@@ -824,7 +824,7 @@ protected:
                                                       false>           Wrapper;
     return Wrapper(image,
                    transform_fct,
-                   transform_fct(value_outside));
+                   value_outside) ;
   }
 
   template <typename FT, typename FT2, typename Functor>

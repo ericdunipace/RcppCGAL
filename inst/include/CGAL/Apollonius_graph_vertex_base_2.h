@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_graph_vertex_base_2.h $
-// $Id: Apollonius_graph_vertex_base_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_vertex_base_2.h $
+// $Id: Apollonius_graph_vertex_base_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -39,14 +39,14 @@ struct Apollonius_graph_vertex_base_nested_iterator_traits
   {
     return it->hidden_sites_end();
   }
-  
+
 };
 
 
 
 template <class Gt,
-	  bool StoreHidden = true,
-	  class Vb = Triangulation_ds_vertex_base_2<> >
+          bool StoreHidden = true,
+          class Vb = Triangulation_ds_vertex_base_2<> >
 class Apollonius_graph_vertex_base_2
   : public Vb
 {
@@ -59,7 +59,7 @@ public:
   typedef Vb                             Base;
   typedef typename Gt::Point_2           Point;
   typedef typename Gt::Site_2            Site_2;
-  typedef AGDS	                         Apollonius_graph_data_structure_2;
+  typedef AGDS                                 Apollonius_graph_data_structure_2;
   typedef typename AGDS::Face_handle     Face_handle;
   typedef typename AGDS::Vertex_handle   Vertex_handle;
 
@@ -107,7 +107,7 @@ public:
     return hidden_site_list.size();
   }
 
-  Hidden_sites_iterator hidden_sites_begin() { 
+  Hidden_sites_iterator hidden_sites_begin() {
     return hidden_site_list.begin();
   }
 
@@ -145,6 +145,6 @@ private:
   Site_2 _p;
 };
 
-} //namespace CGAL 
+} //namespace CGAL
 
 #endif // CGAL_APOLLONIUS_GRAPH_VERTEX_BASE_2_H

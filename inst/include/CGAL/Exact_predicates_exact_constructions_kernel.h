@@ -1,16 +1,16 @@
-// Copyright (c) 2003  
+// Copyright (c) 2003
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_23/include/CGAL/Exact_predicates_exact_constructions_kernel.h $
-// $Id: Exact_predicates_exact_constructions_kernel.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Exact_predicates_exact_constructions_kernel.h $
+// $Id: Exact_predicates_exact_constructions_kernel.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas, Sylvain Pion
 
@@ -55,7 +55,7 @@ class Epeck
   : public Type_equality_wrapper<
              Lazy_kernel_base< Simple_cartesian<Epeck_ft>,
                                Simple_cartesian<Interval_nt_advanced>,
-	                       Cartesian_converter< Simple_cartesian<Epeck_ft>,
+                               Cartesian_converter< Simple_cartesian<Epeck_ft>,
                                                     Simple_cartesian<Interval_nt_advanced> >,
                                Epeck>,
              Epeck >

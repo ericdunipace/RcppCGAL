@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/Sqrt_extension/io.h $
-// $Id: io.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Sqrt_extension/io.h $
+// $Id: io.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,7 +27,7 @@ template<class NT, class ROOT, class ACDE_TAG, class FP_TAG>
 void
 input_ascii(std::istream& is , Sqrt_extension<NT,ROOT,ACDE_TAG,FP_TAG>& result){
 
-  typedef Sqrt_extension<NT,ROOT,ACDE_TAG,FP_TAG> EXT; 
+  typedef Sqrt_extension<NT,ROOT,ACDE_TAG,FP_TAG> EXT;
 
     char c;
     NT a0;
@@ -52,7 +52,7 @@ input_ascii(std::istream& is , Sqrt_extension<NT,ROOT,ACDE_TAG,FP_TAG>& result){
 
     if ( root  < ROOT(0)) CGAL_error_msg("input error: non-negative root expected");
 
-    if ( root == ROOT(0)) 
+    if ( root == ROOT(0))
         result =  EXT(a0);
     else
         result = EXT(a0,a1,root);
@@ -63,7 +63,7 @@ void
 output_maple(std::ostream& os, const Sqrt_extension<NT,ROOT,ACDE_TAG,FP_TAG>& x){
     CGAL::IO::Mode o_mode=::CGAL::get_mode(os);
     ::CGAL::set_mode(os,CGAL::IO::PRETTY);
-    
+
     if ( x.a0() != NT(0)){
         if ( x.a1() != NT(0)){
             os << x.a0()
@@ -92,7 +92,7 @@ output_benchmark( std::ostream& os, const Sqrt_extension<NT,ROOT,ACDE_TAG,FP_TAG
        << ", " << bmformat( x.root()) << " )";
 }
 
-// Benchmark_rep specialization 
+// Benchmark_rep specialization
 template < class NT, class ROOT, class ACDE_TAG, class FP_TAG >
 class Benchmark_rep< CGAL::Sqrt_extension< NT,ROOT, ACDE_TAG, FP_TAG> > {
     const CGAL::Sqrt_extension< NT,ROOT,ACDE_TAG,FP_TAG>& t;
@@ -100,14 +100,14 @@ public:
     //! initialize with a const reference to \a t.
     Benchmark_rep( const CGAL::Sqrt_extension< NT,ROOT,ACDE_TAG,FP_TAG>& tt) : t(tt) {}
     //! perform the output, calls \c operator\<\< by default.
-    std::ostream& operator()( std::ostream& out) const { 
+    std::ostream& operator()( std::ostream& out) const {
         output_benchmark( out, t );
         return out;
     }
-    
+
     static std::string get_benchmark_name() {
         std::stringstream ss;
-        ss << "Sqrt_extension< " << Benchmark_rep< NT >::get_benchmark_name() 
+        ss << "Sqrt_extension< " << Benchmark_rep< NT >::get_benchmark_name()
            << ", " << Benchmark_rep< ROOT>::get_benchmark_name() << " >";
         return ss.str();
     }
@@ -135,7 +135,7 @@ std::ostream& operator << (std::ostream& os,
         const Sqrt_extension<NT,ROOT,ACDE_TAG,FP_TAG>& ext){
     switch(CGAL::get_mode(os)) {
     case CGAL::IO::PRETTY:
-        output_maple(os,ext); break; 
+        output_maple(os,ext); break;
     default:
         os<<"EXT["<<ext.a0()<<","<<ext.a1()<<","<<ext.root()<<"]"; break;
     }

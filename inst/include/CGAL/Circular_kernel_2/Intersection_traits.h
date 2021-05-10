@@ -3,12 +3,12 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Circular_kernel_2/include/CGAL/Circular_kernel_2/Intersection_traits.h $
-// $Id: Intersection_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Circular_kernel_2/include/CGAL/Circular_kernel_2/Intersection_traits.h $
+// $Id: Intersection_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Circular_kernel_2/include/CGAL/Circular_kernel_2/Intersection_traits.h $
-// $Id: Intersection_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Circular_kernel_2/include/CGAL/Circular_kernel_2/Intersection_traits.h $
+// $Id: Intersection_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -29,7 +29,7 @@ struct CK2_Intersection_traits
 
 // Intersection_traits for the circular kernel
 
-// The additional CGAL_ADDITIONAL_VARIANT_FOR_ICL ( = int) in the variant 
+// The additional CGAL_ADDITIONAL_VARIANT_FOR_ICL ( = int) in the variant
 // has the only purpose to work around a bug of the Intel compiler,
 // which without it produces the error
 // /usr/include/boost/type_traits/has_nothrow_copy.hpp(36): internal error: bad pointer

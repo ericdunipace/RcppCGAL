@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_segments_3.h $
-// $Id: linear_least_squares_fitting_segments_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_segments_3.h $
+// $Id: linear_least_squares_fitting_segments_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Sylvain Pion and Ankit Gupta
@@ -28,24 +28,24 @@ namespace CGAL {
 namespace internal {
 
 // fits a plane to a 3D segment set
-template < typename InputIterator, 
+template < typename InputIterator,
            typename K,
-	   typename DiagonalizeTraits >
+           typename DiagonalizeTraits >
 typename K::FT
 linear_least_squares_fitting_3(InputIterator first,
-                               InputIterator beyond, 
+                               InputIterator beyond,
                                typename K::Plane_3& plane,   // best fit plane
                                typename K::Point_3& c,       // centroid
                                const typename K::Segment_3*,  // used for indirection
                                const K& k,                   // kernel
-			       const CGAL::Dimension_tag<1>& tag,
-			       const DiagonalizeTraits& diagonalize_traits)
+                               const CGAL::Dimension_tag<1>& tag,
+                               const DiagonalizeTraits& diagonalize_traits)
 {
   typedef typename K::Segment_3  Segment;
 
   // precondition: at least one element in the container.
   CGAL_precondition(first != beyond);
-  
+
   // compute centroid
   c = centroid(first,beyond,k,tag);
 
@@ -59,25 +59,25 @@ linear_least_squares_fitting_3(InputIterator first,
 } // end linear_least_squares_fitting_segments_3
 
 // fits a plane to a 3D segment set
-template < typename InputIterator, 
+template < typename InputIterator,
            typename K,
-	   typename DiagonalizeTraits >
+           typename DiagonalizeTraits >
 typename K::FT
 linear_least_squares_fitting_3(InputIterator first,
-                               InputIterator beyond, 
+                               InputIterator beyond,
                                typename K::Plane_3& plane,   // best fit plane
                                typename K::Point_3& c,       // centroid
                                const typename K::Segment_3*, // used for indirection
                                const K& k,                   // kernel
-			       const CGAL::Dimension_tag<0>& tag,
-			       const DiagonalizeTraits& diagonalize_traits)
+                               const CGAL::Dimension_tag<0>& tag,
+                               const DiagonalizeTraits& diagonalize_traits)
 {
   typedef typename K::Segment_3  Segment;
   typedef typename K::Point_3  Point;
 
   // precondition: at least one element in the container.
   CGAL_precondition(first != beyond);
-  
+
   std::list<Point> points;
   for(InputIterator it = first;
       it != beyond;
@@ -90,29 +90,29 @@ linear_least_squares_fitting_3(InputIterator first,
 
   // compute fitting plane
   return linear_least_squares_fitting_3(points.begin(),points.end(),plane,c,(Point*)nullptr,k,tag,
-					diagonalize_traits);
+                                        diagonalize_traits);
 
 } // end linear_least_squares_fitting_segments_3
 
 // fits a line to a 3D segment set
-template < typename InputIterator, 
+template < typename InputIterator,
            typename K,
-	   typename DiagonalizeTraits >
+           typename DiagonalizeTraits >
 typename K::FT
 linear_least_squares_fitting_3(InputIterator first,
-                               InputIterator beyond, 
+                               InputIterator beyond,
                                typename K::Line_3& line,      // best fit line
                                typename K::Point_3& c,        // centroid
                                const typename K::Segment_3*,  // used for indirection
                                const K& k,                    // kernel
-			       const CGAL::Dimension_tag<1>& tag,
-			       const DiagonalizeTraits& diagonalize_traits)
+                               const CGAL::Dimension_tag<1>& tag,
+                               const DiagonalizeTraits& diagonalize_traits)
 {
   typedef typename K::Segment_3  Segment;
 
   // precondition: at least one element in the container.
   CGAL_precondition(first != beyond);
-  
+
   // compute centroid
   c = centroid(first,beyond,k,tag);
 
@@ -122,29 +122,29 @@ linear_least_squares_fitting_3(InputIterator first,
 
   // compute fitting line
   return fitting_line_3(covariance,c,line,k,diagonalize_traits);
-  
+
 } // end linear_least_squares_fitting_segments_3
 
 // fits a plane to a 3D segment set
-template < typename InputIterator, 
+template < typename InputIterator,
            typename K,
-	   typename DiagonalizeTraits >
+           typename DiagonalizeTraits >
 typename K::FT
 linear_least_squares_fitting_3(InputIterator first,
-                               InputIterator beyond, 
+                               InputIterator beyond,
                                typename K::Line_3& line,      // best fit line
                                typename K::Point_3& c,        // centroid
                                const typename K::Segment_3*,  // used for indirection
                                const K& k,                    // kernel
-			       const CGAL::Dimension_tag<0>& tag,
-			       const DiagonalizeTraits& diagonalize_traits)
+                               const CGAL::Dimension_tag<0>& tag,
+                               const DiagonalizeTraits& diagonalize_traits)
 {
   typedef typename K::Segment_3  Segment;
   typedef typename K::Point_3  Point;
 
   // precondition: at least one element in the container.
   CGAL_precondition(first != beyond);
-  
+
   std::list<Point> points;
   for(InputIterator it = first;
       it != beyond;
@@ -157,7 +157,7 @@ linear_least_squares_fitting_3(InputIterator first,
 
   // compute fitting plane
   return linear_least_squares_fitting_3(points.begin(),points.end(),line,c,(Point*)nullptr,k,tag,
-					diagonalize_traits);
+                                        diagonalize_traits);
 
 } // end linear_least_squares_fitting_segments_3
 

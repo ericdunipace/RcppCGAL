@@ -6,28 +6,28 @@
  * This file is part of CGAL (www.cgal.org).
  *
  * File: RealRep.h
- * Synopsis: 
- * 		Internal Representation for Real
+ * Synopsis:
+ *                 Internal Representation for Real
  *
- * Written by 
+ * Written by
  *       Koji Ouchi <ouchi@simulation.nyu.edu>
  *       Chee Yap <yap@cs.nyu.edu>
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
- *       Sylvain Pion <pion@cs.nyu.edu> 
- * 
+ *       Sylvain Pion <pion@cs.nyu.edu>
+ *
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_Core/include/CGAL/CORE/RealRep.h $
- * $Id: RealRep.h 26fb266 2019-10-19T16:28:33+02:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/RealRep.h $
+ * $Id: RealRep.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 #ifndef _CORE_REALREP_H_
 #define _CORE_REALREP_H_
 #include "BigFloat.h"
 
-namespace CORE { 
+namespace CORE {
 
 class Real;
 
@@ -56,7 +56,7 @@ public:
   virtual BigFloat sqrt(const extLong&, const BigFloat&) const = 0;
 
   virtual void ULV_E(extLong &, extLong&, extLong&,
-		  extLong&, extLong&, extLong&) const = 0;
+                  extLong&, extLong&, extLong&) const = 0;
   virtual extLong flrLgErr() const = 0;
   virtual extLong clLgErr() const = 0;
   virtual unsigned long degree() const = 0;
@@ -416,12 +416,12 @@ inline extLong RealBigFloat::clLgErr() const {
 template<>
 inline unsigned long RealLong::length() const {
   return clLg(1+ core_abs(ker));
-}	// length is (log_2(1+ker^2)) /2.
+}        // length is (log_2(1+ker^2)) /2.
 
 template<>
 inline unsigned long RealLong::height() const {
   return clLg(core_max(1L, core_abs(ker)));
-}	// height is max{1, |ker|}
+}        // height is max{1, |ker|}
 
 template<>
 inline unsigned long RealDouble::length() const {

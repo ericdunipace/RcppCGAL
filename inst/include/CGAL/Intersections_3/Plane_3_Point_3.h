@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Intersections_3/include/CGAL/Intersections_3/Plane_3_Point_3.h $
-// $Id: Plane_3_Point_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/Plane_3_Point_3.h $
+// $Id: Plane_3_Point_3.h 0f3305f 2020-01-16T17:20:13+01:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,18 +27,18 @@ template <class K>
 inline bool
 do_intersect(const typename K::Point_3 &pt,
              const typename K::Plane_3 &plane,
-             const K&)
+             const K& k)
 {
-  return plane.has_on(pt);
+  return k.has_on_3_object()(plane,pt);
 }
 
 template <class K>
 inline bool
 do_intersect(const typename K::Plane_3 &plane,
              const typename K::Point_3 &pt,
-             const K&)
+             const K& k)
 {
-  return plane.has_on(pt);
+  return k.has_on_3_object()(plane,pt);
 }
 
 template <class K>

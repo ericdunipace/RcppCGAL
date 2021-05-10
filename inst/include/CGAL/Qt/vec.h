@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/vec.h $
-// $Id: vec.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/vec.h $
+// $Id: vec.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifndef QGLVIEWER_VEC_H
@@ -107,7 +107,7 @@ and can hence be used in place of Vec. See also operator const qreal*() .*/
   // Vec(const Vec& v) : x(v.x), y(v.y), z(v.z) {}
 
   /*! Equal operator. */
-#ifdef DOXYGEN_RUNNING  
+#ifdef DOXYGEN_RUNNING
   Vec &operator=(const Vec &v) {
     x = v.x;
     y = v.y;

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_2/include/CGAL/IO/File_poly.h $
-// $Id: File_poly.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_2/include/CGAL/IO/File_poly.h $
+// $Id: File_poly.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -137,7 +137,7 @@ write_triangle_poly_file(const CDT& t, std::ostream &f,
 
   f << std::endl;
 
-  
+
   // write seeds, assuming that the seeds unmarks faces
   f << std::distance(begin, end) << std::endl;
   unsigned int seeds_counter = 0;
@@ -152,7 +152,7 @@ void
 write_triangle_poly_file(const CDT& t, std::ostream &f)
 {
   std::list<int> l;
-  
+
   write_triangle_poly_file(t, f, l.begin(), l.end());
 }
 

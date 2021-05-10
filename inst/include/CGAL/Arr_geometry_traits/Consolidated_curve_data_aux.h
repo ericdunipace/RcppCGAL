@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Consolidated_curve_data_aux.h $
-// $Id: Consolidated_curve_data_aux.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Consolidated_curve_data_aux.h $
+// $Id: Consolidated_curve_data_aux.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Ron Wein          <wein@post.tau.ac.il>
 //                 Efi Fogel         <efif@post.tau.ac.il>
@@ -37,7 +37,7 @@ public:
   typedef typename std::list<Data>::const_iterator  const_iterator;
 
 private:
-  
+
   std::list<Data>     m_list;
 
 public:
@@ -122,9 +122,9 @@ public:
     }
     return (iter);
   }
-  
+
   /*!
-   * Insert an object into the list. 
+   * Insert an object into the list.
    * \param data The data object.
    * \return (true) if the data object has been successfully inserted;
    *         (false) otherwise (if it already exists).
@@ -137,9 +137,9 @@ public:
     m_list.push_back (data);
     return (true);
   }
-  
+
   /*!
-   * Erase an object from the list. 
+   * Erase an object from the list.
    * \param data The data object.
    * \return (true) if the data object has been successfully erased;
    *         (false) otherwise (if it is not in the list).

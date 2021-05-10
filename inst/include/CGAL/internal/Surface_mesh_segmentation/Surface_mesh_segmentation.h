@@ -1,16 +1,16 @@
-#ifndef CGAL_SURFACE_MESH_SEGMENTATION_H
 // Copyright (c) 2014  GeometryFactory Sarl (France).
 // All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesh_segmentation/include/CGAL/internal/Surface_mesh_segmentation/Surface_mesh_segmentation.h $
-// $Id: Surface_mesh_segmentation.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_segmentation/include/CGAL/internal/Surface_mesh_segmentation/Surface_mesh_segmentation.h $
+// $Id: Surface_mesh_segmentation.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz
 
 
+#ifndef CGAL_SURFACE_MESH_SEGMENTATION_H
 #define CGAL_SURFACE_MESH_SEGMENTATION_H
 
 #include <CGAL/license/Surface_mesh_segmentation.h>
@@ -18,8 +18,12 @@
 
 #include <CGAL/internal/Surface_mesh_segmentation/Expectation_maximization.h>
 #include <CGAL/internal/Surface_mesh_segmentation/Filters.h>
-#include <CGAL/internal/Surface_mesh_segmentation/Alpha_expansion_graph_cut.h>
 #include <CGAL/internal/Surface_mesh_segmentation/SDF_calculation.h>
+
+#include <CGAL/boost/graph/alpha_expansion_graphcut.h>
+#ifndef CGAL_DO_NOT_USE_BOYKOV_KOLMOGOROV_MAXFLOW_SOFTWARE
+#include <CGAL/boost/graph/Alpha_expansion_MaxFlow_tag.h>
+#endif
 
 #include <CGAL/Kernel/global_functions_3.h>
 
@@ -146,7 +150,7 @@ public:
     boost::tie(min_sdf, max_sdf) = min_max_value(mesh, sdf_values);
 
     if(min_sdf == max_sdf) {
-      CGAL_warning(min_sdf == max_sdf && !"Linear normalization is not applicable!");
+      CGAL_warning_msg(min_sdf == max_sdf, "Linear normalization is not applicable!");
       return std::make_pair(min_sdf, max_sdf);
     }
 
@@ -199,9 +203,9 @@ class Polyhedron,
   class VertexPointPmap,
       bool fast_bbox_intersection = true,
 #ifndef CGAL_DO_NOT_USE_BOYKOV_KOLMOGOROV_MAXFLOW_SOFTWARE
-      class GraphCut = Alpha_expansion_graph_cut_boykov_kolmogorov,
+      class AlphaExpansionImplementationTag = CGAL::Alpha_expansion_MaxFlow_tag,
 #else
-      class GraphCut = Alpha_expansion_graph_cut_boost,
+      class AlphaExpansionImplementationTag = CGAL::Alpha_expansion_boost_adjacency_list_tag,
 #endif
       class Filter = Bilateral_filtering<Polyhedron>
       >
@@ -289,7 +293,8 @@ public:
         edge_weights);
 
     // apply graph cut
-    GraphCut()(edges, edge_weights, probability_matrix, labels);
+    CGAL::alpha_expansion_graphcut (edges, edge_weights, probability_matrix, labels,
+                                    AlphaExpansionImplementationTag());
     std::vector<std::size_t>::iterator label_it = labels.begin();
     face_iterator facet_it, fend;
     for(boost::tie(facet_it,fend) = faces(mesh);

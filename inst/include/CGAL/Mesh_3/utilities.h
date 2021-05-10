@@ -3,21 +3,21 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/utilities.h $
-// $Id: utilities.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/utilities.h $
+// $Id: utilities.h 4dda7b6 2020-05-27T15:53:05+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Stephane Tayeb
 //
 //******************************************************************************
-// File Description : 
+// File Description :
 //******************************************************************************
 
 #ifndef CGAL_MESH_3_UTILITIES_H
 #define CGAL_MESH_3_UTILITIES_H
 
-#include <CGAL/license/Mesh_3.h>
+#include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Has_timestamp.h>
 #include <iterator>
@@ -27,7 +27,7 @@
 namespace CGAL {
 namespace Mesh_3 {
 namespace internal {
-  
+
 struct Debug_messages_tools {
   template <typename Vertex_handle>
   static std::string disp_vert(Vertex_handle v, Tag_true) {
@@ -65,10 +65,10 @@ struct First_of :
   typedef CGAL::cpp98::unary_function<Pair, const typename Pair::first_type&> Base;
   typedef typename Base::result_type                                  result_type;
   typedef typename Base::argument_type                                argument_type;
-  
+
   result_type operator()(const argument_type& p) const { return p.first; }
 }; // end class First_of
-  
+
 
 /**
  * @class Ordered_pair
@@ -81,18 +81,18 @@ public:
   Ordered_pair(const T& t1, const T& t2)
   : data_(t1,t2)
   {
-    if ( ! (t1 < t2) ) 
+    if ( ! (t1 < t2) )
     {
       data_.second = t1;
       data_.first = t2;
     }
   }
-  
+
   const T& first() const { return data_.first; }
   const T& second() const { return data_.second; }
-  
+
   bool operator<(const Ordered_pair& rhs) const { return data_ < rhs.data_; }
-  
+
 private:
   std::pair<T,T> data_;
 };
@@ -108,13 +108,13 @@ class Iterator_not_in_complex
   const C3T3& c3t3_;
 public:
   Iterator_not_in_complex(const C3T3& c3t3) : c3t3_(c3t3) { }
-  
+
   template <typename Iterator>
   bool operator()(Iterator it) const { return ! c3t3_.is_in_complex(*it); }
 }; // end class Iterator_not_in_complex
 
 
-} // end namespace internal  
+} // end namespace internal
 } // end namespace Mesh_3
 } //namespace CGAL
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_sweep_2/include/CGAL/Surface_sweep_2/Default_subcurve.h $
-// $Id: Default_subcurve.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/Default_subcurve.h $
+// $Id: Default_subcurve.h 107d77b3 2020-08-03T13:02:13+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi <talizvi@post.tau.ac.il>,
@@ -39,6 +39,7 @@
 #include <CGAL/Multiset.h>
 #include <CGAL/assertions.h>
 #include <CGAL/Default.h>
+#include <CGAL/Small_unordered_set.h>
 #include <set>
 
 namespace CGAL {
@@ -73,6 +74,9 @@ public:
 private:
   typedef Geometry_traits_2                             Gt2;
   typedef No_overlap_subcurve<Gt2, Event, Subcurve>     Base;
+  typedef Default_subcurve_base<GeometryTraits_2, Event_, Allocator_, Subcurve_>
+                                                        Self;
+  typedef Small_unordered_set<Self*, 8>                 Intersected_set;
 
 public:
   typedef typename Gt2::X_monotone_curve_2              X_monotone_curve_2;
@@ -95,6 +99,8 @@ public:
 protected:
   Subcurve* m_orig_subcurve1;           // The overlapping hierarchy
   Subcurve* m_orig_subcurve2;           // (relevant only in case of overlaps).
+  Intersected_set m_intersected;
+
 
 public:
   /*! Get the subcurves that originate an overlap. */
@@ -105,6 +111,8 @@ public:
   const Subcurve* originating_subcurve1() const { return m_orig_subcurve1; }
 
   const Subcurve* originating_subcurve2() const { return m_orig_subcurve2; }
+
+  bool intersection_exists (Self* other) { return !m_intersected.insert(other); }
 
   /*! Set the subcurves that originate an overlap. */
   void set_originating_subcurve1(Subcurve* orig_subcurve1)

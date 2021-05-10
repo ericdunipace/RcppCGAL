@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_lm_nearest_neighbor.h $
-// $Id: Arr_lm_nearest_neighbor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_lm_nearest_neighbor.h $
+// $Id: Arr_lm_nearest_neighbor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 // Author(s)     : Idit Haran   <haranidi@post.tau.ac.il>
 //                 Ron Wein     <wein@post.tau.ac.il>
 //                 Efi Fogel    <efif@post.tau.ac.il>
@@ -104,7 +104,7 @@ public:
     bool operator== (const NN_Point_2& nnp) const
     { return (m_vec[0] == nnp.m_vec[0] && m_vec[1] == nnp.m_vec[1]); }
 
-    bool operator!= (const NN_Point_2& nnp) const 
+    bool operator!= (const NN_Point_2& nnp) const
     { return (m_vec[0] != nnp.m_vec[0] || m_vec[1] != nnp.m_vec[1]); }
   };
 
@@ -115,7 +115,7 @@ public:
   struct Construct_coord_iterator
   {
     typedef const Approximate_number_type*      result_type;
-    
+
     /*! Get an iterator for the approximate coordinates. */
     const Approximate_number_type* operator()(const NN_Point_2& nnp) const
     { return (nnp.begin()); }
@@ -137,9 +137,9 @@ protected:
   Tree* m_tree;        // The search tree.
   bool  m_is_empty;    // Is the search tree empty.
 
-public: 
+public:
   bool is_empty() const { return m_is_empty; }
-  
+
 private:
   typedef Arr_landmarks_nearest_neighbor<Arrangement_2>     Self;
 
@@ -182,7 +182,7 @@ public:
   }
 
   /*! Clear the search tree. */
-  void clear() 
+  void clear()
   {
     if (m_tree != nullptr)
       delete m_tree;
@@ -210,7 +210,7 @@ public:
 
     // For some reason search.begin()->first fails
     const NN_Point_2&  nearest_p = (*(search.begin())).first;
-    obj = nearest_p.object();   
+    obj = nearest_p.object();
     return nearest_p.point();
   }
 };

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/polylines_to_protect.h $
-// $Id: polylines_to_protect.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/polylines_to_protect.h $
+// $Id: polylines_to_protect.h daf2e68 2020-01-09T16:52:05+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -264,7 +264,7 @@ struct Polyline_visitor
 
   ~Polyline_visitor()
   {//DEBUG
-#if CGAL_MESH_3_PROTECTION_DEBUG > 1
+#if CGAL_MESH_3_PROTECTION_DEBUG & 2
     std::ofstream og("polylines_graph.polylines.txt");
     og.precision(17);
     for(const std::vector<P>& poly : polylines)
@@ -274,7 +274,7 @@ struct Polyline_visitor
         og << p << " ";
       og << std::endl;
     }
-#endif // CGAL_MESH_3_PROTECTION_DEBUG > 1
+#endif // CGAL_MESH_3_PROTECTION_DEBUG & 2
   }
 
   void start_new_polyline()

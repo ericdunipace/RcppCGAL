@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/QP_solver/include/CGAL/QP_solver/QP_solver_bounds_impl.h $
-// $Id: QP_solver_bounds_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/QP_solver/include/CGAL/QP_solver/QP_solver_bounds_impl.h $
+// $Id: QP_solver_bounds_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Sven Schoenherr
 //                 Bernd Gaertner <gaertner@inf.ethz.ch>
@@ -55,7 +55,7 @@ ET QP_solver<Q, ET, Tags>::upper_bound(int i) const
   // Given an index of an original variable, returns its upper bound.
 {
   CGAL_qpe_assertion(i < qp_n); // Note: slack variables cannot have
-				// finite upper bounds.
+                                // finite upper bounds.
   CGAL_qpe_assertion(has_finite_upper_bound(i));
   return *(qp_u+i);
 }

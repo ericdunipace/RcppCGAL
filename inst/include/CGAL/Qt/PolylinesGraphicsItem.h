@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/PolylinesGraphicsItem.h $
-// $Id: PolylinesGraphicsItem.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/PolylinesGraphicsItem.h $
+// $Id: PolylinesGraphicsItem.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -45,9 +45,9 @@ public:
 
 public:
   QRectF boundingRect() const;
-  
+
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  
+
 
   const QPen& verticesPen() const
   {
@@ -100,7 +100,7 @@ protected:
 template <typename P>
 PolylinesGraphicsItem<P>::PolylinesGraphicsItem(P * p_)
   :  polylines(p_), painterostream(0),
-     draw_edges(true), draw_vertices(true)   
+     draw_edges(true), draw_vertices(true)
 {
   setVerticesPen(QPen(::Qt::red, 3.));
   updateBoundingBox();
@@ -108,7 +108,7 @@ PolylinesGraphicsItem<P>::PolylinesGraphicsItem(P * p_)
 }
 
 template <typename P>
-QRectF 
+QRectF
 PolylinesGraphicsItem<P>::boundingRect() const
 {
   return bounding_rect;
@@ -118,15 +118,15 @@ PolylinesGraphicsItem<P>::boundingRect() const
 
 
 template <typename P>
-void 
-PolylinesGraphicsItem<P>::paint(QPainter *painter, 
+void
+PolylinesGraphicsItem<P>::paint(QPainter *painter,
                                 const QStyleOptionGraphicsItem * /*option*/,
                                 QWidget * /*widget*/)
 {
 
   painterostream = PainterOstream<Traits>(painter);
 
-  painter->setPen(this->edgesPen());  
+  painter->setPen(this->edgesPen());
   for(typename P::iterator it = polylines->begin();
       it != polylines->end();
       it++){
@@ -145,7 +145,7 @@ PolylinesGraphicsItem<P>::paint(QPainter *painter,
 // We let the bounding box only grow, so that when vertices get removed
 // the maximal bbox gets refreshed in the GraphicsView
 template <typename P>
-void 
+void
 PolylinesGraphicsItem<P>::updateBoundingBox()
 {
   Converter<Traits> convert;
@@ -165,7 +165,7 @@ PolylinesGraphicsItem<P>::updateBoundingBox()
 
 
 template <typename P>
-void 
+void
 PolylinesGraphicsItem<P>::modelChanged()
 {
   updateBoundingBox();

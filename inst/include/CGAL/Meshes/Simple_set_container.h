@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesher_level/include/CGAL/Meshes/Simple_set_container.h $
-// $Id: Simple_set_container.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesher_level/include/CGAL/Meshes/Simple_set_container.h $
+// $Id: Simple_set_container.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -20,7 +20,7 @@ namespace CGAL {
   namespace Meshes {
 
     template <typename Element>
-    class Simple_set_container 
+    class Simple_set_container
     {
     public:
       typedef std::set<Element> Set;
@@ -39,7 +39,7 @@ namespace CGAL {
       Element get_next_element_impl()
       {
         CGAL_assertion(!s.empty());
-        
+
         return *(s.begin());
 
       }
@@ -61,10 +61,10 @@ namespace CGAL {
 
       size_type size() const
       {
-	return s.size();
+        return s.size();
       }
     }; // end Simple_set_container
-    
+
   } // end namespace Meshes
 } // end namespace CGAL
 

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/comparator_profiler.h $
-// $Id: comparator_profiler.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/comparator_profiler.h $
+// $Id: comparator_profiler.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -76,15 +76,15 @@ public:
 
   template< class FT >
   static void count_case(const FT& a1, const FT& b1, const FT& c1,
-			 const FT& a2, const FT& b2, const FT& c2)
+                         const FT& a2, const FT& b2, const FT& c2)
   {
     // works correctly only with leda_real
     FT D1 = CGAL::square(b1) - a1 * c1;
-    
+
     FT l1 = (b1 - CGAL::sqrt(D1)) / a1;
     FT r1 = (b1 + CGAL::sqrt(D1)) / a1;
     if ( a1 < 0 ) { std::swap(r1, l1); }
-    
+
     FT D2 = CGAL::square(b2) - a2 * c2;
 
     if ( D1 == 0 || D2 == 0 ) {
@@ -98,45 +98,45 @@ public:
 
     if ( l1 < l2 ) {
       if ( r1 > r2 ) {
-	FT J = a1 * b2 - a2 * b1;
-	if ( J > 0 ) {
-	  case_3b_Jpos_counter++;
-	} else if ( J < 0 ) {
-	  case_3b_Jneg_counter++;
-	} else {
-	  case_degenerate_counter++;
-	}
+        FT J = a1 * b2 - a2 * b1;
+        if ( J > 0 ) {
+          case_3b_Jpos_counter++;
+        } else if ( J < 0 ) {
+          case_3b_Jneg_counter++;
+        } else {
+          case_degenerate_counter++;
+        }
       } else if ( r1 < r2 ) {
-	if ( r1 < l2 ) {
-	  case_5_counter++;
-	} else if ( r1 > l2 ) {
-	  case_4_counter++;
-	} else {
-	  case_degenerate_counter++;
-	}
+        if ( r1 < l2 ) {
+          case_5_counter++;
+        } else if ( r1 > l2 ) {
+          case_4_counter++;
+        } else {
+          case_degenerate_counter++;
+        }
       } else {
-	case_degenerate_counter++;
+        case_degenerate_counter++;
       }
     } else if ( l1 > l2 ) {
       if ( r1 < r2 ) {
-	FT J = a1 * b2 - a2 * b1;
-	if ( J > 0 ) {
-	  case_3a_Jpos_counter++;
-	} else if ( J < 0 ) {
-	  case_3a_Jneg_counter++;
-	} else {
-	  case_degenerate_counter++;
-	}
+        FT J = a1 * b2 - a2 * b1;
+        if ( J > 0 ) {
+          case_3a_Jpos_counter++;
+        } else if ( J < 0 ) {
+          case_3a_Jneg_counter++;
+        } else {
+          case_degenerate_counter++;
+        }
       } else if ( r1 > r2 ) {
-	if ( l1 < r2 ) {
-	  case_2_counter++;
-	} else if ( l1 > r2 ) {
-	  case_1_counter++;
-	} else {
-	  case_degenerate_counter++;
-	}
+        if ( l1 < r2 ) {
+          case_2_counter++;
+        } else if ( l1 > r2 ) {
+          case_1_counter++;
+        } else {
+          case_degenerate_counter++;
+        }
       } else {
-	case_degenerate_counter++;
+        case_degenerate_counter++;
       }
     } else {
       case_degenerate_counter++;

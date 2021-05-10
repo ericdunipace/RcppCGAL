@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Combinatorial_map/include/CGAL/Combinatorial_map_iterators_base.h $
-// $Id: Combinatorial_map_iterators_base.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Combinatorial_map/include/CGAL/Combinatorial_map_iterators_base.h $
+// $Id: Combinatorial_map_iterators_base.h 9a50c0f 2019-11-26T13:22:03+01:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -106,7 +106,7 @@ namespace CGAL {
     {
       return ( ((*this==mmap->null_handle) && (aiterator==mmap->null_handle)) ||
                (mfirst_dart == aiterator.mfirst_dart &&
-               static_cast<const Base&>(*this)==
+                static_cast<const Base&>(*this)==
                 static_cast<const Base&>(aiterator)) );
     }
 

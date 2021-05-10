@@ -3,16 +3,16 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Circular_kernel_2/include/CGAL/Circular_kernel_2/function_objects_on_line_2.h $
-// $Id: function_objects_on_line_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Circular_kernel_2/include/CGAL/Circular_kernel_2/function_objects_on_line_2.h $
+// $Id: function_objects_on_line_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion, Pedro Machado
 
 // Partially supported by the IST Programme of the EU as a Shared-cost
-// RTD (FET Open) Project under Contract No  IST-2000-26473 
-// (ECG - Effective Computational Geometry for Curves and Surfaces) 
-// and a STREP (FET Open) Project under Contract No  IST-006413 
+// RTD (FET Open) Project under Contract No  IST-2000-26473
+// (ECG - Effective Computational Geometry for Curves and Surfaces)
+// and a STREP (FET Open) Project under Contract No  IST-006413
 // (ACS -- Algorithms for Complex Shapes)
 
 
@@ -32,11 +32,11 @@ namespace LinearFunctors {
   template < class CK >
   class Construct_line_2 : public  CK::Linear_kernel::Construct_line_2
   {
-	  typedef typename CK::Line_arc_2            Line_arc_2;
+          typedef typename CK::Line_arc_2            Line_arc_2;
     typedef typename CK::Line_2                Line_2;
     public:
 
-    typedef typename CK::Linear_kernel::Construct_line_2::result_type 
+    typedef typename CK::Linear_kernel::Construct_line_2::result_type
       result_type;
     using CK::Linear_kernel::Construct_line_2::operator();
 
@@ -48,7 +48,7 @@ namespace LinearFunctors {
     result_type
     operator() ( const typename CK::Polynomial_1_2 &eq )
       {
-	      return construct_line_2<CK>(eq);
+              return construct_line_2<CK>(eq);
       }
   };
 

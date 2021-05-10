@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_experimental.h $
-// $Id: Lipschitz_sizing_experimental.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_experimental.h $
+// $Id: Lipschitz_sizing_experimental.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -201,7 +201,7 @@ public:
       const typename MeshDomain::Curve_index& curve_id =
         m_domain.curve_index(index);
       const Patches_ids& ids = patches_ids_map[curve_id];
-      
+
       if (m_domain_is_a_box && ids.size() == 2)
       {
         //we are on an edge of the box
@@ -310,7 +310,6 @@ public:
 
     m_own_ptree.reset(new Tree(triangles.begin(), triangles.end()));
     m_own_ptree->build();
-    m_own_ptree->accelerate_distance_queries();
   }
 
 private:

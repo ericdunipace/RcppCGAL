@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/CC_safe_handle.h $
-// $Id: CC_safe_handle.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/CC_safe_handle.h $
+// $Id: CC_safe_handle.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement Jamin
@@ -14,7 +14,7 @@
 
 namespace CGAL {
 
-// CC_safe_handle is a helper that store a CC handle and its erase 
+// CC_safe_handle is a helper that store a CC handle and its erase
 // counter value (value when the CC_safe_handle instance was created).
 // The is_zombie() function allows to know if the pointee was erased since.
 template <typename CC_iterator>

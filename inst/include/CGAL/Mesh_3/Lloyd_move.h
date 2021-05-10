@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/Lloyd_move.h $
-// $Id: Lloyd_move.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Lloyd_move.h $
+// $Id: Lloyd_move.h 2d73ef3 2020-12-04T17:18:04+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,7 @@
 #include <CGAL/Mesh_3/config.h>
 #include <CGAL/Mesh_3/Uniform_sizing_field.h>
 
-#include <CGAL/Hash_handles_with_or_without_timestamps.h>
+#include <CGAL/Time_stamper.h>
 #include <CGAL/convex_hull_2.h>
 #include <CGAL/ch_graham_andrew.h>
 
@@ -551,7 +551,6 @@ private:
 
     Cell_circulator current_cell = tr.incident_cells(edge);
     Cell_circulator done = current_cell;
-    CGAL_assertion(c3t3.is_in_complex(current_cell));
 
     // a & b are fixed points
     const Weighted_point& wa = tr.point(v);
@@ -561,7 +560,6 @@ private:
     const Weighted_point& a_b = tr.point(current_cell, current_cell->index(v));
     Vector_3 ba = Vector_3(cp(a_b), b);
     ++current_cell;
-    CGAL_assertion(c3t3.is_in_complex(current_cell));
     CGAL_assertion(current_cell != done);
 
     // c & d are moving points
@@ -573,7 +571,6 @@ private:
 
     while ( current_cell != done )
     {
-      CGAL_assertion(c3t3.is_in_complex(current_cell));
       Bare_point d = tr.dual(current_cell);
       const Weighted_point& a_d = tr.point(current_cell, current_cell->index(v));
       Vector_3 da = Vector_3(cp(a_d), d);

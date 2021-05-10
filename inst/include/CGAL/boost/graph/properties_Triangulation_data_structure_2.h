@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_2/include/CGAL/boost/graph/properties_Triangulation_data_structure_2.h $
-// $Id: properties_Triangulation_data_structure_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_2/include/CGAL/boost/graph/properties_Triangulation_data_structure_2.h $
+// $Id: properties_Triangulation_data_structure_2.h 0903946 2020-03-17T17:53:21+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -284,23 +284,31 @@ get(boost::face_index_t, const Triangulation_data_structure_2<VB,FB>&)
 
 namespace boost {
 
-// g++ 'enumeral_type' in template unification not implemented workaround
-template <class VB, class FB, class Tag>
-struct property_map<CGAL::Triangulation_data_structure_2<VB,FB>, Tag>
-{
-  typedef typename CGAL::internal::TDS2_property_map<VB, FB, Tag> map_gen;
-  typedef typename map_gen::type type;
-  typedef typename map_gen::const_type const_type;
+#define CGAL_PM_SPECIALIZATION(TAG) \
+template <class VB, class FB> \
+struct property_map<CGAL::Triangulation_data_structure_2<VB,FB>, TAG> \
+{ \
+  typedef typename CGAL::internal::TDS2_property_map<VB, FB, TAG> map_gen; \
+  typedef typename map_gen::type type; \
+  typedef typename map_gen::const_type const_type; \
+}; \
+\
+template <class VB, class FB> \
+struct property_map<const CGAL::Triangulation_data_structure_2<VB,FB>, TAG> \
+{ \
+  typedef typename CGAL::internal::TDS2_property_map<VB, FB, TAG> map_gen; \
+  typedef typename map_gen::type type; \
+  typedef typename map_gen::const_type const_type; \
 };
 
-// see struct property_map in Polyehdron for an explanation
-template <class VB, class FB, class Tag>
-struct property_map<const CGAL::Triangulation_data_structure_2<VB,FB>, Tag>
-{
-  typedef typename CGAL::internal::TDS2_property_map<VB, FB, Tag> map_gen;
-  typedef typename map_gen::type type;
-  typedef typename map_gen::const_type const_type;
-};
+CGAL_PM_SPECIALIZATION(vertex_point_t)
+CGAL_PM_SPECIALIZATION(edge_weight_t)
+CGAL_PM_SPECIALIZATION(vertex_index_t)
+CGAL_PM_SPECIALIZATION(halfedge_index_t)
+CGAL_PM_SPECIALIZATION(edge_index_t)
+CGAL_PM_SPECIALIZATION(face_index_t)
+
+#undef CGAL_PM_SPECIALIZATION
 
 } // namespace boost
 

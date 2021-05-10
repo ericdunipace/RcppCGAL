@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polyhedron_IO/include/CGAL/IO/generic_print_polyhedron.h $
-// $Id: generic_print_polyhedron.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polyhedron_IO/include/CGAL/IO/generic_print_polyhedron.h $
+// $Id: generic_print_polyhedron.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Lutz Kettner  <kettner@mpi-sb.mpg.de>
 
@@ -28,7 +28,7 @@ namespace CGAL {
 
 template <class Polyhedron, class Writer, class Vpm>
 void
-generic_print_polyhedron( std::ostream&     out, 
+generic_print_polyhedron( std::ostream&     out,
                           const Polyhedron& P,
                           Writer&           writer,
                           const Vpm& vpm ) {
@@ -67,9 +67,9 @@ generic_print_polyhedron( std::ostream&     out,
 
 template <class Polyhedron, class Writer>
 void
-generic_print_polyhedron( std::ostream&     out, 
+generic_print_polyhedron( std::ostream&     out,
                           const Polyhedron& P,
-                          Writer&           writer) 
+                          Writer&           writer)
 {
   generic_print_polyhedron(out, P, writer,
                            get(CGAL::vertex_point, P));

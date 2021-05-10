@@ -3,14 +3,14 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/utility_impl.h $
-// $Id: utility_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/utility_impl.h $
+// $Id: utility_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
-   
+
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
@@ -37,9 +37,9 @@ QRectF mapToScene(const QGraphicsView* v, const QRect rect)
   QPointF size = v->mapToScene(rect.bottomRight());
   size -= top_left;
   return QRectF(top_left.x(),
-		top_left.y(),
-		size.x(),
-		size.y());
+                top_left.y(),
+                size.x(),
+                size.y());
 }
 
 CGAL_INLINE_FUNCTION

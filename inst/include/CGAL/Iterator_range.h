@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/STL_Extension/include/CGAL/Iterator_range.h $
-// $Id: Iterator_range.h 56b828d 2019-11-05T09:07:34+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Iterator_range.h $
+// $Id: Iterator_range.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri
 
@@ -25,7 +25,7 @@ namespace CGAL {
   template <typename I>
   class Iterator_range
     : public std::pair<I,I>{
-    
+
     typedef std::pair<I,I> Base;
 
   public:
@@ -75,7 +75,7 @@ namespace CGAL {
     return std::tuple<I&, I&>{this->first, this->second};
   }
 
-  operator std::tuple<const I&, const I&>() const 
+  operator std::tuple<const I&, const I&>() const
   {
     return std::tuple<const I&, const I&>{this->first, this->second};
   }

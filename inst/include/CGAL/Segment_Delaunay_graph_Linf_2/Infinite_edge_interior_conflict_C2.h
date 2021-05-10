@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Infinite_edge_interior_conflict_C2.h $
-// $Id: Infinite_edge_interior_conflict_C2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Infinite_edge_interior_conflict_C2.h $
+// $Id: Infinite_edge_interior_conflict_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Panagiotis Cheilaris, Sandeep Kumar Dey, Evanthia Papadopoulou
 //philaris@gmail.com, sandeep.kr.dey@gmail.com, evanthia.papadopoulou@usi.ch
@@ -77,7 +77,7 @@ private:
 
 public:
   Boolean   operator()(const Site_2& q, const Site_2& s, const Site_2& r,
-		       const Site_2& t, Sign sgn) const
+                       const Site_2& t, Sign sgn) const
   {
 
     CGAL_SDG_DEBUG(
@@ -308,7 +308,7 @@ public:
             << ' ' << sgn << " returns "
             << ( sgn == NEGATIVE ) << std::endl;);
         return ( sgn == NEGATIVE );
-      } 
+      }
       else
       {
         if (sgn == NEGATIVE) {

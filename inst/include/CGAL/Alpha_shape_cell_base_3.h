@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Alpha_shapes_3/include/CGAL/Alpha_shape_cell_base_3.h $
-// $Id: Alpha_shape_cell_base_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Alpha_shapes_3/include/CGAL/Alpha_shape_cell_base_3.h $
+// $Id: Alpha_shape_cell_base_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Tran Kai Frank DA
@@ -23,7 +23,7 @@
 namespace CGAL {
 
 template < class NT_>
-class  Alpha_status 
+class  Alpha_status
 : public Compact_container_base
 {
   bool _is_Gabriel;
@@ -77,13 +77,13 @@ private:
   NT A;
 
 public:
-  Alpha_shape_cell_base_3() 
+  Alpha_shape_cell_base_3()
     : Cb() {}
-  
+
   Alpha_shape_cell_base_3(Vertex_handle v0, Vertex_handle v1,
                           Vertex_handle v2, Vertex_handle v3)
     : Cb(v0, v1, v2, v3) {}
-  
+
   Alpha_shape_cell_base_3(Vertex_handle v0, Vertex_handle v1,
                           Vertex_handle v2, Vertex_handle v3,
                           Cell_handle n0, Cell_handle n1,

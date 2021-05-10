@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/orient_polygon_soup.h $
-// $Id: orient_polygon_soup.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/orient_polygon_soup.h $
+// $Id: orient_polygon_soup.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -447,7 +447,7 @@ struct Polygon_soup_orienter
  * amounts to duplicate the polygon to which it belongs.
  *
  * These points are either an endpoint of an edge incident to more
- * than two polygons, an endpoint of an edge between 
+ * than two polygons, an endpoint of an edge between
  * two polygons with incompatible orientations (during the re-orientation process),
  * or more generally a point \a p at which the intersection
  * of an infinitesimally small ball centered at \a p

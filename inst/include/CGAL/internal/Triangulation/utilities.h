@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation/include/CGAL/internal/Triangulation/utilities.h $
-// $Id: utilities.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation/include/CGAL/internal/Triangulation/utilities.h $
+// $Id: utilities.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -116,11 +116,11 @@ struct Point_from_pointer
 {
     typedef const typename T::Geom_traits::Point_d *   argument_type;
     typedef const typename T::Geom_traits::Point_d     result_type;
-    result_type & operator()(argument_type & x) const 
+    result_type & operator()(argument_type & x) const
     {
         return (*x);
     }
-    const result_type & operator()(const argument_type & x) const 
+    const result_type & operator()(const argument_type & x) const
     {
         return (*x);
     }
@@ -131,11 +131,11 @@ struct Point_from_vertex_handle
 {
     typedef Vertex_handle   argument_type;
     typedef Point           result_type;
-    result_type & operator()(argument_type & x) const 
+    result_type & operator()(argument_type & x) const
     {
         return x->point();
     }
-    const result_type & operator()(const argument_type & x) const 
+    const result_type & operator()(const argument_type & x) const
     {
         return x->point();
     }

@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/GraphicsViewLineInput.h $
-// $Id: GraphicsViewLineInput.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/GraphicsViewLineInput.h $
+// $Id: GraphicsViewLineInput.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -21,7 +21,7 @@
 #include <QRectF>
 #include <QPointF>
 #include <QGraphicsItem>
-#include <QGraphicsLineItem> 
+#include <QGraphicsLineItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
@@ -42,15 +42,15 @@ public:
   GraphicsViewLineInput(QObject *parent, QGraphicsScene* s);
 
 protected:
-    
+
   virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
   virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
   virtual void keyPressEvent(QKeyEvent *event);
-  
-  bool eventFilter(QObject *obj, QEvent *event);
-  
 
-  
+  bool eventFilter(QObject *obj, QEvent *event);
+
+
+
 
 private:
 
@@ -62,7 +62,7 @@ private:
   QPointF qsp, qtp;
   typename K::Point_2 sp, tp;
   typename K::Line_2 l;
-  QGraphicsScene *scene_;  
+  QGraphicsScene *scene_;
   Converter<K> convert;
 };
 
@@ -99,9 +99,9 @@ GraphicsViewLineInput<K>::qlinef()
 }
 
 template <typename K>
-void 
+void
 GraphicsViewLineInput<K>::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{  
+{
   if(event->modifiers()  & ::Qt::ShiftModifier){
     return;
   }
@@ -124,20 +124,20 @@ GraphicsViewLineInput<K>::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 
 template <typename K>
-void 
+void
 GraphicsViewLineInput<K>::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
   qtp = event->scenePos();
   if(qtp == qsp){
     qtp = QPointF(qsp.x()+1, qsp.y());
-  } 
+  }
   line.setLine(qlinef());
 }
 
 
 template <typename K>
-void 
-GraphicsViewLineInput<K>::keyPressEvent ( QKeyEvent * event ) 
+void
+GraphicsViewLineInput<K>::keyPressEvent ( QKeyEvent * event )
 {
   if(event->key() != ::Qt::Key_Delete){ // need an anchored namespace to get away from CGAL::Qt
     return;
@@ -151,7 +151,7 @@ GraphicsViewLineInput<K>::keyPressEvent ( QKeyEvent * event )
 
 
 template <typename K>
-bool 
+bool
 GraphicsViewLineInput<K>::eventFilter(QObject *obj, QEvent *event)
 {
   if (event->type() == QEvent::GraphicsSceneMousePress) {
@@ -170,7 +170,7 @@ GraphicsViewLineInput<K>::eventFilter(QObject *obj, QEvent *event)
     // standard event processing
     return QObject::eventFilter(obj, event);
   }
-} 
+}
 
 } // namespace Qt
 } // namespace CGAL

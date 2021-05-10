@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Hyperbolic_triangulation_2/include/CGAL/internal/Hyperbolic_Delaunay_triangulation_traits_2_functions.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Hyperbolic_triangulation_2/include/CGAL/internal/Hyperbolic_Delaunay_triangulation_traits_2_functions.h $
 // $Id: Hyperbolic_Delaunay_triangulation_traits_2_functions.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

@@ -1,11 +1,11 @@
 // Copyright (c) 2012
 // Inria Nancy - Grand Est
-// All rights reserved. 
+// All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Generator/include/CGAL/Combination_enumerator.h $
-// $Id: Combination_enumerator.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Generator/include/CGAL/Combination_enumerator.h $
+// $Id: Combination_enumerator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus

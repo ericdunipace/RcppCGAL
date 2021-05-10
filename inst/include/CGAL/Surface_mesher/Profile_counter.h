@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Surface_mesher/include/CGAL/Surface_mesher/Profile_counter.h $
-// $Id: Profile_counter.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/Surface_mesher/Profile_counter.h $
+// $Id: Profile_counter.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,9 +38,9 @@
 #  define CGAL_SURFACE_MESHER_HISTOGRAM_PROFILER(Y, Z)
 #  define CGAL_SURFACE_MESHER_BRANCH_PROFILER(Y, NAME)
 #  define CGAL_SURFACE_MESHER_BRANCH_PROFILER_BRANCH(NAME)
-#  define CGAL_SURFACE_MESHER_BRANCH_PROFILER_3(Y, NAME) 
+#  define CGAL_SURFACE_MESHER_BRANCH_PROFILER_3(Y, NAME)
 #  define CGAL_SURFACE_MESHER_BRANCH_PROFILER_BRANCH_1(NAME)
-#  define CGAL_SURFACE_MESHER_BRANCH_PROFILER_BRANCH_2(NAME) 
+#  define CGAL_SURFACE_MESHER_BRANCH_PROFILER_BRANCH_2(NAME)
 #endif
 
 #endif // CGAL_SURFACE_MESHER_PROFILE_COUNTER_H

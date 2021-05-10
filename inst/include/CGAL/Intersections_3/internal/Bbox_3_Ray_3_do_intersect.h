@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Ray_3_do_intersect.h $
-// $Id: Bbox_3_Ray_3_do_intersect.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Ray_3_do_intersect.h $
+// $Id: Bbox_3_Ray_3_do_intersect.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,7 @@
 // inspired from http://cag.csail.mit.edu/~amy/papers/box-jgt.pdf
 
 namespace CGAL {
-  
+
 namespace Intersections {
 
 namespace internal {
@@ -41,7 +41,7 @@ namespace internal {
 
     return do_intersect_bbox_segment_aux
       <FT,
-       true,  // bounded at t=0 
+       true,  // bounded at t=0
        false, // not bounded at t=1
        false> // do not use static filters
       (
@@ -57,7 +57,7 @@ namespace internal {
                     const K&) {
     return do_intersect(ray, bbox, K());
   }
-  
+
 } // namespace internal
 } // namespace Intersections
 } //namespace CGAL

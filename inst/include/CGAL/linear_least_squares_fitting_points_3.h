@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_points_3.h $
-// $Id: linear_least_squares_fitting_points_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_points_3.h $
+// $Id: linear_least_squares_fitting_points_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Sylvain Pion and Ankit Gupta
@@ -28,18 +28,18 @@ namespace internal {
 // returns a fitting quality (1 - lambda_min/lambda_max):
 //  1 is best (zero variance orthogonally to the fitting line)
 //  0 is worst (isotropic case, returns a plane with default direction)
-template < typename InputIterator, 
+template < typename InputIterator,
            typename K,
-	   typename DiagonalizeTraits >
+           typename DiagonalizeTraits >
 typename K::FT
 linear_least_squares_fitting_3(InputIterator first,
-                               InputIterator beyond, 
+                               InputIterator beyond,
                                typename K::Plane_3& plane, // best fit plane
                                typename K::Point_3& c,     // centroid
                                const typename K::Point_3*, // used for indirection
                                const K& k,                 // kernel
-			       const CGAL::Dimension_tag<0>& tag,
-			       const DiagonalizeTraits& diagonalize_traits)
+                               const CGAL::Dimension_tag<0>& tag,
+                               const DiagonalizeTraits& diagonalize_traits)
 {
   typedef typename K::Point_3  Point;
 
@@ -61,18 +61,18 @@ linear_least_squares_fitting_3(InputIterator first,
 // returns a fitting quality (1 - lambda_min/lambda_max):
 //  1 is best (zero variance orthogonally to the fitting line)
 //  0 is worst (isotropic case, returns a line along x axis)
-template < typename InputIterator, 
+template < typename InputIterator,
            typename K,
-	   typename DiagonalizeTraits >
+           typename DiagonalizeTraits >
 typename K::FT
 linear_least_squares_fitting_3(InputIterator first,
-                               InputIterator beyond, 
+                               InputIterator beyond,
                                typename K::Line_3& line,  // best fit line
                                typename K::Point_3& c,    // centroid
                                const typename K::Point_3*, // used for indirection
                                const K& k,                // kernel
-			       const CGAL::Dimension_tag<0>& tag,
-			       const DiagonalizeTraits& diagonalize_traits)
+                               const CGAL::Dimension_tag<0>& tag,
+                               const DiagonalizeTraits& diagonalize_traits)
 {
   typedef typename K::Point_3  Point;
 

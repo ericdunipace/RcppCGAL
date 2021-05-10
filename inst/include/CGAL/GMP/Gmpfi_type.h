@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/GMP/Gmpfi_type.h $
-// $Id: Gmpfi_type.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/GMP/Gmpfi_type.h $
+// $Id: Gmpfi_type.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author: Luis Peñaranda <luis.penaranda@gmx.com>
@@ -104,7 +104,7 @@ class Gmpfi:
     CGAL_STATIC_THREAD_LOCAL_VARIABLE(mp_prec_t, Gmpfi_default_precision, CGAL_GMPFI_DEFAULT_PRECISION);
     return Gmpfi_default_precision;
   }
-        
+
 
         bool is_unique(){
 #ifdef CGAL_GMPFR_NO_REFCOUNT

@@ -3,8 +3,8 @@
 //
 // This file is a part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2.h $
-// $Id: Barycentric_coordinates_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2.h $
+// $Id: Barycentric_coordinates_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Dmitry Anisimov, David Bommes, Kai Hormann, and Pierre Alliez.
@@ -20,12 +20,11 @@
 
 
 #include <CGAL/Barycentric_coordinates_2/barycentric_enum_2.h>
-#include <CGAL/Barycentric_coordinates_2/Segment_coordinates_2.h> 
-#include <CGAL/Barycentric_coordinates_2/Triangle_coordinates_2.h> 
+#include <CGAL/Barycentric_coordinates_2/Segment_coordinates_2.h>
+#include <CGAL/Barycentric_coordinates_2/Triangle_coordinates_2.h>
 #include <CGAL/Barycentric_coordinates_2/Generalized_barycentric_coordinates_2.h>
 #include <CGAL/Barycentric_coordinates_2/Discrete_harmonic_2.h>
 #include <CGAL/Barycentric_coordinates_2/Wachspress_2.h>
-#include <CGAL/Barycentric_coordinates_2/Mean_value_2.h>    
+#include <CGAL/Barycentric_coordinates_2/Mean_value_2.h>
 
 #endif // CGAL_BARYCENTRIC_COORDINATES_2_H
-  

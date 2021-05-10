@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/NT_converter.h $
-// $Id: NT_converter.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/NT_converter.h $
+// $Id: NT_converter.h 848aa7d 2021-02-08T10:16:59+01:00 Simon Giraudot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -61,12 +61,34 @@ struct NT_converter < NT1, double >
     }
 };
 
+template < class NT1 >
+struct NT_converter < NT1, float >
+  : public CGAL::cpp98::unary_function< NT1, float >
+{
+    float
+    operator()(const NT1 &a) const
+    {
+        return static_cast<float>(to_double(a));
+    }
+};
+
 template <>
 struct NT_converter < double, double >
   : public CGAL::cpp98::unary_function< double, double >
 {
     const double &
     operator()(const double &a) const
+    {
+        return a;
+    }
+};
+
+template <>
+struct NT_converter < float, float >
+  : public CGAL::cpp98::unary_function< float, float >
+{
+    const float &
+    operator()(const float &a) const
     {
         return a;
     }

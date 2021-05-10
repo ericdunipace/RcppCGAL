@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Bounding_volumes/include/CGAL/Rectangular_p_center_traits_2.h $
-// $Id: Rectangular_p_center_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Bounding_volumes/include/CGAL/Rectangular_p_center_traits_2.h $
+// $Id: Rectangular_p_center_traits_2.h 5da7e84 2021-02-02T10:58:31+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Hoffmann <hoffmann@inf.ethz.ch>
 
@@ -63,7 +63,7 @@ struct I_Infinity_distance_2
   // https://cgal.geometryfactory.com/CGAL/testsuite/CGAL-4.14-I-95/Rectangular_p_center_2_Examples/TestReport_afabri_x64_Cygwin-Windows10_MSVC2017-Release-64bits.gz
   I_Infinity_distance_2()
   {}
-  
+
   I_Infinity_distance_2(const I_Infinity_distance_2&)
   {}
 
@@ -71,7 +71,7 @@ struct I_Infinity_distance_2
   {
     return *this;
   }
-  
+
   typename R::FT
   operator()(const Point_2< R >& q1, const Point_2< R >& q2) const {
     return (std::max)(CGAL_NTS abs(q1.x() - q2.x()),
@@ -86,8 +86,8 @@ struct I_Signed_infinity_distance_2
 {
   typename R::FT
   operator()(const Point_2< R >& q1, const Point_2< R >& q2) const
-  { 
-    return (std::max)(q1.x() - q2.x(), q1.y() - q2.y()); 
+  {
+    return (std::max)(q1.x() - q2.x(), q1.y() - q2.y());
   }
 };
 
@@ -290,8 +290,8 @@ bounding_box_2(ForwardIterator f, ForwardIterator l, const Traits& t)
   return rect(v(rect(*xmin, *ymin), 0), v(rect(*xmax, *ymax), 2));
 } // bounding_box_2(f, l, t)
 template < class ForwardIterator >
-inline typename
-std::iterator_traits< ForwardIterator >::value_type::R::Iso_rectangle_2
+inline
+auto
 bounding_box_2(ForwardIterator f, ForwardIterator l)
 // PRE: f != l.
 {

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_on_surface_base_2_impl.h $
-// $Id: Gps_on_surface_base_2_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_on_surface_base_2_impl.h $
+// $Id: Gps_on_surface_base_2_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -735,8 +735,8 @@ template <class Traits_, class TopTraits_, class ValidationPolicy>
   if (f->number_of_outer_ccbs() > 1)
     CGAL_error_msg("Not implemented yet.");
 
-	// Some compilers (VC 9) do not like that we directly access the ccb_circ. So we have
-	// to pass through the iterator.
+        // Some compilers (VC 9) do not like that we directly access the ccb_circ. So we have
+        // to pass through the iterator.
   Outer_ccb_const_iterator oci_temp = f->outer_ccbs_begin();
   Ccb_halfedge_const_circulator ccb_end = *oci_temp;
   Ccb_halfedge_const_circulator ccb_circ = ccb_end;

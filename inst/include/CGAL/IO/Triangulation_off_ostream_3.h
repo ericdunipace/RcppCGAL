@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_3/include/CGAL/IO/Triangulation_off_ostream_3.h $
-// $Id: Triangulation_off_ostream_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/IO/Triangulation_off_ostream_3.h $
+// $Id: Triangulation_off_ostream_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement Jamin
@@ -21,7 +21,7 @@ namespace CGAL {
 
 template < class GT, class TDS >
 std::ostream &
-export_triangulation_3_to_off(std::ostream & os, 
+export_triangulation_3_to_off(std::ostream & os,
                               const Triangulation_3<GT,TDS> & tr,
                               bool export_surface_only = false)
 {
@@ -34,20 +34,20 @@ export_triangulation_3_to_off(std::ostream & os,
   size_t n = tr.number_of_vertices();
 
   std::stringstream output;
-  
+
   // write the vertices
   std::map<Vertex_handle, int> index_of_vertex;
   std::size_t i = 0;
-  for(Finite_vertex_iterator it = tr.finite_vertices_begin(); 
+  for(Finite_vertex_iterator it = tr.finite_vertices_begin();
       it != tr.finite_vertices_end(); ++it, ++i)
   {
-    output << it->point().x() << " " 
-           << it->point().y() << " " 
+    output << it->point().x() << " "
+           << it->point().y() << " "
            << it->point().z() << std::endl;
     index_of_vertex[it.base()] = i;
   }
   CGAL_assertion( i == n );
-  
+
   size_t number_of_triangles = 0;
 
   if (export_surface_only)

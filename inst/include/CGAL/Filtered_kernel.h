@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Filtered_kernel/include/CGAL/Filtered_kernel.h $
-// $Id: Filtered_kernel.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Filtered_kernel/include/CGAL/Filtered_kernel.h $
+// $Id: Filtered_kernel.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Sylvain Pion
 
@@ -112,14 +112,14 @@ template < typename CK, bool UseStaticFilters = true >
 struct Filtered_kernel_adaptor
   : public Filtered_kernel_base<CK>
 {
-	enum { Has_static_filters = false };
+        enum { Has_static_filters = false };
 };
 
 template < typename CK >
 struct Filtered_kernel_adaptor<CK, true>
   : public Static_filters_base<CK>
 {
-	enum { Has_static_filters = true };
+        enum { Has_static_filters = true };
 };
 
 // UseStaticFilters has a default value, depending on
@@ -130,7 +130,7 @@ struct Filtered_kernel
                Type_equality_wrapper<
                    typename CK:: template Base< Filtered_kernel<CK, UseStaticFilters> >::Type,
                    Filtered_kernel<CK, UseStaticFilters> >,
-	       UseStaticFilters >
+               UseStaticFilters >
 {};
 
 } //namespace CGAL

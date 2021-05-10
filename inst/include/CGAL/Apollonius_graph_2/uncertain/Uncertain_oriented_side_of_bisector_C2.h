@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/uncertain/Uncertain_oriented_side_of_bisector_C2.h $
-// $Id: Uncertain_oriented_side_of_bisector_C2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/uncertain/Uncertain_oriented_side_of_bisector_C2.h $
+// $Id: Uncertain_oriented_side_of_bisector_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -43,13 +43,13 @@ private:
 private:
   Uncertain<Comparison_result>
   compare_distances(const Site_2& p1, const Site_2& p2,
-		    const Point_2& p, const Integral_domain_without_division_tag&) const
+                    const Point_2& p, const Integral_domain_without_division_tag&) const
   {
 #ifdef AG2_PROFILE_PREDICATES
     ag2_predicate_profiler::side_of_bisector_counter++;
 #endif
 
-    // this function compares the distances of the point(x, y) from the 
+    // this function compares the distances of the point(x, y) from the
     // disks {(x1, y1), w1} and {(x2, y2), w2}
     RT D1 = CGAL::square(p1.x() - p.x()) + CGAL::square(p1.y() - p.y());
     RT D2 = CGAL::square(p2.x() - p.x()) + CGAL::square(p2.y() - p.y());
@@ -72,22 +72,22 @@ private:
       if ( R != SMALLER )  return LARGER;
 
       return uncertain_sign_a_plus_b_x_sqrt_c(D1 - D2 + CGAL::square(Dw),
-					      RT(2) * Dw, D1);
+                                              RT(2) * Dw, D1);
     }
 
     if ( R != LARGER )  return SMALLER;
     return uncertain_sign_a_plus_b_x_sqrt_c(D1 - D2 - CGAL::square(Dw),
-				            RT(2) * Dw, D2);
+                                            RT(2) * Dw, D2);
   }
 
   Comparison_result
   compare_distances(const Site_2& p1, const Site_2& p2,
-		    const Point_2 &p, const Field_with_sqrt_tag&) const
+                    const Point_2 &p, const Field_with_sqrt_tag&) const
   {
 #ifdef AG2_PROFILE_PREDICATES
     ag2_predicate_profiler::side_of_bisector_counter++;
 #endif
-    // this function compares the distances of the point(x, y) from the 
+    // this function compares the distances of the point(x, y) from the
     // disks {(x1, y1), w1} and {(x2, y2), w2}
 
     RT D1 = CGAL::square(p1.x() - p.x()) + CGAL::square(p1.y() - p.y());
@@ -106,7 +106,7 @@ public:
   inline
   Uncertain<Oriented_side>
   operator()(const Site_2& p1, const Site_2& p2,
-	     const Point_2 &p) const
+             const Point_2 &p) const
   {
     return - compare_distances(p1, p2, p, Method_tag());
   }

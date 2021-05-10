@@ -1,14 +1,14 @@
-// Copyright (c) 1999  
+// Copyright (c) 1999
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_23/include/CGAL/Iso_cuboid_3.h $
-// $Id: Iso_cuboid_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Iso_cuboid_3.h $
+// $Id: Iso_cuboid_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -75,16 +75,16 @@ public:
                const RT& max_hx, const RT& max_hy, const RT& max_hz,
                const RT& hw)
    : Rep(typename R::Construct_iso_cuboid_3()(Return_base_tag(), min_hx, min_hy, min_hz,
-				     max_hx, max_hy, max_hz, hw)) {}
+                                     max_hx, max_hy, max_hz, hw)) {}
 
   Iso_cuboid_3(const RT& min_hx, const RT& min_hy, const RT& min_hz,
                const RT& max_hx, const RT& max_hy, const RT& max_hz)
    : Rep(typename R::Construct_iso_cuboid_3()(Return_base_tag(), min_hx, min_hy, min_hz,
-					     max_hx, max_hy, max_hz)) {}
+                                             max_hx, max_hy, max_hz)) {}
 
   Iso_cuboid_3(const Bbox_3& bbox)
    : Rep(typename R::Construct_iso_cuboid_3()(Return_base_tag(), bbox.xmin(), bbox.ymin(), bbox.zmin(),
-				                                 bbox.xmax(), bbox.ymax(), bbox.zmax())) {}
+                                                                 bbox.xmax(), bbox.ymax(), bbox.zmax())) {}
 
   typename cpp11::result_of<typename R::Construct_min_vertex_3( Iso_cuboid_3 )>::type
   min BOOST_PREVENT_MACRO_SUBSTITUTION () const

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Three/include/CGAL/Three/Three.h $
-// $Id: Three.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Three/include/CGAL/Three/Three.h $
+// $Id: Three.h b4bba7f 2020-06-15T08:58:13+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -29,8 +29,15 @@
 #  define THREE_EXPORT Q_DECL_IMPORT
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+#define CGAL_QT_SKIP_EMPTY_PARTS QString::SkipEmptyParts
+#else
+#define CGAL_QT_SKIP_EMPTY_PARTS ::Qt::SkipEmptyParts
+#endif
+
 namespace CGAL{
 namespace Three{
+//define enum depending on Qt version
 class Polyhedron_demo_plugin_interface;
 class THREE_EXPORT Three{
 public:
@@ -53,13 +60,13 @@ public:
   static int getDefaultLinesWidth();
   /*! \brief Adds a dock widget to the interface
    *
-   * Adds a dock widget in the left section of the MainWindow. If the slot is already 
+   * Adds a dock widget in the left section of the MainWindow. If the slot is already
    * taken, the dock widgets will be tabified.
    */
   void addDockWidget(QDockWidget* dock_widget);
 
   /*! \brief Gets an item of the templated type.
-   * \returns the first `SceneType` item found in the scene's list of currently selected 
+   * \returns the first `SceneType` item found in the scene's list of currently selected
    * items;
    * \returns nullptr if there is no `SceneType` in the list.
    */
@@ -73,15 +80,31 @@ public:
    * in the plugin.
    */
   static void autoConnectActions(CGAL::Three::Polyhedron_demo_plugin_interface* plugin);
+  /*!
+   * Displays in the console a blue text preceded by the mention
+   * "INFO: ".
+   */
   static void information(QString);
   /*!
-   * Displays a blue text preceded by the mention "WARNING :".
+   * Displays in the console an orange text preceded by the mention "WARNING: ".
    */
   static void warning(QString);
   /*!
-   * Displays a red text preceded by the mention "ERROR :".
+   * Displays in the console a red text preceded by the mention "ERROR: ".
    */
   static void error(QString);
+  /*!
+   * Displays an information popup.
+   */
+  static void information(QString title, QString message);
+  /*!
+   * Displays a warning popup.
+   */
+  static void warning(QString title, QString message);
+  /*!
+   * Displays an error popup.
+   */
+  static void error(QString title, QString message);
 protected:
   static QMainWindow* s_mainwindow;
   static Viewer_interface* s_mainviewer;

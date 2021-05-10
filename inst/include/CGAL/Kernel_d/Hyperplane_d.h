@@ -1,16 +1,16 @@
-// Copyright (c) 2000,2001  
+// Copyright (c) 2000,2001
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Kernel_d/include/CGAL/Kernel_d/Hyperplane_d.h $
-// $Id: Hyperplane_d.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_d/include/CGAL/Kernel_d/Hyperplane_d.h $
+// $Id: Hyperplane_d.h 489e853 2020-06-10T18:25:33+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel
 
@@ -41,10 +41,10 @@ public:
 
   Hyperplane_d(int d=0) : Base(d) {}
   Hyperplane_d(int a, int b, int c) : Base(a,b,c) {}
-  Hyperplane_d(const RT& a, const RT& b, const RT& c) : 
+  Hyperplane_d(const RT& a, const RT& b, const RT& c) :
     Base(a,b,c) {}
   Hyperplane_d(int a, int b, int c, int d) : Base(a,b,c,d) {}
-  Hyperplane_d(const RT& a, const RT& b, const RT& c, const RT& d) : 
+  Hyperplane_d(const RT& a, const RT& b, const RT& c, const RT& d) :
     Base(a,b,c,d) {}
 
   Hyperplane_d(const Point_d<R>& p, const Direction_d<R>& dir) :
@@ -62,18 +62,22 @@ public:
     : Base (d, first, last, D) {}
 
   template <class ForwardIterator>
-  Hyperplane_d(ForwardIterator first, ForwardIterator last, 
+  Hyperplane_d(ForwardIterator first, ForwardIterator last,
                const Point_d<R>& o, Oriented_side side = ON_ORIENTED_BOUNDARY)
     : Base(first,last,o,side) {}
 
-  Vector_d<R> orthogonal_vector() const 
+  Vector_d<R> orthogonal_vector() const
   { return Base::orthogonal_vector(); }
-  Direction_d<R> orthogonal_direction() const 
+  Direction_d<R> orthogonal_direction() const
   { return Base::orthogonal_direction(); }
 
   bool operator==(const Self& w) const
   { return Base::operator==(w); }
   bool operator!=(const Self& w) const
+  { return Base::operator!=(w); }
+  bool operator==(const Base& w) const
+  { return Base::operator==(w); }
+  bool operator!=(const Base& w) const
   { return Base::operator!=(w); }
 };
 

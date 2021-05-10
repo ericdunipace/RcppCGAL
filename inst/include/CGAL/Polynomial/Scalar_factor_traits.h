@@ -2,13 +2,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polynomial/include/CGAL/Polynomial/Scalar_factor_traits.h $
-// $Id: Scalar_factor_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polynomial/include/CGAL/Polynomial/Scalar_factor_traits.h $
+// $Id: Scalar_factor_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Arno Eigenwillig <arno@mpi-inf.mpg.de>
-//                 Michael Hemmer <hemmer@informatik.uni-mainz.de> 
+//                 Michael Hemmer <hemmer@informatik.uni-mainz.de>
 //
 // ============================================================================
 
@@ -54,13 +54,13 @@ public:
         typedef Scalar result_type;
         //! returns the gcd of a polynomials coefficients
         Scalar operator()(const NT& p, const Scalar& d_=Scalar(0)) const {
-            
+
             typename Scalar_factor_traits<Coeff>::Scalar_factor sfac;
             const Scalar unity(1);
-            
+
             Scalar d(d_);
             if (p.is_zero()) return d;
-            
+
             int i = p.degree();
             while((d != unity) && (i >= 0)) {
                 d = sfac(p[i--],d);
@@ -75,9 +75,9 @@ public:
          //! second argument type
         typedef Scalar second_argument_type;
         //! divides a polynomial \c p by a scalar factor \c b
-        void operator () (NT& p, const Scalar& b) const { 
+        void operator () (NT& p, const Scalar& b) const {
             CGAL_precondition(b != Scalar(0));
-            p.scalar_div(b); 
+            p.scalar_div(b);
         }
     };
 };

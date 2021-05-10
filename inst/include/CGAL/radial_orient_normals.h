@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Point_set_processing_3/include/CGAL/radial_orient_normals.h $
-// $Id: radial_orient_normals.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Point_set_processing_3/include/CGAL/radial_orient_normals.h $
+// $Id: radial_orient_normals.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Laurent Saboret
@@ -99,7 +99,7 @@ radial_orient_normals(
 
       // Point's normal
       Vector_ref vec2 = get(normal_pmap, *it);
-      
+
       //         ->               ->
       // Orients vec2 parallel to vec1
       double dot = vec1 * vec2;
@@ -144,7 +144,7 @@ radial_orient_normals(
     typedef typename Kernel_traits<Point>::Kernel Kernel;
     return radial_orient_normals(
       first,beyond,
-      point_pmap, normal_pmap, 
+      point_pmap, normal_pmap,
       Kernel());
 }
 /// @endcond

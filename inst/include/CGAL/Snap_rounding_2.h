@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Snap_rounding_2/include/CGAL/Snap_rounding_2.h $
-// $Id: Snap_rounding_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Snap_rounding_2/include/CGAL/Snap_rounding_2.h $
+// $Id: Snap_rounding_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -386,9 +386,9 @@ bool Hot_pixel<Traits_>::intersect_right(const Segment_2 & seg,
     Comparison_result c_source = compare_x(p_right, src);
 
     return (((seg_dir == SEG_LEFT || seg_dir == SEG_DOWN_LEFT ||
-	      seg_dir == SEG_UP_LEFT) && c_target != EQUAL) ||
+              seg_dir == SEG_UP_LEFT) && c_target != EQUAL) ||
             ((seg_dir == SEG_RIGHT || seg_dir == SEG_DOWN_RIGHT ||
-	      seg_dir == SEG_UP_RIGHT) && c_source != EQUAL));
+              seg_dir == SEG_UP_RIGHT) && c_source != EQUAL));
   }
   return false;
 }
@@ -416,7 +416,7 @@ bool Hot_pixel<Traits_>::intersect_bot(const Segment_2 & seg,
     Comparison_result c_source = compare_x(construct_vertex(seg, 0), p_right);
 
     return(c_p != EQUAL || (seg_dir == SEG_UP_LEFT && c_target != EQUAL) ||
-	   (seg_dir == SEG_DOWN_RIGHT && c_source != EQUAL));
+           (seg_dir == SEG_DOWN_RIGHT && c_source != EQUAL));
   } else if (assign(s,result))
     return(true);
   else
@@ -454,9 +454,9 @@ bool Hot_pixel<Traits_>::intersect_top(const Segment_2 & seg,
       return(false);// were checked
     else
       return(((seg_dir == SEG_DOWN || seg_dir == SEG_DOWN_LEFT ||
-	       seg_dir == SEG_DOWN_RIGHT) && c3 != EQUAL) ||
+               seg_dir == SEG_DOWN_RIGHT) && c3 != EQUAL) ||
              ((seg_dir == SEG_UP || seg_dir == SEG_UP_LEFT ||
-	       seg_dir == SEG_UP_RIGHT) && c4 != EQUAL));
+               seg_dir == SEG_UP_RIGHT) && c4 != EQUAL));
   }
   return(false);
 }
@@ -507,17 +507,17 @@ bool Hot_pixel_dir_cmp<Traits_>::operator ()(const Hot_pixel * h1,
 
   // Point segment intersects only one pixel, thus ignored
   return((seg_dir == SEG_UP_RIGHT &&  (cx == SMALLER || (cx == EQUAL &&
-							 cy == SMALLER))) ||
-	 (seg_dir == SEG_UP_LEFT && (cx == LARGER || (cx == EQUAL &&
-						      cy == SMALLER))) ||
-	 (seg_dir == SEG_DOWN_RIGHT && (cx == SMALLER || (cx == EQUAL &&
-							  cy == LARGER))) ||
+                                                         cy == SMALLER))) ||
+         (seg_dir == SEG_UP_LEFT && (cx == LARGER || (cx == EQUAL &&
+                                                      cy == SMALLER))) ||
+         (seg_dir == SEG_DOWN_RIGHT && (cx == SMALLER || (cx == EQUAL &&
+                                                          cy == LARGER))) ||
          (seg_dir == SEG_DOWN_LEFT && (cx == LARGER || (cx == EQUAL &&
-							cy == LARGER))) ||
-	 (seg_dir == SEG_UP && cy == SMALLER) ||
+                                                        cy == LARGER))) ||
+         (seg_dir == SEG_UP && cy == SMALLER) ||
          (seg_dir == SEG_DOWN && cy == LARGER) ||
-	 (seg_dir == SEG_LEFT && cx == LARGER) ||
-	 (seg_dir == SEG_RIGHT && cx == SMALLER));
+         (seg_dir == SEG_LEFT && cx == LARGER) ||
+         (seg_dir == SEG_RIGHT && cx == SMALLER));
 }
 
 /*! */

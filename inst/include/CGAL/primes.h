@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Modular_arithmetic/include/CGAL/primes.h $
-// $Id: primes.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Modular_arithmetic/include/CGAL/primes.h $
+// $Id: primes.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,7 @@
 
 #include <CGAL/basic.h>
 
-namespace CGAL { 
+namespace CGAL {
 namespace internal {
 
 const int primes[2000] = {
@@ -287,10 +287,10 @@ const int primes[2000] = {
   67016611, 67016483, 67016437, 67016387, 67016269, 67016197, 67016189, 67016179,
 };
 
-static inline 
+static inline
 int get_next_lower_prime(int current_prime){
     bool is_prime = false;
-    
+
     int i;
     CGAL_precondition_msg(current_prime != 2 ," primes definitely exhausted ");
 
@@ -301,7 +301,7 @@ int get_next_lower_prime(int current_prime){
             return 3;
         }
         return 5;
-    }                
+    }
     for(i=current_prime-2;(i>1 && !is_prime);i=i-2){
         int r = 1;
         for(int j=3; (j <= i/2 && (r != 0)); j++){

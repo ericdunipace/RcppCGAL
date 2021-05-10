@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Smoothing/smoothing_evaluation.h $
-// $Id: smoothing_evaluation.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Smoothing/smoothing_evaluation.h $
+// $Id: smoothing_evaluation.h f33618e 2020-02-06T09:54:35+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -61,7 +61,7 @@ public:
       angles_.push_back(traits_.compute_approximate_angle_3_object()(a, b, c));
     }
 
-#ifdef CGAL_PMP_SMOOTHING_VERBOSE
+#ifdef CGAL_PMP_SMOOTHING_DEBUG
     std::cout << "angles_ size = " << angles_.size() << std::endl;
 #endif
   }
@@ -79,7 +79,7 @@ public:
     for(face_descriptor f : faces(mesh_))
       areas_.push_back(face_area(f, mesh_));
 
-#ifdef CGAL_PMP_SMOOTHING_VERBOSE
+#ifdef CGAL_PMP_SMOOTHING_DEBUG
     std::cout << "areas_ size = " << areas_.size() << std::endl;
 #endif
   }
@@ -97,7 +97,7 @@ public:
     for(face_descriptor f : faces(mesh_))
       aspect_ratios_.push_back(CGAL::Polygon_mesh_processing::face_aspect_ratio(f, mesh_));
 
-#ifdef CGAL_PMP_SMOOTHING_VERBOSE
+#ifdef CGAL_PMP_SMOOTHING_DEBUG
     std::cout << "aspect_ratios_ size = " << aspect_ratios_.size() << std::endl;
 #endif
   }

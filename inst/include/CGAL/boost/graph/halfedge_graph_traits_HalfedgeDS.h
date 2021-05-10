@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/HalfedgeDS/include/CGAL/boost/graph/halfedge_graph_traits_HalfedgeDS.h $
-// $Id: halfedge_graph_traits_HalfedgeDS.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/HalfedgeDS/include/CGAL/boost/graph/halfedge_graph_traits_HalfedgeDS.h $
+// $Id: halfedge_graph_traits_HalfedgeDS.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri, Fernando Cacciola
 
@@ -22,11 +22,11 @@
 namespace CGAL {
 
 template < class HDS >
-class HDS_all_undirected_edges_const_iterator 
+class HDS_all_undirected_edges_const_iterator
   : public HDS_all_edges_iterator_base<HDS,typename HDS::Edge_const_iterator,typename HDS::Halfedge_const_handle>
 {
   typedef HDS_all_edges_iterator_base<HDS,typename HDS::Edge_const_iterator,typename HDS::Halfedge_const_handle> Base ;
-  
+
 public:
 
   typedef typename HDS::Edge_const_iterator Iterator;
@@ -36,11 +36,11 @@ public:
 };
 
 template < class HDS >
-class HDS_all_undirected_edges_iterator 
+class HDS_all_undirected_edges_iterator
   : public HDS_all_edges_iterator_base<HDS,typename HDS::Edge_iterator,typename HDS::Halfedge_handle>
 {
   typedef HDS_all_edges_iterator_base<HDS,typename HDS::Edge_iterator,typename HDS::Halfedge_handle> Base ;
-  
+
 public:
 
   typedef typename HDS::Edge_iterator Iterator;
@@ -54,11 +54,11 @@ template <class HDS_>
 struct HDS_halfedge_graph_traits
 {
 public :
-  
+
   typedef HDS_ HDS;
-  
+
   typedef HDS_all_undirected_edges_iterator<HDS> undirected_edge_iterator;
-  
+
   typedef typename HDS::Vertex::Point Point ;
 };
 

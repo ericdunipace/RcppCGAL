@@ -1,16 +1,16 @@
-// Copyright (c) 1997  
+// Copyright (c) 1997
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon/include/CGAL/Polygon_2/Polygon_2_edge_circulator.h $
-// $Id: Polygon_2_edge_circulator.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon/include/CGAL/Polygon_2/Polygon_2_edge_circulator.h $
+// $Id: Polygon_2_edge_circulator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Wieger Wesselink <wieger@cs.ruu.nl>
 
@@ -84,14 +84,14 @@ class Polygon_2_const_edge_circulator {
     {
       Vertex_const_circulator second_vertex = first_vertex;
       ++second_vertex;
-      typename Traits::Construct_segment_2 construct_segment_2 = 
+      typename Traits::Construct_segment_2 construct_segment_2 =
             Traits().construct_segment_2_object();
-      const_cast<Polygon_2_const_edge_circulator*>(this)->segment = 
+      const_cast<Polygon_2_const_edge_circulator*>(this)->segment =
           construct_segment_2(*first_vertex, *second_vertex);
       return segment;
     }
 
-    const Segment_2* operator->() const 
+    const Segment_2* operator->() const
     {
       return &(**this);
     }

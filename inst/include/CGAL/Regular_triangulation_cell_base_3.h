@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_3/include/CGAL/Regular_triangulation_cell_base_3.h $
-// $Id: Regular_triangulation_cell_base_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/Regular_triangulation_cell_base_3.h $
+// $Id: Regular_triangulation_cell_base_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Christophe Delage <christophe.delage@sophia.inria.fr>
@@ -58,17 +58,17 @@ public:
 
   Regular_triangulation_cell_base_3(Vertex_handle v0,
                                     Vertex_handle v1,
-				    Vertex_handle v2,
+                                    Vertex_handle v2,
                                     Vertex_handle v3)
     : Cb(v0, v1, v2, v3) {}
 
   Regular_triangulation_cell_base_3(Vertex_handle v0,
                                     Vertex_handle v1,
-				    Vertex_handle v2,
+                                    Vertex_handle v2,
                                     Vertex_handle v3,
-				    Cell_handle   n0,
+                                    Cell_handle   n0,
                                     Cell_handle   n1,
-				    Cell_handle   n2,
+                                    Cell_handle   n2,
                                     Cell_handle   n3)
     : Cb(v0, v1, v2, v3, n0, n1, n2, n3) {}
 
@@ -88,7 +88,7 @@ public:
   {
     return _hidden;
   }
-  
+
   void hide_point(const Point& p)
   { hide_point_internal<Memory_policy>(p); }
   void unhide_point(const Point_iterator pit)

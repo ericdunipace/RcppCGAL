@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Combinatorial_map/include/CGAL/Combinatorial_map_insertions.h $
-// $Id: Combinatorial_map_insertions.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Combinatorial_map/include/CGAL/Combinatorial_map_insertions.h $
+// $Id: Combinatorial_map_insertions.h 48fedba 2019-12-11T16:57:34+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -39,7 +39,7 @@ insert_cell_0_in_cell_1( CMap& amap, typename CMap::Dart_handle adart,
   return amap.insert_cell_0_in_cell_1(adart, ah, update_attributes);
 }
 
-/** Insert a vertex in the given 2-cell which is splitted in triangles,
+/** Insert a vertex in the given 2-cell which is split in triangles,
  * once for each inital edge of the facet.
  * @param amap the used combinatorial map.
  * @param adart a dart of the facet to triangulate.

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/CGAL_ImageIO/include/CGAL/SEP_to_ImageIO.h $
-// $Id: SEP_to_ImageIO.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_ImageIO/include/CGAL/SEP_to_ImageIO.h $
+// $Id: SEP_to_ImageIO.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau
@@ -63,10 +63,10 @@ public:
     boost::filesystem::path headerFile(fileName);
     boost::filesystem::path dataFile(string_field("in"));
 #if BOOST_FILESYSTEM_VERSION == 2
-    dataFile = boost::filesystem::complete(dataFile, 
+    dataFile = boost::filesystem::complete(dataFile,
                                            boost::filesystem::complete(headerFile.parent_path()));
 #else
-    dataFile = boost::filesystem::absolute(dataFile, 
+    dataFile = boost::filesystem::absolute(dataFile,
                                            boost::filesystem::absolute(headerFile.parent_path()));
 #endif
     if(!load_data(dataFile.string())) {
@@ -88,7 +88,7 @@ public:
 
 protected :
 
-  bool load_data(std::string dataFilename) 
+  bool load_data(std::string dataFilename)
   {
     if(_im) delete _im;
     _im = new _image;
@@ -141,11 +141,11 @@ protected :
 
     // Compute number of element
     const std::size_t size = n(1) * n(2) * n(3);
-    
+
     // Allocate array
     _data = new T[size];
     _im->data = (void*)_data;
-    
+
     // // Read file
     if(_readImageData(_im) < 0) return false;
    // char* buffer = reinterpret_cast<char*>(_data);

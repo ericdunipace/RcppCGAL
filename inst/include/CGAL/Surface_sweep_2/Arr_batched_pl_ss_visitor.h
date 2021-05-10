@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_batched_pl_ss_visitor.h $
-// $Id: Arr_batched_pl_ss_visitor.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_batched_pl_ss_visitor.h $
+// $Id: Arr_batched_pl_ss_visitor.h 0626eb0 2020-06-11T12:32:33+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,6 @@
  */
 
 #include <CGAL/Arr_point_location_result.h>
-#include <CGAL/Object.h>
 #include <CGAL/Surface_sweep_2/Default_visitor_base.h>
 #include <CGAL/Default.h>
 

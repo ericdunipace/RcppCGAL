@@ -2,10 +2,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/assertions.h $
-// $Id: assertions.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/assertions.h $
+// $Id: assertions.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
 
 #ifndef CGAL_STRAIGHT_SKELETON_ASSERTIONS_H
@@ -25,7 +25,7 @@
 #  define CGAL_stskel_expensive_postcondition(EX)         (CGAL::possibly(EX)?(static_cast<void>(0)): ::CGAL::postcondition_fail( # EX , __FILE__, __LINE__))
 #  define CGAL_stskel_expensive_postcondition_msg(EX,MSG) (CGAL::possibly(EX)?(static_cast<void>(0)): ::CGAL::postcondition_fail( # EX , __FILE__, __LINE__, MSG))
 #  define CGAL_stskel_expensive_postcondition_code(CODE)  CODE
-#endif 
+#endif
 
 
 namespace CGAL {
@@ -44,4 +44,4 @@ template<class Handle> inline bool handle_assigned ( Handle const& aH )
 
 #endif // CGAL_STRAIGHT_SKELETON_ASSERTIONS_H //
 // EOF //
- 
+

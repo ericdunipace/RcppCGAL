@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Minkowski_sum_2/include/CGAL/Minkowski_sum_2/Labels.h $
-// $Id: Labels.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Minkowski_sum_2/include/CGAL/Minkowski_sum_2/Labels.h $
+// $Id: Labels.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein   <wein_r@yahoo.com>
@@ -62,7 +62,7 @@ public:
       return (false);
 
     return (_component == label._component &&
-	    _index == label._index);
+      _index == label._index);
   }
 
   /*! Get the component. */
@@ -168,7 +168,7 @@ public:
       return (false);
 
     return (_component == label._component &&
-	    _index == label._index);
+      _index == label._index);
   }
 
   /*! Check whether the given label is the predecessor of this label. */
@@ -178,8 +178,8 @@ public:
       return (false);
 
     return (_component == label._component &&
-	    (label._index + 1 == _index ||
-	     (label._is_last && _index == 0)));
+      (label._index + 1 == _index ||
+       (label._is_last && _index == 0)));
   }
 
   /*! Check whether the given label is the succcessor of this label. */
@@ -189,8 +189,8 @@ public:
       return (false);
 
     return (_component == label._component &&
-	    (_index + 1 == label._index ||
-	     (_is_last && label._index == 0)));
+      (_index + 1 == label._index ||
+       (_is_last && label._index == 0)));
   }
 
   /*!

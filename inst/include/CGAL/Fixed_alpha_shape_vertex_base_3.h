@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Alpha_shapes_3/include/CGAL/Fixed_alpha_shape_vertex_base_3.h $
-// $Id: Fixed_alpha_shape_vertex_base_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Alpha_shapes_3/include/CGAL/Fixed_alpha_shape_vertex_base_3.h $
+// $Id: Fixed_alpha_shape_vertex_base_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     :  Sebastien Loriot
 //
@@ -38,30 +38,30 @@ public:
   };
 
   typedef typename Vb::Point Point;
-  
+
 private:
-  typedef internal::Classification_type Classification_type;  
+  typedef internal::Classification_type Classification_type;
   Classification_type status_;
 
   bool is_on_chull_;
 
 public:
 
-  Fixed_alpha_shape_vertex_base_3()    
+  Fixed_alpha_shape_vertex_base_3()
     : Vb(),is_on_chull_(false) {}
-  
+
   Fixed_alpha_shape_vertex_base_3(const Point& p)
     : Vb(p),is_on_chull_(false) {}
-  
+
   Fixed_alpha_shape_vertex_base_3(const Point& p, Cell_handle c)
     : Vb(p, c),is_on_chull_(false) {}
 
   Classification_type get_classification_type() { return status_;}
   void set_classification_type(Classification_type status) {status_=status;}
-  
+
   void is_on_chull(bool b){is_on_chull_=b;};
   bool is_on_chull(){return is_on_chull_;}
-    
+
 };
 
 } //namespace CGAL

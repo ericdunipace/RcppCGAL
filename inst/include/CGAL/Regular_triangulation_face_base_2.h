@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_2/include/CGAL/Regular_triangulation_face_base_2.h $
-// $Id: Regular_triangulation_face_base_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_2/include/CGAL/Regular_triangulation_face_base_2.h $
+// $Id: Regular_triangulation_face_base_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Frederic Fichel, Mariette Yvinec
 
@@ -51,23 +51,23 @@ public:
    : Fbase(),  vlist()
   {}
 
-  Regular_triangulation_face_base_2(Vertex_handle v0, 
-				    Vertex_handle v1, 
-				    Vertex_handle v2)
+  Regular_triangulation_face_base_2(Vertex_handle v0,
+                                    Vertex_handle v1,
+                                    Vertex_handle v2)
     : Fbase(v0,v1,v2), vlist()
   { }
 
-  Regular_triangulation_face_base_2(Vertex_handle v0, 
-				    Vertex_handle v1, 
-				    Vertex_handle v2,
-				    Face_handle n0, 
-				    Face_handle n1, 
-				    Face_handle n2)
+  Regular_triangulation_face_base_2(Vertex_handle v0,
+                                    Vertex_handle v1,
+                                    Vertex_handle v2,
+                                    Face_handle n0,
+                                    Face_handle n1,
+                                    Face_handle n2)
     : Fbase(v0,v1,v2,n0,n1,n2),  vlist()
   { }
 
   ~Regular_triangulation_face_base_2()
-  { 
+  {
     vlist.clear();
   }
 
@@ -80,6 +80,6 @@ public:
 
 };
 
-} //namespace CGAL 
+} //namespace CGAL
 
 #endif // CGAL_REGULAR_TRIANGULATION_FACE_BASE_2_H

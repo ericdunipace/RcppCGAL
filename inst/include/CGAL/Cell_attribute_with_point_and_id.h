@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Linear_cell_complex/include/CGAL/Cell_attribute_with_point_and_id.h $
-// $Id: Cell_attribute_with_point_and_id.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Linear_cell_complex/include/CGAL/Cell_attribute_with_point_and_id.h $
+// $Id: Cell_attribute_with_point_and_id.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -15,7 +15,7 @@
 #include <CGAL/Cell_attribute_with_point.h>
 
 namespace CGAL {
-  
+
   // A cell attribute with point and id, when Info_!=void
   template <class Refs, class Info_=void, class Tag_=Tag_true,
             class OnMerge=Null_functor,

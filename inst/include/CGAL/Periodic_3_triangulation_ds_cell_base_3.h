@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_ds_cell_base_3.h $
-// $Id: Periodic_3_triangulation_ds_cell_base_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_ds_cell_base_3.h $
+// $Id: Periodic_3_triangulation_ds_cell_base_3.h dcc4fb1 2020-05-20T09:46:26+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -180,9 +180,9 @@ public:
     int bit_offset = 3 * vhi;
 
     // first reset the bit to 0 (AND), then assign the value given in input (OR)
-    off = off & ~(1 <<  bit_offset)      | (offo[0] <<  bit_offset);
-    off = off & ~(1 << (bit_offset + 1)) | (offo[1] << (bit_offset + 1));
-    off = off & ~(1 << (bit_offset + 2)) | (offo[2] << (bit_offset + 2));
+    off = (off & ~(1 <<  bit_offset))      | (offo[0] <<  bit_offset);
+    off = (off & ~(1 << (bit_offset + 1))) | (offo[1] << (bit_offset + 1));
+    off = (off & ~(1 << (bit_offset + 2))) | (offo[2] << (bit_offset + 2));
 
     CGAL_postcondition(offset(vhi) == o);
   }
@@ -233,7 +233,7 @@ public:
 
   // For use by Compact_container.
   void * for_compact_container() const { return N[0].for_compact_container(); }
-  void * & for_compact_container()     { return N[0].for_compact_container(); }
+  void for_compact_container(void *p) { N[0].for_compact_container(p); }
 
   // TDS internal data access functions.
   TDS_data& tds_data() { return _tds_data; }

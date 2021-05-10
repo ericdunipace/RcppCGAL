@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Arithmetic_kernel/include/CGAL/GMP_arithmetic_kernel.h $
-// $Id: GMP_arithmetic_kernel.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arithmetic_kernel/include/CGAL/GMP_arithmetic_kernel.h $
+// $Id: GMP_arithmetic_kernel.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 // Author(s)     : Michael Hemmer <mhemmer@uni-mainz.de>
 //
 // ============================================================================
 //
-//    \brief provide class Arithmetic_kernel, a collection of number types. 
+//    \brief provide class Arithmetic_kernel, a collection of number types.
 //
 
 #ifndef CGAL_GMP_ARITHMETIC_KERNEL_H
@@ -19,7 +19,7 @@
 
 #include <CGAL/config.h>
 
-#ifdef CGAL_USE_GMP 
+#ifdef CGAL_USE_GMP
 
 #include <CGAL/Arithmetic_kernel/Arithmetic_kernel_base.h>
 #include <CGAL/Get_arithmetic_kernel.h>
@@ -30,7 +30,7 @@
 #include <CGAL/Gmpq.h>
 
 #ifdef CGAL_USE_MPFI
-#define CGAL_HAS_GMP_ARITHMETIC_KERNEL 
+#define CGAL_HAS_GMP_ARITHMETIC_KERNEL
 #include <CGAL/Gmpfr.h>
 #include <CGAL/Gmpfi.h>
 #endif //CGAL_USE_MPFI
@@ -49,7 +49,7 @@ public:
   typedef CGAL::Gmpfi Bigfloat_interval;
   #endif //CGAL_USE_MPFI
 };
-    
+
 template <>
 struct Get_arithmetic_kernel<Gmpz> {
   typedef GMP_arithmetic_kernel Arithmetic_kernel;

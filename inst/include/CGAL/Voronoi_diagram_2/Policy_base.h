@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Policy_base.h $
-// $Id: Policy_base.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Policy_base.h $
+// $Id: Policy_base.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -115,8 +115,8 @@ public:
 template<class DG, class ERB, class FRB, class SIB, class SRB>
 class Caching_policy_base
   : public Policy_base_base<DG,
-			    Cached_edge_rejector<ERB>,
-			    Cached_face_rejector<FRB> >
+                            Cached_edge_rejector<ERB>,
+                            Cached_face_rejector<FRB> >
 {
 protected:
   typedef ERB   Edge_rejector_base;

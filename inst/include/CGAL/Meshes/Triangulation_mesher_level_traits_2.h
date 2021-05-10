@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesher_level/include/CGAL/Meshes/Triangulation_mesher_level_traits_2.h $
-// $Id: Triangulation_mesher_level_traits_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesher_level/include/CGAL/Meshes/Triangulation_mesher_level_traits_2.h $
+// $Id: Triangulation_mesher_level_traits_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Laurent RINEAU
 
@@ -19,7 +19,7 @@
 namespace CGAL {
 
 template <typename Tr>
-struct Triangulation_mesher_level_traits_2 : 
+struct Triangulation_mesher_level_traits_2 :
     public Triangulation_ref_impl<Tr>
 {
   typedef Tr Triangulation;
@@ -55,17 +55,17 @@ struct Triangulation_mesher_level_traits_2 :
   Vertex_handle insert_impl(const Point& p, Zone& zone)
   {
 #ifdef CGAL_MESH_2_DEBUG_INSERTIONS
-    std::cerr << "insert(" << p << "): " 
+    std::cerr << "insert(" << p << "): "
               << zone.boundary_edges.size() << " edges." << std::endl;
 #endif
     if( zone.locate_type == Tr::VERTEX )
       return zone.fh->vertex(zone.i);
     return triangulation_ref_impl().
       star_hole(p,
-		zone.boundary_edges.begin(),
-		zone.boundary_edges.end(),
-		zone.faces.begin(),
-		zone.faces.end());
+                zone.boundary_edges.begin(),
+                zone.boundary_edges.end(),
+                zone.faces.begin(),
+                zone.faces.end());
   }
 }; // end Triangulation_mesher_level_traits_2
 

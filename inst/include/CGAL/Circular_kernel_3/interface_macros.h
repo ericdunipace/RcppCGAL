@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Circular_kernel_3/include/CGAL/Circular_kernel_3/interface_macros.h $
-// $Id: interface_macros.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Circular_kernel_3/include/CGAL/Circular_kernel_3/interface_macros.h $
+// $Id: interface_macros.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-// Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado, 
+// Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,
 //             Sebastien Loriot, Julien Hazebrouck, Damien Leroy
 
-// Partially supported by the IST Programme of the EU as a 
-// STREP (FET Open) Project under Contract No  IST-006413 
+// Partially supported by the IST Programme of the EU as a
+// STREP (FET Open) Project under Contract No  IST-006413
 // (ACS -- Algorithms for Complex Shapes)
 
 // This file is intentionally not protected against re-inclusion.
@@ -22,7 +22,7 @@
 // macros CGAL_Kernel_pred and CGAL_Kernel_cons.
 // And they are #undefed at the end of this file.
 
-  CGAL_Spherical_Kernel_cons(Get_equation, get_equation_object) 
+  CGAL_Spherical_Kernel_cons(Get_equation, get_equation_object)
   CGAL_Spherical_Kernel_cons(Construct_circular_arc_point_3, construct_circular_arc_point_3_object)
   CGAL_Spherical_Kernel_overload_cons(Construct_sphere_3, construct_sphere_3_object)
   CGAL_Spherical_Kernel_overload_cons(Construct_plane_3, construct_plane_3_object)

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/Sqrt_extension/Eigen_NumTraits.h $
-// $Id: Eigen_NumTraits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Sqrt_extension/Eigen_NumTraits.h $
+// $Id: Eigen_NumTraits.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,13 +19,6 @@ namespace Eigen {
   template <class NT,class ROOT, class ACDE_TAG, class FP_TAG>
   struct NumTraits<CGAL::Sqrt_extension<NT, ROOT, ACDE_TAG, FP_TAG> >
   {
-    typedef CGAL::Sqrt_extension<NT, ROOT, ACDE_TAG, FP_TAG> Real;
-    typedef Real NonInteger;
-    typedef Real Nested;
-    typedef Real Literal;
-
-    static inline Real epsilon() { return NumTraits<NT>::epsilon(); }
-
     enum {
       IsInteger = 0,
       IsSigned = 1,
@@ -35,6 +28,19 @@ namespace Eigen {
       AddCost = 2*NumTraits<NT>::AddCost+NumTraits<ROOT>::ReadCost,
       MulCost = 5*NumTraits<NT>::MulCost+2*NumTraits<NT>::AddCost
     };
+
+    typedef CGAL::Sqrt_extension<NT, ROOT, ACDE_TAG, FP_TAG> Real;
+    typedef Real NonInteger;
+    typedef Real Nested;
+    typedef Real Literal;
+
+    static inline Real epsilon() { return NumTraits<NT>::epsilon(); }
+    static inline int digits10() { return NumTraits<NT>::digits10(); }
+    static inline Real dummy_precision() { return NumTraits<NT>::dummy_precision(); }
+    static inline Real highest() { return NumTraits<NT>::highest(); }
+    static inline Real lowest() { return NumTraits<NT>::lowest(); }
+    static inline Real infinity() { return NumTraits<NT>::infinity(); }
+    static inline Real quiet_NaN() { return NumTraits<NT>::quiet_NaN(); }
   };
 }
 

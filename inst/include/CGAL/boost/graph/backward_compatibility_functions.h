@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/BGL/include/CGAL/boost/graph/backward_compatibility_functions.h $
-// $Id: backward_compatibility_functions.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/BGL/include/CGAL/boost/graph/backward_compatibility_functions.h $
+// $Id: backward_compatibility_functions.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -50,10 +50,10 @@ namespace CGAL {
                 , const Graph& g)
   {
     typename boost::graph_traits<Graph>::halfedge_descriptor h = halfedge(e, g);
-    
+
     return edge(prev(opposite(h, g), g), g);
   }
-  
+
   template <class Graph>
   struct halfedge_graph_traits;
 
@@ -63,7 +63,7 @@ namespace CGAL {
    {
      return edges(g);
    }
-  
+
 }  //end of namespace CGAL
 
 #endif //CGAL_BOOST_GRAPH_BACKWARD_COMPATIBILITY_FUNCTIONS_H

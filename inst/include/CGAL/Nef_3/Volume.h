@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_3/include/CGAL/Nef_3/Volume.h $
-// $Id: Volume.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_3/include/CGAL/Nef_3/Volume.h $
+// $Id: Volume.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel        <seel@mpi-sb.mpg.de>
 //                 Miguel Granados     <granados@mpi-sb.mpg.de>
@@ -57,22 +57,22 @@ class Volume_base  {
 
     Volume_base(const Volume_base<Refs>& v)
       { mark_ = v.mark_;
-	shell_entry_objects_ = v.shell_entry_objects_;
+        shell_entry_objects_ = v.shell_entry_objects_;
       }
 
     Volume_base<Refs>& operator=(const Volume_base<Refs>& v)
       { if (this == &v) return *this;
-	mark_ = v.mark_;
-	shell_entry_objects_ = v.shell_entry_objects_;
-	return *this;
+        mark_ = v.mark_;
+        shell_entry_objects_ = v.shell_entry_objects_;
+        return *this;
       }
 
     Mark& mark() { return mark_; }
     const Mark& mark() const { return mark_; }
 
     Object_list& shell_entry_objects() { return shell_entry_objects_; }
-    const Object_list& shell_entry_objects() const { 
-      return shell_entry_objects_; 
+    const Object_list& shell_entry_objects() const {
+      return shell_entry_objects_;
     }
 
     Shell_entry_iterator shells_begin()
@@ -85,15 +85,15 @@ class Volume_base  {
     { return shell_entry_objects_.end(); }
 
     bool is_valid( bool verb = false, int level = 0) const {
-      
+
       Verbose_ostream verr(verb);
       verr << "begin CGAL::SNC_items<...>::Volume_base::is_valid( verb=true, "
-	"level = " << level << "):" << std::endl;
+        "level = " << level << "):" << std::endl;
 
       bool valid = (!shell_entry_objects_.empty());
 
       verr << "end of CGAL::SNC_items<...>::Volume_base::is_valid(): structure is "
-	   << ( valid ? "valid." : "NOT VALID.") << std::endl;
+           << ( valid ? "valid." : "NOT VALID.") << std::endl;
 
       return valid;
     }

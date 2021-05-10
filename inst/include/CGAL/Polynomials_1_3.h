@@ -4,13 +4,13 @@
 // This file is part of CGAL (www.cgal.org).
 //
 // Partially supported by the IST Programme of the EU as a Shared-cost
-// RTD (FET Open) Project under Contract No  IST-2000-26473 
-// (ECG - Effective Computational Geometry for Curves and Surfaces) 
-// and a STREP (FET Open) Project under Contract No  IST-006413 
+// RTD (FET Open) Project under Contract No  IST-2000-26473
+// (ECG - Effective Computational Geometry for Curves and Surfaces)
+// and a STREP (FET Open) Project under Contract No  IST-006413
 // (ACS -- Algorithms for Complex Shapes)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Algebraic_kernel_for_spheres/include/CGAL/Polynomials_1_3.h $
-// $Id: Polynomials_1_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Algebraic_kernel_for_spheres/include/CGAL/Polynomials_1_3.h $
+// $Id: Polynomials_1_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -34,15 +34,15 @@ template < typename FT_ >
 class Polynomial_1_3
 {
   FT_ rep[4]; // stores a, b, c, d
-  
+
 public:
-  
+
   typedef FT_ FT;
-  
+
   Polynomial_1_3(){}
-  
+
   Polynomial_1_3(const FT & a, const FT & b, const FT & c, const FT & d)
-  { 
+  {
     rep[0]=a;
     rep[1]=b;
     rep[2]=c;
@@ -54,10 +54,10 @@ public:
 
   const FT & b() const
   { return rep[1]; }
-  
+
   const FT & c() const
   { return rep[2]; }
-  
+
   const FT & d() const
   { return rep[3]; }
 
@@ -78,21 +78,21 @@ public:
 
 template < typename FT >
 inline
-bool 
+bool
 operator == ( const Polynomial_1_3<FT> & p1,
-	      const Polynomial_1_3<FT> & p2 )
+              const Polynomial_1_3<FT> & p2 )
 {
-  return( (p1.a() == p2.a()) && 
-	  (p1.b() == p2.b()) &&
-	  (p1.c() == p2.c()) &&
-	  (p1.d() == p2.d()) );
+  return( (p1.a() == p2.a()) &&
+          (p1.b() == p2.b()) &&
+          (p1.c() == p2.c()) &&
+          (p1.d() == p2.d()) );
 }
 
 template < typename FT >
 inline
-bool 
+bool
 same_solutions ( const Polynomial_1_3<FT> & p1,
-	         const Polynomial_1_3<FT> & p2 )
+                 const Polynomial_1_3<FT> & p2 )
 {
   if(p1.undefined()) return p2.undefined();
   if(p1.empty_space()) return p2.empty_space();

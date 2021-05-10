@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Shape_detection/include/CGAL/Shape_detection_3.h $
-// $Id: Shape_detection_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Shape_detection/include/CGAL/Shape_detection_3.h $
+// $Id: Shape_detection_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,7 +25,7 @@
 #define CGAL_DEPRECATED_MESSAGE_DETAILS \
   "CGAL::Shape_detection_3 namespace has been replaced by the namespace "\
   "CGAL::Shape_detection."
-  
+
 #include <CGAL/internal/deprecation_warning.h>
 
 namespace CGAL {

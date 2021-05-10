@@ -1,16 +1,16 @@
-// Copyright (c) 2000  
+// Copyright (c) 2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Cartesian_kernel/include/CGAL/Cartesian/Aff_transformation_2.h $
-// $Id: Aff_transformation_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Cartesian_kernel/include/CGAL/Cartesian/Aff_transformation_2.h $
+// $Id: Aff_transformation_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri, Lutz Kettner
 
@@ -57,7 +57,7 @@ class Aff_transformationC2
 
 public:
   typedef R_                                R;
-   
+
   Aff_transformationC2()
   {
     initialize_with(Aff_transformation_repC2<R>(FT(1), FT(0), FT(0), FT(1)));
@@ -100,7 +100,7 @@ public:
     else
       initialize_with(Scaling_repC2<R>(s));
   }
-  
+
   Aff_transformationC2(const Reflection, const Line_2& l)
   {
       initialize_with(Reflection_repC2<R>(l));
@@ -126,18 +126,18 @@ public:
   {
     initialize_with(Aff_transformation_repC2<R>(m11/w, m12/w, m21/w, m22/w));
   }
-  
+
 
   Point_2
-  transform(const Point_2 &p) const 
-  { return this->Ptr()->transform(p); } 
+  transform(const Point_2 &p) const
+  { return this->Ptr()->transform(p); }
 
   Point_2
   operator()(const Point_2 &p) const
   { return transform(p); }
 
   Vector_2
-  transform(const Vector_2 &v) const 
+  transform(const Vector_2 &v) const
   { return this->Ptr()->transform(v); }
 
   Vector_2
@@ -177,7 +177,7 @@ public:
 
   std::ostream &
   print(std::ostream &os) const;
-  
+
   bool operator==(const Aff_transformationC2 &t)const
   {
     for(int i=0; i<3; ++i)
@@ -186,12 +186,12 @@ public:
           return false;
     return true;
   }
-  
+
   bool operator!=(const Aff_transformationC2 &t)const
   {
     return !(*this == t);
   }
-  
+
 };
 
 template < class R >

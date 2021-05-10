@@ -3,12 +3,12 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polynomial/include/CGAL/Polynomial/Degree.h $
-// $Id: Degree.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polynomial/include/CGAL/Polynomial/Degree.h $
+// $Id: Degree.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
 //
-// Author(s)     : Michael Hemmer <hemmer@mpi-inf.mpg.de> 
+//
+// Author(s)     : Michael Hemmer <hemmer@mpi-inf.mpg.de>
 //
 // ============================================================================
 
@@ -26,45 +26,45 @@ namespace internal{
 
 template <typename Polynomial > struct Degree;
 
-// Polynomial musst be at least univariate ! 
-template <typename Coeff_ > 
+// Polynomial musst be at least univariate !
+template <typename Coeff_ >
 struct Degree<Polynomial<Coeff_> >
   : public CGAL::cpp98::unary_function< Polynomial<Coeff_> , int  >{
-  
-private: 
+
+private:
   typedef Polynomial<Coeff_> Polynomial_d;
-  
-  // for univariate polynomials 
+
+  // for univariate polynomials
   template <typename Coeff>
   int degree(const Polynomial<Coeff>& p, int i) const {
-    (void) i; 
+    (void) i;
     CGAL_assertion(i == 0);
     return p.degree();
   }
-  
+
   // for multivariate polynomials
   template <typename Coeff>
   int degree(const Polynomial<Polynomial<Coeff> >& p, int i) const {
     typedef Polynomial<Polynomial<Coeff> > Poly;
-    
+
     if(i == (Dimension<Poly>::value-1))
       return p.degree();
-    
+
     int result = 0;
     for(typename Poly::const_iterator it = p.begin(); it != p.end(); it++){
       result = (std::max)(result,degree(*it,i));
     }
-    return result; 
+    return result;
   }
 
 public:
   int operator()(
-      const Polynomial_d& p, 
+      const Polynomial_d& p,
       int i = (Dimension<Polynomial_d>::value-1)) const {
     CGAL_assertion(i < Dimension<Polynomial_d>::value);
     CGAL_assertion(i >= 0);
     return this->degree(p,i);
-  }     
+  }
 
 };
 

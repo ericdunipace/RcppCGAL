@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Apollonius_graph_2/include/CGAL/Hyperbola_ray_2.h $
-// $Id: Hyperbola_ray_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Hyperbola_ray_2.h $
+// $Id: Hyperbola_ray_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -75,8 +75,8 @@ public:
 
 
   Hyperbola_ray_2(const Site_2 &f1, const Site_2 &f2,
-		  const Point_2 &p,
-		  const Hyperbola_direction& direction) :
+                  const Point_2 &p,
+                  const Hyperbola_direction& direction) :
     Hyperbola_segment_2< Gt >(f1, f2, p, p),
     _f1(f1), _f2(f2), _p(p), _dir(direction)
   {
@@ -112,7 +112,7 @@ public:
     } else {
       this->p2 = f(t1 - this->STEP * OFFSET());
     }
-    
+
     Hyperbola_segment_2< Gt >::draw(s);
   }
 
@@ -127,7 +127,7 @@ public:
 
     Hyperbola_segment_2< Gt >::draw(s);
   }
-  
+
 };
 
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Envelope_2/include/CGAL/Envelope_diagram_1.h $
-// $Id: Envelope_diagram_1.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Envelope_2/include/CGAL/Envelope_diagram_1.h $
+// $Id: Envelope_diagram_1.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein   <wein@post.tau.ac.il>
@@ -376,21 +376,21 @@ public:
     std::allocator_traits<Edge_allocator>::construct(edge_alloc, e);
     return (e);
   }
-   
+
   /*! Delete an existing vertex. */
   void delete_vertex (Vertex_handle v)
   {
     std::allocator_traits<Vertex_allocator>::destroy(vertex_alloc, v);
     vertex_alloc.deallocate (v, 1);
   }
-  
+
   /*! Delete an existing edge. */
   void delete_edge (Edge_handle e)
   {
     std::allocator_traits<Edge_allocator>::destroy(edge_alloc, e);
     edge_alloc.deallocate (e, 1);
   }
-  
+
 private:
   /*!
    * Free all diagram elements.
@@ -418,7 +418,7 @@ private:
         e = nullptr;
       }
     }
-     
+
     _leftmostP = nullptr;
     _rightmostP = nullptr;
   }

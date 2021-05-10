@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/GraphicsView/include/CGAL/Qt/LineGraphicsItem.h $
-// $Id: LineGraphicsItem.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/LineGraphicsItem.h $
+// $Id: LineGraphicsItem.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 //                 Laurent Rineau <Laurent.Rineau@geometryfactory.com>
@@ -41,9 +41,9 @@ public:
 
 public:
   QRectF boundingRect() const;
-  
+
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  
+
 
   const QPen& Pen() const
   {
@@ -56,7 +56,7 @@ public:
     this->pen = pen_;
   }
 
-  
+
   void setLine(const Line_2& a);
 
   Line_2 line() const
@@ -77,7 +77,7 @@ protected:
 
 
 template <typename CK>
-void 
+void
 LineGraphicsItem<CK>::setLine(const Line_2& a)
 {
   line_ = a;
@@ -93,7 +93,7 @@ LineGraphicsItem<CK>::LineGraphicsItem()
 }
 
 template <typename CK>
-QRectF 
+QRectF
 LineGraphicsItem<CK>::boundingRect() const
 {
   if(scene()){
@@ -106,8 +106,8 @@ LineGraphicsItem<CK>::boundingRect() const
 
 
 template <typename CK>
-void 
-LineGraphicsItem<CK>::paint(QPainter *painter, 
+void
+LineGraphicsItem<CK>::paint(QPainter *painter,
                                     const QStyleOptionGraphicsItem * /*option*/,
                                     QWidget * /*widget*/)
 {
@@ -120,7 +120,7 @@ LineGraphicsItem<CK>::paint(QPainter *painter,
 
 
 template <typename CK>
-void 
+void
 LineGraphicsItem<CK>::modelChanged()
 {
   update();

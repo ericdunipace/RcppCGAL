@@ -1,14 +1,14 @@
-// Copyright (c) 1999,2007  
+// Copyright (c) 1999,2007
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved. 
+// and Tel-Aviv University (Israel).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/double.h $
-// $Id: double.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/double.h $
+// $Id: double.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -118,17 +118,17 @@ template <> class Algebraic_structure_traits< double >
 };
 
 
-  
-#ifdef CGAL_USE_SSE2_FABS   
+
+#ifdef CGAL_USE_SSE2_FABS
 inline double sse2fabs(double a)
 {
   static CGAL_ALIGN_16 const union{
     __int64 i[2];
     __m128d m;
   } absMask = {0x7fffffffffffffff, 0x7fffffffffffffff};
-	  
+
   __m128d temp = _mm_set1_pd(a);
-  
+
   temp = _mm_and_pd(temp, absMask.m);
   return _mm_cvtsd_f64 (temp);
 }
@@ -148,7 +148,7 @@ template <> class Real_embeddable_traits< double >
         Type operator()( const Type& x ) const {
 #ifdef CGAL_USE_SSE2_FABS
           return sse2fabs(x);
-#else         
+#else
           return std::fabs( x );
 #endif
         }

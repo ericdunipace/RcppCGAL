@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_d/include/CGAL/Convex_hull_d_to_polyhedron_3.h $
-// $Id: Convex_hull_d_to_polyhedron_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_d/include/CGAL/Convex_hull_d_to_polyhedron_3.h $
+// $Id: Convex_hull_d_to_polyhedron_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel
 
@@ -46,10 +46,10 @@ Point convert(const Point_d& p) const
 
 void operator()(HDS& hds )
 {
-  CGAL_assertion( ch.current_dimension() == 3); 
+  CGAL_assertion( ch.current_dimension() == 3);
   Polyhedron_incremental_builder_3<HDS> B(hds, true);
-  B.begin_surface( ch.number_of_vertices(), 
-                   ch.number_of_facets() ); 
+  B.begin_surface( ch.number_of_vertices(),
+                   ch.number_of_facets() );
   // would be nice to have statistical data on
   // Chull available other than print_statistics()
   Unique_hash_map<Vertex_handle, int> index( -1);
@@ -105,7 +105,7 @@ include |<CGAL/Convex_hull_d_to_polyhedron_3.h>|
 template <class R, class Polyhedron_3>
 void convex_hull_d_to_polyhedron_3(
   const Convex_hull_d<R>& C, Polyhedron_3& P)
-/*{\Mfunc converts the convex hull |C| to polyedral surface stored in 
+/*{\Mfunc converts the convex hull |C| to polyedral surface stored in
    |P|.\\ \precond |dim == 3| and |dcur == 3|. }*/
 { typedef Convex_hull_d<R> ChullType;
 

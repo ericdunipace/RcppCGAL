@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/test_FPU_rounding_mode_impl.h $
-// $Id: test_FPU_rounding_mode_impl.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/test_FPU_rounding_mode_impl.h $
+// $Id: test_FPU_rounding_mode_impl.h a08470b 2020-11-03T10:14:42+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -32,14 +32,14 @@ struct Check_FPU_rounding_mode_is_restored {
   {
     CGAL_assertion_msg( FPU_get_cw() == mode,
                         "The default FPU rounding mode has not been restored "
-                        " before the exit of the program. "
+                        "before the exit of the program. "
                         "That may be a bug in some CGAL kernel code.");
   }
 };
 
 #ifdef CGAL_HEADER_ONLY
 
-inline const Check_FPU_rounding_mode_is_restored& 
+inline const Check_FPU_rounding_mode_is_restored&
 get_static_check_fpu_rounding_mode_is_restored()
 {
   // A static object that emits a warning if the rounding mode at the
@@ -53,7 +53,7 @@ get_static_check_fpu_rounding_mode_is_restored()
 
 namespace {
   CGAL_UNUSED const Check_FPU_rounding_mode_is_restored &
-    check_fpu_rounding_mode_is_restored 
+    check_fpu_rounding_mode_is_restored
     = get_static_check_fpu_rounding_mode_is_restored();
 }
 

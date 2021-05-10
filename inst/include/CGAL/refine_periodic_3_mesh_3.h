@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Periodic_3_mesh_3/include/CGAL/refine_periodic_3_mesh_3.h $
-// $Id: refine_periodic_3_mesh_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_mesh_3/include/CGAL/refine_periodic_3_mesh_3.h $
+// $Id: refine_periodic_3_mesh_3.h 53d4c9b 2019-10-28T11:29:08+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stephane Tayeb,
@@ -24,8 +24,7 @@
 #include <CGAL/Mesh_3/Dump_c3t3.h>
 #include <CGAL/Mesh_3/Triangulation_helpers.h>
 #include <CGAL/refine_mesh_3.h>
-
-#include <CGAL/Hash_handles_with_or_without_timestamps.h>
+#include <CGAL/Time_stamper.h>
 
 #include <boost/parameter/preprocessor.hpp>
 #include <boost/unordered_set.hpp>

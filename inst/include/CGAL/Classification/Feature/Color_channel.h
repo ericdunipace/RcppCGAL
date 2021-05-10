@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Classification/include/CGAL/Classification/Feature/Color_channel.h $
-// $Id: Color_channel.h b9a079b 2019-11-04T11:34:53+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Feature/Color_channel.h $
+// $Id: Color_channel.h 0e934b1 2020-08-04T13:16:13+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -24,7 +24,7 @@ namespace CGAL {
 namespace Classification {
 
 namespace Feature {
-  
+
   /*!
     \ingroup PkgClassificationFeatures
 
@@ -46,7 +46,7 @@ namespace Feature {
     Its default name is "color_hue", "color_saturation" or
     "color_value", depending on which channel is chosen in the
     constructor.
-    
+
     \note The user only needs to provide a map to standard (and more common)
     RGB colors, the conversion to HSV is done internally.
 
@@ -72,15 +72,15 @@ public:
   };
 
 private:
-  
+
   const PointRange& input;
   ColorMap color_map;
   Channel m_channel;
-  
+
 public:
-  
+
   /*!
-    \brief Constructs a feature based on the given color channel.
+    \brief constructs a feature based on the given color channel.
 
     \param input point range.
     \param color_map property map to access the colors of the input points.

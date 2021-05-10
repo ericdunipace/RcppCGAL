@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Three/include/CGAL/Three/Scene_item_rendering_helper.h $
-// $Id: Scene_item_rendering_helper.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Three/include/CGAL/Three/Scene_item_rendering_helper.h $
+// $Id: Scene_item_rendering_helper.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -72,14 +72,14 @@ public:
   QMenu* contextMenu() Q_DECL_OVERRIDE;
 
   /*!
-     * \brief processData calls `computeElements()` 
-     * 
+     * \brief processData calls `computeElements()`
+     *
      * @todo in a dedicated thread so the
      * application does not get stuck while the processing is performed.
      * Emits `dataProcessed()`.
      */
    virtual void processData(Gl_data_names name) const;
-   
+
   //!
   //! \brief setAlpha sets the integer value of the alpha channel of this item.
   //! Also updates the slider value.
@@ -125,7 +125,7 @@ public:
   //!
   void setEdgeContainer(std::size_t id,
                         Edge_container* tc);
-  
+
   //!
   //! \brief setPointContainer sets the `id`th `Point_container` to `tc`.
   //!
@@ -167,7 +167,7 @@ public:
   //! This function should be called in the drawing functions, when `getBuffersFilled()` is `true`.
   //!
   void setBuffersInit(Viewer_interface *viewer, bool val) const;
-  
+
   //! \brief the item's bounding box's diagonal length.
   //!
   //! If the diagonal's length has never been computed, computes it and
@@ -211,7 +211,7 @@ protected:
   //! \param b
   //!
   void setBbox(Bbox b)const ;
-  
+
   virtual void computeElements()const{}
 protected:
   friend struct PRIV;

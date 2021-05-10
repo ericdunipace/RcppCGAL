@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/NewKernel_d/include/CGAL/NewKernel_d/Vector/avx4.h $
-// $Id: avx4.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/NewKernel_d/include/CGAL/NewKernel_d/Vector/avx4.h $
+// $Id: avx4.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -48,53 +48,53 @@ namespace CGAL {
     typedef __m256d Vector;
     struct Construct_vector {
       struct Dimension {
-	// Initialize with NaN?
-	Vector operator()(unsigned d) const {
-	  CGAL_assertion(d==4);
-	  return Vector();
-	}
+        // Initialize with NaN?
+        Vector operator()(unsigned d) const {
+          CGAL_assertion(d==4);
+          return Vector();
+        }
       };
 
       struct Iterator {
-	template<typename Iter>
-	  Vector operator()(unsigned d,Iter const& f,Iter const& e) const {
-	    CGAL_assertion(d==4);
-	    double x0 = *f;
-	    double x1 = *++f;
-	    double x2 = *++f;
-	    double x3 = *++f;
-	    CGAL_assertion(++f==e);
-	    Vector a = { x0, x1, x2, x3 };
-	    return a;
-	  }
+        template<typename Iter>
+          Vector operator()(unsigned d,Iter const& f,Iter const& e) const {
+            CGAL_assertion(d==4);
+            double x0 = *f;
+            double x1 = *++f;
+            double x2 = *++f;
+            double x3 = *++f;
+            CGAL_assertion(++f==e);
+            Vector a = { x0, x1, x2, x3 };
+            return a;
+          }
       };
 
       struct Iterator_and_last {
-	template<typename Iter,typename T>
-	  Vector operator()(unsigned d,Iter const& f,Iter const& e,double t) const {
-	    CGAL_assertion(d==4);
-	    double x0 = *f;
-	    double x1 = *++f;
-	    double x2 = *++f;
-	    CGAL_assertion(++f==e);
-	    Vector a = { x0, x1, x2, t };
-	    return a;
-	  }
+        template<typename Iter,typename T>
+          Vector operator()(unsigned d,Iter const& f,Iter const& e,double t) const {
+            CGAL_assertion(d==4);
+            double x0 = *f;
+            double x1 = *++f;
+            double x2 = *++f;
+            CGAL_assertion(++f==e);
+            Vector a = { x0, x1, x2, t };
+            return a;
+          }
       };
 
       struct Values {
-	  Vector operator()(double a,double b,double c,double d) const {
-	    Vector r = { a, b, c, d };
-	    return r;
-	  }
+          Vector operator()(double a,double b,double c,double d) const {
+            Vector r = { a, b, c, d };
+            return r;
+          }
       };
 
       struct Values_divide {
-	Vector operator()(double h,double a,double b,double c,double d) const {
-	  // {a,b,c,d}/{h,h,h,h} should be roughly the same
-	  Vector r = { a/h, b/h, c/h, d/h };
-	  return r;
-	}
+        Vector operator()(double h,double a,double b,double c,double d) const {
+          // {a,b,c,d}/{h,h,h,h} should be roughly the same
+          Vector r = { a/h, b/h, c/h, d/h };
+          return r;
+        }
       };
     };
 

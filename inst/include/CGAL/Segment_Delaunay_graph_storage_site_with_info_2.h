@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_storage_site_with_info_2.h $
-// $Id: Segment_Delaunay_graph_storage_site_with_info_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_storage_site_with_info_2.h $
+// $Id: Segment_Delaunay_graph_storage_site_with_info_2.h 980adeb 2020-04-09T13:27:13+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -75,7 +75,7 @@ private:
 public:
   // COPY CONSTRUCTOR
   //-----------------
-  Segment_Delaunay_graph_storage_site_with_info_2(const Self& other) 
+  Segment_Delaunay_graph_storage_site_with_info_2(const Self& other)
     : Base(other)
   {
     info_set_ = other.info_set_;
@@ -119,7 +119,7 @@ public:
   // ACCESS TO INFO
   //---------------
   inline const Info& info() const {
-    CGAL_precondition( info_has_been_set() );
+    CGAL_assume(info_has_been_set());
     return info_;
   }
 

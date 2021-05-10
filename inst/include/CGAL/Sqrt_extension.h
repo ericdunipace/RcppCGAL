@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Number_types/include/CGAL/Sqrt_extension.h $
-// $Id: Sqrt_extension.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Sqrt_extension.h $
+// $Id: Sqrt_extension.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,17 +17,17 @@
 
 // COMMENTS FROM EXACUS
 /*! \ingroup NiX_Sqrt_extension
-\brief represents an extension of a number type by one square root. 
+\brief represents an extension of a number type by one square root.
 
  An instance of this class
-represents  an extension of the type NT by a square root of the 
-type ROOT. In case NT and ROOT do not coincide, 
-NT must be constructible from ROOT.  The number type NT 
-must be at least a model of the IntegralDomainWithoutDiv concept. 
+represents  an extension of the type NT by a square root of the
+type ROOT. In case NT and ROOT do not coincide,
+NT must be constructible from ROOT.  The number type NT
+must be at least a model of the IntegralDomainWithoutDiv concept.
 
-An Sqrt_extension is a model of RealComparable if NT is RealComparable.\n  
-The <B>algebraic type</B> of NiX::Sqrt_extension depends on the algebraic type 
-of NT: 
+An Sqrt_extension is a model of RealComparable if NT is RealComparable.\n
+The <B>algebraic type</B> of NiX::Sqrt_extension depends on the algebraic type
+of NT:
 - IntegralDomainWithoutDiv -> IntegralDomainWithoutDiv
 - IntegralDomain           -> IntegralDomain
 - UFDomain                 -> IntegralDomain
@@ -38,9 +38,9 @@ of NT:
 
 Note that NT and ROOT can themselves be an instance of
 NiX::Sqrt_extension, yielding a nested extension.\n
-Note that the extension of an UFDomain or EuclideanRing is just an 
-IntegralDomain, since the extension in general destroys the unique 
-factorization property. 
+Note that the extension of an UFDomain or EuclideanRing is just an
+IntegralDomain, since the extension in general destroys the unique
+factorization property.
 */
 
 #include <CGAL/number_type_basic.h>

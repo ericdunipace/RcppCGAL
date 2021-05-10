@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Construct_storage_site_with_info_2.h $
-// $Id: Construct_storage_site_with_info_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Construct_storage_site_with_info_2.h $
+// $Id: Construct_storage_site_with_info_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
 
@@ -45,7 +45,7 @@ public:
   // constructs the point of intersection
   inline
   result_type operator()(const Storage_site_2& ss0,
-			 const Storage_site_2& ss1) const {
+                         const Storage_site_2& ss1) const {
     Storage_site_2 ssx = Base::operator()(ss0, ss1);
     Info infox = Merge_info()(ss0.info(), ss1.info());
     ssx.set_info(infox);
@@ -57,8 +57,8 @@ public:
   // determines if the first or segment subsegment is constructed
   inline
   result_type operator()(const Storage_site_2& ss0,
-			 const Storage_site_2& ss1,
-			 bool first) const {
+                         const Storage_site_2& ss1,
+                         bool first) const {
     Storage_site_2 s = Base::operator()(ss0, ss1, first);
     Info is = Convert_info()(ss0.info(), ss1.info(), first);
     s.set_info(is);

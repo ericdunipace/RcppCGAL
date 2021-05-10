@@ -3,12 +3,12 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Convex_hull_2/include/CGAL/segment_intersection_points_2.h $
-// $Id: segment_intersection_points_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_2/include/CGAL/segment_intersection_points_2.h $
+// $Id: segment_intersection_points_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
 //
-// Author(s)     : Stefan Schirra 
+//
+// Author(s)     : Stefan Schirra
 
 #ifndef CGAL_SEGMENT_INTERSECTION_POINTS_2_H
 #define CGAL_SEGMENT_INTERSECTION_POINTS_2_H
@@ -92,7 +92,7 @@ segment_intersection_points_2(ForwardIterator first, ForwardIterator last,
     typedef typename ITraits::value_type          value_type;
     typedef CGAL::Kernel_traits<value_type>       KTraits;
     typedef typename KTraits::Kernel              Kernel;
-    return segment_intersection_points_2( first, last, result, Kernel()); 
+    return segment_intersection_points_2( first, last, result, Kernel());
 }
 
 } // namespace CGAL

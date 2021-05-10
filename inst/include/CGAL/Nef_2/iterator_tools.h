@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Nef_2/include/CGAL/Nef_2/iterator_tools.h $
-// $Id: iterator_tools.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_2/include/CGAL/Nef_2/iterator_tools.h $
+// $Id: iterator_tools.h 9d16a42 2020-06-15T17:07:35+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Seel <seel@mpi-sb.mpg.de>
 #ifndef CGAL_ITERATORTOOLS_H
@@ -20,7 +20,7 @@
 
 namespace CGAL {
 
-template <typename Iter, typename Move> 
+template <typename Iter, typename Move>
 class CircFromIt : public Iter {
     // Ptr  node;    // The internal node ptr inherited from It.
     typedef CircFromIt<Iter,Move> Self;
@@ -46,6 +46,12 @@ public:
       return Iter::operator==(i);
     }
     bool operator!=( const Self& i) const {
+        return !(*this == i);
+    }
+    bool operator==( const Iter& i ) const {
+      return Iter::operator==(i);
+    }
+    bool operator!=( const Iter& i) const {
         return !(*this == i);
     }
 
@@ -76,7 +82,7 @@ public:
 
 };
 
-template <typename Iter, typename Pnt> 
+template <typename Iter, typename Pnt>
 class PntItFromVertIt : public Iter {
 public:
   typedef PntItFromVertIt<Iter,Pnt> Self;
@@ -89,9 +95,9 @@ public:
   PntItFromVertIt(Iter it) : Base(it) {}
   PntItFromVertIt(const Self& it) : Base(it) {}
 
-  reference operator*() const 
+  reference operator*() const
   { return Base::operator*().point(); }
-  pointer operator->() const 
+  pointer operator->() const
   { return &(operator*()); }
   Self& operator++() { return (Self&)Base::operator++(); }
   Self operator++(int) { Self tmp=*this; ++*this; return tmp; }

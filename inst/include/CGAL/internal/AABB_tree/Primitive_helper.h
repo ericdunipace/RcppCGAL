@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/AABB_tree/include/CGAL/internal/AABB_tree/Primitive_helper.h $
-// $Id: Primitive_helper.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/AABB_tree/include/CGAL/internal/AABB_tree/Primitive_helper.h $
+// $Id: Primitive_helper.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Sebastien Loriot
@@ -36,7 +36,7 @@ template<class Primitive>
 struct Point_result_type<Primitive,false>{ typedef typename Primitive::Point type; };
 
 
-//helper controlling whether extra data should be stored in the AABB_tree traits class  
+//helper controlling whether extra data should be stored in the AABB_tree traits class
 template <class AABBTraits, bool has_shared_data=Has_nested_type_Shared_data<typename AABBTraits::Primitive>::value>
 struct Primitive_helper;
 
@@ -52,7 +52,7 @@ struct Primitive_helper<AABBTraits,true>{
     return p.reference_point(traits.shared_data());
   }
 };
-  
+
 template <class AABBTraits>
 struct Primitive_helper<AABBTraits,false>{
   typedef typename Datum_result_type<typename AABBTraits::Primitive>::type Datum_type;

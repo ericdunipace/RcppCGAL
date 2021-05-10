@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Linear_cell_complex/include/CGAL/Linear_cell_complex_min_items.h $
-// $Id: Linear_cell_complex_min_items.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Linear_cell_complex/include/CGAL/Linear_cell_complex_min_items.h $
+// $Id: Linear_cell_complex_min_items.h 0308d1a 2020-03-27T18:35:15+01:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -16,6 +16,7 @@
 #include <CGAL/Dart.h>
 #endif
 
+#include <CGAL/Linear_cell_complex_fwd.h>
 #include <CGAL/Cell_attribute_with_point.h>
 #include <CGAL/tuple.h>
 
@@ -39,7 +40,7 @@ namespace CGAL {
     struct Dart_wrapper
     {
       typedef CGAL::Dart<d, LCC> Dart;
-      
+
       typedef CGAL::Cell_attribute_with_point<LCC> Vertex_attrib;
       typedef std::tuple<Vertex_attrib>    Attributes;
     };

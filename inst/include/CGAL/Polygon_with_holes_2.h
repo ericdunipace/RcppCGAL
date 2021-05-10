@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Polygon/include/CGAL/Polygon_with_holes_2.h $
-// $Id: Polygon_with_holes_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon/include/CGAL/Polygon_with_holes_2.h $
+// $Id: Polygon_with_holes_2.h 145f204 2020-10-09T17:20:01+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -48,7 +48,7 @@ public:
   typedef typename Base::Hole_const_iterator         Hole_const_iterator;
   typedef typename Base::Size                        Size;
 
-  /*! Default constructor. */
+  /*! %Default constructor. */
   Polygon_with_holes_2 () :
     Base()
   {}

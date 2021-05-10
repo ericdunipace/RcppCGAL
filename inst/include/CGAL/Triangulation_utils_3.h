@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/TDS_3/include/CGAL/Triangulation_utils_3.h $
-// $Id: Triangulation_utils_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/TDS_3/include/CGAL/Triangulation_utils_3.h $
+// $Id: Triangulation_utils_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -27,7 +27,7 @@ struct Triangulation_utils_base_3
 {
   static const char tab_next_around_edge[4][4];
   static const int tab_vertex_triple_index[4][3];
-  
+
   // copied from Triangulation_utils_2.h to avoid package dependency
   static const int ccw_map[3];
   static const int cw_map[3];
@@ -61,7 +61,7 @@ const int Triangulation_utils_base_3<T>::cw_map[3] = {2, 0, 1};
 struct Triangulation_utils_3
   : public Triangulation_utils_base_3<>
 {
-  static int ccw(const int i) 
+  static int ccw(const int i)
     {
       CGAL_triangulation_precondition( i >= 0 && i < 3);
       return ccw_map[i];
@@ -78,8 +78,8 @@ struct Triangulation_utils_3
     // index of the next cell when turning around the
     // oriented edge vertex(i) vertex(j) in 3d
     CGAL_triangulation_precondition( ( i >= 0 && i < 4 ) &&
-		                     ( j >= 0 && j < 4 ) &&
-		                     ( i != j ) );
+                                     ( j >= 0 && j < 4 ) &&
+                                     ( i != j ) );
     return tab_next_around_edge[i][j];
   }
 
@@ -89,7 +89,7 @@ struct Triangulation_utils_3
     // indexes of the  jth vertex  of the facet of a cell
     // opposite to vertx i
       CGAL_triangulation_precondition( ( i >= 0 && i < 4 ) &&
-		                     ( j >= 0 && j < 3 ) );
+                                     ( j >= 0 && j < 3 ) );
     return tab_vertex_triple_index[i][j];
   }
 

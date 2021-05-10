@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Triangulation_2/include/CGAL/Triangulation_2/internal/Triangulation_2_projection_traits_base_3.h $
-// $Id: Triangulation_2_projection_traits_base_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_2/include/CGAL/Triangulation_2/internal/Triangulation_2_projection_traits_base_3.h $
+// $Id: Triangulation_2_projection_traits_base_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -47,8 +47,8 @@ public:
   }
 
   Orientation operator()(const Point& p,
-			 const Point& q,
-			 const Point& r) const
+                         const Point& q,
+                         const Point& r) const
   {
     CGAL_PROFILER("Projected_orientation_with_normal_3::operator()");
     CGAL_TIME_PROFILER("Projected_orientation_with_normal_3::operator()");
@@ -82,9 +82,9 @@ public:
   }
 
   Oriented_side operator()(const Point& p,
-			   const Point& q,
-			   const Point& r,
-			   const Point& t) const
+                           const Point& q,
+                           const Point& r,
+                           const Point& t) const
   {
     CGAL_PROFILER("Projected_side_of_oriented_circle_with_normal_3::operator()")
     CGAL_TIME_PROFILER("Projected_side_of_oriented_circle_with_normal_3::operator()")
@@ -104,10 +104,10 @@ public:
     const FT k_r = tr * u;
 
     return sign_of_determinant<FT>(
-	tp.x(), tp.y(), tp.z(), (tp2 + k_p) * u2 - k_p * k_p,
-	tr.x(), tr.y(), tr.z(), (tr2 + k_r) * u2 - k_r * k_r,
-	tq.x(), tq.y(), tq.z(), (tq2 + k_q) * u2 - k_q * k_q,
-	 u.x(),  u.y(),  u.z(), u2 * u2);
+        tp.x(), tp.y(), tp.z(), (tp2 + k_p) * u2 - k_p * k_p,
+        tr.x(), tr.y(), tr.z(), (tr2 + k_r) * u2 - k_r * k_r,
+        tq.x(), tq.y(), tq.z(), (tq2 + k_q) * u2 - k_q * k_q,
+         u.x(),  u.y(),  u.z(), u2 * u2);
     // Note that q and r have been swapped in the determinant above, to
     // inverse its sign.
   }

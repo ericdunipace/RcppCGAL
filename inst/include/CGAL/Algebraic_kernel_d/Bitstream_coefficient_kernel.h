@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Bitstream_coefficient_kernel.h $
-// $Id: Bitstream_coefficient_kernel.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Bitstream_coefficient_kernel.h $
+// $Id: Bitstream_coefficient_kernel.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 //
 // Author(s)     : Michael Kerber <mkerber@mpi-inf.mpg.de>
 //
@@ -24,11 +24,11 @@ namespace internal {
 template <typename Coefficient_> struct Bitstream_coefficient_kernel {
 
     typedef Coefficient_ Coefficient;
-    
-    typedef typename 
-        CGAL::Get_arithmetic_kernel<Coefficient_>::Arithmetic_kernel  
+
+    typedef typename
+        CGAL::Get_arithmetic_kernel<Coefficient_>::Arithmetic_kernel
     Arithmetic_kernel;
-    
+
     typedef typename Arithmetic_kernel::Bigfloat_interval Bigfloat_interval;
     typedef typename Arithmetic_kernel::Integer Integer;
     typedef typename Arithmetic_kernel::Rational Bound;
@@ -36,24 +36,24 @@ template <typename Coefficient_> struct Bitstream_coefficient_kernel {
 
     typedef typename CGAL::Algebraic_structure_traits<Coefficient>
         ::Is_zero  Is_zero;
-    
+
     Is_zero is_zero_object() const {
         return Is_zero();
     }
 
     struct Convert_to_bfi : public CGAL::cpp98::unary_function
         <Coefficient,Bigfloat_interval> {
-        
+
         Bigfloat_interval operator() (Coefficient c) const {
             return CGAL::convert_to_bfi(c);
         }
     };
-    
+
     Convert_to_bfi convert_to_bfi_object() const {
         return Convert_to_bfi();
     }
-        
-    
+
+
 }; // of class Bitstream_coefficient_kernel
 
 } // namespace internal

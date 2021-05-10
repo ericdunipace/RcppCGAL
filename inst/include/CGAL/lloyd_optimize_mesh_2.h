@@ -3,10 +3,10 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_2/include/CGAL/lloyd_optimize_mesh_2.h $
-// $Id: lloyd_optimize_mesh_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_2/include/CGAL/lloyd_optimize_mesh_2.h $
+// $Id: lloyd_optimize_mesh_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
-// 
+//
 // Author(s) : Jane Tournois
 //
 
@@ -76,7 +76,7 @@ namespace CGAL
   * to avoid compilation errors when seeds_begin and seeds_end are
   * not initialized. Indeed, there is no way to have a
   * "default empty iterator" for these named parameters.
-  * Emptyset_iterator implements OutputIterator, 
+  * Emptyset_iterator implements OutputIterator,
   * but stands here for "any empty input iterator"
   * (and any other type could).
   */

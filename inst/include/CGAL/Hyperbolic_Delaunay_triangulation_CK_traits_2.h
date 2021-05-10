@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Hyperbolic_triangulation_2/include/CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h $
-// $Id: Hyperbolic_Delaunay_triangulation_CK_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Hyperbolic_triangulation_2/include/CGAL/Hyperbolic_Delaunay_triangulation_CK_traits_2.h $
+// $Id: Hyperbolic_Delaunay_triangulation_CK_traits_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mikhail Bogdanov
@@ -35,7 +35,7 @@ namespace internal {
   template <typename Traits>
   class Construct_hyperbolic_circumcenter_CK_2
   {
-    typedef typename Traits::Hyperbolic_Voronoi_point_2     Hyperbolic_Voronoi_point_2;  
+    typedef typename Traits::Hyperbolic_Voronoi_point_2     Hyperbolic_Voronoi_point_2;
     typedef typename Traits::Hyperbolic_point_2             Hyperbolic_point_2;
     typedef typename Traits::Euclidean_circle_or_line_2     Euclidean_circle_or_line_2;
     typedef typename Traits::Euclidean_line_2               Euclidean_line_2;
@@ -56,7 +56,7 @@ namespace internal {
       Hyperbolic_point_2 po(CGAL::ORIGIN);
       Circle_2 l_inf(po, FT(1));
 
-      if( _gt.compare_distance_2_object()(po, p, q) == EQUAL && 
+      if( _gt.compare_distance_2_object()(po, p, q) == EQUAL &&
           _gt.compare_distance_2_object()(po, p, r) == EQUAL)
         return po;
 
@@ -366,7 +366,7 @@ public:
   Construct_hyperbolic_circumcenter_2
   construct_hyperbolic_circumcenter_2_object() const
   { return Construct_hyperbolic_circumcenter_2(*this); }
-  
+
   Construct_hyperbolic_bisector_2
   construct_hyperbolic_bisector_2_object() const
   { return Construct_hyperbolic_bisector_2(*this); }

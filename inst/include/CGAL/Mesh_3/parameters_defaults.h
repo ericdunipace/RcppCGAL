@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/Mesh_3/include/CGAL/Mesh_3/parameters_defaults.h $
-// $Id: parameters_defaults.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/parameters_defaults.h $
+// $Id: parameters_defaults.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -26,14 +26,14 @@
 namespace CGAL {
 namespace parameters { namespace default_values {
 
-// exude_mesh_3  
+// exude_mesh_3
 const double exude_sliver_bound = 0.;
 
 // perturb_mesh_3
 const double perturb_sliver_bound = 0.;
 template<typename C3T3>
 CGAL::Mesh_3::Min_dihedral_angle_criterion
-  <typename C3T3::Triangulation> 
+  <typename C3T3::Triangulation>
   default_sliver_criterion(const C3T3& c3t3, const double& bound)
 {
   typedef typename C3T3::Triangulation Tr;
