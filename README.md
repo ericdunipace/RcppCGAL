@@ -3,7 +3,7 @@
 
 ### Synopsis
 
-This package provides access to the Computational Geometry Algorithms Library ([CGAL](https://www.cgal.org)) in R  [R](https://www.r-project.org).  [CGAL](https://www.cgal.org) provides access to methods like KDtree, Hilbert sorting, convex hull calculation, and many more.
+This package provides access to the Computational Geometry Algorithms Library ([CGAL](https://www.cgal.org)) in [R](https://www.r-project.org).  [CGAL](https://www.cgal.org) provides access to methods like KDtree, Hilbert sorting, convex hull calculation, and many more.
 
 This package allows for the easy linking of the CGAL header files into R packages without having to download and manually add the appropriate CGAL header file into an R package.
 
