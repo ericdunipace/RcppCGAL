@@ -1,7 +1,7 @@
 ## RcppCGAL: CGAL Headers for R
 
 
-### Synopsis
+### Description
 
 This package provides access to the Computational Geometry Algorithms Library ([CGAL](https://www.cgal.org)) in [R](https://www.r-project.org).  [CGAL](https://www.cgal.org) provides access to methods like KDtree, Hilbert sorting, convex hull calculation, and many more.
 
@@ -11,6 +11,15 @@ Much like the BH package, the RcppCGAL package can be used via the `LinkingTo:` 
 
 ### Version
 This package currently includes the version 5.2.1 stable release of CGAL.
+
+### Installation
+To install this package, you can download or clone the git repository. Then you can install using devtools
+```R
+devtools::install("RcppCGAL")
+```
+
+Alternatively, you can install from github directly using the
+`devtools::install_github` function.
 
 ### Example
 We provide an example of how to perform Hilbert sorting using an R matrix:
