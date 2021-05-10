@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/releases/CGAL-5.0/AABB_tree/include/CGAL/AABB_primitive.h $
-// $Id: AABB_primitive.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/AABB_tree/include/CGAL/AABB_primitive.h $
+// $Id: AABB_primitive.h 5ec5ad6 2020-04-22T16:23:57+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -112,14 +112,14 @@ struct AABB_primitive
   /// @}
 
   /*!
-  Constructs a primitive and initializes the property maps.
+  constructs a primitive and initializes the property maps.
   */
   AABB_primitive(Id id,
                  ObjectPropertyMap o_pmap=ObjectPropertyMap(),
                  PointPropertyMap p_pmap=PointPropertyMap());
 
   /*!
-  Constructs a primitive from an iterator with `Id` as value type
+  constructs a primitive from an iterator with `Id` as value type
   and initializes the property maps.
   */
   template <class Iterator>
