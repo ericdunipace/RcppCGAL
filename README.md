@@ -73,7 +73,7 @@ void hilbert_sort_cgal_fun(const double * A, int D, int N,  int * idx)
 }
 
 // [[Rcpp::export]]
-Rcpp::IntegerVector hilbertSort(const RcppEigen::MatrixXd & A)
+Rcpp::IntegerVector hilbertSort(const Eigen::MatrixXd & A)
 {
   int K = A.rows();
   int N = A.cols();
