@@ -92,6 +92,6 @@ makes the function `hilbertSort()`.
 Eric Dunipace
 
 ## License
-
-This package is provided under the GPL v3+.
+This package is provided under the GPL v3+. Note: if you wish to use CGAL for commercial purposes, you must obtain a license from
+the [GeometryFactory](https://geometryfactory.com).
 
