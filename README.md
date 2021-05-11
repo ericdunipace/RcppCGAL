@@ -7,7 +7,7 @@ This package provides access to the Computational Geometry Algorithms Library ([
 
 This package allows for the easy linking of the CGAL header files into R packages without having to download and manually add the appropriate CGAL header file into an R package.
 
-Much like the BH package, the RcppCGAL package can be used via the `LinkingTo:` field in the `DESCRIPTION` file in R packages. This will allow access to the header files in C/C++ source code.
+Much like the `BH` package, the `RcppCGAL` package can be used via the `LinkingTo:` field in the `DESCRIPTION` file in R packages. This will allow access to the header files in C/C++ source code.
 
 ### Version
 This package currently includes the version 5.2.1 stable release of CGAL.

@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2021-05-09
 Author: Eric Dunipace
 Maintainer: Eric Dunipace <edunipace@mail.harvard.edu>
-Description: Creates a header only package to link to CGAL in Rcpp (https://www.cgal.org).
+Description: Creates a header only package to link to the CGAL header files in Rcpp <https://www.cgal.org>. There are a variety of potential uses for the software such as Hilbert sorting, KDtree nearest neighbors, and convex hull algorithms. There is only one R function in this package, which returns the current version of the CGAL library included. For more information about how to use the header files, see the CGAL documentation at <https://www.cgal.org>. 
 License: GPL (>=3)
 LinkingTo: RcppEigen, BH
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
