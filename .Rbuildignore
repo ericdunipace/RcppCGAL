@@ -12,5 +12,4 @@
 ^inst/include/CGAL/internal/Static_filters/*
 ^inst/include/CGAL/Surface_mesh_simplification/*
 ^inst/include/CGAL/internal/Mesh_3/*
-^cran-comments.md
-
+^cran-comments\.md$
