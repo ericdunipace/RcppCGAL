@@ -8,6 +8,12 @@
 \description{
 Creates a header only package to link to the CGAL header files in Rcpp. There are a variety of potential uses for the software such as Hilbert sorting, KDtree nearest neighbors, and convex hull algorithms. There is only one R function in this package, which returns the current version of the CGAL library included. For more information about how to use the header files, see the CGAL documentation at <https://www.cgal.org>. Currently includes CGAL 5.2.1 stable release. Note: if you wish to use CGAL for a non-GPLv3+ purpose, then you MUST obtain a commercial license for CGAL. See <https://www.cgal.org/license.html> for more details.
 }
+\examples{
+\dontrun{# To use this in a C++ file make sure you add an appropriate
+# dependency
+// [[Rcpp::depends(RcppCGAL)]]
+include <Rcpp.h>}
+}
 \references{
 The CGAL Project. (2021). {CGAL} User and Reference Manual (5.2.1). Retrieved from https://doc.cgal.org/5.2.1/Manual/packages.html
 }
