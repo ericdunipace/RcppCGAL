@@ -18,7 +18,7 @@ Description: Creates a header only package to link to the CGAL
   Also, be aware that some files in the CGAL directory have names that 
   are too long to put into the package on CRAN. 
   To obtain a version of the
-  package that does not have these truncated file names, see the
+  package that does not remove these files, see the
   github version at <https://github.com/ericdunipace/RcppCGAL>.
 License: GPL (>=3)
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
