@@ -1,2 +1,17 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^deprecated
+^cran-comments\.md$
+^inst/include/CGAL/Algebraic_kernel_for_circles/*
+^inst/include/CGAL/Algebraic_kernel_for_spheres/*
+^inst/include/CGAL/NewKernel_d/Vector/determinant_of_iterator_to_points_from_iterator_to_vectors.h
+^inst/include/CGAL/Polygon_mesh_processing/internal/*
+^inst/include/CGAL/Point_set_processing_3/internal/*
+^inst/include/CGAL/Set_movable_separability_2/Single_mold_translational_casting/is_pullout_direction.h
+^inst/include/CGAL/Set_movable_separability_2/Single_mold_translational_casting/pullout_directions.h
+^inst/include/CGAL/Segment_Delaunay_graph_Linf_2/Segment_Delaunay_graph_Linf_hierarchy_2_impl.h
+^inst/include/CGAL/Shape_detection/Region_growing/*
+^inst/include/CGAL/internal/Static_filters/Periodic_3_power_side_of_oriented_power_sphere_3.h
+^inst/include/CGAL/Surface_mesh_simplification/Policies/*
+^inst/include/CGAL/internal/Mesh_3/Boundary_of_subdomain_of_complex_3_in_triangulation_3_to_off.h
+^inst/include/CGAL/internal/Static_filters/Periodic_3_power_side_of_oriented_power_sphere_3.h
