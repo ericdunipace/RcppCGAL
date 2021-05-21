@@ -8,3 +8,4 @@ src/*.so
 src/*.dll
 deprecated
 cran-comments.md
+inst/AUTHORS
