@@ -3,9 +3,5 @@
 #' @return prints the CGAL version of the package
 #' @export
 cgal_version <- function() {
-  pkg_path = dirname(system.file(".", package = "RcppCGAL"))
-  buildnumFile <- file.path(pkg_path, "VERSION")
-  version <- readLines(buildnumFile)
-  
-  cat(paste0("CGAL version ",version))
+  message(paste0("If the package autodownloaded the header files, this is CGAL version 5.3.1"))
 }
