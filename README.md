@@ -1,3 +1,6 @@
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/ericdunipace/RcppCGAL/workflows/R-CMD-check/badge.svg)](https://github.com/ericdunipace/RcppCGAL/actions)
+<!-- badges: end -->
 ## RcppCGAL: CGAL Headers for R
 
 
