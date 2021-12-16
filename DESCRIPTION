@@ -20,6 +20,7 @@ Description: Creates a header only package to link to the CGAL
   for the CGAL software. 
   See <https://www.cgal.org/license.html> for more details.
 License: GPL (>=3)
+Imports: utils
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
 RoxygenNote: 7.1.1
