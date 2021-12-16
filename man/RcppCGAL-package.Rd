@@ -14,12 +14,7 @@ Creates a header only package to link to the CGAL
   package, which returns the current version of the CGAL library 
   included. For more information about how to use the header files, 
   see the CGAL documentation at <https://www.cgal.org>. Currently 
-  includes CGAL 5.3.1 stable release. Note: This software is GPL3+
-  but the CGAL header files are dual licensed.
-  The CGAL group requests that if you are using CGAL for
-  a commercial purpose, that you obtain a commercial license
-  for the CGAL software. 
-  See <https://www.cgal.org/license.html> for more details.
+  includes the CGAL 5.3.1 stable release.
 }
 \examples{
 \dontrun{
@@ -29,7 +24,7 @@ Creates a header only package to link to the CGAL
 include <Rcpp.h>}
 }
 \references{
-The CGAL Project. (2021). {CGAL} User and Reference Manual (5.2.1). Retrieved from https://doc.cgal.org/5.2.1/Manual/packages.html
+The CGAL Project. (2021). {CGAL} User and Reference Manual (5.2.1). Retrieved from https://doc.cgal.org/5.3.1/Manual/packages.html
 }
 \seealso{
 Useful links:
