@@ -13,7 +13,7 @@ This package allows for the easy linking of the CGAL header files into R package
 Much like the `BH` package, the `RcppCGAL` package can be used via the `LinkingTo:` field in the `DESCRIPTION` file in R packages. This will allow access to the header files in C/C++ source code.
 
 ### Version
-This package currently includes the version 5.2.1 stable release of CGAL.
+This package currently includes the version 5.3.1 stable release of CGAL.
 
 ### Installation
 To install this package, you can download or clone the git repository. Then you can install using devtools
@@ -23,6 +23,15 @@ devtools::install("RcppCGAL")
 
 Alternatively, you can install from github directly using the
 `devtools::install_github` function.
+
+By default, the package will try to download the header files from the
+CGAL git repository. If you already have one downloaded that you prefer to use,
+you can specify the environmental variable `CGAL_DIR` and `R` will use that
+instead:
+```R
+Sys.setenv("CGAL_DIR" = "path/to/CGAL/include")
+```
+Note: this must be done *before* the package is loaded by `R`.
 
 ### Example
 We provide an example of how to perform Hilbert sorting using an R matrix:

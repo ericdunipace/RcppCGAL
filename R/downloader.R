@@ -1,4 +1,3 @@
-
 #' Downloads CGAL files
 #'
 #' @param overwrite TRUE FALSE, default is FALSE
@@ -11,6 +10,7 @@
 .cgal.downloader <- function(overwrite = FALSE) {
   old_options <- options(timeout = getOption("timeout"))
   on.exit(options(old_options))
+  options(timeout = 1e4)
   if(!is.logical(overwrite) || length(overwrite) != 1L || is.na(overwrite)) stop("`overwrite` must be TRUE or FALSE")
   
   own_cgal <- Sys.getenv("CGAL_DIR")
@@ -18,7 +18,7 @@
   
   pkg_path = dirname(system.file(".", package = "RcppCGAL"))
   
-  # Check for jar file in 'include' directory.
+  # Check for CGAL file in 'include' directory.
   if (! overwrite) {
     possible_file <- file.path(pkg_path, "include", "CGAL")
     if (file.exists(possible_file)) {
@@ -26,7 +26,7 @@
     }
   }
   
-  # Check for jar file in 'inst/include' directory.
+  # Check for CGAL file in 'inst/include' directory.
   if (! overwrite) {
     possible_file <- file.path(pkg_path, "inst", "include", "CGAL")
     if (file.exists(possible_file)) {
@@ -46,12 +46,12 @@
     return(own_cgal)
   }
   
-  buildnumFile <- file.path(pkg_path, "include/VERSION")
+  buildnumFile <- file.path(pkg_path, "VERSION")
   version <- readLines(buildnumFile)
   
   dest_file <- file.path(dest_folder, "CGAL_zip")
   
-  # Download if h2o.jar doesn't already exist or user specifies force overwrite
+  # Download if CGAL doesn't already exist or user specifies force overwrite
   if (nzchar(own_cgal) && is_url(own_cgal)) {
     cgal_url <- own_cgal
   } else {
@@ -63,7 +63,7 @@
   cat("Performing one-time download of CGAL from\n")
   cat("    ", cgal_url, "\n")
   utils::flush.console()
-  download.file(url = cgal_url, destfile = temp_file, mode = "wb", cacheOK = FALSE, quiet = TRUE)
+  utils::download.file(url = cgal_url, destfile = temp_file, mode = "wb", cacheOK = FALSE, quiet = TRUE)
   
   # Apply sanity checks
   if(!file.exists(temp_file))
