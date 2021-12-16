@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/internal/Triangulation_segment_traverser_3_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_3/include/CGAL/internal/Triangulation_segment_traverser_3_impl.h $
 // $Id: Triangulation_segment_traverser_3_impl.h 10a28d1 2020-11-05T11:13:26+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

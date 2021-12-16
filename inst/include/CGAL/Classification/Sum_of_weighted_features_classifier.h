@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Sum_of_weighted_features_classifier.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/Sum_of_weighted_features_classifier.h $
 // $Id: Sum_of_weighted_features_classifier.h 0e934b1 2020-08-04T13:16:13+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

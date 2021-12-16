@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Point_2.h $
-// $Id: Point_2.h 3ebe883 2020-03-01T12:50:13+01:00 Marc Glisse
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Point_2.h $
+// $Id: Point_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,7 +24,6 @@
 #include <CGAL/Kernel/Return_base_tag.h>
 #include <CGAL/representation_tags.h>
 #include <CGAL/Dimension.h>
-#include <CGAL/result_of.h>
 
 namespace CGAL {
 
@@ -93,26 +92,26 @@ public:
     swap(a.rep(), b.rep());
   }
 
-  typename cpp11::result_of<typename R::Compute_x_2(Point_2)>::type
+  decltype(auto)
   x() const
   {
     return typename R::Compute_x_2()(*this);
   }
 
-  typename cpp11::result_of<typename R::Compute_y_2(Point_2)>::type
+  decltype(auto)
   y() const
   {
     return typename R::Compute_y_2()(*this);
   }
 
-  typename cpp11::result_of<typename R::Compute_x_2(Point_2)>::type
+  decltype(auto)
   cartesian(int i) const
   {
     CGAL_kernel_precondition( (i == 0) || (i == 1) );
     return (i==0) ?  x() : y();
   }
 
-  typename cpp11::result_of<typename R::Compute_x_2(Point_2)>::type
+  decltype(auto)
   operator[](int i) const
   {
       return cartesian(i);
@@ -129,19 +128,19 @@ public:
   }
 
 
-  typename cpp11::result_of<typename R::Compute_hx_2(Point_2)>::type
+  decltype(auto)
   hx() const
   {
     return typename R::Compute_hx_2()(*this);
   }
 
-  typename cpp11::result_of<typename R::Compute_hy_2(Point_2)>::type
+  decltype(auto)
   hy() const
   {
     return typename R::Compute_hy_2()(*this);
   }
 
-  typename cpp11::result_of<typename R::Compute_hw_2(Point_2)>::type
+  decltype(auto)
   hw() const
   {
     return typename R::Compute_hw_2()(*this);
@@ -152,7 +151,7 @@ public:
       return 2;
   }
 
-  typename cpp11::result_of<typename R::Compute_hx_2(Point_2)>::type
+  decltype(auto)
   homogeneous(int i) const
   {
     CGAL_kernel_precondition( (i >= 0) || (i <= 2) );
@@ -191,7 +190,7 @@ template <class R >
 std::ostream&
 insert(std::ostream& os, const Point_2<R>& p,const Cartesian_tag&)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         return os << p.x() << ' ' << p.y();
     case IO::BINARY :
@@ -207,7 +206,7 @@ template <class R >
 std::ostream&
 insert(std::ostream& os, const Point_2<R>& p,const Homogeneous_tag&)
 {
-  switch(get_mode(os))
+  switch(IO::get_mode(os))
   {
     case IO::ASCII :
         return os << p.hx() << ' ' << p.hy() << ' ' << p.hw();
@@ -236,9 +235,9 @@ std::istream&
 extract(std::istream& is, Point_2<R>& p, const Cartesian_tag&)
 {
   typename R::FT x(0), y(0);
-    switch(get_mode(is)) {
+    switch(IO::get_mode(is)) {
     case IO::ASCII :
-        is >> iformat(x) >> iformat(y);
+        is >> IO::iformat(x) >> IO::iformat(y);
         break;
     case IO::BINARY :
         read(is, x);
@@ -261,7 +260,7 @@ std::istream&
 extract(std::istream& is, Point_2<R>& p, const Homogeneous_tag&)
 {
   typename R::RT hx, hy, hw;
-  switch(get_mode(is))
+  switch(IO::get_mode(is))
   {
     case IO::ASCII :
         is >> hx >> hy >> hw;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_3/include/CGAL/Nef_3/Binary_operation.h $
-// $Id: Binary_operation.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/Binary_operation.h $
+// $Id: Binary_operation.h 11bc0e4 2021-06-25T09:29:03+02:00 Sebastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -191,9 +191,8 @@ class Binary_operation : public CGAL::SNC_decorator<Map> {
       Halffacet_handle f;
 
       Point_3 p(normalized(ip));
-
+#ifdef CGAL_USE_TRACE
       CGAL_NEF_TRACEN("Intersection_call_back: intersection reported on " << p << " (normalized: " << normalized(p) << " )");
-#ifdef CGAL_NEF_DEBUG
       CGAL_NEF_TRACEN("edge 0 has source " << e0->source()->point() << " and direction " << e0->vector());
       if( CGAL::assign( e, o1)) {
         CGAL_NEF_TRACEN("edge 1 has source " << e->source()->point() << " and direction " << e->vector());
@@ -313,12 +312,6 @@ class Binary_operation : public CGAL::SNC_decorator<Map> {
     //    CGAL_NEF_SETDTHREAD(19*43*131);
     CGAL_NEF_TRACEN("=> binary operation");
 
-#ifdef CGAL_NEF3_FACET_WITH_BOX
-    SNC_constructor C1(snc1);
-    C1.create_box();
-    SNC_constructor C2(snc2);
-    C2.create_box();
-#endif
 
     CGAL_NEF_TRACEN("\nnumber of vertices (so far...) = "
                     << this->sncp()->number_of_vertices());

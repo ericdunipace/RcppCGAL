@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Uncertain.h $
-// $Id: Uncertain.h 5c8df66 2020-09-25T14:25:14+02:00 Jane Tournois
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Uncertain.h $
+// $Id: Uncertain.h 68dc09b 2021-04-10T07:10:29+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sylvain Pion
@@ -348,6 +348,7 @@ Uncertain<bool> operator&(Uncertain<bool> a, bool b)
 #endif
 
 #define CGAL_AND_3(X, Y, Z)  CGAL_AND(X, CGAL_AND(Y, Z))
+#define CGAL_AND_6(A, B, C, D, E, F)  CGAL_AND(CGAL_AND_3(A, B, C), CGAL_AND_3(D, E,F))
 #define CGAL_OR_3(X, Y, Z)   CGAL_OR(X, CGAL_OR(Y, Z))
 
 

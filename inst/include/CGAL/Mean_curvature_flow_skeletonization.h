@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_skeletonization/include/CGAL/Mean_curvature_flow_skeletonization.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_skeletonization/include/CGAL/Mean_curvature_flow_skeletonization.h $
 // $Id: Mean_curvature_flow_skeletonization.h 7dbb8f1 2020-10-23T15:57:18+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/AABB_traversal_traits_with_transformation.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/AABB_traversal_traits_with_transformation.h $
 // $Id: AABB_traversal_traits_with_transformation.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

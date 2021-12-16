@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/AABB_tree/include/CGAL/internal/AABB_tree/AABB_node.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/AABB_tree/include/CGAL/internal/AABB_tree/AABB_node.h $
 // $Id: AABB_node.h 7938060 2020-09-22T15:47:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

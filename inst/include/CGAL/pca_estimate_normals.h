@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Point_set_processing_3/include/CGAL/pca_estimate_normals.h $
-// $Id: pca_estimate_normals.h c253679 2020-04-18T16:27:58+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/pca_estimate_normals.h $
+// $Id: pca_estimate_normals.h 9939011 2020-06-21T15:54:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret
@@ -96,7 +96,7 @@ pca_estimate_normal(const typename NeighborQuery::Kernel::Point_3& query, ///< p
    \tparam PointRange is a model of `Range`. The value type of
    its iterator is the key type of the named parameter `point_map`.
 
-   \param points input point range.
+   \param points input point range
    \param k number of neighbors
    \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
 

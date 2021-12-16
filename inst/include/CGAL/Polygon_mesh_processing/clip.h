@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/clip.h $
-// $Id: clip.h 3c3dad3 2021-03-03T16:56:31+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/clip.h $
+// $Id: clip.h 0e3b738 2021-10-07T14:26:14+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -45,9 +45,7 @@
 
 namespace CGAL{
 namespace Polygon_mesh_processing {
-
-namespace internal
-{
+namespace internal {
 
 template <class Plane_3,
           class TriangleMesh,
@@ -316,6 +314,7 @@ void split_along_edges(TriangleMesh& tm,
   std::set<halfedge_descriptor> extra_border_hedges;
   for(std::size_t k=0; k<nb_shared_edges; ++k)
   {
+    if (is_border(shared_edges[k], tm)) continue;
     for(halfedge_descriptor h : halfedges_around_target(target(shared_edges[k], tm), tm))
       if(is_border(h, tm))
         extra_border_hedges.insert(h);
@@ -334,6 +333,7 @@ void split_along_edges(TriangleMesh& tm,
   // now duplicate the edge and set its pointers
   for(std::size_t k=0; k<nb_shared_edges; ++k)
   {
+    if (is_border(shared_edges[k], tm)) continue;
     halfedge_descriptor h    = halfedge(shared_edges[k], tm);
     face_descriptor fh = face(h, tm);
     //add edge
@@ -444,8 +444,8 @@ generic_clip_impl(
   Vpm vpm1 = choose_parameter(get_parameter(np1, internal_np::vertex_point),
                               get_property_map(boost::vertex_point, tm1));
 
-  Vpm vpm2 = choose_parameter(get_parameter(np2, internal_np::vertex_point),
-                              get_property_map(boost::vertex_point, tm2));
+  Vpm2 vpm2 = choose_parameter(get_parameter(np2, internal_np::vertex_point),
+                               get_property_map(boost::vertex_point, tm2));
 
   if (&tm1==&tm2)
   {
@@ -862,6 +862,8 @@ bool clip(TriangleMesh& tm,
   *                           will be thrown if at least one self-intersection is found.}
   *     \cgalParamType{Boolean}
   *     \cgalParamDefault{`false`}
+  *   \cgalParamNEnd
+  *
   *   \cgalParamNBegin{do_not_modify}
   *     \cgalParamDescription{(`np_s` only) if `true`, `splitter` will not be modified.}
   *     \cgalParamType{Boolean}

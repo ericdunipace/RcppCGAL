@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/oriented_bounding_box.h $
-// $Id: oriented_bounding_box.h d567a0d 2020-07-16T09:52:32+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/oriented_bounding_box.h $
+// $Id: oriented_bounding_box.h 2b18b8d 2020-06-25T15:17:44+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -432,8 +432,6 @@ void oriented_bounding_box(const PolygonMesh& pmesh,
 #endif
                            )
 {
-  namespace PMP = CGAL::Polygon_mesh_processing;
-
   using CGAL::parameters::choose_parameter;
   using CGAL::parameters::get_parameter;
 

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Spatial_lock_grid_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Spatial_lock_grid_3.h $
 // $Id: Spatial_lock_grid_3.h ea0386c 2021-01-06T11:36:32+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

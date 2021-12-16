@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Alpha_shapes_2/include/CGAL/Alpha_shape_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Alpha_shapes_2/include/CGAL/Alpha_shape_2.h $
 // $Id: Alpha_shape_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // Author(s)     : Tran Kai Frank DA
 //                 Andreas Fabri <Andreas.Fabri@geometryfactory.com>

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Cartesian_kernel/include/CGAL/Cartesian/Circle_3.h $
-// $Id: Circle_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Cartesian_kernel/include/CGAL/Cartesian/Circle_3.h $
+// $Id: Circle_3.h fe5f655 2021-03-29T15:23:24+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Pedro Machado, Sebastien Loriot
@@ -17,6 +17,7 @@
 #define CGAL_CARTESIAN_CIRCLEC3_H
 
 #include <CGAL/Interval_nt.h>
+#include "boost/tuple/tuple.hpp"
 
 namespace CGAL {
 
@@ -29,13 +30,9 @@ class CircleC3 {
   typedef typename R_::Direction_3              Direction_3;
   typedef typename R_::FT                       FT;
 
-  struct Rep
-  {
-    Sphere_3 first;
-    Plane_3 second;
-    Rep () : first(), second() { }
-    Rep (const Sphere_3& s, const Plane_3& p) : first(s), second(p) { }
-  };
+  //using a boost::tuple because std::pair and tuple cannot work with incomplete types.
+  typedef boost::tuple<Sphere_3, Plane_3> Rep;
+
 
   typedef typename R_::template Handle<Rep>::type  Base;
   Base base;
@@ -125,7 +122,7 @@ public:
 
   const Plane_3& supporting_plane() const
   {
-    return get_pointee_or_identity(base).second;
+    return boost::get<1>(get_pointee_or_identity(base));
   }
 
   const Sphere_3& supporting_sphere() const
@@ -145,7 +142,7 @@ public:
 
   const Sphere_3& diametral_sphere() const
   {
-    return get_pointee_or_identity(base).first;
+    return boost::get<0>(get_pointee_or_identity(base));
   }
 
   double approximate_area() const

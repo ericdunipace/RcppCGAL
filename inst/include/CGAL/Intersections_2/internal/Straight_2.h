@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_2/include/CGAL/Intersections_2/internal/Straight_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Intersections_2/include/CGAL/Intersections_2/internal/Straight_2.h $
 // $Id: Straight_2.h 2549b58 2020-09-30T09:58:12+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

@@ -3,15 +3,17 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Hyperbolic_triangulation_2/include/CGAL/internal/Hyperbolic_Delaunay_triangulation_traits_2_functions.h $
-// $Id: Hyperbolic_Delaunay_triangulation_traits_2_functions.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Hyperbolic_triangulation_2/include/CGAL/internal/Hyperbolic_Delaunay_triangulation_traits_2_functions.h $
+// $Id: Hyperbolic_Delaunay_triangulation_traits_2_functions.h 275d73e 2020-06-23T19:02:19+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mikhail Bogdanov
 //                 Monique Teillaud <Monique.Teillaud@inria.fr>
 
-#ifndef CGAL_HYPERBOLIC_DELAUNAY_TRIANGULATION_TRAITS_2_FUNCTIONS
-#define CGAL_HYPERBOLIC_DELAUNAY_TRIANGULATION_TRAITS_2_FUNCTIONS
+#ifndef CGAL_HYPERBOLIC_DELAUNAY_TRIANGULATION_TRAITS_2_FUNCTIONS_H
+#define CGAL_HYPERBOLIC_DELAUNAY_TRIANGULATION_TRAITS_2_FUNCTIONS_H
+
+#include <CGAL/license/Hyperbolic_triangulation_2.h>
 
 #include <CGAL/Origin.h>
 #include <CGAL/enum.h>
@@ -295,4 +297,4 @@ private:
 } // end namespace CGAL
 
 
-#endif // CGAL_HYPERBOLIC_DELAUNAY_TRIANGULATION_TRAITS_2_FUNCTIONS
+#endif // CGAL_HYPERBOLIC_DELAUNAY_TRIANGULATION_TRAITS_2_FUNCTIONS_H

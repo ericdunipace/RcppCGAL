@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Line_3.h $
-// $Id: Line_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Line_3.h $
+// $Id: Line_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -138,7 +138,7 @@ template < class R >
 std::ostream &
 operator<<(std::ostream &os, const Line_3<R> &l)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         return os << l.point(0) << ' ' << l.point(1);
     case IO::BINARY :

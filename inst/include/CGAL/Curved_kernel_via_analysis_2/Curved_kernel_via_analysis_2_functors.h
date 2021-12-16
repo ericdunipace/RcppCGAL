@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_functors.h $
-// $Id: Curved_kernel_via_analysis_2_functors.h 436ba5f 2020-06-30T21:23:16+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_functors.h $
+// $Id: Curved_kernel_via_analysis_2_functors.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -231,7 +231,7 @@ public:
         // avoid compiler warning
         (void)arc;
 
-        //CGAL::set_pretty_mode(std::cerr);
+        //CGAL::IO::set_pretty_mode(std::cerr);
         CERR("Construct_pt_on_arc: " << CGAL::to_double(x) << ", " << arcno <<
              ", " << c.id() <<  "\narc = " << arc << "\n");
 

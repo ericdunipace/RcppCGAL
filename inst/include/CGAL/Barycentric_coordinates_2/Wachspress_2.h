@@ -3,7 +3,7 @@
 //
 // This file is a part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Wachspress_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Wachspress_2.h $
 // $Id: Wachspress_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

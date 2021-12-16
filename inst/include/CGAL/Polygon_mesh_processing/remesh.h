@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/remesh.h $
-// $Id: remesh.h 10ba347 2020-10-02T15:20:53+02:00 Sebastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/remesh.h $
+// $Id: remesh.h ec7a211 2021-06-22T14:22:32+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -124,7 +124,7 @@ namespace Polygon_mesh_processing {
 *   \cgalParamNBegin{face_patch_map}
 *     \cgalParamDescription{a property map with the patch id's associated to the faces of `faces`}
 *     \cgalParamType{a class model of `ReadWritePropertyMap` with `boost::graph_traits<PolygonMesh>::%face_descriptor`
-*                    as key type and the desired property, model of `CopyConstructible` as value type.}
+*                    as key type and the desired property, model of `CopyConstructible` and `LessThanComparable` as value type.}
 *     \cgalParamDefault{a default property map where each face is associated with the ID of
 *                       the connected component it belongs to. Connected components are
 *                       computed with respect to the constrained edges listed in the property map
@@ -278,6 +278,9 @@ void isotropic_remeshing(const FaceRange& faces
   unsigned int nb_iterations = choose_parameter(get_parameter(np, internal_np::number_of_iterations), 1);
   bool smoothing_1d = choose_parameter(get_parameter(np, internal_np::relax_constraints), false);
   unsigned int nb_laplacian = choose_parameter(get_parameter(np, internal_np::number_of_relaxation_steps), 1);
+  bool do_collapse = choose_parameter(get_parameter(np, internal_np::do_collapse), true);
+  bool do_split = choose_parameter(get_parameter(np, internal_np::do_split), true);
+  bool do_flip = choose_parameter(get_parameter(np, internal_np::do_flip), true);
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
   std::cout << std::endl;
@@ -293,10 +296,13 @@ void isotropic_remeshing(const FaceRange& faces
 #endif
     if (target_edge_length>0)
     {
-      remesher.split_long_edges(high);
-      remesher.collapse_short_edges(low, high, collapse_constraints);
+      if(do_split)
+        remesher.split_long_edges(high);
+      if(do_collapse)
+        remesher.collapse_short_edges(low, high, collapse_constraints);
     }
-    remesher.equalize_valences();
+    if(do_flip)
+      remesher.flip_edges_for_valence_and_shape();
     remesher.tangential_relaxation(smoothing_1d, nb_laplacian);
     if ( choose_parameter(get_parameter(np, internal_np::do_project), true) )
       remesher.project_to_surface(get_parameter(np, internal_np::projection_functor));

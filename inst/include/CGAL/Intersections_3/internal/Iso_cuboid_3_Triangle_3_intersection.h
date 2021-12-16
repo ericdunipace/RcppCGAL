@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/internal/Iso_cuboid_3_Triangle_3_intersection.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Intersections_3/include/CGAL/Intersections_3/internal/Iso_cuboid_3_Triangle_3_intersection.h $
 // $Id: Iso_cuboid_3_Triangle_3_intersection.h bbe02d9 2019-10-29T15:22:49+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

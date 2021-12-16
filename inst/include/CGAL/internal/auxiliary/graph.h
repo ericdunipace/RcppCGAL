@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_segmentation/include/CGAL/internal/auxiliary/graph.h $
-// $Id: graph.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_segmentation/include/CGAL/internal/auxiliary/graph.h $
+// $Id: graph.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // Re-licensed for CGAL distribution to:
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Original license is:
@@ -242,7 +242,7 @@ void main()
 #  endif // CGAL_LICENSE_WARNING
 
 #  ifdef CGAL_LICENSE_ERROR
-#    error "You use the the MaxFlow package of Vladimir Kolmogorov under the terms of the GPLv2+.\
+#    error "You use the MaxFlow package of Vladimir Kolmogorov under the terms of the GPLv2+.\
 You get this error, as you defined CGAL_LICENSE_ERROR."
 #  endif // CGAL_LICENSE_ERROR
 

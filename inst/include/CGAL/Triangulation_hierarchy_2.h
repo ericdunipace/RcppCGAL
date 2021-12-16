@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_2/include/CGAL/Triangulation_hierarchy_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_2/include/CGAL/Triangulation_hierarchy_2.h $
 // $Id: Triangulation_hierarchy_2.h b8bb3ff 2021-02-04T09:21:36+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Geomview/include/CGAL/IO/Geomview_stream_impl.h $
-// $Id: Geomview_stream_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Geomview/include/CGAL/IO/Geomview_stream_impl.h $
+// $Id: Geomview_stream_impl.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -43,7 +43,7 @@ Geomview_stream::Geomview_stream(const Bbox_3 &bbox,
   : bb(bbox), vertex_color(black()), edge_color(black()), face_color(black()),
       wired_flag(false), echo_flag(true), raw_flag(false),
       trace_flag(false), binary_flag(false),
-      line_width(1)
+      line_width(1),prec(6)
 {
     setup_geomview(machine, login);
     frame(bbox);
@@ -197,7 +197,7 @@ Geomview_stream::pickplane(const Bbox_3 &bbox)
 
     // close the text bracket
             << "}) (pickable pickplane no)";
-    set_ascii_mode(bin_bak);
+    IO::set_ascii_mode(bin_bak);
 }
 
 CGAL_INLINE_FUNCTION
@@ -242,6 +242,7 @@ Geomview_stream::operator<<(int i)
     } else {
         // transform the int in a character sequence and put whitespace around
         std::ostringstream str;
+        str.precision(prec);
         str << i << ' ' << std::ends;
         *this << str.str().c_str();
     }
@@ -264,6 +265,7 @@ Geomview_stream::operator<<(unsigned int i)
     } else {
         // transform the int in a character sequence and put whitespace around
         std::ostringstream str;
+        str.precision(prec);
         str << i << ' ' << std::ends;
         *this << str.str().c_str();
     }
@@ -299,6 +301,7 @@ Geomview_stream::operator<<(double d)
     } else {
         // 'copy' the float in a string and append a blank
         std::ostringstream str;
+        str.precision(prec);
         str << f << ' ' << std::ends;
         *this << str.str().c_str();
     }

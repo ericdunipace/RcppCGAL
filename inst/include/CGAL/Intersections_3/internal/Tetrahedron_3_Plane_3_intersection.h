@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/internal/Tetrahedron_3_Plane_3_intersection.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Intersections_3/include/CGAL/Intersections_3/internal/Tetrahedron_3_Plane_3_intersection.h $
 // $Id: Tetrahedron_3_Plane_3_intersection.h 4bc161a 2021-02-12T09:42:52+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

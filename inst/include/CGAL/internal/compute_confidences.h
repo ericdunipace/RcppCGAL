@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygonal_surface_reconstruction/include/CGAL/internal/compute_confidences.h $
-// $Id: compute_confidences.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygonal_surface_reconstruction/include/CGAL/internal/compute_confidences.h $
+// $Id: compute_confidences.h 42c9d55 2021-08-26T12:24:19+08:00 shuangyuan
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan
@@ -141,8 +141,10 @@ namespace internal {
                                 // The last point in the polygon
                                 if (!plg.is_empty()) {
                                         const Point2& r = plg[plg.size() - 1];
-                                        if (CGAL::squared_distance(q, r) < CGAL::snap_squared_distance_threshold<FT>())
+                                        if (CGAL::squared_distance(q, r) < CGAL::snap_squared_distance_threshold<FT>()) {
+                                                ++cir;
                                                 continue;
+                                        }
                                 }
                                 plg.push_back(q);
 

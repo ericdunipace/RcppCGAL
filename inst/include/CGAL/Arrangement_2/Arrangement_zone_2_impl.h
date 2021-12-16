@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arrangement_zone_2_impl.h $
-// $Id: Arrangement_zone_2_impl.h e0c8048 2020-07-02T14:08:08+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arrangement_zone_2_impl.h $
+// $Id: Arrangement_zone_2_impl.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1513,7 +1513,7 @@ bool Arrangement_zone_2<Arrangement, ZoneVisitor>::_zone_in_overlap()
     // In this case m_overlap_cv has a finite right endpoint. In this case,
     // if the right vertex of m_intersect_he is associated with a finite point,
     // we check whether it is equal to cv_right_pt. Otherwise, we know that
-    // m_intersect_he extends to the the right of m_overlap_cv, and there is no
+    // m_intersect_he extends to the right of m_overlap_cv, and there is no
     // vertex currently associated with m_overlap_cv's right endpoint.
     if (! he_right_v->is_at_open_boundary() &&
         equal(cv_right_pt, he_right_v->point()))

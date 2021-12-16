@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/intersection_callbacks.h $
-// $Id: intersection_callbacks.h aea7a5f 2020-10-20T13:36:07+02:00 Sebastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/intersection_callbacks.h $
+// $Id: intersection_callbacks.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,7 +21,7 @@
 #include <CGAL/Polygon_mesh_processing/self_intersections.h>
 
 #include <boost/graph/graph_traits.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <set>
 
 namespace CGAL {
@@ -324,23 +324,41 @@ class Callback_with_self_intersection_report
   : public Base
 {
   typedef typename Base::face_descriptor face_descriptor;
+  typedef typename Base::halfedge_descriptor halfedge_descriptor;
   typedef typename Base::Box Box;
-  boost::shared_ptr< std::set<face_descriptor> > faces_with_bbox_involved_in_intersections;
+  std::set<face_descriptor>* tmf_collected_faces_ptr;
+  std::set<face_descriptor>* tme_collected_faces_ptr;
 public:
-  Callback_with_self_intersection_report(const Base& base)
-  : Base(base), faces_with_bbox_involved_in_intersections(new std::set<face_descriptor>())
+  Callback_with_self_intersection_report(const Base& base,
+                                         std::set<face_descriptor>& tmf_collected_faces,
+                                         std::set<face_descriptor>& tme_collected_faces)
+  : Base(base),
+    tmf_collected_faces_ptr(&tmf_collected_faces),
+    tme_collected_faces_ptr(&tme_collected_faces)
   {}
 
   void operator()( const Box* fb, const Box* eb) {
-    faces_with_bbox_involved_in_intersections->insert( face(fb->info(), this->tm_faces) );
+    halfedge_descriptor h = eb->info();
+    if (!is_border(h, this->tm_edges))
+      tme_collected_faces_ptr->insert( face(h, this->tm_edges) );
+    h = opposite(h, this->tm_edges);
+    if (!is_border(h, this->tm_edges))
+      tme_collected_faces_ptr->insert( face(h, this->tm_edges) );
+    tmf_collected_faces_ptr->insert( face(fb->info(), this->tm_faces) );
     Base::operator()(fb, eb);
   }
   bool self_intersections_found()
   {
-    return Polygon_mesh_processing::does_self_intersect(
-      *faces_with_bbox_involved_in_intersections,
-      this->tm_faces,
-      Polygon_mesh_processing::parameters::vertex_point_map(this->vpmap_tmf));
+    return
+      Polygon_mesh_processing::does_self_intersect(
+        *tmf_collected_faces_ptr,
+        this->tm_faces,
+        Polygon_mesh_processing::parameters::vertex_point_map(this->vpmap_tmf))
+    ||
+      Polygon_mesh_processing::does_self_intersect(
+        *tme_collected_faces_ptr,
+        this->tm_edges,
+        Polygon_mesh_processing::parameters::vertex_point_map(this->vpmap_tme));
   }
 };
 

@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_cell_base_3.h $
-// $Id: Mesh_cell_base_3.h 4dda7b6 2020-05-27T15:53:05+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_cell_base_3.h $
+// $Id: Mesh_cell_base_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -248,7 +248,7 @@ operator>>(std::istream &is,
            Mesh_cell_base_3<GT, MT, Cb> &c)
 {
   typename Mesh_cell_base_3<GT, MT, Cb>::Subdomain_index index;
-  if(is_ascii(is))
+  if(IO::is_ascii(is))
     is >> index;
   else
     read(is, index);
@@ -263,7 +263,7 @@ std::ostream&
 operator<<(std::ostream &os,
            const Mesh_cell_base_3<GT, MT, Cb> &c)
 {
-  if(is_ascii(os))
+  if(IO::is_ascii(os))
      os << c.subdomain_index();
   else
     write(os, c.subdomain_index());

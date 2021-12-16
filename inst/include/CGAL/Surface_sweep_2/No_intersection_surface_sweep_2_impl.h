@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_intersection_surface_sweep_2_impl.h $
-// $Id: No_intersection_surface_sweep_2_impl.h 21c48c5 2020-11-04T20:46:18+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_intersection_surface_sweep_2_impl.h $
+// $Id: No_intersection_surface_sweep_2_impl.h b732878 2021-07-01T08:10:59+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baruch Zukerman  <baruchzu@post.tau.ac.il>
@@ -33,6 +33,7 @@ No_intersection_surface_sweep_2<Vis>::
 No_intersection_surface_sweep_2(Visitor* visitor) :
   m_traits(new Traits_adaptor_2()),
   m_traitsOwner(true),
+  m_currentEvent(nullptr),
   m_statusLineCurveLess(m_traits, &m_currentEvent),
   m_queueEventLess(m_traits),
   m_queue(new Event_queue(m_queueEventLess)),
@@ -54,6 +55,7 @@ No_intersection_surface_sweep_2<Vis>::
 No_intersection_surface_sweep_2(const Gt2* traits, Visitor* visitor) :
   m_traits(static_cast<const Traits_adaptor_2*>(traits)),
   m_traitsOwner(false),
+  m_currentEvent(nullptr),
   m_statusLineCurveLess(m_traits, &m_currentEvent),
   m_queueEventLess(m_traits),
   m_queue(new Event_queue(m_queueEventLess)),

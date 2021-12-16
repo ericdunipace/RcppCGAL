@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Refine_cells_3.h $
-// $Id: Refine_cells_3.h 6fe18d8 2021-01-20T15:32:23+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Refine_cells_3.h $
+// $Id: Refine_cells_3.h 59a0da4 2021-05-19T17:23:53+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau, Stéphane Tayeb
@@ -26,7 +26,6 @@
   #include <tbb/blocked_range.h>
   #include <tbb/parallel_for.h>
 #endif
-#include <CGAL/atomic.h>
 
 #include <CGAL/Meshes/Filtered_deque_container.h>
 #include <CGAL/Meshes/Filtered_multimap_container.h>
@@ -41,7 +40,7 @@
 #include <boost/mpl/if.hpp>
 #include <boost/type_traits/is_convertible.hpp>
 #include <sstream>
-
+#include <atomic>
 
 namespace CGAL {
 
@@ -319,7 +318,7 @@ public:
                  C3T3& c3t3,
                  std::size_t maximal_number_of_vertices
 #ifndef CGAL_NO_ATOMIC
-                , CGAL::cpp11::atomic<bool>* stop_ptr
+                , std::atomic<bool>* stop_ptr
 #endif
                 );
   // For parallel
@@ -332,7 +331,7 @@ public:
                  WorksharingDataStructureType *worksharing_ds,
                  std::size_t maximal_number_of_vertices
 #ifndef CGAL_NO_ATOMIC
-                , CGAL::cpp11::atomic<bool>* stop_ptr
+                , std::atomic<bool>* stop_ptr
 #endif
                 );
 
@@ -372,7 +371,7 @@ public:
   {
 #ifndef CGAL_NO_ATOMIC
     if(m_stop_ptr != 0 &&
-       m_stop_ptr->load(CGAL::cpp11::memory_order_acquire) == true)
+       m_stop_ptr->load(std::memory_order_acquire) == true)
     {
       return true;
     }
@@ -573,7 +572,7 @@ private:
 
 #ifndef CGAL_NO_ATOMIC
   /// Pointer to the atomic Boolean that can stop the process
-  CGAL::cpp11::atomic<bool>* const m_stop_ptr;
+  std::atomic<bool>* const m_stop_ptr;
 #endif
 private:
   // Disabled copy constructor
@@ -595,7 +594,7 @@ Refine_cells_3(Tr& triangulation,
                C3T3& c3t3,
                std::size_t maximal_number_of_vertices
 #ifndef CGAL_NO_ATOMIC
-               , CGAL::cpp11::atomic<bool>* stop_ptr
+               , std::atomic<bool>* stop_ptr
 #endif
                )
   : Mesher_level<Tr, Self, Cell_handle, P_,
@@ -628,7 +627,7 @@ Refine_cells_3(Tr& triangulation,
                WorksharingDataStructureType *worksharing_ds,
                std::size_t maximal_number_of_vertices
 #ifndef CGAL_NO_ATOMIC
-               , CGAL::cpp11::atomic<bool>* stop_ptr
+               , std::atomic<bool>* stop_ptr
 #endif
                )
   : Mesher_level<Tr, Self, Cell_handle, P_,

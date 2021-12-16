@@ -3,8 +3,8 @@
 //
 // This file is a part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Segment_coordinates_2.h $
-// $Id: Segment_coordinates_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Segment_coordinates_2.h $
+// $Id: Segment_coordinates_2.h 3ea0952 2020-11-29T12:39:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Dmitry Anisimov, David Bommes, Kai Hormann, and Pierre Alliez.
@@ -199,10 +199,10 @@ private:
 // Global functions
 
 /*!
-   \anchor seg_coord_global
  * \relates Segment_coordinates_2
  * This is a global function that takes both vertices of a segment and computes segment coordinates at a given query point with respect to these vertices.
 
+   \anchor seg_coord_global
 \tparam Traits must be a model of the concept `BarycentricTraits_2`.
 
 */

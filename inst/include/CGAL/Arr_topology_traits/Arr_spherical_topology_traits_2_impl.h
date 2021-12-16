@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_spherical_topology_traits_2_impl.h $
-// $Id: Arr_spherical_topology_traits_2_impl.h 3849f5e 2020-06-14T00:41:25+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_spherical_topology_traits_2_impl.h $
+// $Id: Arr_spherical_topology_traits_2_impl.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel         <efif@post.tau.ac.il>
@@ -423,7 +423,7 @@ compare_y_at_x(const Point_2& p, const Halfedge* he) const
   return m_geom_traits->compare_y_at_x_2_object()(p, he->curve());
 }
 
-/*! \brief determine whether a vertex is associated with a curve end */
+/*! \brief determines whether a vertex is associated with a curve end */
 template <typename GeomTraits, typename Dcel>
 bool Arr_spherical_topology_traits_2<GeomTraits, Dcel>::
 are_equal(const Vertex* v,
@@ -812,7 +812,7 @@ _locate_around_pole(Vertex* v,
   return nullptr;
 }
 
-/*! \brief Return the face that lies below the given vertex, which lies
+/*! \brief returns the face that lies below the given vertex, which lies
  * on the line of discontinuity.
  */
 template <typename GeomTraits, typename Dcel>

@@ -5,7 +5,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Filtered_kernel/include/CGAL/internal/Static_filters/Do_intersect_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Filtered_kernel/include/CGAL/internal/Static_filters/Do_intersect_2.h $
 // $Id: Do_intersect_2.h 5c8df66 2020-09-25T14:25:14+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

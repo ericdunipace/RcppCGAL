@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_2/include/CGAL/Triangulation_2.h $
-// $Id: Triangulation_2.h 090b82e 2020-10-02T15:08:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_2/include/CGAL/Triangulation_2.h $
+// $Id: Triangulation_2.h e3c08cf 2020-10-19T16:17:27+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Olivier Devillers, Mariette Yvinec
@@ -44,6 +44,7 @@
 #include <boost/random/variate_generator.hpp>
 #include <CGAL/boost/iterator/transform_iterator.hpp>
 #include <boost/iterator/zip_iterator.hpp>
+#include <boost/utility/result_of.hpp>
 
 #ifndef CGAL_TRIANGULATION_2_DONT_INSERT_RANGE_OF_POINTS_WITH_INFO
 #include <CGAL/internal/info_check.h>
@@ -304,8 +305,10 @@ public:
   typename boost::result_of<const Construct_point_2(const Point&)>::type
   construct_point(const Point& p) const { return geom_traits().construct_point_2_object()(p); }
 
-  const Point& point(Face_handle c, int i) const;
+
+  const Point& point(Face_handle f, int i) const;
   const Point& point(Vertex_handle v) const;
+
   Segment segment(Face_handle f, int i) const;
   Segment segment(const Edge& e) const;
   Segment segment(const Edge_circulator& ec) const;

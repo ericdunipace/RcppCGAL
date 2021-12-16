@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Concurrent_compact_container.h $
-// $Id: Concurrent_compact_container.h e0b2bc6 2020-06-23T18:49:49+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Concurrent_compact_container.h $
+// $Id: Concurrent_compact_container.h 9ad2991 2021-11-04T16:27:05+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement Jamin
@@ -31,7 +31,6 @@
 #include <CGAL/iterator.h>
 #include <CGAL/CC_safe_handle.h>
 #include <CGAL/Time_stamper.h>
-#include <CGAL/atomic.h>
 
 #include <tbb/enumerable_thread_specific.h>
 #include <tbb/queuing_mutex.h>
@@ -314,10 +313,10 @@ public:
     a.swap(b);
   }
 
-  iterator begin() { return iterator(m_first_item, 0, 0); }
+  iterator begin() { return empty()?end():iterator(m_first_item, 0, 0); }
   iterator end()   { return iterator(m_last_item, 0); }
 
-  const_iterator begin() const { return const_iterator(m_first_item, 0, 0); }
+  const_iterator begin() const { return empty()?end():const_iterator(m_first_item, 0, 0); }
   const_iterator end()   const { return const_iterator(m_last_item, 0); }
 
   reverse_iterator rbegin() { return reverse_iterator(end()); }
@@ -474,6 +473,42 @@ public:
   allocator_type get_allocator() const
   {
     return m_alloc;
+  }
+
+  // Returns the index of the iterator "cit", i.e. the number n so that
+  // operator[](n)==*cit.
+  // Complexity : O(#blocks) = O(sqrt(capacity())).
+  // This function is mostly useful for purposes of efficient debugging at
+  // higher levels.
+  size_type index(const_iterator cit) const
+  {
+    // We use the block structure to provide an efficient version :
+    // we check if the address is in the range of each block.
+
+    assert(cit != end());
+
+    const_pointer c = &*cit;
+    size_type res=0;
+
+    Mutex::scoped_lock lock(m_mutex);
+
+    for (typename All_items::const_iterator it = m_all_items.begin(),
+         itend = m_all_items.end(); it != itend; ++it) {
+      const_pointer p = it->first;
+      size_type s = it->second;
+
+      // Are we in the address range of this block (excluding first and last
+      // elements) ?
+      if ( p<c && c<(p+s-1) )
+      {
+        CGAL_assertion_msg( (c-p)+p == c, "wrong alignment of iterator");
+        return res+(c-p-1);
+      }
+
+      res += s-2;
+    }
+
+    return (size_type)-1; // cit does not belong to this compact container
   }
 
   // Returns whether the iterator "cit" is in the range [begin(), end()].

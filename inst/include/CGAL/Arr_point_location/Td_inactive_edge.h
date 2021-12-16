@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_inactive_edge.h $
-// $Id: Td_inactive_edge.h 319383c 2020-05-20T09:47:58+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_inactive_edge.h $
+// $Id: Td_inactive_edge.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)         : Oren Nechushtan <theoren@math.tau.ac.il>
@@ -22,7 +22,7 @@
 
 #include <CGAL/Arr_point_location/Trapezoidal_decomposition_2.h>
 #include <boost/variant.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 
 #ifdef CGAL_TD_DEBUG
@@ -115,14 +115,14 @@ public:
 
   public:
     //c'tors
-    Data (boost::shared_ptr<X_monotone_curve_2>& _cv, Dag_node* _p_node)
+    Data (std::shared_ptr<X_monotone_curve_2>& _cv, Dag_node* _p_node)
        : cv(_cv), p_node(_p_node) //, lb(_lb),lt(_lt),rb(_rb),rt(_rt)
     { }
 
     ~Data() { }
 
   protected:
-    boost::shared_ptr<X_monotone_curve_2> cv;
+    std::shared_ptr<X_monotone_curve_2> cv;
     Dag_node* p_node;
   };
 
@@ -148,7 +148,7 @@ public:
   }
 
   /*! Set the x_monotone_curve_2 for removed edge degenerate trapezoid. */
-  CGAL_TD_INLINE void set_curve(boost::shared_ptr<X_monotone_curve_2>& cv)
+  CGAL_TD_INLINE void set_curve(std::shared_ptr<X_monotone_curve_2>& cv)
   {
     ptr()->cv = cv;
   }
@@ -159,7 +159,7 @@ public:
   //@{
 
   /*! Constructor given Vertex & Halfedge handles. */
-  Td_inactive_edge (boost::shared_ptr<X_monotone_curve_2>& cv, Dag_node* node = nullptr)
+  Td_inactive_edge (std::shared_ptr<X_monotone_curve_2>& cv, Dag_node* node = nullptr)
   {
     PTR = new Data(cv,node);
   }

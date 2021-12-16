@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/internal/Mesh_3/Boundary_of_subdomain_of_complex_3_in_triangulation_3_to_off.h $
-// $Id: Boundary_of_subdomain_of_complex_3_in_triangulation_3_to_off.h 4dda7b6 2020-05-27T15:53:05+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/internal/Mesh_3/Boundary_of_subdomain_of_complex_3_in_triangulation_3_to_off.h $
+// $Id: Boundary_of_subdomain_of_complex_3_in_triangulation_3_to_off.h 70058db 2021-05-03T15:30:52+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau and Sebastien Loriot
@@ -14,7 +14,7 @@
 
 #include <CGAL/license/Triangulation_3.h>
 
-#include <CGAL/IO/facets_in_complex_3_to_triangle_mesh.h>
+#include <CGAL/facets_in_complex_3_to_triangle_mesh.h>
 
 namespace CGAL {
 

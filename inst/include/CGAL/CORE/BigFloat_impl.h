@@ -26,8 +26,8 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_Core/include/CGAL/CORE/BigFloat_impl.h $
- * $Id: BigFloat_impl.h bd172e5 2020-07-21T17:15:45+02:00 Laurent Rineau
+ * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_Core/include/CGAL/CORE/BigFloat_impl.h $
+ * $Id: BigFloat_impl.h 6a2958b 2021-09-15T11:36:35+02:00 Andreas Fabri
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -1078,6 +1078,7 @@ std::istream& BigFloatRep :: operator >>(std::istream& i) {
   // Chen Li, "if (c == EOF)" is unsafe since c is of char type and
   // EOF is of int tyep with a negative value -1
   if (i.eof()) {
+    delete [] str;
     i.clear(std::ios::eofbit | std::ios::failbit);
     return i;
   }

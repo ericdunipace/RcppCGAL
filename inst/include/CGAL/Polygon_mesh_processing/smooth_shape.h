@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/smooth_shape.h $
-// $Id: smooth_shape.h 10ba347 2020-10-02T15:20:53+02:00 Sebastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/smooth_shape.h $
+// $Id: smooth_shape.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -201,6 +201,7 @@ void smooth_shape(const FaceRange& faces,
   }
 }
 
+/// \cond SKIP_IN_MANUAL
 template<typename TriangleMesh, typename FaceRange>
 void smooth_shape(const FaceRange& faces,
                   TriangleMesh& tmesh,
@@ -223,6 +224,7 @@ void smooth_shape(TriangleMesh& tmesh,
 {
   smooth_shape(faces(tmesh), tmesh, time, parameters::all_default());
 }
+/// \endcond
 
 } // Polygon_mesh_processing
 } // CGAL

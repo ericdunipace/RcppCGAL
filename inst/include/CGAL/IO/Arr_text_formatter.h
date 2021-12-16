@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/IO/Arr_text_formatter.h $
-// $Id: Arr_text_formatter.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/IO/Arr_text_formatter.h $
+// $Id: Arr_text_formatter.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -120,8 +120,8 @@ public:
   void write_arrangement_begin()
   {
     CGAL_assertion(m_out != nullptr);
-    m_old_out_mode = get_mode(*m_out);
-    set_ascii_mode(*m_out);
+    m_old_out_mode = IO::get_mode(*m_out);
+    IO::set_ascii_mode(*m_out);
     _write_comment("BEGIN ARRANGEMENT");
   }
 
@@ -277,8 +277,8 @@ public:
   void read_arrangement_begin()
   {
     CGAL_assertion(m_in != nullptr);
-    m_old_in_mode = get_mode(*m_in);
-    set_ascii_mode(*m_in);
+    m_old_in_mode = IO::get_mode(*m_in);
+    IO::set_ascii_mode(*m_in);
     _skip_comments();
   }
 

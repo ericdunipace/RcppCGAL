@@ -6,15 +6,14 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/GraphicsView/include/CGAL/Qt/camera.h $
-// $Id: camera.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/GraphicsView/include/CGAL/Qt/camera.h $
+// $Id: camera.h 9cd0d45 2021-02-09T11:31:34+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 
 
 #ifndef QGLVIEWER_CAMERA_H
 #define QGLVIEWER_CAMERA_H
 #include <QMap>
-#include <QDomElement>
 #include <CGAL/Qt/vec.h>
 #include <CGAL/Qt/quaternion.h>
 #include <CGAL/export/Qt.h>
@@ -433,15 +432,6 @@ public:
   qreal flySpeed() const;
 public Q_SLOTS:
   void setFlySpeed(qreal speed);
-  //@}
-
-  /*! @name XML representation */
-  //@{
-public:
-  virtual QDomElement domElement(const QString &name,
-                                 QDomDocument &document) const;
-public Q_SLOTS:
-  virtual void initFromDOMElement(const QDomElement &element);
   //@}
 
 private Q_SLOTS:

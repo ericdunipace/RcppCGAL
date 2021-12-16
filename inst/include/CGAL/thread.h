@@ -3,14 +3,17 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/thread.h $
-// $Id: thread.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/thread.h $
+// $Id: thread.h e9b7595 2021-05-04T11:45:57+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
 
 #ifndef CGAL_THREAD_H
 #define CGAL_THREAD_H
+
+#define CGAL_DEPRECATED_HEADER "<CGAL/thread.h>"
+#define CGAL_REPLACEMENT_HEADER "<CGAL/config.h>"
 
 #include <CGAL/config.h>
 

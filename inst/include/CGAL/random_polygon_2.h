@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Generator/include/CGAL/random_polygon_2.h $
-// $Id: random_polygon_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Generator/include/CGAL/random_polygon_2.h $
+// $Id: random_polygon_2.h f243467 2021-03-29T15:24:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Susan Hert <hert@mpi-sb.mpg.de>
@@ -45,6 +45,21 @@ OutputIterator random_polygon_2(std::size_t n,  OutputIterator result,
 
    copy_n_unique(pg, n, std::back_inserter(vertices), traits);
    CGAL_assertion(!duplicate_points(vertices.begin(), vertices.end(), traits));
+
+   CGAL_precondition_code(auto d = std::distance(vertices.begin(), vertices.end());)
+   CGAL_precondition(d > 2);
+
+   CGAL_precondition_code(const Point_2& p = *(vertices.begin());)
+   CGAL_precondition_code(const Point_2& q = *(std::next(vertices.begin()));)
+   CGAL_precondition_code(auto third_it = std::next(vertices.begin(), 2);)
+   CGAL_precondition_code(bool all_collinear = true;)
+   CGAL_precondition_code(do {)
+   CGAL_precondition_code(  if(traits.orientation_2_object()(p, q, *third_it) != CGAL::COLLINEAR) {)
+   CGAL_precondition_code(    all_collinear = false;)
+   CGAL_precondition_code(    break;)
+   CGAL_precondition_code(  })
+   CGAL_precondition_code(} while(++third_it != vertices.end());)
+   CGAL_precondition(!all_collinear);
 
 #ifndef CGAL_DONT_SHUFFLE_IN_RANDOM_POLYGON_2
    CGAL::cpp98::random_shuffle(vertices.begin(), vertices.end());

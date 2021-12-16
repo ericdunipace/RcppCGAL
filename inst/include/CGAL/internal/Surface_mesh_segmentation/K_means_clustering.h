@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_segmentation/include/CGAL/internal/Surface_mesh_segmentation/K_means_clustering.h $
-// $Id: K_means_clustering.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_segmentation/include/CGAL/internal/Surface_mesh_segmentation/K_means_clustering.h $
+// $Id: K_means_clustering.h ab14acf 2021-03-23T13:14:41+01:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz
@@ -123,7 +123,7 @@ public:
       double cumulative_distance_square = 0.0;
       // distance_square holds closest distance that points have, so just test new coming center (i.e. centers.back())
       for(std::size_t j = 0; j < points.size(); ++j) {
-        double new_distance = std::pow(centers.back() - points[j], 2);
+        double new_distance = CGAL::square(centers.back() - points[j]);
         if(new_distance < distance_square[j]) {
           distance_square[j] = new_distance;
         }
@@ -422,7 +422,7 @@ private:
     double sum = 0.0;
     for(std::vector<K_means_point>::const_iterator point_it = points.begin();
         point_it != points.end(); ++point_it) {
-      sum += std::pow(centers[point_it->center_id].mean - point_it->data, 2);
+      sum += CGAL::square(centers[point_it->center_id].mean - point_it->data);
     }
     return sum;
   }

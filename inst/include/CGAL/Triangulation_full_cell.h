@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation/include/CGAL/Triangulation_full_cell.h $
-// $Id: Triangulation_full_cell.h 2d18b6e 2020-08-26T11:30:59+02:00 Marc Glisse
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation/include/CGAL/Triangulation_full_cell.h $
+// $Id: Triangulation_full_cell.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -119,7 +119,7 @@ template < typename TDS, typename Data, typename SSP >
 std::ostream &
 operator<<(std::ostream & O, const Triangulation_full_cell<TDS, Data, SSP> & s)
 {
-    /*if( is_ascii(O) )
+    /*if( IO::is_ascii(O) )
     {
         // os << '\n';
     }
@@ -132,7 +132,7 @@ template < typename TDS, typename Data, typename SSP >
 std::istream &
 operator>>(std::istream & I, Triangulation_full_cell<TDS, Data, SSP> & s)
 {
-    /*if( is_ascii(I) )
+    /*if( IO::is_ascii(I) )
     {}
     else {}*/
     I >> s.data();

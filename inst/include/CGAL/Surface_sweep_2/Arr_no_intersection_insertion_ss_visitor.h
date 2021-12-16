@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_no_intersection_insertion_ss_visitor.h $
-// $Id: Arr_no_intersection_insertion_ss_visitor.h 3849f5e 2020-06-14T00:41:25+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_no_intersection_insertion_ss_visitor.h $
+// $Id: Arr_no_intersection_insertion_ss_visitor.h 5985db1 2021-07-28T16:17:10+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -219,7 +219,7 @@ protected:
 };
 
 //-----------------------------------------------------------------------------
-// Memeber-function definitions:
+// Member-function definitions:
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------

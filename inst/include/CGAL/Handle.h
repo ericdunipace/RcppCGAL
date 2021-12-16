@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Handle.h $
-// $Id: Handle.h 8b474dd 2020-05-20T10:32:03+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Handle.h $
+// $Id: Handle.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,13 +25,17 @@ namespace CGAL {
 
 class Rep
 {
-    friend class Handle;
-  protected:
-             Rep() { count = 1; }
-    virtual ~Rep() {}
+  friend class Handle;
+protected:
+  Rep() { count = 1; }
+  Rep(int count)
+    : count(count)
+  {}
+  virtual ~Rep() {}
 
-    int      count;
+  int count;
 };
+
 
 class Handle
 {
@@ -42,13 +46,18 @@ class Handle
     Handle() noexcept
         : PTR(static_cast<Rep*>(0)) {}
 
-    // FIXME: if the precondition throws in a noexcept function, the program terminates
-    Handle(const Handle& x) noexcept
+    Handle(const Handle& x) noexcept(!(CGAL_PRECONDITIONS_ENABLED || CGAL_ASSERTIONS_ENABLED))
     {
       CGAL_precondition( x.PTR != static_cast<Rep*>(0) );
       PTR = x.PTR;
       CGAL_assume (PTR->count > 0);
       PTR->count++;
+    }
+
+    Handle(Handle&& x) noexcept
+      : PTR(x.PTR)
+    {
+      x.PTR = static_cast<Rep*>(0);
     }
 
     ~Handle()
@@ -58,13 +67,20 @@ class Handle
     }
 
     Handle&
-    operator=(const Handle& x) noexcept
+    operator=(const Handle& x) noexcept(!CGAL_PRECONDITIONS_ENABLED)
     {
       CGAL_precondition( x.PTR != static_cast<Rep*>(0) );
       x.PTR->count++;
       if ( PTR && (--PTR->count == 0))
           delete PTR;
       PTR = x.PTR;
+      return *this;
+    }
+
+    Handle&
+    operator=(Handle&& x) noexcept
+    {
+      swap(*this,x);
       return *this;
     }
 

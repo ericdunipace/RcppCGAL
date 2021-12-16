@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Mesh_3/Refine_facets_manifold_base.h $
-// $Id: Refine_facets_manifold_base.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Refine_facets_manifold_base.h $
+// $Id: Refine_facets_manifold_base.h 17ac255 2021-05-18T15:43:59+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,6 @@
 
 #include <CGAL/Mesh_facet_topology.h>
 
-#include <CGAL/atomic.h>
 #include <CGAL/utility.h>
 #include <CGAL/Time_stamper.h>
 
@@ -31,6 +30,7 @@
 
 #include <set>
 #include <vector>
+#include <atomic>
 
 namespace CGAL {
 
@@ -308,7 +308,7 @@ public:
                               int mesh_topology,
                               std::size_t maximal_number_of_vertices
 #ifndef CGAL_NO_ATOMIC
-                              , CGAL::cpp11::atomic<bool>* stop_ptr
+                              , std::atomic<bool>* stop_ptr
 #endif
                               )
     : Base(triangulation,
@@ -446,7 +446,7 @@ public:
 
 #ifndef CGAL_NO_ATOMIC
       if(this->m_stop_ptr != 0 &&
-         this->m_stop_ptr->load(CGAL::cpp11::memory_order_acquire) == true)
+         this->m_stop_ptr->load(std::memory_order_acquire) == true)
       {
         return true;
       }

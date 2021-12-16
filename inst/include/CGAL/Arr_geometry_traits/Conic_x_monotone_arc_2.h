@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Conic_x_monotone_arc_2.h $
-// $Id: Conic_x_monotone_arc_2.h 6fcbee1 2020-04-21T17:12:21+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Conic_x_monotone_arc_2.h $
+// $Id: Conic_x_monotone_arc_2.h 993a7b2 2021-09-28T15:36:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein <wein@post.tau.ac.il>
@@ -263,7 +263,7 @@ public:
     Comparison_result res =
       ker.compare_x_2_object()(this->_source, this->_target);
 
-    this->_info = (Conic_arc_2::IS_VALID | DEGREE_1);
+    this->_info = (static_cast<int>(Conic_arc_2::IS_VALID) | static_cast<int>(DEGREE_1));
     if (res == EQUAL) {
       // Mark that the segment is vertical.
       this->_info = (this->_info | IS_VERTICAL_SEGMENT);

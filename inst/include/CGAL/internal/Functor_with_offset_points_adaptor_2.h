@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_2_triangulation_2/include/CGAL/internal/Functor_with_offset_points_adaptor_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_2_triangulation_2/include/CGAL/internal/Functor_with_offset_points_adaptor_2.h $
 // $Id: Functor_with_offset_points_adaptor_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

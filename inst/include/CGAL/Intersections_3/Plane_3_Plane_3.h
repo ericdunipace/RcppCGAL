@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/Plane_3_Plane_3.h $
-// $Id: Plane_3_Plane_3.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Intersections_3/include/CGAL/Intersections_3/Plane_3_Plane_3.h $
+// $Id: Plane_3_Plane_3.h d5a5b20 2021-02-19T20:23:20+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,6 +21,16 @@
 namespace CGAL {
 CGAL_INTERSECTION_FUNCTION_SELF(Plane_3, 3)
 CGAL_DO_INTERSECT_FUNCTION_SELF(Plane_3, 3)
+
+
+template < class K >
+inline
+boost::optional<typename K::Point_3>
+intersection_point_for_polyhedral_envelope(const Plane_3<K>& p0, const Plane_3<K>& p1, const Plane_3<K>& p2)
+{
+  return K().intersect_point_3_for_polyhedral_envelope_object()(p0, p1, p2);
+}
+
 }
 
 #endif // CGAL_INTERSECTIONS_3_PLANE_3_PLANE_3_H

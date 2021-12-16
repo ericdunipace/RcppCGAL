@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/FMLS.h $
-// $Id: FMLS.h ce8f779 2021-03-04T14:44:22+01:00 Jane Tournois
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/FMLS.h $
+// $Id: FMLS.h ba695b9 2021-04-12T16:43:30+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -382,14 +382,16 @@ private:
             minMax[3 + j] = PN[6 * i + j];
         }
       for (std::size_t i = 0; i < 3; i++) {
-        minMax[i] *= 0.99;
-        minMax[3 + i] *= 1.01;
+        minMax[i] = (minMax[i] > 0.)
+                  ? (0.99 * minMax[i]) : (1.01 * minMax[i]);
+        minMax[3 + i] = (minMax[3+i] > 0.)
+                  ? (1.01 * minMax[3+i]) : (0.99 * minMax[3+i]);
       }
 
       for (std::size_t i = 0; i < 3; i++)
       {
         res[i] = (std::size_t)ceil((minMax[3 + i] - minMax[i]) / cellSize);
-        if(res[1] == 0)
+        if(res[i] == 0)
           res[i] = 1;
       }
 

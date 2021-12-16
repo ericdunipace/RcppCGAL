@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/refine_mesh_3.h $
-// $Id: refine_mesh_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/refine_mesh_3.h $
+// $Id: refine_mesh_3.h 3e03d50 2021-05-05T15:32:22+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -28,9 +28,10 @@
 #include <CGAL/Mesh_3/Mesher_3.h>
 #include <CGAL/Mesh_error_code.h>
 #include <CGAL/optimize_mesh_3.h>
-#include <CGAL/atomic.h>
 
 #include <boost/parameter/preprocessor.hpp>
+
+#include <atomic>
 
 namespace CGAL {
 
@@ -196,7 +197,7 @@ struct Manifold_options {
 // Various Mesh_3 option
 struct Mesh_3_options {
 #ifndef CGAL_NO_ATOMIC
-      typedef CGAL::cpp11::atomic<bool>* Pointer_to_stop_atomic_boolean_t;
+      typedef std::atomic<bool>* Pointer_to_stop_atomic_boolean_t;
 #else
       typedef bool* Pointer_to_stop_atomic_boolean_t;
 #endif

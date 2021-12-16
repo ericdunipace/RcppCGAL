@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Filtered_kernel/include/CGAL/internal/Static_filters/Static_filters.h $
-// $Id: Static_filters.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Filtered_kernel/include/CGAL/internal/Static_filters/Static_filters.h $
+// $Id: Static_filters.h bd75d6f 2021-01-26T13:31:26+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -71,7 +71,7 @@
 #include <CGAL/internal/Static_filters/Compare_squared_radius_3.h>
 #include <CGAL/internal/Static_filters/Compare_weighted_squared_radius_3.h>
 #include <CGAL/internal/Static_filters/Power_side_of_oriented_power_sphere_3.h>
-
+#include <CGAL/internal/Static_filters/Compare_distance_3.h>
 
 // #include <CGAL/internal/Static_filters/Coplanar_orientation_3.h>
 // #include <CGAL/internal/Static_filters/Coplanar_side_of_bounded_circle_3.h>
@@ -125,6 +125,8 @@ public:
 
   typedef Static_filters_predicates::Compare_weighted_squared_radius_3<K_base>     Compare_weighted_squared_radius_3;
   typedef Static_filters_predicates::Power_side_of_oriented_power_sphere_3<K_base>                          Power_side_of_oriented_power_sphere_3;
+
+  typedef Static_filters_predicates::Compare_distance_3<K_base>             Compare_distance_3;
 
   Orientation_2
   orientation_2_object() const
@@ -195,6 +197,9 @@ public:
   compare_weighted_squared_radius_3_object() const
   { return Compare_weighted_squared_radius_3(); }
 
+  Compare_distance_3
+  compare_distance_3_object() const
+  { return Compare_distance_3();}
 
   enum { Has_static_filters = true };
 

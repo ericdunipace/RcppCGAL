@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_geodesic_arc_on_sphere_traits_2.h $
-// $Id: Arr_geodesic_arc_on_sphere_traits_2.h 436ba5f 2020-06-30T21:23:16+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_geodesic_arc_on_sphere_traits_2.h $
+// $Id: Arr_geodesic_arc_on_sphere_traits_2.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Efi Fogel         <efif@post.tau.ac.il>
@@ -1068,7 +1068,7 @@ public:
      *         LARGER  - x(xcv1, ce) > x(xcv2, ce).
      * \pre the ce end of the arc xcv1 lies on a pole.
      * \pre the ce end of the arc xcv2 lies on a pole.
-     * \pre the the $x$-coordinates of xcv1 and xcv2 at their ce end are
+     * \pre the $x$-coordinates of xcv1 and xcv2 at their ce end are
      *      equal (implying that the curves overlap).
      * \pre xcv1 does not coincide with the vertical identification curve.
      * \pre xcv2 does not coincide with the vertical identification curve.

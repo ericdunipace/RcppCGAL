@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon/include/CGAL/General_polygon_with_holes_2.h $
-// $Id: General_polygon_with_holes_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon/include/CGAL/General_polygon_with_holes_2.h $
+// $Id: General_polygon_with_holes_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -184,7 +184,7 @@ std::ostream
 {
   typename General_polygon_with_holes_2<Polygon_>::Hole_const_iterator hit;
 
-  switch(get_mode(os)) {
+  switch(IO::get_mode(os)) {
     case IO::ASCII :
       os << p.outer_boundary() << ' ' << p.number_of_holes()<< ' ';
       for (hit = p.holes_begin(); hit != p.holes_end(); ++hit) {
@@ -217,8 +217,7 @@ std::ostream
 /*!
 This operator imports a General_polygon_with_holes_2 from the input stream `in`.
 
-An ASCII and a binary format exist. The stream detects the format
-automatically and can read both.
+Both ASCII and binary formats are supported, and the format is automatically detected.
 
 The format consists of the number of curves of the outer boundary
 followed by the curves themselves, followed

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesher_level/include/CGAL/Double_map.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesher_level/include/CGAL/Double_map.h $
 // $Id: Double_map.h 58b10a3 2020-03-26T18:58:50+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

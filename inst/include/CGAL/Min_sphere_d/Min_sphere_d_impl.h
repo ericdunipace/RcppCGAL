@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Bounding_volumes/include/CGAL/Min_sphere_d/Min_sphere_d_impl.h $
-// $Id: Min_sphere_d_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Bounding_volumes/include/CGAL/Min_sphere_d/Min_sphere_d_impl.h $
+// $Id: Min_sphere_d_impl.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,7 +25,7 @@ operator << ( std::ostream& os, const Min_sphere_d<Traits>& min_sphere)
 {
     typedef typename Min_sphere_d<Traits>::Point  Point;
 
-    switch ( get_mode( os)) {
+    switch ( IO::get_mode( os)) {
 
       case IO::PRETTY:
         os << std::endl;
@@ -63,7 +63,7 @@ operator << ( std::ostream& os, const Min_sphere_d<Traits>& min_sphere)
 
       default:
         CGAL_optimisation_assertion_msg
-            ( false, "get_mode( os) invalid!");
+            ( false, "IO::get_mode( os) invalid!");
         break; }
 
     return( os);
@@ -73,7 +73,7 @@ template < class Traits >
 std::istream&
 operator >> ( std::istream& is, Min_sphere_d<Traits>& min_sphere)
 {
-    switch ( get_mode( is)) {
+    switch ( IO::get_mode( is)) {
 
       case IO::PRETTY:
         std::cerr << std::endl;

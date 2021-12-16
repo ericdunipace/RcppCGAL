@@ -3,7 +3,7 @@
 //
 // This file is a part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/barycentric_enum_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/barycentric_enum_2.h $
 // $Id: barycentric_enum_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

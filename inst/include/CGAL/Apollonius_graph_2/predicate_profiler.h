@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/predicate_profiler.h $
-// $Id: predicate_profiler.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/predicate_profiler.h $
+// $Id: predicate_profiler.h 3e03d50 2021-05-05T15:32:22+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,7 @@
 
 
 #include <CGAL/Apollonius_graph_2/basic.h>
-#include <CGAL/atomic.h>
+#include <atomic>
 
 #define AG2_PROFILE_PREDICATES
 
@@ -33,7 +33,7 @@ public:
 #ifdef CGAL_NO_ATOMIC
   typedef unsigned long long_;
 #else
-  typedef CGAL::cpp11::atomic<unsigned long> long_;
+  typedef std::atomic<unsigned long> long_;
 #endif
 
   // high level predicates

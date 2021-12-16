@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygonal_surface_reconstruction/include/CGAL/internal/hypothesis.h $
-// $Id: hypothesis.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygonal_surface_reconstruction/include/CGAL/internal/hypothesis.h $
+// $Id: hypothesis.h 6b87fe3 2020-12-05T11:11:33+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan
@@ -680,7 +680,7 @@ namespace CGAL {
                 template <typename Kernel>
                 void Hypothesis<Kernel>::compute_triplet_intersections() {
                         triplet_intersections_.clear();
-                        if (supporting_planes_.size() < 4) // no closed surface will be constructed from less than 4 planes
+                        if (supporting_planes_.size() < 4) // no closed surface will be constructed from fewer than 4 planes
                                 return;
 
                         for (std::size_t i = 0; i < supporting_planes_.size(); ++i) {

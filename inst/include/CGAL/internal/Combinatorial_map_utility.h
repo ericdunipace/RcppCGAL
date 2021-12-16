@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Combinatorial_map/include/CGAL/internal/Combinatorial_map_utility.h $
-// $Id: Combinatorial_map_utility.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Combinatorial_map/include/CGAL/internal/Combinatorial_map_utility.h $
+// $Id: Combinatorial_map_utility.h d6306be 2020-10-22T10:30:38+02:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -14,6 +14,7 @@
 
 #include <CGAL/tuple.h>
 #include <CGAL/Compact_container.h>
+#include <CGAL/Concurrent_compact_container.h>
 #include <iostream>
 
 #include <boost/type_traits/is_same.hpp>
@@ -591,6 +592,18 @@ namespace CGAL
         static void run(Ts& ... t)
         { Foreach_static_restricted_except<Functor, j, Attributes>::run(t...); }
       };
+  };
+
+  // Helper class to define container type depending on the Concurrent_tag
+  template<typename Concurrent_tag, class T, class Alloc_>
+  struct Container_type
+  {
+    typedef CGAL::Compact_container<T, Alloc_> type;
+  };
+  template<class T, class Alloc_>
+  struct Container_type<CGAL::Tag_true, T, Alloc_>
+  {
+    typedef CGAL::Concurrent_compact_container<T, Alloc_> type;
   };
 
 } //namespace internal

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arrangement_on_surface_2.h $
-// $Id: Arrangement_on_surface_2.h 06cd942 2021-03-10T10:33:19+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arrangement_on_surface_2.h $
+// $Id: Arrangement_on_surface_2.h dc36cee 2021-03-10T11:53:16+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1496,7 +1496,7 @@ public:
    * \pre cv1's source and cv2's target equal the endpoints of the curve
    *      currently assoicated with e (respectively), and cv1's target equals
    *      cv2's target, and this is the split point (ot vice versa).
-   * \return A handle for the halfedge whose source is the source of the the
+   * \return A handle for the halfedge whose source is the source of the
    *         original halfedge e, and whose target is the split point.
    */
   Halfedge_handle split_edge(Halfedge_handle e,

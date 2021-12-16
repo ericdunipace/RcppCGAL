@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/BGL/include/CGAL/boost/graph/split_graph_into_polylines.h $
-// $Id: split_graph_into_polylines.h ebd65c9 2020-07-20T11:47:30+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/split_graph_into_polylines.h $
+// $Id: split_graph_into_polylines.h 8682f9b 2020-08-24T11:45:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau, Xiang Gao
@@ -205,7 +205,7 @@ split_graph_into_polylines(const Graph& graph,
 #endif
 
 /*!
-\ingroup PkgBGLRef
+\ingroup PkgBGLPartition
 splits into polylines the graph `g` at vertices of degree greater than 2
 and at vertices for which `is_terminal(v,graph)==true`.
 The polylines are reported using a visitor.

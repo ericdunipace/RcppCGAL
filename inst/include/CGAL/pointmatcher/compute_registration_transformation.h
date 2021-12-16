@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Point_set_processing_3/include/CGAL/pointmatcher/compute_registration_transformation.h $
-// $Id: compute_registration_transformation.h c253679 2020-04-18T16:27:58+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/pointmatcher/compute_registration_transformation.h $
+// $Id: compute_registration_transformation.h 676c367 2021-11-29T18:02:31+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Necip Fazil Yildiran
@@ -78,7 +78,7 @@ construct_icp(const NamedParameters1& np1, const NamedParameters2& np2)
 
   icp.setDefault();
 
-  const ICP_config null_config { "_null_pm_config_in_cgal" };
+  const ICP_config null_config { /*.name=*/"_null_pm_config_in_cgal", /*.params=*/{ } };
   const std::vector<ICP_config> null_config_chain { null_config };
   auto is_null_config = [&](const ICP_config& c) { return !c.name.compare(null_config.name); };
 

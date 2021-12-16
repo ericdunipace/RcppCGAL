@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/AABB_tree/include/CGAL/internal/AABB_tree/AABB_search_tree.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/AABB_tree/include/CGAL/internal/AABB_tree/AABB_search_tree.h $
 // $Id: AABB_search_tree.h 49465bb 2020-03-06T16:28:21+02:00 Ahmed Essam
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

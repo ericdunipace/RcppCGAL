@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Handle_for.h $
-// $Id: Handle_for.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Handle_for.h $
+// $Id: Handle_for.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -102,7 +102,7 @@ public:
         ptr_ = p;
     }
 
-    Handle_for(const Handle_for& h) noexcept
+    Handle_for(const Handle_for& h) noexcept(!CGAL_ASSERTIONS_ENABLED)
       : ptr_(h.ptr_)
     {
         CGAL_assume (ptr_->count > 0);
@@ -110,7 +110,7 @@ public:
     }
 
     Handle_for&
-    operator=(const Handle_for& h) noexcept
+    operator=(const Handle_for& h) noexcept(!CGAL_ASSERTIONS_ENABLED)
     {
         Handle_for tmp = h;
         swap(tmp);
@@ -151,10 +151,12 @@ public:
 
     ~Handle_for()
     {
-      if (--(ptr_->count) == 0) {
-        Allocator_traits::destroy(allocator, ptr_);
-        allocator.deallocate( ptr_, 1);
-      }
+      try {
+        if (--(ptr_->count) == 0) {
+          Allocator_traits::destroy(allocator, ptr_);
+          allocator.deallocate( ptr_, 1);
+        }
+      } catch(...) {}
     }
 
     void

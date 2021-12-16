@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Solver_interface/include/CGAL/GLPK_mixed_integer_program_traits.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Solver_interface/include/CGAL/GLPK_mixed_integer_program_traits.h $
 // $Id: GLPK_mixed_integer_program_traits.h 3b6c100 2020-04-29T14:12:29+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

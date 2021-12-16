@@ -8,7 +8,7 @@
 // https://www.boost.org/LICENSE_1_0.txt)
 //=======================================================================
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/internal/boost/mutable_queue.hpp $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/internal/boost/mutable_queue.hpp $
 // $Id: mutable_queue.hpp 590612a 2020-03-26T13:25:16+01:00 Sébastien Loriot
 // SPDX-License-Identifier: BSL-1.0
 //

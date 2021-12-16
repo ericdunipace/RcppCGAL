@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Point_set_3/include/CGAL/draw_point_set_3.h $
-// $Id: draw_point_set_3.h a85cf6e 2021-01-26T09:45:18+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_3/include/CGAL/draw_point_set_3.h $
+// $Id: draw_point_set_3.h 8005f91 2021-05-03T19:21:57+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -66,7 +66,7 @@ protected:
   void compute_vertex(const Point& p)
   {
     add_point(p);
-    // We can use add_point(p, c) with c a CGAL::Color to add a colored point
+    // We can use add_point(p, c) with c a CGAL::IO::Color to add a colored point
   }
 
   void compute_elements()

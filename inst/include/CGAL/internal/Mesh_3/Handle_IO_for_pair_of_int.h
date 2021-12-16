@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/internal/Mesh_3/Handle_IO_for_pair_of_int.h $
-// $Id: Handle_IO_for_pair_of_int.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/internal/Mesh_3/Handle_IO_for_pair_of_int.h $
+// $Id: Handle_IO_for_pair_of_int.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -41,7 +41,7 @@ public:
   Output_rep( const T& tt) : t(tt) {}
   //! perform the output, calls \c operator\<\< by default.
   std::ostream& operator()( std::ostream& out) const {
-    if(is_ascii(out)) {
+    if(IO::is_ascii(out)) {
       out << t.first << " " << t.second;
     } else {
       CGAL::write(out, t.first);
@@ -62,7 +62,7 @@ public:
   Output_rep(const Variant& v) : v(v) {}
   std::ostream& operator()( std::ostream& out) const {
     if(v.which() == 1) {
-      out << oformat(boost::get<std::pair<int, int> >(v));
+      out << IO::oformat(boost::get<std::pair<int, int> >(v));
     } else {
       out << boost::get<int>(v);
     }
@@ -79,7 +79,7 @@ public:
   Input_rep( T& tt) : t(tt) {}
   //! perform the output, calls \c operator\<\< by default.
   std::istream& operator()( std::istream& in) const {
-    if(is_ascii(in)) {
+    if(IO::is_ascii(in)) {
       in >> t.first >> t.second;
     } else {
       CGAL::read(in, t.first);

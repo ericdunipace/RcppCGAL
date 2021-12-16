@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_triangulation_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_triangulation_3.h $
 // $Id: Periodic_3_mesh_triangulation_3.h 8080601 2020-12-05T17:58:52+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

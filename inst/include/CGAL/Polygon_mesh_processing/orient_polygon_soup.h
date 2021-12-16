@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/orient_polygon_soup.h $
-// $Id: orient_polygon_soup.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/orient_polygon_soup.h $
+// $Id: orient_polygon_soup.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -458,8 +458,8 @@ struct Polygon_soup_orienter
  * @tparam PointRange a model of the concepts `RandomAccessContainer`
  * and `BackInsertionSequence` whose value type is the point type.
  * @tparam PolygonRange a model of the concept `RandomAccessContainer`
- * whose value_type is a model of the concept `RandomAccessContainer`
- * whose value_type is `std::size_t`.
+ * whose `value_type` is a model of the concept `RandomAccessContainer`
+ * whose `value_type` is `std::size_t`.
  *
  * @param points points of the soup of polygons. Some additional points might be pushed back to resolve
  *               non-manifoldness or non-orientability issues.

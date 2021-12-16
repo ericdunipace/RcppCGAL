@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/BGL/include/CGAL/boost/graph/parameters_interface.h $
-// $Id: parameters_interface.h 2f73dab 2020-11-13T15:31:56+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/parameters_interface.h $
+// $Id: parameters_interface.h 4960886 2021-10-20T15:07:18+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -39,6 +39,21 @@ CGAL_add_named_parameter(face_to_face_map_t, face_to_face_map, face_to_face_map)
 CGAL_add_named_parameter(implementation_tag_t, implementation_tag, implementation_tag)
 CGAL_add_named_parameter(prevent_unselection_t, prevent_unselection, prevent_unselection)
 
+CGAL_add_named_parameter(verbose_t, verbose, verbose)
+
+// List of named parameters used for IO
+CGAL_add_named_parameter(vertex_normal_output_iterator_t, vertex_normal_output_iterator, vertex_normal_output_iterator)
+CGAL_add_named_parameter(vertex_color_output_iterator_t, vertex_color_output_iterator, vertex_color_output_iterator)
+CGAL_add_named_parameter(vertex_texture_output_iterator_t, vertex_texture_output_iterator, vertex_texture_output_iterator)
+CGAL_add_named_parameter(face_color_output_iterator_t, face_color_output_iterator, face_color_output_iterator)
+CGAL_add_named_parameter(vertex_normal_map_t, vertex_normal_map, vertex_normal_map)
+CGAL_add_named_parameter(vertex_color_map_t, vertex_color_map, vertex_color_map)
+CGAL_add_named_parameter(vertex_texture_map_t, vertex_texture_map, vertex_texture_map)
+CGAL_add_named_parameter(face_color_map_t, face_color_map, face_color_map)
+CGAL_add_named_parameter(repair_polygon_soup_t, repair_polygon_soup, repair_polygon_soup)
+CGAL_add_named_parameter(output_color_t, output_color, output_color)
+CGAL_add_named_parameter(stream_precision_t, stream_precision, stream_precision)
+
 // List of named parameters that we use in the package 'Mesh_3'
 CGAL_add_named_parameter(vertex_feature_degree_t, vertex_feature_degree, vertex_feature_degree_map)
 
@@ -47,6 +62,7 @@ CGAL_add_named_parameter(geom_traits_t, geom_traits, geom_traits)
 CGAL_add_named_parameter(vertex_incident_patches_t, vertex_incident_patches, vertex_incident_patches_map)
 CGAL_add_named_parameter(density_control_factor_t, density_control_factor, density_control_factor)
 CGAL_add_named_parameter(use_delaunay_triangulation_t, use_delaunay_triangulation, use_delaunay_triangulation)
+CGAL_add_named_parameter(use_2d_constrained_delaunay_triangulation_t, use_2d_constrained_delaunay_triangulation, use_2d_constrained_delaunay_triangulation)
 CGAL_add_named_parameter(fairing_continuity_t, fairing_continuity, fairing_continuity)
 CGAL_add_named_parameter(sparse_linear_solver_t, sparse_linear_solver, sparse_linear_solver)
 CGAL_add_named_parameter(number_of_relaxation_steps_t, number_of_relaxation_steps, number_of_relaxation_steps)
@@ -86,6 +102,9 @@ CGAL_add_named_parameter(use_angle_smoothing_t, use_angle_smoothing, use_angle_s
 CGAL_add_named_parameter(use_area_smoothing_t, use_area_smoothing, use_area_smoothing)
 CGAL_add_named_parameter(use_Delaunay_flips_t, use_Delaunay_flips, use_Delaunay_flips)
 CGAL_add_named_parameter(do_project_t, do_project, do_project)
+CGAL_add_named_parameter(do_split_t, do_split, do_split)
+CGAL_add_named_parameter(do_collapse_t, do_collapse, do_collapse)
+CGAL_add_named_parameter(do_flip_t, do_flip, do_flip)
 CGAL_add_named_parameter(do_orientation_tests_t, do_orientation_tests, do_orientation_tests)
 CGAL_add_named_parameter(do_self_intersection_tests_t, do_self_intersection_tests, do_self_intersection_tests)
 CGAL_add_named_parameter(error_codes_t, error_codes, error_codes)
@@ -103,10 +122,14 @@ CGAL_add_named_parameter(volume_threshold_t, volume_threshold, volume_threshold)
 CGAL_add_named_parameter(dry_run_t, dry_run, dry_run)
 CGAL_add_named_parameter(do_not_modify_t, do_not_modify, do_not_modify)
 CGAL_add_named_parameter(allow_self_intersections_t, allow_self_intersections, allow_self_intersections)
+CGAL_add_named_parameter(non_manifold_feature_map_t, non_manifold_feature_map, non_manifold_feature_map)
+CGAL_add_named_parameter(polyhedral_envelope_epsilon_t, polyhedral_envelope_epsilon, polyhedral_envelope_epsilon)
+CGAL_add_named_parameter(face_epsilon_map_t, face_epsilon_map, face_epsilon_map)
 
 // List of named parameters that we use in the package 'Surface Mesh Simplification'
 CGAL_add_named_parameter(get_cost_policy_t, get_cost_policy, get_cost)
 CGAL_add_named_parameter(get_placement_policy_t, get_placement_policy, get_placement)
+CGAL_add_named_parameter(filter_t, filter, filter)
 
 //to be documented
 CGAL_add_named_parameter(face_normal_t, face_normal, face_normal_map)
@@ -174,7 +197,7 @@ CGAL_add_named_parameter(pca_plane_t, pca_plane, pca_plane)
 
 // tetrahedral remeshing parameters
 CGAL_add_named_parameter(remesh_boundaries_t, remesh_boundaries, remesh_boundaries)
-CGAL_add_named_parameter(cell_selector_t, cell_selector, cell_selector)
+CGAL_add_named_parameter(cell_selector_t, cell_selector, cell_is_selected_map)
 CGAL_add_named_parameter(facet_is_constrained_t, facet_is_constrained, facet_is_constrained_map)
 CGAL_add_named_parameter(smooth_constrained_edges_t, smooth_constrained_edges, smooth_constrained_edges)
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_degeneracies.h $
-// $Id: repair_degeneracies.h e522630 2021-03-03T16:34:46+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_degeneracies.h $
+// $Id: repair_degeneracies.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sebastien Loriot,
@@ -27,7 +27,7 @@
 
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
-#include <CGAL/IO/OFF_reader.h>
+#include <CGAL/IO/OFF.h>
 #endif
 
 #include <boost/algorithm/minmax_element.hpp>
@@ -436,10 +436,7 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
     std::cout << "Iter: " << iter << std::endl;
     std::ostringstream oss;
     oss << "degen_cleaning_iter_" << iter++ << ".off";
-    std::ofstream out(oss.str().c_str());
-    out << std::setprecision(17);
-    out << tmesh;
-    out.close();
+    CGAL::IO::write_polygon_mesh(oss.str(), tmesh, CGAL::parameters::stream_precision(17));
 #endif
 
     if(edges_to_collapse.empty() && edges_to_flip.empty())
@@ -1683,9 +1680,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
   {
     std::cout <<"Done with null edges.\n";
-    std::ofstream output("/tmp/no_null_edges.off");
-    output << std::setprecision(17) << tmesh << "\n";
-    output.close();
+    CGAL::IO::write_polygon_mesh("/tmp/no_null_edges.off", tmesh, CGAL::parameters::stream_precision(17));
   }
 #endif
 
@@ -1809,7 +1804,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
       std::vector<typename Traits::Point_3> points;
       std::vector<std::vector<std::size_t> > triangles;
       std::ifstream in("/tmp/out.off");
-      CGAL::read_OFF(in, points, triangles);
+      CGAL::IO::read_OFF(in, points, triangles);
       if(!CGAL::Polygon_mesh_processing::is_polygon_soup_a_polygon_mesh(triangles))
       {
         std::cerr << "Warning: got a polygon soup (may simply be a non-manifold vertex)!\n";

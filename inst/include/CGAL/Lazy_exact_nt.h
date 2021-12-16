@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Number_types/include/CGAL/Lazy_exact_nt.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Number_types/include/CGAL/Lazy_exact_nt.h $
 // $Id: Lazy_exact_nt.h c1f2fde 2020-04-11T12:12:27+02:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

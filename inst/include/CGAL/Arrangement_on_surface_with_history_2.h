@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arrangement_on_surface_with_history_2.h $
-// $Id: Arrangement_on_surface_with_history_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arrangement_on_surface_with_history_2.h $
+// $Id: Arrangement_on_surface_with_history_2.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -557,7 +557,7 @@ public:
    * \param e The edge to split (one of the pair of twin halfedges).
    * \param p The split point.
    * \pre p lies in the interior of the curve associated with e.
-   * \return A handle for the halfedge whose source is the source of the the
+   * \return A handle for the halfedge whose source is the source of the
    *         original halfedge e, and whose target is the split point.
    */
   Halfedge_handle split_edge (Halfedge_handle e, const Point_2& p);

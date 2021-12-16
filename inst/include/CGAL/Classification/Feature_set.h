@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Feature_set.h $
-// $Id: Feature_set.h 627584f 2020-09-30T08:38:45+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/Feature_set.h $
+// $Id: Feature_set.h 473d30b 2021-04-06T15:12:45+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -32,7 +32,7 @@ namespace Classification {
 /*!
 \ingroup PkgClassificationFeature
 
-\brief Set of features (see `Feature_base`) used as input by
+\brief sets of features (see `Feature_base`) used as input by
 classification algorithms. This class handles both the instantiation,
 the addition and the deletion of features.
 
@@ -228,7 +228,7 @@ public:
   {
 #ifdef CGAL_LINKED_WITH_TBB
     m_tasks->wait();
-    m_tasks.release();
+    m_tasks.reset();
     m_adders.clear();
 #endif
   }

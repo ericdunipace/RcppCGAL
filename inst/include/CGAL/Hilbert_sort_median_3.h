@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Spatial_sorting/include/CGAL/Hilbert_sort_median_3.h $
-// $Id: Hilbert_sort_median_3.h 4eeb7f1 2020-02-06T11:57:04+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_sorting/include/CGAL/Hilbert_sort_median_3.h $
+// $Id: Hilbert_sort_median_3.h 6b5e04a 2021-02-12T15:52:47+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Christophe Delage
@@ -83,8 +83,14 @@ struct Hilbert_cmp_3<K,2,false>
 
 } // namespace internal
 
+#ifdef __clang__
+#define CGAL_VISIBILITY_MACRO __attribute__ ((visibility ("hidden")))
+#else
+#define CGAL_VISIBILITY_MACRO
+#endif
+
 template <class K, class ConcurrencyTag>
-class Hilbert_sort_median_3
+class CGAL_VISIBILITY_MACRO Hilbert_sort_median_3
 {
 public:
   typedef Hilbert_sort_median_3<K, ConcurrencyTag> Self;

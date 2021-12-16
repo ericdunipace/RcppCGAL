@@ -4,9 +4,22 @@
 \name{RcppCGAL-package}
 \alias{RcppCGAL}
 \alias{RcppCGAL-package}
-\title{RcppCGAL: Rcpp Integration for CGAL (Computational Geometry Algorithms Library)}
+\title{RcppCGAL: Rcpp Integration for CGAL}
 \description{
-Creates a header only package to link to the CGAL header files in Rcpp. There are a variety of potential uses for the software such as Hilbert sorting, KDtree nearest neighbors, and convex hull algorithms. There is only one R function in this package, which returns the current version of the CGAL library included. For more information about how to use the header files, see the CGAL documentation at <https://www.cgal.org>. Currently includes CGAL 5.2.1 stable release. Note: if you wish to use CGAL for a non-GPLv3+ purpose, then you MUST obtain a commercial license for CGAL. See <https://www.cgal.org/license.html> for more details. Note, some header files require the boost library and you should link to the \link[BH]{BH} package as necessary!
+Creates a header only package to link to the CGAL 
+  (Computational Geometry Algorithms Library)
+  header files in Rcpp. There are a variety of potential uses for 
+  the software such as Hilbert sorting, KDtree nearest neighbors, 
+  and convex hull algorithms. There is only one R function in this 
+  package, which returns the current version of the CGAL library 
+  included. For more information about how to use the header files, 
+  see the CGAL documentation at <https://www.cgal.org>. Currently 
+  includes CGAL 5.3.1 stable release. Note: This software is GPL3+
+  but the CGAL header files are dual licensed.
+  The CGAL group requests that if you are using CGAL for
+  a commercial purpose, that you obtain a commercial license
+  for the CGAL software. 
+  See <https://www.cgal.org/license.html> for more details.
 }
 \examples{
 \dontrun{

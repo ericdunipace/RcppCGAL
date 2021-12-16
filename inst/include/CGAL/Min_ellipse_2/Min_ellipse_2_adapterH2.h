@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Bounding_volumes/include/CGAL/Min_ellipse_2/Min_ellipse_2_adapterH2.h $
-// $Id: Min_ellipse_2_adapterH2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Bounding_volumes/include/CGAL/Min_ellipse_2/Min_ellipse_2_adapterH2.h $
+// $Id: Min_ellipse_2_adapterH2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -337,7 +337,7 @@ operator << ( std::ostream& os,
     const char*  sep  = empty;
     const char*  tail = empty;
 
-    switch ( CGAL::get_mode( os)) {
+    switch ( CGAL::IO::get_mode( os)) {
       case CGAL::IO::PRETTY:
         head = pretty_head;
         sep  = pretty_sep;
@@ -350,7 +350,7 @@ operator << ( std::ostream& os,
         break;
       default:
         CGAL_optimisation_assertion_msg( false,
-                                        "CGAL::get_mode( os) invalid!");
+                                        "CGAL::IO::get_mode( os) invalid!");
         break; }
 
     os << head << e.n_boundary_points;
@@ -382,7 +382,7 @@ std::istream&
 operator >> ( std::istream& is,
               CGAL::_Min_ellipse_2_adapterH2__Ellipse<PT_,DA_>& e)
 {
-    switch ( CGAL::get_mode( is)) {
+    switch ( CGAL::IO::get_mode( is)) {
 
       case CGAL::IO::PRETTY:
         std::cerr << std::endl;

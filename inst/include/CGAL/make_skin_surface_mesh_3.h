@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Skin_surface_3/include/CGAL/make_skin_surface_mesh_3.h $
-// $Id: make_skin_surface_mesh_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Skin_surface_3/include/CGAL/make_skin_surface_mesh_3.h $
+// $Id: make_skin_surface_mesh_3.h 2d37774 2021-04-26T11:30:25+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -33,8 +33,9 @@ void make_skin_surface_mesh_3(Polyhedron_3 &p,
                               int nSubdivisions=0,
                               bool grow_balls=true)
 {
-  if (shrink_factor == 1) {
+  if (shrink_factor >= 1) {
     make_union_of_balls_mesh_3(p,begin,end,nSubdivisions);
+    return;
   }
 
   typedef typename WP_iterator::value_type               Weighted_point;

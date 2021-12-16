@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_deformation/include/CGAL/Surface_mesh_deformation.h $
-// $Id: Surface_mesh_deformation.h 05f0f95 2020-03-09T10:23:16+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_deformation/include/CGAL/Surface_mesh_deformation.h $
+// $Id: Surface_mesh_deformation.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Yin Xu, Andreas Fabri and Ilker O. Yaz
@@ -141,7 +141,9 @@ struct Types_selectors<TriangleMesh, CGAL::SRE_ARAP> {
 // on the fly in order the deformation class to be used
 // with points with minimal requirements
 template <class Vertex_point_map>
-struct SC_on_the_fly_pmap: public Vertex_point_map{
+struct SC_on_the_fly_pmap
+  : public Vertex_point_map
+{
   typedef boost::readable_property_map_tag category;
   typedef CGAL::Simple_cartesian<double>::Point_3 value_type;
   typedef value_type reference;

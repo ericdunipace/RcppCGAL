@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/CGAL_ImageIO/include/CGAL/Image_3.h $
-// $Id: Image_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_ImageIO/include/CGAL/Image_3.h $
+// $Id: Image_3.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,7 @@
 #include <CGAL/basic.h>
 #include <CGAL/array.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <boost/format.hpp>
 #include <boost/unordered_set.hpp>
 #include <CGAL/ImageIO.h>
@@ -81,7 +81,7 @@ class CGAL_IMAGEIO_EXPORT Image_3
 public:
   enum Own { OWN_THE_DATA, DO_NOT_OWN_THE_DATA };
 
-  typedef boost::shared_ptr<_image> Image_shared_ptr;
+  typedef std::shared_ptr<_image> Image_shared_ptr;
   typedef Image_shared_ptr Pointer;
 
 protected:

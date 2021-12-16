@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Three/include/CGAL/Three/Three.h $
-// $Id: Three.h b4bba7f 2020-06-15T08:58:13+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Three/include/CGAL/Three/Three.h $
+// $Id: Three.h 8682f9b 2020-08-24T11:45:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -65,7 +65,7 @@ public:
    */
   void addDockWidget(QDockWidget* dock_widget);
 
-  /*! \brief Gets an item of the templated type.
+  /*! \brief gets an item of the templated type.
    * \returns the first `SceneType` item found in the scene's list of currently selected
    * items;
    * \returns nullptr if there is no `SceneType` in the list.

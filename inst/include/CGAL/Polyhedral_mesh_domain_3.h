@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Polyhedral_mesh_domain_3.h $
-// $Id: Polyhedral_mesh_domain_3.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Polyhedral_mesh_domain_3.h $
+// $Id: Polyhedral_mesh_domain_3.h 263ad6b 2020-08-20T18:25:01+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -439,9 +439,7 @@ public:
       if(r_domain_.query_is_cached(q))
       {
         const AABB_primitive_id primitive_id = r_domain_.cached_primitive_id();
-        typename cpp11::result_of<
-          typename IGT::Intersect_3(typename Primitive::Datum, Query)>::type o
-            = IGT().intersect_3_object()(Primitive(primitive_id).datum(),q);
+        const auto o = IGT().intersect_3_object()(Primitive(primitive_id).datum(),q);
         intersection = o ?
           Intersection_and_primitive_id(*o, primitive_id) :
           AABB_intersection();

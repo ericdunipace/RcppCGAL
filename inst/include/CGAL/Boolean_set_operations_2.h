@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2.h $
-// $Id: Boolean_set_operations_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2.h $
+// $Id: Boolean_set_operations_2.h 15ef09b5 2020-10-01T17:37:38+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -809,7 +809,7 @@ OutputIterator complement (const Polygon_with_holes_2<Kernel, Container>& pgn,
 }
 
 template <class Arr_traits, typename OutputIterator, class Traits>
-OutputIterator complement (const General_polygon_with_holes_2<Arr_traits>& pgn,
+OutputIterator complement (const General_polygon_with_holes_2<General_polygon_2<Arr_traits> >& pgn,
                            OutputIterator oi, Traits& tr)
 {
   General_polygon_set_2<Traits> gps(tr);

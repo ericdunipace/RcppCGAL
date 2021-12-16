@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/Polyhedral_complex_mesh_domain_3.h $
-// $Id: Polyhedral_complex_mesh_domain_3.h c1a42c7 2020-03-26T18:58:21+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Polyhedral_complex_mesh_domain_3.h $
+// $Id: Polyhedral_complex_mesh_domain_3.h d1e1846 2020-12-22T16:55:25+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -196,8 +196,8 @@ public:
              corresponding input polyhedral surface.
   @param indices_end past the end iterator on the pairs of subdomain indices
 
-  @tparam InputPolyhedraIterator model of `InputIterator`, holding `Polyhedron`'s
-  @tparam InputPairOfSubdomainIndicesIterator model of `InputIterator`, holding
+  @tparam InputPolyhedraIterator model of `ForwardIterator`, holding `Polyhedron`'s
+  @tparam InputPairOfSubdomainIndicesIterator model of `ForwardIterator`, holding
               `std::pair<Subdomain_index, Subdomain_index>`
 
   @pre `std::distance(begin, end) == std::distance(indices_begin, indices_end)`

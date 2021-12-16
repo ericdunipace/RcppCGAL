@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Handle_with_policy.h $
-// $Id: Handle_with_policy.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Handle_with_policy.h $
+// $Id: Handle_with_policy.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Michael Seel <seel@mpi-inf.mpg.de>
@@ -851,7 +851,7 @@ protected:
     //! constructor used for class hierarchies of representations, where
     //! the handle class derived from this handle creates the different
     //! representations itself with the \c new operator. Except for this
-    //! constructor, the the one with the \c Use_with_initialize_with
+    //! constructor, the one with the \c Use_with_initialize_with
     //! argument, and the single argument template constructor no other
     //! constructor will work for class hierarchies of representations.
     Handle_with_policy( Rep* p) : ptr_( p) {

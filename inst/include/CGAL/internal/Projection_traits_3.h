@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/internal/Projection_traits_3.h $
-// $Id: Projection_traits_3.h 9f2eafd 2020-03-26T19:17:02+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/internal/Projection_traits_3.h $
+// $Id: Projection_traits_3.h 2718072 2021-02-10T10:20:21+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mariette Yvinec, Sebastien Loriot, Mael Rouxel-Labbé
@@ -308,8 +308,13 @@ public:
     return (CGAL::abs(dx)>CGAL::abs(dy)) ? ( p.x()-source.x() ) / dx : (p.y()-source.y() ) / dy;
   }
 
-  Object operator()(const Segment_3& s1, const Segment_3& s2) const
+
+
+  boost::optional< boost::variant<Point_3,Segment_3> >
+  operator()(const Segment_3& s1, const Segment_3& s2) const
   {
+    typedef  boost::variant<Point_3, Segment_3> variant_type;
+
     Point_2 s1_source = project(s1.source());
     Point_2 s1_target = project(s1.target());
     Point_2 s2_source = project(s2.source());
@@ -321,11 +326,13 @@ public:
 
     //compute intersection points in projected plane
     //We know that none of the segment is degenerate
-    Object o = intersection(s1_2,s2_2);
-    const Point_2* pi=CGAL::object_cast<Point_2>(&o);
-    if (pi==nullptr) { //case of segment or empty
-      const Segment_2* si=CGAL::object_cast<Segment_2>(&o);
-      if (si==nullptr) return Object();
+
+    auto o = intersection(s1_2,s2_2);
+    if(! o){
+      return boost::none;
+    }
+
+    if(const Segment_2* si = boost::get<Segment_2>(&*o)){
       FT src[3],tgt[3];
       //the third coordinate is the midpoint between the points on s1 and s2
       FT z1 = s1.source()[dim] + ( alpha(si->source(), s1_source, s1_target) * ( s1.target()[dim] - s1.source()[dim] ));
@@ -343,8 +350,11 @@ public:
       src[Projector<R,dim>::y_index] = si->source().y();
       tgt[Projector<R,dim>::x_index] = si->target().x();
       tgt[Projector<R,dim>::y_index] = si->target().y();
-      return make_object( Segment_3( Point_3(src[0],src[1],src[2]),Point_3(tgt[0],tgt[1],tgt[2]) ) );
+      return boost::make_optional(variant_type(Segment_3( Point_3(src[0],src[1],src[2]),Point_3(tgt[0],tgt[1],tgt[2]) ) ) );
     }
+
+
+    const Point_2* pi = boost::get<Point_2>(&*o);
     FT coords[3];
     //compute the third coordinate of the projected intersection point onto 3D segments
     FT z1 = s1.source()[dim] + ( alpha(*pi, s1_source, s1_target) * ( s1.target()[dim] - s1.source()[dim] ));
@@ -356,7 +366,7 @@ public:
 
     Point_3 res(coords[0],coords[1],coords[2]);
     CGAL_assertion(x(res)==pi->x() && y(res)==pi->y());
-    return make_object(res);
+    return boost::make_optional(variant_type(res));
   }
 };
 

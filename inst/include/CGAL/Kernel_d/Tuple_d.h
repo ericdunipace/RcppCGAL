@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_d/include/CGAL/Kernel_d/Tuple_d.h $
-// $Id: Tuple_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_d/include/CGAL/Kernel_d/Tuple_d.h $
+// $Id: Tuple_d.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Michael Seel
@@ -212,7 +212,7 @@ Comparison_result operator()(
 template <typename NT, typename LA>
 void Tuple_d<NT,LA>::print(std::ostream& os, const char* l) const
 { int i;
-  switch( get_mode(os) ) {
+  switch( IO::get_mode(os) ) {
     case CGAL::IO::ASCII :
       os << size() << " ";
       for (i = 0; i < size(); ++i)
@@ -235,7 +235,7 @@ void Tuple_d<NT,LA>::print(std::ostream& os, const char* l) const
 template <typename NT, typename LA>
 void Tuple_d<NT,LA>::read(std::istream& is)
 { int i = 0, d;
-  switch( get_mode(is) ) {
+  switch( IO::get_mode(is) ) {
     case CGAL::IO::ASCII :
       is >> d; v = Vector(d);
       while (i < d && is >> v[i] ) ++i;

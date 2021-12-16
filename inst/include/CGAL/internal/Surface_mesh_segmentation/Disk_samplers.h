@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_segmentation/include/CGAL/internal/Surface_mesh_segmentation/Disk_samplers.h $
-// $Id: Disk_samplers.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_segmentation/include/CGAL/internal/Surface_mesh_segmentation/Disk_samplers.h $
+// $Id: Disk_samplers.h ab14acf 2021-03-23T13:14:41+01:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz
@@ -88,7 +88,7 @@ public:
       for(std::size_t i = 0; i < number_of_points; ++i) {
         double Q = i * golden_ratio * CGAL_PI;
         double R = std::sqrt(static_cast<double>(i) / number_of_points);
-        double weight =  exp(-0.5 * (std::pow(R / CGAL_ANGLE_ST_DEV_DIVIDER, 2)));
+        double weight =  exp(-0.5 * (CGAL::square(R / CGAL_ANGLE_ST_DEV_DIVIDER)));
         *out_it++ = Tuple(R * cos(Q), R * sin(Q), weight);
       }
     } else {

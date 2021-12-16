@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_segmentation/include/CGAL/internal/Surface_mesh_segmentation/Expectation_maximization.h $
-// $Id: Expectation_maximization.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_segmentation/include/CGAL/internal/Surface_mesh_segmentation/Expectation_maximization.h $
+// $Id: Expectation_maximization.h ab14acf 2021-03-23T13:14:41+01:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz
@@ -75,7 +75,7 @@ private:
         return x == mean ? 1.0 : 0.0;
       }
 
-      double e_over = -0.5 * std::pow((x - mean) / deviation, 2);
+      double e_over = -0.5 * CGAL::square((x - mean) / deviation);
       return exp(e_over) / deviation;
     }
     /**
@@ -289,7 +289,7 @@ private:
       double new_deviation = 0.0;
       for(std::size_t point_i = 0; point_i < points.size(); ++point_i) {
         double membership = responsibility_matrix[center_i][point_i];
-        new_deviation += membership * std::pow(points[point_i] - new_mean, 2);
+        new_deviation += membership * CGAL::square(points[point_i] - new_mean);
       }
       new_deviation = std::sqrt(new_deviation/total_membership);
 

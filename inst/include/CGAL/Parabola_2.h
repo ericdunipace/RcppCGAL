@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Apollonius_graph_2/include/CGAL/Parabola_2.h $
-// $Id: Parabola_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Apollonius_graph_2/include/CGAL/Parabola_2.h $
+// $Id: Parabola_2.h d2a2532 2021-06-17T10:29:02+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -267,14 +267,19 @@ public:
   }
 
 
-  inline Line_2 line() const
+  inline const Line_2& line() const
   {
     return l;
   }
 
-  inline Point_2 center() const
+  inline const Point_2& center() const
   {
     return c;
+  }
+
+  inline const Point_2& origin() const
+  {
+    return o;
   }
 
   template< class Stream >
@@ -283,8 +288,8 @@ public:
     std::vector< Point_2 > p;
     std::vector< Point_2 > pleft, pright;
 
-    pleft.push_back(o);
-    pright.push_back(o);
+    pleft.push_back(origin());
+    pright.push_back(origin());
     const FT STEP(2);
     for (int i = 1; i <= 100; i++) {
       p = compute_points(i * i * STEP);
@@ -311,7 +316,7 @@ public:
       W << Segment_2(pright[i], pright[i+1]);
     }
 
-    W << o;
+    W << origin();
   }
 };
 

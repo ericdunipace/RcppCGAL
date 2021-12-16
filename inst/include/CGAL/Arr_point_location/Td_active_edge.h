@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_active_edge.h $
-// $Id: Td_active_edge.h 319383c 2020-05-20T09:47:58+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_active_edge.h $
+// $Id: Td_active_edge.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)         : Oren Nechushtan <theoren@math.tau.ac.il>
@@ -22,7 +22,7 @@
 
 #include <CGAL/Arr_point_location/Trapezoidal_decomposition_2.h>
 #include <boost/variant.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 
 #ifdef CGAL_TD_DEBUG

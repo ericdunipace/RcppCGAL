@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Spatial_searching/include/CGAL/Kd_tree.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_searching/include/CGAL/Kd_tree.h $
 // $Id: Kd_tree.h 2aa9b02 2021-02-20T11:03:11+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

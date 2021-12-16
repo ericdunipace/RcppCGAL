@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arrangement_on_surface_2_impl.h $
-// $Id: Arrangement_on_surface_2_impl.h 06cd942 2021-03-10T10:33:19+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arrangement_on_surface_2_impl.h $
+// $Id: Arrangement_on_surface_2_impl.h dc36cee 2021-03-10T11:53:16+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein          <wein@post.tau.ac.il>
@@ -4052,7 +4052,7 @@ _defines_outer_ccb_of_new_face(const DHalfedge* he_to,
     //   - No smallest has bin recorded so far, or
     //   - The current target vertex and the recorded vertex are the same and
     //       * The current curve is smaller than the recorded curve, or
-    //   - The current curve end is smaller then the recorded curve end.
+    //   - The current curve end is smaller than the recorded curve end.
     // smaller than its source, so we should check whether it is also smaller
     // Note that we compare the vertices lexicographically: first by the
     // indices, then by x, then by y.

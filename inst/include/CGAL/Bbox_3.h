@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Bbox_3.h $
-// $Id: Bbox_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Bbox_3.h $
+// $Id: Bbox_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -18,7 +18,6 @@
 
 #include <CGAL/config.h>
 #include <CGAL/kernel_assertions.h>
-#include <CGAL/result_of.h>
 #include <CGAL/IO/io.h>
 #include <CGAL/Dimension.h>
 #include <CGAL/array.h>
@@ -206,7 +205,7 @@ inline
 std::ostream&
 operator<<(std::ostream &os, const Bbox_3& b)
 {
-  switch(get_mode(os))
+  switch(IO::get_mode(os))
   {
     case IO::ASCII :
         return os << b.xmin() << ' ' << b.ymin() << ' ' << b.zmin()
@@ -242,11 +241,11 @@ operator>>(std::istream &is, Bbox_3& b)
     double ymax = 0;
     double zmax = 0;
 
-  switch(get_mode(is))
+  switch(IO::get_mode(is))
   {
     case IO::ASCII :
-      is >> iformat(xmin) >> iformat(ymin) >> iformat(zmin)
-         >> iformat(xmax) >> iformat(ymax) >> iformat(zmax);
+      is >> IO::iformat(xmin) >> IO::iformat(ymin) >> IO::iformat(zmin)
+         >> IO::iformat(xmax) >> IO::iformat(ymax) >> IO::iformat(zmax);
         break;
     case IO::BINARY :
         read(is, xmin);

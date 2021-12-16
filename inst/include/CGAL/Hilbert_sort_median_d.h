@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Spatial_sorting/include/CGAL/Hilbert_sort_median_d.h $
-// $Id: Hilbert_sort_median_d.h 5c41b10 2020-01-02T10:26:44+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_sorting/include/CGAL/Hilbert_sort_median_d.h $
+// $Id: Hilbert_sort_median_d.h 6b87fe3 2020-12-05T11:11:33+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     :  Olivier Devillers
@@ -114,7 +114,7 @@ public:
       current_dir = (current_dir +1) % _dimension;
     }while (current_dir != last_dir);
 
-    if ( end-begin < two_to_dim) return; // less than 2^dim points
+    if ( end-begin < two_to_dim) return; // fewer than 2^dim points
 
     /////////////start recursive calls
     last_dir = (direction + _dimension -1) % _dimension;

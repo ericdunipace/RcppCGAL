@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon/include/CGAL/draw_polygon_with_holes_2.h $
-// $Id: draw_polygon_with_holes_2.h a85cf6e 2021-01-26T09:45:18+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon/include/CGAL/draw_polygon_with_holes_2.h $
+// $Id: draw_polygon_with_holes_2.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -91,7 +91,7 @@ protected:
 
     if (p2.outer_boundary().is_empty()) return;
 
-    CGAL::Color c(75,160,255);
+    CGAL::IO::Color c(75,160,255);
     face_begin(c);
 
     compute_one_loop_elements(p2.outer_boundary(), false);

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_regular_triangulation_3.h $
-// $Id: Periodic_3_regular_triangulation_3.h 1003046 2020-03-12T20:58:44+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_regular_triangulation_3.h $
+// $Id: Periodic_3_regular_triangulation_3.h 209513d 2020-07-31T15:58:38+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@inria.fr>
@@ -497,7 +497,7 @@ public:
 
     // Spatial sorting can only be applied to bare points, so we need an adaptor
     typedef typename Geom_traits::Construct_point_3 Construct_point_3;
-    typedef typename boost::result_of<const Construct_point_3(const Weighted_point&)>::type Ret;
+    typedef decltype(std::declval<const Construct_point_3>()(std::declval<const Weighted_point&>())) Ret;
     typedef boost::function_property_map<Construct_point_3, Weighted_point, Ret> fpmap;
     typedef CGAL::Spatial_sort_traits_adapter_3<Geom_traits, fpmap> Search_traits_3;
 

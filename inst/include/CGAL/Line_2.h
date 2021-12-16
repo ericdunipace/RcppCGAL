@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Line_2.h $
-// $Id: Line_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Line_2.h $
+// $Id: Line_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -240,7 +240,7 @@ template <class R >
 std::ostream&
 insert(std::ostream& os, const Line_2<R>& l)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         return os << l.a() << ' ' << l.b() << ' ' << l.c();
     case IO::BINARY :
@@ -267,9 +267,9 @@ std::istream&
 extract(std::istream& is, Line_2<R>& l)
 {
   typename R::RT a(0), b(0), c(0);
-    switch(get_mode(is)) {
+    switch(IO::get_mode(is)) {
     case IO::ASCII :
-        is >> iformat(a) >> iformat(b) >> iformat(c);
+        is >> IO::iformat(a) >> IO::iformat(b) >> IO::iformat(c);
         break;
     case IO::BINARY :
         read(is, a);

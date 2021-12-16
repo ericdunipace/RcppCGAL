@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/Weights.h $
-// $Id: Weights.h f031add 2020-05-18T12:07:17+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/Weights.h $
+// $Id: Weights.h d80d2ee 2020-11-19T16:57:34+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -307,7 +307,8 @@ public:
     {
       if( is_border(he,pmesh()) ) { continue; }
 
-      CGAL_assertion(CGAL::is_triangle_mesh(pmesh()));
+      CGAL_expensive_assertion(CGAL::is_valid_polygon_mesh(pmesh()));
+      CGAL_expensive_assertion(CGAL::is_triangle_mesh(pmesh()));
       CGAL_assertion( v0 == target(he, pmesh()) );
       vertex_descriptor v1 = source(he, pmesh());
       vertex_descriptor v_op = target(next(he, pmesh()), pmesh());

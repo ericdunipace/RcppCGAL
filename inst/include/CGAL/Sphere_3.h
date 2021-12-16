@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Sphere_3.h $
-// $Id: Sphere_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Sphere_3.h $
+// $Id: Sphere_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -86,7 +86,7 @@ public:
 
   Sphere_3 orthogonal_transform(const Aff_transformation_3 &t) const;
 
-  typename cpp11::result_of<typename R::Construct_center_3( Sphere_3)>::type
+  decltype(auto)
   center() const
   {
     return R().construct_center_3_object()(*this);
@@ -208,7 +208,7 @@ template <class R >
 std::ostream&
 insert(std::ostream& os, const Sphere_3<R>& c,const Cartesian_tag&)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         os << c.center() << ' ' << c.squared_radius() << ' '
            << static_cast<int>(c.orientation());
@@ -240,7 +240,7 @@ template <class R >
 std::ostream&
 insert(std::ostream& os, const Sphere_3<R>& c, const Homogeneous_tag&)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         os << c.center() << ' ' << c.squared_radius() << ' '
            << static_cast<int>(c.orientation());
@@ -283,7 +283,7 @@ extract(std::istream& is, Sphere_3<R>& c, const Cartesian_tag&)
     typename R::Point_3 center;
     typename R::FT squared_radius(0);
     int o=0;
-    switch(get_mode(is)) {
+    switch(IO::get_mode(is)) {
     case IO::ASCII :
         is >> center >> squared_radius >> o;
         break;
@@ -311,7 +311,7 @@ extract(std::istream& is, Sphere_3<R>& c, const Homogeneous_tag&)
     typename R::Point_3 center;
     typename R::FT squared_radius;
     int o=0;
-    switch(get_mode(is)) {
+    switch(IO::get_mode(is)) {
     case IO::ASCII :
         is >> center >> squared_radius >> o;
         break;

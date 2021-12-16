@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/TDS_2/include/CGAL/internal/TDS_2/Edge_hash_function.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/TDS_2/include/CGAL/internal/TDS_2/Edge_hash_function.h $
 // $Id: Edge_hash_function.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

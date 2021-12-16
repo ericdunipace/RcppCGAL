@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Nef_3/include/CGAL/Nef_3/SNC_indexed_items.h $
-// $Id: SNC_indexed_items.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/SNC_indexed_items.h $
+// $Id: SNC_indexed_items.h 2a54687 2021-06-04T13:52:14+02:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -15,9 +15,6 @@
 
 #include <CGAL/license/Nef_3.h>
 
-
-#include <CGAL/atomic.h>
-
 #include <CGAL/Nef_3/Vertex.h>
 #include <CGAL/Nef_3/Halfedge.h>
 #include <CGAL/Nef_3/Halffacet.h>
@@ -25,6 +22,8 @@
 #include <CGAL/Nef_3/SHalfedge.h>
 #include <CGAL/Nef_3/SHalfloop.h>
 #include <CGAL/Nef_3/SFace.h>
+
+#include <atomic>
 
 #undef CGAL_NEF_DEBUG
 #define CGAL_NEF_DEBUG 83
@@ -38,11 +37,11 @@ class Index_generator {
   static int get_unique_index()
   {
     // initialized with 0
-    // http://en.cppreference.com/w/cpp/language/zero_initialization
+    // https://en.cppreference.com/w/cpp/language/zero_initialization
 #ifdef CGAL_NO_ATOMIC
     static int unique;
 #else
-    static CGAL::cpp11::atomic<int> unique;
+    static std::atomic<int> unique;
 #endif
     return unique++;
   }
@@ -116,8 +115,9 @@ class SNC_indexed_items {
       init_ifacet = sl.init_ifacet;
       return *this;
     }
-
-    void set_index(int idx = Index_generator::get_unique_index())
+    int new_index()
+    { index = Index_generator::get_unique_index(); return index; }
+    void set_index(int idx)
     { index = idx; }
     int get_index() const { return index; }
     Halffacet_const_handle get_index_facet() const {
@@ -151,8 +151,9 @@ class SNC_indexed_items {
       init_ifacet = se.init_ifacet;
       return *this;
     }
-
-    void set_index(int idx = Index_generator::get_unique_index())
+    int new_index()
+    { index = index2 = Index_generator::get_unique_index(); return index; }
+    void set_index(int idx)
     { index = index2 = idx; }
     int get_index() const {
       return index;
@@ -186,8 +187,9 @@ class SNC_indexed_items {
       index = sv.index;
       return *this;
     }
-
-    void set_index(int idx = Index_generator::get_unique_index())
+    int new_index()
+    { index = Index_generator::get_unique_index(); return index; }
+    void set_index(int idx)
     { index = idx; }
     int get_index() const { return index; }
   };

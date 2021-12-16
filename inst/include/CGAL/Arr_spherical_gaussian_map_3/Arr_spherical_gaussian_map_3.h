@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_spherical_gaussian_map_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_spherical_gaussian_map_3.h $
 // $Id: Arr_spherical_gaussian_map_3.h 89e5200 2020-07-02T19:10:56+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

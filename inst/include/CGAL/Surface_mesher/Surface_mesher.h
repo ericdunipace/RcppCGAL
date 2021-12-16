@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher.h $
 // $Id: Surface_mesher.h 627a7b2 2020-04-27T17:08:35+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

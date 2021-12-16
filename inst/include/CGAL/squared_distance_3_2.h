@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Distance_3/include/CGAL/squared_distance_3_2.h $
-// $Id: squared_distance_3_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Distance_3/include/CGAL/squared_distance_3_2.h $
+// $Id: squared_distance_3_2.h 2820a94 2021-05-25T10:46:29+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -219,12 +219,15 @@ on_left_of_triangle_edge(const typename K::Point_3 & pt,
 }
 
 template <class K>
-inline typename K::FT
-squared_distance_to_triangle(
+inline void
+squared_distance_to_triangle_RT(
     const typename K::Point_3 & pt,
     const typename K::Point_3 & t0,
     const typename K::Point_3 & t1,
     const typename K::Point_3 & t2,
+    bool & inside,
+    typename K::RT& num,
+    typename K::RT& den,
     const K& k)
 {
   typename K::Construct_vector_3 vector;
@@ -233,30 +236,120 @@ squared_distance_to_triangle(
   const Vector_3 oe3 = vector(t0, t2);
   const Vector_3 normal = wcross(e1, oe3, k);
 
-  if(normal != NULL_VECTOR
-     && on_left_of_triangle_edge(pt, normal, t0, t1, k)
-     && on_left_of_triangle_edge(pt, normal, t1, t2, k)
-     && on_left_of_triangle_edge(pt, normal, t2, t0, k))
-      {
-        // the projection of pt is inside the triangle
-        return squared_distance_to_plane(normal, vector(t0, pt), k);
-      }
-      else {
-        // The case normal==NULL_VECTOR covers the case when the triangle
-        // is colinear, or even more degenerate. In that case, we can
-        // simply take also the distance to the three segments.
-        typename K::FT d1 = squared_distance(pt,
-                                             typename K::Segment_3(t2, t0),
-                                             k);
-        typename K::FT d2 = squared_distance(pt,
-                                             typename K::Segment_3(t1, t2),
-                                             k);
-        typename K::FT d3 = squared_distance(pt,
-                                             typename K::Segment_3(t0, t1),
-                                             k);
+  if(normal == NULL_VECTOR) {
+    // The case normal==NULL_VECTOR covers the case when the triangle
+    // is colinear, or even more degenerate. In that case, we can
+    // simply take also the distance to the three segments.
+    squared_distance_RT(pt, typename K::Segment_3(t2, t0), num, den, k);
 
-        return (std::min)( (std::min)(d1, d2), d3);
-      }
+    typename K::RT num2, den2;
+    squared_distance_RT(pt, typename K::Segment_3(t1, t2), num2, den2, k);
+    if(compare_quotients(num2,den2, num,den) == SMALLER) {
+      num = num2;
+      den = den2;
+    }
+
+    // should not be needed since at most 2 edges cover the full triangle in the degenerate case
+    squared_distance_RT(pt, typename K::Segment_3(t0, t1), num2, den2, k);
+    if(compare_quotients(num2,den2, num,den) == SMALLER){
+      num = num2;
+      den = den2;
+    }
+
+    return;
+  }
+
+  const bool b01 = on_left_of_triangle_edge(pt, normal, t0, t1, k);
+  if(!b01) {
+    squared_distance_RT(pt, typename K::Segment_3(t0, t1), num, den, k);
+    return;
+  }
+
+  const bool b12 = on_left_of_triangle_edge(pt, normal, t1, t2, k);
+  if(!b12) {
+    squared_distance_RT(pt, typename K::Segment_3(t1, t2), num, den, k);
+    return;
+  }
+
+  const bool b20 = on_left_of_triangle_edge(pt, normal, t2, t0, k);
+  if(!b20) {
+    squared_distance_RT(pt, typename K::Segment_3(t2, t0), num, den, k);
+    return;
+  }
+
+  // The projection of pt is inside the triangle
+  inside = true;
+  squared_distance_to_plane_RT(normal, vector(t0, pt), num, den, k);
+}
+
+template <class K>
+void
+squared_distance_RT(
+    const typename K::Point_3 & pt,
+    const typename K::Triangle_3 & t,
+    typename K::RT& num,
+    typename K::RT& den,
+    const K& k)
+{
+  typename K::Construct_vertex_3 vertex;
+  bool inside = false;
+  squared_distance_to_triangle_RT(pt,
+                                  vertex(t, 0),
+                                  vertex(t, 1),
+                                  vertex(t, 2),
+                                  inside,
+                                  num,
+                                  den,
+                                  k);
+}
+
+template <class K>
+inline typename K::FT
+squared_distance_to_triangle(
+    const typename K::Point_3 & pt,
+    const typename K::Point_3 & t0,
+    const typename K::Point_3 & t1,
+    const typename K::Point_3 & t2,
+    bool & inside,
+    const K& k)
+{
+  typename K::Construct_vector_3 vector;
+  typedef typename K::Vector_3 Vector_3;
+  const Vector_3 e1 = vector(t0, t1);
+  const Vector_3 oe3 = vector(t0, t2);
+  const Vector_3 normal = wcross(e1, oe3, k);
+
+  if(normal == NULL_VECTOR) {
+    // The case normal==NULL_VECTOR covers the case when the triangle
+    // is colinear, or even more degenerate. In that case, we can
+    // simply take also the distance to the three segments.
+    typename K::FT d1 = squared_distance(pt, typename K::Segment_3(t2, t0), k);
+    typename K::FT d2 = squared_distance(pt, typename K::Segment_3(t1, t2), k);
+
+    // should not be needed since at most 2 edges cover the full triangle in the degenerate case
+    typename K::FT d3 = squared_distance(pt, typename K::Segment_3(t0, t1), k);
+
+    return (std::min)( (std::min)(d1, d2), d3);
+  }
+
+  const bool b01 = on_left_of_triangle_edge(pt, normal, t0, t1, k);
+  if(!b01) {
+    return internal::squared_distance(pt, typename K::Segment_3(t0, t1), k);
+  }
+
+  const bool b12 = on_left_of_triangle_edge(pt, normal, t1, t2, k);
+  if(!b12) {
+    return internal::squared_distance(pt, typename K::Segment_3(t1, t2), k);
+  }
+
+  const bool b20 = on_left_of_triangle_edge(pt, normal, t2, t0, k);
+  if(!b20) {
+    return internal::squared_distance(pt, typename K::Segment_3(t2, t0), k);
+  }
+
+  // The projection of pt is inside the triangle
+  inside = true;
+  return squared_distance_to_plane(normal, vector(t0, pt), k);
 }
 
 template <class K>
@@ -266,11 +359,13 @@ squared_distance(
     const typename K::Triangle_3 & t,
     const K& k)
 {
-  typename K::Construct_vertex_3 vertex;
+  typename K::Construct_vertex_3 vertex = k.construct_vertex_3_object();
+  bool inside = false;
   return squared_distance_to_triangle(pt,
                                       vertex(t, 0),
                                       vertex(t, 1),
                                       vertex(t, 2),
+                                      inside,
                                       k);
 }
 

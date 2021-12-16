@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Solver_interface/include/CGAL/Eigen_solver_traits.h $
-// $Id: Eigen_solver_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Solver_interface/include/CGAL/Eigen_solver_traits.h $
+// $Id: Eigen_solver_traits.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Gael Guennebaud
@@ -29,7 +29,7 @@
 
 #include <CGAL/Eigen_matrix.h>
 #include <CGAL/Eigen_vector.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace CGAL {
 namespace internal {
@@ -226,7 +226,7 @@ public:
 
 protected:
   const typename Matrix::EigenType* m_mat;
-  boost::shared_ptr<EigenSolverT> m_solver_sptr;
+  std::shared_ptr<EigenSolverT> m_solver_sptr;
 };
 
 // Specialization of the solver for BiCGSTAB as for surface parameterization,
@@ -275,7 +275,7 @@ public:
   }
 
 protected:
-  boost::shared_ptr<EigenSolverT> m_solver_sptr;
+  std::shared_ptr<EigenSolverT> m_solver_sptr;
 };
 
 } // namespace CGAL

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/Triangulation_3.h $
-// $Id: Triangulation_3.h 1e249af 2020-11-10T19:21:21+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_3/include/CGAL/Triangulation_3.h $
+// $Id: Triangulation_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -2313,7 +2313,7 @@ public:
 
     std::size_t n;
     int d;
-    if(is_ascii(is))
+    if(IO::is_ascii(is))
       is >> d >> n;
     else {
       read(is, d);
@@ -2375,7 +2375,7 @@ std::istream& operator>> (std::istream& is, Triangulation_3<GT, Tds, Lds>& tr)
 
   std::size_t n;
   int d;
-  if(is_ascii(is))
+  if(IO::is_ascii(is))
   {
     is >> d >> n;
   }
@@ -2435,7 +2435,7 @@ std::ostream& operator<< (std::ostream& os, const Triangulation_3<GT, Tds, Lds>&
 
   // outputs dimension and number of vertices
   size_type n = tr.number_of_vertices();
-  if(is_ascii(os))
+  if(IO::is_ascii(os))
   {
     os << tr.dimension() << std::endl << n << std::endl;
   }
@@ -2464,7 +2464,7 @@ std::ostream& operator<< (std::ostream& os, const Triangulation_3<GT, Tds, Lds>&
   {
     os << *TV[i];
     V[TV[i]] = i;
-    if(is_ascii(os))
+    if(IO::is_ascii(os))
       os << std::endl;
   }
 
@@ -2482,7 +2482,7 @@ std::ostream& operator<< (std::ostream& os, const Triangulation_3<GT, Tds, Lds>&
       for(Cell_iterator it = tr.cells_begin(), end = tr.cells_end(); it != end; ++it)
       {
         os << *it; // other information
-        if(is_ascii(os))
+        if(IO::is_ascii(os))
           os << std::endl;
       }
       break;
@@ -2492,7 +2492,7 @@ std::ostream& operator<< (std::ostream& os, const Triangulation_3<GT, Tds, Lds>&
       for(Facet_iterator it = tr.facets_begin(), end = tr.facets_end(); it != end; ++it)
       {
         os << *((*it).first); // other information
-        if(is_ascii(os))
+        if(IO::is_ascii(os))
           os << std::endl;
       }
       break;
@@ -2502,7 +2502,7 @@ std::ostream& operator<< (std::ostream& os, const Triangulation_3<GT, Tds, Lds>&
       for(Edge_iterator it = tr.edges_begin(), end = tr.edges_end(); it != end; ++it)
       {
         os << *((*it).first); // other information
-        if(is_ascii(os))
+        if(IO::is_ascii(os))
           os << std::endl;
       }
       break;

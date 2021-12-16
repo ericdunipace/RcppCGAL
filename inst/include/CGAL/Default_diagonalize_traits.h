@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Solver_interface/include/CGAL/Default_diagonalize_traits.h $
-// $Id: Default_diagonalize_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Solver_interface/include/CGAL/Default_diagonalize_traits.h $
+// $Id: Default_diagonalize_traits.h 350b917 2021-04-11T14:50:44+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -25,7 +25,7 @@ namespace CGAL {
 ///
 /// The class `Default_diagonalize_traits` is a wrapper designed to automatically
 /// use `Eigen_diagonalize_traits` if Eigen is available and otherwise use
-/// the fallback `Diagonalize_traits` class of %CGAL.
+/// the fallback `Diagonalize_traits` class of \cgal.
 ///
 /// \tparam FT Number type
 /// \tparam dim Dimension of the matrices and vectors

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Kernel_23/include/CGAL/Ray_2.h $
-// $Id: Ray_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Ray_2.h $
+// $Id: Ray_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,6 @@
 #include <CGAL/kernel_assertions.h>
 #include <CGAL/representation_tags.h>
 #include <CGAL/Dimension.h>
-#include <CGAL/result_of.h>
 #include <CGAL/IO/io.h>
 
 namespace CGAL {
@@ -81,13 +80,13 @@ public:
     : RRay_2(typename R::Construct_ray_2()(Return_base_tag(), sp, l)) {}
 
 
-  typename cpp11::result_of<typename R_::Construct_source_2( Ray_2)>::type
+  decltype(auto)
   source() const
   {
     return R().construct_source_2_object()(*this);
   }
 
-  typename cpp11::result_of<typename R_::Construct_second_point_2( Ray_2)>::type
+  decltype(auto)
   second_point() const
   {
     return R().construct_second_point_2_object()(*this);
@@ -108,7 +107,7 @@ public:
              construct_scaled_vector(construct_vector(source(), second_point()), i));
   }
 
-  typename cpp11::result_of<typename R_::Construct_source_2( Ray_2 )>::type
+  decltype(auto)
   start() const
   {
     return source();
@@ -199,7 +198,7 @@ template <class R >
 std::ostream&
 insert(std::ostream& os, const Ray_2<R>& r, const Cartesian_tag&)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         return os << r.source() << ' ' << r.second_point();
     case IO::BINARY :
@@ -213,7 +212,7 @@ template <class R >
 std::ostream&
 insert(std::ostream& os, const Ray_2<R>& r, const Homogeneous_tag&)
 {
-  switch(get_mode(os))
+  switch(IO::get_mode(os))
   {
     case IO::ASCII :
         return os << r.source() << ' ' << r.second_point();

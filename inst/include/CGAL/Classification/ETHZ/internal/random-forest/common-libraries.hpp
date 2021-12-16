@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/ETHZ/internal/random-forest/common-libraries.hpp $
-// $Id: common-libraries.hpp 7599bbe 2020-10-01T13:53:02+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/ETHZ/internal/random-forest/common-libraries.hpp $
+// $Id: common-libraries.hpp f62aaa7 2021-04-06T15:12:56+02:00 Laurent Rineau
 // SPDX-License-Identifier: LicenseRef-RFL
 // License notice in Installation/LICENSE.RFL
 //
@@ -31,7 +31,7 @@
 #include <list>
 #include <CGAL/IO/binary_file_io.h>
 #include <boost/version.hpp>
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <boost/random/mersenne_twister.hpp>
 #if BOOST_VERSION >= 104700

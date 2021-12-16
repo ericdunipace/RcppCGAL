@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Snapping/snap_vertices.h $
-// $Id: snap_vertices.h 038869c 2020-05-12T15:12:21+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Snapping/snap_vertices.h $
+// $Id: snap_vertices.h 542d360 2021-09-27T19:46:14+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -599,7 +599,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
         const FT tol_t = uv_b->second;
         CGAL_assertion(tol_s != FT(0) || tol_t != FT(0));
 
-        const FT lambda = tol_t / (tol_s + tol_t);
+        const FT lambda = tol_s / (tol_s + tol_t);
         const Point new_p = get(vpm_A, va) + lambda * (get(vpm_B, vb) - get(vpm_A, va));
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
         std::cout << "new position of " << va << " " << vb << " --> " << new_p << std::endl;

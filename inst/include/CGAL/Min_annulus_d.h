@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Bounding_volumes/include/CGAL/Min_annulus_d.h $
-// $Id: Min_annulus_d.h 27360a0 2021-02-02T13:36:45+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Bounding_volumes/include/CGAL/Min_annulus_d.h $
+// $Id: Min_annulus_d.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -781,7 +781,7 @@ operator << ( std::ostream& os,
   typedef  typename Traits_::ET          ET;
   typedef  ostream_iterator<ET>          Et_it;
 
-  switch ( CGAL::get_mode( os)) {
+  switch ( CGAL::IO::get_mode( os)) {
 
   case CGAL::IO::PRETTY:
     os << "CGAL::Min_annulus_d( |P| = "
@@ -830,7 +830,7 @@ operator << ( std::ostream& os,
 
   default:
     CGAL_optimisation_assertion_msg( false,
-                                     "CGAL::get_mode( os) invalid!");
+                                     "CGAL::IO::get_mode( os) invalid!");
     break; }
 
   return( os);
@@ -843,7 +843,7 @@ operator >> ( std::istream& is, CGAL::Min_annulus_d<Traits_>& min_annulus)
 {
   using namespace std;
 
-  switch ( CGAL::get_mode( is)) {
+  switch ( CGAL::IO::get_mode( is)) {
 
   case CGAL::IO::PRETTY:
     cerr << endl;

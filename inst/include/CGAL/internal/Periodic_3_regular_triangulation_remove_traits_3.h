@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Periodic_3_triangulation_3/include/CGAL/internal/Periodic_3_regular_triangulation_remove_traits_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_triangulation_3/include/CGAL/internal/Periodic_3_regular_triangulation_remove_traits_3.h $
 // $Id: Periodic_3_regular_triangulation_remove_traits_3.h 2e8a59d 2020-07-21T15:25:54+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

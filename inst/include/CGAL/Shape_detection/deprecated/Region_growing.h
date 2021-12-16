@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Shape_detection/include/CGAL/Shape_detection/deprecated/Region_growing.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Shape_detection/include/CGAL/Shape_detection/deprecated/Region_growing.h $
 // $Id: Region_growing.h 604c793 2020-09-01T09:14:10+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

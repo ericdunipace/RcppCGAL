@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Intersections_3/include/CGAL/Intersections_3/internal/Tetrahedron_3_Bounded_3_do_intersect.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Intersections_3/include/CGAL/Intersections_3/internal/Tetrahedron_3_Bounded_3_do_intersect.h $
 // $Id: Tetrahedron_3_Bounded_3_do_intersect.h dc1ccb5 2020-08-11T16:59:55+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

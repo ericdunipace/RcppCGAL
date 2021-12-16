@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/AABB_tree/include/CGAL/AABB_tree.h $
-// $Id: AABB_tree.h 9b60888 2020-10-20T13:23:15+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/AABB_tree/include/CGAL/AABB_tree.h $
+// $Id: AABB_tree.h f0e94d5 2020-12-05T10:08:13+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -126,7 +126,7 @@ namespace CGAL {
     Self& operator=(const Self&) = delete;
 
     /**
-     * @brief Builds the datastructure from a sequence of primitives.
+     * @brief Builds the data structure from a sequence of primitives.
      * @param first iterator over first primitive to insert
      * @param beyond past-the-end iterator
      *

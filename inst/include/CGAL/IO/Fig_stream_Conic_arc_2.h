@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/IO/Fig_stream_Conic_arc_2.h $
-// $Id: Fig_stream_Conic_arc_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/IO/Fig_stream_Conic_arc_2.h $
+// $Id: Fig_stream_Conic_arc_2.h 755693b 2021-05-03T13:25:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein           <wein@post.tau.ac.il>
@@ -17,6 +17,9 @@
 
 #include <CGAL/IO/Fig_stream.h>
 #include <list>
+
+namespace CGAL {
+namespace IO {
 
 /*!
  * Write an x-monotone conic arc to a FIG stream.
@@ -96,5 +99,7 @@ void write_conic_arc
 
   return;
 }
+
+}} // namespace CGAL:IO
 
 #endif

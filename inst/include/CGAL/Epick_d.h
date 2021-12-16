@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/NewKernel_d/include/CGAL/Epick_d.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/NewKernel_d/include/CGAL/Epick_d.h $
 // $Id: Epick_d.h 7929c7d 2020-04-08T14:42:47+02:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

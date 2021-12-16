@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/STL_Extension/include/CGAL/Time_stamper.h $
-// $Id: Time_stamper.h e82ea5d 2020-01-29T17:13:11+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Time_stamper.h $
+// $Id: Time_stamper.h e9b7595 2021-05-04T11:45:57+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Jane Tournois
@@ -13,7 +13,6 @@
 #define CGAL_TIME_STAMPER_H
 
 #include <CGAL/Has_timestamp.h>
-#include <CGAL/atomic.h>
 
 namespace CGAL {
 

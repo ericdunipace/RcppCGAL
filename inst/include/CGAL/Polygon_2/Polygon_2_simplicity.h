@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon/include/CGAL/Polygon_2/Polygon_2_simplicity.h $
-// $Id: Polygon_2_simplicity.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon/include/CGAL/Polygon_2/Polygon_2_simplicity.h $
+// $Id: Polygon_2_simplicity.h 6b4ba80 2021-03-31T15:58:09+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -74,6 +74,8 @@ struct Vertex_index {
     explicit Vertex_index(Index_t i): m_i(i) {}
     Index_t as_int() const {return m_i;}
     Vertex_index operator++() {++m_i; return *this; }
+    bool operator==(const Vertex_index& other) const { return (m_i == other.m_i); }
+
 private:
     Index_t m_i;
 };

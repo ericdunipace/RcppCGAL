@@ -5,21 +5,23 @@
 // Max-Planck-Institute Saarbruecken (Germany),
 // and Tel-Aviv University (Israel).  All rights reserved.
 //
-// This file is part of CGAL (www.cgal.org)
+// This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Inventor/include/CGAL/IO/Alpha_shape_3_VRML_2_ostream.h $
-// $Id: Alpha_shape_3_VRML_2_ostream.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
-// SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Alpha_shapes_3/include/CGAL/IO/Alpha_shape_3_VRML_2_ostream.h $
+// $Id: Alpha_shape_3_VRML_2_ostream.h 3ea5fc5 2020-05-26T19:33:27+02:00 Mael Rouxel-Labbé
+// SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
 
 #ifndef CGAL_ALPHA_SHAPE_3_VRML_2_OSTREAM_H
 #define CGAL_ALPHA_SHAPE_3_VRML_2_OSTREAM_H
 
-#include <CGAL/basic.h>
-#include <CGAL/IO/VRML_2_ostream.h>
+#include <CGAL/license/Alpha_shapes_3.h>
 
-#ifdef CGAL_ALPHA_SHAPE_3_H
+#include <CGAL/Alpha_shape_3.h>
+#include <CGAL/IO/VRML/VRML_2_ostream.h>
+#include <CGAL/number_utils.h>
+
 namespace CGAL {
 
 template <class Dt >
@@ -90,6 +92,5 @@ operator<<(VRML_2_ostream& os,
 }
 
 } //namespace CGAL
-#endif // CGAL_ALPHA_SHAPE_3_H
 
-#endif CGAL_ALPHA_SHAPE_3_VRML_2_OSTREAM_H
+#endif // CGAL_ALPHA_SHAPE_3_VRML_2_OSTREAM_H

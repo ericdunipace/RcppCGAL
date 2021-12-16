@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Mesh_3/include/CGAL/make_mesh_3.h $
-// $Id: make_mesh_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/make_mesh_3.h $
+// $Id: make_mesh_3.h 3e03d50 2021-05-05T15:32:22+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -31,6 +31,8 @@
 
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/parameter/preprocessor.hpp>
+
+#include <atomic>
 
 namespace CGAL {
 
@@ -192,7 +194,7 @@ void init_c3t3_with_features(C3T3& c3t3,
                              std::size_t maximal_number_of_vertices = 0,
                              Mesh_error_code* pointer_to_error_code = 0
 #ifndef CGAL_NO_ATOMIC
-                             , CGAL::cpp11::atomic<bool>* pointer_to_stop = 0
+                             , std::atomic<bool>* pointer_to_stop = 0
 #endif
                              )
 {

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh_topology/include/CGAL/Face_graph_wrapper.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/Face_graph_wrapper.h $
 // $Id: Face_graph_wrapper.h 52186a0 2020-05-14T11:38:15+02:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

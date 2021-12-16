@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Convex_hull_3/include/CGAL/convex_hull_3.h $
-// $Id: convex_hull_3.h 61d0fb5 2021-01-05T12:06:20+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_hull_3/include/CGAL/convex_hull_3.h $
+// $Id: convex_hull_3.h c8624ee 2021-09-09T11:01:03+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -359,6 +359,8 @@ public:
       }
     }
     catch (Uncertain_conversion_exception&){}
+    Protector protector(CGAL_FE_TONEAREST);
+    CGAL_expensive_assertion(FPU_get_cw() == CGAL_FE_TONEAREST);
     if (ek_plane_ptr==nullptr) {
       const typename Exact_K::Point_3 ep = to_EK(p);
       ek_plane_ptr = new Vector_plus_point<Exact_K>;

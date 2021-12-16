@@ -3,77 +3,99 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Surface_mesh/include/CGAL/Surface_mesh/IO/3mf.h $
-// $Id: 3mf.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
-// SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh/include/CGAL/Surface_mesh/IO/3MF.h $
+// $Id: 3MF.h 56025fb 2021-05-04T14:38:47+02:00 Sébastien Loriot
+// SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Maxime Gimeno
-
 
 #ifndef CGAL_SURFACE_MESH_IO_3MF_H
 #define CGAL_SURFACE_MESH_IO_3MF_H
 
+#include <CGAL/license/Surface_mesh.h>
+
+#include <CGAL/Surface_mesh/Surface_mesh_fwd.h>
+
+#include <CGAL/IO/3MF.h>
+
 #include <iostream>
-#include <CGAL/IO/read_3mf.h>
-#include <CGAL/Surface_mesh.h>
+#include <string>
+#include <vector>
 
-namespace CGAL{
+#if defined(CGAL_LINKED_WITH_3MF) || defined(DOXYGEN_RUNNING)
+
+#ifdef DOXYGEN_RUNNING
+#define CGAL_DEPRECATED
+#endif
+
+namespace CGAL {
+
+namespace IO {
+
+// @todo generalize it to any model of `FaceGraph` and put it in BGL/IO (see read_OFF for the face color map)
+
 /*!
- * Extracts the surface meshes from an input 3mf file and appends it to `output`.
- *\tparam  Point the Point type of the output meshes.
- * \param file_name the path to the 3mf file.
- * \param output a `std::vector` containing the `CGAL::Surface_mesh`s that will be filled by this function.
- * \return the number of extracted meshes.
+ * \ingroup PkgSurfaceMeshIOFunc3MF
+ *
+ * \brief extracts the surface meshes from an input 3mf file and appends it to `output`.
+ *
+ * \tparam Point The type of the \em point property of a vertex. There is no requirement on `P`,
+ *               besides being default constructible and assignable.
+ *               In typical use cases it will be a 2D or 3D point type.
+ *
+ * \param filename the path to the 3mf file
+ * \param output a `std::vector` containing the `CGAL::Surface_mesh`s that will be filled by this function
+ *
+ * \returns `true` if reading was successful, `false` otherwise.
  */
-
 template<typename Point>
-int read_3mf(const std::string& file_name,
-             std::vector<CGAL::Surface_mesh<Point> >& output)
+bool read_3MF(const std::string& filename,
+              std::vector<CGAL::Surface_mesh<Point> >& output)
 {
-  typedef std::vector<Point> PointRange;
-  typedef std::vector<std::size_t> Polygon;
-  typedef std::vector<Polygon> PolygonRange;
-  typedef CGAL::Surface_mesh<Point> SMesh;
-  typedef typename SMesh::Vertex_index Vertex_index;
-  typedef typename SMesh::Face_index Face_index;
+  typedef std::vector<Point>                                  PointRange;
+  typedef std::vector<std::size_t>                            Triangle;
+  typedef std::vector<Triangle>                               TriangleRange;
+  typedef CGAL::Surface_mesh<Point>                           SMesh;
+  typedef typename SMesh::Vertex_index                        Vertex_index;
+  typedef typename SMesh::Face_index                          Face_index;
 
   std::vector<PointRange> all_points;
-  std::vector<PolygonRange> all_polygons;
+  std::vector<TriangleRange> all_triangles;
   std::vector<std::string> names;
-  std::vector<std::vector<CGAL::Color> > all_colors;
-  int result = 0;
-  int nb_meshes =
-      CGAL::read_triangle_soups_from_3mf(file_name,
-                                all_points, all_polygons, all_colors, names);
-  if(nb_meshes < 0 )
+  std::vector<std::vector<CGAL::IO::Color> > all_colors;
+
+  const bool success = CGAL::IO::read_3MF(filename, all_points, all_triangles, all_colors, names);
+  if(!success)
   {
-    std::cerr << "Error in reading meshes."<<std::endl;
-    return -1;
+    std::cerr << "Error in reading meshes." << std::endl;
+    return false;
   }
+
+  const std::size_t nb_meshes = all_points.size();
+  int result = 0;
   output.reserve(nb_meshes);
-  for(int i = 0; i< nb_meshes; ++i)
+
+  for(std::size_t i=0; i<nb_meshes; ++i)
   {
     bool skip = false;
     SMesh sm;
-    PolygonRange triangles = all_polygons[i];
+    TriangleRange triangles = all_triangles[i];
     PointRange points = all_points[i];
-    std::vector<CGAL::Color> colors = all_colors[i];
-    //Create the surface mesh from scratch
-    std::size_t n(points.size());
-    sm.reserve(n,0, triangles.size());
-    for(const Point& p : points)
-    {
-      sm.add_vertex(p);
-    }
+    std::vector<CGAL::IO::Color> colors = all_colors[i];
 
-    for(Polygon& triangle : triangles)
+    // Create the surface mesh from scratch
+    std::size_t n(points.size());
+    sm.reserve(n, 0, triangles.size());
+    for(const Point& p : points)
+      sm.add_vertex(p);
+
+    for(Triangle& triangle : triangles)
     {
       std::vector<Vertex_index> face;
       face.reserve(triangle.size());
-      for(auto index : triangle)
-      {
+      for(std::size_t index : triangle)
         face.push_back(Vertex_index(index));
-      }
+
       Face_index fi = sm.add_face(face);
       if(fi == sm.null_face())
       {
@@ -82,34 +104,55 @@ int read_3mf(const std::string& file_name,
         break;
       }
     }
+
     if(skip)
       continue;
-    //end constructin the surface mesh from scratch
 
-    CGAL::Color first = colors.front();
+    const Color& first = colors.front();
     bool need_pmap = false;
-    for(auto color : colors)
+    for(const Color& color : colors)
     {
-      if (color != first)
+      if(color != first)
       {
         need_pmap = true;
         break;
       }
     }
+
     if(need_pmap)
     {
-      typename SMesh::template Property_map<Face_index, CGAL::Color> fcolor =
-          sm.template add_property_map<Face_index,CGAL::Color>("f:color",first).first;
-      for(std::size_t pid = 0; pid < colors.size(); ++pid)
-      {
-        put(fcolor, Face_index(pid), colors[pid]);//should work bc mesh is just created and shouldn't have any destroyed face.
-      }
+      typename SMesh::template Property_map<Face_index, CGAL::IO::Color> fcolor =
+          sm.template add_property_map<Face_index,CGAL::IO::Color>("f:color", first).first;
+
+      for(std::size_t pid=0, cs=colors.size(); pid<cs; ++pid)
+        put(fcolor, Face_index(pid), colors[pid]); // there can't have any deleted face yet
     }
+
     output.push_back(sm);
     ++result;
   }
-  return result;
+
+  return true;
 }
 
-}//end CGAL
-#endif // CGAL_SURFACE_MESH_3MF_H
+} // namespace IO
+
+#ifndef CGAL_NO_DEPRECATED_CODE
+
+/*!
+  \ingroup PkgSurfaceMeshIOFuncDeprecated
+  \deprecated This function is deprecated since \cgal 5.3, `CGAL::IO::read_3MF()` should be used instead.
+*/
+template<typename Point>
+CGAL_DEPRECATED int read_3mf(const std::string& filename, std::vector<CGAL::Surface_mesh<Point> >& output)
+{
+  return IO::read_3MF(filename, output);
+}
+
+#endif // CGAL_NO_DEPRECATED_CODE
+
+} // namespace CGAL
+
+#endif // defined(CGAL_LINKED_WITH_3MF) || defined(DOXYGEN_RUNNING)
+
+#endif // CGAL_SURFACE_MESH_IO_3MF_H

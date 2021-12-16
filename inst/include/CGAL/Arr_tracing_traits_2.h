@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_tracing_traits_2.h $
-// $Id: Arr_tracing_traits_2.h 7cf9a11 2020-07-02T19:11:07+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_tracing_traits_2.h $
+// $Id: Arr_tracing_traits_2.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel    <efif@post.tau.ac.il>
@@ -669,7 +669,7 @@ public:
     /*! Operate
      * \param xcv1 the first curve
      * \param xcv2 the second curve
-     * \return true if the the two curve are mergeable and false otherwise.
+     * \return true if the two curve are mergeable and false otherwise.
      * Two curves are mergeable if they have the same underlying theoretical
      * curve
      */

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Classification/include/CGAL/Classification/Evaluation.h $
-// $Id: Evaluation.h 2d7e15b 2020-09-30T08:32:43+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/Evaluation.h $
+// $Id: Evaluation.h 76d1fe8 2021-01-07T16:45:08+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -123,7 +123,7 @@ public:
     CGAL_precondition (m_labels.is_valid_ground_truth (ground_truth));
     CGAL_precondition (m_labels.is_valid_ground_truth (result));
 
-    for (const auto& p : CGAL::make_range
+    for (const auto p : CGAL::make_range
            (boost::make_zip_iterator(boost::make_tuple(ground_truth.begin(), result.begin())),
             boost::make_zip_iterator(boost::make_tuple(ground_truth.end(), result.end()))))
     {

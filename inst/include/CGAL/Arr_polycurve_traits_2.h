@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Arrangement_on_surface_2/include/CGAL/Arr_polycurve_traits_2.h $
-// $Id: Arr_polycurve_traits_2.h 10f399c 2020-11-04T20:46:07+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_polycurve_traits_2.h $
+// $Id: Arr_polycurve_traits_2.h 3b70343 2020-11-16T16:19:43+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel <efif@post.tau.ac.il>
@@ -781,7 +781,7 @@ public:
         }
       }
 
-      // Check if the the left endpoint lies on the other polycurve.
+      // Check if the left endpoint lies on the other polycurve.
       bool left_coincides = (left_res == EQUAL);
       bool left_overlap = false;
 

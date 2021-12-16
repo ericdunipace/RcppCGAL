@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Spatial_searching/include/CGAL/Incremental_neighbor_search.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_searching/include/CGAL/Incremental_neighbor_search.h $
 // $Id: Incremental_neighbor_search.h dfe272f 2020-05-18T12:24:05+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

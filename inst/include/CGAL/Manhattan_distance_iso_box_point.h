@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Spatial_searching/include/CGAL/Manhattan_distance_iso_box_point.h $
-// $Id: Manhattan_distance_iso_box_point.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_searching/include/CGAL/Manhattan_distance_iso_box_point.h $
+// $Id: Manhattan_distance_iso_box_point.h 9533a9f 2021-05-04T10:43:26+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,6 @@
 #include <CGAL/license/Spatial_searching.h>
 
 
-#include <CGAL/result_of.h>
 #include <CGAL/Kd_tree_rectangle.h>
 #include <CGAL/internal/Get_dimension_tag.h>
 #include <vector>

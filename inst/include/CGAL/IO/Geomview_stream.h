@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Geomview/include/CGAL/IO/Geomview_stream.h $
-// $Id: Geomview_stream.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Geomview/include/CGAL/IO/Geomview_stream.h $
+// $Id: Geomview_stream.h 0583a48 2020-10-14T15:32:27+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -43,7 +43,14 @@ public:
                     const char *machine = nullptr,
                     const char *login = nullptr);
 
+    bool fail() const { return false; }
+    bool good() const { return true; }
+    explicit operator bool() { return true; }
+
     ~Geomview_stream();
+
+    void precision(const int p) { prec = p; }
+    int precision() const { return prec; }
 
     Geomview_stream &operator<<(const Color &c);
     Geomview_stream &operator<<(const std::string & s);
@@ -214,6 +221,7 @@ private:
     double radius;    // radius of vertices
     int in, out;      // file descriptors for input and output pipes
     int pid;          // the geomview process identification
+    int prec;         // precision of the (ASCII) stream
     std::map<std::string, int> id; // used to get a unique ID per type.
 };
 

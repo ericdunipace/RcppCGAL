@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/self_intersections.h $
-// $Id: self_intersections.h efc0c52 2021-01-15T10:02:00+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/self_intersections.h $
+// $Id: self_intersections.h a1edfa7 2021-02-25T12:05:56+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -47,6 +47,7 @@
 #include <exception>
 #include <sstream>
 #include <type_traits>
+#include <typeinfo>
 #include <vector>
 
 #ifdef DOXYGEN_RUNNING
@@ -503,11 +504,21 @@ bool does_self_intersect(const FaceRange& face_range,
     CGAL::Emptyset_iterator unused_out;
     internal::self_intersections_impl<ConcurrencyTag>(face_range, tmesh, unused_out, true /*throw*/, np);
   }
-  catch(CGAL::internal::Throw_at_output_exception&)
+  catch (const CGAL::internal::Throw_at_output_exception&)
   {
     return true;
   }
-
+  #if defined(CGAL_LINKED_WITH_TBB) && TBB_USE_CAPTURED_EXCEPTION
+  catch (const tbb::captured_exception& e)
+  {
+    const char* ti1 = e.name();
+    const char* ti2 = typeid(const CGAL::internal::Throw_at_output_exception&).name();
+    const std::string tn1(ti1);
+    const std::string tn2(ti2);
+    if (tn1 == tn2) return true;
+    else throw;
+  }
+  #endif
   return false;
 }
 

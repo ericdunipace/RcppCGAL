@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/TDS_3/include/CGAL/Triangulation_ds_cell_base_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/TDS_3/include/CGAL/Triangulation_ds_cell_base_3.h $
 // $Id: Triangulation_ds_cell_base_3.h dcc4fb1 2020-05-20T09:46:26+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

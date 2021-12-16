@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Point_set_processing_3/include/CGAL/jet_estimate_normals.h $
-// $Id: jet_estimate_normals.h 93f1cd9 2020-07-16T09:53:31+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/jet_estimate_normals.h $
+// $Id: jet_estimate_normals.h 8682f9b 2020-08-24T11:45:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret and Marc Pouget and Frederic Cazals
@@ -107,7 +107,7 @@ jet_estimate_normal(const typename NeighborQuery::Point_3& query, ///< point to 
    \tparam PointRange is a model of `Range`. The value type of
    its iterator is the key type of the named parameter `point_map`.
 
-   \param points input point range.
+   \param points input point range
    \param k number of neighbors
    \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
 

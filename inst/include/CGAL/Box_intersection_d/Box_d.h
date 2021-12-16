@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Box_intersection_d/include/CGAL/Box_intersection_d/Box_d.h $
-// $Id: Box_d.h 6b36ea0 2021-02-17T16:48:39+00:00 Andreas Fabri
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Box_intersection_d/include/CGAL/Box_intersection_d/Box_d.h $
+// $Id: Box_d.h 3e03d50 2021-05-05T15:32:22+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,10 +21,10 @@
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Bbox_3.h>
 #include <CGAL/Box_intersection_d/box_limits.h>
-#include <CGAL/atomic.h>
 
 #include <algorithm>
 #include <array>
+#include <atomic>
 
 namespace CGAL {
 
@@ -38,7 +38,7 @@ struct Unique_numbers {
 #ifdef CGAL_NO_ATOMIC
       static std::size_t n = 0;
 #else
-      static CGAL::cpp11::atomic<std::size_t> n; // initialized to 0
+      static std::atomic<std::size_t> n; // initialized to 0
 #endif
       i = n++;
     }

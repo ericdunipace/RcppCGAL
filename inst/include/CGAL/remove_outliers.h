@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Point_set_processing_3/include/CGAL/remove_outliers.h $
-// $Id: remove_outliers.h 7d5bec6 2020-09-28T09:49:00+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/remove_outliers.h $
+// $Id: remove_outliers.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Laurent Saboret and Nader Salman and Pierre Alliez
@@ -103,7 +103,7 @@ compute_avg_knn_sq_distance_3(
    \tparam PointRange is a model of `Range`. The value type of
    its iterator is the key type of the named parameter `point_map`.
 
-   \param points input point range.
+   \param points input point range
    \param k number of neighbors
    \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
 

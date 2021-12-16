@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.1/Triangulation_3/include/CGAL/Triangulation_hierarchy_3.h $
-// $Id: Triangulation_hierarchy_3.h 8dbf50a 2021-02-03T21:50:10+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_3/include/CGAL/Triangulation_hierarchy_3.h $
+// $Id: Triangulation_hierarchy_3.h 8fc88a9 2021-02-18T15:19:11+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Olivier Devillers <Olivier.Devillers@sophia.inria.fr>
@@ -855,7 +855,7 @@ int
 Triangulation_hierarchy_3<Tr>::
 random_level()
 {
-  boost::geometric_distribution<> proba(1.0/ratio);
+  boost::geometric_distribution<> proba(1.0/double(ratio));
   boost::variate_generator<boost::rand48&, boost::geometric_distribution<> > die(random, proba);
 
   return (std::min)(die(), (int)maxlevel)-1;
