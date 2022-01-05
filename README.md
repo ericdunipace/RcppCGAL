@@ -16,12 +16,16 @@ Much like the `BH` package, the `RcppCGAL` package can be used via the `LinkingT
 This package currently includes the version 5.3.1 stable release of CGAL.
 
 ### Installation
-To install this package, you can download or clone the git repository. Then you can install using devtools
+To install this package, you can install the version from CRAN:
+```R
+install.packages("RcppCGAL")
+```
+
+Alternatively, you can download or clone the git repository. Then you can install using devtools
 ```R
 devtools::install("RcppCGAL")
 ```
-
-Alternatively, you can install from github directly using the
+You may also install from github directly using the
 `devtools::install_github` function.
 
 By default, the package will try to download the header files from the

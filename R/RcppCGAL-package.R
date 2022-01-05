@@ -3,9 +3,15 @@
 #' @examples
 #' \dontrun{
 #' # To use this in a C++ file make sure you add an appropriate
-#' # dependency
+#' # dependency in your header C++ code. Make sure to use CGAL/basic.h
+#' 
+#' #include <Rcpp.h>
 #' // [[Rcpp::depends(RcppCGAL)]]
-#' include <Rcpp.h>}
+#' #include <CGAL/basic.h>
+#' 
+#' // function code
+#' 
+#' }
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage
