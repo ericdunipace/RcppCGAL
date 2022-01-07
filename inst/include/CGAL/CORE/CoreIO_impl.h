@@ -40,7 +40,7 @@ void core_io_error_handler(const char *f, const char *m) {
   Rcpp::Rcout << "\n error_handler";
   Rcpp::Rcout << "::" << f << "::" << m << "\n";
   Rcpp::Rcout.flush();
-  Rcpp::Rstop();
+  Rcpp::stop();
 }
 
 CGAL_INLINE_FUNCTION
@@ -50,7 +50,7 @@ void core_io_memory_handler(char *t, const char *f, const char *m) {
     Rcpp::Rcout << "::" << f << "::" << m;
     Rcpp::Rcout << "memory exhausted\n";
     Rcpp::Rcout.flush();
-    Rcpp::Rstop();
+    Rcpp::stop();
   }
 }
 

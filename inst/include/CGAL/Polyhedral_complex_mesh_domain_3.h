@@ -587,7 +587,7 @@ public:
         //     Rcpp::Rcerr << "Not the same result for:\n  "
         //               << ray_shot
         //               << "\n  " << ray_shot2 << std::endl;
-        //     Rcpp::Rstop();
+        //     Rcpp::stop();
         //   }
         // }
         if(!opt)

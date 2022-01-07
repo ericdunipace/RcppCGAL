@@ -100,9 +100,11 @@
   dest_folder <- file.path(pkg_path, "include", "CGAL")
   
   # check to see if changes have already been done before
-  stored_change_log <- file.path(pkg_path, "saveCheck", "OUTPUT_CHANGED")
+  change_log_dir <- file.path(pkg_path, "saveCheck")
+  stored_change_log <- file.path(change_log_dir, "OUTPUT_CHANGED")
   
   if(!file.exists(stored_change_log)) {
+    if(!dir.exists(change_log_dir)) dir.create(change_log_dir)
     file.create(stored_change_log)
   }
   CHANGED <- readLines(stored_change_log)
@@ -123,10 +125,10 @@
     tx[first]  <- sub(pattern = "#include",   replacement = "#include <Rcpp.h>\n#include", x = tx[first])
     tx[search]  <- gsub(pattern = "std::cerr", replacement = "Rcpp::Rcerr", x = tx[search])
     tx[search]  <- gsub(pattern = "std::cout", replacement = "Rcpp::Rcout", x = tx[search])
-    tx[search]  <- gsub(pattern = "std::abort\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
-    tx[search]  <- gsub(pattern = "abort\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
-    tx[search]  <- gsub(pattern = "std::exit\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
-    tx[search]  <- gsub(pattern = "exit\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
+    tx[search]  <- gsub(pattern = "std::abort\\(\\)", replacement = "Rcpp::stop()", x = tx[search])
+    tx[search]  <- gsub(pattern = "abort\\(\\)", replacement = "Rcpp::stop()", x = tx[search])
+    tx[search]  <- gsub(pattern = "std::exit\\(\\)", replacement = "Rcpp::stop()", x = tx[search])
+    tx[search]  <- gsub(pattern = "exit\\(\\)", replacement = "Rcpp::stop()", x = tx[search])
     writeLines(tx, con=f)
   }
   CHANGED <- "TRUE"

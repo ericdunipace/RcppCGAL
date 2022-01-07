@@ -567,7 +567,7 @@ public:
     if (I.first == 1 && I.second == 0) {
       core_error("CORE ERROR! root index out of bound",
                       __FILE__, __LINE__, true);
-      Rcpp::Rstop();
+      Rcpp::stop();
     }
     // test if the root isolated in I is 0:
     if ((I.first == 0)&&(I.second == 0))
@@ -586,7 +586,7 @@ public:
     if (v.size() != 1) {
       core_error("CORE ERROR! non-isolating interval",
                       __FILE__, __LINE__, true);
-      Rcpp::Rstop();
+      Rcpp::stop();
     }
     ffVal = computeFilteredValue(); // Chee: this line seems unnecessary
   }
