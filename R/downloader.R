@@ -129,6 +129,8 @@
     tx[search]  <- gsub(pattern = "abort\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
     tx[search]  <- gsub(pattern = "std::exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
     tx[search]  <- gsub(pattern = "exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
+    tx[search]  <- gsub(pattern = "std::exit\\(0\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
+    tx[search]  <- gsub(pattern = "std::exit\\(1\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
     writeLines(tx, con=f)
   }
   CHANGED <- "TRUE"
