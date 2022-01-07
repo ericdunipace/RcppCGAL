@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_2_REFINE_EDGES_WITH_CLUSTERS_H
 #define CGAL_MESH_2_REFINE_EDGES_WITH_CLUSTERS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 
@@ -92,7 +93,7 @@ public:
     this->va = edge.first->vertex(Tr::cw (edge.second));
     this->vb = edge.first->vertex(Tr::ccw(edge.second));
 
-//     std::cerr << "refinement_point_impl\n" << this->va->point() << " / "
+//     Rcpp::Rcerr << "refinement_point_impl\n" << this->va->point() << " / "
 //               << this->vb->point() << std::endl;
 
     va_has_a_cluster = false;
@@ -107,7 +108,7 @@ public:
           va_has_a_cluster = true;
           vb_has_a_cluster = true;
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-          std::cerr << "midpoint(" << this->va->point()
+          Rcpp::Rcerr << "midpoint(" << this->va->point()
                     << " , " << this->vb->point() << ")\n";
 #endif // CGAL_MESH_2_DEBUG_CLUSTERS
           return midpoint(this->va->point(), this->vb->point());
@@ -125,7 +126,7 @@ public:
     }else{
       // no cluster
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-      std::cerr << "midpoint(" << this->va->point()
+      Rcpp::Rcerr << "midpoint(" << this->va->point()
                 << " , " << this->vb->point() << ")\n";
 #endif // CGAL_MESH_2_DEBUG_CLUSTERS
       return midpoint(this->va->point(), this->vb->point());
@@ -135,12 +136,12 @@ public:
   void after_insertion_impl(const Vertex_handle& v)
   {
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-    std::cerr << "update_clusters" << std::endl;
-    std::cerr << "va_has_a_cluster=" << va_has_a_cluster
+    Rcpp::Rcerr << "update_clusters" << std::endl;
+    Rcpp::Rcerr << "va_has_a_cluster=" << va_has_a_cluster
               << std::endl
               << "vb_has_a_cluster=" << vb_has_a_cluster
               << std::endl;
-    std::cerr << "clusters.size()=" << clusters.size() << std::endl;
+    Rcpp::Rcerr << "clusters.size()=" << clusters.size() << std::endl;
 #endif // CGAL_MESH_2_DEBUG_CLUSTERS
     Super::after_insertion_impl(v);
     if( va_has_a_cluster )
@@ -148,7 +149,7 @@ public:
     if( vb_has_a_cluster )
       clusters.update_cluster(cb,cb_it,this->vb,this->va,v,cluster_splitted);
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-    std::cerr << "clusters.size() after update_cluster="
+    Rcpp::Rcerr << "clusters.size() after update_cluster="
               << clusters.size() << std::endl;
 #endif // CGAL_MESH_2_DEBUG_CLUSTERS
   }
@@ -258,13 +259,13 @@ private:
     const Point& b = vb->point();
 
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-    std::cerr << "split_cluster_point(" << va->point()
+    Rcpp::Rcerr << "split_cluster_point(" << va->point()
               << " , " << vb->point() << ")\n"
               << "  reduced: " << c.is_reduced() << "\nresult:  ";
 #endif // CGAL_MESH_2_DEBUG_CLUSTERS
     if( c.is_reduced() ) {
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-      std::cerr << midpoint(a, b) << " (midpoint)\n";
+      Rcpp::Rcerr << midpoint(a, b) << " (midpoint)\n";
 #endif  // CGAL_MESH_2_DEBUG_CLUSTERS
       return midpoint(a, b);
     }
@@ -289,7 +290,7 @@ private:
           i = i2;
         //here i is the best point for splitting
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-        std::cerr << i << std::endl;
+        Rcpp::Rcerr << i << std::endl;
 #endif  // CGAL_MESH_2_DEBUG_CLUSTERS
         return i;
       }

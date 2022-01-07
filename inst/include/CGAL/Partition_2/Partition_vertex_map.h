@@ -13,6 +13,7 @@
 #ifndef CGAL_PARTITION_VERTEX_MAP_H
 #define CGAL_PARTITION_VERTEX_MAP_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -241,8 +242,8 @@ public:
   {
 
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-    std::cout << "before sort: edges for " << *vertex_it << std::endl;
-    std::cout << *this << std::endl;
+    Rcpp::Rcout << "before sort: edges for " << *vertex_it << std::endl;
+    Rcpp::Rcout << *this << std::endl;
 #endif
 
     int num_unshared = 0;
@@ -257,8 +258,8 @@ public:
     }
 
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-    std::cout << "after sort: edges for " << *vertex_it  << std::endl;
-    std::cout << *this << std::endl;
+    Rcpp::Rcout << "after sort: edges for " << *vertex_it  << std::endl;
+    Rcpp::Rcout << *this << std::endl;
 #endif
 
     Self_const_iterator prev_e_it = m_list.begin();
@@ -398,18 +399,18 @@ public:
        Vertex_info first_v_info = (*m_it).second.front().endpoint();
        Vertex_info prev_v_info = first_v_info ;
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-       std::cout << "union_vertices: inserting " << (*prev_v_info.vertex_it()) << std::endl;
+       Rcpp::Rcout << "union_vertices: inserting " << (*prev_v_info.vertex_it()) << std::endl;
 #endif
        *result = *prev_v_info.vertex_it();
        result++;
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-       std::cout << "union_vertices: inserting "<< *(*m_it).first.vertex_it() << std::endl;
+       Rcpp::Rcout << "union_vertices: inserting "<< *(*m_it).first.vertex_it() << std::endl;
 #endif
        *result = *(*m_it).first.vertex_it();
        result++;
        Vertex_info next_v_info = (*m_it).second.back().endpoint();
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-       std::cout << "union_vertices: inserting " << *next_v_info.vertex_it() << std::endl;
+       Rcpp::Rcout << "union_vertices: inserting " << *next_v_info.vertex_it() << std::endl;
 #endif
        *result = *next_v_info.vertex_it();
        result++;
@@ -422,7 +423,7 @@ public:
        while (v_info != first_v_info && m_it != m_map.end())
        {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-          std::cout << "union_vertices: prev_v_info " << (*prev_v_info.vertex_it())
+          Rcpp::Rcout << "union_vertices: prev_v_info " << (*prev_v_info.vertex_it())
                     << " v_info " << (*v_info.vertex_it()) << " next_v_info "
                     << (*next_v_info.vertex_it()) << std::endl;
 #endif
@@ -441,7 +442,7 @@ public:
           if (next_v_info != first_v_info)
           {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-             std::cout << "union_vertices: inserting "
+             Rcpp::Rcout << "union_vertices: inserting "
                        << *next_v_info.vertex_it() << std::endl;
 #endif
              *result = *next_v_info.vertex_it();
@@ -454,10 +455,10 @@ public:
        }
 #ifdef CGAL_PARTITION_CHECK_DEBUG
        if (v_info == first_v_info)
-          std::cout << "union_vertices: stopped because first was reached "
+          Rcpp::Rcout << "union_vertices: stopped because first was reached "
                     << std::endl;
        else
-          std::cout << "union_vertices: stopped because end was reached "
+          Rcpp::Rcout << "union_vertices: stopped because end was reached "
                     << std::endl;
 #endif
        return result;

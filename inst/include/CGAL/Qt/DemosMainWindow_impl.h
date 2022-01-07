@@ -14,6 +14,7 @@
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
+#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #else
@@ -279,7 +280,7 @@ DemosMainWindow::popupAboutBox(QString title, QString html_resource_name)
                                       ::Qt::LinksAccessibleByKeyboard);
   }
   else {
-    std::cerr << "Cannot find child \"qt_msgbox_label\" in QMessageBox\n"
+    Rcpp::Rcerr << "Cannot find child \"qt_msgbox_label\" in QMessageBox\n"
               << "  with Qt version " << QT_VERSION_STR << "!\n";
   }
   mb.exec();

@@ -18,6 +18,7 @@
 #ifndef CGAL_LABELED_MESH_DOMAIN_3_H
 #define CGAL_LABELED_MESH_DOMAIN_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -952,7 +953,7 @@ Construct_initial_points::operator()(OutputIterator pts,
   // Create nb_point points
   int n = nb_points;
 #ifdef CGAL_MESH_3_VERBOSE
-  std::cerr << "construct initial points (nb_points: " << nb_points << ")\n";
+  Rcpp::Rcerr << "construct initial points (nb_points: " << nb_points << ")\n";
 #endif
   while ( 0 != n )
   {
@@ -972,7 +973,7 @@ Construct_initial_points::operator()(OutputIterator pts,
       --n;
 
 #ifdef CGAL_MESH_3_VERBOSE
-      std::cerr << boost::format("\r             \r"
+      Rcpp::Rcerr << boost::format("\r             \r"
                                  "%1%/%2% initial point(s) found...")
                    % (nb_points - n)
                    % nb_points;
@@ -990,7 +991,7 @@ Construct_initial_points::operator()(OutputIterator pts,
   }
 
 #ifdef CGAL_MESH_3_VERBOSE
-  std::cerr << "\n";
+  Rcpp::Rcerr << "\n";
 #endif
   return pts;
 }

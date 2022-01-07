@@ -30,6 +30,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/CORE/Expr.h>
@@ -89,7 +90,7 @@ void Expr::doubleInterval(double & lb, double & ub) const {
   int sign = ((* this) -Expr(d)).sign();
   // Seems like doubleValue() always give a lower bound,
   //         so sign = 0 or 1 (never -1).
-  //std::cout << "Sign = " << sign << std::endl;
+  //Rcpp::Rcout << "Sign = " << sign << std::endl;
   if (sign == 0) {
     lb = ub = d;
     return;
@@ -203,37 +204,37 @@ extLong ExprRep::computeBound() {
                         // core_min(cauchyBd,
                         core_min(bfmsskBd, ourBd));
 #ifdef CORE_SHOW_BOUNDS
-    std::cout << "Bounds (" << measureBd <<
+    Rcpp::Rcout << "Bounds (" << measureBd <<
                     "," << bfmsskBd << ", " << ourBd << "),  ";
-    std::cout << "MIN = " << bd << std::endl;
-    std::cout << "d_e= " << d_e() << std::endl;
+    Rcpp::Rcout << "MIN = " << bd << std::endl;
+    Rcpp::Rcout << "d_e= " << d_e() << std::endl;
 #endif
 
 #if defined(CORE_DEBUG_BOUND) && !defined(CGAL_HEADER_ONLY)
   // Some statistics about which one is/are the winner[s].
   computeBoundCallsCounter++;
   int number_of_winners = 0;
-  std::cerr << " New contest " << std::endl;
+  Rcpp::Rcerr << " New contest " << std::endl;
   if (bd == bfmsskBd) {
     BFMSS_counter++;
     number_of_winners++;
-    std::cerr << " BFMSS is the winner " << std::endl;
+    Rcpp::Rcerr << " BFMSS is the winner " << std::endl;
   }
   if (bd == measureBd) {
     Measure_counter++;
     number_of_winners++;
-    std::cerr << " measureBd is the winner " << std::endl;
+    Rcpp::Rcerr << " measureBd is the winner " << std::endl;
   }
   /*  if (bd == cauchyBd) {
       Cauchy_counter++;
       number_of_winners++;
-      std::cerr << " cauchyBd is the winner " << std::endl;
+      Rcpp::Rcerr << " cauchyBd is the winner " << std::endl;
     }
    */
   if (bd == ourBd) {
     LiYap_counter++;
     number_of_winners++;
-    std::cerr << " ourBd is the winner " << std::endl;
+    Rcpp::Rcerr << " ourBd is the winner " << std::endl;
   }
 
   CGAL_assertion(number_of_winners >= 1);
@@ -241,18 +242,18 @@ extLong ExprRep::computeBound() {
   if (number_of_winners == 1) {
     if (bd == bfmsskBd) {
       BFMSS_only_counter++;
-      std::cerr << " BFMSSBd is the only winner " << std::endl;
+      Rcpp::Rcerr << " BFMSSBd is the only winner " << std::endl;
     } else if (bd == measureBd) {
       Measure_only_counter++;
-      std::cerr << " measureBd is the only winner " << std::endl;
+      Rcpp::Rcerr << " measureBd is the only winner " << std::endl;
     }
     /* else if (bd == cauchyBd) {
       Cauchy_only_counter++;
-      std::cerr << " cauchyBd is the only winner " << std::endl;
+      Rcpp::Rcerr << " cauchyBd is the only winner " << std::endl;
     } */
     else if (bd == ourBd) {
       LiYap_only_counter++;
-      std::cerr << " ourBd is the only winner " << std::endl;
+      Rcpp::Rcerr << " ourBd is the only winner " << std::endl;
     }
   }
 #endif
@@ -1075,15 +1076,15 @@ void DivRep::computeApproxValue(const extLong& relPrec,
 //
 CGAL_INLINE_FUNCTION
 void Expr::debug(int mode, int level, int depthLimit) const {
-  std::cout << "-------- Expr debug() -----------" << std::endl;
-  std::cout << "rep = " << rep << std::endl;
+  Rcpp::Rcout << "-------- Expr debug() -----------" << std::endl;
+  Rcpp::Rcout << "rep = " << rep << std::endl;
   if (mode == Expr::LIST_MODE)
     rep->debugList(level, depthLimit);
   else if (mode == Expr::TREE_MODE)
     rep->debugTree(level, 0, depthLimit);
   else
     core_error("unknown debugging mode", __FILE__, __LINE__, false);
-  std::cout << "---- End Expr debug(): " << std::endl;
+  Rcpp::Rcout << "---- End Expr debug(): " << std::endl;
 }
 
 
@@ -1132,13 +1133,13 @@ void UnaryOpRep::debugList(int level, int depthLimit) const {
   if (depthLimit <= 0)
     return;
   if (level == Expr::SIMPLE_LEVEL) {
-    std::cout << "(" << dump(OPERATOR_VALUE);
+    Rcpp::Rcout << "(" << dump(OPERATOR_VALUE);
     child->debugList(level, depthLimit - 1);
-    std::cout << ")";
+    Rcpp::Rcout << ")";
   } else if (level == Expr::DETAIL_LEVEL) {
-    std::cout << "(" << dump(FULL_DUMP);
+    Rcpp::Rcout << "(" << dump(FULL_DUMP);
     child->debugList(level, depthLimit - 1);
-    std::cout << ")";
+    Rcpp::Rcout << ")";
   }
 }
 
@@ -1147,13 +1148,13 @@ void UnaryOpRep::debugTree(int level, int indent, int depthLimit) const {
   if (depthLimit <= 0)
     return;
   for (int i = 0; i<indent; i++ )
-    std::cout << "  ";
-  std::cout << "|_";
+    Rcpp::Rcout << "  ";
+  Rcpp::Rcout << "|_";
   if (level == Expr::SIMPLE_LEVEL)
-    std::cout << dump(OPERATOR_VALUE);
+    Rcpp::Rcout << dump(OPERATOR_VALUE);
   else if (level == Expr::DETAIL_LEVEL)
-    std::cout << dump(FULL_DUMP);
-  std::cout << std::endl;
+    Rcpp::Rcout << dump(FULL_DUMP);
+  Rcpp::Rcout << std::endl;
   child->debugTree(level, indent + 2, depthLimit - 1);
 }
 
@@ -1162,9 +1163,9 @@ void ConstRep::debugList(int level, int depthLimit) const {
   if (depthLimit <= 0)
     return;
   if (level == Expr::SIMPLE_LEVEL) {
-    std::cout << "(" << dump(OPERATOR_VALUE) << ")";
+    Rcpp::Rcout << "(" << dump(OPERATOR_VALUE) << ")";
   } else if (level == Expr::DETAIL_LEVEL) {
-    std::cout << "(" << dump(FULL_DUMP) << ")";
+    Rcpp::Rcout << "(" << dump(FULL_DUMP) << ")";
   }
 }
 
@@ -1173,29 +1174,29 @@ void ConstRep::debugTree(int level, int indent, int depthLimit) const {
   if (depthLimit <= 0)
     return;
   for (int i=0; i<indent; i++)
-    std::cout << "  ";
-  std::cout << "|_";
+    Rcpp::Rcout << "  ";
+  Rcpp::Rcout << "|_";
   if (level == Expr::SIMPLE_LEVEL)
-    std::cout << dump(OPERATOR_VALUE);
+    Rcpp::Rcout << dump(OPERATOR_VALUE);
   else if (level == Expr::DETAIL_LEVEL)
-    std::cout << dump(FULL_DUMP);
-  std::cout << std::endl;
+    Rcpp::Rcout << dump(FULL_DUMP);
+  Rcpp::Rcout << std::endl;
 }
 
 CGAL_INLINE_FUNCTION
 void BinOpRep::debugList(int level, int depthLimit) const {
   if (depthLimit <= 0 )
     return;
-  std::cout << "(";
+  Rcpp::Rcout << "(";
   if (level == Expr::SIMPLE_LEVEL) {
-    std::cout << dump(OPERATOR_VALUE);
+    Rcpp::Rcout << dump(OPERATOR_VALUE);
   } else if (level == Expr::DETAIL_LEVEL) {
-    std::cout << dump(FULL_DUMP);
+    Rcpp::Rcout << dump(FULL_DUMP);
   }
   first->debugList(level, depthLimit - 1);
-  std::cout << ", ";
+  Rcpp::Rcout << ", ";
   second->debugList(level, depthLimit - 1);
-  std::cout << ")" ;
+  Rcpp::Rcout << ")" ;
 }
 
 CGAL_INLINE_FUNCTION
@@ -1203,14 +1204,14 @@ void BinOpRep::debugTree(int level, int indent, int depthLimit) const {
   if (depthLimit <= 0)
     return;
   for (int i=0; i<indent; i++)
-    std::cout << "  ";
-  std::cout << "|_";
+    Rcpp::Rcout << "  ";
+  Rcpp::Rcout << "|_";
   if (level == Expr::SIMPLE_LEVEL) {
-    std::cout << dump(OPERATOR_VALUE);
+    Rcpp::Rcout << dump(OPERATOR_VALUE);
   } else if (level == Expr::DETAIL_LEVEL) {
-    std::cout << dump(FULL_DUMP);
+    Rcpp::Rcout << dump(FULL_DUMP);
   }
-  std::cout << std::endl;
+  Rcpp::Rcout << std::endl;
   first->debugTree(level, indent + 2, depthLimit - 1);
   second->debugTree(level, indent + 2, depthLimit - 1);
 }

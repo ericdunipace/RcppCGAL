@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_3_POLYLINES_TO_PROTECT_H
 #define CGAL_MESH_3_POLYLINES_TO_PROTECT_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -176,7 +177,7 @@ private:
                     Vector vy)
   {
 #ifdef CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
-    std::cerr << "New curve:\n"
+    Rcpp::Rcerr << "New curve:\n"
               << "  base("
               << p00 << " , "
               << p00+vx << " , "
@@ -196,14 +197,14 @@ private:
     {
       const double y = (equation.*f)(x);
 #ifdef CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
-      std::cerr << "  (" << x << ", " << y << ") -> ";
+      Rcpp::Rcerr << "  (" << x << ", " << y << ") -> ";
 #endif // CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
       const Point inter_p =
         translate(translate(p00,
                             scale(vx, x)),
                   scale(vy, y));
 #ifdef CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
-      std::cerr << "( " << inter_p << ")\n";
+      Rcpp::Rcerr << "( " << inter_p << ")\n";
 #endif // CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
       v_int = g_manip.get_vertex(inter_p, false);
       g_manip.try_add_edge(old, v_int);
@@ -323,7 +324,7 @@ struct Angle_tester
       if(CGAL::angle(p1, p, p2) == CGAL::ACUTE) {
         // const typename Kernel::Vector_3 e1 = p1 - p;
         // const typename Kernel::Vector_3 e2 = p2 - p;
-        // std::cerr << "At point " << p << ": the angle is "
+        // Rcpp::Rcerr << "At point " << p << ": the angle is "
         //           << ( std::acos(e1 * e2
         //                          / CGAL::sqrt(e1*e1)
         //                          / CGAL::sqrt(e2*e2))
@@ -486,7 +487,7 @@ polylines_to_protect
   for(int axis = 0; axis < 3; ++axis)
   {
 #ifdef CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
-    std::cerr << "axis = " << axis << "\n";
+    Rcpp::Rcerr << "axis = " << axis << "\n";
 #endif // CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
     for(int i = 0; i < xdim; i+= (axis == 0 ? (std::max)(1, xdim-1) : 1 ) )
       for(int j = 0; j < ydim; j+= (axis == 1 ? (std::max)(1, ydim-1) : 1 ) )
@@ -500,7 +501,7 @@ polylines_to_protect
           typedef array<int, 3> Pixel;
 
 #ifdef CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
-          std::cerr << "Pixel(" << i << ", " << j << ", " << k << ")\n";
+          Rcpp::Rcerr << "Pixel(" << i << ", " << j << ", " << k << ")\n";
 #endif // CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
           Pixel pix00 = {{i  , j  , k  }},
             pix10 = pix00, pix01 = pix00, pix11 = pix00;
@@ -514,7 +515,7 @@ polylines_to_protect
           if(pix11[0] >= xdim || pix11[1] >= ydim || pix11[2] >= zdim) {
             // we have gone too far
 #ifdef CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
-            std::cerr << "  ... continue\n";
+            Rcpp::Rcerr << "  ... continue\n";
 #endif // CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
             continue;
           }
@@ -545,11 +546,11 @@ polylines_to_protect
 
 #ifdef CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
               if(square[ii][jj].on_edge_of_the_cube) {
-                std::cerr << "  Pixel(" << pixel[0] << ", " << pixel[1] << ", "
+                Rcpp::Rcerr << "  Pixel(" << pixel[0] << ", " << pixel[1] << ", "
                           << pixel[2] << ") is on edge\n";
               }
               if (square[ii][jj].on_corner_of_the_cube) {
-                std::cerr << "  Pixel(" << pixel[0] << ", " << pixel[1] << ", "
+                Rcpp::Rcerr << "  Pixel(" << pixel[0] << ", " << pixel[1] << ", "
                   << pixel[2] << ") is on corner\n";
               }
 #endif // CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
@@ -873,7 +874,7 @@ case_1_2_1:
                   const double squared_distance =
                     8 * CGAL::abs(discrimant) / CGAL::square(double(v00) - v10 - v01 + v11);
 #ifdef CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
-                  std::cerr << "squared_distance: " << squared_distance << "\n";
+                  Rcpp::Rcerr << "squared_distance: " << squared_distance << "\n";
 #endif // CGAL_MESH_3_DEBUG_POLYLINES_TO_PROTECT
                   if(CGAL::square(prec) * squared_distance > 1)
                   {
@@ -960,12 +961,12 @@ case_1_2_1:
           }
         }
   }
-  // std::cerr << "case 4:     " << case4 << std::endl;
-  // std::cerr << "case 2-1-1: " << case211 << std::endl;
-  // std::cerr << "case 1-2-1: " << case121 << std::endl;
-  // std::cerr << "case 3-1:   " << case31 << std::endl;
-  // std::cerr << "case 2-2:   " << case22 << std::endl;
-  // std::cerr << "case 1:     " << case1 << std::endl;
+  // Rcpp::Rcerr << "case 4:     " << case4 << std::endl;
+  // Rcpp::Rcerr << "case 2-1-1: " << case211 << std::endl;
+  // Rcpp::Rcerr << "case 1-2-1: " << case121 << std::endl;
+  // Rcpp::Rcerr << "case 3-1:   " << case31 << std::endl;
+  // Rcpp::Rcerr << "case 2-2:   " << case22 << std::endl;
+  // Rcpp::Rcerr << "case 1:     " << case1 << std::endl;
 
   const std::ptrdiff_t nb_facets =
     case4 + case211 + case121 + case31 + case22 + case1;
@@ -974,7 +975,7 @@ case_1_2_1:
     *
     ((xdim-1)*(ydim-1) + (ydim-1)*(zdim-1) + (xdim-1)*(zdim-1));
 
-  // std::cerr << "nb of facets:           " << nb_facets << std::endl
+  // Rcpp::Rcerr << "nb of facets:           " << nb_facets << std::endl
   //           << " expected nb of facets: " << expected_nb_facets << std::endl;
 
   CGAL_assertion(nb_facets == expected_nb_facets);

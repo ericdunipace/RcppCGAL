@@ -13,6 +13,7 @@
 #ifndef CGAL_TRIANGULATE_MIXED_COMPLEX_3
 #define CGAL_TRIANGULATE_MIXED_COMPLEX_3
 
+#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 // #include <CGAL/Unique_hash_map.h>
@@ -135,32 +136,32 @@ private:
   {
     triangulation_incr_builder.begin_triangulation(3);
 
-    if (verbose) std::cout << "Construct vertices" << std::endl;
+    if (verbose) Rcpp::Rcout << "Construct vertices" << std::endl;
     construct_vertices();
 
     // mixed cells corresponding to regular vertices
-    if (verbose) std::cout << "Construct 0 cells" << std::endl;
+    if (verbose) Rcpp::Rcout << "Construct 0 cells" << std::endl;
     for (Rt_Finite_vertices_iterator vit = regular.finite_vertices_begin();
       vit != regular.finite_vertices_end(); vit ++) {
       construct_0_cell(vit);
     }
 
     // mixed cells corresponding to regular edges
-    if (verbose) std::cout << "Construct 1 cells" << std::endl;
+    if (verbose) Rcpp::Rcout << "Construct 1 cells" << std::endl;
     for (Rt_Finite_edges_iterator eit = regular.finite_edges_begin();
       eit != regular.finite_edges_end(); eit ++) {
       construct_1_cell(eit);
     }
 
     // mixed cells corresponding to regular facets
-    if (verbose) std::cout << "Construct 2 cells" << std::endl;
+    if (verbose) Rcpp::Rcout << "Construct 2 cells" << std::endl;
     for (Rt_Finite_facets_iterator fit = regular.finite_facets_begin();
       fit != regular.finite_facets_end(); fit ++) {
       construct_2_cell(fit);
     }
 
     // mixed cells corresponding to regular cells
-    if (verbose) std::cout << "Construct 3 cells" << std::endl;
+    if (verbose) Rcpp::Rcout << "Construct 3 cells" << std::endl;
     for (Rt_Finite_cells_iterator cit = regular.finite_cells_begin();
          cit != regular.finite_cells_end();
          cit++) {
@@ -467,10 +468,10 @@ construct_vertices()
   Rt_Simplex sDel, sVor;
   Tmc_Vertex_handle vh;
 
-  if (verbose) std::cout << "construct_anchors" << std::endl;
+  if (verbose) Rcpp::Rcout << "construct_anchors" << std::endl;
   construct_anchors();
 
-  if (verbose) std::cout << "9 ";
+  if (verbose) Rcpp::Rcout << "9 ";
   // anchor dimDel=0, dimVor=3
   for (cit=regular.finite_cells_begin();
        cit!=regular.finite_cells_end(); cit++) {
@@ -485,7 +486,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "8 ";
+  if (verbose) Rcpp::Rcout << "8 ";
   // anchor dimDel=1, dimVor=3
   for (cit=regular.finite_cells_begin(); cit!=regular.finite_cells_end(); cit++) {
     sVor = get_anchor_vor(Rt_Simplex(cit));
@@ -501,7 +502,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "7 ";
+  if (verbose) Rcpp::Rcout << "7 ";
   // anchor dimDel=2, dimVor=3 and dimDel=0, dimVor=2
   for (fit=regular.finite_facets_begin(); fit!=regular.finite_facets_end(); fit++) {
     // anchor dimDel=2, dimVor=3
@@ -539,7 +540,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "6 ";
+  if (verbose) Rcpp::Rcout << "6 ";
   // anchor dimDel=0, dimVor=1
   for (eit=regular.finite_edges_begin(); eit!=regular.finite_edges_end(); eit++) {
     sVor = get_anchor_vor(*eit);
@@ -561,7 +562,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "5 ";
+  if (verbose) Rcpp::Rcout << "5 ";
   // anchor dimDel=3, dimVor=3
   for (cit=regular.finite_cells_begin(); cit!=regular.finite_cells_end(); cit++) {
     sDel = get_anchor_del(Rt_Simplex(cit));
@@ -573,7 +574,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "4 ";
+  if (verbose) Rcpp::Rcout << "4 ";
   // anchor dimDel=0, dimVor=0
   for (vit=regular.finite_vertices_begin(); vit!=regular.finite_vertices_end(); vit++) {
     sDel = get_anchor_del(Rt_Simplex(vit));
@@ -585,7 +586,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "3 ";
+  if (verbose) Rcpp::Rcout << "3 ";
   // anchor dimDel=1, dimVor=2
   for (fit=regular.finite_facets_begin(); fit!=regular.finite_facets_end(); fit++) {
     c1 = fit->first;
@@ -607,7 +608,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "2 ";
+  if (verbose) Rcpp::Rcout << "2 ";
   // anchor dimDel=2, dimVor=2
   for (fit=regular.finite_facets_begin(); fit!=regular.finite_facets_end(); fit++) {
     c1 = fit->first;
@@ -622,7 +623,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "1" << std::endl;
+  if (verbose) Rcpp::Rcout << "1" << std::endl;
   // anchor dimDel=1, dimVor=1
   for (eit=regular.finite_edges_begin(); eit!=regular.finite_edges_end(); eit++) {
     v1 = eit->first->vertex(eit->second);
@@ -915,7 +916,7 @@ add_vertex (Symb_anchor const &anchor)
   Protect_FPU_rounding<true> P;
   vh->point() = get_anchor(anchor.first, anchor.second);
 
-//   std::cout << "@ ["
+//   Rcpp::Rcout << "@ ["
 //             << vh->info().first << " - "
 //             << vh->info().second << "] -- ["
 //             << vh->point() << "] -- ["

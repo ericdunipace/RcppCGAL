@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_SNAPPING_HELPER_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_SNAPPING_HELPER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/boost/graph/iterator.h>
@@ -84,7 +85,7 @@ void assign_tolerance_with_local_edge_length_bound(const HalfedgeRange& halfedge
     }
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "tolerance at vd: " << vd << " [" << get(vpm, vd) << "]: min of "
+    Rcpp::Rcout << "tolerance at vd: " << vd << " [" << get(vpm, vd) << "]: min of "
               << 0.9 * CGAL::approximate_sqrt(min_sq_dist) << " AND " << tolerance << std::endl;
 #endif
     put(tolerance_map, vd, CGAL::min<FT>(0.9 * CGAL::approximate_sqrt(min_sq_dist), tolerance));

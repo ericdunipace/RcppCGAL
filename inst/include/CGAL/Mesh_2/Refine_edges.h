@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_2_REFINE_EDGES_H
 #define CGAL_MESH_2_REFINE_EDGES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 
@@ -558,7 +559,7 @@ public:
   void after_insertion_impl(const Vertex_handle& v)
   {
 #ifdef CGAL_MESH_2_VERBOSE
-    std::cerr << "E";
+    Rcpp::Rcerr << "E";
 #endif
     // @todo Perhaps we should remove destroyed edges too.
     // @warning This code has been rewroten!

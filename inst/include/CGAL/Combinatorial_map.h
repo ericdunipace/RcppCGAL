@@ -12,6 +12,7 @@
 #ifndef CGAL_COMBINATORIAL_MAP_H
 #define CGAL_COMBINATORIAL_MAP_H 1
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/Combinatorial_map_fwd.h>
@@ -1009,9 +1010,9 @@ namespace CGAL {
     {
       if (mnb_used_marks == NB_MARKS)
       {
-        std::cerr << "Not enough Boolean marks: "
+        Rcpp::Rcerr << "Not enough Boolean marks: "
           "increase NB_MARKS in item class." << std::endl;
-        std::cerr << "  (exception launched)" << std::endl;
+        Rcpp::Rcerr << "  (exception launched)" << std::endl;
         throw Exception_no_more_available_mark();
       }
 
@@ -1352,7 +1353,7 @@ namespace CGAL {
               (!is_free(it, 1) && beta(it, 1, 0)!=it ))
           {
             if (show_errors)
-            { std::cerr << "Map not valid: beta(0) "
+            { Rcpp::Rcerr << "Map not valid: beta(0) "
                 "is not the inverse of beta(1) for dart "
                         <<darts().index(it) << std::endl;
             }
@@ -1364,7 +1365,7 @@ namespace CGAL {
             if (!is_free(it, i) && beta(it, i, i)!=it)
             {
               if (show_errors)
-              { std::cerr << "Map not valid: beta(" << i
+              { Rcpp::Rcerr << "Map not valid: beta(" << i
                           << ") is not an involution for dart "
                           <<darts().index(it)<< std::endl;
               }
@@ -1380,7 +1381,7 @@ namespace CGAL {
               {
                 if (show_errors)
                 {
-                  std::cerr << "Map not valid: beta(0) o beta(" << i
+                  Rcpp::Rcerr << "Map not valid: beta(0) o beta(" << i
                             << ") is not an involution for dart "
                             <<darts().index(it)<< std::endl;
                 }
@@ -1395,7 +1396,7 @@ namespace CGAL {
               {
                 if (show_errors)
                 {
-                  std::cerr << "Map not valid: beta(1) o beta(" << i
+                  Rcpp::Rcerr << "Map not valid: beta(1) o beta(" << i
                             << ") is not an involution for dart "
                             <<darts().index(it)<< std::endl;
                 }
@@ -1414,7 +1415,7 @@ namespace CGAL {
                 {
                   if (show_errors)
                   {
-                    std::cerr << "Map not valid: beta(" << i
+                    Rcpp::Rcerr << "Map not valid: beta(" << i
                               << ") o beta(" << j
                               << ") is not an involution for dart "
                               << darts().index(it)<< std::endl;

@@ -13,6 +13,7 @@
 #ifndef CGAL_POINT_SET_3_H
 #define CGAL_POINT_SET_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_3.h>
 
 #include <typeindex>
@@ -589,7 +590,7 @@ public:
         while (source != last // All elements have been moved
                && dest != last - 1) // All elements are at the end of the container
           {
-            std::cerr << "Swapping " << *source << " and " << *dest << std::endl;
+            Rcpp::Rcerr << "Swapping " << *source << " and " << *dest << std::endl;
             std::swap (*(source ++), *(dest --));
           }
       }

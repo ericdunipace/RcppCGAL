@@ -17,6 +17,7 @@
 #ifndef CGAL_IO_VERBOSE_OSTREAM_H
 #define CGAL_IO_VERBOSE_OSTREAM_H
 
+#include <Rcpp.h>
 #include <iostream>
 
 namespace CGAL {
@@ -61,7 +62,7 @@ public:
   /*!
   creates an output stream with state set to `active` that writes to the stream `out`.
   */
-  Verbose_ostream(bool active = false, std::ostream& out = std::cerr)
+  Verbose_ostream(bool active = false, std::ostream& out = Rcpp::Rcerr)
     : b(active), o(&out)
   {}
 

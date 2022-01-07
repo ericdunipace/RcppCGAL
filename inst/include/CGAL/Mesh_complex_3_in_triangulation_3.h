@@ -18,6 +18,7 @@
 #ifndef CGAL_MESH_COMPLEX_3_IN_TRIANGULATION_3_H
 #define CGAL_MESH_COMPLEX_3_IN_TRIANGULATION_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Mesh_3/Mesh_complex_3_in_triangulation_3_fwd.h>
@@ -574,7 +575,7 @@ private:
   {
     CGAL_precondition(!is_in_complex(edge));
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    std::cerr << "Add edge ( " << disp_vert(edge.left)
+    Rcpp::Rcerr << "Add edge ( " << disp_vert(edge.left)
               << " , " << disp_vert(edge.right) << " ), curve_index=" << index
               << " to c3t3.\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG
@@ -714,7 +715,7 @@ is_valid(bool verbose) const
     if ( vit->first->in_dimension() != 0 && vit->second != 2 )
     {
       if(verbose)
-        std::cerr << "Validity error: vertex " << (void*)(&*vit->first)
+        Rcpp::Rcerr << "Validity error: vertex " << (void*)(&*vit->first)
                   << " (" << this->triangulation().point(vit->first) << ") "
                   << "is not a corner (dimension " << vit->first->in_dimension()
                   << ") but has " << vit->second << " neighbor(s)!\n";
@@ -740,7 +741,7 @@ is_valid(bool verbose) const
 
     if ( ! do_intersect(sphere(cp(itrwp), cw(itrwp)), sphere(cp(itlwp), cw(itlwp))) )
     {
-      std::cerr << "Points p[" << disp_vert(it->right) << "], dim=" << it->right->in_dimension()
+      Rcpp::Rcerr << "Points p[" << disp_vert(it->right) << "], dim=" << it->right->in_dimension()
                 << " and q[" << disp_vert(it->left) << "], dim=" << it->left->in_dimension()
                 << " form an edge but do not intersect !\n";
       return false;

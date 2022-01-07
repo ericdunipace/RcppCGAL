@@ -12,6 +12,7 @@
 #ifndef CGAL_MCFSKEL_CURVE_SKELETON_H
 #define CGAL_MCFSKEL_CURVE_SKELETON_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_skeletonization.h>
 
 
@@ -211,7 +212,7 @@ public:
 private:
   void init()
   {
-    MCFSKEL_DEBUG( std::cerr <<"init" << std::endl; )
+    MCFSKEL_DEBUG( Rcpp::Rcerr <<"init" << std::endl; )
 
     int nb_edges = static_cast<int>(num_edges(hg));
     int num_faces = static_cast<int>(hg.size_of_facets());
@@ -564,7 +565,7 @@ private:
       {
         if (edge_to_face[id].size() > 0)
         {
-          std::cerr << "edge should not have faces " << edge_to_face[id].size() << "\n";
+          Rcpp::Rcerr << "edge should not have faces " << edge_to_face[id].size() << "\n";
         }
       }
     }
@@ -580,7 +581,7 @@ private:
         ++cnt;
       }
     }
-    std::cerr << "num of vertices " << cnt << "\n";
+    Rcpp::Rcerr << "num of vertices " << cnt << "\n";
 
     cnt = 0;
     for (size_t i = 0; i < is_edge_deleted.size(); ++i)
@@ -590,7 +591,7 @@ private:
         ++cnt;
       }
     }
-    std::cerr << "num of edges " << cnt << "\n";
+    Rcpp::Rcerr << "num of edges " << cnt << "\n";
 
     cnt = 0;
     for (size_t i = 0; i < is_face_deleted.size(); ++i)
@@ -600,7 +601,7 @@ private:
         ++cnt;
       }
     }
-    std::cerr << "num of faces " << cnt << "\n";
+    Rcpp::Rcerr << "num of faces " << cnt << "\n";
   }
 };
 

@@ -24,6 +24,7 @@
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
+#include <Rcpp.h>
 #include <sstream>
 
 //CONSTRUCTORS FOR THE BIPOLY CLASS
@@ -298,7 +299,7 @@ int BiPoly<NT>::getbasicterm(string s, BiPoly<NT> & P){
     P.coeffX.push_back(q);
   }else{
 #ifdef CGAL_CORE_TRACE
-    std::cout <<"ERROR IN PARSING BASIC TERM" << std::endl;
+    Rcpp::Rcout <<"ERROR IN PARSING BASIC TERM" << std::endl;
 #endif
   }
   //i+1 points to the beginning of next syntaxtic object in the string.
@@ -399,7 +400,7 @@ BiPoly<NT> BiPoly<NT>::getbipoly(string s){
         P -= R;
       else{
 #ifdef CGAL_CORE_TRACE
-        std::cout << "ERROR IN PARSING BIPOLY! " << std::endl;
+        Rcpp::Rcout << "ERROR IN PARSING BIPOLY! " << std::endl;
 #endif
       }
     }
@@ -453,7 +454,7 @@ void BiPoly<NT>::dump(std::ofstream & ofs, std::string msg,
 template <class NT>
 void BiPoly<NT>::dump(std::string msg, std::string com,
     std::string com2) const {
-    dump(std::cout, msg, com, com2);
+    dump(Rcpp::Rcout, msg, com, com2);
   }
 
   /* ***********************************************************
@@ -1255,7 +1256,7 @@ cout <<"Number of roots at " << xCurr << " are " << numRoots<<endl;
   }
 
   int limit = ((x2 - xCurr + eps)/eps).intValue()+1;
-  //std::cout << "Limit = " << limit << std::endl;
+  //Rcpp::Rcout << "Limit = " << limit << std::endl;
   machine_double plotCurves[this->getTrueYdegree()][limit];//plot buffer
   machine_double yval;
 
@@ -1281,7 +1282,7 @@ cout <<"Number of roots at " << xCurr << " are " << numRoots<<endl;
   BigFloat tmp; // used to step from xLast to xCurr in loops
 
   while (xCurr < x2) { //main loop
-    //std::cout << "Doing verticalintersec at " << xCurr << std::endl;
+    //Rcpp::Rcout << "Doing verticalintersec at " << xCurr << std::endl;
     verticalIntersections(xCurr, vI, aprec);
     if (vI.size() != numRoots) { // an x-interval discovered!
         // write previous x-interval to output file
@@ -1414,12 +1415,12 @@ void  Yintersections( Curve<NT>& P ,Curve<NT>& Q, BFVecInterval &vI){
 //
 template <class NT>//DO I NEED THIS OVERHERE AS WELL?
 void showIntervals(char* s, BFVecInterval &vI) {
-   std::cout << s;
+   Rcpp::Rcout << s;
    for (unsigned int i=0; i< vI.size(); i++) {
-           std::cout << "[ " << vI[i].first << ", "
+           Rcpp::Rcout << "[ " << vI[i].first << ", "
                    << vI[i].second << " ],  " ;
    }
-   std::cout << std::endl;
+   Rcpp::Rcout << std::endl;
 }
 
 

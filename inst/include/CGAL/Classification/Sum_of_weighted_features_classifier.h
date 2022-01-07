@@ -13,6 +13,7 @@
 #ifndef CLASSIFICATION_SUM_OF_WEIGHTED_FEATURES_CLASSIFIER_H
 #define CLASSIFICATION_SUM_OF_WEIGHTED_FEATURES_CLASSIFIER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/Classification/Feature_set.h>
@@ -322,7 +323,7 @@ public:
 
     for (std::size_t i = 0; i < m_labels.size(); ++ i)
       if (training_sets.size() <= i || training_sets[i].empty())
-        std::cerr << "WARNING: \"" << m_labels[i]->name() << "\" doesn't have a training set." << std::endl;
+        Rcpp::Rcerr << "WARNING: \"" << m_labels[i]->name() << "\" doesn't have a training set." << std::endl;
 
     std::vector<float> best_weights (m_features.size(), 1.);
 
@@ -501,7 +502,7 @@ public:
 
     for (std::size_t i = 0; i < m_labels.size(); ++ i)
       if (training_sets.size() <= i || training_sets[i].empty())
-        std::cerr << "WARNING: \"" << m_labels[i]->name() << "\" doesn't have a training set." << std::endl;
+        Rcpp::Rcerr << "WARNING: \"" << m_labels[i]->name() << "\" doesn't have a training set." << std::endl;
 
     std::vector<float> best_weights (m_features.size(), 1.);
 
@@ -750,7 +751,7 @@ public:
       else
       {
         if (verbose)
-          std::cerr << "Warning: feature \"" << name << "\" in configuration file not found" << std::endl;
+          Rcpp::Rcerr << "Warning: feature \"" << name << "\" in configuration file not found" << std::endl;
         out = false;
       }
     }
@@ -766,7 +767,7 @@ public:
       else
       {
         if (verbose)
-          std::cerr << "Warning: label \"" << label_name << "\" in configuration file not found" << std::endl;
+          Rcpp::Rcerr << "Warning: label \"" << label_name << "\" in configuration file not found" << std::endl;
         out = false;
         continue;
       }
@@ -786,7 +787,7 @@ public:
         else if (verbose)
         {
           if (verbose)
-            std::cerr << "Warning: feature \"" << feature_name << "\" in configuration file not found" << std::endl;
+            Rcpp::Rcerr << "Warning: feature \"" << feature_name << "\" in configuration file not found" << std::endl;
           out = false;
           continue;
         }

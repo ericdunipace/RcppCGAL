@@ -15,6 +15,7 @@
 #ifndef CGAL_ALGEBRAIC_CURVE_KERNEL_CURVE_ANALYSIS_2_ALCIX_H
 #define CGAL_ALGEBRAIC_CURVE_KERNEL_CURVE_ANALYSIS_2_ALCIX_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <vector>
@@ -2497,7 +2498,7 @@ std::ostream& operator<< (
       break;
     }
     case ::CGAL::IO::BINARY:
-      std::cerr << "BINARY format not yet implemented" << std::endl;
+      Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
       break;
     default:
       // ASCII

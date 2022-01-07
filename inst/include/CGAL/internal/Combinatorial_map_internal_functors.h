@@ -12,6 +12,7 @@
 #ifndef CGAL_COMBINATORIAL_MAP_INTERNAL_FUNCTORS_H
 #define CGAL_COMBINATORIAL_MAP_INTERNAL_FUNCTORS_H
 
+#include <Rcpp.h>
 #include <CGAL/Dart_const_iterators.h>
 #include <CGAL/Combinatorial_map_basic_operations.h>
 #include <CGAL/Dimension.h>
@@ -242,13 +243,13 @@ struct Test_is_valid_attribute_functor
     {
       if ( amap.template attribute<i>(it) != a )
       {
-        std::cout<<"ERROR: an attribute of the "<<i<<"-cell is different. cur:";
+        Rcpp::Rcout<<"ERROR: an attribute of the "<<i<<"-cell is different. cur:";
         amap.template display_attribute<i>(a);
-        std::cout<<" != first:";
+        Rcpp::Rcout<<" != first:";
         amap.template display_attribute<i>(amap.template attribute<i>(it));
-        std::cout<<" for dart ";
+        Rcpp::Rcout<<" for dart ";
         amap.display_dart(it);
-        std::cout<<std::endl;
+        Rcpp::Rcout<<std::endl;
         valid=false;
       }
 
@@ -263,25 +264,25 @@ struct Test_is_valid_attribute_functor
     {
       if ( amap.template get_attribute_ref_counting<i>(a)!=nb )
       {
-        std::cout<<"ERROR: the number of reference of an "<<i
+        Rcpp::Rcout<<"ERROR: the number of reference of an "<<i
                 <<"-attribute is not correct. Count: "<<nb
                <<" != Store in the attribute: "
               <<amap.template get_attribute_ref_counting<i>(a)
              <<" for dart ";
-        amap.display_dart(adart); std::cout<<std::endl;
+        amap.display_dart(adart); Rcpp::Rcout<<std::endl;
         valid=false;
       }
       if ( !amap.template is_valid_attribute<i>(a) )
       {
-        std::cout<<"ERROR: the dart associated with an "<<i
+        Rcpp::Rcout<<"ERROR: the dart associated with an "<<i
                 <<"-attribute is nullptr for dart ";
-        amap.display_dart(adart); std::cout<<std::endl;
+        amap.display_dart(adart); Rcpp::Rcout<<std::endl;
         valid=false;
       }
       if ( amap.template dart_of_attribute<i>(a)!=amap.null_handle &&
            !found_dart )
       {
-        std::cout<<"ERROR: the non nullptr dart of an "<<i
+        Rcpp::Rcout<<"ERROR: the non nullptr dart of an "<<i
                 <<"-attribute does not belong to the cell."<<std::endl;
         valid=false;
       }

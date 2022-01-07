@@ -13,6 +13,7 @@
 #ifndef CGAL_PARTITION_APPROX_CONVEX_H
 #define CGAL_PARTITION_APPROX_CONVEX_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -75,7 +76,7 @@ bool partition_appx_cvx_cuts_nonconvex_angle( Edge_circulator e_circ,
    typedef typename Triangulation::Point          Point;
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
    Segment_2 edge = triangles.segment((*e_circ).first, (*e_circ).second);
-   std::cout << "edge: " << *edge.source() << " " << *edge.target()
+   Rcpp::Rcout << "edge: " << *edge.source() << " " << *edge.target()
              << std::endl;
 #endif
 
@@ -92,9 +93,9 @@ bool partition_appx_cvx_cuts_nonconvex_angle( Edge_circulator e_circ,
    Segment_2  next_edge = triangles.segment((*next_e).first,(*next_e).second);
    Segment_2  prev_edge = triangles.segment((*prev_e).first,(*prev_e).second);
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-   std::cout << "next_edge: " << *next_edge.source() << " "
+   Rcpp::Rcout << "next_edge: " << *next_edge.source() << " "
              << *next_edge.target() <<std::endl;
-   std::cout << "prev_edge: " << *prev_edge.source() << " "
+   Rcpp::Rcout << "prev_edge: " << *prev_edge.source() << " "
              << *prev_edge.target() <<std::endl;
 #endif
    // find which endpoint is shared by the two edges
@@ -104,7 +105,7 @@ bool partition_appx_cvx_cuts_nonconvex_angle( Edge_circulator e_circ,
      (prev_edge.source() == v_ref) ? prev_edge.target() : prev_edge.source();
 
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-   std::cout << "partition_appx_cvx_cuts_nonconvex_angle: next_ccw_pt "
+   Rcpp::Rcout << "partition_appx_cvx_cuts_nonconvex_angle: next_ccw_pt "
              << *next_ccw_pt_ref << " v_ref " << *v_ref << " prev_ccw_pt_ref "
              << *prev_ccw_pt_ref << std::endl;
 #endif
@@ -155,7 +156,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
    } while (++c != first_c);
 
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-   std::cout << "Inserting diagonals: " << std::endl;
+   Rcpp::Rcout << "Inserting diagonals: " << std::endl;
 #endif
 
    Edge_circulator e_circ, first_e;
@@ -180,7 +181,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
           {
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
              Segment_2 edge = triangles.segment((*e_circ).first, (*e_circ).second);
-             std::cout << "edge " <<  *edge.source() << " " << *edge.target()
+             Rcpp::Rcout << "edge " <<  *edge.source() << " " << *edge.target()
                        << " is constrained " << std::endl;
 #endif
           }
@@ -194,7 +195,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
                 Circulator before_s = edge.source(); before_s--;
                 Circulator after_s = edge.source(); after_s++;
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-                std::cout << "considering " << *source << " " << *target
+                Rcpp::Rcout << "considering " << *source << " " << *target
                           << "...";
 #endif
                 if (partition_appx_cvx_is_edge_through_interior(*before_s,
@@ -204,7 +205,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
                                  (*v_it).point(), triangles, traits))
                    {
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-                      std::cout << "inserting" << std::endl;
+                      Rcpp::Rcout << "inserting" << std::endl;
 #endif
                       polygon.insert_diagonal(source.unsafe_circulator()
                                              ,target.unsafe_circulator()
@@ -213,17 +214,17 @@ OutputIterator partition_approx_convex_2(InputIterator first,
                    }
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
                    else
-                      std::cout << "doesn't cut reflex angle" << std::endl;
+                      Rcpp::Rcout << "doesn't cut reflex angle" << std::endl;
 #endif
                 }
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
                 else
-                   std::cout << "not an edge through the interior"
+                   Rcpp::Rcout << "not an edge through the interior"
                              << std::endl;
 #endif
              }
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-             std::cout << "edge is infinite " << std::endl;
+             Rcpp::Rcout << "edge is infinite " << std::endl;
 #endif
           }
        } while (++e_circ != first_e);

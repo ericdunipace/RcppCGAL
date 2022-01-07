@@ -19,6 +19,7 @@
 #ifndef CGAL_ALGORITHM_H
 #define CGAL_ALGORITHM_H
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/utils.h>
 #include <CGAL/enum.h>
@@ -269,7 +270,7 @@ lexicographical_compare_three_valued( InputIterator1 first1, InputIterator1 last
     Example:
 <PRE>
     int a[] = {1, 2, 3};
-    output_range(std::cout, a, a+3, ":", "(", ")");
+    output_range(Rcpp::Rcout, a, a+3, ":", "(", ")");
 </PRE>
     produces \c (1):(2):(3)
  */

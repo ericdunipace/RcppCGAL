@@ -18,6 +18,7 @@
 #ifndef CGAL_MESH_DOMAIN_WITH_POLYLINE_FEATURES_3_H
 #define CGAL_MESH_DOMAIN_WITH_POLYLINE_FEATURES_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -876,7 +877,7 @@ public:
 
   void build_curves_aabb_tree() const {
 #if CGAL_MESH_3_VERBOSE
-    std::cerr << "Building curves AABB tree...";
+    Rcpp::Rcerr << "Building curves AABB tree...";
     CGAL::Real_timer timer;
     timer.start();
 #endif
@@ -903,7 +904,7 @@ public:
     curves_aabb_tree_is_built = true;
 #if CGAL_MESH_3_VERBOSE
     timer.stop();
-    std::cerr << " done (" << timer.time() * 1000 << " ms)" << std::endl;
+    Rcpp::Rcerr << " done (" << timer.time() * 1000 << " ms)" << std::endl;
 #endif
   } // end build_curves_aabb_tree()
   /// @endcond
@@ -1157,11 +1158,11 @@ add_features_and_incidences(InputIterator first, InputIterator end,
     Curve_index curve_id = insert_edge(polyline.begin(), polyline.end());
     edges_incidences_[curve_id].insert(patches_ids.begin(), patches_ids.end());
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    std::cerr << "Curve #" << curve_id << " is incident to the following patches: {";
+    Rcpp::Rcerr << "Curve #" << curve_id << " is incident to the following patches: {";
     for(auto id: patches_ids) {
-      std::cerr << " " << id;
+      Rcpp::Rcerr << " " << id;
     }
-    std::cerr << "}\n";
+    Rcpp::Rcerr << "}\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG & 1
     *indices_out++ = curve_id;
   }
@@ -1409,7 +1410,7 @@ compute_corners_incidences()
                                    incidences.begin()));
     }
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    display_corner_incidences(std::cerr, cit->first, id);
+    display_corner_incidences(Rcpp::Rcerr, cit->first, id);
 #endif // CGAL_MESH_3_PROTECTION_DEBUG
 
     // increment the loop variable

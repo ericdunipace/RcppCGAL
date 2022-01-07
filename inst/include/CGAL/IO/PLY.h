@@ -12,6 +12,7 @@
 #ifndef CGAL_IO_PLY_H
 #define CGAL_IO_PLY_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/PLY/PLY_reader.h>
 #include <CGAL/IO/PLY/PLY_writer.h>
 #include <CGAL/IO/helpers.h>
@@ -65,7 +66,7 @@ bool read_PLY(std::istream& is,
   if(!is.good())
   {
     if(verbose)
-      std::cerr << "Error: cannot open file" << std::endl;
+      Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -155,7 +156,7 @@ bool read_PLY(std::istream& is,
       else
       {
         if(verbose)
-          std::cerr << "Error: can't find vertex indices in PLY input" << std::endl;
+          Rcpp::Rcerr << "Error: can't find vertex indices in PLY input" << std::endl;
         return false;
       }
     }

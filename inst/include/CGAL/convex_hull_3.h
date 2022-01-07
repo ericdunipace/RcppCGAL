@@ -15,6 +15,7 @@
 #ifndef CGAL_CONVEX_HULL_3_H
 #define CGAL_CONVEX_HULL_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Convex_hull_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -758,7 +759,7 @@ void non_coplanar_quickhull_3(std::list<typename Traits::Point_3>& points,
 
   ch_quickhull_3_scan(tds, pending_facets, traits);
 
-  //std::cout << "|V(tds)| = " << tds.number_of_vertices() << std::endl;
+  //Rcpp::Rcout << "|V(tds)| = " << tds.number_of_vertices() << std::endl;
 //  CGAL_ch_expensive_postcondition(all_points_inside(points.begin(),
 //                                                    points.end(),P,traits));
 //  CGAL_ch_postcondition(is_strongly_convex_3(P, traits));

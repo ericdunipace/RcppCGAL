@@ -42,6 +42,7 @@
 //   - lock counters in parallel mode
 //     (e.g. time spent spinning, and/or number of locks taken or forbidden...)
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <iostream>
 #include <sstream>
@@ -102,7 +103,7 @@ struct Profile_counter
     {
 
 
-      std::cerr << "[CGAL::Profile_counter] "
+      Rcpp::Rcerr << "[CGAL::Profile_counter] "
                 << std::setw(10) << internal::dot_it(i) << " " << s << std::endl;
     }
 
@@ -146,14 +147,14 @@ public:
         unsigned total=0;
         for (Counters::const_iterator it=counters.begin(), end=counters.end();
              it != end; ++it) {
-            std::cerr << "[CGAL::Profile_histogram_counter] " << s;
-            std::cerr << " [ " << std::setw(10) << internal::dot_it(it->first) << " : "
+            Rcpp::Rcerr << "[CGAL::Profile_histogram_counter] " << s;
+            Rcpp::Rcerr << " [ " << std::setw(10) << internal::dot_it(it->first) << " : "
                       << std::setw(10) << internal::dot_it(it->second) << " ]"
                                << std::endl;
             total += it->second;
         }
-        std::cerr << "[CGAL::Profile_histogram_counter] " << s;
-        std::cerr << " [ " << std::setw(10) << "Total" << " : "
+        Rcpp::Rcerr << "[CGAL::Profile_histogram_counter] " << s;
+        Rcpp::Rcerr << " [ " << std::setw(10) << "Total" << " : "
                            << std::setw(10) << total << " ]" << std::endl;
     }
 
@@ -177,7 +178,7 @@ struct Profile_branch_counter
 
     ~Profile_branch_counter()
     {
-        std::cerr << "[CGAL::Profile_branch_counter] "
+        Rcpp::Rcerr << "[CGAL::Profile_branch_counter] "
                   << std::setw(10) << internal::dot_it(j) << " / "
                   << std::setw(10) << internal::dot_it(i) << " " << s << std::endl;
     }
@@ -207,7 +208,7 @@ struct Profile_branch_counter_3
 
     ~Profile_branch_counter_3()
     {
-        std::cerr << "[CGAL::Profile_branch_counter_3] "
+        Rcpp::Rcerr << "[CGAL::Profile_branch_counter_3] "
                   << std::setw(10) << internal::dot_it(k) << " / "
                   << std::setw(10) << internal::dot_it(j) << " / "
                   << std::setw(10) << internal::dot_it(i) << " " << s << std::endl;

@@ -13,6 +13,7 @@
 #ifndef CGAL_GREENE_APPROX_H
 #define CGAL_GREENE_APPROX_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -44,23 +45,23 @@ bool is_adjacent_to(BidirectionalCirculator new_point_ref,
                     BidirectionalCirculator old_point_ref)
 {
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "is_adjacent_to: new_point " << *new_point_ref
+   Rcpp::Rcout << "is_adjacent_to: new_point " << *new_point_ref
              <<             " old_point " << *old_point_ref << std::endl;
 #endif
    // find the old point in original list of points
    if (*new_point_ref == *(++old_point_ref)) return true;  // check ccw
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "is_adjacent_to:  next point is " << *old_point_ref
+   Rcpp::Rcout << "is_adjacent_to:  next point is " << *old_point_ref
              << std::endl;
 #endif
    old_point_ref--;
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "is_adjacent_to:  old_point is " << *old_point_ref
+   Rcpp::Rcout << "is_adjacent_to:  old_point is " << *old_point_ref
              << std::endl;
 #endif
    if (*new_point_ref == *(--old_point_ref)) return true;  // check cw
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "is_adjacent_to:  previous points is " << *old_point_ref
+   Rcpp::Rcout << "is_adjacent_to:  previous points is " << *old_point_ref
              << std::endl;
 #endif
    return false;
@@ -80,13 +81,13 @@ void erase_vertices(BidirectionalCirculator first,
    update_required = false;
 
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "before erasing polygon is ";
+   Rcpp::Rcout << "before erasing polygon is ";
    for (Vertex_iterator v = polygon.begin(); v != polygon.end(); v++)
    {
-      std::cout << " " << *v;
+      Rcpp::Rcout << " " << *v;
    }
-   std::cout << std::endl;
-   std::cout << "erasing from " << *first << " to " << *last << std::endl;
+   Rcpp::Rcout << std::endl;
+   Rcpp::Rcout << "erasing from " << *first << " to " << *last << std::endl;
 #endif
    it = first.current_iterator();
 
@@ -97,7 +98,7 @@ void erase_vertices(BidirectionalCirculator first,
       while ( (it != polygon.end()) && (*it != *last) )
       {
 #ifdef CGAL_GREENE_APPROX_DEBUG
-         std::cout << "erase_vertices: erasing " << *it << std::endl;
+         Rcpp::Rcout << "erase_vertices: erasing " << *it << std::endl;
 #endif
          temp_it = it;
          // when the beginning vertex of the polygon is deleted, all the
@@ -107,7 +108,7 @@ void erase_vertices(BidirectionalCirculator first,
          it++;
 #ifdef CGAL_GREENE_APPROX_DEBUG
          if (it != polygon.end())
-            std::cout << "erase_vertices: next vertex is " << *it << std::endl;
+            Rcpp::Rcout << "erase_vertices: next vertex is " << *it << std::endl;
 #endif
          polygon.erase(temp_it);
       }
@@ -131,7 +132,7 @@ void visible(Polygon& polygon,
 {
 
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "visible: stack.back " << *stack.back()
+   Rcpp::Rcout << "visible: stack.back " << *stack.back()
              << " stack.before_back " << *stack.before_back() <<
                 " new_point_ref " << *new_point_ref << std::endl;
 #endif
@@ -155,7 +156,7 @@ void visible(Polygon& polygon,
        bool update_required;
 
 #ifdef CGAL_GREENE_APPROX_DEBUG
-       std::cout << "visible: bottom_chain.front " << *bottom_chain.front()
+       Rcpp::Rcout << "visible: bottom_chain.front " << *bottom_chain.front()
                  << std::endl;
 #endif
        do
@@ -163,7 +164,7 @@ void visible(Polygon& polygon,
           new_Polygon_2 new_polygon;
           stack.pop_back();
 #ifdef CGAL_GREENE_APPROX_DEBUG
-          std::cout << "visible: stack.back " << *stack.back() << std::endl;
+          Rcpp::Rcout << "visible: stack.back " << *stack.back() << std::endl;
 #endif
           if (bottom_chain.direction() == CLOCKWISE)
           {
@@ -194,7 +195,7 @@ void visible(Polygon& polygon,
                if (less_yx(*(stack.front()),*bottom_chain.front()))
                {
 #ifdef CGAL_GREENE_APPROX_DEBUG
-                  std::cout << "visible:  reversing stack and swapping chains "
+                  Rcpp::Rcout << "visible:  reversing stack and swapping chains "
                             << std::endl;
 #endif
                   stack.push_front(bottom_chain.front());
@@ -204,16 +205,16 @@ void visible(Polygon& polygon,
                   top_chain.initialize(stack.front());
                   top_chain.change_dir();
 #ifdef CGAL_GREENE_APPROX_DEBUG
-                  std::cout << "visible:  stack is now " << *stack.back()
+                  Rcpp::Rcout << "visible:  stack is now " << *stack.back()
                             << " " << *stack.front()
                             << " dir " << int(stack.direction())
                             << std::endl;
-                  std::cout << "visible:  bottom_chain is now "
+                  Rcpp::Rcout << "visible:  bottom_chain is now "
                             << *bottom_chain.back() << " "
                             << *bottom_chain.front()
                             << " dir " << int(bottom_chain.direction())
                             << std::endl;
-                  std::cout << "visible:  top_chain is now "
+                  Rcpp::Rcout << "visible:  top_chain is now "
                             << *top_chain.back() << " " << *top_chain.front()
                             << " dir " << int(top_chain.direction())
                             << std::endl;
@@ -228,7 +229,7 @@ void visible(Polygon& polygon,
             else // stack size must be >= 2 here
             {
 #ifdef CGAL_GREENE_APPROX_DEBUG
-               std::cout << "visible: stack.before_back "
+               Rcpp::Rcout << "visible: stack.before_back "
                          << *stack.before_back() << std::endl;
 #endif
                // angle at stack > 180
@@ -267,8 +268,8 @@ void stack_extend(Polygon& polygon,
                   OutputIterator& result, const Traits& traits)
 {
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "stack_extend" << std::endl;
-   std::cout << "stack_extend:  stack.before_front() " << *stack.before_front()
+   Rcpp::Rcout << "stack_extend" << std::endl;
+   Rcpp::Rcout << "stack_extend:  stack.before_front() " << *stack.before_front()
     << " stack.front " << *stack.front() << " point_ref " << *point_ref
     << std::endl;
 #endif
@@ -286,7 +287,7 @@ void stack_extend(Polygon& polygon,
       stack.push_front(point_ref);
       top_chain.initialize(point_ref);
 #ifdef CGAL_GREENE_APPROX_DEBUG
-      std::cout << "stack_extend: top_chain.front "
+      Rcpp::Rcout << "stack_extend: top_chain.front "
                 << *top_chain.front() << std::endl;
 #endif
    }
@@ -309,7 +310,7 @@ void change_top_chain(Polygon& polygon,
       next_point_ref--;
 
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "change_top_chain: top_chain.front " << *top_chain.front()
+   Rcpp::Rcout << "change_top_chain: top_chain.front " << *top_chain.front()
              << " new_point_ref " << *new_point_ref
              << " next_point_ref " << *next_point_ref << std::endl;
 #endif
@@ -342,7 +343,7 @@ void change_top_chain(Polygon& polygon,
       {
          new_Polygon_2 new_polygon;
 #ifdef CGAL_GREENE_APPROX_DEBUG
-         std::cout << "change_top_chain: stack.front "
+         Rcpp::Rcout << "change_top_chain: stack.front "
                    << *stack.front() << std::endl;
 #endif
          if (top_chain.direction() == COUNTERCLOCKWISE)
@@ -371,10 +372,10 @@ void change_top_chain(Polygon& polygon,
             done = true;
             stack.push_front(new_point_ref);
 #ifdef CGAL_GREENE_APPROX_DEBUG
-            std::cout << "change_top_chain: stack is empty. New stack top is "
+            Rcpp::Rcout << "change_top_chain: stack is empty. New stack top is "
                       << *stack.front() << std::endl;
-            std::cout << "stack.back is " << *stack.back() << std::endl;
-            std::cout << "stack.before_back is " << *stack.before_back()
+            Rcpp::Rcout << "stack.back is " << *stack.back() << std::endl;
+            Rcpp::Rcout << "stack.before_back is " << *stack.before_back()
                       << std::endl;
 #endif
             top_chain.initialize(new_point_ref);
@@ -383,7 +384,7 @@ void change_top_chain(Polygon& polygon,
          else    // stack size must be >= 2 here
          {
 #ifdef CGAL_GREENE_APPROX_DEBUG
-            std::cout << "change_top_chain: stack.front "
+            Rcpp::Rcout << "change_top_chain: stack.front "
                       << *stack.front() << std::endl;
 #endif
             if (top_chain.direction() == COUNTERCLOCKWISE)
@@ -435,7 +436,7 @@ void change_bottom_chain(Polygon& polygon,
    else
       next_point_ref--;
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "change_bottom_chain: bottom_chain.front "
+   Rcpp::Rcout << "change_bottom_chain: bottom_chain.front "
              << *bottom_chain.front() << " new_point_ref " << *new_point_ref
              << " next_point_ref " << *next_point_ref << std::endl;
 #endif
@@ -464,7 +465,7 @@ void change_bottom_chain(Polygon& polygon,
          new_Polygon_2 new_polygon;
          stack.pop_back();  // remove old bottom of stack
 #ifdef CGAL_GREENE_APPROX_DEBUG
-         std::cout << "change_bottom_chain: stack.front " << *stack.front()
+         Rcpp::Rcout << "change_bottom_chain: stack.front " << *stack.front()
                    << " stack.back " << *stack.back() << std::endl;
 #endif
          if (bottom_chain.direction() == CLOCKWISE)
@@ -495,7 +496,7 @@ void change_bottom_chain(Polygon& polygon,
             if (less_yx(*(stack.front()),*new_point_ref))
             {
 #ifdef CGAL_GREENE_APPROX_DEBUG
-               std::cout << "change_bottom_chain: reversing stack and "
+               Rcpp::Rcout << "change_bottom_chain: reversing stack and "
                          << "swapping chains" << std::endl;
 #endif
                stack.push_front(new_point_ref);  // reverse stack direction
@@ -504,13 +505,13 @@ void change_bottom_chain(Polygon& polygon,
                top_chain.initialize(stack.front());
                top_chain.change_dir();
 #ifdef CGAL_GREENE_APPROX_DEBUG
-               std::cout << "change_bottom_chain:  stack is now "
+               Rcpp::Rcout << "change_bottom_chain:  stack is now "
                     << *stack.back() << " " << *stack.front()
                     << " dir " << int(stack.direction()) << std::endl;
-               std::cout << "change_bottom_chain:  bottom_chain is now "
+               Rcpp::Rcout << "change_bottom_chain:  bottom_chain is now "
                     << *bottom_chain.back() << " " << *bottom_chain.front()
                     << " dir " << int(bottom_chain.direction()) << std::endl;
-               std::cout << "change_bottom_chain:  top_chain is now "
+               Rcpp::Rcout << "change_bottom_chain:  top_chain is now "
                     << *top_chain.back() << " " << *top_chain.front()
                     << " dir " << int(top_chain.direction()) << std::endl;
 #endif
@@ -550,7 +551,7 @@ void make_polygons_from_stack(Polygon& polygon,
    // make polygons by connecting the high point to every point on the stack
    // except the first and the last.
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "make_polygons_from_stack: high_point_ref " << *high_point_ref
+   Rcpp::Rcout << "make_polygons_from_stack: high_point_ref " << *high_point_ref
         << " stack.back " << *stack.back()
         << " stack.before_back " << *stack.before_back() << std::endl;
 #endif
@@ -565,7 +566,7 @@ void make_polygons_from_stack(Polygon& polygon,
    {
        new_Polygon_2 new_polygon;
 #ifdef CGAL_GREENE_APPROX_DEBUG
-       std::cout << "make_polygons_from_stack: stack.back " << *stack.back()
+       Rcpp::Rcout << "make_polygons_from_stack: stack.back " << *stack.back()
                  << std::endl;
 #endif
        if (bottom_chain.direction() == CLOCKWISE)
@@ -653,7 +654,7 @@ BidirectionalCirculator next_vertex(BidirectionalCirculator& ccw_current,
   BidirectionalCirculator cw_next = cw_current;
   cw_next--;
 #ifdef CGAL_GREENE_APPROX_DEBUG
-  std::cout << "next_vertex: ccw_next " << *ccw_next << " cw_next " << *cw_next
+  Rcpp::Rcout << "next_vertex: ccw_next " << *ccw_next << " cw_next " << *cw_next
             << std::endl;
 #endif
 
@@ -701,10 +702,10 @@ void ga_convex_decomposition(ForwardIterator first, ForwardIterator beyond,
    Vertex_circulator circ = point_ref;
 
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "before find_smallest_yx " << std::endl;
+   Rcpp::Rcout << "before find_smallest_yx " << std::endl;
    do
    {
-      std::cout << *circ << std::endl;
+      Rcpp::Rcout << *circ << std::endl;
    } while (++circ != point_ref);
 #endif
 
@@ -712,10 +713,10 @@ void ga_convex_decomposition(ForwardIterator first, ForwardIterator beyond,
 
    circ = point_ref;
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "after find_smallest_yx " << std::endl;
+   Rcpp::Rcout << "after find_smallest_yx " << std::endl;
    do
    {
-      std::cout << *circ << std::endl;
+      Rcpp::Rcout << *circ << std::endl;
    } while (++circ != point_ref);
 #endif
 
@@ -746,7 +747,7 @@ void ga_convex_decomposition(ForwardIterator first, ForwardIterator beyond,
      bottom_chain.set_direction(COUNTERCLOCKWISE);
    }
 #ifdef CGAL_GREENE_APPROX_DEBUG
-   std::cout << "after inserting first two points: ccw_chain_ref "
+   Rcpp::Rcout << "after inserting first two points: ccw_chain_ref "
              << *ccw_chain_ref << " cw_chain_ref " << *cw_chain_ref
              << std::endl;
 #endif
@@ -756,9 +757,9 @@ void ga_convex_decomposition(ForwardIterator first, ForwardIterator beyond,
       point_ref = next_vertex(ccw_chain_ref, cw_chain_ref, traits);
 
 #ifdef CGAL_GREENE_APPROX_DEBUG
-      std::cout << "after next_vertex: ccw_chain_ref " << *ccw_chain_ref
+      Rcpp::Rcout << "after next_vertex: ccw_chain_ref " << *ccw_chain_ref
                 << " cw_chain_ref " << *cw_chain_ref << std::endl;
-      std::cout << "current point: " << *point_ref << std::endl;
+      Rcpp::Rcout << "current point: " << *point_ref << std::endl;
 #endif
       if (is_adjacent_to(point_ref, bottom_chain.front()))
          visible(polygon, point_ref, stack, bottom_chain, top_chain,

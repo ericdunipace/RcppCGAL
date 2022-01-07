@@ -12,6 +12,7 @@
 #ifndef CGAL_POINT_SET_PROCESSING_READ_OFF_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_READ_OFF_POINTS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/IO/io.h>
@@ -118,7 +119,7 @@ bool read_OFF(std::istream& is,
 
   if(!is)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -147,7 +148,7 @@ bool read_OFF(std::istream& is,
         || (signature != "OFF" && signature != "NOFF") )
       {
         // if wrong file format
-        std::cerr << "Incorrect file format line " << lineNumber << " of file" << std::endl;
+        Rcpp::Rcerr << "Incorrect file format line " << lineNumber << " of file" << std::endl;
         return false;
       }
     }
@@ -157,7 +158,7 @@ bool read_OFF(std::istream& is,
     {
       if ( !(iss >> pointsCount >> facesCount >> edgesCount) )
       {
-        std::cerr << "Error line " << lineNumber << " of file" << std::endl;
+        Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
         return false;
       }
     }
@@ -180,7 +181,7 @@ bool read_OFF(std::istream& is,
           if(iss  >> IO::iformat(ny) >> IO::iformat(nz)){
             normal = Vector(FT(nx),FT(ny),FT(nz));
           } else {
-            std::cerr << "Error line " << lineNumber << " of file" << std::endl;
+            Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
             return false;
           }
         }

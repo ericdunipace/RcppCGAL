@@ -13,6 +13,7 @@
 #ifndef CGAL_SURFACE_MESH_IO_PLY_H
 #define CGAL_SURFACE_MESH_IO_PLY_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh.h>
 
 #include <CGAL/Surface_mesh/Surface_mesh_fwd.h>
@@ -764,7 +765,7 @@ bool read_PLY(std::istream& is,
   if(!is.good())
   {
     if(verbose)
-      std::cerr << "Error: cannot open file" << std::endl;
+      Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 

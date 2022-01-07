@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_SNAPPING_SNAP_VERTICES_H
 #define CGAL_POLYGON_MESH_PROCESSING_SNAPPING_SNAP_VERTICES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
@@ -195,7 +196,7 @@ struct Vertex_proximity_report
       m_gt.compare_squared_distance_3_object()(get(m_vpm_A, va), get(m_vpm_B, vb), upper_bound_squared);
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "squared distance between "
+    Rcpp::Rcout << "squared distance between "
               << va << " [" << get(m_vpm_A, va) << "] and "
               << vb << " [" << get(m_vpm_B, vb) << "]: " << sq_dist
               << " (tol a/b: " << tol_a << " " << tol_b << ") larger? " << (res == CGAL::LARGER)
@@ -306,7 +307,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
                                  get_property_map(vertex_point, tm_B));
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << "Finding snappables vertices. Range sizes: "
+  Rcpp::Rcout << "Finding snappables vertices. Range sizes: "
             << std::distance(halfedge_range_A.begin(), halfedge_range_A.end()) << " and "
             << std::distance(halfedge_range_B.begin(), halfedge_range_B.end()) << std::endl;
 #endif
@@ -331,7 +332,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
     const FT tolerance = get(tolerance_map_A, v);
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "Pos (A): " << v << " (" << get(vpm_A, v) << ")" << std::endl;
+    Rcpp::Rcout << "Pos (A): " << v << " (" << get(vpm_A, v) << ")" << std::endl;
 #endif
 
     Vertex_container nvc {{ h }};
@@ -358,7 +359,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
     const FT tolerance = get(tolerance_map_B, v);
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "Pos (B): " << v << " (" << get(vpm_B, v) << ")" << std::endl;
+    Rcpp::Rcout << "Pos (B): " << v << " (" << get(vpm_B, v) << ")" << std::endl;
 #endif
 
     Vertex_container nvc {{ h }};
@@ -381,10 +382,10 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
   for(const auto& p : unique_positions_A)
   {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "Unique_vertex (A), pos: " << p.first.first << " vertices:";
+    Rcpp::Rcout << "Unique_vertex (A), pos: " << p.first.first << " vertices:";
     for(const halfedge_descriptor h : p.second.first)
-      std::cout << " " << target(h, tm_A);
-    std::cout << std::endl;
+      Rcpp::Rcout << " " << target(h, tm_A);
+    Rcpp::Rcout << std::endl;
 #endif
 
     const Unique_vertex& ev = p.second;
@@ -402,10 +403,10 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
   for(const auto& p : unique_positions_B)
   {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "Unique_vertex (B), pos: " << p.first.first << " vertices:";
+    Rcpp::Rcout << "Unique_vertex (B), pos: " << p.first.first << " vertices:";
     for(const halfedge_descriptor h : p.second.first)
-      std::cout << " " << target(h, tm_B);
-    std::cout << std::endl;
+      Rcpp::Rcout << " " << target(h, tm_B);
+    Rcpp::Rcout << std::endl;
 #endif
 
     const Unique_vertex& ev = p.second;
@@ -468,7 +469,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
                                                  boxes_B_ptr.begin(), boxes_B_ptr.end(),
                                                  callback);
 
-    std::cout << "time for box_d: " << timer.time() << std::endl;
+    Rcpp::Rcout << "time for box_d: " << timer.time() << std::endl;
 
     // Actually filter the range of intersecting boxes now (in parallel)
     typedef std::vector<std::pair<FT, bool> >                                         Filters;
@@ -540,8 +541,8 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
     const Point& pa = get(vpm_A, target(uv_a->first.front(), tm_A));
     const Point& pb = get(vpm_B, target(uv_b->first.front(), tm_B));
-    std::cout << "Snapping (" << pa << ") to (" << pb << ") at dist: " << sp.sq_dist << std::endl;
-    std::cout << "#verts A: " << uv_a->first.size() << " #verts B: " << uv_b->first.size() << std::endl;
+    Rcpp::Rcout << "Snapping (" << pa << ") to (" << pb << ") at dist: " << sp.sq_dist << std::endl;
+    Rcpp::Rcout << "#verts A: " << uv_a->first.size() << " #verts B: " << uv_b->first.size() << std::endl;
 #endif
 
     snappable_vertices_pairs.emplace_back(uv_a, uv_b);
@@ -558,7 +559,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
   }
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << snappable_vertices_pairs.size() << " snappable pair(s)" << std::endl;
+  Rcpp::Rcout << snappable_vertices_pairs.size() << " snappable pair(s)" << std::endl;
 #endif
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -602,7 +603,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
         const FT lambda = tol_s / (tol_s + tol_t);
         const Point new_p = get(vpm_A, va) + lambda * (get(vpm_B, vb) - get(vpm_A, va));
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-        std::cout << "new position of " << va << " " << vb << " --> " << new_p << std::endl;
+        Rcpp::Rcout << "new position of " << va << " " << vb << " --> " << new_p << std::endl;
 #endif
 
         for(const halfedge_descriptor ha : vs_a)
@@ -621,7 +622,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
 #endif
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << "Snapped " << counter << " pair(s)!" << std::endl;
+  Rcpp::Rcout << "Snapped " << counter << " pair(s)!" << std::endl;
 #endif
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -715,7 +716,7 @@ std::size_t snap_vertices_two_way(const HalfedgeRange_A& halfedge_range_A,
         if(is_collinear_left && is_collinear_right) // #3
         {
 #ifdef CGAL_PMP_SNAP_DEBUG
-          std::cout << va << " (" << get(vpm_A, va) << ") and " << vb << " (" << get(vpm_B, vb) << ") are locked vertices" << std::endl;
+          Rcpp::Rcout << va << " (" << get(vpm_A, va) << ") and " << vb << " (" << get(vpm_B, vb) << ") are locked vertices" << std::endl;
 #endif
           *lockable_vps_out++ = std::make_pair(va, vb);
         }

@@ -13,6 +13,7 @@
 #ifndef CGAL_PMP_WEIGHTS_H
 #define CGAL_PMP_WEIGHTS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/core.h>
 
 /// @cond CGAL_DOCUMENT_INTERNAL
@@ -761,7 +762,7 @@ public:
   double operator()(halfedge_descriptor he)
   {
     double weight = primary(he);
-    //if(weight < 0) { std::cout << "Negative weight" << std::endl; }
+    //if(weight < 0) { Rcpp::Rcout << "Negative weight" << std::endl; }
     return (weight >= 0) ? weight : secondary(he);
   }
 };

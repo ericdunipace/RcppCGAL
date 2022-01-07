@@ -14,6 +14,7 @@
 #ifndef CGAL_BOX_INTERSECTION_D_SEGMENT_TREE_H
 #define CGAL_BOX_INTERSECTION_D_SEGMENT_TREE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Box_intersection_d.h>
 
 #include <CGAL/basic.h>
@@ -272,8 +273,8 @@ split_points( RandomAccessIter begin, RandomAccessIter end,
 #if CGAL_BOX_INTERSECTION_DEBUG
  #define CGAL_BOX_INTERSECTION_DUMP(msg) { \
    for( unsigned int i = level; i; --i ) \
-     std::cout << "  "; \
-    std::cout << msg; \
+     Rcpp::Rcout << "  "; \
+    Rcpp::Rcout << msg; \
   }
 #else
  #define CGAL_BOX_INTERSECTION_DUMP(msg) ;
@@ -284,30 +285,30 @@ template< class ForwardIter, class Traits >
 void dump_points( ForwardIter begin, ForwardIter end, Traits /* traits */,
                   int dim ) {
     while( begin != end ) {
-        std::cout << Traits::min_coord( *begin, dim ) << " ";
+        Rcpp::Rcout << Traits::min_coord( *begin, dim ) << " ";
         ++begin;
     }
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
 }
 
 template< class ForwardIter, class Traits >
 void dump_intervals( ForwardIter begin, ForwardIter end, Traits /* traits */,
                      int dim ) {
     while( begin != end ) {
-        std::cout << "[" << Traits::min_coord( *begin, dim ) << ","
+        Rcpp::Rcout << "[" << Traits::min_coord( *begin, dim ) << ","
                          << Traits::max_coord( *begin, dim ) << ") ";
         ++begin;
     }
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
 }
 
 template< class ForwardIter, class  Traits >
 void dump_box_numbers( ForwardIter begin, ForwardIter end, Traits /* traits */ ) {
     while( begin != end ) {
-        std::cout << Traits::id( *begin ) << " ";
+        Rcpp::Rcout << Traits::id( *begin ) << " ";
         ++begin;
     }
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
 }
 
 template< class T >

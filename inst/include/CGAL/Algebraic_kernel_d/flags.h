@@ -29,7 +29,7 @@
 
 // If CGAL_ACK_DEBUG_FLAG is set, which output stream is used for debug?
 #ifndef CGAL_ACK_DEBUG_PRINT
-#define CGAL_ACK_DEBUG_PRINT std::cout
+#define CGAL_ACK_DEBUG_PRINT Rcpp::Rcout
 #endif
 
 // If enabled, needs includes from experimental package

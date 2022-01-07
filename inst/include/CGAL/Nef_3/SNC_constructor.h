@@ -16,6 +16,7 @@
 #ifndef CGAL_SNC_CONSTRUCTOR_H
 #define CGAL_SNC_CONSTRUCTOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -1769,7 +1770,7 @@ public:
       sfc->twin()->incident_sface()->volume() = c0;
     }
 
-    SNC_io_parser<SNC_structure>::dump(*this->sncp(), std::cerr);
+    SNC_io_parser<SNC_structure>::dump(*this->sncp(), Rcpp::Rcerr);
   }
 
   void correct_infibox_sedge_marks() {

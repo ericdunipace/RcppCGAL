@@ -13,6 +13,7 @@
 #ifndef CGAL_PARTITION_IS_VALID_2_H
 #define CGAL_PARTITION_IS_VALID_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -52,7 +53,7 @@ polygons_w_steiner_are_equal(Circulator1 orig_first, Circulator2 new_first,
    if (new_circ == new_first)
    {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-      std::cout << "first vertex " << *orig_first << " not found "
+      Rcpp::Rcout << "first vertex " << *orig_first << " not found "
                 << std::endl;
 #endif // CGAL_PARTITION_CHECK_DEBUG
       return false;
@@ -79,7 +80,7 @@ polygons_w_steiner_are_equal(Circulator1 orig_first, Circulator2 new_first,
              COLLINEAR)
          {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-           std::cout << *new_circ << " is not collinear with " << prev_pt
+           Rcpp::Rcout << *new_circ << " is not collinear with " << prev_pt
                      << " and " << *orig_circ << std::endl;
 #endif
             return false;
@@ -112,7 +113,7 @@ polygons_are_equal(Circulator1 orig_first, Circulator2 new_first)
    do
    {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-      std::cout << *new_first << " is in the right place " << std::endl;
+      Rcpp::Rcout << *new_first << " is in the right place " << std::endl;
 #endif
       orig_circ++; new_circ++;
    }
@@ -160,15 +161,15 @@ partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
       vtx_begin = (*poly_first).vertices_begin();
       vtx_end = (*poly_first).vertices_end();
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-         std::cout << "Polygon " << poly_num << " is " << std::endl;
-         std::cout << *poly_first << std::endl;
+         Rcpp::Rcout << "Polygon " << poly_num << " is " << std::endl;
+         Rcpp::Rcout << *poly_first << std::endl;
 #endif
       CGAL_partition_assertion (
            orientation_2(vtx_begin, vtx_end, traits) == COUNTERCLOCKWISE);
       if (!is_valid(vtx_begin, vtx_end))
       {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-         std::cout << "It does NOT have the tested property." << std::endl;
+         Rcpp::Rcout << "It does NOT have the tested property." << std::endl;
 #endif
          return false;
       }
@@ -179,13 +180,13 @@ partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
 
 #ifdef CGAL_PARTITION_CHECK_DEBUG
    typename std::list<Point_2>::iterator  poly_iterator;
-   std::cout << "union polygon is " << std::endl;
+   Rcpp::Rcout << "union polygon is " << std::endl;
    for (poly_iterator = union_polygon.begin();
         poly_iterator != union_polygon.end(); poly_iterator++)
    {
-      std::cout << *poly_iterator << " ";
+      Rcpp::Rcout << *poly_iterator << " ";
    }
-   std::cout << std::endl;
+   Rcpp::Rcout << std::endl;
 #endif // CGAL_PARTITION_CHECK_DEBUG
 
    typedef typename std::list<Point_2>::iterator     I;

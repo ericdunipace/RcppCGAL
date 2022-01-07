@@ -17,6 +17,7 @@
 #ifndef CGAL_FUNCTION_OBJECTSCD_H
 #define CGAL_FUNCTION_OBJECTSCD_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/enum.h>
 #include <CGAL/use.h>
@@ -25,9 +26,9 @@
 #undef CGAL_KD_TRACE
 #undef CGAL_KD_TRACEN
 #undef CGAL_KD_TRACEV
-#define CGAL_KD_TRACE(t)  std::cerr << t
-#define CGAL_KD_TRACEN(t) std::cerr << t << std::endl
-#define CGAL_KD_TRACEV(t) std::cerr << #t << " = " << (t) << std::endl
+#define CGAL_KD_TRACE(t)  Rcpp::Rcerr << t
+#define CGAL_KD_TRACEN(t) Rcpp::Rcerr << t << std::endl
+#define CGAL_KD_TRACEV(t) Rcpp::Rcerr << #t << " = " << (t) << std::endl
 
 namespace CGAL {
 
@@ -454,7 +455,7 @@ public:
                         Orientation o = ori_(first, last);
                         if( COPLANAR == o )
             {
-                std::cerr << "\nAffine base is flat (it should have positive orientation) !!";
+                Rcpp::Rcerr << "\nAffine base is flat (it should have positive orientation) !!";
                 //return ON_ORIENTED_BOUNDARY;
             }
                         CGAL_assertion( o == POSITIVE );

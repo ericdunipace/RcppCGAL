@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_COREFINEMENT_INTERSECTION_IMPL_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_COREFINEMENT_INTERSECTION_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/corefinement.h>
 
 
@@ -1293,7 +1294,7 @@ class Intersection_of_triangle_meshes
                                      tm, vpm);
                   Node_id node_id=++current_node;
 #ifdef CGAL_DEBUG_AUTOREFINEMENT
-                  std::cerr << "New triple node " << node_id << "\n";
+                  Rcpp::Rcerr << "New triple node " << node_id << "\n";
 #endif
                   visitor.new_node_added_triple_face(node_id, f1, f2, f3, tm);
 
@@ -1311,7 +1312,7 @@ class Intersection_of_triangle_meshes
     }
 
 #ifdef CGAL_DEBUG_AUTOREFINEMENT
-    std::cout << "\nAt the end of new node creation, current_node is " << current_node << "\n\n";
+    Rcpp::Rcout << "\nAt the end of new node creation, current_node is " << current_node << "\n\n";
 #endif
     typedef std::pair<const std::pair< std::pair<face_descriptor, face_descriptor>, int>,
                       std::vector<Node_id> > Faces_and_nodes;
@@ -1336,7 +1337,7 @@ class Intersection_of_triangle_meshes
       int i=0;
       typename Faces_to_nodes_map::iterator insert_it = find_it;
 #ifdef CGAL_DEBUG_AUTOREFINEMENT
-      std::cout << n1 << " -> " << n2 << "\n";
+      Rcpp::Rcout << n1 << " -> " << n2 << "\n";
 #endif
       for(Node_id id : f_n_nids.second)
       {
@@ -1346,7 +1347,7 @@ class Intersection_of_triangle_meshes
         insert_it->second.insert(id);
         CGAL_assertion(insert_it->second.size()==2);
 #ifdef CGAL_DEBUG_AUTOREFINEMENT
-        std::cerr <<"  adding " << prev << " " << id << " into "
+        Rcpp::Rcerr <<"  adding " << prev << " " << id << " into "
                   << f_n_nids.first.first.first << " and " << f_n_nids.first.first.second <<  "\n";
 #endif
         prev=id;

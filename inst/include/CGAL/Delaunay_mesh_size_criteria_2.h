@@ -13,6 +13,7 @@
 #ifndef CGAL_DELAUNAY_MESH_SIZE_CRITERIA_2_H
 #define CGAL_DELAUNAY_MESH_SIZE_CRITERIA_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -152,7 +153,7 @@ public:
       q.second = 0;
       if( squared_size_bound != 0 )
         {
-          //          std::cerr << squared_size_bound << std::endl;
+          //          Rcpp::Rcerr << squared_size_bound << std::endl;
           q.second = max_sq_length / squared_size_bound;
             // normalized by size bound to deal
             // with size field

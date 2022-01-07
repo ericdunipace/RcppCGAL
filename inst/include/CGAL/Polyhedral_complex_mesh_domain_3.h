@@ -14,6 +14,7 @@
 #ifndef CGAL_POLYHEDRAL_COMPLEX_MESH_DOMAIN_3_H
 #define CGAL_POLYHEDRAL_COMPLEX_MESH_DOMAIN_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -369,8 +370,8 @@ public:
   template <typename C3t3>
   void add_vertices_to_c3t3_on_patch_without_feature_edges(C3t3& c3t3) const {
 #ifdef CGAL_MESH_3_VERBOSE
-    std::cout << "add_vertices_to_c3t3_on_patch_without_feature_edges...";
-    std::cout.flush();
+    Rcpp::Rcout << "add_vertices_to_c3t3_on_patch_without_feature_edges...";
+    Rcpp::Rcout.flush();
 #endif
     CGAL::Random random(0);
 
@@ -507,8 +508,8 @@ public:
       }
     }
 #ifdef CGAL_MESH_3_VERBOSE
-    std::cout << "\badd_vertices_to_c3t3_on_patch_without_feature_edges done.";
-    std::cout << std::endl;
+    Rcpp::Rcout << "\badd_vertices_to_c3t3_on_patch_without_feature_edges done.";
+    Rcpp::Rcout << std::endl;
 #endif
   }
 
@@ -583,10 +584,10 @@ public:
         //   if(opt != opt2) {
         //     if(!opt  && *opt2 == 0) continue;
         //     if(!opt2 && *opt  == 0) continue;
-        //     std::cerr << "Not the same result for:\n  "
+        //     Rcpp::Rcerr << "Not the same result for:\n  "
         //               << ray_shot
         //               << "\n  " << ray_shot2 << std::endl;
-        //     abort();
+        //     Rcpp::stop("Error");
         //   }
         // }
         if(!opt)
@@ -753,9 +754,9 @@ detect_features(FT angle_in_degree,
 
 #ifdef CGAL_MESH_3_VERBOSE
     std::size_t poly_id = &p-&poly[0];
-    std::cerr << "Polyhedron #" << poly_id << " :\n";
-    std::cerr << "  material #" << patch_indices[poly_id].first << "\n";
-    std::cerr << "  material #" << patch_indices[poly_id].second << "\n";
+    Rcpp::Rcerr << "Polyhedron #" << poly_id << " :\n";
+    Rcpp::Rcerr << "  material #" << patch_indices[poly_id].first << "\n";
+    Rcpp::Rcerr << "  material #" << patch_indices[poly_id].second << "\n";
 #endif // CGAL_MESH_3_VERBOSE
 
     // Get sharp features
@@ -778,7 +779,7 @@ detect_features(FT angle_in_degree,
   this->patch_id_to_polyhedron_id.resize(nb_of_patch_plus_one);
   this->patch_has_featured_edges.resize(nb_of_patch_plus_one);
 #ifdef CGAL_MESH_3_VERBOSE
-  std::cerr << "Number of patches: " << (nb_of_patch_plus_one - 1) << std::endl;
+  Rcpp::Rcerr << "Number of patches: " << (nb_of_patch_plus_one - 1) << std::endl;
 #endif
   for(Polyhedron_type& p : poly)
   {
@@ -876,7 +877,7 @@ merge_duplicated_points(const PointSet& duplicated_points)
     }
     const Patch_iterator range_end = it;
 #if CGAL_MESH_3_VERBOSE > 10
-    std::cerr << "Point " << range_begin->first.first << " is duplicated, in "
+    Rcpp::Rcerr << "Point " << range_begin->first.first << " is duplicated, in "
               << "the following patches:\n";
 #endif // CGAL_MESH_3_VERBOSE
     typename Union_find_t::handle first_handle =
@@ -885,7 +886,7 @@ merge_duplicated_points(const PointSet& duplicated_points)
     for (it = boost::next(range_begin); it != range_end; ++it)
     {
 #if CGAL_MESH_3_VERBOSE > 10
-      std::cerr << " - #" << it->second << "\n";
+      Rcpp::Rcerr << " - #" << it->second << "\n";
 #endif // CGAL_MESH_3_VERBOSE
       union_find.unify_sets(first_handle,
                             handles[it->second]);
@@ -1005,7 +1006,7 @@ reindex_patches(const std::vector<Surf_p_index>& map)
 #if CGAL_MESH_3_VERBOSE > 10
   for(Surf_p_index i = 0, end = Surf_p_index(map.size()); i < end; ++i) {
     if(i != map[i])
-      std::cerr << "patch #" << i << " is reindexed to " << map[i] << "\n";
+      Rcpp::Rcerr << "patch #" << i << " is reindexed to " << map[i] << "\n";
   }
 #endif // CGAL_MESH_3_VERBOSE
   typedef typename boost::graph_traits<Polyhedron_type>::face_descriptor
@@ -1022,7 +1023,7 @@ reindex_patches(const std::vector<Surf_p_index>& map)
       put(face_pid_pmap, fd, new_id);
 #if CGAL_MESH_3_VERBOSE > 11
       if(id != new_id) {
-        std::cerr << "On polyhedron #" << i << ", patch #" << id
+        Rcpp::Rcerr << "On polyhedron #" << i << ", patch #" << id
                   << " turned into patch #" << new_id << "\n";
       }
 #endif // CGAL_MESH_3_VERBOSE

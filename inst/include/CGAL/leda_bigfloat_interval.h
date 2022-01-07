@@ -15,6 +15,7 @@
 #ifndef CGAL_LEDA_BIGFLOAT_INTERVAL_H
 #define CGAL_LEDA_BIGFLOAT_INTERVAL_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/LEDA_basic.h>
@@ -429,7 +430,7 @@ public:
 //             else            lower_m = (lower_m << -shift);
 //             //CGAL_postcondition(lower_m.length() == upper_m.length());
 //             leda::integer err = upper_m - lower_m;
-//             std::cout <<"LEDA: " << lower_m << " " << err << " " << std::endl;
+//             Rcpp::Rcout <<"LEDA: " << lower_m << " " << err << " " << std::endl;
 //             return CGAL::abs(lower_m.length()-err.length());
 //         }
 //     };

@@ -13,6 +13,7 @@
 #ifndef CGAL_IO_GOCAD_H
 #define CGAL_IO_GOCAD_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/helpers.h>
 #include <CGAL/IO/io.h>
 
@@ -55,7 +56,7 @@ bool read_GOCAD(std::istream& is,
   if(!is)
   {
     if(verbose)
-      std::cerr<<"File doesn't exist."<<std::endl;
+      Rcpp::Rcerr<<"File doesn't exist."<<std::endl;
     return false;
   }
 
@@ -113,7 +114,7 @@ bool read_GOCAD(std::istream& is,
       if(!(iss >> s >> i >> p))
       {
         if(verbose)
-          std::cerr << "error while reading vertex." << std::endl;
+          Rcpp::Rcerr << "error while reading vertex." << std::endl;
         return false;
       }
 
@@ -135,7 +136,7 @@ bool read_GOCAD(std::istream& is,
       if(!(iss >> i >> j >> k))
       {
         if(verbose)
-          std::cerr << "error while reading triangle." << std::endl;
+          Rcpp::Rcerr << "error while reading triangle." << std::endl;
         return false;
       }
 

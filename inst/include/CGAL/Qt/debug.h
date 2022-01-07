@@ -14,6 +14,7 @@
 #ifndef CGAL_QT_DEBUG_H
 #define CGAL_QT_DEBUG_H
 
+#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 
@@ -30,7 +31,7 @@ namespace Qt {
  *     CGAL::Qt:traverse_resources(":/cgal"); // view CGAL resources
  *  or
  *     CGAL::Qt:traverse_resources(":"); // view all resources
- *  and displays the resources tree on std::cerr.
+ *  and displays the resources tree on Rcpp::Rcerr.
  */
 CGAL_QT_EXPORT void traverse_resources(const QString& name,
                                         const QString& dirname = QString(),
@@ -46,22 +47,22 @@ void opengl_check_errors(QtOpenGLFunctions* gl,
   while (error != GL_NO_ERROR)
   {
     if(error == GL_INVALID_ENUM)
-      std::cerr << "An unacceptable value is specified for an enumerated argument." << "@" << line << std::endl;
+      Rcpp::Rcerr << "An unacceptable value is specified for an enumerated argument." << "@" << line << std::endl;
     if(error == GL_INVALID_VALUE)
-      std::cerr << "A numeric argument is out of range." << "@" << line << std::endl;
+      Rcpp::Rcerr << "A numeric argument is out of range." << "@" << line << std::endl;
     if(error == GL_INVALID_OPERATION)
-      std::cerr << "The specified operation is not allowed in the current state." << "@" << line << std::endl;
+      Rcpp::Rcerr << "The specified operation is not allowed in the current state." << "@" << line << std::endl;
     if(error == GL_INVALID_FRAMEBUFFER_OPERATION)
-      std::cerr << "The framebuffer object is not complete." << "@" << line << std::endl;
+      Rcpp::Rcerr << "The framebuffer object is not complete." << "@" << line << std::endl;
     if(error == GL_OUT_OF_MEMORY)
-      std::cerr << "There is not enough memory left to execute the command." << "@" << line << std::endl;
+      Rcpp::Rcerr << "There is not enough memory left to execute the command." << "@" << line << std::endl;
 #ifdef GL_STACK_UNDERFLOW
     if(error == GL_STACK_UNDERFLOW)
-      std::cerr << "An attempt has been made to perform an operation that would cause an internal stack to underflow." << "@" << line << std::endl;
+      Rcpp::Rcerr << "An attempt has been made to perform an operation that would cause an internal stack to underflow." << "@" << line << std::endl;
 #endif
 #ifdef GL_STACK_OVERFLOW
     if(error == GL_STACK_OVERFLOW)
-      std::cerr << "An attempt has been made to perform an operation that would cause an internal stack to overflow." << "@" << line << std::endl;
+      Rcpp::Rcerr << "An attempt has been made to perform an operation that would cause an internal stack to overflow." << "@" << line << std::endl;
 #endif
     error = gl->glGetError();
   }

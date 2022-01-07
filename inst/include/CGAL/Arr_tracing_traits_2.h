@@ -12,6 +12,7 @@
 #ifndef CGAL_ARR_TRACING_TRAITS_H
 #define CGAL_ARR_TRACING_TRAITS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -238,11 +239,11 @@ public:
     Comparison_result operator()(const Point_2 & p1, const Point_2 & p2) const
     {
       if (!m_enabled) return m_object(p1, p2);
-      std::cout << "compare_x" << std::endl
+      Rcpp::Rcout << "compare_x" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       Comparison_result cr = m_object(p1, p2);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -266,11 +267,11 @@ public:
     Comparison_result operator()(const Point_2 & p1, const Point_2 & p2) const
     {
       if (!m_enabled) return m_object(p1, p2);
-      std::cout << "compare_xy" << std::endl
+      Rcpp::Rcout << "compare_xy" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       Comparison_result cr = m_object(p1, p2);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -293,10 +294,10 @@ public:
     const Point_2 operator()(const X_monotone_curve_2 & xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      std::cout << "construct_min_vertex" << std::endl
+      Rcpp::Rcout << "construct_min_vertex" << std::endl
                 << "  xcv: " << xcv << std::endl;
       Point_2 p = m_object(xcv);
-      std::cout << "  result: " << p << std::endl;
+      Rcpp::Rcout << "  result: " << p << std::endl;
       return p;
     }
   };
@@ -319,10 +320,10 @@ public:
     const Point_2 operator()(const X_monotone_curve_2 & xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      std::cout << "construct_max_vertex" << std::endl
+      Rcpp::Rcout << "construct_max_vertex" << std::endl
                 << "  xcv: " << xcv << std::endl;
       Point_2 p = m_object(xcv);
-      std::cout << "  result: " << p << std::endl;
+      Rcpp::Rcout << "  result: " << p << std::endl;
       return p;
     }
   };
@@ -345,10 +346,10 @@ public:
     bool operator()(const X_monotone_curve_2 & xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      std::cout << "is_vertical" << std::endl
+      Rcpp::Rcout << "is_vertical" << std::endl
                 << "  xcv: " << xcv << std::endl;
       bool is_vertical = m_object(xcv);
-      std::cout << "  result: " << is_vertical << std::endl;
+      Rcpp::Rcout << "  result: " << is_vertical << std::endl;
       return is_vertical;
     }
   };
@@ -375,11 +376,11 @@ public:
                                  const X_monotone_curve_2 & xcv) const
     {
       if (!m_enabled) return m_object(p, xcv);
-      std::cout << "compare_y_at_x" << std::endl
+      Rcpp::Rcout << "compare_y_at_x" << std::endl
                 << "  p: " << p << std::endl
                 << "  xcv: " << xcv << std::endl;
       Comparison_result cr = m_object(p, xcv);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -411,11 +412,11 @@ public:
                     const X_monotone_curve_2 & xcv2) const
     {
       if (!m_enabled_curve) return m_object(xcv1, xcv2);
-      std::cout << "equal 1" << std::endl
+      Rcpp::Rcout << "equal 1" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv1: " << xcv1 << std::endl;
       bool equal = m_object(xcv1, xcv2);
-      std::cout << "  result: " << equal << std::endl;
+      Rcpp::Rcout << "  result: " << equal << std::endl;
       return equal;
     }
 
@@ -427,11 +428,11 @@ public:
     bool operator()(const Point_2 & p1, const Point_2 & p2) const
     {
       if (!m_enabled_point) return m_object(p1, p2);
-      std::cout << "equal 2" << std::endl
+      Rcpp::Rcout << "equal 2" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       bool equal = m_object(p1, p2);
-      std::cout << "  result: " << equal << std::endl;
+      Rcpp::Rcout << "  result: " << equal << std::endl;
       return equal;
     }
   };
@@ -460,12 +461,12 @@ public:
                                  const Point_2 & p) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, p);
-      std::cout << "compare_y_at_x_left" << std::endl
+      Rcpp::Rcout << "compare_y_at_x_left" << std::endl
                 << "  p: " << p << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, p);
-      std::cout << "  result:" << cr << std::endl;
+      Rcpp::Rcout << "  result:" << cr << std::endl;
       return cr;
     }
   };
@@ -494,12 +495,12 @@ public:
                                  const Point_2 & p) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, p);
-      std::cout << "compare_y_at_x_right" << std::endl
+      Rcpp::Rcout << "compare_y_at_x_right" << std::endl
                 << "  p: " << p << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, p);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -531,7 +532,7 @@ public:
     OutputIterator operator()(const Curve_2 & cv, OutputIterator oi) const
     {
       if (! m_enabled) return m_object(cv, oi);
-      std::cout << "make_x_monotone" << std::endl
+      Rcpp::Rcout << "make_x_monotone" << std::endl
                 << "  cv: " << cv << std::endl;
 
       typedef boost::variant<Point_2, X_monotone_curve_2>
@@ -544,12 +545,12 @@ public:
       size_t i = 0;
       for (auto it = container.begin(); it != container.end(); ++it) {
         if (const auto* xcv = boost::get<X_monotone_curve_2>(*it)) {
-          std::cout << "  result[" << i++ << "]: xcv: " << *xcv << std::endl;
+          Rcpp::Rcout << "  result[" << i++ << "]: xcv: " << *xcv << std::endl;
           continue;
         }
 
         if (const Point_2* p = boost::get<Point_2>(*it)) {
-          std::cout << "  result[" << i++ << "]: p: " << *p << std::endl;
+          Rcpp::Rcout << "  result[" << i++ << "]: p: " << *p << std::endl;
           continue;
         }
 
@@ -586,11 +587,11 @@ public:
         m_object(xcv, p, xcv1, xcv2);
         return;
       }
-      std::cout << "split: " << std::endl
+      Rcpp::Rcout << "split: " << std::endl
                 << "  xcv: " << xcv << std::endl
                 << "  p: " << p << std::endl;
       m_object(xcv, p, xcv1, xcv2);
-      std::cout << "  result xcv1: " << xcv1 << std::endl
+      Rcpp::Rcout << "  result xcv1: " << xcv1 << std::endl
                 << "         xcv2: " << xcv2 << std::endl;
     }
   };
@@ -626,7 +627,7 @@ public:
 
       if (! m_enabled) return m_object(xcv1, xcv2, oi);
 
-      std::cout << "intersect" << std::endl
+      Rcpp::Rcout << "intersect" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       std::list<Intersection_result> container;
@@ -637,13 +638,13 @@ public:
       for (const auto& item : container) {
         const X_monotone_curve_2* xcv = boost::get<X_monotone_curve_2>(&item);
         if (xcv != nullptr) {
-          std::cout << "  result[" << i++ << "]: xcv: " << *xcv << std::endl;
+          Rcpp::Rcout << "  result[" << i++ << "]: xcv: " << *xcv << std::endl;
           continue;
         }
 
         const Intersection_point* ip = boost::get<Intersection_point>(&item);
         if (ip != nullptr) {
-          std::cout << "  result[" << i++ << "]: p: " << ip->first
+          Rcpp::Rcout << "  result[" << i++ << "]: p: " << ip->first
                     << ", multiplicity: " << ip->second << std::endl;
           continue;
         }
@@ -677,11 +678,11 @@ public:
                     const X_monotone_curve_2 & xcv2) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2);
-      std::cout << "are_mergeable" << std::endl
+      Rcpp::Rcout << "are_mergeable" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       bool are_mergeable = m_object(xcv1, xcv2);
-      std::cout << "  result: " << are_mergeable << std::endl;
+      Rcpp::Rcout << "  result: " << are_mergeable << std::endl;
       return are_mergeable;
     }
   };
@@ -706,11 +707,11 @@ public:
                     const X_monotone_curve_2 & xcv2,
                     X_monotone_curve_2 & xcv) const
     {
-      std::cout << "merge" << std::endl
+      Rcpp::Rcout << "merge" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       return m_object(xcv1, xcv2, xcv);
-      std::cout << "  result: " << xcv << std::endl;
+      Rcpp::Rcout << "  result: " << xcv << std::endl;
     }
   };
 
@@ -732,10 +733,10 @@ public:
     X_monotone_curve_2 operator()(const X_monotone_curve_2 & xcv)
     {
       if (!m_enabled) return m_object(xcv);
-      std::cout << "construct_opposite" << std::endl
+      Rcpp::Rcout << "construct_opposite" << std::endl
                 << "  xcv: " << xcv << std::endl;
       X_monotone_curve_2 xcv_out = m_object(xcv);
-      std::cout << "  result: " << xcv_out << std::endl;
+      Rcpp::Rcout << "  result: " << xcv_out << std::endl;
       return xcv;
     }
   };
@@ -760,10 +761,10 @@ public:
     Comparison_result operator()(const X_monotone_curve_2 & xcv)
     {
       if (!m_enabled) return m_object(xcv);
-      std::cout << "compare_endpoints_xy" << std::endl
+      Rcpp::Rcout << "compare_endpoints_xy" << std::endl
                 << "  xcv: " << xcv << std::endl;
       Comparison_result cr = m_object(xcv);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -793,10 +794,10 @@ public:
                              Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv, ce);
-      std::cout << "parameter_space_in_x" << std::endl
+      Rcpp::Rcout << "parameter_space_in_x" << std::endl
                 << "  ce: " << ce << ", xcv: " << xcv << std::endl;
       Arr_parameter_space bt = m_object(xcv, ce);
-      std::cout << "  result: " << bt << std::endl;
+      Rcpp::Rcout << "  result: " << bt << std::endl;
       return bt;
     }
   };
@@ -819,10 +820,10 @@ public:
     Comparison_result operator()(const Point_2 & p) const
     {
       if (!m_enabled) return m_object(p);
-      std::cout << "is_on_x_identification" << std::endl
+      Rcpp::Rcout << "is_on_x_identification" << std::endl
                 << "  p: " << p << std::endl;
       Comparison_result cr = m_object(p);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
 
@@ -832,10 +833,10 @@ public:
     Comparison_result operator()(const X_monotone_curve_2 & xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      std::cout << "is_on_x_identification" << std::endl
+      Rcpp::Rcout << "is_on_x_identification" << std::endl
                 << "  xcv: " << xcv << std::endl;
       Comparison_result cr = m_object(xcv);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -862,11 +863,11 @@ public:
     Comparison_result operator()(const Point_2 & p1, const Point_2 & p2) const
     {
       if (!m_enabled) return m_object(p1, p2);
-      std::cout << "compare_y_on_boundary" << std::endl
+      Rcpp::Rcout << "compare_y_on_boundary" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       Comparison_result cr = m_object(p1, p2);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -895,12 +896,12 @@ public:
                                  Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, ce);
-      std::cout << "compare_y_near_boundary" << std::endl
+      Rcpp::Rcout << "compare_y_near_boundary" << std::endl
                 << "  ce: " << ce << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, ce);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -929,10 +930,10 @@ public:
                              Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv, ce);
-        std::cout << "parameter_space_in_y" << std::endl
+        Rcpp::Rcout << "parameter_space_in_y" << std::endl
                   << "  ce: " << ce << ", xcv: " << xcv << std::endl;
       Arr_parameter_space bt = m_object(xcv, ce);
-      std::cout << "  result: " << bt << std::endl;
+      Rcpp::Rcout << "  result: " << bt << std::endl;
       return bt;
     }
 
@@ -943,10 +944,10 @@ public:
     Arr_parameter_space operator()(const Point_2 & p) const
     {
       if (!m_enabled) return m_object(p);
-        std::cout << "parameter_space_in_y" << std::endl
+        Rcpp::Rcout << "parameter_space_in_y" << std::endl
                   << "  point: " << p << std::endl;
       Arr_parameter_space bt = m_object(p);
-      std::cout << "  result: " << bt << std::endl;
+      Rcpp::Rcout << "  result: " << bt << std::endl;
       return bt;
     }
   };
@@ -969,10 +970,10 @@ public:
     Comparison_result operator()(const Point_2 & p) const
     {
       if (!m_enabled) return m_object(p);
-      std::cout << "is_on_y_identification" << std::endl
+      Rcpp::Rcout << "is_on_y_identification" << std::endl
                 << "  p: " << p << std::endl;
       Comparison_result cr = m_object(p);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
 
@@ -982,10 +983,10 @@ public:
     Comparison_result operator()(const X_monotone_curve_2 & xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      std::cout << "is_on_y_identification" << std::endl
+      Rcpp::Rcout << "is_on_y_identification" << std::endl
                 << "  xcv: " << xcv << std::endl;
       Comparison_result cr = m_object(xcv);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -1014,11 +1015,11 @@ public:
                                  Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(p, xcv, ce);
-      std::cout << "compare_x_at_limit 1" << std::endl
+      Rcpp::Rcout << "compare_x_at_limit 1" << std::endl
                 << "  p: " << p << std::endl
                 << "  ce: " << ce << ", xcv: " << xcv << std::endl;
       Comparison_result cr = m_object(p, xcv, ce);
-      std::cout << "  result: " << std::endl;
+      Rcpp::Rcout << "  result: " << std::endl;
       return cr;
     }
 
@@ -1035,11 +1036,11 @@ public:
                                  Arr_curve_end ce2) const
     {
       if (!m_enabled) return m_object(xcv1, ce1, xcv2, ce2);
-      std::cout << "compare_x_at_limit 2" << std::endl
+      Rcpp::Rcout << "compare_x_at_limit 2" << std::endl
                 << "  ce1: " << ce1 << ", xcv1: " << xcv1 << std::endl
                 << "  ce2: " << ce2 << ", xcv2: " << xcv2 << std::endl;
       Comparison_result cr = m_object(xcv1, ce1, xcv2, ce2);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -1070,12 +1071,12 @@ public:
                                  Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, ce);
-      std::cout << "compare_x_near_limit 2" << std::endl
+      Rcpp::Rcout << "compare_x_near_limit 2" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl
                 << "    ce: " << ce << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, ce);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -1099,11 +1100,11 @@ public:
     Comparison_result operator()(const Point_2 & p1, const Point_2 & p2) const
     {
       if (!m_enabled) return m_object(p1, p2);
-      std::cout << "compare_x_on_boundary" << std::endl
+      Rcpp::Rcout << "compare_x_on_boundary" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       Comparison_result cr = m_object(p1, p2);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
 
@@ -1116,12 +1117,12 @@ public:
                                  const X_monotone_curve_2 & xcv, Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(pt, xcv, ce);
-      std::cout << "compare_x_on_boundary" << std::endl
+      Rcpp::Rcout << "compare_x_on_boundary" << std::endl
                 << "  pt: " << pt << std::endl
                 << " xcv: " << xcv << std::endl
                 << "  ce: " << ce << std::endl;
       Comparison_result cr = m_object(pt, xcv, ce);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
 
@@ -1135,13 +1136,13 @@ public:
                                  const X_monotone_curve_2 & xcv2, Arr_curve_end ce2) const
     {
       if (!m_enabled) return m_object(xcv2, ce1, xcv2, ce2);
-      std::cout << "compare_x_on_boundary" << std::endl
+      Rcpp::Rcout << "compare_x_on_boundary" << std::endl
                 << "xcv1: " << xcv1 << std::endl
                 << " ce1: " << ce1 << std::endl
                 << "xcv2: " << xcv2 << std::endl
                 << " ce2: " << ce2 << std::endl;
       Comparison_result cr = m_object(xcv1, ce1, xcv2, ce2);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
 
@@ -1172,12 +1173,12 @@ public:
                                  Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, ce);
-      std::cout << "compare_x_near_boundary 2" << std::endl
+      Rcpp::Rcout << "compare_x_near_boundary 2" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl
                 << "    ce: " << ce << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, ce);
-      std::cout << "  result: " << cr << std::endl;
+      Rcpp::Rcout << "  result: " << cr << std::endl;
       return cr;
     }
   };

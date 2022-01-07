@@ -13,6 +13,7 @@
 #ifndef CGAL_IO_FILE_TETGEN_H
 #define CGAL_IO_FILE_TETGEN_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Time_stamper.h>
@@ -33,7 +34,7 @@ output_to_tetgen(std::string filename,
                  const C3T3& c3t3)
 {
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  std::cerr << "Output to tetgen:\n";
+  Rcpp::Rcerr << "Output to tetgen:\n";
 #endif
 
   typedef Medit_pmap_generator<C3T3,rebind,no_patch> Generator;
@@ -56,7 +57,7 @@ output_to_tetgen(std::string filename,
                    Generator().print_twice());
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  std::cerr << "done.\n";
+  Rcpp::Rcerr << "done.\n";
 #endif
 }
 

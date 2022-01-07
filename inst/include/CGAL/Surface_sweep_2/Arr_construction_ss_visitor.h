@@ -15,6 +15,7 @@
 #ifndef CGAL_ARR_CONSTRUCTION_SS_VISITOR_H
 #define CGAL_ARR_CONSTRUCTION_SS_VISITOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #ifndef CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
@@ -294,7 +295,7 @@ template <class Hlpr, typename Vis>
 void Arr_construction_ss_visitor<Hlpr, Vis>::before_handle_event(Event* event)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "CGAL_CSLV before_handle_event" << std::endl;
+  Rcpp::Rcout << "CGAL_CSLV before_handle_event" << std::endl;
 #endif
   // We just have to notify the helper class on the event.
   m_helper.before_handle_event(event);
@@ -309,7 +310,7 @@ bool Arr_construction_ss_visitor<Hlpr, Vis>::
 after_handle_event(Event* event, Status_line_iterator iter, bool /* flag */)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << std::endl << "CGAL_CSLV after_handle_event: " << event
+  Rcpp::Rcout << std::endl << "CGAL_CSLV after_handle_event: " << event
             << std::endl;
 #endif
 
@@ -334,7 +335,7 @@ after_handle_event(Event* event, Status_line_iterator iter, bool /* flag */)
       // The vertex is not located below any valid curve, so we use the helper
       // class to mark that this index should belong to the current top face.
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-      std::cout << "CGAL_CSLV adding a " << m_sc_counter << std::endl;
+      Rcpp::Rcout << "CGAL_CSLV adding a " << m_sc_counter << std::endl;
 #endif
       m_helper.add_subcurve_in_top_face(m_sc_counter);
     }
@@ -356,7 +357,7 @@ after_handle_event(Event* event, Status_line_iterator iter, bool /* flag */)
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
       typename Indices_list::const_iterator it;
       for (it = list_ref.begin(); it != list_ref.end(); ++it)
-        std::cout << "moved " << *it << " from top to below" << std::endl;
+        Rcpp::Rcout << "moved " << *it << " from top to below" << std::endl;
 #endif
     }
   }
@@ -380,7 +381,7 @@ after_handle_event(Event* event, Status_line_iterator iter, bool /* flag */)
       // The vertex is not located below any valid curve, so we use the helper
       // class to mark that this index should belong to the current top face.
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-      std::cout << "CGAL_CSLV adding b " << m_sc_counter << std::endl;
+      Rcpp::Rcout << "CGAL_CSLV adding b " << m_sc_counter << std::endl;
 #endif
       m_helper.add_subcurve_in_top_face(m_sc_counter);
     }
@@ -423,7 +424,7 @@ void Arr_construction_ss_visitor<Hlpr, Vis>::
 add_subcurve(const X_monotone_curve_2& cv, Subcurve* sc)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << std::endl << "CGAL_CSLV add_subcurve: " << cv << std::endl;
+  Rcpp::Rcout << std::endl << "CGAL_CSLV add_subcurve: " << cv << std::endl;
 #endif
 
   // Obtain all information to perform the insertion of the subcurve into
@@ -438,24 +439,24 @@ add_subcurve(const X_monotone_curve_2& cv, Subcurve* sc)
 
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
   if (last_event->is_closed())
-    std::cout << "CGAL_CSLG lastevent: " << last_event->point() << std::endl;
+    Rcpp::Rcout << "CGAL_CSLG lastevent: " << last_event->point() << std::endl;
   if (he_left != invalid_he) {
-    std::cout << "he_left    : " << &(*he_left) << std::endl;
+    Rcpp::Rcout << "he_left    : " << &(*he_left) << std::endl;
     if (!he_left->is_fictitious())
-      std::cout << "he_leftcv  : " << he_left->curve() << std::endl;
-    else std::cout << "he_left    : fictitious" << std::endl;
-    std::cout << "he_leftdir : " << he_left->direction() << std::endl;
-    std::cout << "he_leftfac : " << &(*he_left->face()) << std::endl;
+      Rcpp::Rcout << "he_leftcv  : " << he_left->curve() << std::endl;
+    else Rcpp::Rcout << "he_left    : fictitious" << std::endl;
+    Rcpp::Rcout << "he_leftdir : " << he_left->direction() << std::endl;
+    Rcpp::Rcout << "he_leftfac : " << &(*he_left->face()) << std::endl;
   }
-  else std::cout << "he_left    : invalid" << std::endl;
+  else Rcpp::Rcout << "he_left    : invalid" << std::endl;
   if (he_right != invalid_he) {
-    std::cout << "he_right   : " << &(*he_right) << std::endl;
+    Rcpp::Rcout << "he_right   : " << &(*he_right) << std::endl;
     if (!he_right->is_fictitious())
-      std::cout << "he_rightcv : " << he_right->curve() << std::endl;
-    else std::cout << "he_right   : fictitious" << std::endl;
-    std::cout << "he_rightdir: " << he_right->direction() << std::endl;
-    std::cout << "he_rightfac: " << &(*he_right->face()) << std::endl;
-  } else std::cout << "he_right   : invalid" << std::endl;
+      Rcpp::Rcout << "he_rightcv : " << he_right->curve() << std::endl;
+    else Rcpp::Rcout << "he_right   : fictitious" << std::endl;
+    Rcpp::Rcout << "he_rightdir: " << he_right->direction() << std::endl;
+    Rcpp::Rcout << "he_rightfac: " << &(*he_right->face()) << std::endl;
+  } else Rcpp::Rcout << "he_right   : invalid" << std::endl;
 #endif
 
   // Check whether the previous event on the curve is not in the arrangement
@@ -485,12 +486,12 @@ add_subcurve(const X_monotone_curve_2& cv, Subcurve* sc)
 
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
     if (jump != 0) {
-      std::cout << "CGAL_CSLV JUMP: " << jump << std::endl;
+      Rcpp::Rcout << "CGAL_CSLV JUMP: " << jump << std::endl;
       if (!he_left->is_fictitious())
-        std::cout << "he_leftcv  : " << he_left->curve() << std::endl;
-      else std::cout << "he_left    : fictitious" << std::endl;
-      std::cout << "he_leftdir : " << he_left->direction() << std::endl;
-      std::cout << "he_leftfac : " << &(*he_left->face()) << std::endl;
+        Rcpp::Rcout << "he_leftcv  : " << he_left->curve() << std::endl;
+      else Rcpp::Rcout << "he_left    : fictitious" << std::endl;
+      Rcpp::Rcout << "he_leftdir : " << he_left->direction() << std::endl;
+      Rcpp::Rcout << "he_leftfac : " << &(*he_left->face()) << std::endl;
     }
 #endif
   }
@@ -526,9 +527,9 @@ add_subcurve(const X_monotone_curve_2& cv, Subcurve* sc)
      this->insert_in_face_interior(cv, sc));
 
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "CGAL_CSLV res: " << &(*res) << " with face " << &(*res->face())
+  Rcpp::Rcout << "CGAL_CSLV res: " << &(*res) << " with face " << &(*res->face())
             << " is " << res->direction() << std::endl;
-  std::cout << "CGAL_CSLV twi: " << &(*res->twin()) << " with face "
+  Rcpp::Rcout << "CGAL_CSLV twi: " << &(*res->twin()) << " with face "
             << &(*res->twin()->face()) << " is " << res->twin()->direction()
             << std::endl;
 #endif
@@ -538,7 +539,7 @@ add_subcurve(const X_monotone_curve_2& cv, Subcurve* sc)
   if (res->direction() != ARR_LEFT_TO_RIGHT) {
     res = res->twin();
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-    std::cout << "CGAL_CSLV twined!" << std::endl;
+    Rcpp::Rcout << "CGAL_CSLV twined!" << std::endl;
 #endif
   }
 
@@ -585,7 +586,7 @@ Arr_construction_ss_visitor<Hlpr, Vis>::
 insert_in_face_interior(const X_monotone_curve_2& cv, Subcurve* sc)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "CGAL_CSLV insert_in_face_interior\ncurve: " << cv << std::endl;
+  Rcpp::Rcout << "CGAL_CSLV insert_in_face_interior\ncurve: " << cv << std::endl;
 #endif
 
   Event* last_event = last_event_on_subcurve(sc);
@@ -638,17 +639,17 @@ insert_at_vertices(const X_monotone_curve_2& cv,
                    bool& new_face_created)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "CGAL_CSLV insert_at_vertices:\ncurve:" << cv << std::endl;
+  Rcpp::Rcout << "CGAL_CSLV insert_at_vertices:\ncurve:" << cv << std::endl;
   if (!prev1->is_fictitious())
-    std::cout << "prev1cv   : " << prev1->curve() << std::endl;
-  else std::cout << "prev1     : fictitious" << std::endl;
-  std::cout << "prev1dir  : " << prev1->direction() << std::endl;
-  std::cout << "prev1fac  : " << &(*prev1->face()) << std::endl;
+    Rcpp::Rcout << "prev1cv   : " << prev1->curve() << std::endl;
+  else Rcpp::Rcout << "prev1     : fictitious" << std::endl;
+  Rcpp::Rcout << "prev1dir  : " << prev1->direction() << std::endl;
+  Rcpp::Rcout << "prev1fac  : " << &(*prev1->face()) << std::endl;
   if (!prev2->is_fictitious())
-    std::cout << "prev2cv   : " << prev2->curve() << std::endl;
-  else std::cout << "prev2     : fictitious" << std::endl;
-  std::cout << "prev2dir  : " << prev2->direction() << std::endl;
-  std::cout << "prev2fac  : " << &(*prev2->face()) << std::endl;
+    Rcpp::Rcout << "prev2cv   : " << prev2->curve() << std::endl;
+  else Rcpp::Rcout << "prev2     : fictitious" << std::endl;
+  Rcpp::Rcout << "prev2dir  : " << prev2->direction() << std::endl;
+  Rcpp::Rcout << "prev2fac  : " << &(*prev2->face()) << std::endl;
 #endif
 
   // Use the helper class to determine whether the order of predecessor
@@ -734,14 +735,14 @@ insert_from_right_vertex(const X_monotone_curve_2& cv,
                          Subcurve* sc)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "CGAL_CSLV insert_from_right_vertex:\ncurve:" << cv << std::endl;
+  Rcpp::Rcout << "CGAL_CSLV insert_from_right_vertex:\ncurve:" << cv << std::endl;
   if (!prev->is_fictitious()) {
-    std::cout << "prevcv    : " << prev->curve() << std::endl;
+    Rcpp::Rcout << "prevcv    : " << prev->curve() << std::endl;
   } else {
-    std::cout << "prev      : fictitious" << std::endl;
+    Rcpp::Rcout << "prev      : fictitious" << std::endl;
   }
-  std::cout << "prevdir   : " << prev->direction() << std::endl;
-  std::cout << "prevfac   : " << &(*prev->face()) << std::endl;
+  Rcpp::Rcout << "prevdir   : " << prev->direction() << std::endl;
+  Rcpp::Rcout << "prevfac   : " << &(*prev->face()) << std::endl;
 #endif
 
   Event* last_event = last_event_on_subcurve(sc);
@@ -782,12 +783,12 @@ insert_from_left_vertex(const X_monotone_curve_2& cv,
                         Subcurve* sc)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "CGAL_CSLV insert_from_left_vertex:\ncurve:" << cv << std::endl;
+  Rcpp::Rcout << "CGAL_CSLV insert_from_left_vertex:\ncurve:" << cv << std::endl;
   if (!prev->is_fictitious())
-    std::cout << "prevcv    : " << prev->curve() << std::endl;
-  else std::cout << "prev      : fictitious" << std::endl;
-  std::cout << "prevdir   : " << prev->direction() << std::endl;
-  std::cout << "prevfac   : " << &(*prev->face()) << std::endl;
+    Rcpp::Rcout << "prevcv    : " << prev->curve() << std::endl;
+  else Rcpp::Rcout << "prev      : fictitious" << std::endl;
+  Rcpp::Rcout << "prevdir   : " << prev->direction() << std::endl;
+  Rcpp::Rcout << "prevfac   : " << &(*prev->face()) << std::endl;
 #endif
 
   Event* curr_event = this->current_event();
@@ -826,7 +827,7 @@ Arr_construction_ss_visitor<Hlpr, Vis>::
 insert_isolated_vertex(const Point_2& pt, Status_line_iterator /* iter */)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "CGAL_CSLV insert_isolated_vertex:\npoint:" << pt << std::endl;
+  Rcpp::Rcout << "CGAL_CSLV insert_isolated_vertex:\npoint:" << pt << std::endl;
 #endif
 
   // Insert the isolated vertex in the interior of the current top face, as
@@ -842,9 +843,9 @@ void Arr_construction_ss_visitor<Hlpr, Vis>::
 relocate_in_new_face(Halfedge_handle he)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "CGAL_CSLV relocate" << std::endl;
-  std::cout << "HeCv: " << he->curve() << std::endl;
-  std::cout << "HeDi: " << he->direction() << std::endl;
+  Rcpp::Rcout << "CGAL_CSLV relocate" << std::endl;
+  Rcpp::Rcout << "HeCv: " << he->curve() << std::endl;
+  Rcpp::Rcout << "HeDi: " << he->direction() << std::endl;
 #endif
 
   // We use a constant index-map to prvent the introduction of new entries.
@@ -857,8 +858,8 @@ relocate_in_new_face(Halfedge_handle he)
   const Halfedge_handle invalid_he;
 
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "m_sc_counter: " << m_sc_counter << std::endl;
-  std::cout << "m_sc_he_table: " << m_sc_he_table.size() << std::endl;
+  Rcpp::Rcout << "m_sc_counter: " << m_sc_counter << std::endl;
+  Rcpp::Rcout << "m_sc_he_table: " << m_sc_he_table.size() << std::endl;
 #endif
   do {
     // We are interested only in halfedges directed from right to left.
@@ -874,7 +875,7 @@ relocate_in_new_face(Halfedge_handle he)
     for (itr = indices_list.begin(); itr != indices_list.end(); ++itr) {
       CGAL_assertion(*itr != 0);
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-      std::cout << "itr: " << *itr << std::endl;
+      Rcpp::Rcout << "itr: " << *itr << std::endl;
 #endif
 
       // In case the current subcurve index does not match a valid entry in
@@ -923,7 +924,7 @@ void Arr_construction_ss_visitor<Hlpr, Vis>::
 _map_new_halfedge(unsigned int i, Halfedge_handle he)
 {
 #if CGAL_ARR_CONSTRUCTION_SS_VISITOR_VERBOSE
-  std::cout << "map " << i << " to " << he->curve() << " "
+  Rcpp::Rcout << "map " << i << " to " << he->curve() << " "
             << he->direction() << std::endl;
 #endif
   CGAL_assertion(i != 0);

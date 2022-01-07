@@ -14,6 +14,7 @@
 #ifndef CGAL_SURFACE_MESHER_MANIFOLD_H
 #define CGAL_SURFACE_MESHER_MANIFOLD_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -106,7 +107,7 @@ namespace CGAL {
       void initialize_bad_vertices() const
       {
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-        std::cerr << "scanning vertices" << std::endl;
+        Rcpp::Rcerr << "scanning vertices" << std::endl;
 #endif
         int n = 0;
         for (Finite_vertices_iterator vit = SMMBB::tr.finite_vertices_begin();
@@ -120,7 +121,7 @@ namespace CGAL {
         }
         bad_vertices_initialized = true;
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-        std::cerr << "   -> found " << n << " bad vertices\n";
+        Rcpp::Rcerr << "   -> found " << n << " bad vertices\n";
 #endif
       }
 
@@ -133,7 +134,7 @@ namespace CGAL {
           bad_vertices_initialized(false)
       {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-        std::cerr << "CONS: Surface_mesher_manifold_base\n";
+        Rcpp::Rcerr << "CONS: Surface_mesher_manifold_base\n";
 #endif
       }
 
@@ -154,7 +155,7 @@ namespace CGAL {
       void scan_triangulation_impl() {
         SMMBB::scan_triangulation_impl();
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-        std::cerr << "scanning vertices (lazy)" << std::endl;
+        Rcpp::Rcerr << "scanning vertices (lazy)" << std::endl;
 #endif
       }
 

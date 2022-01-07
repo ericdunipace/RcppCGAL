@@ -18,6 +18,7 @@
 #ifndef CGAL_IO_H
 #define CGAL_IO_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/IO/io_tags.h>
@@ -683,8 +684,8 @@ inline std::istream &operator>>(std::istream &is, Color& col)
       read(is, a);
       break;
     default:
-      std::cerr << "" << std::endl;
-      std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+      Rcpp::Rcerr << "" << std::endl;
+      Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
       break;
   }
 

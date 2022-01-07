@@ -14,6 +14,7 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_CONSTRUCTIONS_C2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_CONSTRUCTIONS_C2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -179,7 +180,7 @@ public:
   {
     CGAL_assertion( !(p.is_segment() && q.is_segment()) );
 
-    CGAL_SDG_DEBUG( std::cout << "debug construct bisector line "
+    CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector line "
               << "p=" << p << " q=" << q << std::endl; );
 
     if ( p.is_point() && q.is_point() ) {
@@ -254,7 +255,7 @@ public:
 
       Polychainline pcl(-d, points, points+npts, d);
 
-      //CGAL_SDG_DEBUG( std::cout << "debug construct bisector line is "
+      //CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector line is "
       //  << pcl << std::endl; );
 
       return pcl;
@@ -390,14 +391,14 @@ public:
         points[0]=pcfirst;
         points[2]=pclast;
 
-        CGAL_SDG_DEBUG( std::cout << "debug: point1 = " << points[0]
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug: point1 = " << points[0]
             << " point2 = " << points[1] << " point3 = "
             << points[2] << std::endl; );
 
         if (p.is_segment()) {
           std::swap(points[0], points[2]);
         }
-        CGAL_SDG_DEBUG( std::cout << "debug: point1 = " << points[0]
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug: point1 = " << points[0]
             << " point2 = " << points[1] << " point3 = "
             << points[2] << std::endl; );
 
@@ -406,7 +407,7 @@ public:
         Direction_2 d(ld.perpendicular(pcfirst));
 
         Polychainline pcl(d, points, points+npts, d);
-        CGAL_SDG_DEBUG( std::cout
+        CGAL_SDG_DEBUG( Rcpp::Rcout
             << "debug about to return pcl=" << pcl << std::endl ;);
         return pcl;
 
@@ -447,17 +448,17 @@ public:
                    const Site_2& r) const
   {
 
-    CGAL_SDG_DEBUG( std::cout << "debug construct bisector ray "
+    CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector ray "
               << "p=" << p << " q=" << q << " r=" << r << std::endl; );
 
     // compute pqr vertex
     Point_2 v = Construct_svd_vertex_2()(p, q, r);
 
-    CGAL_SDG_DEBUG( std::cout << "debug construct bisector ray "
+    CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector ray "
               << "p=" << p << " q=" << q << " r=" << r
               << " has v(pqr)=" << v << std::endl; );
 
-    //CGAL_SDG_DEBUG( std::cout
+    //CGAL_SDG_DEBUG( Rcpp::Rcout
     //    << "debug in ray computing bisector" << std::endl; );
 
     // compute oriented bisector between p and q
@@ -542,7 +543,7 @@ public:
 
       Polychainray pcr(points, points+npts, d);
 
-      CGAL_SDG_DEBUG( std::cout
+      CGAL_SDG_DEBUG( Rcpp::Rcout
           << "debug construct bisector ray is " << pcr << std::endl; );
 
       return pcr;
@@ -587,7 +588,7 @@ public:
 
         Polychainray pcr(points, points+npts, d);
 
-        CGAL_SDG_DEBUG( std::cout
+        CGAL_SDG_DEBUG( Rcpp::Rcout
             << "debug construct bisector ray is " << pcr << std::endl; );
 
         return pcr;
@@ -685,14 +686,14 @@ public:
         points[1]=pcfirst;
         points[3]=pclast;
 
-        CGAL_SDG_DEBUG( std::cout << "debug: point1 = " << points[1] <<
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug: point1 = " << points[1] <<
         " point2 = " << points[2] << " point3 = "
         << points[3] << std::endl; );
 
         if (p.is_segment()) {
           std::swap(points[1], points[3]);
         }
-        CGAL_SDG_DEBUG( std::cout << "debug: point1 = " << points[1] <<
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug: point1 = " << points[1] <<
         " point2 = " << points[2] << " point3 = "
         << points[3] << std::endl; );
 
@@ -726,7 +727,7 @@ public:
         }
 
         Polychainray pcr(points, points+npts, d);
-        CGAL_SDG_DEBUG( std::cout << "debug construct bisector ray is "
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector ray is "
             << pcr << std::endl; );
         return pcr;
 
@@ -735,7 +736,7 @@ public:
     }
 
     // the following code should never be executed
-    CGAL_SDG_DEBUG( std::cout
+    CGAL_SDG_DEBUG( Rcpp::Rcout
         << "debug construct bisector ray error " << std::endl; );
     CGAL_assertion(false);
     return Polychainray();
@@ -778,7 +779,7 @@ public:
   Polychainsegment pcsbis(const Site_2& p, const Site_2& q,
                           const Site_2& r, const Site_2& s) const
   {
-    CGAL_SDG_DEBUG( std::cout << "debug construct bisector segment "
+    CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector segment "
         << "p=" << p << " q=" << q << " r=" << r << " s=" << s
         << std::endl; );
 
@@ -786,7 +787,7 @@ public:
     Point_2 vpqr = circumcenter(p, q, r);
     Point_2 vqps = circumcenter(q, p, s);
 
-    CGAL_SDG_DEBUG( std::cout << "debug construct bisector segment "
+    CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector segment "
         << "p=" << p << " q=" << q << " r=" << r << " s=" << s
         << " has v(pqr)=" << vpqr << " v(qps)=" << vqps << std::endl; );
 
@@ -799,7 +800,7 @@ public:
     Comparison_result cmpy_vpqr_vqps =
       compare_y_2(vpqr, vqps);
 
-    CGAL_SDG_DEBUG( std::cout << "debug bis segment vpqr="
+    CGAL_SDG_DEBUG( Rcpp::Rcout << "debug bis segment vpqr="
       << vpqr << " vqps=" << vqps
       << " cmpx=" << cmpx_vpqr_vqps
       << " cmpy=" << cmpy_vpqr_vqps
@@ -815,7 +816,7 @@ public:
       points[1] = vqps;
       Polychainsegment pcs(points, points+2);
 
-      CGAL_SDG_DEBUG( std::cout
+      CGAL_SDG_DEBUG( Rcpp::Rcout
           << "debug construct bisector segment is (trivial) "
           << pcs << std::endl; );
       return pcs;
@@ -895,7 +896,7 @@ public:
           npts = 2;
         }
 
-        CGAL_SDG_DEBUG( std::cout << "debug p1=" << p1 << " p2=" << p2
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug p1=" << p1 << " p2=" << p2
           << " vpqr=" << vpqr << " vqps=" << vqps << std::endl; );
 
         CGAL_assertion(l.perpendicular(vpqr).
@@ -916,7 +917,7 @@ public:
 
       Polychainsegment pcs(points, points+npts);
 
-      //CGAL_SDG_DEBUG( std::cout << "debug construct bisector segment is "
+      //CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector segment is "
       //  << pcs << std::endl; );
 
       return pcs;
@@ -940,7 +941,7 @@ public:
         npts = 2;
       }
       else {
-        CGAL_SDG_DEBUG(std::cout
+        CGAL_SDG_DEBUG(Rcpp::Rcout
             << "debug bisector segment "
             << "p=" << p << " q=" << q << std::endl; );
         //pnt is the point site and seg is the segment site
@@ -987,7 +988,7 @@ public:
             npts = 2;
           }
 
-          CGAL_SDG_DEBUG(std::cout
+          CGAL_SDG_DEBUG(Rcpp::Rcout
               << "debug construct bisector segment npts="
               << npts << std::endl; );
 
@@ -1005,7 +1006,7 @@ public:
               npts = npts - 1;
             }
           }
-          CGAL_SDG_DEBUG( std::cout
+          CGAL_SDG_DEBUG( Rcpp::Rcout
               << "debug bisector segment after cutting points, npts="
               << npts << std::endl; );
         }//end of horizontal segment case
@@ -1047,7 +1048,7 @@ public:
             npts = 2;
           }
 
-          CGAL_SDG_DEBUG( std::cout
+          CGAL_SDG_DEBUG( Rcpp::Rcout
               << "debug bis segment npts=" << npts << " vpqr="
               << vpqr << " vqps=" << vqps << std::endl; );
 
@@ -1152,7 +1153,7 @@ public:
           points[1]=pcfirst;
           points[3]=pclast;
 
-          CGAL_SDG_DEBUG( std::cout << "debug: point1 = " << points[1] <<
+          CGAL_SDG_DEBUG( Rcpp::Rcout << "debug: point1 = " << points[1] <<
           " point2 = " << points[2] << " point3 = "
           << points[3] << std::endl; );
 
@@ -1160,7 +1161,7 @@ public:
             std::swap(points[1], points[3]);
           }
 
-          CGAL_SDG_DEBUG( std::cout << "debug: after possible swap: "
+          CGAL_SDG_DEBUG( Rcpp::Rcout << "debug: after possible swap: "
                     << "point1 = " << points[1] <<
                     " point2 = " << points[2] << " point3 = "
                     << points[3] << std::endl; );
@@ -1194,7 +1195,7 @@ public:
             }
           }
 
-          CGAL_SDG_DEBUG( std::cout << "debug first check npts="
+          CGAL_SDG_DEBUG( Rcpp::Rcout << "debug first check npts="
               << npts << std::endl; );
 
           if ((npts == 3) &&
@@ -1237,7 +1238,7 @@ public:
       points[npts-1] = vqps;
       Polychainsegment pcs(points, points+npts);
 
-      CGAL_SDG_DEBUG( std::cout << "debug: construct bisector segment is "
+      CGAL_SDG_DEBUG( Rcpp::Rcout << "debug: construct bisector segment is "
           << pcs << " with npts = " << npts << std::endl; );
 
       return pcs;
@@ -1249,7 +1250,7 @@ public:
       points[npts-1] = vqps;
       Polychainsegment pcs(points, points+npts);
 
-      CGAL_SDG_DEBUG( std::cout << "debug construct bisector segment is "
+      CGAL_SDG_DEBUG( Rcpp::Rcout << "debug construct bisector segment is "
         << pcs << std::endl; );
 
       return pcs;

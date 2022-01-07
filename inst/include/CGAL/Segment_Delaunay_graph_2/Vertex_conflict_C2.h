@@ -15,6 +15,7 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_2_VERTEX_CONFLICT_C2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_2_VERTEX_CONFLICT_C2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_2.h>
 
 
@@ -495,11 +496,11 @@ public:
     Sign s_alt = v_alt.incircle(t);
 
     if ( s != s_alt ) {
-      std::cerr << "different results" << std::endl;
-      std::cerr << p << std::endl;
-      std::cerr << q << std::endl;
-      std::cerr << r << std::endl;
-      std::cerr << t << std::endl;
+      Rcpp::Rcerr << "different results" << std::endl;
+      Rcpp::Rcerr << p << std::endl;
+      Rcpp::Rcerr << q << std::endl;
+      Rcpp::Rcerr << r << std::endl;
+      Rcpp::Rcerr << t << std::endl;
       CGAL_assertion( s == s_alt );
       exit(1);
     }

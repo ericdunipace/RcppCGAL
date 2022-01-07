@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_SMOOTHING_EVALUATION_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_SMOOTHING_EVALUATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/Polygon_mesh_processing/measure.h>
@@ -62,7 +63,7 @@ public:
     }
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    std::cout << "angles_ size = " << angles_.size() << std::endl;
+    Rcpp::Rcout << "angles_ size = " << angles_.size() << std::endl;
 #endif
   }
 
@@ -80,7 +81,7 @@ public:
       areas_.push_back(face_area(f, mesh_));
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    std::cout << "areas_ size = " << areas_.size() << std::endl;
+    Rcpp::Rcout << "areas_ size = " << areas_.size() << std::endl;
 #endif
   }
 
@@ -98,7 +99,7 @@ public:
       aspect_ratios_.push_back(CGAL::Polygon_mesh_processing::face_aspect_ratio(f, mesh_));
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    std::cout << "aspect_ratios_ size = " << aspect_ratios_.size() << std::endl;
+    Rcpp::Rcout << "aspect_ratios_ size = " << aspect_ratios_.size() << std::endl;
 #endif
   }
 

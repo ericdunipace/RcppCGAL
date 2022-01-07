@@ -16,6 +16,7 @@
 #ifndef CGAL_REGULAR_TRIANGULATION_3_H
 #define CGAL_REGULAR_TRIANGULATION_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -427,7 +428,7 @@ public:
       }
     }
 #ifdef CGAL_TRIANGULATION_3_PROFILING
-    std::cerr << "Points inserted in " << t.elapsed() << " seconds." << std::endl;
+    Rcpp::Rcerr << "Points inserted in " << t.elapsed() << " seconds." << std::endl;
 #endif
     return number_of_vertices() - n;
   }
@@ -888,7 +889,7 @@ public:
     }
 
 #ifdef CGAL_TRIANGULATION_3_PROFILING
-    std::cerr << "Points removed in " << t.elapsed() << " seconds." << std::endl;
+    Rcpp::Rcerr << "Points removed in " << t.elapsed() << " seconds." << std::endl;
 #endif
     return n - number_of_vertices();
   }
@@ -2676,7 +2677,7 @@ is_valid(bool verbose, int level) const
   if(! Tr_Base::is_valid(verbose,level))
   {
     if(verbose)
-      std::cerr << "invalid base triangulation" << std::endl;
+      Rcpp::Rcerr << "invalid base triangulation" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -2699,7 +2700,7 @@ is_valid(bool verbose, int level) const
                                       it->neighbor(i)->index(it))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                std::cerr << "non-empty sphere " << std::endl;
+                Rcpp::Rcerr << "non-empty sphere " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -2725,7 +2726,7 @@ is_valid(bool verbose, int level) const
                                            ->index((*it).first))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                std::cerr << "non-empty circle " << std::endl;
+                Rcpp::Rcerr << "non-empty circle " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -2753,7 +2754,7 @@ is_valid(bool verbose, int level) const
                                          (*it).first))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                std::cerr << "non-empty edge " << std::endl;
+                Rcpp::Rcerr << "non-empty edge " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -2766,7 +2767,7 @@ is_valid(bool verbose, int level) const
   }
 
   if(verbose)
-    std::cerr << "valid regular triangulation" << std::endl;
+    Rcpp::Rcerr << "valid regular triangulation" << std::endl;
 
   return true;
 }

@@ -14,6 +14,7 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_FINITE_EDGE_INTERIOR_CONFLICT_C2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_FINITE_EDGE_INTERIOR_CONFLICT_C2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -298,7 +299,7 @@ private:
       Oriented_side opqr = vpqr.oriented_side(lqperp);
       Oriented_side oqps = vqps.oriented_side(lqperp);
 
-      CGAL_SDG_DEBUG( std::cout
+      CGAL_SDG_DEBUG( Rcpp::Rcout
           << "debug endpt case computing ondifparabarcs" << std::endl; );
       Boolean   on_different_parabola_arcs =
          ((opqr == ON_NEGATIVE_SIDE) & (oqps == ON_POSITIVE_SIDE)) |
@@ -390,7 +391,7 @@ private:
     Oriented_side opqr = vpqr.oriented_side(lqperp);
     Oriented_side oqps = vqps.oriented_side(lqperp);
 
-    CGAL_SDG_DEBUG( std::cout
+    CGAL_SDG_DEBUG( Rcpp::Rcout
         << "debug computing ondifparabarcs" << std::endl; );
 
     Boolean   on_different_parabola_arcs = (opqr == -oqps) & (opqr != ZERO);
@@ -465,7 +466,7 @@ private:
       // philaris: the text would give false
       // philaris: for segments, we have to refine later
       if (r.is_point() && s.is_point()) {
-        CGAL_SDG_DEBUG(std::cout << "debug is_interior_in_conflict_touch"
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug is_interior_in_conflict_touch"
             << " about to return false with same points" << std::endl; );
         return false;
       }
@@ -475,7 +476,7 @@ private:
 
       if ( vpqr.incircle_no_easy(s) == ZERO &&
           vqps.incircle_no_easy(r) == ZERO ) {
-        CGAL_SDG_DEBUG(std::cout << "debug is_interior_in_conflict_touch"
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug is_interior_in_conflict_touch"
             << " about to return false with both ZERO" << std::endl; );
         return false;
       }
@@ -501,7 +502,7 @@ private:
       return (res != SMALLER);
     }
 
-    CGAL_SDG_DEBUG(std::cout << "debug is_interior_in_conflict_touch"
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug is_interior_in_conflict_touch"
         << " recursion with permuted input" << std::endl; );
     return is_interior_in_conflict_touch(q, p, s, r, t, tag);
   }
@@ -726,7 +727,7 @@ public:
   {
     Boolean retval;
     CGAL_SDG_DEBUG(
-        std::cout << "debug finite-edge-int-cf entering (p,q,r,s,t,sgn)= "
+        Rcpp::Rcout << "debug finite-edge-int-cf entering (p,q,r,s,t,sgn)= "
         << p << ' ' << q << ' ' << r << ' ' << s << ' ' << t
         << ' ' << sgn << std::endl; );
     if ( sgn == POSITIVE ) {
@@ -736,7 +737,7 @@ public:
     } else {
       retval = is_interior_in_conflict_touch(p, q, r, s, t, Method_tag());
     }
-    CGAL_SDG_DEBUG( std::cout <<
+    CGAL_SDG_DEBUG( Rcpp::Rcout <<
         "debug finite-edge-int-cf with (p,q,r,s,t,sgn)= "
         << p << ' ' << q << ' ' << r << ' ' << s << ' ' << t
         << ' ' << sgn << " returns " << retval << std::endl; );
@@ -749,7 +750,7 @@ public:
                        const Site_2& t, Sign sgn) const
   {
     CGAL_SDG_DEBUG(
-        std::cout << "debug finite-edge-int-cf entering (p,q,r,t,sgn)= ("
+        Rcpp::Rcout << "debug finite-edge-int-cf entering (p,q,r,t,sgn)= ("
         << p << ") (" << q << ") (" << r <<  " (r not ignored)) ("
         << t << ")  "
         << sgn << std::endl; );
@@ -762,7 +763,7 @@ public:
 
     // if p, q, t are points, then return (sgn == NEGATIVE)
     if (t.is_point() && p.is_point() && q.is_point()) {
-      CGAL_SDG_DEBUG( std::cout <<
+      CGAL_SDG_DEBUG( Rcpp::Rcout <<
           "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
           << p << ") (" << q << ") (" << r <<  " ) ("
           << t << ")  "
@@ -790,7 +791,7 @@ public:
 
           //if ( !on_different_parabola_arcs ) { return true; }
           if (certainly( ! on_different_parabola_arcs ) ) {
-            CGAL_SDG_DEBUG( std::cout
+            CGAL_SDG_DEBUG( Rcpp::Rcout
                 << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
                 << p << ") (" << q << ") (" << r <<  ") ("
                 << t << ")  "
@@ -816,7 +817,7 @@ public:
 
           //if ( !on_different_parabola_arcs ) { return true; }
           if (certainly( ! on_different_parabola_arcs ) ) {
-            CGAL_SDG_DEBUG( std::cout
+            CGAL_SDG_DEBUG( Rcpp::Rcout
                 << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
                 << p << ") (" << q << ") (" << r <<  ") ("
                 << t << ")  "
@@ -827,7 +828,7 @@ public:
             return indeterminate<Boolean>();
           }
         }
-        CGAL_SDG_DEBUG( std::cout <<
+        CGAL_SDG_DEBUG( Rcpp::Rcout <<
             "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
             << p << ") (" << q << ") (" << r <<  ") ("
             << t << ")  "
@@ -835,7 +836,7 @@ public:
         return false;
       }
 
-      CGAL_SDG_DEBUG( std::cout <<
+      CGAL_SDG_DEBUG( Rcpp::Rcout <<
           "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
           << p << ") (" << q << ") (" << r <<  ") ("
           << t << ")  "
@@ -861,7 +862,7 @@ public:
       if ( p.is_point() && q.is_segment() ) {
         if (same_points(p, q.source_site()) ||
             same_points(p, q.target_site())   ) {
-          CGAL_SDG_DEBUG( std::cout <<
+          CGAL_SDG_DEBUG( Rcpp::Rcout <<
               "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
               << p << ") (" << q << ") (" << r <<  ") ("
               << t << ")  "
@@ -869,7 +870,7 @@ public:
           return false;
         } else { // p is not endpoint of q
 
-          CGAL_SDG_DEBUG( std::cout << "debug fecf p is not endpoint of q"
+          CGAL_SDG_DEBUG( Rcpp::Rcout << "debug fecf p is not endpoint of q"
             << std::endl; );
 
           CGAL_assertion( ! is_site_h_or_v(q) ) ;
@@ -886,7 +887,7 @@ public:
           CGAL_assertion(ossegt != ON_ORIENTED_BOUNDARY);
 
           if (ossegp != ossegt) {
-            CGAL_SDG_DEBUG( std::cout <<
+            CGAL_SDG_DEBUG( Rcpp::Rcout <<
                 "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
                 << p << ") (" << q << ") (" << r <<  ") ("
                 << t << ")  "
@@ -896,7 +897,7 @@ public:
             // here, t and p are on the same side of q
 
             CGAL_SDG_DEBUG(
-                std::cout << "debug fecf: t and p on the same side of q"
+                Rcpp::Rcout << "debug fecf: t and p on the same side of q"
                 << std::endl; );
 
             // compute linf projection of infinite
@@ -934,7 +935,7 @@ public:
 
             Boolean retval = ( os_line_inf == os_line_fin) ? false : true;
 
-            CGAL_SDG_DEBUG( std::cout <<
+            CGAL_SDG_DEBUG( Rcpp::Rcout <<
                 "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
                 << p << ") (" << q << ") (" << r <<  ") ("
                 << t << ")  "
@@ -950,7 +951,7 @@ public:
       if ( p.is_segment() && q.is_point() ) {
         if (same_points(q, p.source_site()) ||
             same_points(q, p.target_site())   ) {
-          CGAL_SDG_DEBUG( std::cout <<
+          CGAL_SDG_DEBUG( Rcpp::Rcout <<
               "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
               << p << ") (" << q << ") (" << r <<  ") ("
               << t << ")  "
@@ -971,7 +972,7 @@ public:
           CGAL_assertion(ossegt != ON_ORIENTED_BOUNDARY);
 
           if (ossegq != ossegt) {
-            CGAL_SDG_DEBUG( std::cout <<
+            CGAL_SDG_DEBUG( Rcpp::Rcout <<
               "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
               << p << ") (" << q << ") (" << r <<  ") ("
               << t << ")  "
@@ -1015,7 +1016,7 @@ public:
 
             Boolean retval = ( os_line_inf == os_line_fin) ? false : true;
 
-            CGAL_SDG_DEBUG( std::cout <<
+            CGAL_SDG_DEBUG( Rcpp::Rcout <<
                 "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
                 << p << ") (" << q << ") (" << r <<  ") ("
                 << t << ")  "
@@ -1028,7 +1029,7 @@ public:
         } // end of case where q is not endpoint of p
       } // end of case where q is point and p is segment
 
-      CGAL_SDG_DEBUG( std::cout <<
+      CGAL_SDG_DEBUG( Rcpp::Rcout <<
           "debug finite-edge-int-cf with (p,q,r,t,sgn)= ("
           << p << ") (" << q << ") (" << r <<  ") ("
           << t << ")  "
@@ -1066,7 +1067,7 @@ public:
           if ( same_points(p,t.source_site())
                || same_points(p,t.target_site()) ) {
             CGAL_SDG_DEBUG(
-                std::cout
+                Rcpp::Rcout
                 << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
                 << p << ") (" << q << ") (" << r <<  ") ("
                 << t << ")  "
@@ -1094,7 +1095,7 @@ public:
               //if ( !on_different_parabola_arcs ) { return true; }
               if (certainly( ! on_different_parabola_arcs ) ) {
                 CGAL_SDG_DEBUG(
-                    std::cout
+                    Rcpp::Rcout
                     << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
                     << p << ") (" << q << ") (" << r <<  ") ("
                     << t << ")  "
@@ -1107,10 +1108,10 @@ public:
 
               // here, we are on different parabola arcs
 
-              CGAL_SDG_DEBUG( std::cout
+              CGAL_SDG_DEBUG( Rcpp::Rcout
                   << "debug fecf pqrt on diff parab arcs" << std::endl; );
 
-              CGAL_SDG_DEBUG( std::cout
+              CGAL_SDG_DEBUG( Rcpp::Rcout
                  << "debug fecf call intersects( " << q << ", "
                  << p << ", " << t << ")" << std::endl; ) ;
               result = intersects_segment_interior_inf_wedge_sp(q,p,t);
@@ -1121,7 +1122,7 @@ public:
           //q may be endpoint of t
           if (   same_points(q,t.source_site())
               || same_points(q,t.target_site())) {
-            CGAL_SDG_DEBUG( std::cout
+            CGAL_SDG_DEBUG( Rcpp::Rcout
                 << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
                 << p << ") (" << q << ") (" << r <<  ") ("
                 << t << ")  "
@@ -1149,7 +1150,7 @@ public:
               //if ( !on_different_parabola_arcs ) { return true; }
               if (certainly( ! on_different_parabola_arcs ) ) {
                 CGAL_SDG_DEBUG(
-                    std::cout
+                    Rcpp::Rcout
                     << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
                     << p << ") (" << q << ") (" << r <<  ") ("
                     << t << ")  "
@@ -1162,10 +1163,10 @@ public:
 
               // here, we are on different parabola arcs
 
-              CGAL_SDG_DEBUG( std::cout
+              CGAL_SDG_DEBUG( Rcpp::Rcout
                   << "debug fecf pqrt on diff parab arcs" << std::endl; );
 
-              CGAL_SDG_DEBUG( std::cout
+              CGAL_SDG_DEBUG( Rcpp::Rcout
                  << "debug fecf call intersects( " << p << ", "
                  << q << ", " << t << ")" << std::endl; ) ;
               result = intersects_segment_interior_inf_wedge_sp(p,q,t);
@@ -1174,7 +1175,7 @@ public:
         }
 
         if (result == false) {
-          CGAL_SDG_DEBUG( std::cout
+          CGAL_SDG_DEBUG( Rcpp::Rcout
               << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
               << p << ") (" << q << ") (" << r <<  ") ("
               << t << ")  "
@@ -1184,7 +1185,7 @@ public:
       }//end of t is segment
 
       // philaris: tocheck
-      CGAL_SDG_DEBUG( std::cout
+      CGAL_SDG_DEBUG( Rcpp::Rcout
           << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
           << p << ") (" << q << ") (" << r <<  ") ("
           << t << ")  "
@@ -1208,7 +1209,7 @@ public:
     } else {
       // philaris: tocheck
       CGAL_assertion(sgn == NEGATIVE);
-      CGAL_SDG_DEBUG( std::cout
+      CGAL_SDG_DEBUG( Rcpp::Rcout
           << "debug finite-edge-int-cf tocheck (p,q,r,t,sgn)= ("
           << p << ") (" << q << ") (" << r <<  ") ("
           << t << ")  "
@@ -1221,7 +1222,7 @@ public:
                        Sign sgn) const
   {
     CGAL_SDG_DEBUG(
-        std::cout << "debug finite-edge-int-cf entering (p,q,t,sgn)= "
+        Rcpp::Rcout << "debug finite-edge-int-cf entering (p,q,t,sgn)= "
         << p << ' ' << q << ' ' << t << ' '
         << "(sgn " << sgn << " not ignored)"  << std::endl; );
 
@@ -1239,7 +1240,7 @@ public:
                           same_points(q, p.target_site())   ) ;
         }
         CGAL_SDG_DEBUG(
-            std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+            Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
             << p << ' ' << q << ' ' << t << ' '
             << "(sgn " << sgn << " not ignored)" << " returns "
             << false << std::endl; );
@@ -1265,7 +1266,7 @@ public:
         }
 
         CGAL_SDG_DEBUG(
-            std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+            Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
             << p << ' ' << q << ' ' << t << ' '
             << "(sgn " << sgn << " not ignored)" << " returns "
             << result << std::endl; );
@@ -1285,7 +1286,7 @@ public:
           if (same_points(p, q.source_site()) ||
               same_points(p, q.target_site())   ) {
             CGAL_SDG_DEBUG(
-                std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+                Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
                 << p << ' ' << q << ' ' << t << ' '
                 << "(sgn " << sgn << " not ignored)" << " returns "
                 << false << std::endl; );
@@ -1298,7 +1299,7 @@ public:
           if (same_points(q, p.source_site()) ||
               same_points(q, p.target_site())   ) {
             CGAL_SDG_DEBUG(
-                std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+                Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
                 << p << ' ' << q << ' ' << t << ' '
                 << "(sgn " << sgn << " not ignored)" << " returns "
                 << false << std::endl; );
@@ -1322,7 +1323,7 @@ public:
 
         if (ossegpnt != ossegt) {
           CGAL_SDG_DEBUG(
-              std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+              Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
               << p << ' ' << q << ' ' << t << ' '
               << "(sgn " << sgn << " not ignored)" << " returns "
               << false << std::endl; );
@@ -1351,7 +1352,7 @@ public:
           Boolean retval = ( os_lineh == os_linev ) ? false : true;
 
           CGAL_SDG_DEBUG(
-              std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+              Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
               << p << ' ' << q << ' ' << t << ' '
               << "(sgn " << sgn << " not ignored)" << " returns "
               << retval << std::endl; );
@@ -1366,7 +1367,7 @@ public:
     } // end of case: any of p, q is a segment
 
     CGAL_SDG_DEBUG(
-        std::cout << "debug tocheck here p, q points" << std::endl; );
+        Rcpp::Rcout << "debug tocheck here p, q points" << std::endl; );
 
     // both p and q are points
     if ( t.is_point() ) {
@@ -1383,12 +1384,12 @@ public:
 
       CGAL_assertion( s1 != ZERO );
 
-      CGAL_SDG_DEBUG( std::cout << "debug finite-edge-int-cf (p,q,t)= "
+      CGAL_SDG_DEBUG( Rcpp::Rcout << "debug finite-edge-int-cf (p,q,t)= "
         << p << ' ' << q << ' ' << t
         << "  s1= " << s1 << std::endl; );
 
       CGAL_SDG_DEBUG(
-          std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+          Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
           << p << ' ' << q << ' ' << t << ' '
           << "(sgn " << sgn << " not ignored)" << " returns "
           << ( s1 == NEGATIVE ) << std::endl; );
@@ -1396,7 +1397,7 @@ public:
       return ( s1 == NEGATIVE );
     }
 
-    CGAL_SDG_DEBUG( std::cout << "debug tocheck" << std::endl; );
+    CGAL_SDG_DEBUG( Rcpp::Rcout << "debug tocheck" << std::endl; );
 
     bool bp =
       same_points(p, t.source_site()) || same_points(p, t.target_site());
@@ -1408,7 +1409,7 @@ public:
 
     if ((cmpxpq == EQUAL) || (cmpypq == EQUAL)) {
       CGAL_SDG_DEBUG(
-          std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+          Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
           << p << ' ' << q << ' ' << t << ' '
           << "(sgn " << sgn << " not ignored)" << " returns "
           << ( bp && bq ) << std::endl; );
@@ -1418,7 +1419,7 @@ public:
       // with the bounding box of p, q
       Boolean retval = intersects_segment_interior_bbox(t, p, q);
       CGAL_SDG_DEBUG(
-          std::cout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
+          Rcpp::Rcout << "debug finite-edge-int-cf with (p,q,t,sgn)= "
           << p << ' ' << q << ' ' << t << ' '
           << "(sgn " << sgn << " not ignored)" << " returns "
           << retval << std::endl; );

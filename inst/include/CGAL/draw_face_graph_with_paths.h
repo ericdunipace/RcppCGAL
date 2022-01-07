@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2019 CNRS and LIRIS' Establishments (France).
+// Copyright (c) 2019 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org).
@@ -12,6 +12,7 @@
 #ifndef CGAL_DRAW_FACE_GRAPH_WITH_PATHS_H
 #define CGAL_DRAW_FACE_GRAPH_WITH_PATHS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <iostream>
@@ -462,7 +463,7 @@ namespace CGAL
             (std::numeric_limits<typename Get_map<Mesh, Mesh>::type::size_type>::max)(),
             bool=false)
   {
-    std::cerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
+    Rcpp::Rcerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
   }
 
   template<class Mesh>
@@ -473,7 +474,7 @@ namespace CGAL
             (std::numeric_limits<typename Get_map<Mesh, Mesh>::type::size_type>::max)(),
             bool=false)
   {
-    std::cerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
+    Rcpp::Rcerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
   }
 
 } // End namespace CGAL

@@ -13,6 +13,7 @@
 #ifndef CGAL_ARR_PLANE_3_h
 #define CGAL_ARR_PLANE_3_h
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -152,7 +153,7 @@ public:
     CGAL_assertion(i < 3);
 
 #if 0
-    std::cout << "(a, b, c): " << a() << "," << b() << "," << c()
+    Rcpp::Rcout << "(a, b, c): " << a() << "," << b() << "," << c()
               << std::endl;
 #endif
 

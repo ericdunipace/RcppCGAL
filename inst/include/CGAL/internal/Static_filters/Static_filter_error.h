@@ -26,6 +26,7 @@
 // - Remove the degree stuff, it's only meant for debug (?).
 // - Add __attribute__((const)) for optimizing ?
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/FPU.h>
 
@@ -114,7 +115,7 @@ struct Static_filter_error
   bool operator< (const Sfe &f) const
   {
       Sfe e = *this + f;
-      std::cerr << "Static error is : " << e.error() << std::endl;
+      Rcpp::Rcerr << "Static error is : " << e.error() << std::endl;
       CGAL_error();
       return false;
   }

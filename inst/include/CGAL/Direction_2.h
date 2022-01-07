@@ -17,6 +17,7 @@
 #ifndef CGAL_DIRECTION_2_H
 #define CGAL_DIRECTION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/assertions.h>
 #include <boost/type_traits/is_same.hpp>
 #include <CGAL/kernel_assertions.h>
@@ -233,7 +234,7 @@ extract(std::istream& is, Direction_2<R>& d, const Cartesian_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        std::cerr << std::endl << "Stream must be in ascii or binary mode"
+        Rcpp::Rcerr << std::endl << "Stream must be in ascii or binary mode"
                   << std::endl;
         break;
     }
@@ -258,8 +259,8 @@ extract(std::istream& is, Direction_2<R>& d, const Homogeneous_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        std::cerr << "" << std::endl;
-        std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+        Rcpp::Rcerr << "" << std::endl;
+        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
         break;
   }
   d = Direction_2<R>(x, y);

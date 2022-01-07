@@ -12,6 +12,7 @@
 #ifndef CGAL_MEAN_CURVATURE_FLOW_SKELETONIZATION_H
 #define CGAL_MEAN_CURVATURE_FLOW_SKELETONIZATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_skeletonization.h>
 
 
@@ -606,7 +607,7 @@ public:
    */
   void contract_geometry()
   {
-    MCFSKEL_DEBUG(std::cerr << "before contract geometry";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "before contract geometry";)
 
     update_vertex_id();
 
@@ -636,7 +637,7 @@ public:
     typename SolverTraits::Vector Z(nver), Bz(nrows);
     assemble_RHS(Bx, By, Bz);
 
-    MCFSKEL_DEBUG(std::cerr << "before solve\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "before solve\n";)
 
     // solve "At * A * X = At * B".
     m_solver.normal_equation_factor(A);
@@ -644,7 +645,7 @@ public:
     m_solver.normal_equation_solver(By, Y);
     m_solver.normal_equation_solver(Bz, Z);
 
-    MCFSKEL_DEBUG(std::cerr << "after solve\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "after solve\n";)
 
     // copy to surface mesh
     for(vertex_descriptor vd : vertices(m_tmesh))
@@ -655,7 +656,7 @@ public:
       put(m_tmesh_point_pmap, vd, p);
     }
 
-    MCFSKEL_DEBUG(std::cerr << "leave contract geometry\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "leave contract geometry\n";)
   }
 
   /**
@@ -671,7 +672,7 @@ public:
    */
   std::size_t split_faces()
   {
-    MCFSKEL_DEBUG(std::cerr << "before split\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "before split\n";)
 
     std::size_t num_splits = 0;
     while (true)
@@ -691,7 +692,7 @@ public:
       }
     }
 
-    MCFSKEL_DEBUG(std::cerr << "after split\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "after split\n";)
 
     return num_splits;
   }
@@ -702,13 +703,13 @@ public:
    */
   std::size_t remesh()
   {
-    MCFSKEL_DEBUG(std::cerr << "before collapse edges\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "before collapse edges\n";)
 
     std::size_t num_collapses = collapse_edges();
-    MCFSKEL_INFO(std::cerr << "collapse " << num_collapses << " edges.\n";)
+    MCFSKEL_INFO(Rcpp::Rcerr << "collapse " << num_collapses << " edges.\n";)
 
     std::size_t num_splits = split_faces();
-    MCFSKEL_INFO(std::cerr << "split " << num_splits << " edges.\n";)
+    MCFSKEL_INFO(Rcpp::Rcerr << "split " << num_splits << " edges.\n";)
 
     return num_collapses + num_splits;
   }
@@ -733,7 +734,7 @@ public:
 
     MCFSKEL_INFO(double area = CGAL::Polygon_mesh_processing::area(m_tmesh,
       CGAL::Polygon_mesh_processing::parameters::vertex_point_map(m_tmesh_point_pmap));)
-    MCFSKEL_INFO(std::cout << "area " << area << "\n";)
+    MCFSKEL_INFO(Rcpp::Rcout << "area " << area << "\n";)
   }
 
 
@@ -749,7 +750,7 @@ public:
     std::size_t num_iteration = 0;
     while (true)
     {
-      MCFSKEL_INFO(std::cout << "iteration " << num_iteration + 1 << "\n";)
+      MCFSKEL_INFO(Rcpp::Rcout << "iteration " << num_iteration + 1 << "\n";)
 
       contract_geometry();
       remesh();
@@ -760,8 +761,8 @@ public:
         .geom_traits(m_traits));
       double area_ratio = fabs(last_area - area) / m_original_area;
 
-      MCFSKEL_INFO(std::cout << "area " << area << "\n";)
-      MCFSKEL_INFO(std::cout << "|area - last_area| / original_area "
+      MCFSKEL_INFO(Rcpp::Rcout << "area " << area << "\n";)
+      MCFSKEL_INFO(Rcpp::Rcout << "|area - last_area| / original_area "
                              << area_ratio << "\n";)
 
       if (area_ratio < m_delta_area)
@@ -897,7 +898,7 @@ private:
   /// Assemble the left hand side.
   void assemble_LHS(typename SolverTraits::Matrix& A)
   {
-    MCFSKEL_DEBUG(std::cerr << "start LHS\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "start LHS\n";)
 
     std::size_t nver = num_vertices(m_tmesh);
 
@@ -952,7 +953,7 @@ private:
       A.set_coef(i, i, diagonal, true);
     }
 
-    MCFSKEL_DEBUG(std::cerr << "end LHS\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "end LHS\n";)
   }
 
   /// Assemble the right hand side.
@@ -960,7 +961,7 @@ private:
                     typename SolverTraits::Vector& By,
                     typename SolverTraits::Vector& Bz)
   {
-    MCFSKEL_DEBUG(std::cerr << "start RHS\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "start RHS\n";)
 
     Side_of_triangle_mesh<mTriangleMesh, Traits> test_inside(m_tmesh);
 
@@ -1011,7 +1012,7 @@ private:
       }
     }
 
-    MCFSKEL_DEBUG(std::cerr << "end RHS\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcerr << "end RHS\n";)
   }
 
   /// The order of vertex id is the same as the traverse order.
@@ -1239,7 +1240,7 @@ private:
       }
     }
 
-    MCFSKEL_INFO(std::cerr << "fixed " << num_fixed << " vertices.\n";)
+    MCFSKEL_INFO(Rcpp::Rcerr << "fixed " << num_fixed << " vertices.\n";)
 
     return num_fixed;
   }
@@ -1252,7 +1253,7 @@ private:
   /// vertex in the Voronoi cell containing the given vertex.
   void compute_voronoi_pole()
   {
-    MCFSKEL_DEBUG(std::cout << "start compute_voronoi_pole\n";)
+    MCFSKEL_DEBUG(Rcpp::Rcout << "start compute_voronoi_pole\n";)
     compute_vertex_normal();
 
     std::vector<std::pair<Exact_point, vertex_descriptor> > points;
@@ -1376,7 +1377,7 @@ private:
         vertex_descriptor vj = target(hd, m_tmesh);
         size_t vi_idx = get(m_vertex_id_pmap, vi);
         size_t vj_idx = get(m_vertex_id_pmap, vj);
-        std::cout << vi_idx << " " << vj_idx << "\n";
+        Rcpp::Rcout << vi_idx << " " << vj_idx << "\n";
 
         visited[hd] = true;
         visited[opposite(hd,m_tmesh)] = true;

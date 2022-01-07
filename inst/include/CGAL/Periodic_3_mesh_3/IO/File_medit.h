@@ -13,6 +13,7 @@
 #ifndef CGAL_PERIODIC_3_MESH_3_IO_FILE_MEDIT_H
 #define CGAL_PERIODIC_3_MESH_3_IO_FILE_MEDIT_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_mesh_3.h>
 
 #include <CGAL/array.h>
@@ -135,12 +136,12 @@ void output_to_medit(std::ostream& os,
   int occ_mult = Ox_rn * Oy_rn * Oz_rn;
 
 #ifdef CGAL_PERIODIC_3_MESH_3_VERBOSE
-  std::cerr << "Outputting mesh to medit... " << std::endl;
-  std::cerr << "occurrences over each axis: "
+  Rcpp::Rcerr << "Outputting mesh to medit... " << std::endl;
+  Rcpp::Rcerr << "occurrences over each axis: "
             << Ox_rn << " " << Oy_rn << " " << Oz_rn << std::endl;
-  std::cerr << number_of_vertices << " vertices" << std::endl;
-  std::cerr << number_of_facets << " facets" << std::endl;
-  std::cerr << number_of_cells << " cells" << std::endl;
+  Rcpp::Rcerr << number_of_vertices << " vertices" << std::endl;
+  Rcpp::Rcerr << number_of_facets << " facets" << std::endl;
+  Rcpp::Rcerr << number_of_cells << " cells" << std::endl;
 #endif
 
   os << std::setprecision(17);
@@ -304,7 +305,7 @@ void output_to_medit(std::ostream& os,
                      const bool distinguish_copies)
 {
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  std::cerr << "Output to medit:\n";
+  Rcpp::Rcerr << "Output to medit:\n";
 #endif
   CGAL_precondition(c3t3.triangulation().is_1_cover());
 
@@ -324,7 +325,7 @@ void output_to_medit(std::ostream& os,
                                      Generator().print_twice());
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  std::cerr << "done.\n";
+  Rcpp::Rcerr << "done.\n";
 #endif
 }
 

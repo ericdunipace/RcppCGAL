@@ -16,6 +16,7 @@
 #ifndef CGAL_NEF3_BINARY_OPERATION_H
 #define CGAL_NEF3_BINARY_OPERATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -133,7 +134,7 @@ class Binary_operation : public CGAL::SNC_decorator<Map> {
 
     CGAL_assertion( v0->point() == v1->point());
     Vertex_handle v01 = rsnc.new_vertex( v0->point(), BOP( v0->mark(),v1->mark()));
-    //    std::cerr <<"BOP Vertex "<< v0->point() << ":"
+    //    Rcpp::Rcerr <<"BOP Vertex "<< v0->point() << ":"
     //                     << v0->mark()<<" "<<v1->mark()<<std::endl;
     CGAL_NEF_TRACEN("  binop result on vertex "<<&*v01<<" on "<<&*(v01->sncp()));
     SM_overlayer O(&*v01);
@@ -209,7 +210,7 @@ class Binary_operation : public CGAL::SNC_decorator<Map> {
 #endif
 
       if( CGAL::assign( e, o1)) {
-        //        std::cerr << "inverse order " << inverse_order << std::endl;
+        //        Rcpp::Rcerr << "inverse order " << inverse_order << std::endl;
 
 #ifdef CGAL_NEF_EXPERIMENTAL_CODE
         typename CGAL::Edge_edge_overlay<SNC_structure> eeo(result, e0, e);
@@ -553,7 +554,7 @@ class Binary_operation : public CGAL::SNC_decorator<Map> {
 #ifdef CGAL_NEF3_TIMER_INTERSECTION
     timer_intersection.stop();
     if(cgal_nef3_timer_on)
-      std::cout << "Runtime_intersection: "
+      Rcpp::Rcout << "Runtime_intersection: "
                 << timer_intersection.time()-timer_overlay.time()+split_intersection
                 << std::endl;
 #endif
@@ -567,69 +568,69 @@ class Binary_operation : public CGAL::SNC_decorator<Map> {
 
 #ifdef CGAL_NEF3_TIMER_PLANE_SWEEPS
     if(cgal_nef3_timer_on) {
-      std::cout << "Number_of_plane_sweeps: "
+      Rcpp::Rcout << "Number_of_plane_sweeps: "
                 << number_of_plane_sweeps << std::endl;
-      std::cout << "Runtime_plane_sweeps: "
+      Rcpp::Rcout << "Runtime_plane_sweeps: "
                 << timer_plane_sweeps.time() << std::endl;
     }
 #endif
 
 #ifdef CGAL_NEF3_DUMP_STATISTICS
     if(cgal_nef3_timer_on) {
-      std::cout << "Vertices_in_object_A: "
+      Rcpp::Rcout << "Vertices_in_object_A: "
                 << snc1.number_of_vertices() << std::endl;
-      std::cout << "Vertices_in_object_B: "
+      Rcpp::Rcout << "Vertices_in_object_B: "
                 << snc2.number_of_vertices() << std::endl;
-      std::cout << "Number_of_intersections: "
+      Rcpp::Rcout << "Number_of_intersections: "
                 << number_of_intersections << std::endl;
-      std::cout << "Number_of_intersection_candidates: "
+      Rcpp::Rcout << "Number_of_intersection_candidates: "
                 << number_of_intersection_candidates << std::endl;
-      std::cout << "Vertices_in_Result: "
+      Rcpp::Rcout << "Vertices_in_Result: "
                 << this->sncp()->number_of_vertices() << std::endl;
     }
 #endif
 
 #ifdef CGAL_NEF3_TIMER_SPHERE_SWEEPS
     if(cgal_nef3_timer_on) {
-      std::cout << "Number_of_edge_facet_overlays: "
+      Rcpp::Rcout << "Number_of_edge_facet_overlays: "
                 << number_of_edge_facet_overlays << std::endl;
-      std::cout << "Number_of_clones: "
+      Rcpp::Rcout << "Number_of_clones: "
                 << number_of_clones << std::endl;
-      std::cout << "Number_of_sphere_sweeps: "
+      Rcpp::Rcout << "Number_of_sphere_sweeps: "
                 << number_of_sphere_sweeps << std::endl;
-      std::cout << "Runtime_sphere_sweeps: "
+      Rcpp::Rcout << "Runtime_sphere_sweeps: "
                 << timer_sphere_sweeps.time() << std::endl;
     }
 #endif
 
 #if defined (CGAL_NEF3_TIMER_SPHERE_SWEEPS) && defined (CGAL_NEF3_TIMER_PLANE_SWEEPS)
     if(cgal_nef3_timer_on) {
-      std::cout << "Runtime_all_sweeps: "
+      Rcpp::Rcout << "Runtime_all_sweeps: "
                 << timer_sphere_sweeps.time()+timer_plane_sweeps.time() << std::endl;
     }
 #endif
 
 #ifdef CGAL_NEF3_TIMER_OVERLAY
     if(cgal_nef3_timer_on) {
-      std::cout << "Runtime_overlay: "
+      Rcpp::Rcout << "Runtime_overlay: "
                 << timer_overlay.time() << std::endl;
     }
 #endif
 
 #ifdef CGAL_NEF3_TIMER_POINT_LOCATION
     if(cgal_nef3_timer_on) {
-      std::cout << "Number_of_ray_shooting_queries: "
+      Rcpp::Rcout << "Number_of_ray_shooting_queries: "
                 << number_of_ray_shooting_queries << std::endl;
-      std::cout << "Runtime_ray_shooting: "
+      Rcpp::Rcout << "Runtime_ray_shooting: "
                 << timer_ray_shooting.time() << std::endl;
-      std::cout << "Number_of_point_location_queries: "
+      Rcpp::Rcout << "Number_of_point_location_queries: "
                 << number_of_point_location_queries << std::endl;
-      std::cout << "Runtime_point_location: "
+      Rcpp::Rcout << "Runtime_point_location: "
                 << timer_point_location.time() << std::endl;
-      std::cout << "Number_of_kd_tree_queries: "
+      Rcpp::Rcout << "Number_of_kd_tree_queries: "
                 << number_of_point_location_queries +
                    number_of_ray_shooting_queries << std::endl;
-      std::cout << "Runtime_kd_tree_queries: "
+      Rcpp::Rcout << "Runtime_kd_tree_queries: "
                 << timer_point_location.time() +
                    timer_ray_shooting.time() << std::endl;
     }
@@ -638,7 +639,7 @@ class Binary_operation : public CGAL::SNC_decorator<Map> {
 #ifdef CGAL_NEF3_TIMER_BINARY_OPERATION
     if(cgal_nef3_timer_on) {
       timer_binary_operation.stop();
-      std::cout << "Runtime_binary_operation: "
+      Rcpp::Rcout << "Runtime_binary_operation: "
                 << timer_binary_operation.time() << std::endl;
     }
 #endif

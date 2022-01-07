@@ -14,6 +14,7 @@
 #ifndef CGAL_SURFACE_MESHER_STANDARD_CRITERIA_H
 #define CGAL_SURFACE_MESHER_STANDARD_CRITERIA_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 
@@ -63,14 +64,14 @@ namespace CGAL {
           bad = true;
       if( bad )
       {
-        std::cerr << "bad triangle: |";
+        Rcpp::Rcerr << "bad triangle: |";
         for(typename Criteria::iterator cit = criteria.begin(); cit !=
               criteria.end(); ++cit)
         {
           FT dummy_q;
-          std::cerr << (*cit)->is_bad (f, dummy_q) << "|" ;
+          Rcpp::Rcerr << (*cit)->is_bad (f, dummy_q) << "|" ;
         }
-        std::cerr << "\n";
+        Rcpp::Rcerr << "\n";
       }
       return bad;
 #endif

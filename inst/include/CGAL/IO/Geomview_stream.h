@@ -17,6 +17,7 @@
 #ifndef CGAL_GEOMVIEW_STREAM_H
 #define CGAL_GEOMVIEW_STREAM_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #ifdef CGAL_USE_GEOMVIEW
@@ -154,22 +155,22 @@ public:
     void trace(const std::string s) const
     {
         if (get_trace())
-            std::cerr << s;
+            Rcpp::Rcerr << s;
     }
     void trace(double d) const
     {
         if (get_trace())
-            std::cerr << d << ' ';
+            Rcpp::Rcerr << d << ' ';
     }
     void trace(int i) const
     {
         if (get_trace())
-            std::cerr << i << ' ';
+            Rcpp::Rcerr << i << ' ';
     }
     void trace(unsigned int i) const
     {
         if (get_trace())
-            std::cerr << i << ' ';
+            Rcpp::Rcerr << i << ' ';
     }
 
     bool set_binary_mode(bool b = true)

@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_SKIN_SURFACE_3_H
 #define CGAL_MESH_SKIN_SURFACE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 #include <CGAL/Cartesian_converter.h>
@@ -36,7 +37,7 @@ void mesh_skin_surface_3(SkinSurface_3 const &skin_surface, Polyhedron &p)
 //(SkinSurface_3 const &skin_surface,
 // Polyhedron_3<P_Traits, Skin_surface_polyhedral_items_3<SkinSurface_3> > &p)
 //{
-//  std::cout << "B" << std::endl;
+//  Rcpp::Rcout << "B" << std::endl;
 //  skin_surface.mesh_skin_surface_3(p);
 //}
 //

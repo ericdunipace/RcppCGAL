@@ -12,6 +12,7 @@
 #ifndef CGAL_PATH_ON_SURFACE_WITH_RLE_H
 #define CGAL_PATH_ON_SURFACE_WITH_RLE_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <list>
@@ -350,7 +351,7 @@ public:
       if (prev!=nullptr && !get_map().template belong_to_same_cell<0>
           (get_map().template beta<1>(prev), begin_of_flat(it)))
       {
-        std::cerr<<"ERROR: The path is not valid: flat in position "<<i
+        Rcpp::Rcerr<<"ERROR: The path is not valid: flat in position "<<i
                  <<" does not follow the previous dart."<<std::endl;
         return false;
       }
@@ -358,7 +359,7 @@ public:
       if (!is_flat_valid(it))
       {
         display();
-        std::cout<<"ERROR: The path is not valid: flat at position "<<i
+        Rcpp::Rcout<<"ERROR: The path is not valid: flat at position "<<i
                 <<" with length "<<flat_length(it)
                <<" is not correct: its end does not"
               <<" correspond to the flat."<<std::endl;
@@ -367,7 +368,7 @@ public:
 
       if (test_minimal && can_merge_with_next_flat(it))
       {
-        std::cout<<"ERROR: The path is not valid: flat at position "<<i
+        Rcpp::Rcout<<"ERROR: The path is not valid: flat at position "<<i
                 <<" with length "<<flat_length(it)<<" is not correct: it can be merged "
                <<"with the next flat with length "
               <<flat_length(next_iterator(it))<<" - turns between the two flats = +"
@@ -383,14 +384,14 @@ public:
     {
       if (prev==nullptr)
       {
-        std::cout<<"ERROR: The path is not valid: it is empty and closed."
+        Rcpp::Rcout<<"ERROR: The path is not valid: it is empty and closed."
                 <<std::endl;
         return false;
       }
       if (!get_map().template belong_to_same_cell<0>
           (get_map().template beta<1>(prev), begin_of_flat(m_path.begin())))
       {
-        std::cerr<<"ERROR: The path is not valid: first flat "
+        Rcpp::Rcerr<<"ERROR: The path is not valid: first flat "
                  <<" does not follow the last dart for a closed path."<<std::endl;
         return false;
       }
@@ -398,7 +399,7 @@ public:
 
     if (length()!=nbdarts)
     {
-      std::cerr<<"ERROR: The path is not valid: store length=="<<length()
+      Rcpp::Rcerr<<"ERROR: The path is not valid: store length=="<<length()
                <<" different of real length=="<<nbdarts<<std::endl;
       return false;
     }
@@ -823,9 +824,9 @@ public:
     { return false; }
 
 #ifdef CGAL_TRACE_PATH_TESTS
-    std::cout<<"Merge with next flat: ";
-    display_flat(std::cout, it); std::cout<<" and ";
-    display_flat(std::cout, next_iterator(it)); std::cout<<std::endl;
+    Rcpp::Rcout<<"Merge with next flat: ";
+    display_flat(Rcpp::Rcout, it); Rcpp::Rcout<<" and ";
+    display_flat(Rcpp::Rcout, next_iterator(it)); Rcpp::Rcout<<std::endl;
 #endif
 
     List_iterator it2=next_iterator(it);
@@ -875,9 +876,9 @@ public:
   void remove_spur(List_iterator& it)
   {
 #ifdef CGAL_TRACE_PATH_TESTS
-        std::cout<<"Remove spur between flats: ";
-        display_flat(std::cout, it); std::cout<<" and ";
-        display_flat(std::cout, next_iterator(it)); std::cout<<std::endl;
+        Rcpp::Rcout<<"Remove spur between flats: ";
+        display_flat(Rcpp::Rcout, it); Rcpp::Rcout<<" and ";
+        display_flat(Rcpp::Rcout, next_iterator(it)); Rcpp::Rcout<<std::endl;
 #endif
 
     CGAL_assertion(is_spur(it));
@@ -1005,10 +1006,10 @@ public:
   void remove_negative_bracket(List_iterator& it1, List_iterator& it3)
   {
 #ifdef CGAL_TRACE_PATH_TESTS
-    std::cout<<"Remove negative bracket: ";
-    display_flat(std::cout, it1); std::cout<<", ";
-    display_flat(std::cout, next_iterator(it1)); std::cout<<" and ";
-    display_flat(std::cout, it3); std::cout<<std::endl;
+    Rcpp::Rcout<<"Remove negative bracket: ";
+    display_flat(Rcpp::Rcout, it1); Rcpp::Rcout<<", ";
+    display_flat(Rcpp::Rcout, next_iterator(it1)); Rcpp::Rcout<<" and ";
+    display_flat(Rcpp::Rcout, it3); Rcpp::Rcout<<std::endl;
 #endif
 
     Set_of_it modified_flats;
@@ -1053,10 +1054,10 @@ public:
                                List_iterator& it3)
   {
 #ifdef CGAL_TRACE_PATH_TESTS
-    std::cout<<"Remove positive bracket: ";
-    display_flat(std::cout, it1); std::cout<<", ";
-    display_flat(std::cout, next_iterator(it1)); std::cout<<" and ";
-    display_flat(std::cout, it3); std::cout<<std::endl;
+    Rcpp::Rcout<<"Remove positive bracket: ";
+    display_flat(Rcpp::Rcout, it1); Rcpp::Rcout<<", ";
+    display_flat(Rcpp::Rcout, next_iterator(it1)); Rcpp::Rcout<<" and ";
+    display_flat(Rcpp::Rcout, it3); Rcpp::Rcout<<std::endl;
 #endif
 
     Set_of_it modified_flats;
@@ -1274,9 +1275,9 @@ public:
   void right_push_l_shape(List_iterator& it1)
   {
 #ifdef CGAL_TRACE_PATH_TESTS
-        std::cout<<"Right push l-shape: ";
-        display_flat(std::cout, it1); std::cout<<" and ";
-        display_flat(std::cout, next_iterator(it1)); std::cout<<std::endl;
+        Rcpp::Rcout<<"Right push l-shape: ";
+        display_flat(Rcpp::Rcout, it1); Rcpp::Rcout<<" and ";
+        display_flat(Rcpp::Rcout, next_iterator(it1)); Rcpp::Rcout<<std::endl;
 #endif
 
     // it is the beginning of a flat
@@ -1512,32 +1513,32 @@ public:
 
   void display_positive_turns()
   {
-    std::cout<<"+(";
+    Rcpp::Rcout<<"+(";
     for (List_iterator it=m_path.begin(), itend=m_path.end();
          it!=itend; ++it)
     {
       if (next_flat_exist(it))
-      { std::cout<<next_positive_turn(it)<<" "; }
+      { Rcpp::Rcout<<next_positive_turn(it)<<" "; }
     }
-    std::cout<<")";
+    Rcpp::Rcout<<")";
   }
 
   void display_negative_turns()
   {
-    std::cout<<"-(";
+    Rcpp::Rcout<<"-(";
     for (List_iterator it=m_path.begin(), itend=m_path.end();
          it!=itend; ++it)
     {
       if (next_flat_exist(it))
-      { std::cout<<next_negative_turn(it)<<" "; }
+      { Rcpp::Rcout<<next_negative_turn(it)<<" "; }
     }
-    std::cout<<")";
+    Rcpp::Rcout<<")";
   }
 
   void display_pos_and_neg_turns()
   {
     display_positive_turns();
-    std::cout<<"  ";
+    Rcpp::Rcout<<"  ";
     display_negative_turns();
   }
 
@@ -1548,14 +1549,14 @@ public:
       for (List_iterator it=m_path.begin(), itend=m_path.end();
            it!=itend; ++it)
       {
-        std::cout<<"[ ";
-        std::cout<<get_map().darts().index(begin_of_flat(it))
+        Rcpp::Rcout<<"[ ";
+        Rcpp::Rcout<<get_map().darts().index(begin_of_flat(it))
                  <<", "<<get_map().darts().index(end_of_flat(it))
                  <<"("<<flat_length(it)<<") ] ";
       }
       if (is_closed())
-      { std::cout<<" c "; }
-      std::cout<<" length("<<length()<<")";
+      { Rcpp::Rcout<<" c "; }
+      Rcpp::Rcout<<" length("<<length()<<")";
     }
   }
 

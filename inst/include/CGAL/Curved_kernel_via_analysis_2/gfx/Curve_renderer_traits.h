@@ -14,6 +14,7 @@
 #ifndef CGAL_CKVA_CURVE_RENDERER_TRAITS_H
 #define CGAL_CKVA_CURVE_RENDERER_TRAITS_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/function_objects.h>
 
@@ -198,7 +199,7 @@ struct Curve_renderer_traits_base
     //!@todo: use Rat_to_float functor instead of coercion traits ?
     //! need some sort of polymorphism..
 
-            //std::cerr << "calling transform..\n";
+            //Rcpp::Rcerr << "calling transform..\n";
             typedef typename CGAL::Coercion_traits<Extended, Coeff>::Cast
                 Cast;
             Transform<result_type,

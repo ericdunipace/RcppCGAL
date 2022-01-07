@@ -15,6 +15,7 @@
 #ifndef CGAL_POLYNOMIAL_STURM_HABICHT
 #define CGAL_POLYNOMIAL_STURM_HABICHT 1
 
+#include <Rcpp.h>
 #include <vector>
 #include <algorithm>
 #include <CGAL/Polynomial/bezout_matrix.h>
@@ -423,7 +424,7 @@ template<typename Polynomial_traits_d,
     int k;
     InputIterator el=start;
 
-    //std::cout << "Sign of." << (*el) << std::endl;
+    //Rcpp::Rcout << "Sign of." << (*el) << std::endl;
 
     curr_sign=CGAL::sign(*el);
 

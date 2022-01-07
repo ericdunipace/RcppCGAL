@@ -12,6 +12,7 @@
 #ifndef CGAL_LINEAR_CELL_COMPLEX_INCREMENTAL_BUILDER_H
 #define CGAL_LINEAR_CELL_COMPLEX_INCREMENTAL_BUILDER_H 1
 
+#include <Rcpp.h>
 #include <vector>
 #include <cstddef>
 #include <CGAL/Linear_cell_complex_base.h>
@@ -100,13 +101,13 @@ namespace CGAL {
     {
       first_dart = lcc.null_handle;
       prev_dart  = lcc.null_handle;
-      // std::cout<<"Begin facet: "<<std::flush;
+      // Rcpp::Rcout<<"Begin facet: "<<std::flush;
     }
 
     void add_vertex_to_facet(size_type i)
     {
       CGAL_assertion( i<new_vertices );
-      // std::cout<<i<<"  "<<std::flush;
+      // Rcpp::Rcout<<i<<"  "<<std::flush;
       Dart_handle cur = Add_vertex_to_face<LCC>::
           run(lcc, vertex_map[i], prev_dart);
 

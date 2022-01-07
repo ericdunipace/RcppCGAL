@@ -13,6 +13,7 @@
 #ifndef CGAL_SURFACE_MESHER_POLYHEDRAL_ORACLE_H
 #define CGAL_SURFACE_MESHER_POLYHEDRAL_ORACLE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 
@@ -76,9 +77,9 @@ public:
 //       is.seekg(0,std::ios::beg);
 //       tr.clear();
 //       // The data structure for testing intersections is set
-//       std::cerr << "Creating data structure for intersections detection... ";
+//       Rcpp::Rcerr << "Creating data structure for intersections detection... ";
 //       data_struct.input(is, CGAL::Insert_iterator<Tr>(tr));
-//       std::cerr << "done\n\n";
+//       Rcpp::Rcerr << "done\n\n";
   }
 
 //   Finite_vertices_iterator finite_vertices_begin()
@@ -236,7 +237,7 @@ public:
       return false;
 
 #ifdef CGAL_SURFACE_MESHER_DEBUG_INTERSECTION_DATA_STRUCTURE
-    std::cerr << "(in volume) ";
+    Rcpp::Rcerr << "(in volume) ";
 #endif
     std::pair<bool, int> result = std::make_pair(false, 0);
 
@@ -293,7 +294,7 @@ public:
       // debug: test if segment is degenerate
       // (can happen, because of rounding in circumcenter computations)
       if (is_degenerate(s)) {
-        std::cerr << "Warning: degenerate segment (" << s << ")\n";
+        Rcpp::Rcerr << "Warning: degenerate segment (" << s << ")\n";
         return CGAL::Object();
       }
 
@@ -308,7 +309,7 @@ public:
 
 //       if ((assign(p, oun) && !assign(p,odeux)) ||
 //           !assign(p, oun) && assign(p,odeux))
-//         std::cout << "s " << s
+//         Rcpp::Rcout << "s " << s
 //                   << " " << (assign(p, odeux))
 //                   << std::endl;
 
@@ -335,7 +336,7 @@ public:
       // debug: test if segment is degenerate
       // (can happen, because of rounding in circumcenter computations)
       if (is_degenerate(r)) {
-        std::cerr << "Warning: degenerate ray (" << r << ")\n";
+        Rcpp::Rcerr << "Warning: degenerate ray (" << r << ")\n";
         return CGAL::Object();
       }
       // debug: for detecting whether Marie's code works
@@ -348,7 +349,7 @@ public:
 
 //       if ((assign(p, oun) && !assign(p,odeux)) ||
 //           !assign(p, oun) && assign(p,odeux))
-//         std::cout << "r " << r
+//         Rcpp::Rcout << "r " << r
 //                   << " " << (assign(p, odeux))
 //                   << std::endl;
 

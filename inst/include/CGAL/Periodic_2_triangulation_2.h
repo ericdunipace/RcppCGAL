@@ -12,6 +12,7 @@
 #ifndef CGAL_PERIODIC_2_TRIANGULATION_2_H
 #define CGAL_PERIODIC_2_TRIANGULATION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Periodic_2_triangulation_2.h>
 
 
@@ -1621,13 +1622,13 @@ bool Periodic_2_triangulation_2<Gt, Tds>::is_valid(Face_handle fh, bool /*verbos
   result &= (ymax - ymin <= 1);
   if (!result)
     {
-      std::cerr << "min/max: " << xmin << "," << xmax << " " << ymin << "," << ymax << std::endl;
+      Rcpp::Rcerr << "min/max: " << xmin << "," << xmax << " " << ymin << "," << ymax << std::endl;
       for (int i = 0; i < 3; ++i)
         {
           Offset o = get_offset(fh, i);
-          std::cerr << "Offset: " << o << std::endl;
+          Rcpp::Rcerr << "Offset: " << o << std::endl;
         }
-      std::cerr << std::endl;
+      Rcpp::Rcerr << std::endl;
       CGAL_triangulation_assertion(false);
     }
 
@@ -1657,7 +1658,7 @@ bool Periodic_2_triangulation_2<Gt, Tds>::is_valid(bool verbose, int level) cons
             {
               if (verbose)
                 {
-                  std::cerr
+                  Rcpp::Rcerr
                       << "Periodic_2_triangulation_2: wrong orientation:" << "\n"
                       << *p[0] << " \t" << off[0] << "\n"
                       << *p[1] << " \t" << off[1] << "\n"
@@ -1765,7 +1766,7 @@ bool Periodic_2_triangulation_2<Gt, Tds>::is_valid_too_long_edges(bool verbose, 
   CGAL_triangulation_assertion(result);
   if (_too_long_edge_counter != too_long_edges)
     {
-      if (verbose) std::cout << "Too long edge counter is incorrect: " << _too_long_edge_counter << " != " << too_long_edges << std::endl;
+      if (verbose) Rcpp::Rcout << "Too long edge counter is incorrect: " << _too_long_edge_counter << " != " << too_long_edges << std::endl;
       result = false;
     }
   CGAL_triangulation_assertion(result);
@@ -1802,7 +1803,7 @@ bool Periodic_2_triangulation_2<Gt, Tds>::is_valid_too_long_edges(bool verbose, 
           bool too_long = edge_is_too_long(p1, p2);
           if (too_long != edge_is_too_long(p2, p1))
             {
-              if (verbose) std::cout << "Long edge criterion not symmetric c(v1,v2) != c(v2,v1)" << std::endl;
+              if (verbose) Rcpp::Rcout << "Long edge criterion not symmetric c(v1,v2) != c(v2,v1)" << std::endl;
               result = false;
             }
           CGAL_triangulation_assertion(result);
@@ -1812,7 +1813,7 @@ bool Periodic_2_triangulation_2<Gt, Tds>::is_valid_too_long_edges(bool verbose, 
             {
               if (too_long)
                 {
-                  if (verbose) std::cout << "1. Too long edge not in the data structure" << std::endl;
+                  if (verbose) Rcpp::Rcout << "1. Too long edge not in the data structure" << std::endl;
                   result = false;
                 }
               result &= !too_long;
@@ -1826,7 +1827,7 @@ bool Periodic_2_triangulation_2<Gt, Tds>::is_valid_too_long_edges(bool verbose, 
                   too_long_edges++;
                   if (it2 == it->second.end())
                     {
-                      if (verbose) std::cout << "2. Too long edge not in the data structure" << std::endl;
+                      if (verbose) Rcpp::Rcout << "2. Too long edge not in the data structure" << std::endl;
                       result = false;
                     }
                   CGAL_triangulation_assertion(result);
@@ -1835,7 +1836,7 @@ bool Periodic_2_triangulation_2<Gt, Tds>::is_valid_too_long_edges(bool verbose, 
                 {
                   if (it2 != it->second.end())
                     {
-                      if (verbose) std::cout << "Edge is not too long, but contained in the data structure" << std::endl;
+                      if (verbose) Rcpp::Rcout << "Edge is not too long, but contained in the data structure" << std::endl;
                       result = false;
                     }
                   CGAL_triangulation_assertion(result);
@@ -1846,7 +1847,7 @@ bool Periodic_2_triangulation_2<Gt, Tds>::is_valid_too_long_edges(bool verbose, 
       if (_too_long_edge_counter != too_long_edges)
         {
           if (verbose)
-            std::cout << "Counts do not match: " << _too_long_edge_counter << " != " << too_long_edges << std::endl;
+            Rcpp::Rcout << "Counts do not match: " << _too_long_edge_counter << " != " << too_long_edges << std::endl;
           result = false;
         }
       CGAL_triangulation_assertion(result);
@@ -2733,15 +2734,15 @@ bool Periodic_2_triangulation_2<Gt, Tds>::compare_walks(const Point& p,
 
   if (!b)
     {
-      std::cerr << "from compare_walks " << std::endl;
-      std::cerr << "point " << p << std::endl;
-      std::cerr << "locate 1 " << &*c1 << "\t" << lt1 << "\t" << li1 << std::endl;
-      std::cerr << "locate 2 " << &*c2 << "\t" << lt2 << "\t" << li2 << std::endl;
-      std::cerr << std::endl;
+      Rcpp::Rcerr << "from compare_walks " << std::endl;
+      Rcpp::Rcerr << "point " << p << std::endl;
+      Rcpp::Rcerr << "locate 1 " << &*c1 << "\t" << lt1 << "\t" << li1 << std::endl;
+      Rcpp::Rcerr << "locate 2 " << &*c2 << "\t" << lt2 << "\t" << li2 << std::endl;
+      Rcpp::Rcerr << std::endl;
       show_face(c1);
-      std::cerr << std::endl;
+      Rcpp::Rcerr << std::endl;
       show_face(c2);
-      std::cerr << std::endl;
+      Rcpp::Rcerr << std::endl;
     }
 
   CGAL_triangulation_assertion(b);
@@ -4156,9 +4157,9 @@ Periodic_2_triangulation_2<Gt, Tds>::save(std::ostream& os) const
       write(os, cover[1]);
       write(os, n * cover[0]*cover[1]);
     }
-  std::cout << "Line:" << __LINE__ << " cover[0]:" << cover[0] << " cover[1]:" << cover[1] << " n*c0*c1:" << (n * cover[0]*cover[1]) << std::endl;
+  Rcpp::Rcout << "Line:" << __LINE__ << " cover[0]:" << cover[0] << " cover[1]:" << cover[1] << " n*c0*c1:" << (n * cover[0]*cover[1]) << std::endl;
 
-  std::cout << "save, #Vertices: " << n << std::endl;
+  Rcpp::Rcout << "save, #Vertices: " << n << std::endl;
 
   if (n == 0)
     return os;
@@ -4215,7 +4216,7 @@ Periodic_2_triangulation_2<Gt, Tds>::save(std::ostream& os) const
   size_type m = _tds.number_of_faces();
   if (IO::is_ascii(os)) os << std::endl << m << std::endl;
   else write(os, m);
-  std::cout << "save, #Faces: " << m << std::endl;
+  Rcpp::Rcout << "save, #Faces: " << m << std::endl;
 
   for( Face_iterator ib = faces_begin();
        ib != faces_end(); ++ib)
@@ -4231,7 +4232,7 @@ Periodic_2_triangulation_2<Gt, Tds>::save(std::ostream& os) const
     }
   if(IO::is_ascii(os)) os << "\n";
 
-  std::cout << "save, face check: " << inum << " == " << m << std::endl;
+  Rcpp::Rcout << "save, face check: " << inum << " == " << m << std::endl;
   CGAL_assertion(m == (size_type)inum);
 
   // neighbor pointers of the  faces
@@ -4319,7 +4320,7 @@ Periodic_2_triangulation_2<Gt, Tds>::load(std::istream& is)
     read(is, cy);
     read(is, n);
   }
-  std::cout << "Line:" << __LINE__ << " cx:" << cx << " cy:" << cy << " n:" << n << std::endl;
+  Rcpp::Rcout << "Line:" << __LINE__ << " cx:" << cx << " cy:" << cy << " n:" << n << std::endl;
 
   CGAL_triangulation_assertion((n / (cx * cy))*cx*cy == n);
 
@@ -4375,7 +4376,7 @@ Periodic_2_triangulation_2<Gt, Tds>::load(std::istream& is)
   if (IO::is_ascii(is)) is >> m;
   else read(is, m);
   std::vector<Face_handle> F(m);
-  std::cout << "load, #Faces: " << m << std::endl;
+  Rcpp::Rcout << "load, #Faces: " << m << std::endl;
   {
     for(size_t i = 0; i < m; ++i)
       {
@@ -4404,7 +4405,7 @@ Periodic_2_triangulation_2<Gt, Tds>::load(std::istream& is)
             if (IO::is_ascii(is)) is >> index;
             else read(is, index);
             if (index >= F.size()) {
-              std::cout << __FILE__ << ", " << __FUNCTION__ << ", l:" << __LINE__ << "  f="
+              Rcpp::Rcout << __FILE__ << ", " << __FUNCTION__ << ", l:" << __LINE__ << "  f="
                         << i << "<" << m << ", index=" << j << " nb=" << index << " #F=" << F.size()
                         << std::endl;
             }

@@ -14,6 +14,7 @@
 #ifndef CGAL_IMAGE_3_H
 #define CGAL_IMAGE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
@@ -99,7 +100,7 @@ public:
   Image_3(const Image_3& bi)
     : image_ptr(bi.image_ptr)
   {
-//     std::cerr << "Image_3::copy_constructor\n";
+//     Rcpp::Rcerr << "Image_3::copy_constructor\n";
   }
 
   Image_3(_image* im, Own own_the_data = OWN_THE_DATA)
@@ -424,9 +425,9 @@ Image_3::trilinear_interpolation(const Coord_type& x,
   const Target_type dj1 = ly - j1;
   const Target_type dk2 = k2 - lx;
   const Target_type dk1 = lx - k1;
-//   std::cerr << di2 << " " << di1 << "\n";
-//   std::cerr << dj2 << " " << dj1 << "\n";
-//   std::cerr << dk2 << " " << dk1 << "\n";
+//   Rcpp::Rcerr << di2 << " " << di1 << "\n";
+//   Rcpp::Rcerr << dj2 << " " << dj1 << "\n";
+//   Rcpp::Rcerr << dk2 << " " << dk1 << "\n";
 
   return ( (  ( a * di2 + b * di1 ) * dj2 +
               ( d * di2 + c * di1 ) * dj1   ) * dk2 +

@@ -19,6 +19,7 @@
 #ifndef CGAL_COMPUTE_CONE_BOUNDARIES_2_H
 #define CGAL_COMPUTE_CONE_BOUNDARIES_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 
@@ -90,7 +91,7 @@ public:
                                        const Direction_2& initial_direction,
                                        DirectionOutputIterator result)  {
         if (cone_number<2) {
-            std::cout << "The number of cones must be larger than 1!" << std::endl;
+            Rcpp::Rcout << "The number of cones must be larger than 1!" << std::endl;
             CGAL_assertion(false);
         }
 
@@ -147,8 +148,8 @@ public:
                                        DirectionOutputIterator result)  {
 
         if (cone_number<2) {
-            std::cout << "The number of cones must be larger than 1!" << std::endl;
-            std::exit(1);
+            Rcpp::Rcout << "The number of cones must be larger than 1!" << std::endl;
+            Rcpp::stop("Error");
         }
 
         // Since CGAL::root_of() gives the k-th smallest root,

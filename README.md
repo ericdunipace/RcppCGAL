@@ -46,6 +46,7 @@ We provide an example of how to perform Hilbert sorting using an R matrix:
 // [[Rcpp::plugins(cpp14)]]  
 
 #include <RcppEigen.h>
+#include <CGAL/basic.h>
 #include <CGAL/Cartesian_d.h>
 #include <CGAL/spatial_sort.h>
 #include <CGAL/Spatial_sort_traits_adapter_d.h>

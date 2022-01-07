@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_3_SIZING_FIELD_WITH_AABB_TREE_H
 #define CGAL_MESH_3_SIZING_FIELD_WITH_AABB_TREE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Profile_counter.h>
@@ -173,7 +174,7 @@ struct Sizing_field_with_aabb_tree
     CGAL_PROFILER("Sizing field");
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
     if(dim <= 1) {
-      std::cerr << "Sizing("  << p << ", dim=" << dim
+      Rcpp::Rcerr << "Sizing("  << p << ", dim=" << dim
                 << ", index=#" << CGAL::IO::oformat(id) << "): ";
     }
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
@@ -181,7 +182,7 @@ struct Sizing_field_with_aabb_tree
     if(dim == 0) {
       if(dt.dimension() < 1) {
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-        std::cerr << result << "(dt.dimension() < 1)\n";
+        Rcpp::Rcerr << result << "(dt.dimension() < 1)\n";
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
         return result;
       }
@@ -191,39 +192,39 @@ struct Sizing_field_with_aabb_tree
       int li, lj;
       const typename Dt::Cell_handle ch = dt.locate(p, lt, li, lj);
       if(lt == Dt::VERTEX) {
-//         std::cerr << "lt == Dt::VERTEX\n";
+//         Rcpp::Rcerr << "lt == Dt::VERTEX\n";
         const typename Dt::Vertex_handle vh = ch->vertex(li);
         std::vector<typename Dt::Vertex_handle> vs;
         vs.reserve(32);
         dt.finite_adjacent_vertices(vh, std::back_inserter(vs));
         CGAL_assertion(!vs.empty());
         nearest = dt.point(vs[0]);
-//         std::cerr << "sq_dist = " << CGAL::squared_distance(p, nearest)
+//         Rcpp::Rcerr << "sq_dist = " << CGAL::squared_distance(p, nearest)
 //                   << std::endl;
         typename Kernel_::Compare_distance_3 compare_dist;
         for (typename std::vector<typename Dt::Vertex_handle>::const_iterator
                it = vs.begin(); it != vs.end(); ++it)
         {
-//           std::cerr << "sq_dist = " << CGAL::squared_distance(p, dt.point(*it))
+//           Rcpp::Rcerr << "sq_dist = " << CGAL::squared_distance(p, dt.point(*it))
 //                   << std::endl;
           if(compare_dist(p, dt.point(*it), nearest) == CGAL::SMALLER) {
-//             std::cerr << "  nearest!\n";
+//             Rcpp::Rcerr << "  nearest!\n";
             nearest = dt.point(*it);
           }
         }
       } else {
-//         std::cerr << "lt=" << lt << std::endl;
+//         Rcpp::Rcerr << "lt=" << lt << std::endl;
         const typename Dt::Vertex_handle vh = dt.nearest_vertex(p, ch);
         nearest = dt.point(vh);
       }
       const FT dist = CGAL_NTS sqrt(CGAL::squared_distance( nearest, p));
-      // std::cerr << (std::min)(dist / FT(1.5), d_) << "\n";
+      // Rcpp::Rcerr << (std::min)(dist / FT(1.5), d_) << "\n";
       result = (std::min)(dist / FT(2), result);
 
       // now search in the AABB tree
       typename Corners_indices::const_iterator ids_it = corners_indices.find(p);
       if(ids_it == corners_indices.end()) {
-        std::cerr << "ERROR at " << __FILE__ << " line " << __LINE__ << "\n";
+        Rcpp::Rcerr << "ERROR at " << __FILE__ << " line " << __LINE__ << "\n";
       }
       else if(!aabb_tree.empty()) {
         const Patches_ids& ids = corners_incident_patches[ids_it->second];
@@ -266,20 +267,20 @@ struct Sizing_field_with_aabb_tree
               s << CGAL::IO::oformat(i) << " ";
             }
             s << "}\n";
-            std::cerr << s.str();
-            std::cerr << result << " (result)\n";
+            Rcpp::Rcerr << s.str();
+            Rcpp::Rcerr << result << " (result)\n";
           }
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
         } else {
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-          std::cerr << result << " (projection not found)\n";
+          Rcpp::Rcerr << result << " (projection not found)\n";
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
         }
       } // end if(corners.find(p) != corners.end()) and !aabb_tree.empty()
     } // end if(dim == 0)
     else if(dim != 1) {
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-      std::cerr << result << "\n";
+      Rcpp::Rcerr << result << "\n";
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
       return result;
     }
@@ -303,7 +304,7 @@ struct Sizing_field_with_aabb_tree
 
         if(!projection_traits.found()) {
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-          std::cerr << result << " (projection not found)\n";
+          Rcpp::Rcerr << result << " (projection not found)\n";
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
           return result;
         }
@@ -333,8 +334,8 @@ struct Sizing_field_with_aabb_tree
             s << CGAL::IO::oformat(i) << " ";
           }
           s << "}\n";
-          std::cerr << s.str();
-          std::cerr << result << " (result)\n";
+          Rcpp::Rcerr << s.str();
+          Rcpp::Rcerr << result << " (result)\n";
         }
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
 #ifndef CGAL_NO_ASSERTIONS
@@ -367,7 +368,7 @@ struct Sizing_field_with_aabb_tree
             s << CGAL::IO::oformat(i) << " ";
           }
           s << "}\n";
-          std::cerr << "ERROR at " << __FILE__ << " line " << __LINE__ << " :\n"
+          Rcpp::Rcerr << "ERROR at " << __FILE__ << " line " << __LINE__ << " :\n"
                     << s.str() << std::endl;
         }
 #endif // PROTECTION_DEBUG
@@ -398,10 +399,10 @@ struct Sizing_field_with_aabb_tree
                                                            std::back_inserter(prims));
 
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-      std::cerr << std::endl;
-      std::cerr << "p = " << p << std::endl;
-      std::cerr << "curr_ortho_plane = " << curr_ortho_plane << std::endl;
-      std::cerr << "PRIMITIVES FOUND : " << prims.size() << std::endl;
+      Rcpp::Rcerr << std::endl;
+      Rcpp::Rcerr << "p = " << p << std::endl;
+      Rcpp::Rcerr << "curr_ortho_plane = " << curr_ortho_plane << std::endl;
+      Rcpp::Rcerr << "PRIMITIVES FOUND : " << prims.size() << std::endl;
 #endif
 
       Point_3 closest_intersection;
@@ -424,15 +425,15 @@ struct Sizing_field_with_aabb_tree
             FT gdist = CGAL::abs(domain.signed_geodesic_distance(p, *pp, curve_id));
 
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-            std::cerr << "Intersection point : Point_3(" << *pp << ") ";
-            std::cerr << "\n  new_sqd = " << new_sqd ;
-            std::cerr << "\n  gdist = " << gdist << "\n";
+            Rcpp::Rcerr << "Intersection point : Point_3(" << *pp << ") ";
+            Rcpp::Rcerr << "\n  new_sqd = " << new_sqd ;
+            Rcpp::Rcerr << "\n  gdist = " << gdist << "\n";
 #endif
             if (new_sqd * 1e10 < CGAL::squared_distance(curr_segment.source(),
                                                         curr_segment.target()))
             {
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-              std::cerr << "  too close, compared to possible rounding errors, "
+              Rcpp::Rcerr << "  too close, compared to possible rounding errors, "
                         << "SKIPPED\n";
 #endif
               continue;
@@ -466,17 +467,17 @@ struct Sizing_field_with_aabb_tree
         }
       }
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-      std::cout << " curve_id = " << curve_id
+      Rcpp::Rcout << " curve_id = " << curve_id
                 << " proj_cid = " << closest_primitive.id().first->first
                 << " (" << get(get_curve_index, closest_primitive.id()) << ")"
                 << std::endl;
-      std::cerr << " --- domain.curves_aabb_tree().traversal \n";
+      Rcpp::Rcerr << " --- domain.curves_aabb_tree().traversal \n";
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
       if (sqd_intersection > 0)
       {
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-        std::cerr << "FOUND!\n";
-        std::cerr << "  closest_point: " << closest_intersection << "\n"
+        Rcpp::Rcerr << "FOUND!\n";
+        Rcpp::Rcerr << "  closest_point: " << closest_intersection << "\n"
                   << "  distance = " << CGAL_NTS sqrt(sqd_intersection) << std::endl;
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
         double new_result =
@@ -485,8 +486,8 @@ struct Sizing_field_with_aabb_tree
                      d_);
 
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-        std::cerr << "result     = " << result << "\n";
-        std::cerr << "new_result = " << new_result << "\n";
+        Rcpp::Rcerr << "result     = " << result << "\n";
+        Rcpp::Rcerr << "new_result = " << new_result << "\n";
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
         if(result > new_result) {
           result = new_result;
@@ -503,14 +504,14 @@ struct Sizing_field_with_aabb_tree
             s << i << " ";
           }
           s << "}\n";
-          std::cerr << s.str();
-          std::cerr << result << " (result)\n";
+          Rcpp::Rcerr << s.str();
+          Rcpp::Rcerr << result << " (result)\n";
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
         }
       }
     } // end dim == 1
 #ifdef CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
-    std::cerr << result << std::endl;
+    Rcpp::Rcerr << result << std::endl;
 #endif // CGAL_MESH_3_PROTECTION_HIGH_VERBOSITY
     return result;
   }

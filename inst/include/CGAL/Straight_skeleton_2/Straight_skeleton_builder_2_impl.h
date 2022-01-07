@@ -11,6 +11,7 @@
 #ifndef CGAL_STRAIGHT_SKELETON_BUILDER_2_IMPL_H
 #define CGAL_STRAIGHT_SKELETON_BUILDER_2_IMPL_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Straight_skeleton_2.h>
 
 #include <CGAL/number_type_config.h>
@@ -301,7 +302,7 @@ void Straight_skeleton_builder_2<Gt,Ss,V>::CollectSplitEvents( Vertex_handle aNo
   }
 
 #ifdef CGAL_STRAIGHT_SKELETON_ENABLE_TRACE
-  std::cout << "  local queue size --> " << GetVertexData(aNode).mSplitEvents.size() << std::endl;
+  Rcpp::Rcout << "  local queue size --> " << GetVertexData(aNode).mSplitEvents.size() << std::endl;
 #endif
 }
 
@@ -1546,16 +1547,16 @@ void Straight_skeleton_builder_2<Gt,Ss,V>::Propagate()
     if ( !mPQ.empty() )
     {
 #ifdef CGAL_SLS_PRINT_QUEUE_BEFORE_EACH_POP
-      std::cout << "MAIN QUEUE -------------------------------------------------- " << std::endl;
-      std::cout << "Queue size: " << mPQ.size() << std::endl;
+      Rcpp::Rcout << "MAIN QUEUE -------------------------------------------------- " << std::endl;
+      Rcpp::Rcout << "Queue size: " << mPQ.size() << std::endl;
       auto mpq = mPQ;
       while(!mpq.empty())
       {
         EventPtr event = mpq.top();
         mpq.pop();
-        std::cout << *event << std::endl;
+        Rcpp::Rcout << *event << std::endl;
       }
-      std::cout << "END MAIN QUEUE --------------------------------------------- " << std::endl;
+      Rcpp::Rcout << "END MAIN QUEUE --------------------------------------------- " << std::endl;
 #endif
 
       EventPtr lEvent = PopEventFromPQ();

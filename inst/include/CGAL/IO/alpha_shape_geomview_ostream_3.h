@@ -13,6 +13,7 @@
 #ifndef CGAL_IO_ALPHA_SHAPE_GEOMVIEW_OSTREAM_3_H
 #define CGAL_IO_ALPHA_SHAPE_GEOMVIEW_OSTREAM_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Alpha_shapes_3.h>
 
 #include <CGAL/IO/Geomview_stream.h>
@@ -142,7 +143,7 @@ show_alpha_shape_faces(Geomview_stream &gv) const
      << " {appearance {}{ OFF BINARY\n"
      << number_of_points << number_of_facets << 0;
 
-  std::cout << number_of_points << " " << number_of_facets << std::endl;
+  Rcpp::Rcout << number_of_points << " " << number_of_facets << std::endl;
 
   // Vertices
   typename PMapIterVector::iterator Pit, Pbegin = PIV.begin(), Pend = PIV.end();

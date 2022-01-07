@@ -12,6 +12,7 @@
 #ifndef CGAL_HILBERT_SORT_MIDDLE_d_H
 #define CGAL_HILBERT_SORT_MIDDLE_d_H
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <functional>
 #include <cstddef>
@@ -117,7 +118,7 @@ public:
 
 
      for(int i=1; i<two_to_dim-1; i +=2){
-       //std::cout<<i<<";"<<start[0]<<start[1]<<start[2]<<start[3]<<"/"<<dir[i+1]<<std::endl;
+       //Rcpp::Rcout<<i<<";"<<start[0]<<start[1]<<start[2]<<start[3]<<"/"<<dir[i+1]<<std::endl;
        if (places[i]!=begin || places[i+1]!=end)
          sort( places[i  ], places[i+1], start, dir[i+1],cmin,cmax);
        cmax[ dir[i+1] ] =  (cmin[ dir[i+1]]==mini[ dir[i+1]])

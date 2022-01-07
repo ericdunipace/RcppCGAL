@@ -14,6 +14,7 @@
 #ifndef CGAL_APOLLONIUS_GRAPH_2_FINITE_EDGE_TEST8_C2_H
 #define CGAL_APOLLONIUS_GRAPH_2_FINITE_EDGE_TEST8_C2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Apollonius_graph_2.h>
 
 
@@ -180,8 +181,8 @@ public:
     if ( os == ON_POSITIVE_SIDE ) {
       Orientation o123_1 = orientation(p1, p2, p3, p1, q);
       Orientation o142_1 = orientation(p1, p4, p2, p1, q);
-      //      std::cerr << "o123_1: " << o123_1 << std::endl;
-      //      std::cerr << "o142_1: " << o142_1 << std::endl;
+      //      Rcpp::Rcerr << "o123_1: " << o123_1 << std::endl;
+      //      Rcpp::Rcerr << "o142_1: " << o142_1 << std::endl;
 
       if ( b ) {
         return !(o123_1 == NEGATIVE && o142_1 == POSITIVE);
@@ -191,8 +192,8 @@ public:
 
     Orientation o123_2 = orientation(p1, p2, p3, p2, q);
     Orientation o142_2 = orientation(p1, p4, p2, p2, q);
-    //    std::cerr << "o123_2: " << o123_2 << std::endl;
-    //    std::cerr << "o142_2: " << o142_2 << std::endl;
+    //    Rcpp::Rcerr << "o123_2: " << o123_2 << std::endl;
+    //    Rcpp::Rcerr << "o142_2: " << o142_2 << std::endl;
 
     if ( b ) {
       return !(o123_2 == POSITIVE && o142_2 == NEGATIVE);
@@ -690,12 +691,12 @@ public:
     bool t_old = Old_Test()(p1, p2, q, b);
 
     if ( t != t_old ) {
-      std::cerr << std::endl;
-      std::cerr << "b: " << b << "; t: " << t
+      Rcpp::Rcerr << std::endl;
+      Rcpp::Rcerr << "b: " << b << "; t: " << t
                 << "; t_old: " << t_old << std::endl;
-      std::cerr << "p1: " << p1 << std::endl;
-      std::cerr << "p2: " << p2 << std::endl;
-      std::cerr << "q: " << q << std::endl;
+      Rcpp::Rcerr << "p1: " << p1 << std::endl;
+      Rcpp::Rcerr << "p2: " << p2 << std::endl;
+      Rcpp::Rcerr << "q: " << q << std::endl;
     }
 
     CGAL_assertion( t == t_old );
@@ -726,14 +727,14 @@ public:
 
       Oriented_side os = side_of_bisector(p1, p2, q.point());
 
-      std::cerr << "b: " << b << std::endl;
-      std::cerr << "t: " << t << "; t_old: " << t_old << std::endl;
-      std::cerr << "os: " << os << std::endl;
-      std::cerr << "p1: " << p1 << std::endl;
-      std::cerr << "p2: " << p2 << std::endl;
-      std::cerr << "p3: " << p3 << std::endl;
-      std::cerr << "p4: " << p4 << std::endl;
-      std::cerr << "q: " << q << std::endl;
+      Rcpp::Rcerr << "b: " << b << std::endl;
+      Rcpp::Rcerr << "t: " << t << "; t_old: " << t_old << std::endl;
+      Rcpp::Rcerr << "os: " << os << std::endl;
+      Rcpp::Rcerr << "p1: " << p1 << std::endl;
+      Rcpp::Rcerr << "p2: " << p2 << std::endl;
+      Rcpp::Rcerr << "p3: " << p3 << std::endl;
+      Rcpp::Rcerr << "p4: " << p4 << std::endl;
+      Rcpp::Rcerr << "q: " << q << std::endl;
     }
 
     CGAL_assertion( t == t_old );

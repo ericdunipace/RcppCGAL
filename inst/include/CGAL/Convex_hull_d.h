@@ -21,6 +21,7 @@
 #ifndef CGAL_CONVEX_HULL_D_H
 #define CGAL_CONVEX_HULL_D_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Convex_hull_d.h>
 
 #define CGAL_DEPRECATED_HEADER "<CGAL/Convex_hull_d.h>"
@@ -608,16 +609,16 @@ public:
   /*{\Mop gives information about the size of the current hull and the
   number of visibility tests performed.}*/
   {
-    std::cout << "Convex_hull_d ("
+    Rcpp::Rcout << "Convex_hull_d ("
               << current_dimension() << "/" << dimension()
               << ") - statistic" << std::endl;
-    std::cout<<" # points = " << all_pnts_.size() << std::endl;
-    std::cout<<" # vertices = " << num_of_vertices << std::endl;
-    std::cout<<" # unbounded simplices = " << num_of_unbounded_simplices
+    Rcpp::Rcout<<" # points = " << all_pnts_.size() << std::endl;
+    Rcpp::Rcout<<" # vertices = " << num_of_vertices << std::endl;
+    Rcpp::Rcout<<" # unbounded simplices = " << num_of_unbounded_simplices
       << std::endl;
-    std::cout<<" # bounded simplices = " << num_of_bounded_simplices
+    Rcpp::Rcout<<" # bounded simplices = " << num_of_bounded_simplices
       << std::endl;
-    std::cout<<" # visibility tests = " << num_of_visibility_tests
+    Rcpp::Rcout<<" # visibility tests = " << num_of_visibility_tests
       << std::endl;
   }
 

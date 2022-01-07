@@ -12,6 +12,7 @@
 #ifndef CGAL_ARR_TRIANGULATION_POINT_LOCATION_FUNCTIONS_H
 #define CGAL_ARR_TRIANGULATION_POINT_LOCATION_FUNCTIONS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -23,7 +24,7 @@
 //#define CGAL_TRG_DEBUG
 
 #ifdef CGAL_TRG_DEBUG
-        #define CGAL_TRG_PRINT_DEBUG(expr)   std::cout << expr << std::endl
+        #define CGAL_TRG_PRINT_DEBUG(expr)   Rcpp::Rcout << expr << std::endl
 #else
         #define CGAL_TRG_PRINT_DEBUG(expr)
 #endif
@@ -179,10 +180,10 @@ Arr_triangulation_point_location<Arrangement_2>::locate (const Point_2& p) const
 
   if (face_found == this->arrangement()->unbounded_face()) {
     if (! found_unbounded) {
-      std::cerr<< "NOT GOOD - face not found" << std::endl;
+      Rcpp::Rcerr<< "NOT GOOD - face not found" << std::endl;
       //debug - print some more info
-      std::cout << "p = "<< p <<std::endl;
-      std::cout << "v0 = "<< v0->point()
+      Rcpp::Rcout << "p = "<< p <<std::endl;
+      Rcpp::Rcout << "v0 = "<< v0->point()
         <<", v1 = "<< v1->point()
         <<", v2 = "<<v2->point() <<std::endl;
     }
@@ -247,7 +248,7 @@ void Arr_triangulation_point_location<Arrangement_2>::build_triangulation()
 
     //check if source point is equal to destination point
     if (m_traits->equal_2_object()(pm_p1, pm_p2)) {
-      std::cerr << "WARNING: source point is equal to destination point!!! "
+      Rcpp::Rcerr << "WARNING: source point is equal to destination point!!! "
                 << pm_p1 << std::endl;
       CDT_Vertex_handle cdt_vh1 = cdt.insert(cdt_p1);
       cdt_vh1->info() = pm_vh1;

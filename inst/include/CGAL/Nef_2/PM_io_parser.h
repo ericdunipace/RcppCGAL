@@ -13,6 +13,7 @@
 #ifndef CGAL_PM_IO_PARSER_H
 #define CGAL_PM_IO_PARSER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 
@@ -103,7 +104,7 @@ public:
 PM_io_parser(std::istream& is, Plane_map& H)
 /*{\Mcreate creates an instance |\Mvar| of type |\Mname|
    to input |H| from |is|.}*/
-    : Base(H), in(is), out(std::cout), verbose(0), vn(0), en(0), fn(0)
+    : Base(H), in(is), out(Rcpp::Rcout), verbose(0), vn(0), en(0), fn(0)
         { this->clear(); }
 
 
@@ -148,7 +149,7 @@ std::string index(Vertex_handle v) const { return VI(v,verbose); }
 std::string index(Halfedge_handle e) const { return EI(e,verbose); }
 std::string index(Face_handle f) const { return FI(f,verbose); }
 
-static void dump(const PMDEC& D, std::ostream& os = std::cerr);
+static void dump(const PMDEC& D, std::ostream& os = Rcpp::Rcerr);
 /*{\Mstatic prints the plane map decorated by |D| to |os|.}*/
 
 }; // PM_io_parser<PMDEC>
@@ -239,7 +240,7 @@ bool PM_io_parser<PMDEC>::read_hedge(Halfedge_handle e)
        v >= 0 && (std::size_t) v < vn && f >= 0 && (std::size_t) f < fn ))
   {
     in.setstate(std::ios_base::badbit);
-    std::cerr<<"wrong index in read_hedge"<<std::endl;
+    Rcpp::Rcerr<<"wrong index in read_hedge"<<std::endl;
     return false;
   }
 

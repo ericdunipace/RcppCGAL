@@ -19,6 +19,7 @@
 #ifndef CGAL_POLYHEDRAL_MESH_DOMAIN_3_H
 #define CGAL_POLYHEDRAL_MESH_DOMAIN_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -219,7 +220,7 @@ public:
   {
     this->add_primitives(p);
     if(! is_triangle_mesh(p)) {
-      std::cerr << "Your input polyhedron must be triangulated!\n";
+      Rcpp::Rcerr << "Your input polyhedron must be triangulated!\n";
       CGAL_error_msg("Your input polyhedron must be triangulated!");
     }
     this->build();
@@ -703,7 +704,7 @@ Construct_initial_points::operator()(OutputIterator pts,
 
   int i = n;
 # ifdef CGAL_MESH_3_VERBOSE
-  std::cerr << "construct initial points:" << std::endl;
+  Rcpp::Rcerr << "construct initial points:" << std::endl;
 # endif
   // Point construction by ray shooting from the center of the enclosing bbox
   while ( i > 0 )
@@ -723,7 +724,7 @@ Construct_initial_points::operator()(OutputIterator pts,
       --i;
 
 #ifdef CGAL_MESH_3_VERBOSE
-      std::cerr << boost::format("\r             \r"
+      Rcpp::Rcerr << boost::format("\r             \r"
                                  "%1%/%2% initial point(s) found...")
         % (n - i)
         % n;
@@ -733,7 +734,7 @@ Construct_initial_points::operator()(OutputIterator pts,
   }
 
 #ifdef CGAL_MESH_3_VERBOSE
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
 #endif
   if(r_domain_.p_rng_ == 0) delete &rng;
   return pts;

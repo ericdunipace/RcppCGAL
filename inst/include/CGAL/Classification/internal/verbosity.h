@@ -12,6 +12,7 @@
 #ifndef CLASSIFICATION_INTERNAL_VERBOSITY_H
 #define CLASSIFICATION_INTERNAL_VERBOSITY_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 // General verbosity
@@ -23,7 +24,7 @@
 #endif
 
 #define CGAL_CLASSIFICATION_CERR \
-  if(CGAL_CLASSIFICATION_SILENT) {} else std::cerr
+  if(CGAL_CLASSIFICATION_SILENT) {} else Rcpp::Rcerr
 
 // Verbosity for training part
 
@@ -34,6 +35,6 @@
 #endif
 
 #define CGAL_CLASSTRAINING_CERR \
-  if(CGAL_CLASSTRAINING_SILENT) {} else std::cerr
+  if(CGAL_CLASSTRAINING_SILENT) {} else Rcpp::Rcerr
 
 #endif

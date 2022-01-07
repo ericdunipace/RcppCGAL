@@ -14,6 +14,7 @@
 #ifndef CGAL_TRIANGULATION_ON_SPHERE_2_H
 #define CGAL_TRIANGULATION_ON_SPHERE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_on_sphere_2.h>
 
 #include <CGAL/triangulation_assertions.h>
@@ -1101,43 +1102,43 @@ Triangulation_on_sphere_2<Gt, Tds>::
 show_all() const
 {
   //Triangulation_2::show_all();
-  std::cerr << "PRINTING COMPLETE TRIANGULATION:" << std::endl;
-  std::cerr << std::endl<< "====> " << this;
-  std::cerr << "dimension " << dimension() << std::endl;
-  std::cerr << "nb of vertices " << number_of_vertices() << std::endl;
+  Rcpp::Rcerr << "PRINTING COMPLETE TRIANGULATION:" << std::endl;
+  Rcpp::Rcerr << std::endl<< "====> " << this;
+  Rcpp::Rcerr << "dimension " << dimension() << std::endl;
+  Rcpp::Rcerr << "nb of vertices " << number_of_vertices() << std::endl;
 
   if(dimension() < 1)
     return;
 
   if(dimension() == 1)
   {
-    std::cerr << " all edges dim 1 " << std::endl;
+    Rcpp::Rcerr << " all edges dim 1 " << std::endl;
     for(All_edges_iterator aeit=all_edges_begin(); aeit!=all_edges_end(); ++aeit)
     {
       show_face(aeit->first);
-      std::cerr << "   ------------   " << std::endl;
+      Rcpp::Rcerr << "   ------------   " << std::endl;
     }
 
     return;
   }
 
-  std::cerr << " faces " << std::endl;
+  Rcpp::Rcerr << " faces " << std::endl;
   for(All_faces_iterator fi = all_faces_begin(); fi !=all_faces_end(); ++fi)
   {
     show_face(fi);
-    std::cerr << "   ------------   " << std::endl;
+    Rcpp::Rcerr << "   ------------   " << std::endl;
   }
 
   if(number_of_vertices() > 1)
   {
-    std::cerr << "print triangulation vertices:" << std::endl;
+    Rcpp::Rcerr << "print triangulation vertices:" << std::endl;
     for(Vertices_iterator vi=vertices_begin(); vi!=vertices_end(); ++vi)
     {
       show_vertex(vi);
-      std::cerr << "  / associated face: " << (void*)(&(*(vi->face()))) << std::endl;;
+      Rcpp::Rcerr << "  / associated face: " << (void*)(&(*(vi->face()))) << std::endl;;
     }
 
-    std::cerr << std::endl;
+    Rcpp::Rcerr << std::endl;
   }
   return;
 }
@@ -1147,7 +1148,7 @@ void
 Triangulation_on_sphere_2<Gt, Tds>::
 show_vertex(Vertex_handle vh) const
 {
-  std::cerr << point(vh) << "\t";
+  Rcpp::Rcerr << point(vh) << "\t";
   return;
 }
 
@@ -1156,55 +1157,55 @@ void
 Triangulation_on_sphere_2<Gt, Tds>::
 show_face(Face_handle fh) const
 {
-  std::cerr << "face : " << (void*)&(*fh) << " => " << std::endl;
+  Rcpp::Rcerr << "face : " << (void*)&(*fh) << " => " << std::endl;
   if(is_ghost(fh))
-    std::cerr << "ghost " << std::endl;
+    Rcpp::Rcerr << "ghost " << std::endl;
 
   int i = fh->dimension();
   switch(i)
   {
     case 0:
-      std::cerr << "point :" ; show_vertex(fh->vertex(0));
-      std::cerr << " / neighbor " << &(*(fh->neighbor(0)));
-      std::cerr << "[" ; show_vertex(fh->neighbor(0)->vertex(0));
-      std::cerr << "]"  << std::endl;
+      Rcpp::Rcerr << "point :" ; show_vertex(fh->vertex(0));
+      Rcpp::Rcerr << " / neighbor " << &(*(fh->neighbor(0)));
+      Rcpp::Rcerr << "[" ; show_vertex(fh->neighbor(0)->vertex(0));
+      Rcpp::Rcerr << "]"  << std::endl;
       break;
 
     case 1:
-      std::cerr << "point :" ; show_vertex(fh->vertex(0));
-      std::cerr << " / neighbor " << &(*(fh->neighbor(0)));
-      std::cerr << "[" ; show_vertex(fh->neighbor(0)->vertex(0));
-      std::cerr << "/" ; show_vertex(fh->neighbor(0)->vertex(1));
-      std::cerr << "]" << std::endl;
+      Rcpp::Rcerr << "point :" ; show_vertex(fh->vertex(0));
+      Rcpp::Rcerr << " / neighbor " << &(*(fh->neighbor(0)));
+      Rcpp::Rcerr << "[" ; show_vertex(fh->neighbor(0)->vertex(0));
+      Rcpp::Rcerr << "/" ; show_vertex(fh->neighbor(0)->vertex(1));
+      Rcpp::Rcerr << "]" << std::endl;
 
-      std::cerr << "point :" ; show_vertex(fh->vertex(1));
-      std::cerr << " / neighbor " << &(*(fh->neighbor(1)));
-      std::cerr << "[" ; show_vertex(fh->neighbor(1)->vertex(0));
-      std::cerr << "/" ; show_vertex(fh->neighbor(1)->vertex(1));
-      std::cerr << "]" << std::endl;
+      Rcpp::Rcerr << "point :" ; show_vertex(fh->vertex(1));
+      Rcpp::Rcerr << " / neighbor " << &(*(fh->neighbor(1)));
+      Rcpp::Rcerr << "[" ; show_vertex(fh->neighbor(1)->vertex(0));
+      Rcpp::Rcerr << "/" ; show_vertex(fh->neighbor(1)->vertex(1));
+      Rcpp::Rcerr << "]" << std::endl;
       break;
 
     case 2:
-      std::cerr << "point :" ; show_vertex(fh->vertex(0));
-      std::cerr << " / neighbor " << &(*(fh->neighbor(0)));
-      std::cerr << "[" ; show_vertex(fh->neighbor(0)->vertex(0));
-      std::cerr << "/" ; show_vertex(fh->neighbor(0)->vertex(1));
-      std::cerr << "/" ; show_vertex(fh->neighbor(0)->vertex(2));
-      std::cerr << "]" << std::endl;
+      Rcpp::Rcerr << "point :" ; show_vertex(fh->vertex(0));
+      Rcpp::Rcerr << " / neighbor " << &(*(fh->neighbor(0)));
+      Rcpp::Rcerr << "[" ; show_vertex(fh->neighbor(0)->vertex(0));
+      Rcpp::Rcerr << "/" ; show_vertex(fh->neighbor(0)->vertex(1));
+      Rcpp::Rcerr << "/" ; show_vertex(fh->neighbor(0)->vertex(2));
+      Rcpp::Rcerr << "]" << std::endl;
 
-      std::cerr << "point :" ; show_vertex(fh->vertex(1));
-      std::cerr << " / neighbor " << &(*(fh->neighbor(1)));
-      std::cerr << "[" ; show_vertex(fh->neighbor(1)->vertex(0));
-      std::cerr << "/" ; show_vertex(fh->neighbor(1)->vertex(1));
-      std::cerr << "/" ; show_vertex(fh->neighbor(1)->vertex(2));
-      std::cerr << "]" << std::endl;
+      Rcpp::Rcerr << "point :" ; show_vertex(fh->vertex(1));
+      Rcpp::Rcerr << " / neighbor " << &(*(fh->neighbor(1)));
+      Rcpp::Rcerr << "[" ; show_vertex(fh->neighbor(1)->vertex(0));
+      Rcpp::Rcerr << "/" ; show_vertex(fh->neighbor(1)->vertex(1));
+      Rcpp::Rcerr << "/" ; show_vertex(fh->neighbor(1)->vertex(2));
+      Rcpp::Rcerr << "]" << std::endl;
 
-      std::cerr << "point :" ; show_vertex(fh->vertex(2));
-      std::cerr << " / neighbor " << &(*(fh->neighbor(2)));
-      std::cerr << "[" ; show_vertex(fh->neighbor(2)->vertex(0));
-      std::cerr << "/" ; show_vertex(fh->neighbor(2)->vertex(1));
-      std::cerr << "/" ; show_vertex(fh->neighbor(2)->vertex(2));
-      std::cerr << "]" << std::endl;
+      Rcpp::Rcerr << "point :" ; show_vertex(fh->vertex(2));
+      Rcpp::Rcerr << " / neighbor " << &(*(fh->neighbor(2)));
+      Rcpp::Rcerr << "[" ; show_vertex(fh->neighbor(2)->vertex(0));
+      Rcpp::Rcerr << "/" ; show_vertex(fh->neighbor(2)->vertex(1));
+      Rcpp::Rcerr << "/" ; show_vertex(fh->neighbor(2)->vertex(2));
+      Rcpp::Rcerr << "]" << std::endl;
       break;
   }
 }
@@ -1249,10 +1250,10 @@ is_valid_vertex(Vertex_handle vh, bool verbose, int /*level*/) const
   {
     if(verbose)
     {
-      std::cerr << " from is_valid_vertex " << std::endl;
-      std::cerr << "normal vertex " << &(*vh) << std::endl;
+      Rcpp::Rcerr << " from is_valid_vertex " << std::endl;
+      Rcpp::Rcerr << "normal vertex " << &(*vh) << std::endl;
       show_vertex(vh);
-      std::cerr << "\nvh_>face " << &*(vh->face()) << " " << std::endl;
+      Rcpp::Rcerr << "\nvh_>face " << &*(vh->face()) << " " << std::endl;
 
       show_face(vh->face());
     }

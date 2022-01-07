@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_2_H
 #define CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_2_H
 
+#include <Rcpp.h>
 #include <list>
 #include <CGAL/Mesher_level.h>
 
@@ -55,7 +56,7 @@ struct Triangulation_mesher_level_traits_2 :
   Vertex_handle insert_impl(const Point& p, Zone& zone)
   {
 #ifdef CGAL_MESH_2_DEBUG_INSERTIONS
-    std::cerr << "insert(" << p << "): "
+    Rcpp::Rcerr << "insert(" << p << "): "
               << zone.boundary_edges.size() << " edges." << std::endl;
 #endif
     if( zone.locate_type == Tr::VERTEX )

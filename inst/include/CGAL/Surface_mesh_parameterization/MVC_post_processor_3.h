@@ -12,6 +12,7 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_MVC_POST_PROCESSOR_3_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_MVC_POST_PROCESSOR_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/Surface_mesh_parameterization/internal/Bool_property_map.h>
@@ -726,7 +727,7 @@ public:
 
     // Not sure how to handle non-simple yet @fixme
     if(!is_param_border_simple) {
-      std::cerr << "Border is not simple!" << std::endl;
+      Rcpp::Rcerr << "Border is not simple!" << std::endl;
       return ERROR_NON_CONVEX_BORDER;
     }
 

@@ -248,7 +248,7 @@ int Polynomial<NT>::getbasicterm(std::string & s, Polynomial<NT> & P){
     P = getpoly(t);
   }else{
 #ifdef CGAL_CORE_TRACE
-    std::cout <<"ERROR IN PARSING BASIC TERM" << std::endl;
+    Rcpp::Rcout <<"ERROR IN PARSING BASIC TERM" << std::endl;
 #endif
   }
   //i+1 points to the beginning of next syntactic object in the string.
@@ -346,7 +346,7 @@ Polynomial<NT> Polynomial<NT>::getpoly(std::string & s){
                 P -= R;
       else{
 #ifdef CGAL_CORE_TRACE
-        std::cout << "ERROR IN PARSING POLY! " << std::endl;
+        Rcpp::Rcout << "ERROR IN PARSING POLY! " << std::endl;
 #endif
       }
     }
@@ -613,28 +613,28 @@ Polynomial<NT> Polynomial<NT>::reduceStep (
 template <class NT>
 Polynomial<NT> Polynomial<NT>::testReduceStep(const Polynomial<NT>& A,
         const Polynomial<NT>& B) {
-std::cout << "+++++++++++++++++++++TEST REDUCE STEP+++++++++++++++++++++\n";
+Rcpp::Rcout << "+++++++++++++++++++++TEST REDUCE STEP+++++++++++++++++++++\n";
   Polynomial<NT> cA(A);
   Polynomial<NT> AA(A);
   Polynomial<NT> quo;
   quo = AA.reduceStep(B);                // quo = c + X*m  (m is monomial, c const)
                                 // where c*A = B*m + (*newthis)
-std::cout << "A = " << A << std::endl;
-std::cout << "B = " << B << std::endl;
+Rcpp::Rcout << "A = " << A << std::endl;
+Rcpp::Rcout << "B = " << B << std::endl;
   cA.mulScalar(quo.coeff[0]);    // A -> c*A
   Polynomial<NT> m(quo);
   m.mulXpower(-1);            // m's value is now m
-std::cout << "c = " << quo.coeff[0] << std::endl;
-std::cout << "c + xm = " << quo << std::endl;
-std::cout << "c*A = " << cA << std::endl;
-std::cout << "AA = " << AA << std::endl;
-std::cout << "B*m = " << B*m << std::endl;
-std::cout << "B*m + AA = " << B*m + AA << std::endl;
+Rcpp::Rcout << "c = " << quo.coeff[0] << std::endl;
+Rcpp::Rcout << "c + xm = " << quo << std::endl;
+Rcpp::Rcout << "c*A = " << cA << std::endl;
+Rcpp::Rcout << "AA = " << AA << std::endl;
+Rcpp::Rcout << "B*m = " << B*m << std::endl;
+Rcpp::Rcout << "B*m + AA = " << B*m + AA << std::endl;
   if (cA == (B*m + AA))
-          std::cout << "CORRECT inside testReduceStep" << std::endl;
+          Rcpp::Rcout << "CORRECT inside testReduceStep" << std::endl;
   else
-          std::cout << "ERROR inside testReduceStep" << std::endl;
-std::cout << "+++++++++++++++++END TEST REDUCE STEP+++++++++++++++++++++\n";
+          Rcpp::Rcout << "ERROR inside testReduceStep" << std::endl;
+Rcpp::Rcout << "+++++++++++++++++END TEST REDUCE STEP+++++++++++++++++++++\n";
   return quo;
 }
 
@@ -1331,22 +1331,22 @@ void Polynomial<NT>::dump(std::ofstream & ofs,
 template <class NT>
 void Polynomial<NT>::dump(std::string msg, std::string com,
                 std::string com2) const {
-  filedump(std::cout, msg, com, com2);
+  filedump(Rcpp::Rcout, msg, com, com2);
 }
 
 // Dump of Maple Code for Polynomial
 template <class NT>
 void Polynomial<NT>::mapleDump() const {
   if (zeroP(*this)) {
-    std::cout << 0 << std::endl;
+    Rcpp::Rcout << 0 << std::endl;
     return;
   }
-  std::cout << coeff[0];
+  Rcpp::Rcout << coeff[0];
   for (int i = 1; i<= getTrueDegree(); ++i) {
-    std::cout << " + (" << coeff[i] << ")";
-    std::cout << "*x^" << i;
+    Rcpp::Rcout << " + (" << coeff[i] << ")";
+    Rcpp::Rcout << "*x^" << i;
   }
-  std::cout << std::endl;
+  Rcpp::Rcout << std::endl;
 }//mapleDump
 
 // ==================================================
@@ -1436,13 +1436,13 @@ template <class NT>
 bool testPoly() {
   int c[] = {1, 2, 3};
   Polynomial<NT> p(2, c);
-  std::cout << p;
+  Rcpp::Rcout << p;
 
   Polynomial<NT> zeroP;
-  std::cout << "zeroP  : " << zeroP << std::endl;
+  Rcpp::Rcout << "zeroP  : " << zeroP << std::endl;
 
   Polynomial<NT> P5(5);
-  std::cout << "Poly 5 : " << P5 << std::endl;
+  Rcpp::Rcout << "Poly 5 : " << P5 << std::endl;
 
   return 0;
 }

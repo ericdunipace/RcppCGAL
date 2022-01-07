@@ -13,6 +13,7 @@
 #ifndef CGAL_TRIANGULATE_POWER_DIAGRAM_3_H
 #define CGAL_TRIANGULATE_POWER_DIAGRAM_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 
@@ -128,11 +129,11 @@ private:
     triangulation_incr_builder.begin_triangulation(3);
 
     if (verbose)
-      std::cout << "Construct vertices" << std::endl;
+      Rcpp::Rcout << "Construct vertices" << std::endl;
     construct_vertices();
 
     if (verbose)
-      std::cout << "Construct cells" << std::endl;
+      Rcpp::Rcout << "Construct cells" << std::endl;
     construct_cells(); // mixed cells corresponding to regular vertices
 
     triangulation_incr_builder.end_triangulation();
@@ -334,10 +335,10 @@ construct_vertices()
   Rt_Simplex sVor;
   Tmc_Vertex_handle vh;
 
-  if (verbose) std::cout << "construct_anchors" << std::endl;
+  if (verbose) Rcpp::Rcout << "construct_anchors" << std::endl;
   construct_anchors();
 
-  if (verbose) std::cout << "4 ";
+  if (verbose) Rcpp::Rcout << "4 ";
   // anchor dimDel=0, dimVor=3
   for (cit=regular.finite_cells_begin();
        cit!=regular.finite_cells_end(); cit++) {
@@ -349,7 +350,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "3 ";
+  if (verbose) Rcpp::Rcout << "3 ";
   // anchor dimDel=2, dimVor=3 and dimDel=0, dimVor=2
   for (fit=regular.finite_facets_begin(); fit!=regular.finite_facets_end(); fit++) {
     // anchor dimDel=0, dimVor=2
@@ -361,7 +362,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "2 ";
+  if (verbose) Rcpp::Rcout << "2 ";
   // anchor dimDel=0, dimVor=1
   for (eit=regular.finite_edges_begin(); eit!=regular.finite_edges_end(); eit++) {
     sVor = get_anchor_vor(*eit);
@@ -372,7 +373,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) std::cout << "1 ";
+  if (verbose) Rcpp::Rcout << "1 ";
   // anchor dimDel=0, dimVor=0
   for (vit=regular.finite_vertices_begin(); vit!=regular.finite_vertices_end(); vit++) {
     sVor = get_anchor_vor(Rt_Simplex(vit));
@@ -507,7 +508,7 @@ add_cell(Tmc_Vertex_handle vh[], int orient, Rt_Simplex s)
   if (orient) {
     if (orientation(vh[0]->point(), vh[1]->point(),
                     vh[2]->point(), vh[3]->point()) != POSITIVE) {
-      std::cout << orientation(vh[0]->point(), vh[1]->point(),
+      Rcpp::Rcout << orientation(vh[0]->point(), vh[1]->point(),
                                vh[2]->point(), vh[3]->point())<< std::endl;
     }
     CGAL_assertion(orientation(vh[0]->point(), vh[1]->point(),
@@ -615,7 +616,7 @@ remove_small_edges()
       do_collapse(vh,vh_collapse_to);
     }
   }
-  std::cout << "Collapsed: " << nCollapsed << std::endl;
+  Rcpp::Rcout << "Collapsed: " << nCollapsed << std::endl;
 }
 
 template <class RegularTriangulation_3,

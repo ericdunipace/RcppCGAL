@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_2_REFINE_FACES_H
 #define CGAL_MESH_2_REFINE_FACES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 
@@ -107,7 +108,7 @@ public:
   {
     bad_faces.clear();
 #ifdef CGAL_MESH_2_DEBUG_BAD_FACES
-    std::cerr << "bad_faces.clear()\n";
+    Rcpp::Rcerr << "bad_faces.clear()\n";
 #endif // CGAL_MESH_2_DEBUG_BAD_FACES
 
     for(typename Tr::Finite_faces_iterator fit =
@@ -140,7 +141,7 @@ public:
                                  fh
                                  );
 #ifdef CGAL_MESH_2_DEBUG_CONFLICTS_ZONE
-    std::cerr << "get_conflicts_and_boundary(" << p << "):" << std::endl
+    Rcpp::Rcerr << "get_conflicts_and_boundary(" << p << "):" << std::endl
               << "faces: " << zone.faces.size() << std::endl
               << "edges: " << zone.boundary_edges.size() << std::endl;
 #endif // CGAL_MESH_2_DEBUG_CONFLICTS_ZONE
@@ -207,7 +208,7 @@ public:
   void after_insertion_impl(const Vertex_handle& v)
   {
 #ifdef CGAL_MESH_2_VERBOSE
-    std::cerr << "*";
+    Rcpp::Rcerr << "*";
 #endif
     typename Tr::Face_circulator fc =
       triangulation_ref_impl().incident_faces(v), fcbegin(fc);
@@ -256,7 +257,7 @@ public:
   {
     bad_faces.clear();
 #ifdef CGAL_MESH_2_DEBUG_BAD_FACES
-    std::cerr << "bad_faces.clear()\n";
+    Rcpp::Rcerr << "bad_faces.clear()\n";
 #endif // CGAL_MESH_2_DEBUG_BAD_FACES
     for(Fh_it pfit=begin; pfit!=end; ++pfit)
       push_in_bad_faces(*pfit, Quality());
@@ -272,7 +273,7 @@ void Refine_faces_base<Tr, Criteria, Previous>::
 push_in_bad_faces(Face_handle fh, const Quality& q)
 {
 #ifdef CGAL_MESH_2_DEBUG_BAD_FACES
-  std::cerr << "push_in_bad_faces("
+  Rcpp::Rcerr << "push_in_bad_faces("
             << fh->vertex(0)->point() << ","
             << fh->vertex(1)->point() << ","
             << fh->vertex(2)->point() << ")\n";
@@ -294,7 +295,7 @@ void Refine_faces_base<Tr, Criteria, Previous>::
 remove_bad_face(Face_handle fh)
 {
 #ifdef CGAL_MESH_2_DEBUG_BAD_FACES
-  std::cerr << "bad_faces.erase("
+  Rcpp::Rcerr << "bad_faces.erase("
             << fh->vertex(0)->point() << ","
             << fh->vertex(1)->point() << ","
             << fh->vertex(2)->point() << ")\n";
@@ -445,13 +446,13 @@ public:
                       (*fit)->vertex(1)->point(),
                       (*fit)->vertex(2)->point()) == COLLINEAR )
         {
-          std::cerr << "collinear("
+          Rcpp::Rcerr << "collinear("
                     << (*fit)->vertex(0)->point() << ", "
                     << (*fit)->vertex(1)->point() << ", "
                     << (*fit)->vertex(2)->point()<< ") == true"
                     << std::endl;
-          std::cerr << "Dump of bad_faces:" << std::endl;
-          this->bad_faces.dump_direct_func(std::cerr, Output_bad_face());
+          Rcpp::Rcerr << "Dump of bad_faces:" << std::endl;
+          this->bad_faces.dump_direct_func(Rcpp::Rcerr, Output_bad_face());
 
           return false;
         }

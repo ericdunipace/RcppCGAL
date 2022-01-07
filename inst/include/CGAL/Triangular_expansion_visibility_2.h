@@ -14,6 +14,7 @@
 #ifndef CGAL_TRIANGULAR_EXPANSION_VISIBILITY_2_H
 #define CGAL_TRIANGULAR_EXPANSION_VISIBILITY_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Visibility_2.h>
 
 
@@ -173,7 +174,7 @@ public:
 
 
   bool is_attached() const {
-    //std::cout << "is_attached" << std::endl;
+    //Rcpp::Rcout << "is_attached" << std::endl;
     return (p_arr != nullptr);
   }
 
@@ -184,11 +185,11 @@ public:
       observer.attach(const_cast<Arrangement_2&>(arr));
       init_cdt();
     }
-    //std::cout << "attach done" << std::endl;
+    //Rcpp::Rcout << "attach done" << std::endl;
   }
 
   void detach() {
-    //std::cout << "detach" << std::endl;
+    //Rcpp::Rcout << "detach" << std::endl;
     observer.detach();
     p_arr = nullptr;
     p_cdt.reset();
@@ -205,7 +206,7 @@ public:
                      const Face_const_handle face,
                      VARR& out_arr )
   const {
-    //std::cout << "query in face interior" << std::endl;
+    //Rcpp::Rcout << "query in face interior" << std::endl;
 
     if(observer.has_changed) {
         init_cdt();
@@ -222,7 +223,7 @@ public:
 
     raw_output.push_back(fh->vertex(1)->point());
     if(!p_cdt->is_constrained(get_edge(fh,0))){
-      //std::cout<< "edge 0 is not constrained" << std::endl;
+      //Rcpp::Rcout<< "edge 0 is not constrained" << std::endl;
       expand_edge(
           q,
           fh->vertex(2)->point(),
@@ -232,7 +233,7 @@ public:
 
     raw_output.push_back(fh->vertex(2)->point());
     if(!p_cdt->is_constrained(get_edge(fh,1))){
-      //std::cout << "edge 1 is not constrained" << std::endl;
+      //Rcpp::Rcout << "edge 1 is not constrained" << std::endl;
       expand_edge(
           q,
           fh->vertex(0)->point(),
@@ -242,7 +243,7 @@ public:
 
     raw_output.push_back(fh->vertex(0)->point());
     if(!p_cdt->is_constrained(get_edge(fh,2))){
-      //std::cout << "edge 2 is not constrained" << std::endl;
+      //Rcpp::Rcout << "edge 2 is not constrained" << std::endl;
       expand_edge(
           q,
           fh->vertex(1)->point(),
@@ -260,7 +261,7 @@ public:
                      const Halfedge_const_handle he,
                      VARR& out_arr)
   const {
-    //std::cout << "visibility_region he" << std::endl;
+    //Rcpp::Rcout << "visibility_region he" << std::endl;
 
     if(observer.has_changed) {
         init_cdt();
@@ -279,12 +280,12 @@ public:
 
 
     if(location == CDT::EDGE){
-      //std::cout << "query on edge" << std::endl;
+      //Rcpp::Rcout << "query on edge" << std::endl;
       // this is the easy part, there are only two possible faces
       // index indicates the edge = vertex on the other side of the edge
       // the next vertex in cw order should be the target of given edge
       if(fh->vertex(p_cdt->cw(index))->point() != he->target()->point()){
-        //std::cout << "need to swap face" << std::endl;
+        //Rcpp::Rcout << "need to swap face" << std::endl;
         // take face on the other side if this is not the case
         typename CDT::Face_handle nfh = fh->neighbor(index);
         index = nfh->index(fh);
@@ -321,7 +322,7 @@ public:
     }
 
     if(location == CDT::VERTEX){
-      //std::cout << "query on vertex" << std::endl;
+      //Rcpp::Rcout << "query on vertex" << std::endl;
 
       //bool query_point_on_vertex_is_not_working_yet = false;
       //CGAL_assertion(query_point_on_vertex_is_not_working_yet);
@@ -438,12 +439,12 @@ private:
     CGAL::Orientation orient = orientation(q,vh->point(),nvh->point());
 
 
-    //std::cout << "\n collect_needle" <<std::endl;
-    //std::cout << "q             "<< q << std::endl ;
-    //std::cout << "vh->point()  "<<  vh->point() << std::endl;
-    //std::cout << "lvh->point()  "<< lvh->point() << std::endl ;
-    //std::cout << "nvh->point()  "<< nvh->point() << std::endl ;
-    //std::cout << "rvh->point()  "<< rvh->point() << std::endl<< std::endl;
+    //Rcpp::Rcout << "\n collect_needle" <<std::endl;
+    //Rcpp::Rcout << "q             "<< q << std::endl ;
+    //Rcpp::Rcout << "vh->point()  "<<  vh->point() << std::endl;
+    //Rcpp::Rcout << "lvh->point()  "<< lvh->point() << std::endl ;
+    //Rcpp::Rcout << "nvh->point()  "<< nvh->point() << std::endl ;
+    //Rcpp::Rcout << "rvh->point()  "<< rvh->point() << std::endl<< std::endl;
 
 
     switch ( orient ) {
@@ -453,7 +454,7 @@ private:
         if(vh != rvh) {
           Point_2 p = ray_seg_intersection(q, vh->point(),
                                            nvh->point(), rvh->point());
-          //std::cout << vh->point() <<" -1- "<< p <<std::endl;
+          //Rcpp::Rcout << vh->point() <<" -1- "<< p <<std::endl;
           needles.push_back(Segment_2(vh->point(),p));
         }
       } else {
@@ -466,7 +467,7 @@ private:
         if(vh != lvh){
           Point_2 p = ray_seg_intersection(q, vh->point(),
                                            nvh->point(), lvh->point());
-          //std::cout << vh->point() <<" -2- "<< p <<std::endl;
+          //Rcpp::Rcout << vh->point() <<" -2- "<< p <<std::endl;
           needles.push_back(Segment_2(vh->point(),p));
         }
       } else {
@@ -478,7 +479,7 @@ private:
       // looking on nvh, so it must be reported
       // if it wasn't already (triangles rotate around vh)
       if(vh != nvh){
-        //std::cout << vh->point() <<" -3- "<< nvh->point() <<std::endl;
+        //Rcpp::Rcout << vh->point() <<" -3- "<< nvh->point() <<std::endl;
         needles.push_back(Segment_2(vh->point(),nvh->point()));
       }
       // but we may also contiue looking along the vertex
@@ -538,7 +539,7 @@ private:
     CGAL_assertion(typename K::Orientation_2()(q,right,rvh->point())
            != CGAL::COUNTERCLOCKWISE);
 
-    //std::cout << (ro == CGAL::COUNTERCLOCKWISE) << " " <<
+    //Rcpp::Rcout << (ro == CGAL::COUNTERCLOCKWISE) << " " <<
     //(lo == CGAL::CLOCKWISE) << std::endl;
 
     //right edge is seen if new vertex is counter clockwise of right boarder
@@ -559,26 +560,26 @@ private:
         // the edge is not a constrained
         if(lo == CGAL::COUNTERCLOCKWISE){
           // no split needed and return
-          //std::cout<< "h1"<< std::endl;
+          //Rcpp::Rcout<< "h1"<< std::endl;
           oit = expand_edge(q,left,right,nfh,rindex,oit);
-          //std::cout<< "h1 done"<< std::endl;
+          //Rcpp::Rcout<< "h1 done"<< std::endl;
           return oit;
         }else{
           // spliting at new vertex
-          //std::cout<< "h2"<< std::endl;
+          //Rcpp::Rcout<< "h2"<< std::endl;
           *oit++ = expand_edge(q,nvh->point(),right,nfh,rindex,oit);
-          //std::cout<< "h2 done"<< std::endl;
+          //Rcpp::Rcout<< "h2 done"<< std::endl;
         }
       }
     }
 
 
-    //std::cout << "q             "<< q << std::endl ;
-    //std::cout << "lvh->point()  "<< lvh->point() << std::endl;
-    //std::cout << "left          "<< left << std::endl  ;
-    //std::cout << "nvh->point()  "<< nvh->point() << std::endl ;
-    //std::cout << "right         "<< right << std::endl ;
-    //std::cout << "rvh->point()  "<< rvh->point() << std::endl<< std::endl;
+    //Rcpp::Rcout << "q             "<< q << std::endl ;
+    //Rcpp::Rcout << "lvh->point()  "<< lvh->point() << std::endl;
+    //Rcpp::Rcout << "left          "<< left << std::endl  ;
+    //Rcpp::Rcout << "nvh->point()  "<< nvh->point() << std::endl ;
+    //Rcpp::Rcout << "right         "<< right << std::endl ;
+    //Rcpp::Rcout << "rvh->point()  "<< rvh->point() << std::endl<< std::endl;
 
 
     // determin whether new vertex needs to be reported
@@ -615,15 +616,15 @@ private:
         // the edge is not a constrained
         if(ro == CGAL::CLOCKWISE){
           // no split needed and return
-          //std::cout<< "h3"<< std::endl;
+          //Rcpp::Rcout<< "h3"<< std::endl;
           oit = expand_edge(q,left,right,nfh,lindex,oit);
-          //std::cout<< "h3 done"<< std::endl;
+          //Rcpp::Rcout<< "h3 done"<< std::endl;
           return oit;
         }else{
           // spliting at new vertex
-          //std::cout<< "h4"<< std::endl;
+          //Rcpp::Rcout<< "h4"<< std::endl;
           oit = expand_edge(q,left,nvh->point(),nfh,lindex,oit);
-          //std::cout<< "h4 done"<< std::endl;
+          //Rcpp::Rcout<< "h4 done"<< std::endl;
           return oit;
         }
       }
@@ -640,7 +641,7 @@ private:
     if(!needles.empty()){
       std::vector<Segment_2> segments(needles.begin(),needles.end());
       for(unsigned int i = 0; i < raw_output.size(); i++){
-//      //std::cout <<  raw_output[i] << " -- "
+//      //Rcpp::Rcout <<  raw_output[i] << " -- "
 //                <<  raw_output[(i+1)%raw_output.size()] << std::endl;
         segments.push_back(Segment_2(raw_output[i],
                                      raw_output[(i+1) % raw_output.size()]));
@@ -656,7 +657,7 @@ private:
         out_arr.insert_in_face_interior(raw_output[0],out_arr.unbounded_face());
 
       for(unsigned int i = 0; i < raw_output.size()-1; i++){
-//      std::cout <<  raw_output[i] << " -- "
+//      Rcpp::Rcout <<  raw_output[i] << " -- "
 //                <<  raw_output[(i+1)%raw_output.size()] << std::endl;
         if(raw_output[i] < raw_output[(i+1)]){
           v_last = out_arr.insert_from_left_vertex (
@@ -683,8 +684,8 @@ private:
   }
 
   void init_cdt() const {
-    //std::cout<< "==============" <<std::endl;
-    //std::cout<< "Input Polygon:" <<std::endl;
+    //Rcpp::Rcout<< "==============" <<std::endl;
+    //Rcpp::Rcout<< "Input Polygon:" <<std::endl;
 
     typedef typename boost::transform_iterator<Make_constraint,
                                                Edge_const_iterator>        Iter;
@@ -695,11 +696,11 @@ private:
     Iter end = boost::make_transform_iterator(p_arr->edges_end(),
                                               Make_constraint());
 
-    //std::cout << "init_cdt new CDT" << std::endl;
+    //Rcpp::Rcout << "init_cdt new CDT" << std::endl;
     p_cdt = std::shared_ptr<CDT>(new CDT(begin, end));
     observer.has_changed = false;
-    //std::cout << "init_cdt done" << std::endl;
-    //std::cout << std::endl;
+    //Rcpp::Rcout << "init_cdt done" << std::endl;
+    //Rcpp::Rcout << std::endl;
   }
 };
 

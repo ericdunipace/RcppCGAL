@@ -17,6 +17,7 @@
 #ifndef CGAL_MESH_3_CONCURRENT_MESHER_CONFIG_H
 #define CGAL_MESH_3_CONCURRENT_MESHER_CONFIG_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -120,7 +121,7 @@ protected:
     }
     catch (std::exception &e)
     {
-      std::cerr << "Concurrency configuration file error: "
+      Rcpp::Rcerr << "Concurrency configuration file error: "
         << e.what() << std::endl;
       return false;
     }
@@ -147,7 +148,7 @@ protected:
     m_config_file_loaded = true;
 
 #else // CGAL_USE_BOOST_PROGRAM_OPTIONS not defined
-    std::cerr << "Warning: could not load concurrency configuration file '"
+    Rcpp::Rcerr << "Warning: could not load concurrency configuration file '"
       << filename << "'. Default values will be used."
       << std::endl;
 #endif // CGAL_USE_BOOST_PROGRAM_OPTIONS

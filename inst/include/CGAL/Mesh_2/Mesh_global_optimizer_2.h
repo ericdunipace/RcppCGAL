@@ -14,6 +14,7 @@
 #ifndef CGAL_MESH_2_MESH_GLOBAL_OPTIMIZER_2_H
 #define CGAL_MESH_2_MESH_GLOBAL_OPTIMIZER_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 
@@ -127,8 +128,8 @@ public:
   double initial_vertices_nb = static_cast<double>(moving_vertices.size());
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
   double step_begin = running_time_.time();
-  std::cerr << "Running " << Mf::name() << "-smoothing..." << std::endl;
-  std::cerr << "(" << initial_vertices_nb << " vertices moving)" << std::endl;
+  Rcpp::Rcerr << "Running " << Mf::name() << "-smoothing..." << std::endl;
+  Rcpp::Rcerr << "(" << initial_vertices_nb << " vertices moving)" << std::endl;
 #endif
 
     // Initialize big moves (stores the largest moves)
@@ -174,7 +175,7 @@ public:
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
       double time = running_time_.time();
       double moving_vertices_size = static_cast<double>(moving_vertices.size());
-      std::cerr << boost::format("\r             \r"
+      Rcpp::Rcerr << boost::format("\r             \r"
         "end iteration %1% (%2%%% frozen), %3% / %4%, last step:%5$.2fs, step avg:%6$.2fs, avg large move:%7$.3f          ")
       % (i+1)
       % ((1. - moving_vertices_size/initial_vertices_nb)*100.)
@@ -192,17 +193,17 @@ public:
 
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
     if(sq_freeze_ratio_ > 0. && moving_vertices.empty())
-      std::cerr << "All vertices frozen" << std::endl;
+      Rcpp::Rcerr << "All vertices frozen" << std::endl;
     else if(sq_freeze_ratio_ > 0. && convergence_stop)
-      std::cerr << "Can't improve anymore" << std::endl;
+      Rcpp::Rcerr << "Can't improve anymore" << std::endl;
     else if ( is_time_limit_reached() )
-      std::cerr << "Time limit reached" << std::endl;
+      Rcpp::Rcerr << "Time limit reached" << std::endl;
     else if ( check_convergence() )
-      std::cerr << "Convergence reached" << std::endl;
+      Rcpp::Rcerr << "Convergence reached" << std::endl;
     else if ( i >= nb_iterations )
-      std::cerr << "Max iteration number reached" << std::endl;
+      Rcpp::Rcerr << "Max iteration number reached" << std::endl;
 
-    std::cerr << "Total optimization time: " << running_time_.time()
+    Rcpp::Rcerr << "Total optimization time: " << running_time_.time()
               << "s" << std::endl << std::endl;
 #endif
 

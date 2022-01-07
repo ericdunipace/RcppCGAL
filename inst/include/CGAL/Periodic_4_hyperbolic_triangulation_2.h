@@ -13,6 +13,7 @@
 #ifndef CGAL_PERIODIC_4_HYPERBOLIC_TRIANGULATION_2_H
 #define CGAL_PERIODIC_4_HYPERBOLIC_TRIANGULATION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Periodic_4_hyperbolic_triangulation_2.h>
 
 #include <CGAL/basic.h>
@@ -727,7 +728,7 @@ is_valid(bool verbose) const {
     if(ori != POSITIVE)
     {
       if(verbose)
-        std::cerr << "Orientation test failed!" << std::endl;
+        Rcpp::Rcerr << "Orientation test failed!" << std::endl;
 
       error = true;
     }

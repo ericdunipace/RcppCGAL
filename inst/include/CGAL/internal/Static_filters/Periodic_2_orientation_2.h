@@ -12,6 +12,7 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_PERIODIC_2_ORIENTATION_2_H
 #define CGAL_INTERNAL_STATIC_FILTERS_PERIODIC_2_ORIENTATION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Periodic_2_triangulation_2.h>
 
 #include <CGAL/Profile_counter.h>
@@ -236,7 +237,7 @@ public:
                               t1, t1, t1); // Full det
     double err = det.error();
     err += err * 2 * F::ulp(); // Correction due to "eps * maxx * maxy...".
-    std::cerr << "*** epsilon for Periodic_2_orientation_2 = " << err
+    Rcpp::Rcerr << "*** epsilon for Periodic_2_orientation_2 = " << err
               << std::endl;
     return err;
   }

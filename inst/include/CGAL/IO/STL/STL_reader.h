@@ -12,6 +12,7 @@
 #ifndef CGAL_IO_STL_STL_READER_H
 #define CGAL_IO_STL_STL_READER_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/io.h>
 #include <CGAL/IO/helpers.h>
 
@@ -57,7 +58,7 @@ bool read_ASCII_facet(std::istream& is,
       if(count != 3)
       {
         if(verbose)
-          std::cerr << "Error: only triangulated surfaces are supported" << std::endl;
+          Rcpp::Rcerr << "Error: only triangulated surfaces are supported" << std::endl;
 
         return false;
       }
@@ -70,7 +71,7 @@ bool read_ASCII_facet(std::istream& is,
       if(count >= 3)
       {
         if(verbose)
-          std::cerr << "Error: only triangulated surfaces are supported" << std::endl;
+          Rcpp::Rcerr << "Error: only triangulated surfaces are supported" << std::endl;
 
         return false;
       }
@@ -78,7 +79,7 @@ bool read_ASCII_facet(std::istream& is,
       if(!(is >> iformat(x) >> iformat(y) >> iformat(z)))
       {
         if(verbose)
-          std::cerr << "Error while reading point coordinates (premature end of file)" << std::endl;
+          Rcpp::Rcerr << "Error while reading point coordinates (premature end of file)" << std::endl;
 
         return false;
       }
@@ -104,7 +105,7 @@ bool read_ASCII_facet(std::istream& is,
   }
 
   if(verbose)
-    std::cerr << "Error while reading facet (premature end of file)" << std::endl;
+    Rcpp::Rcerr << "Error while reading facet (premature end of file)" << std::endl;
 
   return false;
 }
@@ -118,7 +119,7 @@ bool parse_ASCII_STL(std::istream& is,
   typedef typename boost::range_value<PointRange>::type           Point;
   bool solid_found = false;
   if(verbose)
-    std::cout << "Parsing ASCII file..." << std::endl;
+    Rcpp::Rcout << "Parsing ASCII file..." << std::endl;
 
   if(!is.good())
     return false;
@@ -154,7 +155,7 @@ bool parse_ASCII_STL(std::istream& is,
   if(in_solid)
   {
     if(verbose)
-      std::cerr << "Error while parsing ASCII file" << std::endl;
+      Rcpp::Rcerr << "Error while parsing ASCII file" << std::endl;
 
     return false;
   }
@@ -172,7 +173,7 @@ bool parse_binary_STL(std::istream& is,
   typedef typename boost::range_value<TriangleRange>::type      Triangle;
 
   if(verbose)
-    std::cout << "Parsing binary file..." << std::endl;
+    Rcpp::Rcout << "Parsing binary file..." << std::endl;
 
   // Start from the beginning again to simplify things
   is.clear();
@@ -186,7 +187,7 @@ bool parse_binary_STL(std::istream& is,
   char c;
 
   if(verbose)
-    std::cout << "header: ";
+    Rcpp::Rcout << "header: ";
 
   while(pos < 80)
   {
@@ -195,13 +196,13 @@ bool parse_binary_STL(std::istream& is,
       break;
 
     if(verbose)
-      std::cout << c;
+      Rcpp::Rcout << c;
 
     ++pos;
   }
 
   if(verbose)
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
 
   if(pos != 80)
     return true; // empty file
@@ -213,14 +214,14 @@ bool parse_binary_STL(std::istream& is,
   if(!(is.read(reinterpret_cast<char*>(&N32), sizeof(N32))))
   {
     if(verbose)
-      std::cerr << "Error while reading number of facets" << std::endl;
+      Rcpp::Rcerr << "Error while reading number of facets" << std::endl;
 
     return false;
   }
 
   unsigned int N = N32;
   if(verbose)
-    std::cout << N << " facets to read" << std::endl;
+    Rcpp::Rcout << N << " facets to read" << std::endl;
 
   for(unsigned int i=0; i<N; ++i)
   {
@@ -230,7 +231,7 @@ bool parse_binary_STL(std::istream& is,
        !(is.read(reinterpret_cast<char*>(&normal[2]), sizeof(normal[2]))))
     {
       if(verbose)
-        std::cerr << "Error while reading normal coordinates (premature end of file)" << std::endl;
+        Rcpp::Rcerr << "Error while reading normal coordinates (premature end of file)" << std::endl;
 
       return false;
     }
@@ -246,7 +247,7 @@ bool parse_binary_STL(std::istream& is,
          !(is.read(reinterpret_cast<char*>(&z), sizeof(z))))
       {
         if(verbose)
-          std::cerr << "Error while reading vertex coordinates (premature end of file)" << std::endl;
+          Rcpp::Rcerr << "Error while reading vertex coordinates (premature end of file)" << std::endl;
 
         return false;
       }
@@ -276,7 +277,7 @@ bool parse_binary_STL(std::istream& is,
        !(is.read(reinterpret_cast<char*>(&c), sizeof(c))))
     {
       if(verbose)
-        std::cerr << "Error while reading attribute byte count (premature end of file)" << std::endl;
+        Rcpp::Rcerr << "Error while reading attribute byte count (premature end of file)" << std::endl;
 
       return false;
     }

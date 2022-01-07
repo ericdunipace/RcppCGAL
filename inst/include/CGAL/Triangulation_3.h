@@ -14,6 +14,7 @@
 #ifndef CGAL_TRIANGULATION_3_H
 #define CGAL_TRIANGULATION_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -6981,7 +6982,7 @@ is_valid(bool verbose, int level) const
   if(! _tds.is_valid(verbose,level))
   {
     if(verbose)
-      std::cerr << "invalid data structure" << std::endl;
+      Rcpp::Rcerr << "invalid data structure" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -6990,7 +6991,7 @@ is_valid(bool verbose, int level) const
   if(infinite_vertex() == Vertex_handle())
   {
     if(verbose)
-      std::cerr << "no infinite vertex" << std::endl;
+      Rcpp::Rcerr << "no infinite vertex" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -7022,7 +7023,7 @@ is_valid(bool verbose, int level) const
   }
 
   if(verbose)
-    std::cerr << "valid triangulation" << std::endl;
+    Rcpp::Rcerr << "valid triangulation" << std::endl;
   return true;
 }
 
@@ -7035,11 +7036,11 @@ is_valid(Cell_handle c, bool verbose, int level) const
   {
     if(verbose)
     {
-      std::cerr << "combinatorially invalid cell";
+      Rcpp::Rcerr << "combinatorially invalid cell";
       for(int i=0; i <= dimension(); i++)
-        std::cerr << c->vertex(i)->point() << ", ";
+        Rcpp::Rcerr << c->vertex(i)->point() << ", ";
 
-      std::cerr << std::endl;
+      Rcpp::Rcerr << std::endl;
     }
 
     CGAL_triangulation_assertion(false);
@@ -7050,7 +7051,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
     is_valid_finite(c, verbose, level);
 
   if(verbose)
-    std::cerr << "geometrically valid cell" << std::endl;
+    Rcpp::Rcerr << "geometrically valid cell" << std::endl;
 
   return true;
 }
@@ -7072,7 +7073,7 @@ is_valid_finite(Cell_handle c, bool verbose, int) const
       {
         if(verbose)
         {
-          std::cerr << "badly oriented cell "
+          Rcpp::Rcerr << "badly oriented cell "
                     << c->vertex(0)->point() << ", "
                     << c->vertex(1)->point() << ", "
                     << c->vertex(2)->point() << ", "
@@ -7091,7 +7092,7 @@ is_valid_finite(Cell_handle c, bool verbose, int) const
       {
         if(verbose)
         {
-          std::cerr << "badly oriented face "
+          Rcpp::Rcerr << "badly oriented face "
                     << c->vertex(0)->point() << ", "
                     << c->vertex(1)->point() << ", "
                     << c->vertex(2)->point() << std::endl;
@@ -7113,7 +7114,7 @@ is_valid_finite(Cell_handle c, bool verbose, int) const
         {
           if(verbose)
           {
-            std::cerr << "badly oriented edge " << p0 << ", " << p1 << std::endl
+            Rcpp::Rcerr << "badly oriented edge " << p0 << ", " << p1 << std::endl
                       << "with neighbor 0"
                       << c->neighbor(0)->vertex(1-c->neighbor(0)->index(c))->point()
                       << ", " << v->point() << std::endl;
@@ -7130,7 +7131,7 @@ is_valid_finite(Cell_handle c, bool verbose, int) const
         {
           if(verbose)
           {
-            std::cerr << "badly oriented edge " << p0 << ", " << p1 << std::endl
+            Rcpp::Rcerr << "badly oriented edge " << p0 << ", " << p1 << std::endl
                       << "with neighbor 1"
                       << c->neighbor(1)->vertex(1-c->neighbor(1)->index(c))->point()
                       << ", " << v->point() << std::endl;

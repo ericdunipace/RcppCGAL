@@ -13,6 +13,7 @@
 #ifndef TETRAHEDRAL_REMESHING_H
 #define TETRAHEDRAL_REMESHING_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <CGAL/Triangulation_3.h>
@@ -253,13 +254,13 @@ void tetrahedral_isotropic_remeshing(
                        Tetrahedral_remeshing::internal::Default_remeshing_visitor());
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  std::cout << "Tetrahedral remeshing ("
+  Rcpp::Rcout << "Tetrahedral remeshing ("
             << "nb_iter = " << max_it << ", "
             << "protect = " << std::boolalpha << protect
             << ")" << std::endl;
 
-  std::cout << "Init tetrahedral remeshing...";
-  std::cout.flush();
+  Rcpp::Rcout << "Init tetrahedral remeshing...";
+  Rcpp::Rcout.flush();
 #endif
 
   typedef Tetrahedral_remeshing::internal::Adaptive_remesher<
@@ -271,7 +272,7 @@ void tetrahedral_isotropic_remeshing(
                   , visitor);
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  std::cout << "done." << std::endl;
+  Rcpp::Rcout << "done." << std::endl;
   Tetrahedral_remeshing::internal::compute_statistics(
     remesher.tr(), cell_select, "statistics_begin.txt");
 #endif
@@ -448,13 +449,13 @@ void tetrahedral_isotropic_remeshing(
                        Tetrahedral_remeshing::internal::Default_remeshing_visitor());
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  std::cout << "Tetrahedral remeshing ("
+  Rcpp::Rcout << "Tetrahedral remeshing ("
             << "nb_iter = " << max_it << ", "
             << "protect = " << std::boolalpha << protect
             << ")" << std::endl;
 
-  std::cout << "Init tetrahedral remeshing...";
-  std::cout.flush();
+  Rcpp::Rcout << "Init tetrahedral remeshing...";
+  Rcpp::Rcout.flush();
 #endif
 
   typedef Tetrahedral_remeshing::internal::Adaptive_remesher<
@@ -469,7 +470,7 @@ void tetrahedral_isotropic_remeshing(
                     , visitor);
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  std::cout << "done." << std::endl;
+  Rcpp::Rcout << "done." << std::endl;
   Tetrahedral_remeshing::internal::compute_statistics(
     remesher.tr(),
     cell_select, "statistics_begin.txt");

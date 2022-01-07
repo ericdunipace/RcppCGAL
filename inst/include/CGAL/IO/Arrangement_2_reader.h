@@ -14,6 +14,7 @@
 #ifndef CGAL_IO_ARRANGEMENT_2_READER_H
 #define CGAL_IO_ARRANGEMENT_2_READER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -101,9 +102,9 @@ namespace CGAL {
       const Size  number_of_faces = formatter.read_size("number_of_faces");
       Size        k;
 
-      // std::cout << number_of_vertices << std::endl;
-      // std::cout << number_of_halfedges << std::endl;
-      // std::cout << number_of_faces << std::endl;
+      // Rcpp::Rcout << number_of_vertices << std::endl;
+      // Rcpp::Rcout << number_of_halfedges << std::endl;
+      // Rcpp::Rcout << number_of_faces << std::endl;
 
       // Read the DCEL vertices and store them in the vertices vector.
       formatter.read_vertices_begin();

@@ -11,6 +11,7 @@
 #ifndef CGAL_POINT_SET_IO_LAS_H
 #define CGAL_POINT_SET_IO_LAS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_3.h>
 
 #ifdef CGAL_LINKED_WITH_LASLIB
@@ -69,7 +70,7 @@ bool read_LAS(std::istream& is,
 {
   if(!is)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -212,7 +213,7 @@ bool write_LAS(std::ostream& os,
 {
   if(!os)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 

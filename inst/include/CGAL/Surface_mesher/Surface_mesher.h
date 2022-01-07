@@ -20,6 +20,7 @@
 #ifndef CGAL_SURFACE_MESHER_SURFACE_MESHER_H
 #define CGAL_SURFACE_MESHER_SURFACE_MESHER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -95,7 +96,7 @@ namespace CGAL {
       criteria(c)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      std::cerr << "CONS: Surface_mesher_base\n";
+      Rcpp::Rcerr << "CONS: Surface_mesher_base\n";
 #endif
     }
 
@@ -158,7 +159,7 @@ namespace CGAL {
       // We test only the finite Delaunay facets
 
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-      std::cout << "scanning facets..." << std::endl;
+      Rcpp::Rcout << "scanning facets..." << std::endl;
 #endif
       for (Finite_facets_iterator fit = tr.finite_facets_begin(); fit !=
              tr.finite_facets_end(); ++fit) {
@@ -215,7 +216,7 @@ namespace CGAL {
     Point refinement_point_impl(const Facet& f) const
       {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-        std::cerr << "point from Surface_mesher: ";
+        Rcpp::Rcerr << "point from Surface_mesher: ";
 #endif
         CGAL_assertion (c2t3.face_status(f) == C2T3::REGULAR);
         //CGAL_assertion (f.first->is_facet_on_surface (f.second));
@@ -228,7 +229,7 @@ namespace CGAL {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_BEFORE_CONFLICTS
                                                         s)
     {
-      std::cerr << "Refine_facets: before conflicts of " << s << " ";
+      Rcpp::Rcerr << "Refine_facets: before conflicts of " << s << " ";
 #else
                                                         )
     {
@@ -418,7 +419,7 @@ namespace CGAL {
     void after_insertion_impl(const Vertex_handle& v) {
       CGAL_SURFACE_MESHER_PROFILER("inserted point")
 #ifdef CGAL_SURFACE_MESHER_DEBUG_AFTER_INSERTION
-      std::cerr << "Inserted\n";
+      Rcpp::Rcerr << "Inserted\n";
 #endif
       restore_restricted_Delaunay(v);
     }
@@ -614,9 +615,9 @@ namespace CGAL {
       }
       // Else there is a problem with the dual
       else {
-        std::cerr << "In is_facet_on_surface(const Facet& f, Point& center)\n"
+        Rcpp::Rcerr << "In is_facet_on_surface(const Facet& f, Point& center)\n"
                   << "file " << __FILE__ << ", line " << __LINE__ << "\n";
-        std::cerr << "Incorrect object type: " << dual.type().name() << "\n";
+        Rcpp::Rcerr << "Incorrect object type: " << dual.type().name() << "\n";
         CGAL_error();
       }
 
@@ -696,7 +697,7 @@ namespace CGAL {
         initialized(false)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      std::cerr << "CONS: Surface_mesher\n";
+      Rcpp::Rcerr << "CONS: Surface_mesher\n";
 #endif
     }
 
@@ -710,7 +711,7 @@ namespace CGAL {
         initialized(false)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      std::cerr << "CONS: Surface_mesher\n";
+      Rcpp::Rcerr << "CONS: Surface_mesher\n";
 #endif
     }
 
@@ -751,13 +752,13 @@ namespace CGAL {
       if (verbose == NOT_VERBOSE)
         refine (visitor);
       else {
-        std::cerr << "Refining...\n";
+        Rcpp::Rcerr << "Refining...\n";
         int nbsteps = 0;
         CGAL::Timer timer;
-        std::cerr << "Legende of the following line: "
+        Rcpp::Rcerr << "Legende of the following line: "
                   << "(#vertices,#steps," << this->debug_info_header()
                   << ")\n";
-        std::cerr
+        Rcpp::Rcerr
           << boost::format("\r             \r"
                            "(%1%,%2%,%3%) (%|4$.1f| vertices/s)")
           % tr.number_of_vertices()
@@ -770,7 +771,7 @@ namespace CGAL {
             CGAL_SURFACE_MESHER_TIME_PROFILER("Surface_mesher::one_step()");
             one_step (visitor);
           }
-          std::cerr
+          Rcpp::Rcerr
             << boost::format("\r             \r"
                              "(%1%,%2%,%3%) (%|4$.1f| vertices/s)")
             % tr.number_of_vertices()
@@ -778,7 +779,7 @@ namespace CGAL {
             % (nbsteps / timer.time());
           ++nbsteps;
         }
-        std::cerr << "\ndone.\n";
+        Rcpp::Rcerr << "\ndone.\n";
       }
 
       initialized = false;

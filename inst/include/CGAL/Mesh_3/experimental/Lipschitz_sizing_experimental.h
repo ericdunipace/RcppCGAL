@@ -14,6 +14,7 @@
 #ifndef CGAL_LIPSCHITZ_SIZING_H
 #define CGAL_LIPSCHITZ_SIZING_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/AABB_tree.h>
@@ -146,7 +147,7 @@ public:
   {
     CGAL_assertion(!m_params.empty());
 #ifdef CGAL_MESH_3_LIPSCHITZ_SIZING_VERBOSE
-    std::cout << "D = " << dim << "\t";
+    Rcpp::Rcout << "D = " << dim << "\t";
 #endif
     if (dim == 3)
     {
@@ -161,7 +162,7 @@ public:
         && !is_on_cube_boundary(p))
       {
 #ifdef CGAL_MESH_3_LIPSCHITZ_SIZING_VERBOSE
-        std::cout << "          \n";
+        Rcpp::Rcout << "          \n";
 #endif
         FT size_max;
         m_params.get_parameters(sp_index, size_max);
@@ -170,7 +171,7 @@ public:
       else
       {
 #ifdef CGAL_MESH_3_LIPSCHITZ_SIZING_VERBOSE
-        std::cout << "(on cube) ";
+        Rcpp::Rcout << "(on cube) ";
 #endif
         const std::pair<Subdomain_index, Subdomain_index>& index
           = m_params.incident_subdomains(sp_index);

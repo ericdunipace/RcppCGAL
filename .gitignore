@@ -9,3 +9,4 @@ src/*.dll
 deprecated
 cran-comments.md
 inst/AUTHORS
+.DS_Store

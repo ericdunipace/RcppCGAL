@@ -14,6 +14,7 @@
 #ifndef CGAL_SURFACE_MESH_APPROXIMATION_VSA_MESH_APPROXIMATION_H
 #define CGAL_SURFACE_MESH_APPROXIMATION_VSA_MESH_APPROXIMATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_approximation.h>
 
 
@@ -212,7 +213,7 @@ bool approximate_triangle_mesh(const TriangleMesh &tm, const NamedParameters &np
   const std::size_t number_of_vertices = std::distance(vertices(tm).first, vertices(tm).second);
 
   if (vl == MAIN_STEPS || vl == VERBOSE) {
-    std::cout << "Variational shape approximation:"
+    Rcpp::Rcout << "Variational shape approximation:"
       << "\n#f " << number_of_faces
       << "\n#v " << number_of_vertices << std::endl;
   }
@@ -231,9 +232,9 @@ bool approximate_triangle_mesh(const TriangleMesh &tm, const NamedParameters &np
     get_parameter(np, internal_np::number_of_relaxations), 5);
 
   if (vl == VERBOSE) {
-    std::cout << (method == RANDOM ? "Random" :
+    Rcpp::Rcout << (method == RANDOM ? "Random" :
       (method == INCREMENTAL ? "Incremental" : "Hierarchical")) << " seeding.";
-    std::cout << "\n#max_nb_of_proxies = " << max_nb_of_proxies
+    Rcpp::Rcout << "\n#max_nb_of_proxies = " << max_nb_of_proxies
       << "\n#min_error_drop = " << min_error_drop
       << "\nnb_of_relaxations " << nb_of_relaxations << std::endl;
   }
@@ -241,18 +242,18 @@ bool approximate_triangle_mesh(const TriangleMesh &tm, const NamedParameters &np
   approx.initialize_seeds(np);
 
   if (vl == MAIN_STEPS || vl == VERBOSE)
-    std::cout << "Seeding done." << std::endl;
+    Rcpp::Rcout << "Seeding done." << std::endl;
 
   const std::size_t nb_of_iterations = choose_parameter(
     get_parameter(np, internal_np::number_of_iterations), 20);
 
   if (vl == VERBOSE)
-    std::cout << "\n#nb_of_iterations = " << nb_of_iterations << std::endl;
+    Rcpp::Rcout << "\n#nb_of_iterations = " << nb_of_iterations << std::endl;
 
   approx.run(nb_of_iterations);
 
   if (vl == MAIN_STEPS || vl == VERBOSE) {
-    std::cout << "Approximation done."
+    Rcpp::Rcout << "Approximation done."
       << "\n#proxies = " << approx.number_of_proxies() << std::endl;
   }
 
@@ -261,14 +262,14 @@ bool approximate_triangle_mesh(const TriangleMesh &tm, const NamedParameters &np
 
   if (!parameters::is_default_parameter(get_parameter(np, internal_np::face_proxy_map))
     && (vl == MAIN_STEPS || vl == VERBOSE))
-    std::cout << "Filling face proxy map done." << std::endl;
+    Rcpp::Rcout << "Filling face proxy map done." << std::endl;
 
   // get proxies
   approx.proxies( get_parameter(np, internal_np::proxies) );
 
   if (!is_default_parameter( get_parameter(np, internal_np::proxies) )
     && (vl == MAIN_STEPS || vl == VERBOSE))
-    std::cout << "Get proxies done." << std::endl;
+    Rcpp::Rcout << "Get proxies done." << std::endl;
 
   // meshing
   bool is_manifold = false;
@@ -281,7 +282,7 @@ bool approximate_triangle_mesh(const TriangleMesh &tm, const NamedParameters &np
       const bool with_dihedral_angle = choose_parameter(get_parameter(np, internal_np::with_dihedral_angle), false);
       const bool optimize_anchor_location = choose_parameter(get_parameter(np, internal_np::optimize_anchor_location), true);
       const bool pca_plane = choose_parameter(get_parameter(np, internal_np::pca_plane), false);
-      std::cout << "Meshing: "
+      Rcpp::Rcout << "Meshing: "
         << "\nchord_error = " << subdivision_ratio
         << "\nrelative_to_chord = " << relative_to_chord
         << "\nwith_dihedral_angle = " << with_dihedral_angle
@@ -292,7 +293,7 @@ bool approximate_triangle_mesh(const TriangleMesh &tm, const NamedParameters &np
     is_manifold = approx.extract_mesh(np);
 
     if (vl == MAIN_STEPS || vl == VERBOSE)
-      std::cout << "Meshing done.\n"
+      Rcpp::Rcout << "Meshing done.\n"
         << (is_manifold ? "Can" : "Cannot") << " be built into 2-manifold surface." << std::endl;
   }
 
@@ -301,14 +302,14 @@ bool approximate_triangle_mesh(const TriangleMesh &tm, const NamedParameters &np
 
   if (!is_default_parameter( get_parameter(np, internal_np::anchors) )
     && (vl == MAIN_STEPS || vl == VERBOSE))
-    std::cout << "Get anchors done." << std::endl;
+    Rcpp::Rcout << "Get anchors done." << std::endl;
 
   // get indexed triangles
   approx.indexed_triangles( get_parameter(np, internal_np::triangles) );
 
   if (!is_default_parameter( get_parameter(np, internal_np::triangles) )
     && (vl == MAIN_STEPS || vl == VERBOSE))
-    std::cout << "Get indexed triangles done." << std::endl;
+    Rcpp::Rcout << "Get indexed triangles done." << std::endl;
 
   return is_manifold;
 }

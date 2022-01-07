@@ -12,6 +12,7 @@
 #ifndef CGAL_SEP_HEADER_HPP
 #define CGAL_SEP_HEADER_HPP
 
+#include <Rcpp.h>
 #include <string>
 #include <map>
 #include <fstream>
@@ -72,7 +73,7 @@ private:
 
     template <typename T>
     void operator()(const T& t) {
-      // std::cerr << "My assignement ("
+      // Rcpp::Rcerr << "My assignement ("
       //           << typeid(t).name() << "): "
       //           << key << "=" << t << std::endl;
       self->add(key, t);
@@ -119,7 +120,7 @@ public:
   SEP_header(std::string fileName) : _dim(-1) {
     std::ifstream input(fileName.c_str());
     if(!input) {
-      std::cerr << "Error: cannot open the header file \""
+      Rcpp::Rcerr << "Error: cannot open the header file \""
                 << fileName << "\"!\n";
       return;
     }
@@ -242,7 +243,7 @@ private:
       qi::on_error<qi::fail>
         (
          header,
-         std::cout
+         Rcpp::Rcout
          << val("Error! Expecting ")
          << qi::_4                               // what failed?
          << val(" here: \"")

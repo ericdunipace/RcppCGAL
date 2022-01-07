@@ -15,6 +15,7 @@
 #ifndef CGAL_LIPSCHITZ_SIZING_FIELD_2_H
 #define CGAL_LIPSCHITZ_SIZING_FIELD_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -91,7 +92,7 @@ public:
     : K(k)
   {
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-  std::cout << "Building sizing field..." << std::flush;
+  Rcpp::Rcout << "Building sizing field..." << std::flush;
 #endif
     points = std::list<Point>(first, beyond);
     generate_delaunay();
@@ -99,7 +100,7 @@ public:
     generate_sites();
     generate_apollonius();
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-  std::cout << "done." << std::endl;
+  Rcpp::Rcout << "done." << std::endl;
 #endif
   }
 
@@ -108,7 +109,7 @@ public:
     : K(k)
   {
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-    std::cout << "Building sizing field..." << std::flush;
+    Rcpp::Rcout << "Building sizing field..." << std::flush;
 #endif
     points = std::list<Point>(tr.points_begin(), tr.points_end());
     generate_delaunay();
@@ -116,7 +117,7 @@ public:
     generate_sites();
     generate_apollonius();
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-    std::cout << "done." << std::endl;
+    Rcpp::Rcout << "done." << std::endl;
 #endif
   }
 

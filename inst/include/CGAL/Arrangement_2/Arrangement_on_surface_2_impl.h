@@ -20,6 +20,7 @@
 #ifndef CGAL_ARRANGEMENT_ON_SURFACE_2_IMPL_H
 #define CGAL_ARRANGEMENT_ON_SURFACE_2_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #ifndef CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
@@ -285,9 +286,9 @@ insert_in_face_interior(const Point_2& p, Face_handle f)
   DFace* p_f = _face(f);
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: insert_in_face_interior (interface)" << std::endl;
-  std::cout << "pt   : " << p << std::endl;
-  std::cout << "face : " << &(*f) << std::endl;
+  Rcpp::Rcout << "Aos_2: insert_in_face_interior (interface)" << std::endl;
+  Rcpp::Rcout << "pt   : " << p << std::endl;
+  Rcpp::Rcout << "face : " << &(*f) << std::endl;
 #endif
 
   // Create a new vertex associated with the given point.
@@ -312,9 +313,9 @@ Arrangement_on_surface_2<GeomTraits, TopTraits>::
 insert_in_face_interior(const X_monotone_curve_2& cv, Face_handle f)
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: insert_in_face_interior (interface)" << std::endl;
-  std::cout << "cv   : " << cv << std::endl;
-  std::cout << "face : " << &(*f) << std::endl;
+  Rcpp::Rcout << "Aos_2: insert_in_face_interior (interface)" << std::endl;
+  Rcpp::Rcout << "cv   : " << cv << std::endl;
+  Rcpp::Rcout << "face : " << &(*f) << std::endl;
 #endif
 
   DFace* p_f = _face(f);
@@ -572,14 +573,14 @@ Arrangement_on_surface_2<GeomTraits, TopTraits>::
 insert_from_left_vertex(const X_monotone_curve_2& cv, Halfedge_handle prev)
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: insert_from_left_vertex (interface)" << std::endl;
-  std::cout << "cv   : " << cv << std::endl;
+  Rcpp::Rcout << "Aos_2: insert_from_left_vertex (interface)" << std::endl;
+  Rcpp::Rcout << "cv   : " << cv << std::endl;
   if (!prev->is_fictitious()) {
-    std::cout << "prev : " << prev ->curve() << std::endl;
+    Rcpp::Rcout << "prev : " << prev ->curve() << std::endl;
   } else {
-    std::cout << "prev : fictitious" << std::endl;
+    Rcpp::Rcout << "prev : fictitious" << std::endl;
   }
-  std::cout << "dir  : " << prev->direction() << std::endl;
+  Rcpp::Rcout << "dir  : " << prev->direction() << std::endl;
 #endif
 
   CGAL_precondition_code
@@ -807,13 +808,13 @@ insert_from_right_vertex(const X_monotone_curve_2& cv,
                          Halfedge_handle prev)
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: insert_from_right_vertex (interface)" << std::endl;
-  std::cout << "cv   : " << cv << std::endl;
+  Rcpp::Rcout << "Aos_2: insert_from_right_vertex (interface)" << std::endl;
+  Rcpp::Rcout << "cv   : " << cv << std::endl;
   if (!prev->is_fictitious())
-    std::cout << "prev : " << prev ->curve() << std::endl;
+    Rcpp::Rcout << "prev : " << prev ->curve() << std::endl;
   else
-    std::cout << "prev : fictitious" << std::endl;
-  std::cout << "dir  : " << prev->direction() << std::endl;
+    Rcpp::Rcout << "prev : fictitious" << std::endl;
+  Rcpp::Rcout << "dir  : " << prev->direction() << std::endl;
 #endif
 
   CGAL_precondition_code
@@ -1298,18 +1299,18 @@ insert_at_vertices(const X_monotone_curve_2& cv,
                    Halfedge_handle prev2)
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: insert_at_vertices (interface)" << std::endl;
-  std::cout << "cv   : " << cv << std::endl;
+  Rcpp::Rcout << "Aos_2: insert_at_vertices (interface)" << std::endl;
+  Rcpp::Rcout << "cv   : " << cv << std::endl;
   if (!prev1->is_fictitious())
-    std::cout << "prev1: " << prev1->curve() << std::endl;
+    Rcpp::Rcout << "prev1: " << prev1->curve() << std::endl;
   else
-    std::cout << "prev1: fictitious" << std::endl;
-  std::cout << "dir1 : " << prev1->direction() << std::endl;
+    Rcpp::Rcout << "prev1: fictitious" << std::endl;
+  Rcpp::Rcout << "dir1 : " << prev1->direction() << std::endl;
   if (!prev2->is_fictitious())
-    std::cout << "prev2: " << prev2->curve() << std::endl;
+    Rcpp::Rcout << "prev2: " << prev2->curve() << std::endl;
   else
-    std::cout << "prev2: fictitious" << std::endl;
-  std::cout << "dir2 : " << prev2->direction() << std::endl;
+    Rcpp::Rcout << "prev2: fictitious" << std::endl;
+  Rcpp::Rcout << "dir2 : " << prev2->direction() << std::endl;
 #endif
 
   // Determine which one of the given vertices (the target vertices of the
@@ -2033,10 +2034,10 @@ void Arrangement_on_surface_2<GeomTraits, TopTraits>::
 _insert_isolated_vertex(DFace* f, DVertex* v)
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: _insert_isolated_vertex (internal)" << std::endl;
+  Rcpp::Rcout << "Aos_2: _insert_isolated_vertex (internal)" << std::endl;
   if (!v->has_null_point())
-    std::cout << "v->point: " << v->point() << std::endl;
-  std::cout << "face   : " << f << std::endl;
+    Rcpp::Rcout << "v->point: " << v->point() << std::endl;
+  Rcpp::Rcout << "face   : " << f << std::endl;
 #endif
 
   Face_handle fh(f);
@@ -2259,14 +2260,14 @@ _insert_in_face_interior(DFace* f,
                          DVertex* v1, DVertex* v2)
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: _insert_in_face_interior (internal)" << std::endl;
-  std::cout << "face  : " << f << std::endl;
-  std::cout << "cv    : " << cv << std::endl;
-  std::cout << "cv_dir: " << cv_dir << std::endl;
+  Rcpp::Rcout << "Aos_2: _insert_in_face_interior (internal)" << std::endl;
+  Rcpp::Rcout << "face  : " << f << std::endl;
+  Rcpp::Rcout << "cv    : " << cv << std::endl;
+  Rcpp::Rcout << "cv_dir: " << cv_dir << std::endl;
   if (!v1->has_null_point())
-    std::cout << "v1->point: " << v1->point() << std::endl;
+    Rcpp::Rcout << "v1->point: " << v1->point() << std::endl;
   if (!v2->has_null_point())
-    std::cout << "v2->point: " << v2->point() << std::endl;
+    Rcpp::Rcout << "v2->point: " << v2->point() << std::endl;
 #endif
 
   // Notify the observers that we are about to create a new edge.
@@ -2330,18 +2331,18 @@ _insert_from_vertex(DHalfedge* he_to, const X_monotone_curve_2& cv,
                     DVertex* v)
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: _insert_from_vertex (internal)" << std::endl;
+  Rcpp::Rcout << "Aos_2: _insert_from_vertex (internal)" << std::endl;
   if (!he_to->has_null_curve())
-    std::cout << "he_to: " << he_to->curve() << std::endl;
+    Rcpp::Rcout << "he_to: " << he_to->curve() << std::endl;
   else
-    std::cout << "he_to: fictitious" << std::endl;
-  std::cout << "f_to: " << (he_to->is_on_inner_ccb() ?
+    Rcpp::Rcout << "he_to: fictitious" << std::endl;
+  Rcpp::Rcout << "f_to: " << (he_to->is_on_inner_ccb() ?
                             he_to->inner_ccb()->face() :
                             he_to->outer_ccb()->face()) << std::endl;
-  std::cout << "cv    : " << cv << std::endl;
-  std::cout << "cv_dir: " << cv_dir << std::endl;
+  Rcpp::Rcout << "cv    : " << cv << std::endl;
+  Rcpp::Rcout << "cv_dir: " << cv_dir << std::endl;
   if (!v->has_null_point())
-    std::cout << "v->point: " << v->point() << std::endl;
+    Rcpp::Rcout << "v->point: " << v->point() << std::endl;
 #endif
 
   // Get the incident face of the previous halfedge. Note that this will also
@@ -2418,7 +2419,7 @@ _insert_at_vertices(DHalfedge* he_to,
                     bool allow_swap_of_predecessors /* = true */)
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "_insert_at_vertices: " << cv << std::endl;
+  Rcpp::Rcout << "_insert_at_vertices: " << cv << std::endl;
 #endif
   // Comment: This is how the situation looks
   //    ----to--->  >>cv_dir>>  ---away--->
@@ -2430,24 +2431,24 @@ _insert_at_vertices(DHalfedge* he_to,
   // AFTER insertion on the same outer ccb
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: _insert_at_vertices (internal)" << std::endl;
+  Rcpp::Rcout << "Aos_2: _insert_at_vertices (internal)" << std::endl;
 
   if (!he_to->has_null_curve())
-    std::cout << "he_to: " << he_to->curve() << std::endl;
+    Rcpp::Rcout << "he_to: " << he_to->curve() << std::endl;
   else
-    std::cout << "he_to: fictitious" << std::endl;
-  std::cout << "dir1 : " << he_to->direction() << std::endl;
-  std::cout << "f_to : " << (he_to->is_on_inner_ccb() ?
+    Rcpp::Rcout << "he_to: fictitious" << std::endl;
+  Rcpp::Rcout << "dir1 : " << he_to->direction() << std::endl;
+  Rcpp::Rcout << "f_to : " << (he_to->is_on_inner_ccb() ?
                             he_to->inner_ccb()->face() :
                             he_to->outer_ccb()->face()) << std::endl;
-  std::cout << "cv    : " << cv << std::endl;
-  std::cout << "cv_dir: " << cv_dir << std::endl;
+  Rcpp::Rcout << "cv    : " << cv << std::endl;
+  Rcpp::Rcout << "cv_dir: " << cv_dir << std::endl;
   if (!he_away->has_null_curve())
-    std::cout << "he_away: " << he_away->curve() << std::endl;
+    Rcpp::Rcout << "he_away: " << he_away->curve() << std::endl;
   else
-    std::cout << "he_away: fictitious" << std::endl;
-  std::cout << "dir 2 : " << he_away->direction() << std::endl;
-  std::cout << "f_away: " << (he_away->is_on_inner_ccb() ?
+    Rcpp::Rcout << "he_away: fictitious" << std::endl;
+  Rcpp::Rcout << "dir 2 : " << he_away->direction() << std::endl;
+  Rcpp::Rcout << "f_away: " << (he_away->is_on_inner_ccb() ?
                              he_away->inner_ccb()->face() :
                              he_away->outer_ccb()->face()) << std::endl;
 #endif
@@ -2510,12 +2511,12 @@ _insert_at_vertices(DHalfedge* he_to,
         _compute_signs_and_local_minima(prev2, cv, cv_dir2, prev1->next(),
                                         std::back_inserter(local_mins2));
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-      std::cout << "signs1.x: " << signs1.first << std::endl;
-      std::cout << "signs1.y: " << signs1.second << std::endl;
-      std::cout << "signs2.x: " << signs2.first << std::endl;
-      std::cout << "signs2.y: " << signs2.second << std::endl;
-      std::cout << "#local_mins1: " << local_mins1.size() << std::endl;
-      std::cout << "#local_mins2: " << local_mins2.size() << std::endl;
+      Rcpp::Rcout << "signs1.x: " << signs1.first << std::endl;
+      Rcpp::Rcout << "signs1.y: " << signs1.second << std::endl;
+      Rcpp::Rcout << "signs2.x: " << signs2.first << std::endl;
+      Rcpp::Rcout << "signs2.y: " << signs2.second << std::endl;
+      Rcpp::Rcout << "#local_mins1: " << local_mins1.size() << std::endl;
+      Rcpp::Rcout << "#local_mins2: " << local_mins2.size() << std::endl;
 #endif
 
       if (!m_topol_traits.let_me_decide_the_outer_ccb(signs1, signs2,
@@ -2535,7 +2536,7 @@ _insert_at_vertices(DHalfedge* he_to,
         CGAL_assertion(local_mins2.size() > 0);
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-        std::cout << "decide swap" << std::endl;
+        Rcpp::Rcout << "decide swap" << std::endl;
 #endif
 
         swap_predecessors =
@@ -2574,26 +2575,26 @@ _insert_at_vertices(DHalfedge* he_to,
   DVertex* v2 = prev2->vertex();
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "Aos_2: _insert_at_vertices (internal)" << std::endl;
+  Rcpp::Rcout << "Aos_2: _insert_at_vertices (internal)" << std::endl;
 
-  std::cout << "cv   : " << cv << std::endl;
+  Rcpp::Rcout << "cv   : " << cv << std::endl;
   if (!prev1->has_null_curve())
-    std::cout << "prev1: " << prev1->curve() << std::endl;
+    Rcpp::Rcout << "prev1: " << prev1->curve() << std::endl;
   else
-    std::cout << "prev1: fictitious" << std::endl;
-  std::cout << "dir1 : " << prev1->direction() << std::endl;
-  std::cout << "pref: " << (prev1->is_on_inner_ccb() ?
+    Rcpp::Rcout << "prev1: fictitious" << std::endl;
+  Rcpp::Rcout << "dir1 : " << prev1->direction() << std::endl;
+  Rcpp::Rcout << "pref: " << (prev1->is_on_inner_ccb() ?
                             prev1->inner_ccb()->face() :
                             prev1->outer_ccb()->face()) << std::endl;
   if (!prev2->has_null_curve())
-    std::cout << "prev2: " << prev2->curve() << std::endl;
+    Rcpp::Rcout << "prev2: " << prev2->curve() << std::endl;
   else
-    std::cout << "prev2: fictitious" << std::endl;
-  std::cout << "dir 2: " << prev2->direction() << std::endl;
-  std::cout << "pref2: " << (prev2->is_on_inner_ccb() ?
+    Rcpp::Rcout << "prev2: fictitious" << std::endl;
+  Rcpp::Rcout << "dir 2: " << prev2->direction() << std::endl;
+  Rcpp::Rcout << "pref2: " << (prev2->is_on_inner_ccb() ?
                              prev2->inner_ccb()->face() :
                              prev2->outer_ccb()->face()) << std::endl;
-  std::cout << "cv_dir: " << cv_dir << std::endl;
+  Rcpp::Rcout << "cv_dir: " << cv_dir << std::endl;
 #endif
 
   // Get the components containing the two previous halfedges and the incident
@@ -2607,11 +2608,11 @@ _insert_at_vertices(DHalfedge* he_to,
   CGAL_precondition_code(DFace* f2 = (ic2 != nullptr) ? ic2->face() : oc2->face());
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "ic1: " << ic1 << std::endl;
-  std::cout << "ic2: " << ic2 << std::endl;
-  std::cout << "oc1: " << oc1 << std::endl;
-  std::cout << "oc2: " << oc2 << std::endl;
-  std::cout << "f1: " << &(*f) << std::endl;
+  Rcpp::Rcout << "ic1: " << ic1 << std::endl;
+  Rcpp::Rcout << "ic2: " << ic2 << std::endl;
+  Rcpp::Rcout << "oc1: " << oc1 << std::endl;
+  Rcpp::Rcout << "oc2: " << oc2 << std::endl;
+  Rcpp::Rcout << "f1: " << &(*f) << std::endl;
 
 #if 0
   DHalfedge* curr = prev1;
@@ -2619,21 +2620,21 @@ _insert_at_vertices(DHalfedge* he_to,
     curr = curr->next();
     while (curr != prev1) {
       if (!curr->has_null_curve())
-        std::cout << "curr: " << curr->curve() << std::endl;
+        Rcpp::Rcout << "curr: " << curr->curve() << std::endl;
       else
-        std::cout << "curr: fictitious" << std::endl;
-      std::cout << "dir: "
+        Rcpp::Rcout << "curr: fictitious" << std::endl;
+      Rcpp::Rcout << "dir: "
                 << (curr->direction() == CGAL::ARR_LEFT_TO_RIGHT ?
                     "L2R" : "R2L")
                 << std::endl;
       curr = curr->next();
     }
   } else {
-    std::cout << "only prev1" << std::endl;
+    Rcpp::Rcout << "only prev1" << std::endl;
   }
 #endif
 
-  CGAL_precondition_code(std::cout << "f2: " << &(*f2) << std::endl);
+  CGAL_precondition_code(Rcpp::Rcout << "f2: " << &(*f2) << std::endl);
 
 #if 0
   curr = prev2;
@@ -2641,17 +2642,17 @@ _insert_at_vertices(DHalfedge* he_to,
     curr = curr->next();
     while (curr != prev2) {
       if (!curr->has_null_curve())
-        std::cout << "curr: " << curr->curve() << std::endl;
+        Rcpp::Rcout << "curr: " << curr->curve() << std::endl;
       else
-        std::cout << "curr: fictitious" << std::endl;
-      std::cout << "dir: "
+        Rcpp::Rcout << "curr: fictitious" << std::endl;
+      Rcpp::Rcout << "dir: "
                 << (curr->direction() == CGAL::ARR_LEFT_TO_RIGHT ?
                     "L2R" : "R2L")
                 << std::endl;
       curr = curr->next();
     }
   } else
-    std::cout << "only prev2" << std::endl;
+    Rcpp::Rcout << "only prev2" << std::endl;
 #endif
 #endif // CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
 
@@ -2886,7 +2887,7 @@ _insert_at_vertices(DHalfedge* he_to,
     // point to he2.
     DFace* new_f = _dcel().new_face();
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-    std::cout << "new face: " << new_f << std::endl;
+    Rcpp::Rcout << "new face: " << new_f << std::endl;
 #endif
 
     DOuter_ccb* new_oc = _dcel().new_outer_ccb();
@@ -2908,14 +2909,14 @@ _insert_at_vertices(DHalfedge* he_to,
       curr->set_outer_ccb(new_oc);
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-    std::cout << "(=> prev1=" << &(*prev1) << ") he2= " << &(*he2)
+    Rcpp::Rcout << "(=> prev1=" << &(*prev1) << ") he2= " << &(*he2)
               << "  defines new outer CCB" << std::endl;
-    std::cout << "he2dir  : " << he2->direction() << std::endl;
-    std::cout << "prev1->face(): " << (prev1->is_on_inner_ccb() ?
+    Rcpp::Rcout << "he2dir  : " << he2->direction() << std::endl;
+    Rcpp::Rcout << "prev1->face(): " << (prev1->is_on_inner_ccb() ?
                                        prev1->inner_ccb()->face() :
                                        prev1->outer_ccb()->face())
               << std::endl;
-    std::cout << "signs1: " << signs1.first  << "," << signs1.second
+    Rcpp::Rcout << "signs1: " << signs1.first  << "," << signs1.second
               << std::endl;
 #endif
 
@@ -2943,14 +2944,14 @@ _insert_at_vertices(DHalfedge* he_to,
           ic1->set_halfedge(he1);
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-        std::cout << "(=> prev2=" << &(*prev2) << ") he1= " << &(*he1)
+        Rcpp::Rcout << "(=> prev2=" << &(*prev2) << ") he1= " << &(*he1)
                   << "  defines new inner CCB" << std::endl;
-        std::cout << "he1dir  : " << he1->direction() << std::endl;
-        std::cout << "prev2->face(): " << (prev2->is_on_inner_ccb() ?
+        Rcpp::Rcout << "he1dir  : " << he1->direction() << std::endl;
+        Rcpp::Rcout << "prev2->face(): " << (prev2->is_on_inner_ccb() ?
                                            prev2->inner_ccb()->face() :
                                            prev2->outer_ccb()->face())
                   << std::endl;
-        std::cout << "signs2: " << signs2.first  << "," << signs2.second
+        Rcpp::Rcout << "signs2: " << signs2.first  << "," << signs2.second
                   << std::endl;
 #endif
       }
@@ -2978,13 +2979,13 @@ _insert_at_vertices(DHalfedge* he_to,
           curr->set_outer_ccb(f_oc);
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-        std::cout << "(=> prev2=" << &(*prev2) << ") he1= " << &(*he1) << "  defines new outer CCB" << std::endl;
-        std::cout << "he1dir  : " << he1->direction() << std::endl;
-        std::cout << "prev2->face(): " << (prev2->is_on_inner_ccb() ?
+        Rcpp::Rcout << "(=> prev2=" << &(*prev2) << ") he1= " << &(*he1) << "  defines new outer CCB" << std::endl;
+        Rcpp::Rcout << "he1dir  : " << he1->direction() << std::endl;
+        Rcpp::Rcout << "prev2->face(): " << (prev2->is_on_inner_ccb() ?
                                            prev2->inner_ccb()->face() :
                                            prev2->outer_ccb()->face())
                   << std::endl;
-        std::cout << "signs2: " << signs2.first  << "," << signs2.second
+        Rcpp::Rcout << "signs2: " << signs2.first  << "," << signs2.second
                   << std::endl;
 #endif
 
@@ -3488,11 +3489,11 @@ _compute_signs_and_local_minima(const DHalfedge* he_to,
                                 OutputIterator local_mins_it) const
 {
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "he_to: " << he_to->opposite()->vertex()->point()
+  Rcpp::Rcout << "he_to: " << he_to->opposite()->vertex()->point()
             << " => " << he_to->vertex()->point() << std::endl;
-  std::cout << "cv: " << cv << std::endl;
-  std::cout << "cv_dir: " << cv_dir << std::endl;
-  std::cout << "he_away: " << he_away->opposite()->vertex()->point()
+  Rcpp::Rcout << "cv: " << cv << std::endl;
+  Rcpp::Rcout << "cv_dir: " << cv_dir << std::endl;
+  Rcpp::Rcout << "he_away: " << he_away->opposite()->vertex()->point()
             << " => " << he_away->vertex()->point() << std::endl;
 #endif
 
@@ -4033,7 +4034,7 @@ _defines_outer_ccb_of_new_face(const DHalfedge* he_to,
   Arr_parameter_space ps_y_min = parameter_space_in_y(*cv_min, ARR_MIN_END);
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "1 set global min to " << *cv_min << std::endl;
+  Rcpp::Rcout << "1 set global min to " << *cv_min << std::endl;
 #endif
 
   for (++lm_it; lm_it != lm_end; ++lm_it) {
@@ -4075,7 +4076,7 @@ _defines_outer_ccb_of_new_face(const DHalfedge* he_to,
       he_min = he;
       v_min = he->vertex();
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-      std::cout << "2 set global min to " << *cv_min << std::endl;
+      Rcpp::Rcout << "2 set global min to " << *cv_min << std::endl;
 #endif
     }
   }
@@ -4084,13 +4085,13 @@ _defines_outer_ccb_of_new_face(const DHalfedge* he_to,
   CGAL_assertion(!v_min->has_null_point());
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-  std::cout << "v_min: " << v_min->point() << std::endl;
-  std::cout << "he_min: ";
+  Rcpp::Rcout << "v_min: " << v_min->point() << std::endl;
+  Rcpp::Rcout << "he_min: ";
   if (he_min)
-    std::cout << he_min->opposite()->vertex()->point()
+    Rcpp::Rcout << he_min->opposite()->vertex()->point()
               << " => " << he_min->vertex()->point();
-  else std::cout << "nullptr";
-  std::cout << std::endl;
+  else Rcpp::Rcout << "nullptr";
+  Rcpp::Rcout << std::endl;
 #endif
 
   CGAL_assertion(! he_min || (he_min->direction() == ARR_RIGHT_TO_LEFT));
@@ -4214,19 +4215,19 @@ _remove_edge(DHalfedge* e, bool remove_source, bool remove_target)
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
 #if 0
-  std::cout << "before swap" << std::endl;
-  std::cout << "he1c: " << he1->curve() <<  ", " << he1->direction()
+  Rcpp::Rcout << "before swap" << std::endl;
+  Rcpp::Rcout << "he1c: " << he1->curve() <<  ", " << he1->direction()
             << std::endl;
-  std::cout << "he2c: " << he2->curve() <<  ", " << he2->direction()
+  Rcpp::Rcout << "he2c: " << he2->curve() <<  ", " << he2->direction()
             << std::endl;
-  std::cout << "he1: " << he1 << std::endl;
-  std::cout << "he2: " << he2 << std::endl;
-  std::cout << "ic1: " << ic1 << std::endl;
-  std::cout << "ic2: " << ic2 << std::endl;
-  std::cout << "oc1: " << oc1 << std::endl;
-  std::cout << "oc2: " << oc2 << std::endl;
-  std::cout << "f1 : " << f1 << std::endl;
-  std::cout << "f2 : " << f2 << std::endl;
+  Rcpp::Rcout << "he1: " << he1 << std::endl;
+  Rcpp::Rcout << "he2: " << he2 << std::endl;
+  Rcpp::Rcout << "ic1: " << ic1 << std::endl;
+  Rcpp::Rcout << "ic2: " << ic2 << std::endl;
+  Rcpp::Rcout << "oc1: " << oc1 << std::endl;
+  Rcpp::Rcout << "oc2: " << oc2 << std::endl;
+  Rcpp::Rcout << "f1 : " << f1 << std::endl;
+  Rcpp::Rcout << "f2 : " << f2 << std::endl;
 #endif
 #endif
 
@@ -4281,11 +4282,11 @@ _remove_edge(DHalfedge* e, bool remove_source, bool remove_target)
       const DHalfedge* he_min1 = res1.second;
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-      std::cout << "signs1.x: " << signs1.first << std::endl;
-      std::cout << "signs1.y: " << signs1.second << std::endl;
+      Rcpp::Rcout << "signs1.x: " << signs1.first << std::endl;
+      Rcpp::Rcout << "signs1.y: " << signs1.second << std::endl;
       if (! he_min1->has_null_curve())
-        std::cout << "he_min1: " << he_min1->curve() << std::endl;
-      else std::cout << "he_min1 fictitious" << std::endl;
+        Rcpp::Rcout << "he_min1: " << he_min1->curve() << std::endl;
+      else Rcpp::Rcout << "he_min1 fictitious" << std::endl;
 #endif
 
       // Compute the signs and minimum along ccb of he2:
@@ -4297,11 +4298,11 @@ _remove_edge(DHalfedge* e, bool remove_source, bool remove_target)
       const DHalfedge* he_min2 = res2.second;
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-      std::cout << "signs2.x: " << signs2.first << std::endl;
-      std::cout << "signs2.y: " << signs2.second << std::endl;
+      Rcpp::Rcout << "signs2.x: " << signs2.first << std::endl;
+      Rcpp::Rcout << "signs2.y: " << signs2.second << std::endl;
       if (! he_min2->has_null_curve())
-        std::cout << "he_min2: " << he_min2->curve() << std::endl;
-      else std::cout << "he_min2 fictitious" << std::endl;
+        Rcpp::Rcout << "he_min2: " << he_min2->curve() << std::endl;
+      else Rcpp::Rcout << "he_min2 fictitious" << std::endl;
 #endif
 
       // TODO EBEB 2012-07-29
@@ -4310,14 +4311,14 @@ _remove_edge(DHalfedge* e, bool remove_source, bool remove_target)
       bool is_perimetric2 = signs2.first || signs2.second;
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-      std::cout << std::endl
+      Rcpp::Rcout << std::endl
                 << "index 1: " << index_min1
                 << ", ps_x_min1: " << ps_x_min1
                 << ", ps_y_min1: " << ps_y_min1
                 << ", is_perimetric1: " << is_perimetric1
                 << std::endl;
 
-      std::cout << "index 2: " << index_min2
+      Rcpp::Rcout << "index 2: " << index_min2
                 << ", ps_x_min2: " << ps_x_min2
                 << ", ps_y_min2: " << ps_y_min2
                 << ", is_perimetric2: " << is_perimetric2
@@ -4405,19 +4406,19 @@ _remove_edge(DHalfedge* e, bool remove_source, bool remove_target)
 
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
 #if 0
-  std::cout << "after swap" << std::endl;
-  std::cout << "he1c: " << he1->curve() <<  ", " << he1->direction()
+  Rcpp::Rcout << "after swap" << std::endl;
+  Rcpp::Rcout << "he1c: " << he1->curve() <<  ", " << he1->direction()
             << std::endl;
-  std::cout << "he1c: " << he2->curve() <<  ", " << he2->direction()
+  Rcpp::Rcout << "he1c: " << he2->curve() <<  ", " << he2->direction()
             << std::endl;
-  std::cout << "he1: " << he1 << std::endl;
-  std::cout << "he2: " << he2 << std::endl;
-  std::cout << "ic1: " << ic1 << std::endl;
-  std::cout << "ic2: " << ic2 << std::endl;
-  std::cout << "oc1: " << oc1 << std::endl;
-  std::cout << "oc2: " << oc2 << std::endl;
-  std::cout << "f1 : " << f1 << std::endl;
-  std::cout << "f2 : " << f2 << std::endl;
+  Rcpp::Rcout << "he1: " << he1 << std::endl;
+  Rcpp::Rcout << "he2: " << he2 << std::endl;
+  Rcpp::Rcout << "ic1: " << ic1 << std::endl;
+  Rcpp::Rcout << "ic2: " << ic2 << std::endl;
+  Rcpp::Rcout << "oc1: " << oc1 << std::endl;
+  Rcpp::Rcout << "oc2: " << oc2 << std::endl;
+  Rcpp::Rcout << "f1 : " << f1 << std::endl;
+  Rcpp::Rcout << "f2 : " << f2 << std::endl;
 #endif
 #endif
 
@@ -4877,14 +4878,14 @@ _remove_edge(DHalfedge* e, bool remove_source, bool remove_target)
     // be developed and used.
     signs1 = _compute_signs(he1, Has_identified_sides_category());
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-      std::cout << "signs1.x: " << signs1.first << std::endl;
-      std::cout << "signs1.y: " << signs1.second << std::endl;
+      Rcpp::Rcout << "signs1.x: " << signs1.first << std::endl;
+      Rcpp::Rcout << "signs1.y: " << signs1.second << std::endl;
 #endif
 
       signs2 = _compute_signs(he2, Has_identified_sides_category());
 #if CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE
-      std::cout << "signs2.x: " << signs2.first << std::endl;
-      std::cout << "signs2.y: " << signs2.second << std::endl;
+      Rcpp::Rcout << "signs2.x: " << signs2.first << std::endl;
+      Rcpp::Rcout << "signs2.y: " << signs2.second << std::endl;
 #endif
 
     // Both halfedges lie on the outer boundary of their incident faces

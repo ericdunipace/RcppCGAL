@@ -19,6 +19,7 @@
 #ifndef CGAL_ALGEBRAIC_REAL_QUADRATIC_REFINEMENT_REP_BFI_H
 #define CGAL_ALGEBRAIC_REAL_QUADRATIC_REFINEMENT_REP_BFI_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
@@ -465,7 +466,7 @@ protected:
         // correct sign if needed
         if( s*CGAL::sign(CGAL::upper(eval) ) != CGAL::POSITIVE ){
 
-            //std::cout << "APPROX FAILED-------------------------------"<<std::endl;
+            //Rcpp::Rcout << "APPROX FAILED-------------------------------"<<std::endl;
             s = this->polynomial().sign_at(m);
             if ( s != CGAL::ZERO ) {
                 _set_prec(2*prec_);

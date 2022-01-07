@@ -14,6 +14,7 @@
 #ifndef CGAL_POLYCHAIN_2_H
 #define CGAL_POLYCHAIN_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -392,7 +393,7 @@ public:
 
       unsigned int npts = this->size();
 
-      CGAL_SDG_DEBUG(std::cout << "pcl_reverse npts="
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "pcl_reverse npts="
           << npts << std::endl;);
 
       reverse.resize(npts);
@@ -411,7 +412,7 @@ public:
               vi != this->vertices_end();
               ++vi)
       {
-        //CGAL_SDG_DEBUG(std::cout << "debug pcl_reverse setting at " << i
+        //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug pcl_reverse setting at " << i
         //          << " value " << *vi << std::endl;);
         reverse[i] = *vi;
         --i;
@@ -478,7 +479,7 @@ public:
         return *ipoint;
       }
 
-      CGAL_SDG_DEBUG(std::cout
+      CGAL_SDG_DEBUG(Rcpp::Rcout
           << "debug error: no intersection found for "
           << "this=" << *this << " pcl=" << pcl << std::endl;);
 
@@ -496,7 +497,7 @@ public:
       // for every piece of object,
       // try intersecting with every piece of pcl
 
-      CGAL_SDG_DEBUG(std::cout
+      CGAL_SDG_DEBUG(Rcpp::Rcout
           << "debug first_intersection entering this="
           << *this << " pcl=" << pcl << std::endl;);
 
@@ -516,7 +517,7 @@ public:
       }
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
           << "creating empty vectors" << std::endl;);
 #endif
 
@@ -540,7 +541,7 @@ public:
       CGAL_assertion(this->size() == (segmentsthis.size() + 1));
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                      << "segmentsthis computed" << std::endl;);
 #endif
 
@@ -561,7 +562,7 @@ public:
       CGAL_assertion(pcl.size() == (segmentspcl.size() + 1));
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                      << "segmentspcl computed" << std::endl;);
 #endif
 
@@ -569,12 +570,12 @@ public:
       CGAL::Object result;
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                     << "trying rayincthis with pcl" << std::endl;);
 #endif
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                 << "trying ray " << rayincthis
                      << " with ray " << rayincpcl << std::endl;);
 #endif
@@ -588,7 +589,7 @@ public:
               sipcl != segmentspcl.end();
               ++sipcl) {
 #if 0
-        CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                 << "trying ray " << rayincthis
                        << " with segment " << *sipcl << std::endl;);
 #endif
@@ -600,7 +601,7 @@ public:
       }
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                 << "trying ray " << rayincthis
                      << " with ray " << rayoutpcl << std::endl;);
 #endif
@@ -611,7 +612,7 @@ public:
       }
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                      << "trying segmentsthis with pcl" << std::endl;);
 #endif
 
@@ -620,7 +621,7 @@ public:
               ++sithis) {
 
 #if 0
-        CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                 << "trying segment " << *sithis
                        << " with ray " << rayincpcl << std::endl;);
 #endif
@@ -634,7 +635,7 @@ public:
             sipcl != segmentspcl.end();
             ++sipcl) {
 #if 0
-          CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+          CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                 << "trying segment " << *sithis
                          << " with segment " << *sipcl << std::endl;);
 #endif
@@ -647,7 +648,7 @@ public:
         }
 
 #if 0
-        CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
             << "trying segment " << *sithis
             << " with ray " << rayoutpcl << std::endl;);
 #endif
@@ -660,12 +661,12 @@ public:
       }
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                      << "trying rayoutthis with pcl" << std::endl;);
 #endif
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                 << "trying ray " << rayoutthis
                      << " with ray " << rayincpcl << std::endl;);
 #endif
@@ -679,7 +680,7 @@ public:
               sipcl != segmentspcl.end();
               ++sipcl) {
 #if 0
-        CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                 << "trying ray " << rayoutthis
                        << " with segment " << *sipcl << std::endl;);
 #endif
@@ -691,7 +692,7 @@ public:
       }
 
 #if 0
-      CGAL_SDG_DEBUG(std::cout << "debug first_intersection "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug first_intersection "
                 << "trying ray " << rayoutthis
                      << " with ray " << rayoutpcl << std::endl;);
 #endif
@@ -701,7 +702,7 @@ public:
         return *ipoint;
       }
 
-      CGAL_SDG_DEBUG(std::cout
+      CGAL_SDG_DEBUG(Rcpp::Rcout
           << "debug error: no intersection found for "
           << "this=" << *this << " pcl=" << pcl << std::endl;);
 

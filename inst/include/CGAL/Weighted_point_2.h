@@ -17,6 +17,7 @@
 #ifndef CGAL_WEIGHTED_POINT_2_H
 #define CGAL_WEIGHTED_POINT_2_H
 
+#include <Rcpp.h>
 #include <CGAL/Origin.h>
 #include <CGAL/representation_tags.h>
 #include <CGAL/assertions.h>
@@ -293,8 +294,8 @@ extract(std::istream& is, Weighted_point_2<R>& p, const Cartesian_tag&)
         read(is, weight);
         break;
     default:
-        std::cerr << "" << std::endl;
-        std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+        Rcpp::Rcerr << "" << std::endl;
+        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
         break;
     }
     if (is)
@@ -321,8 +322,8 @@ extract(std::istream& is, Weighted_point_2<R>& p, const Homogeneous_tag&)
         read(is, weight);
         break;
     default:
-        std::cerr << "" << std::endl;
-        std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+        Rcpp::Rcerr << "" << std::endl;
+        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
         break;
   }
   if (is)

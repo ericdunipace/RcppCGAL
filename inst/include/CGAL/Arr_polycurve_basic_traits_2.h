@@ -15,6 +15,7 @@
 #ifndef CGAL_ARR_POLYCURVE_BASIC_TRAITS_2_H
 #define CGAL_ARR_POLYCURVE_BASIC_TRAITS_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -2365,7 +2366,7 @@ public:
         target = src;
       }
 
-      // std::cout << "**************the new sourc: " << source
+      // Rcpp::Rcout << "**************the new sourc: " << source
       //           << "the new target: " << target << std::endl;
       /*
        * Get the source and target subcurve numbers from the polycurve.
@@ -2375,9 +2376,9 @@ public:
        */
       std::size_t source_id = m_poly_traits.locate(xcv, source);
       std::size_t target_id = m_poly_traits.locate(xcv, target);
-      // std::cout << "source number: " << source_id << "  Target number : "
+      // Rcpp::Rcout << "source number: " << source_id << "  Target number : "
       //           << target_id << std::endl;
-      // std::cout << "target subcurve: " << xcv[target_id] << std::endl;
+      // Rcpp::Rcout << "target subcurve: " << xcv[target_id] << std::endl;
 
       std::vector<X_monotone_subcurve_2> trimmed_subcurves;
 

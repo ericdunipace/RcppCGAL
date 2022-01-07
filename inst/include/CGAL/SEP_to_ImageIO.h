@@ -12,6 +12,7 @@
 #ifndef CGAL_SEP_READER_IMAGEIO_HPP
 #define CGAL_SEP_READER_IMAGEIO_HPP
 
+#include <Rcpp.h>
 #include "SEP_header.h"
 #include <CGAL/ImageIO.h>
 #include <CGAL/Image_3.h>
@@ -58,7 +59,7 @@ public:
       err_msg += "\"";
       return;
     }
-    display_information(fileName, std::cout);
+    display_information(fileName, Rcpp::Rcout);
 
     boost::filesystem::path headerFile(fileName);
     boost::filesystem::path dataFile(string_field("in"));
