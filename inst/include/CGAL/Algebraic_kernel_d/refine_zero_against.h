@@ -18,6 +18,7 @@
 #ifndef CGAL_REFINE_ZERO_AGAINST_H
 #define CGAL_REFINE_ZERO_AGAINST_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/Polynomial.h>
@@ -122,7 +123,7 @@ bool refine_zero_against(Field& low, Field& high, Polynomial p, Polynomial q) {
                     gcd_pq = Polynomial(1);
                 }
             }
-            std::cout << CGAL::to_double(low) << " "
+            Rcpp::Rcout << CGAL::to_double(low) << " "
                       << CGAL::to_double(high) << " "
                       << CGAL::degree(gcd_pq) << " "
                       << gcd_pq
@@ -161,11 +162,11 @@ bool refine_zero_against(Field& low, Field& high, Polynomial p, Polynomial q) {
 template < class Polynomial, class Field >
 static bool strong_refine_zero_against(Field& low, Field& high,
                                        Polynomial p, Polynomial q){
-    std::cout << "comp has_common_root" << std::endl;
+    Rcpp::Rcout << "comp has_common_root" << std::endl;
 
     bool has_common_root = refine_zero_against(low,high,p,q);
 
-    std::cout << "done, " << has_common_root << std::endl;
+    Rcpp::Rcout << "done, " << has_common_root << std::endl;
 
     CGAL::Sign sign_p_low = p.sign_at(low);
     CGAL::Sign sign_p_high = p.sign_at(high);

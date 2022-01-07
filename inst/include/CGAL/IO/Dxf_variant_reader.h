@@ -22,6 +22,7 @@
 #ifndef CGAL_IO_DXF_VARIANT_READER_H
 #define CGAL_IO_DXF_VARIANT_READER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 
@@ -58,7 +59,7 @@ template<class CK,class Circular_arc_2, class Line_arc_2, class OutputIterator>
 
   reader(is, polygons, circles);
 
-  std::cout << "Read " << polygons.size() << " polygons, and "
+  Rcpp::Rcout << "Read " << polygons.size() << " polygons, and "
             << circles.size() << " circles" << std::endl;
 
 
@@ -140,7 +141,7 @@ template<class CK,class Circular_arc_2, class Line_arc_2, class OutputIterator>
     }
 
   }
-  std::cout << " Loaded" << std::endl;
+  Rcpp::Rcout << " Loaded" << std::endl;
 
   return res;
 }

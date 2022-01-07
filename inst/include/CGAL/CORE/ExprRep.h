@@ -29,6 +29,7 @@
 #ifndef _CORE_EXPRREP_H_
 #define _CORE_EXPRREP_H_
 
+#include <Rcpp.h>
 #include <CGAL/CORE/Real.h>
 #include <CGAL/CORE/Filter.h>
 #include <CGAL/CORE/poly/Sturm.h>
@@ -1016,12 +1017,12 @@ void AddSubRep<Operator>::computeExactFlags() {
   extLong u  = core_max(uf, us);
 
 #ifdef CGAL_CORE_TRACE
-  std::cout << "INSIDE Add/sub Rep: " << std::endl;
+  Rcpp::Rcout << "INSIDE Add/sub Rep: " << std::endl;
 #endif
 
   if (Op(sf, ss) != 0) {     // can't possibly cancel out
 #ifdef CGAL_CORE_TRACE
-    std::cout << "Add/sub Rep:  Op(sf, ss) non-zero" << std::endl;
+    Rcpp::Rcout << "Add/sub Rep:  Op(sf, ss) non-zero" << std::endl;
 #endif
 
     uMSB() = u + EXTLONG_ONE;
@@ -1029,38 +1030,38 @@ void AddSubRep<Operator>::computeExactFlags() {
     sign() = sf;
   } else {               // might cancel out
 #ifdef CGAL_CORE_TRACE
-    std::cout << "Add/sub Rep:  Op(sf, ss) zero" << std::endl;
+    Rcpp::Rcout << "Add/sub Rep:  Op(sf, ss) zero" << std::endl;
 #endif
 
     uMSB() = u + EXTLONG_ONE;
     uMSB() = u;
     if (lf >= us + EXTLONG_TWO) {// one is at least 1 order of magnitude larger
 #ifdef CGAL_CORE_TRACE
-      std::cout << "Add/sub Rep:  Can't cancel" << std::endl;
+      Rcpp::Rcout << "Add/sub Rep:  Can't cancel" << std::endl;
 #endif
 
       lMSB() = lf - EXTLONG_ONE;     // can't possibly cancel out
       sign() = sf;
     } else if (ls >= uf + EXTLONG_TWO) {
 #ifdef CGAL_CORE_TRACE
-      std::cout << "Add/sub Rep:  Can't cancel" << std::endl;
+      Rcpp::Rcout << "Add/sub Rep:  Can't cancel" << std::endl;
 #endif
 
       lMSB() = ls - EXTLONG_ONE;
       sign() = Op(ss);
     } else if (ffVal.isOK()) {// begin filter computation
 #ifdef CGAL_CORE_TRACE
-      std::cout << "Add/sub Rep:  filter used" << std::endl;
+      Rcpp::Rcout << "Add/sub Rep:  filter used" << std::endl;
 #endif
 #ifdef CGAL_CORE_DEBUG_FILTER
-      std::cout << "call filter in " << op() << "Rep" << std::endl;
+      Rcpp::Rcout << "call filter in " << op() << "Rep" << std::endl;
 #endif
       sign() = ffVal.sign();
       lMSB() = ffVal.lMSB();
       uMSB() = ffVal.uMSB();
     } else {                        // about the same size, might cancel out
 #ifdef CGAL_CORE_TRACE
-      std::cout << "Add/sub Rep:  iteration start" << std::endl;
+      Rcpp::Rcout << "Add/sub Rep:  iteration start" << std::endl;
 #endif
 
       extLong lowBound = computeBound();
@@ -1100,7 +1101,7 @@ void AddSubRep<Operator>::computeExactFlags() {
         }
       } else {  // else do progressive evaluation
 #ifdef CGAL_CORE_TRACE
-        std::cout << "Add/sub Rep:  progressive eval" << std::endl;
+        Rcpp::Rcout << "Add/sub Rep:  progressive eval" << std::endl;
 #endif
         // Oct 30, 2002: fixed a bug here!  Old versions used relative
         // precision bounds, but one should absolute precision for addition!
@@ -1116,7 +1117,7 @@ void AddSubRep<Operator>::computeExactFlags() {
         //   NOTE: ua is allowed to be CORE_INFTY
 
 #ifdef CGAL_CORE_DEBUG_BOUND
-        std::cout << "DebugBound:" << "ua = " << ua << std::endl;
+        Rcpp::Rcout << "DebugBound:" << "ua = " << ua << std::endl;
 #endif
         // We initially set the lMSB and sign as if the value is zero:
         lMSB() = CORE_negInfty;
@@ -1127,8 +1128,8 @@ void AddSubRep<Operator>::computeExactFlags() {
         // Now we try to determine the real lMSB and sign,
         // in case it is not really zero:
 #ifdef CGAL_CORE_TRACE
-        std::cout << "Upper bound (ua) for iteration is " << ua << std::endl;
-        std::cout << "Starting iteration at i = " << i << std::endl;
+        Rcpp::Rcout << "Upper bound (ua) for iteration is " << ua << std::endl;
+        Rcpp::Rcout << "Starting iteration at i = " << i << std::endl;
 #endif
 
         bool current_precision_lower_than_bound = true;
@@ -1149,19 +1150,19 @@ void AddSubRep<Operator>::computeExactFlags() {
 
 #ifdef CGAL_CORE_TRACE
           if (newValue.getRep().ID() == REAL_BIGFLOAT)
-          std::cout << "BigFloat! newValue->rep->ID() = "
+          Rcpp::Rcout << "BigFloat! newValue->rep->ID() = "
                   << newValue.getRep().ID() << std::endl;
           else
-          std::cout << "ERROR, Not BigFloat! newValue->rep->ID() ="
+          Rcpp::Rcout << "ERROR, Not BigFloat! newValue->rep->ID() ="
                   << newValue.getRep().ID() << std::endl;
-          std::cout << "newValue = Op(first,second) = "
+          Rcpp::Rcout << "newValue = Op(first,second) = "
                   << newValue << std::endl;
-          std::cout << "first:appVal, appComputed, knownPrec, sign ="
+          Rcpp::Rcout << "first:appVal, appComputed, knownPrec, sign ="
                   << first->appValue() << ","
                   << first->appComputed() << ","
                   << first->knownPrecision() << ","
                   << first->sign() << std::endl;
-          std::cout << "second:appVal, appComputed, knownPrec, sign ="
+          Rcpp::Rcout << "second:appVal, appComputed, knownPrec, sign ="
                   << second->appValue() << ","
                   << second->appComputed() << ","
                   << second->knownPrecision() << ","
@@ -1172,13 +1173,13 @@ void AddSubRep<Operator>::computeExactFlags() {
             uMSB() = newValue.uMSB();
             sign() = newValue.sign();
 #ifdef CGAL_CORE_DEBUG_BOUND
-            std::cout << "DebugBound(Exit Loop): " << "i=" << i << std::endl;
+            Rcpp::Rcout << "DebugBound(Exit Loop): " << "i=" << i << std::endl;
 #endif
 #ifdef CGAL_CORE_TRACE
-            std::cout << "Zero is not in, lMSB() = " << lMSB()
+            Rcpp::Rcout << "Zero is not in, lMSB() = " << lMSB()
                     << ", uMSB() = " << uMSB()
                     << ", sign() = " << sign() << std::endl;
-            std::cout << "newValue = " << newValue << std::endl;
+            Rcpp::Rcout << "newValue = " << newValue << std::endl;
 #endif
 
             break; // assert -- this must happen in the loop if nonzero!
@@ -1189,11 +1190,11 @@ void AddSubRep<Operator>::computeExactFlags() {
             core_error("Escape precision triggered at",
                              __FILE__, __LINE__, false);
             if (get_static_EscapePrecWarning())
-              std::cout<< "Escape Precision triggered at "
+              Rcpp::Rcout<< "Escape Precision triggered at "
                       << get_static_EscapePrec() << " bits" << std::endl;
 #ifdef CGAL_CORE_DEBUG
-            std::cout << "EscapePrecFlags=" << get_static_EscapePrecFlag() << std::endl;
-            std::cout << "ua =" << ua  << ",lowBound=" << lowBound << std::endl;
+            Rcpp::Rcout << "EscapePrecFlags=" << get_static_EscapePrecFlag() << std::endl;
+            Rcpp::Rcout << "ua =" << ua  << ",lowBound=" << lowBound << std::endl;
 #endif
             break;
           }// if

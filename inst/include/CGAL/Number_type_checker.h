@@ -17,6 +17,7 @@
 #ifndef CGAL_NUMBER_TYPE_CHECKER_H
 #define CGAL_NUMBER_TYPE_CHECKER_H
 
+#include <Rcpp.h>
 #include <CGAL/number_type_basic.h>
 #include <sstream>
 
@@ -25,7 +26,7 @@
 // It is also parameterized by a comparator which compares the values
 // of NT1 and NT2 after all arithmetic operations.
 
-// #define CGAL_NT_CHECK_DEBUG(s) std::cerr << s << std::endl
+// #define CGAL_NT_CHECK_DEBUG(s) Rcpp::Rcerr << s << std::endl
 #define CGAL_NT_CHECK_DEBUG(s)
 
 namespace CGAL {

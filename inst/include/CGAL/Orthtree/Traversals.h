@@ -12,6 +12,7 @@
 #ifndef CGAL_ORTHTREE_TRAVERSALS_H
 #define CGAL_ORTHTREE_TRAVERSALS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Orthtree.h>
 
 #include <iostream>
@@ -235,7 +236,7 @@ public:
 
   template <typename Node>
   Node next(Node n) const {
-    std::cerr << depth << " ";
+    Rcpp::Rcerr << depth << " ";
     Node next = next_sibling(n);
 
     if (next.is_null())

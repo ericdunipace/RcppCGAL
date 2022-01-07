@@ -18,6 +18,7 @@
 #ifndef CGAL_CIRCULAR_KERNEL_PREDICATES_ON_LINE_ARC_2_H
 #define CGAL_CIRCULAR_KERNEL_PREDICATES_ON_LINE_ARC_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 
@@ -651,7 +652,7 @@ namespace CircularFunctors {
       } // Case 4b
 
 
-      std::cout << "oops we missed a case" << std::endl;
+      Rcpp::Rcout << "oops we missed a case" << std::endl;
 
     }
 #endif // CGAL_CK_EXPLOIT_IDENTITY

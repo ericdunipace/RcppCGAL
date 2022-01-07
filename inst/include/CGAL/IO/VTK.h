@@ -15,6 +15,7 @@
 #ifndef CGAL_IO_VTK_H
 #define CGAL_IO_VTK_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/VTK/VTK_reader.h>
 #include <CGAL/IO/VTK/VTK_writer.h>
 
@@ -103,7 +104,7 @@ bool read_VTP(const std::string& fname,
   std::ifstream test(fname);
   if(!test.good())
   {
-    std::cerr<<"File doesn't exist."<<std::endl;
+    Rcpp::Rcerr<<"File doesn't exist."<<std::endl;
     return false;
   }
 

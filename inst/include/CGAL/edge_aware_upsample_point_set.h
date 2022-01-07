@@ -12,6 +12,7 @@
 #ifndef CGAL_UPSAMPLE_POINT_SET_H
 #define CGAL_UPSAMPLE_POINT_SET_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -70,7 +71,7 @@ base_point_selection(
   if (neighbor_points.empty())
   {
 #ifdef CGAL_PSP3_VERBOSE
-    std::cout << "empty neighborhood" << std::endl;
+    Rcpp::Rcout << "empty neighborhood" << std::endl;
 #endif
     output_base_index = query.index;
     return 0.0;
@@ -406,7 +407,7 @@ edge_aware_upsample_point_set(
   {
     neighbor_radius = average_spacing * 3.0f;
 #ifdef CGAL_PSP3_VERBOSE
-    std::cout << "neighbor radius: " << neighbor_radius << std::endl;
+    Rcpp::Rcout << "neighbor radius: " << neighbor_radius << std::endl;
 #endif
   }
 
@@ -446,7 +447,7 @@ edge_aware_upsample_point_set(
   for (unsigned int iter_time = 0; iter_time < max_iter_time; ++iter_time)
   {
   #ifdef CGAL_PSP3_VERBOSE
-     std::cout << std::endl << "iter_time: " << iter_time + 1  << std::endl;
+     Rcpp::Rcout << std::endl << "iter_time: " << iter_time + 1  << std::endl;
   #endif
     if (iter_time > 0)
     {
@@ -460,7 +461,7 @@ edge_aware_upsample_point_set(
                                                           current_radius);
     }
  #ifdef CGAL_PSP3_VERBOSE
-    std::cout << "current radius: " << current_radius << std::endl;
+    Rcpp::Rcout << "current radius: " << current_radius << std::endl;
  #endif
 
     std::size_t current_size = rich_point_set.size();
@@ -507,7 +508,7 @@ edge_aware_upsample_point_set(
     FT density_pass_threshold2 = density_pass_threshold *
                                  density_pass_threshold;
  #ifdef CGAL_PSP3_VERBOSE
-    std::cout << "pass_threshold:  " << density_pass_threshold << std::endl;
+    Rcpp::Rcout << "pass_threshold:  " << density_pass_threshold << std::endl;
  #endif
     // insert new points until all the points' density pass the threshold
     unsigned int max_loop_time = 3;
@@ -515,7 +516,7 @@ edge_aware_upsample_point_set(
     while (true)
     {
    #ifdef CGAL_PSP3_VERBOSE
-      std::cout << "loop_time: " << loop + 1 << std::endl;
+      Rcpp::Rcout << "loop_time: " << loop + 1 << std::endl;
    #endif
       unsigned int count_not_pass = 0;
       loop++;
@@ -585,7 +586,7 @@ edge_aware_upsample_point_set(
         }
       }
    #ifdef CGAL_PSP3_VERBOSE
-      std::cout << "current size: " << rich_point_set.size() << std::endl;
+      Rcpp::Rcout << "current size: " << rich_point_set.size() << std::endl;
    #endif
       if (count_not_pass == 0 ||
           loop >= max_loop_time ||

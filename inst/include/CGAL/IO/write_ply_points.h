@@ -12,6 +12,7 @@
 #ifndef CGAL_POINT_SET_PROCESSING_WRITE_PLY_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_WRITE_PLY_POINTS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/IO/helpers.h>
@@ -121,7 +122,7 @@ template <typename PointRange,
 
   if(!os)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -214,7 +215,7 @@ bool write_PLY(std::ostream& os,
 
   if(!os)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 

@@ -13,6 +13,7 @@
 #ifndef CGAL_PARTITIONED_POLYGON_2_H
 #define CGAL_PARTITIONED_POLYGON_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -132,7 +133,7 @@ public:
 
       Diagonal_iterator d;
 #ifdef CGAL_PARTITIONED_POLY_DEBUG
-      std::cout << "pruning diagonals ..." << std::endl;
+      Rcpp::Rcout << "pruning diagonals ..." << std::endl;
 #endif
       do {
          d = (*c).diagonals_begin();
@@ -140,7 +141,7 @@ public:
             if (!diagonal_is_necessary(c, *d))
             {
 #ifdef CGAL_PARTITIONED_POLY_DEBUG
-               std::cout << "   removing from " << *c << " to " << **d
+               Rcpp::Rcout << "   removing from " << *c << " to " << **d
                          << std::endl;
 #endif
                (**d).diagonal_erase(c);
@@ -207,14 +208,14 @@ private:
        {
           new_polygon.push_back(*next);
 #ifdef CGAL_PARTITIONED_POLY_DEBUG
-          std::cout << "adding vertex " << *next << std::endl;
+          Rcpp::Rcout << "adding vertex " << *next << std::endl;
 #endif
           Circulator diag;
           if ((*next).has_unused_diagonals())
           {
              diag = (*next).current_diagonal();
 #ifdef CGAL_PARTITIONED_POLY_DEBUG
-             std::cout << "diagonal endpoint: " << *diag << std::endl;
+             Rcpp::Rcout << "diagonal endpoint: " << *diag << std::endl;
 #endif
              (*next).advance_diagonal();
              if (diag == start)
@@ -392,12 +393,12 @@ private:
 
     void print_diagonals( ) const
     {
-       std::cout << "from " << *this << std::endl;
+       Rcpp::Rcout << "from " << *this << std::endl;
        typename std::list<Circulator>::const_iterator it;
        for (it = diag_endpoint_refs.begin();it != diag_endpoint_refs.end();
             it++)
        {
-          std::cout << " to " << **it << std::endl;
+          Rcpp::Rcout << " to " << **it << std::endl;
        }
     }
 

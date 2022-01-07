@@ -17,6 +17,7 @@
 #ifndef CGAL_VECTOR_2_H
 #define CGAL_VECTOR_2_H
 
+#include <Rcpp.h>
 #include <CGAL/Origin.h>
 #include <CGAL/Kernel/mpl.h>
 #include <CGAL/assertions.h>
@@ -346,8 +347,8 @@ extract(std::istream& is, Vector_2<R>& v, const Cartesian_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        std::cerr << "" << std::endl;
-        std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+        Rcpp::Rcerr << "" << std::endl;
+        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
         break;
     }
     if (is)
@@ -373,8 +374,8 @@ extract(std::istream& is, Vector_2<R>& v, const Homogeneous_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        std::cerr << "" << std::endl;
-        std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+        Rcpp::Rcerr << "" << std::endl;
+        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
         break;
   }
   v = Vector_2<R>(hx, hy, hw);

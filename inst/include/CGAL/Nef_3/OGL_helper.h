@@ -13,6 +13,7 @@
 #ifndef CGAL_NEF_OPENGL_HELPER_H
 #define CGAL_NEF_OPENGL_HELPER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -198,7 +199,7 @@ namespace OGL {
       if (i<fc_ends_.size()-1) return coords_.begin()+fc_ends_[i+1];
       else return coords_.end(); }
 
-    void debug(std::ostream& os = std::cerr) const
+    void debug(std::ostream& os = Rcpp::Rcerr) const
     { os << "DFacet, normal=" << normal_ << ", mark=" << mark() << std::endl;
       for(unsigned i=0; i<number_of_facet_cycles(); ++i) {
         os << "  facet cycle ";
@@ -505,7 +506,7 @@ namespace OGL {
       if (switches[SNC_AXES]) glCallList(object_list_+3); // axis
    }
 
-    void debug(std::ostream& os = std::cerr) const
+    void debug(std::ostream& os = Rcpp::Rcerr) const
     {
       os << "OGL::Polyhedron" << std::endl;
       os << "Vertices:" << std::endl;

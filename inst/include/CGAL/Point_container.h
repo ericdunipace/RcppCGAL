@@ -15,6 +15,7 @@
 #ifndef CGAL_POINT_CONTAINER_H
 #define CGAL_POINT_CONTAINER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Spatial_searching.h>
 
 
@@ -294,11 +295,11 @@ public:
       typename Traits2::Cartesian_const_iterator_d ptit;
       ptit = construct_it(*pt);
       if(! ( *(ptit+split_coord) <= high ) ){
-        //        std::cerr << "Point " << *pt << " exceeds " << high << " in dimension " << split_coord << std::endl;
+        //        Rcpp::Rcerr << "Point " << *pt << " exceeds " << high << " in dimension " << split_coord << std::endl;
         return false;
       }
       if(! ( *(ptit+split_coord) >= low ) ){
-        //std::cerr << "Point " << *pt << " below " << low << " in dimension " << split_coord << std::endl;
+        //Rcpp::Rcerr << "Point " << *pt << " below " << low << " in dimension " << split_coord << std::endl;
         return false;
       }
       return true;

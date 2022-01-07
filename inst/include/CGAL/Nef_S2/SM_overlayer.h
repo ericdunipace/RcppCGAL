@@ -14,6 +14,7 @@
 #ifndef CGAL_SM_OVERLAYER_H
 #define CGAL_SM_OVERLAYER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 
@@ -313,17 +314,17 @@ void debug() const {
     typename SM_overlayer::SVertex_const_handle vs;
     typename SM_overlayer::SHalfedge_const_handle es;
     if(CGAL::assign(vs, G.supp_object(svii,0)))
-      std::cerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
     else if(CGAL::assign(es, G.supp_object(svii,0)))
-      std::cerr << svii->point() << " supported by sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by sedge" << std::endl;
     else
-      std::cerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
     if(CGAL::assign(vs, G.supp_object(svii,1)))
-      std::cerr << svii->point() << " supported by svertex" << vs->point() << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by svertex" << vs->point() << std::endl;
     else if(CGAL::assign(es, G.supp_object(svii,1)))
-      std::cerr << svii->point() << " supported by sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by sedge" << std::endl;
     else
-      std::cerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
   }
 }
 
@@ -830,7 +831,7 @@ public:
   template <typename Association>
     void transfer_data(Association& A);
 
-  void dump(std::ostream& os = std::cerr) const
+  void dump(std::ostream& os = Rcpp::Rcerr) const
   { SM_io_parser<Base>::dump(*this,os); }
 
 }; // SM_overlayer<SM_decorator>
@@ -872,14 +873,14 @@ create_from_segments(Forward_iterator start, Forward_iterator end)
     Input_range(L_pos.begin(),L_pos.end()),O,
     ph_g);
   SP.sweep();
-  //CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(std::cerr),""));
+  //CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(Rcpp::Rcerr),""));
   v=--this->svertices_end(); e=--this->shalfedges_end();
   NH_geometry nh_g;
   Negative_halfsphere_sweep SM(
     Input_range(L_neg.begin(),L_neg.end()),O,
     nh_g);
   SM.sweep();
-  //CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(std::cerr),""));
+  //CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(Rcpp::Rcerr),""));
   ++v; ++e;
   // now two CCs of sphere graph are calculated
   // v = first vertex of CC in negative x-sphere
@@ -945,14 +946,14 @@ create_from_circles(Forward_iterator start, Forward_iterator end)
     Input_range(L_pos.begin(),L_pos.end()),O,
     ph_g);
   SP.sweep();
-  //CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(std::cerr),""));
+  //CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(Rcpp::Rcerr),""));
   v=--this->svertices_end(); e=--this->shalfedges_end();
   NH_geometry nh_geom;
   Negative_halfsphere_sweep SM(
     Input_range(L_neg.begin(),L_neg.end()), O,
     nh_geom);
   SM.sweep();
-  //CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(std::cerr),""));
+  //CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(Rcpp::Rcerr),""));
   ++v; ++e;
   // now two CCs of sphere graph are calculated
   // v = first vertex of CC in negative x-sphere
@@ -1480,17 +1481,17 @@ subdivide(const Map* M0, const Map* M1,
     SVertex_const_handle vs;
     SHalfedge_const_handle es;
     if(CGAL::assign(vs, supp_object(svii,0)))
-      std::cerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
     else if(CGAL::assign(es, supp_object(svii,0)))
-      std::cerr << svii->point() << " supported by sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by sedge" << std::endl;
     else
-      std::cerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
     if(CGAL::assign(vs, supp_object(svii,1)))
-      std::cerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
     else if(CGAL::assign(es, supp_object(svii,1)))
-      std::cerr << svii->point() << " supported by sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by sedge" << std::endl;
     else
-      std::cerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
   }
   */
   if(compute_halfsphere[cs][0])
@@ -1776,17 +1777,17 @@ subdivide(const Map* M0, const Map* M1,
     SVertex_const_handle vs;
     SHalfedge_const_handle es;
     if(CGAL::assign(vs, supp_object(svii,0)))
-      std::cerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
     else if(CGAL::assign(es, supp_object(svii,0)))
-      std::cerr << svii->point() << " supported by sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by sedge" << std::endl;
     else
-      std::cerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
     if(CGAL::assign(vs, supp_object(svii,1)))
-      std::cerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by svertex " << vs->point() << std::endl;
     else if(CGAL::assign(es, supp_object(svii,1)))
-      std::cerr << svii->point() << " supported by sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " supported by sedge" << std::endl;
     else
-      std::cerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
+      Rcpp::Rcerr << svii->point() << " is neither supported by svertex or sedge" << std::endl;
   }
   */
   if(compute_halfsphere[cs][0])
@@ -1841,7 +1842,7 @@ transfer_data(Association& A) {
   SHalfloop_const_handle sl0, sl1;
 
   CGAL_forall_svertices(sv, *this) {
-    //    std::cerr << "svertex " << sv->point() << std::endl;
+    //    Rcpp::Rcerr << "svertex " << sv->point() << std::endl;
     Object_handle o0 = supp_object(sv,0), o1 = supp_object(sv,1);
     if(o0.empty()) {
       if(CGAL::assign(sv1, o1))
@@ -2443,11 +2444,11 @@ typedef CGAL::generic_sweep<NHS_traits> Negative_halfsphere_sweep;
   typedef typename PHS_traits::INPUT Input_range;
   Positive_halfsphere_sweep SP(Input_range(Lp.begin(),Lp.end()),O);
   SP.sweep();
-  //CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(std::cerr),""));
+  //CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(Rcpp::Rcerr),""));
   v1= this->vertices_begin(); v2=--this->vertices_end();
   Negative_halfsphere_sweep SM(Input_range(Lm.begin(),Lm.end()),O);
   SM.sweep();
-  //CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(std::cerr),""));
+  //CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(Rcpp::Rcerr),""));
   ++v2;
   // now two CCs of sphere graph calculated
   // v1 = first node of CC in positive xy-sphere

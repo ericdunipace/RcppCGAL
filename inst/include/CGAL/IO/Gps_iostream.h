@@ -13,6 +13,7 @@
 #ifndef CGAL_GPS_IOSTREAM_H
 #define CGAL_GPS_IOSTREAM_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Boolean_set_operations_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -36,9 +37,9 @@ std::ostream & operator<< (std::ostream& os,
   Pgn_with_holes_container res;
   pgn_set.polygons_with_holes (std::back_inserter (res));
 
-  std::cout << pgn_set.number_of_polygons_with_holes() << std::endl;
+  Rcpp::Rcout << pgn_set.number_of_polygons_with_holes() << std::endl;
   std::copy(res.begin(), res.end(),
-            std::ostream_iterator<Polygon_with_holes_2>(std::cout, "\n"));
+            std::ostream_iterator<Polygon_with_holes_2>(Rcpp::Rcout, "\n"));
 
   return os;
 }

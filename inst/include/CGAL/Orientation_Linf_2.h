@@ -14,6 +14,7 @@
 #ifndef CGAL_ORIENTATION_LINF_2_H
 #define CGAL_ORIENTATION_LINF_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -48,7 +49,7 @@ private:
     Comparison_result cmpxqr = compare_x_2(q, r);
     Comparison_result cmpyqr = compare_y_2(q, r);
 
-    //std::cout << "debug Orientation_Linf_2 (p,q,r)= "
+    //Rcpp::Rcout << "debug Orientation_Linf_2 (p,q,r)= "
     //          << p << ' ' << q << ' ' << r
     //          << std::endl;
 
@@ -84,16 +85,16 @@ private:
             ( (-cmpxpq == cmpxpr) && ( cmpxpr == cmpxqr) &&
               (-cmpypq == cmpypr) && ( cmpypr == cmpyqr)     )    ) ;
 
-      //std::cout << "debug is_monotone=" << is_monotone << std::endl;
+      //Rcpp::Rcout << "debug is_monotone=" << is_monotone << std::endl;
 
       if (is_monotone) {
         //p, q, r are monotone here
-        //std::cout << "debug Orientation_Linf_2 are monotone"
+        //Rcpp::Rcout << "debug Orientation_Linf_2 are monotone"
         //      << std::endl;
         return DEGENERATE;
       }
       else { // p, q, r do not form stair case
-        //std::cout << "debug Orientation_Linf_2 not monotone"
+        //Rcpp::Rcout << "debug Orientation_Linf_2 not monotone"
         //      << std::endl;
         if ( cmpxpq == SMALLER ) {
           if ( cmpypq == SMALLER ) {//CASE-I q lies in the North East of p
@@ -112,10 +113,10 @@ private:
           }//end of CASE-II
         }
         else {//cmpxpq == LARGER case III and case IV
-          //std::cout << "debug Orientation_Linf_2 cmpxpq LARGER"
+          //Rcpp::Rcout << "debug Orientation_Linf_2 cmpxpq LARGER"
           //    << std::endl;
           if ( cmpypq == SMALLER ) {//CASE-III q lies in the North West of p
-            //std::cout << "debug Orientation_Linf_2 cmpypq SMALLER"
+            //Rcpp::Rcout << "debug Orientation_Linf_2 cmpypq SMALLER"
             //    << std::endl;
             return (cmpxpr == SMALLER ||
                 cmpyqr == SMALLER ||
@@ -123,7 +124,7 @@ private:
               RIGHT_TURN : LEFT_TURN;
           }//end of CASE-III
           else {//compare_y_2(p, q) == LARGER -- CASE-IV q lies in the South West of p
-            //std::cout << "debug Orientation_Linf_2 cmpypq LARGER"
+            //Rcpp::Rcout << "debug Orientation_Linf_2 cmpypq LARGER"
             //    << std::endl;
             return (cmpypr == SMALLER ||
                 cmpxqr == LARGER ||

@@ -19,6 +19,7 @@
  * Definition of the No_intersection_surface_sweep_2 class.
  */
 
+#include <Rcpp.h>
 #include <boost/mpl/assert.hpp>
 
 #include <CGAL/license/Surface_sweep_2.h>
@@ -57,7 +58,7 @@
 #include <iostream>
 
 #define CGAL_SS_DEBUG(a) {a;}
-#define CGAL_SS_PRINT(a) std::cout << a
+#define CGAL_SS_PRINT(a) Rcpp::Rcout << a
 #define CGAL_SS_PRINT_TEXT(text) this->print_text(text)
 #define CGAL_SS_PRINT_EOL() this->print_eol()
 #define CGAL_SS_PRINT_START(name) this->print_start(name, false)

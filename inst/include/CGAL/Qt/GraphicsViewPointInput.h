@@ -10,6 +10,7 @@
 #ifndef CGAL_QT_GRAPHICS_VIEW_POINT_INPUT_H
 #define CGAL_QT_GRAPHICS_VIEW_POINT_INPUT_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/Qt/GraphicsViewInput.h>
@@ -49,7 +50,7 @@ void
 GraphicsViewPointInput< K >::
 mousePressEvent( QGraphicsSceneMouseEvent* event )
 {
-    std::cout << event->pos( ).x( ) << std::endl;
+    Rcpp::Rcout << event->pos( ).x( ) << std::endl;
     this->point = this->convert( event->scenePos( ) );
 }
 

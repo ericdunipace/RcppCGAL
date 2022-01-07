@@ -12,6 +12,7 @@
 #ifndef CGAL_CLASSIFICATION_ETHZ_RANDOM_FOREST_CLASSIFIER_H
 #define CGAL_CLASSIFICATION_ETHZ_RANDOM_FOREST_CLASSIFIER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/Classification/Feature_set.h>
@@ -203,7 +204,7 @@ public:
     CGAL_CLASSIFICATION_CERR << "Using " << gt.size() << " inliers:" << std::endl;
 #ifdef CGAL_CLASSIFICATION_VERBOSE
     for (std::size_t i = 0; i < m_labels.size(); ++ i)
-      std::cerr << " * " << m_labels[i]->name() << ": " << count[i] << " inlier(s)" << std::endl;
+      Rcpp::Rcerr << " * " << m_labels[i]->name() << ": " << count[i] << " inlier(s)" << std::endl;
 #endif
 
     CGAL::internal::liblearning::DataView2D<int> label_vector (&(gt[0]), gt.size(), 1);

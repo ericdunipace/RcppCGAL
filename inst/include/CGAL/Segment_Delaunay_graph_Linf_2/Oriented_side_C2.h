@@ -14,6 +14,7 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_ORIENTED_SIDE_C2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_ORIENTED_SIDE_C2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -87,7 +88,7 @@ public:
 
     Oriented_side retval = v.oriented_side(lp);
 
-    CGAL_SDG_DEBUG(std::cout
+    CGAL_SDG_DEBUG(Rcpp::Rcout
         << "debug: Oriented_side_C2 (s1,s2,s3,s,p)= ("
         << s1 << ") (" << s2 << ") (" << s3 << ") ("
         << s << ") (" << p << ") "
@@ -128,7 +129,7 @@ public:
           (is_s2_pnt? 1 : 0) +
           (is_s3_pnt? 1 : 0) ;
         CGAL_assertion( num_pts == 1 || num_pts == 2 );
-        CGAL_SDG_DEBUG(std::cout
+        CGAL_SDG_DEBUG(Rcpp::Rcout
             << "debug: Oriented_side_C2 num_pts=" << num_pts
             << std::endl;);
 
@@ -169,7 +170,7 @@ public:
           unsigned int num_candidates =
             (is_a_cand? 1 : 0) +
             (is_b_cand? 1 : 0) ;
-          CGAL_SDG_DEBUG(std::cout
+          CGAL_SDG_DEBUG(Rcpp::Rcout
               << "debug: Oriented_side_C2 two points, num_candidates="
               << num_candidates << std::endl;);
           const Site_2 * test_site_ptr;
@@ -187,7 +188,7 @@ public:
       } // end of case ON_ORIENTED_BOUNDARY
     } // end of case of at least a point and non-hv seg s
 
-    CGAL_SDG_DEBUG(std::cout
+    CGAL_SDG_DEBUG(Rcpp::Rcout
         << "debug: Oriented_side_C2 (s1,s2,s3,s,p)= ("
         << s1 << ") (" << s2 << ") (" << s3 << ") ("
         << s << ") (" << p << ") "
@@ -271,7 +272,7 @@ public:
       else {
         // here, the point is not endpoint of the segment
 
-        CGAL_SDG_DEBUG(std::cout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
               << s1 << ") (" << s2 << ") ("
               << s << ") (" << p << ") "
               << "case of s1/s2 no endpoint relation"
@@ -308,7 +309,7 @@ public:
     Oriented_side retval =
       oriented_side_of_line(lp, testpnt);
 
-    CGAL_SDG_DEBUG(std::cout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
               << s1 << ") (" << s2 << ") ("
               << s << ") (" << p << ") "
               << "returns " << retval
@@ -389,7 +390,7 @@ public:
       else {
         // here, the point is not endpoint of the segment
 
-        CGAL_SDG_DEBUG(std::cout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
               << s1 << ") (" << s2 << ") ("
               << s << ") (" << p << ") "
               << "case of s1/s2 no endpoint relation"
@@ -432,7 +433,7 @@ public:
       // philaris: tocheck this later
       CGAL_assertion(! are_endp_s1s2);
 
-      CGAL_SDG_DEBUG(std::cout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
               << s1 << ") (" << s2 << ") ("
               << s << ") (" << p << ") "
               << "trying to fix ZERO"
@@ -446,7 +447,7 @@ public:
     }
 
 
-    CGAL_SDG_DEBUG(std::cout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug: Oriented_side_C2 (s1,s2,s,p)= ("
               << s1 << ") (" << s2 << ") ("
               << s << ") (" << p << ") "
               << "tiebreaker returns " << retval

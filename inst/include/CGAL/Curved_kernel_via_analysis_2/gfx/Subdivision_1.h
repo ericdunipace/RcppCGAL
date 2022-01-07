@@ -19,6 +19,7 @@
 #ifndef CGAL_CKVA_SUBDIVISION_1_H
 #define CGAL_CKVA_SUBDIVISION_1_H 1
 
+#include <Rcpp.h>
 #include <vector>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/member.hpp>
@@ -274,8 +275,8 @@ OutputIterator Subdivision_1<Coeff_, Algebraic_curve_2_>::draw(
 {
     if(!initialized||!polynomial_set)
         return oi;
-    //std::cout << "resolution: " << res_w << " x " << res_h << std::endl;
-    //std::cout << "box: [" << x_min << "; " << y_min << "]x[" << x_max << "; "
+    //Rcpp::Rcout << "resolution: " << res_w << " x " << res_h << std::endl;
+    //Rcpp::Rcout << "box: [" << x_min << "; " << y_min << "]x[" << x_max << "; "
         // <<   y_max << "]" << std::endl;
 
     Isolated_points points;
@@ -293,7 +294,7 @@ OutputIterator Subdivision_1<Coeff_, Algebraic_curve_2_>::draw(
 
         typename Isolated_points::iterator it = points.begin();
         while(it != points.end()) {
-        //          std::cout << "(" << x << "; " << y << ")  ";
+        //          Rcpp::Rcout << "(" << x << "; " << y << ")  ";
             y = engine.res_h - (int)floor((*it).left);
             //if((*it).sign_change)
                 //painter->drawPoint(x, y);
@@ -317,7 +318,7 @@ OutputIterator Subdivision_1<Coeff_, Algebraic_curve_2_>::draw(
 
         typename Isolated_points::iterator it = points.begin();
         while(it != points.end()) {
-        //          std::cout << "(" << x << "; " << y << ")  ";
+        //          Rcpp::Rcout << "(" << x << "; " << y << ")  ";
             x = (int)floor((*it).left);
             *oi++ = std::make_pair(x, engine.res_h - y);
 
@@ -328,7 +329,7 @@ OutputIterator Subdivision_1<Coeff_, Algebraic_curve_2_>::draw(
             it++;
         }
     }
-    //std::cout << "exit normal" << std::endl;
+    //Rcpp::Rcout << "exit normal" << std::endl;
     return oi;
 }
 
@@ -350,7 +351,7 @@ void Subdivision_1<Coeff_, Algebraic_curve_2_>::refine_points(int var,
             else if(eval_r==0)
                 (*it).left = (*it).right = r;*/
             (*it).sign_change = false;
-            //std::cout << "no sign change\n";
+            //Rcpp::Rcout << "no sign change\n";
             it++;
             continue;
         }
@@ -383,7 +384,7 @@ bool Subdivision_1<Coeff_, Algebraic_curve_2_>::isolate_recursive
         return false;
 
     if(!engine.first_der) {
-        //std::cout << "interval found: " << (x_end - x_beg) << std::endl;
+        //Rcpp::Rcout << "interval found: " << (x_end - x_beg) << std::endl;
         points.push_back(Isolated_point(beg, end));
         return true;
     }
@@ -391,7 +392,7 @@ bool Subdivision_1<Coeff_, Algebraic_curve_2_>::isolate_recursive
     NT dist = NT(1)/NT(SoX_REFINE_ISOLATED_POINTS);
     make_exact(dist);
     if(end - beg < dist) {// pixel size is reached
-        //std::cout << "WARNING: roots are too close..\n";
+        //Rcpp::Rcout << "WARNING: roots are too close..\n";
 
         // in this case we should generate an exception..
         points.push_back(Isolated_point(beg, end));

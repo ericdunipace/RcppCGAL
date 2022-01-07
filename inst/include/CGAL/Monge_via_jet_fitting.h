@@ -11,6 +11,7 @@
 #ifndef CGAL_MONGE_VIA_JET_FITTING_H_
 #define CGAL_MONGE_VIA_JET_FITTING_H_
 
+#include <Rcpp.h>
 #include <CGAL/license/Jet_fitting_3.h>
 
 
@@ -584,7 +585,7 @@ compute_Monge_coefficients(FT* A, std::size_t dprime,
     A[k*(k+1)/2+i] /= fact(k-i)*fact(i);//this is A(k-i;i)
 
 /*   //debug */
-/*   std::cout << "coeff of A" << std::endl */
+/*   Rcpp::Rcout << "coeff of A" << std::endl */
 /*             << A[0] << " "<< A[1] << " "<< A[2] << std::endl */
 /*             << A[3] << " "<< A[4] << " "<< A[5] << std::endl */
 /*             << A[6] << " "<< A[7] << " "<< A[8] << " "<< A[9]<< std::endl */

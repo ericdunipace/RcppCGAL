@@ -12,6 +12,7 @@
 #ifndef CGAL_ENVELOPE_DIVIDE_AND_CONQUER_2_IMPL_H
 #define CGAL_ENVELOPE_DIVIDE_AND_CONQUER_2_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Envelope_2.h>
 
 
@@ -69,20 +70,20 @@ _construct_envelope_non_vertical(Curve_pointer_iterator begin,
     Edge_const_handle    e = out_d.leftmost();
     Vertex_const_handle  v;
 
-    std::cout << "The diagram: ";
+    Rcpp::Rcout << "The diagram: ";
     while (e != out_d.rightmost())
     {
       if (! e->is_empty())
-        std::cout << e->curve() << "  ";
+        Rcpp::Rcout << e->curve() << "  ";
       else
-        std::cout << "[empty]" << "  ";
+        Rcpp::Rcout << "[empty]" << "  ";
 
       v = e->right();
-      std::cout << "(" << v->point() << ")  ";
+      Rcpp::Rcout << "(" << v->point() << ")  ";
 
       e = v->right();
     }
-    std::cout << "[empty]" << std::endl;
+    Rcpp::Rcout << "[empty]" << std::endl;
     */
   }
 

@@ -12,6 +12,7 @@
 #ifndef CGAL_CLASSIFICATION_LABEL_SET_H
 #define CGAL_CLASSIFICATION_LABEL_SET_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/Classification/Label.h>
@@ -310,14 +311,14 @@ public:
 
     if (verbose)
     {
-      std::cout << "Ground truth is " << (valid ? "valid" : "invalid") << ":" << std::endl;
-      std::cout << " * " << nb_inliers[m_labels.size()] << " unclassified item(s) ("
+      Rcpp::Rcout << "Ground truth is " << (valid ? "valid" : "invalid") << ":" << std::endl;
+      Rcpp::Rcout << " * " << nb_inliers[m_labels.size()] << " unclassified item(s) ("
                 << 100. * (nb_inliers[m_labels.size()] / double(total)) << "%)" << std::endl;
       for (std::size_t i = 0; i < m_labels.size(); ++ i)
-        std::cout << " * " << nb_inliers[i] << " " << m_labels[i]->name() << " inlier(s) ("
+        Rcpp::Rcout << " * " << nb_inliers[i] << " " << m_labels[i]->name() << " inlier(s) ("
                   << 100. * (nb_inliers[i] / double(total)) << "%)" << std::endl;
       if (!valid)
-        std::cout << " * " << nb_inliers[m_labels.size() + 1] << " item(s) with out-of-range index ("
+        Rcpp::Rcout << " * " << nb_inliers[m_labels.size() + 1] << " item(s) with out-of-range index ("
                   << 100. * (nb_inliers[m_labels.size() + 1] / double(total)) << "%)" << std::endl;
     }
 

@@ -13,6 +13,7 @@
 #ifndef CGAL_SURFACE_MESHER_SPHERE_ORACLE_3_H
 #define CGAL_SURFACE_MESHER_SPHERE_ORACLE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -67,7 +68,7 @@ namespace CGAL {
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
 #  ifndef CGAL_SURFACE_MESHER_IMPLICIT_SURFACE_ORACLE_3_H
-      std::cerr << "CONS: Sphere_oracle_3\n";
+      Rcpp::Rcerr << "CONS: Sphere_oracle_3\n";
 #  endif
 #endif
     }
@@ -284,7 +285,7 @@ namespace CGAL {
           intersection_line_sphere_lambda(sphere, a, b);
 
 #ifdef CGAL_SURFACE_MESHER_DEBUG_IMPLICIT_ORACLE
-        std::cerr << "Clip segment. Roots=("
+        Rcpp::Rcerr << "Clip segment. Roots=("
                   << root_1 << ", " << root_2 << ")\n";
 #endif
         if( number_of_roots < 2 )

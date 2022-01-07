@@ -12,6 +12,7 @@
 #ifndef CGAL_wlop_simplify_and_regularize_point_set_H
 #define CGAL_wlop_simplify_and_regularize_point_set_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -501,8 +502,8 @@ wlop_simplify_and_regularize_point_set(
     radius = average_spacing * 8.0;
 
 #ifdef CGAL_PSP3_VERBOSE
-    std::cout << "The estimated radius size is: " << radius << std::endl;
-    std::cout << "Be careful! Using this radius estimation may not be able to have good performance/result for different input" << std::endl;
+    Rcpp::Rcout << "The estimated radius size is: " << radius << std::endl;
+    Rcpp::Rcout << "Be careful! Using this radius estimation may not be able to have good performance/result for different input" << std::endl;
 #endif
   }
 

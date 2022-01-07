@@ -56,6 +56,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_POLYHEDRAL_ENVELOPE_H
 #define CGAL_POLYGON_MESH_PROCESSING_POLYHEDRAL_ENVELOPE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/Polyhedral_envelope.h>
 
 #include <CGAL/disable_warnings.h>
@@ -851,7 +852,7 @@ private:
 
       boost::optional<ePoint_3> op = intersection_point_for_polyhedral_envelope(line, plane_i.eplane);
       if(! op){
-        std::cout <<  "there must be an intersection 2" << std::endl;
+        Rcpp::Rcout <<  "there must be an intersection 2" << std::endl;
       }
 
       const ePoint_3& ip = *op;
@@ -1162,7 +1163,7 @@ private:
           boost::optional<ePoint_3> op = intersection_point_for_polyhedral_envelope(eline, plane_i.eplane);
           if(! op){
 #ifdef CGAL_ENVELOPE_DEBUG
-            std::cout <<  "there must be an intersection 6" << std::endl;
+            Rcpp::Rcout <<  "there must be an intersection 6" << std::endl;
 #endif
           }
 
@@ -2107,10 +2108,10 @@ private:
         }
 
 #ifdef CGAL_ENVELOPE_DEBUG
-        std::cout << "face "<< i << std::endl;
+        Rcpp::Rcout << "face "<< i << std::endl;
         for(unsigned int j = 0; j < halfspace[i].size(); j++){
           const Plane& p =  halfspace[i][j];
-          std::cout << p.ep << " | "  << p.eq << " | "  << p.er << std::endl;
+          Rcpp::Rcout << p.ep << " | "  << p.eq << " | "  << p.er << std::endl;
           ePoint_3 pv(ver[faces[i][0]].x(), ver[faces[i][0]].y(),ver[faces[i][0]].z());
           Orientation ori = orientation(p.ep, p.eq, p.er, pv);
           assert(ori == NEGATIVE);

@@ -18,6 +18,7 @@
 #ifndef CGAL_LINEAR_ALGEBRACD_C
 #define CGAL_LINEAR_ALGEBRACD_C
 
+#include <Rcpp.h>
 #include <algorithm>
 #include <functional>
 
@@ -388,7 +389,7 @@ homogeneous_linear_solver(const Matrix &M, Matrix &spanning_vectors)
       /* we check whether the $l$ - th spanning vector is a solution
          of the homogeneous system */
       if ( !(M*spanning_vectors.column(l)).is_zero() )
-        std::cerr << M*spanning_vectors.column(l) << std::endl;
+        Rcpp::Rcerr << M*spanning_vectors.column(l) << std::endl;
       CGAL_assertion( (M*spanning_vectors.column(l)).is_zero() );
 #endif
     }

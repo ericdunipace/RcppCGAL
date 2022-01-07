@@ -13,6 +13,7 @@
 #ifndef CGAL_SNC_FM_DECORATOR_H
 #define CGAL_SNC_FM_DECORATOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 #ifdef CGAL_I_DO_WANT_TO_USE_GENINFO
@@ -552,7 +553,7 @@ create_facet_objects(const Plane_3& plane_supporting_facet,
       p2 = e->twin()->source()->twin()->source()->point(),
       p3 = e->next()->twin()->source()->twin()->source()->point();
 
-    //      std::cerr << "minimal shalfedge " << e->source()->source()->point() << ":"
+    //      Rcpp::Rcerr << "minimal shalfedge " << e->source()->source()->point() << ":"
     //                << e->source()->point() << "->" << e->twin()->source()->point() << std::endl;
 
 
@@ -581,9 +582,9 @@ create_facet_objects(const Plane_3& plane_supporting_facet,
     do_sweep = true;
 
   CGAL_forall_iterators(eit,SHalfedges) {
-    //    std::cerr << "fc " << FacetCycle[*eit] << std::endl;
+    //    Rcpp::Rcerr << "fc " << FacetCycle[*eit] << std::endl;
     if ( (*eit)->facet() == Halffacet_handle() ) {
-      //      std::cerr << "nicht verlinkte shalfedge " << (*eit)->source()->source()->point() << ":"
+      //      Rcpp::Rcerr << "nicht verlinkte shalfedge " << (*eit)->source()->source()->point() << ":"
       //                << (*eit)->source()->point() << "->" << (*eit)->twin()->source()->point() << std::endl;
       do_sweep = true;
       break;
@@ -591,7 +592,7 @@ create_facet_objects(const Plane_3& plane_supporting_facet,
   }
 
 
-  //  std::cerr << std::endl;
+  //  Rcpp::Rcerr << std::endl;
 #ifndef CGAL_NEF3_PLANE_SWEEP_OPTIMIZATION_OFF
   if(!do_sweep) return;
 #endif

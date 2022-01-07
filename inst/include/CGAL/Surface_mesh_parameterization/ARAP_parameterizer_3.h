@@ -12,6 +12,7 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_ARAP_PARAMETERIZER_3_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_ARAP_PARAMETERIZER_3_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/license/Surface_mesh_parameterization.h>
@@ -1131,7 +1132,7 @@ private:
     NT Du, Dv;
     if(!get_linear_algebra_traits().linear_solver(A, Bu, Xu, Du) ||
        !get_linear_algebra_traits().linear_solver(A, Bv, Xv, Dv)) {
-      std::cerr << "Could not solve linear system" << std::endl;
+      Rcpp::Rcerr << "Could not solve linear system" << std::endl;
       status = ERROR_CANNOT_SOLVE_LINEAR_SYSTEM;
       return status;
     }
@@ -1369,8 +1370,8 @@ public:
     NT energy_last;
 
 #ifdef CGAL_PARAMETERIZATION_ARAP_VERBOSE
-    std::cout << "Initial energy: " << energy_this << std::endl;
-    std::cout << m_iterations << " max iterations" << std::endl;
+    Rcpp::Rcout << "Initial energy: " << energy_this << std::endl;
+    Rcpp::Rcout << m_iterations << " max iterations" << std::endl;
 #endif
 
     // main loop
@@ -1395,7 +1396,7 @@ public:
         energy_this = compute_current_energy(mesh, faces, ctmap, lp, lpmap, ltmap, uvmap);
 
 #ifdef CGAL_PARAMETERIZATION_ARAP_VERBOSE
-        std::cout << "Energy at iteration " << ite << " : " << energy_this << std::endl;
+        Rcpp::Rcout << "Energy at iteration " << ite << " : " << energy_this << std::endl;
 #endif
 
         if(energy_this < 0) {
@@ -1418,7 +1419,7 @@ public:
     }
 
 #ifdef CGAL_PARAMETERIZATION_ARAP_VERBOSE
-    std::cout << "Minimization process ended after: " << ite << " iterations. " << std::endl;
+    Rcpp::Rcout << "Minimization process ended after: " << ite << " iterations. " << std::endl;
 #endif
 
 #ifdef CGAL_SMP_ARAP_DEBUG
@@ -1428,7 +1429,7 @@ public:
     if(!is_one_to_one_mapping(mesh, faces, uvmap)) {
      // Use post processing to handle flipped elements
 #ifdef CGAL_PARAMETERIZATION_ARAP_VERBOSE
-      std::cout << "Parameterization is not valid; calling post processor" << std::endl;
+      Rcpp::Rcout << "Parameterization is not valid; calling post processor" << std::endl;
 #endif
       status = post_process(mesh, vertices, faces, bhd, uvmap, vimap);
     }

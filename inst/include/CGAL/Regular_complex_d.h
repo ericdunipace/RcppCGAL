@@ -21,6 +21,7 @@
 #ifndef CGAL_REGULAR_COMPLEX_D_H
 #define CGAL_REGULAR_COMPLEX_D_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Convex_hull_d.h>
 
 #define CGAL_DEPRECATED_HEADER "<CGAL/Regular_complex_d.h>"
@@ -216,7 +217,7 @@ public:
   }
   ~RC_simplex_d() {}
 
-  void print(std::ostream& O=std::cout) const
+  void print(std::ostream& O=Rcpp::Rcout) const
   {
     O << "RC_simplex_d {" ;
     for(int i=0;i < int(vertices.size());++i) {
@@ -562,7 +563,7 @@ typedef size_t Size_type;
 Size_type number_of_vertices() const  { return this->vertices_.size();}
 Size_type number_of_simplices() const  { return this->simplices_.size();}
 
-void print_statistics(std::ostream& os = std::cout) const
+void print_statistics(std::ostream& os = Rcpp::Rcout) const
 {
   os << "Regular_complex_d - statistic" << std::endl;
   os << "number of vertices = " << number_of_vertices() << std::endl;

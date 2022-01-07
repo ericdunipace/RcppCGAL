@@ -19,6 +19,7 @@
  * adds support for points at infinity to native CKvA_2 object
  */
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/Handle_with_policy.h>
 
@@ -208,7 +209,7 @@ template <class SweepCurvesAdaptor_2, class Rep_>
 std::istream& operator >> (std::istream& is,
                            Generic_point_2<SweepCurvesAdaptor_2, Rep_>& /* pt */) {
 
-    std::cerr << "bogus >> call for generic_point\n";
+    Rcpp::Rcerr << "bogus >> call for generic_point\n";
     return is;
 }
 

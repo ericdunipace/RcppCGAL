@@ -15,6 +15,7 @@
 #ifndef CGAL_ARRANGEMENT_ON_SURFACE_2_GLOBAL_H
 #define CGAL_ARRANGEMENT_ON_SURFACE_2_GLOBAL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 /*! \file
@@ -716,7 +717,7 @@ insert_non_intersecting_curve
   else {
     // We have a right end with boundary conditions. Use the accessor to locate
     // the feature that contains it.
-    // std::cout << "before locate_curve_end()"
+    // Rcpp::Rcout << "before locate_curve_end()"
     //           << ", bx2: " << bx2
     //           << ", by2: " << by2
     //           << std::endl;
@@ -769,10 +770,10 @@ insert_non_intersecting_curve
       const Face_const_handle* fh1 = boost::get<Face_const_handle>(&obj1);
       const Face_const_handle* fh2 = boost::get<Face_const_handle>(&obj2);
 
-      // std::cout << arr << std::endl;
-      // std::cout << "(*fh1)->number_of_outer_ccbs(): "
+      // Rcpp::Rcout << arr << std::endl;
+      // Rcpp::Rcout << "(*fh1)->number_of_outer_ccbs(): "
       //           << (*fh1)->number_of_outer_ccbs() << std::endl;
-      // std::cout << "(*fh2)->number_of_outer_ccbs(): "
+      // Rcpp::Rcout << "(*fh2)->number_of_outer_ccbs(): "
       //           << (*fh2)->number_of_outer_ccbs() << std::endl;
 
       CGAL_assertion_msg

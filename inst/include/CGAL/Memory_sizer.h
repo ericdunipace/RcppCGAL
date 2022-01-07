@@ -12,6 +12,7 @@
 #ifndef CGAL_MEMORY_SIZER_H
 #define CGAL_MEMORY_SIZER_H
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/assertions.h>
 
@@ -150,7 +151,7 @@ private:
                 // TODO: test if the following line works...
     //task_info(current_task(), TASK_BASIC_INFO, (task_info_t)&t_info, &t_info_count);
 #if 0
-    std::cerr << "PAGE SIZE IS " << getpagesize() << std::endl
+    Rcpp::Rcerr << "PAGE SIZE IS " << getpagesize() << std::endl
     << " RESIDENT SIZE IS " << t_info.resident_size << std::endl
     << " VIRTUAL SIZE IS " << t_info.virtual_size << std::endl;
 #endif

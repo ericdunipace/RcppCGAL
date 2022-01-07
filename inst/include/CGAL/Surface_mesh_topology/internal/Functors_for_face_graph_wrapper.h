@@ -12,6 +12,7 @@
 #ifndef CGAL_FUNCTORS_FOR_FACE_GRAPH_WRAPPER_H
 #define CGAL_FUNCTORS_FOR_FACE_GRAPH_WRAPPER_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <boost/graph/graph_traits.hpp>
@@ -41,7 +42,7 @@ struct Get_beta
 
   static Dart_const_handle value(const HEG& /*heg*/, Dart_const_handle /*dh*/)
   {
-    std::cout<<"ERROR Get_beta<HEG, "<<i<<">"<<std::endl;
+    Rcpp::Rcout<<"ERROR Get_beta<HEG, "<<i<<">"<<std::endl;
     CGAL_assertion(false);
     return nullptr;
   }

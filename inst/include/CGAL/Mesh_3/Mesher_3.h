@@ -19,6 +19,7 @@
 #ifndef CGAL_MESH_3_MESHER_3_H
 #define CGAL_MESH_3_MESHER_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -440,7 +441,7 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
   CGAL_MESH_3_TASK_END(initialize_task_handle);
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << "Refining facets..." << std::endl;
+  Rcpp::Rcerr << "Refining facets..." << std::endl;
   WallClockTimer t;
 #endif
   CGAL_MESH_3_TASK_BEGIN(refine_surface_mesh_task_handle);
@@ -454,7 +455,7 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
   CGAL_MESH_3_TASK_END(refine_surface_mesh_task_handle);
 #ifdef CGAL_MESH_3_PROFILING
   double facet_ref_time = t.elapsed();
-  std::cerr << "==== Facet refinement: " << facet_ref_time << " seconds ===="
+  Rcpp::Rcerr << "==== Facet refinement: " << facet_ref_time << " seconds ===="
             << std::endl << std::endl;
 # ifdef CGAL_MESH_3_EXPORT_PERFORMANCE_DATA
     // If it's parallel but the refinement is forced to sequential, we don't
@@ -466,11 +467,11 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
 #endif
 
 #if defined(CHECK_AND_DISPLAY_THE_NUMBER_OF_BAD_ELEMENTS_IN_THE_END)
-  std::cerr << std::endl
+  Rcpp::Rcerr << std::endl
     << "===============================================================" << std::endl
     << "=== CHECK_AND_DISPLAY_THE_NUMBER_OF_BAD_ELEMENTS_IN_THE_END ===" << std::endl;
   display_number_of_bad_elements();
-  std::cerr
+  Rcpp::Rcerr
     << "==============================================================="
     << std::endl << std::endl;
 #endif
@@ -489,7 +490,7 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
     CGAL_MESH_3_TASK_END(scan_cells_task_handle);
     refinement_stage = REFINE_ALL;
 #ifdef CGAL_MESH_3_PROFILING
-    std::cerr << "Refining cells..." << std::endl;
+    Rcpp::Rcerr << "Refining cells..." << std::endl;
     t.reset();
 #endif
     CGAL_MESH_3_TASK_BEGIN(refine_volume_mesh_task_handle);
@@ -497,7 +498,7 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
     CGAL_MESH_3_TASK_END(refine_volume_mesh_task_handle);
 #ifdef CGAL_MESH_3_PROFILING
     double cell_ref_time = t.elapsed();
-    std::cerr << "==== Cell refinement: " << cell_ref_time << " seconds ===="
+    Rcpp::Rcerr << "==== Cell refinement: " << cell_ref_time << " seconds ===="
               << std::endl << std::endl;
 # ifdef CGAL_MESH_3_EXPORT_PERFORMANCE_DATA
     // If it's parallel but the refinement is forced to sequential, we don't
@@ -509,30 +510,30 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
 #endif
 
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    std::cerr
+    Rcpp::Rcerr
       << "Vertices: " << r_c3t3_.triangulation().number_of_vertices() << std::endl
       << "Facets  : " << r_c3t3_.number_of_facets_in_complex() << std::endl
       << "Tets    : " << r_c3t3_.number_of_cells_in_complex() << std::endl;
 #endif
   } // end test of `maximal_number_of_vertices`
 #else // ifdef CGAL_MESH_3_VERBOSE
-  std::cerr << "Start surface scan...";
+  Rcpp::Rcerr << "Start surface scan...";
   CGAL_MESH_3_TASK_BEGIN(initialize_task_handle);
   initialize();
   CGAL_MESH_3_TASK_END(initialize_task_handle);
-  std::cerr << "end scan. [Bad facets:" << facets_mesher_.size() << "]";
-  std::cerr << std::endl << std::endl;
+  Rcpp::Rcerr << "end scan. [Bad facets:" << facets_mesher_.size() << "]";
+  Rcpp::Rcerr << std::endl << std::endl;
   elapsed_time += timer.time();
   timer.stop(); timer.reset(); timer.start();
 
   int nbsteps = 0;
 
-  std::cerr << "Refining Surface...\n";
-  std::cerr << "Legend of the following line: "
+  Rcpp::Rcerr << "Refining Surface...\n";
+  Rcpp::Rcerr << "Legend of the following line: "
             << "(#vertices,#steps," << cells_mesher_.debug_info_header()
             << ")\n";
 
-  std::cerr << "(" << r_tr.number_of_vertices() << ","
+  Rcpp::Rcerr << "(" << r_tr.number_of_vertices() << ","
             << nbsteps << "," << cells_mesher_.debug_info() << ")";
 
   CGAL_MESH_3_TASK_BEGIN(refine_surface_mesh_task_handle);
@@ -540,7 +541,7 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
           ! forced_stop() )
   {
     facets_mesher_.one_step(facets_visitor_);
-    std::cerr
+    Rcpp::Rcerr
     << boost::format("\r             \r"
                      "(%1%,%2%,%3%) (%|4$.1f| vertices/s)")
     % r_tr.number_of_vertices()
@@ -563,9 +564,9 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
     ++nbsteps;
   }
   CGAL_MESH_3_TASK_END(refine_surface_mesh_task_handle);
-  std::cerr << std::endl;
-  std::cerr << "Total refining surface time: " << timer.time() << "s" << std::endl;
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << "Total refining surface time: " << timer.time() << "s" << std::endl;
+  Rcpp::Rcerr << std::endl;
 
   CGAL_triangulation_postcondition(r_tr.is_valid());
 
@@ -575,21 +576,21 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
 
   facets_visitor_.activate();
   dump_c3t3(r_c3t3_, dump_after_refine_surface_prefix);
-  std::cerr << "Start volume scan...";
+  Rcpp::Rcerr << "Start volume scan...";
   CGAL_MESH_3_TASK_BEGIN(scan_cells_task_handle);
   cells_mesher_.scan_triangulation();
   CGAL_MESH_3_TASK_END(scan_cells_task_handle);
   refinement_stage = REFINE_ALL;
-  std::cerr << "end scan. [Bad tets:" << cells_mesher_.size() << "]";
-  std::cerr << std::endl << std::endl;
+  Rcpp::Rcerr << "end scan. [Bad tets:" << cells_mesher_.size() << "]";
+  Rcpp::Rcerr << std::endl << std::endl;
   elapsed_time += timer.time();
   timer.stop(); timer.reset(); timer.start();
 
-  std::cerr << "Refining...\n";
-  std::cerr << "Legend of the following line: "
+  Rcpp::Rcerr << "Refining...\n";
+  Rcpp::Rcerr << "Legend of the following line: "
             << "(#vertices,#steps," << cells_mesher_.debug_info_header()
             << ")\n";
-  std::cerr << "(" << r_tr.number_of_vertices() << ","
+  Rcpp::Rcerr << "(" << r_tr.number_of_vertices() << ","
             << nbsteps << "," << cells_mesher_.debug_info() << ")";
 
   CGAL_MESH_3_TASK_BEGIN(refine_volume_mesh_task_handle);
@@ -597,7 +598,7 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
           ! forced_stop() )
   {
     cells_mesher_.one_step(cells_visitor_);
-    std::cerr
+    Rcpp::Rcerr
         << boost::format("\r             \r"
                      "(%1%,%2%,%3%) (%|4$.1f| vertices/s)")
         % r_tr.number_of_vertices()
@@ -606,11 +607,11 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
     ++nbsteps;
   }
   CGAL_MESH_3_TASK_END(refine_volume_mesh_task_handle);
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
 
-  std::cerr << "Total refining volume time: " << timer.time() << "s" << std::endl;
-  std::cerr << "Total refining time: " << timer.time()+elapsed_time << "s" << std::endl;
-  std::cerr << std::endl;
+  Rcpp::Rcerr << "Total refining volume time: " << timer.time() << "s" << std::endl;
+  Rcpp::Rcerr << "Total refining time: " << timer.time()+elapsed_time << "s" << std::endl;
+  Rcpp::Rcerr << std::endl;
 
   CGAL_triangulation_postcondition(r_tr.is_valid());
 #endif
@@ -622,11 +623,11 @@ refine_mesh(std::string dump_after_refine_surface_prefix)
 
 #if defined(CHECK_AND_DISPLAY_THE_NUMBER_OF_BAD_ELEMENTS_IN_THE_END) \
  || defined(SHOW_REMAINING_BAD_ELEMENT_IN_RED)
-  std::cerr << std::endl
+  Rcpp::Rcerr << std::endl
     << "===============================================================" << std::endl
     << "=== CHECK_AND_DISPLAY_THE_NUMBER_OF_BAD_ELEMENTS_IN_THE_END ===" << std::endl;
   display_number_of_bad_elements();
-  std::cerr
+  Rcpp::Rcerr
     << "==============================================================="
     << std::endl << std::endl;
 #endif
@@ -641,7 +642,7 @@ Mesher_3<C3T3,MC,MD>::
 initialize()
 {
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << "Initializing... ";
+  Rcpp::Rcerr << "Initializing... ";
   WallClockTimer t;
 #endif
   //=====================================
@@ -687,7 +688,7 @@ initialize()
         bbox.ymin() + 0.5*ydelta,
         bbox.zmin() + 0.5*zdelta);
 #  ifdef CGAL_CONCURRENT_MESH_3_VERBOSE
-      std::cerr << "Adding points on a far sphere (radius = " << radius <<")...";
+      Rcpp::Rcerr << "Adding points on a far sphere (radius = " << radius <<")...";
 #  endif
       Random_points_on_sphere_3<Bare_point> random_point(radius);
       const int NUM_PSEUDO_INFINITE_VERTICES = static_cast<int>(
@@ -698,14 +699,14 @@ initialize()
                               (r_c3t3_.triangulation().geom_traits().construct_translated_point_3_object()(*random_point, center)));
 
 #  ifdef CGAL_CONCURRENT_MESH_3_VERBOSE
-      std::cerr << "done." << std::endl;
+      Rcpp::Rcerr << "done." << std::endl;
 #  endif
     }
 # endif // CGAL_PARALLEL_MESH_3_DO_NOT_ADD_OUTSIDE_POINTS_ON_A_FAR_SPHERE
 
 #ifdef CGAL_MESH_3_PROFILING
     double init_time = t.elapsed();
-    std::cerr << "done in " << init_time << " seconds." << std::endl;
+    Rcpp::Rcerr << "done in " << init_time << " seconds." << std::endl;
 #endif
 
     // Scan triangulation
@@ -744,7 +745,7 @@ initialize()
         bbox.ymin() + 0.5*ydelta,
         bbox.zmin() + 0.5*zdelta);
 # ifdef CGAL_MESH_3_VERBOSE
-      std::cerr << "Adding points on a far sphere (radius = " << radius << ")...";
+      Rcpp::Rcerr << "Adding points on a far sphere (radius = " << radius << ")...";
 # endif
       Random_points_on_sphere_3<Bare_point> random_point(radius);
       const int NUM_PSEUDO_INFINITE_VERTICES = 12*2;
@@ -752,13 +753,13 @@ initialize()
         r_c3t3_.add_far_point(r_c3t3_.triangulation().geom_traits().construct_weighted_point_3_object()
                               (r_c3t3_.triangulation().geom_traits().construct_translated_point_3_object()(*random_point, center)));
 # ifdef CGAL_MESH_3_VERBOSE
-      std::cerr << "done." << std::endl;
+      Rcpp::Rcerr << "done." << std::endl;
 # endif
     }
 
 #ifdef CGAL_MESH_3_PROFILING
     double init_time = t.elapsed();
-    std::cerr << "done in " << init_time << " seconds." << std::endl;
+    Rcpp::Rcerr << "done in " << init_time << " seconds." << std::endl;
 #endif
 
     // Scan triangulation
@@ -787,7 +788,7 @@ display_number_of_bad_elements()
 {
   int nf = facets_mesher_.number_of_bad_elements();
   int nc = cells_mesher_.number_of_bad_elements();
-  std::cerr << "Bad facets: " << nf << " - Bad cells: " << nc << std::endl;
+  Rcpp::Rcerr << "Bad facets: " << nf << " - Bad cells: " << nc << std::endl;
 }
 
 template<class C3T3, class MC, class MD>

@@ -11,6 +11,7 @@
 #ifndef CGAL_POINT_SET_IO_PLY_H
 #define CGAL_POINT_SET_IO_PLY_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_3.h>
 
 #include <CGAL/boost/graph/Named_function_parameters.h>
@@ -249,7 +250,7 @@ bool read_PLY(std::istream& is,
 {
   if(!is)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -493,7 +494,7 @@ bool write_PLY(std::ostream& os,
 
   if(!os)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 

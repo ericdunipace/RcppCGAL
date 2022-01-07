@@ -16,6 +16,7 @@
 #ifndef CGAL_DELAUNAY_TRIANGULATION_3_H
 #define CGAL_DELAUNAY_TRIANGULATION_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -396,7 +397,7 @@ public:
     }
 
 #ifdef CGAL_TRIANGULATION_3_PROFILING
-    std::cerr << "Triangulation computed in " << t.elapsed() << " seconds." << std::endl;
+    Rcpp::Rcerr << "Triangulation computed in " << t.elapsed() << " seconds." << std::endl;
 #endif
 
     return number_of_vertices() - n;
@@ -708,7 +709,7 @@ public:
 
 #ifdef CGAL_TRIANGULATION_3_PROFILING
     double elapsed = t.elapsed();
-    std::cerr << "Points removed in " << elapsed << " seconds." << std::endl;
+    Rcpp::Rcerr << "Points removed in " << elapsed << " seconds." << std::endl;
 #endif
     return n - number_of_vertices();
   }
@@ -1914,7 +1915,7 @@ is_valid(bool verbose, int level) const
   if(! tds().is_valid(verbose,level))
   {
     if(verbose)
-      std::cerr << "invalid data structure" << std::endl;
+      Rcpp::Rcerr << "invalid data structure" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -1923,7 +1924,7 @@ is_valid(bool verbose, int level) const
   if(infinite_vertex() == Vertex_handle())
   {
     if(verbose)
-      std::cerr << "no infinite vertex" << std::endl;
+      Rcpp::Rcerr << "no infinite vertex" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -1944,7 +1945,7 @@ is_valid(bool verbose, int level) const
                                 it->neighbor(i)->index(it))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                std::cerr << "non-empty sphere " << std::endl;
+                Rcpp::Rcerr << "non-empty sphere " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -1970,7 +1971,7 @@ is_valid(bool verbose, int level) const
                                        (*it).first))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                std::cerr << "non-empty circle " << std::endl;
+                Rcpp::Rcerr << "non-empty circle " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -1990,7 +1991,7 @@ is_valid(bool verbose, int level) const
     }
   }
   if(verbose)
-      std::cerr << "Delaunay valid triangulation" << std::endl;
+      Rcpp::Rcerr << "Delaunay valid triangulation" << std::endl;
 
   return true;
 }
@@ -2004,10 +2005,10 @@ is_valid(Cell_handle c, bool verbose, int level) const
   {
     if(verbose)
     {
-      std::cerr << "combinatorically invalid cell" ;
+      Rcpp::Rcerr << "combinatorically invalid cell" ;
       for(int i=0; i <= dimension(); i++)
-        std::cerr << c->vertex(i)->point() << ", " ;
-      std::cerr << std::endl;
+        Rcpp::Rcerr << c->vertex(i)->point() << ", " ;
+      Rcpp::Rcerr << std::endl;
     }
     CGAL_triangulation_assertion(false);
     return false;
@@ -2023,7 +2024,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
           if(side_of_sphere(c, c->vertex((c->neighbor(i))->index(c))->point()) == ON_BOUNDED_SIDE)
           {
             if(verbose)
-              std::cerr << "non-empty sphere " << std::endl;
+              Rcpp::Rcerr << "non-empty sphere " << std::endl;
 
             CGAL_triangulation_assertion(false);
             return false;
@@ -2041,7 +2042,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
           if(side_of_circle(c, 3, c->vertex(c->neighbor(i)->index(c))->point()) == ON_BOUNDED_SIDE)
           {
             if(verbose)
-              std::cerr << "non-empty circle " << std::endl;
+              Rcpp::Rcerr << "non-empty circle " << std::endl;
 
             CGAL_triangulation_assertion(false);
             return false;
@@ -2052,7 +2053,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
     }
   }
   if(verbose)
-    std::cerr << "Delaunay valid cell" << std::endl;
+    Rcpp::Rcerr << "Delaunay valid cell" << std::endl;
 
   return true;
 }

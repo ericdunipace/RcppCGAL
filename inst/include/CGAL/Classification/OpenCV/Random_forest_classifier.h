@@ -12,6 +12,7 @@
 #ifndef CGAL_CLASSIFICATION_OPENCV_RANDOM_FOREST_CLASSIFIER_H
 #define CGAL_CLASSIFICATION_OPENCV_RANDOM_FOREST_CLASSIFIER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/Classification/Feature_set.h>
@@ -156,7 +157,7 @@ public:
 
 #ifdef CGAL_CLASSIFICATION_VERBOSE
 
-    std::cerr << "Training random forest (OpenCV "
+    Rcpp::Rcerr << "Training random forest (OpenCV "
               << CV_MAJOR_VERSION << "."
               << CV_MINOR_VERSION << ")" << std::endl;
 #endif

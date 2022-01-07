@@ -17,6 +17,7 @@
 #ifndef CGAL_POLYNOMIAL_BEZOUT_MATRIX_H
 #define CGAL_POLYNOMIAL_BEZOUT_MATRIX_H
 
+#include <Rcpp.h>
 #include <algorithm>
 
 #include <CGAL/basic.h>
@@ -553,7 +554,7 @@ polynomial_subresultant_matrix(typename Polynomial_traits_d::Polynomial_d f,
 
       Matrix S = internal::s_matrix<NT>(B,intseq.begin(),(int)intseq.size());
       internal::swap_entries<NT>(S);
-      //std::cout << S << std::endl;
+      //Rcpp::Rcout << S << std::endl;
       int Sdim = S.row_dimension();
       int number_of_minors=(Sdim < m) ? Sdim : Sdim;
 

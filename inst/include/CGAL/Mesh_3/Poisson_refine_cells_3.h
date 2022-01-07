@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_3_POISSON_REFINE_CELLS_3_H
 #define CGAL_MESH_3_POISSON_REFINE_CELLS_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 
@@ -115,14 +116,14 @@ public:
   Point refinement_point_impl(const Cell_handle& c) const
   {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    std::cerr << "point from volume mesher: ";
+    Rcpp::Rcerr << "point from volume mesher: ";
 #endif
     // Use tr.dual(), which is optimized, when the cell base class has
     // circumcenter().
     const Point result = triangulation_ref_impl().dual(c);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
 #  ifdef CGAL_MESH_3_DIRTY_DEBUG_SPHERES
-    std::cerr << " \t\tdistance: "
+    Rcpp::Rcerr << " \t\tdistance: "
               << CGAL::sqrt(CGAL::squared_distance(result,
                          typename Tr::Geom_traits::Point_3(CGAL::ORIGIN)));
 #  endif
@@ -134,7 +135,7 @@ public:
 #if CGAL_MESH_3_DEBUG_BEFORE_CONFLICTS
   void before_conflicts_impl(const Cell_handle&, const Point& p)
   {
-    std::cerr << "Poisson_refine_tets: before conflicts of " << p;
+    Rcpp::Rcerr << "Poisson_refine_tets: before conflicts of " << p;
   }
 #else
   void before_conflicts_impl(const Cell_handle&, const Point&)
@@ -146,7 +147,7 @@ public:
                                const Zone& )
   {
 #if CGAL_MESH_3_DEBUG_AFTER_NO_INSERTION
-    std::cerr << "  REJECTED!" << std::endl;
+    Rcpp::Rcerr << "  REJECTED!" << std::endl;
 #endif
   }
 }; // end Poisson_refine_tets_base
@@ -195,7 +196,7 @@ public:
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
     // Check if triangulation's geometric traits provides a robust circumcenter computation
     if (triangulation_ref_impl().side_of_sphere(c, p, true) != ON_BOUNDED_SIDE)
-      std::cerr << "Poisson_refine_tets_with_oracle_base::conflicts_zone_impl: ERROR: circumcenter out of sphere!\n";
+      Rcpp::Rcerr << "Poisson_refine_tets_with_oracle_base::conflicts_zone_impl: ERROR: circumcenter out of sphere!\n";
 #endif
 
     zone.cell = c;
@@ -227,7 +228,7 @@ public:
   {
     CGAL_MESHES_OUTPUT_STREAM << "*";
 #if CGAL_MESH_3_DEBUG_AFTER_INSERTION
-    std::cerr << "  INSERTED." << std::endl;
+    Rcpp::Rcerr << "  INSERTED." << std::endl;
 #endif
     update_star(v);
   }

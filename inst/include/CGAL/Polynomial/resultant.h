@@ -24,6 +24,7 @@
 #endif
 
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Polynomial.h>
 
@@ -165,9 +166,9 @@ CGAL::Polynomial<Coeff_2>  resultant_interpolate(
         int deg_f_at_i = coeff_degree(Fat_i,0);
         int deg_g_at_i = coeff_degree(Gat_i,0);
 
-        // std::cout << F << std::endl;
-        // std::cout << Fat_i << std::endl;
-        // std::cout << deg_f_at_i << " vs. " << deg_f << std::endl;
+        // Rcpp::Rcout << F << std::endl;
+        // Rcpp::Rcout << Fat_i << std::endl;
+        // Rcpp::Rcout << deg_f_at_i << " vs. " << deg_f << std::endl;
         if(deg_f_at_i >  deg_f ){
             points.clear();
             deg_f  = deg_f_at_i;
@@ -186,7 +187,7 @@ CGAL::Polynomial<Coeff_2>  resultant_interpolate(
             // timer2.stop();
             points.push_back(Point(IC(i),res_at_i));
 
-            // std::cout << typename Polynomial_traits_d<Coeff_2>::Degree()(res_at_i) << std::endl ;
+            // Rcpp::Rcout << typename Polynomial_traits_d<Coeff_2>::Degree()(res_at_i) << std::endl ;
         }
     }
 
@@ -275,7 +276,7 @@ Coeff resultant_modularize(
             int current_prime = -1;
             prime_index++;
             if(prime_index >= 2000){
-                std::cerr<<"primes in the array exhausted"<<std::endl;
+                Rcpp::Rcerr<<"primes in the array exhausted"<<std::endl;
                 CGAL_assertion(false);
                 current_prime = internal::get_next_lower_prime(current_prime);
             } else{
@@ -316,9 +317,9 @@ Coeff resultant_modularize(
         //timer_cr.stop();
     } while(!solved);
 
-    //std::cout << "Time Evaluate   : " << timer_evaluate.time() << std::endl;
-    //std::cout << "Time Resultant  : " << timer_resultant.time() << std::endl;
-    //std::cout << "Time Chinese R  : " << timer_cr.time() << std::endl;
+    //Rcpp::Rcout << "Time Evaluate   : " << timer_evaluate.time() << std::endl;
+    //Rcpp::Rcout << "Time Resultant  : " << timer_resultant.time() << std::endl;
+    //Rcpp::Rcout << "Time Chinese R  : " << timer_cr.time() << std::endl;
     // CGAL_postcondition(R == resultant_interpolate(F,G));
     return R;
     // return resultant_interpolate(F,G);

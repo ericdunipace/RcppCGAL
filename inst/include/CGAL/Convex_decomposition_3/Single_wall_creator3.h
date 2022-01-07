@@ -12,6 +12,7 @@
 #ifndef CGAL_CD3_SINGLE_WALL_CREATOR3_H
 #define CGAL_CD3_SINGLE_WALL_CREATOR3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 
@@ -86,7 +87,7 @@ class Single_wall_creator3 : public Modifier_base<typename Nef_::SNC_and_PL> {
 
     SHalfedge_around_svertex_circulator svc(ein->out_sedge()), send(svc);
     CGAL_For_all(svc,send) {
-      //      std::cerr << "check circles " << svc->circle() << std::endl;
+      //      Rcpp::Rcerr << "check circles " << svc->circle() << std::endl;
       if(normalized(svc->circle()) == c &&
          !Sphere_segment(svc->source()->point(),
                          svc->twin()->source()->point(), c).is_long())

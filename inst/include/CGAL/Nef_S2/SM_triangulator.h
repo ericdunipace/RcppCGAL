@@ -13,6 +13,7 @@
 #ifndef CGAL_SM_TRIANGULATOR_H
 #define CGAL_SM_TRIANGULATOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 
@@ -353,7 +354,7 @@ public:
     flip_diagonal(e->snext());
   }
 
-  void dump(std::ostream& os = std::cerr) const
+  void dump(std::ostream& os = Rcpp::Rcerr) const
   { SM_io_parser<Explorer>::dump(E_,os);
     SM_io_parser<Base>::dump(*this,os); }
 
@@ -426,10 +427,10 @@ void SM_triangulator<Decorator_>::triangulate()
   partition_to_halfsphere(L.begin(), L.end(), L_neg, From, -1);
 
   //  typename Seg_list::iterator it;
-  //    std::cerr << "L_pos" << std::endl;
-  //    CGAL_forall_iterators(it,L_pos) std::cerr << *it << std::endl;
-  //    std::cerr << "L_neg" << std::endl;
-  //    CGAL_forall_iterators(it,L_neg) std::cerr << *it << std::endl;
+  //    Rcpp::Rcerr << "L_pos" << std::endl;
+  //    CGAL_forall_iterators(it,L_pos) Rcpp::Rcerr << *it << std::endl;
+  //    Rcpp::Rcerr << "L_neg" << std::endl;
+  //    CGAL_forall_iterators(it,L_neg) Rcpp::Rcerr << *it << std::endl;
 
   // sweep the hemispheres to create two half sphere maps
   typedef SM_subdivision<Self,Seg_iterator,Object_handle> SM_output;
@@ -478,7 +479,7 @@ void SM_triangulator<Decorator_>::triangulate()
 
   /*
   CGAL_forall_sedges(u,*this) {
-    std::cerr << point(source(u)) << "->" << point(target(u)) << std::endl;
+    Rcpp::Rcerr << point(source(u)) << "->" << point(target(u)) << std::endl;
   }
   */
 
@@ -499,9 +500,9 @@ void SM_triangulator<Decorator_>::triangulate()
   NCTS.sweep();
 
   /*
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
   CGAL_forall_sedges(u,*this) {
-    std::cerr << point(source(u)) << "->" << point(target(u)) << std::endl;
+    Rcpp::Rcerr << point(source(u)) << "->" << point(target(u)) << std::endl;
   }
   */
 

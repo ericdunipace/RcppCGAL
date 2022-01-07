@@ -13,6 +13,7 @@
 #ifndef CGAL_NEF_SNC_POINT_LOCATOR_H
 #define CGAL_NEF_SNC_POINT_LOCATOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -560,7 +561,7 @@ public:
       for(;ofc!=candidates.end();++ofc) {
         if(CGAL::assign(f,*ofc)) {
           if(f == fout->twin())
-            std::cerr << "shit" << std::endl;
+            Rcpp::Rcerr << "shit" << std::endl;
           if(f == fout) {
             Object_list_iterator oe(ofc);
             --ofc;
@@ -633,7 +634,7 @@ public:
 
       Vertex_iterator vc;
       CGAL_forall_vertices(vc, *this->sncp()) {
-        std::cerr << "test vertex " << vc->point() << std::endl;
+        Rcpp::Rcerr << "test vertex " << vc->point() << std::endl;
         CGAL_assertion(vc->point() == s.target() || !s.has_on(vc->point()));
       }
     */

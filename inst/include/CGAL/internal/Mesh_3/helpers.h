@@ -19,6 +19,7 @@
 #ifndef CGAL_MESH_3_INTERNAL_MESH_3_HELPERS_H
 #define CGAL_MESH_3_INTERNAL_MESH_3_HELPERS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -166,13 +167,13 @@ struct Extract_polyline_with_context_visitor
     if(polylines.back().polyline_content.size() < 2)
       polylines.resize(polylines.size() - 1);
     // else {
-    //   std::cerr << "Polyline with " << polylines.back().polyline_content.size()
+    //   Rcpp::Rcerr << "Polyline with " << polylines.back().polyline_content.size()
     //             << " vertices, incident to "
     //             << polylines.back().context.adjacent_patches_ids.size()
     //             << " patches:\n ";
     //   for(auto p: polylines.back().polyline_content)
-    //     std::cerr << " " << p;
-    //   std::cerr << "\n";
+    //     Rcpp::Rcerr << " " << p;
+    //   Rcpp::Rcerr << "\n";
     // }
   }
 };

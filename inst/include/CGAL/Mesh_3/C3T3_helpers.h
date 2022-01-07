@@ -17,6 +17,7 @@
 #ifndef CGAL_MESH_3_C3T3_HELPERS_H
 #define CGAL_MESH_3_C3T3_HELPERS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -115,25 +116,25 @@ public:
   is_valid() const
   {
     if(n < 0){
-      std::cerr << "n < 0" << std::endl;
+      Rcpp::Rcerr << "n < 0" << std::endl;
       return false;
     }
     if(n == 0){
       if (f != Type_handle()){
-        std::cerr << "n==0, but f!= Type_handle()" << std::endl;
+        Rcpp::Rcerr << "n==0, but f!= Type_handle()" << std::endl;
         return false;
       }
       if (b != Type_handle()){
-        std::cerr << "n==0, but b!= Type_handle()" << std::endl;
+        Rcpp::Rcerr << "n==0, but b!= Type_handle()" << std::endl;
         return false;
       }
     }else{
       if(f->previous_intrusive() != b){
-        std::cerr << "f->previous_intrusive() != b" << std::endl;
+        Rcpp::Rcerr << "f->previous_intrusive() != b" << std::endl;
         return false;
       }
       if(b->next_intrusive() != f){
-        std::cerr << "b->next_intrusive() != f" << std::endl;
+        Rcpp::Rcerr << "b->next_intrusive() != f" << std::endl;
       return false;
       }
 
@@ -141,13 +142,13 @@ public:
       Type_handle ch = f;
       for(std::size_t i = 1; i < n; i++){
         if(ch->next_intrusive()->previous_intrusive() != ch){
-          std::cerr << "ch->next_intrusive()->previous_intrusive() != ch" << std::endl;
+          Rcpp::Rcerr << "ch->next_intrusive()->previous_intrusive() != ch" << std::endl;
           return false;
         }
         ch = ch->next_intrusive();
       }
       if(ch != b){
-        std::cerr << "ch!= b)" << std::endl;
+        Rcpp::Rcerr << "ch!= b)" << std::endl;
         return false;
       }
     }
@@ -2436,7 +2437,7 @@ update_mesh(const Vertex_handle& old_vertex,
             OutputIterator modified_vertices,
             bool *could_lock_zone)
 {
-  // std::cerr << "\nupdate_mesh[v1](" << (void*)(&*old_vertex)
+  // Rcpp::Rcerr << "\nupdate_mesh[v1](" << (void*)(&*old_vertex)
   //                                   << "=" << tr_.point(old_vertex) << ",\n"
   //           << "                  " << move << ",\n"
   //           << "                  " << new_position << ")\n";
@@ -2471,7 +2472,7 @@ update_mesh_no_topo_change(const Vertex_handle& old_vertex,
                            const Cell_vector& conflict_cells )
 {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-   std::cerr << "update_mesh_no_topo_change("
+   Rcpp::Rcerr << "update_mesh_no_topo_change("
              << (void*)(&*old_vertex) << " = " << tr_.point(old_vertex) << ",\n"
              << "                            " << move << ",\n"
              << "                            " << new_position << ")" << std::endl;
@@ -2507,7 +2508,7 @@ update_mesh_no_topo_change(const Vertex_handle& old_vertex,
   else // revert move
   {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-     std::cerr << "update_mesh_no_topo_change: revert move to "
+     Rcpp::Rcerr << "update_mesh_no_topo_change: revert move to "
                << old_position << "\n";
 #endif
     reset_circumcenter_cache(conflict_cells);
@@ -2537,7 +2538,7 @@ update_mesh_topo_change(const Vertex_handle& old_vertex,
                         bool *could_lock_zone)
 {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-   std::cerr << "update_mesh_topo_change(" << (void*)(&*old_vertex)
+   Rcpp::Rcerr << "update_mesh_topo_change(" << (void*)(&*old_vertex)
                                            << "=" << tr_.point(old_vertex)
              << "                        " << new_position << ",\n"
              << ")" << std::endl;
@@ -2597,7 +2598,7 @@ update_mesh_topo_change(const Vertex_handle& old_vertex,
   if ( old_position == tr_.point(new_vertex) )
   {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-    std::cerr << "update_mesh_topo_change: no move!\n";
+    Rcpp::Rcerr << "update_mesh_topo_change: no move!\n";
 #endif
     return std::make_pair(false,old_vertex);
   }
@@ -2622,7 +2623,7 @@ update_mesh_topo_change(const Vertex_handle& old_vertex,
     // is done by move_point_topo_change_conflict_zone_known, called by revert_move
 
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-     std::cerr << "update_mesh_topo_change: revert move to "
+     Rcpp::Rcerr << "update_mesh_topo_change: revert move to "
                << old_position << "\n";
 #endif
 
@@ -2654,7 +2655,7 @@ update_mesh(const Vertex_handle& old_vertex,
             bool fill_vertices)
 {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-   std::cerr << "\nupdate_mesh[v2](" << (void*)(&*old_vertex)
+   Rcpp::Rcerr << "\nupdate_mesh[v2](" << (void*)(&*old_vertex)
                                      << "=" << tr_.point(old_vertex) << ",\n"
              << "                " << move << ")\n";
 #endif
@@ -2693,7 +2694,7 @@ rebuild_restricted_delaunay(OutdatedCells& outdated_cells,
   Update_c3t3 updater(domain_,c3t3_);
 
 # ifdef CGAL_MESH_3_PROFILING
-  std::cerr << std::endl << "  Updating cells...";
+  Rcpp::Rcerr << std::endl << "  Updating cells...";
   WallClockTimer t;
   size_t num_cells = c3t3_.number_of_cells_in_complex();
 # endif
@@ -2720,10 +2721,10 @@ rebuild_restricted_delaunay(OutdatedCells& outdated_cells,
         c3t3_, updater, outdated_cells_vector));
 
 #   ifdef CGAL_MESH_3_PROFILING
-    std::cerr << " done in " << t.elapsed() << " seconds (#cells from "
+    Rcpp::Rcerr << " done in " << t.elapsed() << " seconds (#cells from "
       << num_cells << " to " << c3t3_.number_of_cells_in_complex() << ")."
       << std::endl;
-    std::cerr << "  Updating facets...";
+    Rcpp::Rcerr << "  Updating facets...";
     t.reset();
 #   endif
 
@@ -2750,10 +2751,10 @@ rebuild_restricted_delaunay(OutdatedCells& outdated_cells,
     }
 
 # ifdef CGAL_MESH_3_PROFILING
-    std::cerr << " done in " << t.elapsed() << " seconds (#cells from "
+    Rcpp::Rcerr << " done in " << t.elapsed() << " seconds (#cells from "
       << num_cells << " to " << c3t3_.number_of_cells_in_complex() << ")."
       << std::endl;
-    std::cerr << "  Updating facets...";
+    Rcpp::Rcerr << "  Updating facets...";
     t.reset();
 # endif
 
@@ -2768,9 +2769,9 @@ rebuild_restricted_delaunay(OutdatedCells& outdated_cells,
   }
 
 # ifdef CGAL_MESH_3_PROFILING
-  std::cerr << " done in " << t.elapsed() << " seconds ("
+  Rcpp::Rcerr << " done in " << t.elapsed() << " seconds ("
             << vertex_to_proj.size() << " vertices to project)." << std::endl;
-  std::cerr << "  Projecting interior vertices...";
+  Rcpp::Rcerr << "  Projecting interior vertices...";
   t.reset();
 # endif
 
@@ -2803,7 +2804,7 @@ rebuild_restricted_delaunay(OutdatedCells& outdated_cells,
   }
 
 # ifdef CGAL_MESH_3_PROFILING
-  std::cerr << " done in " << t.elapsed() << " seconds." << std::endl;
+  Rcpp::Rcerr << " done in " << t.elapsed() << " seconds." << std::endl;
 # endif
 }
 #endif //CGAL_INTRUSIVE_LIST
@@ -2937,7 +2938,7 @@ move_point(const Vertex_handle& old_vertex,
            DeletedCellsOutputIterator deleted_cells) const
 {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-   std::cerr << "C3T3_helpers::move_point[v2](" << (void*)(&*old_vertex)
+   Rcpp::Rcerr << "C3T3_helpers::move_point[v2](" << (void*)(&*old_vertex)
                                                 << " = " << tr_.point(old_vertex)  << ",\n"
              << "                             " << move << ")\n";
 #endif
@@ -2988,7 +2989,7 @@ move_point(const Vertex_handle& old_vertex,
            Moving_vertices_set& moving_vertices) const
 {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-  std::cerr << "C3T3_helpers::move_point(" << (void*)(&*old_vertex)
+  Rcpp::Rcerr << "C3T3_helpers::move_point(" << (void*)(&*old_vertex)
                                            << " = " << tr_.point(old_vertex)  << ",\n"
             << "                         " << move << ")\n";
 #endif
@@ -3121,7 +3122,7 @@ move_point_topo_change(const Vertex_handle& old_vertex,
                        bool *could_lock_zone) const
 {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-  std::cerr << "move_point_topo_change(" << (void*)(&*old_vertex)
+  Rcpp::Rcerr << "move_point_topo_change(" << (void*)(&*old_vertex)
                                          << "=" << tr_.point(old_vertex)
             << "                       " << new_position << ",\n"
             << ")" << std::endl;
@@ -3187,7 +3188,7 @@ move_point_topo_change(const Vertex_handle& old_vertex,
                        DeletedCellsOutputIterator deleted_cells) const
 {
 #ifdef CGAL_MESH_3_C3T3_HELPERS_VERBOSE
-  std::cerr << "move_point_topo_change with delcells(" << (void*)(&*old_vertex)
+  Rcpp::Rcerr << "move_point_topo_change with delcells(" << (void*)(&*old_vertex)
                                                        << "=" << tr_.point(old_vertex)
             << "                                     " << new_position << ",\n"
             << ")" << std::endl;

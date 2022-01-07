@@ -14,6 +14,7 @@
 #ifndef CGAL_ALPHA_SHAPE_3_H
 #define CGAL_ALPHA_SHAPE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Alpha_shapes_3.h>
 
 #include <CGAL/internal/Lazy_alpha_nt_3.h>
@@ -1002,7 +1003,7 @@ public:
    {
      *it++ = make_object(vh);
      *it++ = alpha;
-     //std::cerr << "filtration " << alpha << " \t  VERTEX " << std::endl;
+     //Rcpp::Rcerr << "filtration " << alpha << " \t  VERTEX " << std::endl;
      return it;
    }
 
@@ -1027,7 +1028,7 @@ public:
        *it++ = make_object(vh);
        *it++ = alpha;
      }
-     //std::cerr << "filtration " << alpha << " \t  VERTEX " << std::endl;
+     //Rcpp::Rcerr << "filtration " << alpha << " \t  VERTEX " << std::endl;
      return it;
    }
 
@@ -1061,7 +1062,7 @@ public:
     }
     *it++ = make_object(e);
     *it++ = alpha;
-    //std::cerr << "filtration " << alpha << " \t EDGE " << std::endl;
+    //Rcpp::Rcerr << "filtration " << alpha << " \t EDGE " << std::endl;
     return it;
   }
 
@@ -1100,7 +1101,7 @@ public:
 
     *it++ = make_object(f);
     *it++ = alpha;
-    //std::cerr << "filtration " << alpha << " \t FACET " << std::endl;
+    //Rcpp::Rcerr << "filtration " << alpha << " \t FACET " << std::endl;
     return it;
   }
 
@@ -1129,7 +1130,7 @@ public:
 
     *it++ = make_object(c);
     *it++ = alpha;
-    //std::cerr << "filtration " << alpha << " \t CELL " << std::endl;
+    //Rcpp::Rcerr << "filtration " << alpha << " \t CELL " << std::endl;
     return it;
   }
 
@@ -1803,7 +1804,7 @@ Alpha_shape_3<Dt,EACT>::find_optimal_alpha(size_type nb_components) const
     middle = first + half;
 
 #ifdef CGAL_DEBUG_ALPHA_SHAPE_3
-    std::cerr << "first : " << *first
+    Rcpp::Rcerr << "first : " << *first
               << " last : "
               << ((first+len != last) ? *(first+len) : *(last-1))
               << " mid : " << *middle
@@ -1822,15 +1823,15 @@ Alpha_shape_3<Dt,EACT>::find_optimal_alpha(size_type nb_components) const
   }
 
 #ifdef CGAL_DEBUG_ALPHA_SHAPE_3
-  std::cerr << "In the end: " << std::endl
+  Rcpp::Rcerr << "In the end: " << std::endl
             << "first : " << *first
             << " nb comps : " << number_of_solid_components(*first)
             << std::endl;
   if ((first+1) < alpha_end())
-    std::cerr << "first+1 " << *(first+1)
+    Rcpp::Rcerr << "first+1 " << *(first+1)
               << " nb comps : " << number_of_solid_components(*(first+1))
               << std::endl;
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
 #endif
 
   if (number_of_solid_components(*first) <= nb_components )
@@ -1862,39 +1863,39 @@ Alpha_shape_3<Dt,EACT>::print_maps() const
   typename Alpha_edge_map::const_iterator eit ;
   typename Alpha_vertex_map::const_iterator vit;
 
-  std::cerr << "size of cell map " << alpha_cell_map.size()
+  Rcpp::Rcerr << "size of cell map " << alpha_cell_map.size()
             <<   std::endl;
-  std::cerr << "size of facet map " << alpha_min_facet_map.size() <<
+  Rcpp::Rcerr << "size of facet map " << alpha_min_facet_map.size() <<
     std::endl;
-  std::cerr << "size of edge map " << alpha_min_edge_map.size() <<
+  Rcpp::Rcerr << "size of edge map " << alpha_min_edge_map.size() <<
     std::endl;
-  std::cerr << "size of vertex map " << alpha_min_vertex_map.size() <<
+  Rcpp::Rcerr << "size of vertex map " << alpha_min_vertex_map.size() <<
     std::endl;
-  std::cerr << std::endl;
-  std::cerr << "alpha_cell_map " << std::endl;
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << "alpha_cell_map " << std::endl;
   for(cit = alpha_cell_map.begin();
       cit != alpha_cell_map.end(); ++cit) {
-    std::cerr << cit->first << std::endl;
+    Rcpp::Rcerr << cit->first << std::endl;
   }
-  std::cerr << std::endl;
-  std::cerr << "alpha_min_facet_map " << std::endl;
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << "alpha_min_facet_map " << std::endl;
   for(fit = alpha_min_facet_map.begin();
       fit != alpha_min_facet_map.end(); ++fit) {
-    std::cerr << fit->first << std::endl;
+    Rcpp::Rcerr << fit->first << std::endl;
   }
-  std::cerr << std::endl;
-  std::cerr << "alpha_min_edge_map " << std::endl;
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << "alpha_min_edge_map " << std::endl;
   for(eit = alpha_min_edge_map.begin();
       eit != alpha_min_edge_map.end(); ++eit) {
-    std::cerr << eit->first << std::endl;
+    Rcpp::Rcerr << eit->first << std::endl;
   }
-  std::cerr << std::endl;
-  std::cerr << "alpha_min_vertex_map " << std::endl;
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << "alpha_min_vertex_map " << std::endl;
   for(vit = alpha_min_vertex_map.begin();
       vit != alpha_min_vertex_map.end(); ++vit) {
-    std::cerr << vit->first << std::endl;
+    Rcpp::Rcerr << vit->first << std::endl;
   }
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
 }
 
 
@@ -1902,16 +1903,16 @@ template <class Dt,class EACT>
 void
 Alpha_shape_3<Dt,EACT>::print_alphas() const
 {
-  std::cerr << std::endl;
-  std::cerr << " alpha values of facets" << std::endl;
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << " alpha values of facets" << std::endl;
   for(Finite_facets_iterator fit = finite_facets_begin();
       fit != finite_facets_end();
       ++fit) {
     Alpha_status_iterator as = fit->first->get_facet_status(fit->second);
     print_alpha_status(*as);
   }
-  std::cerr << std::endl;
-  std::cerr << " alpha values of edges " << std::endl;
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << " alpha values of edges " << std::endl;
   if (get_mode() == GENERAL) {
     for(Finite_edges_iterator eit = finite_edges_begin();
         eit != finite_edges_end();
@@ -1923,8 +1924,8 @@ Alpha_shape_3<Dt,EACT>::print_alphas() const
       print_alpha_status(*as);
     }
   }
-  std::cerr << std::endl;
-  std::cerr << " alpha values of vertices " << std::endl;
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << " alpha values of vertices " << std::endl;
   for(Finite_vertices_iterator vit = finite_vertices_begin();
       vit != finite_vertices_end();
       ++vit) {
@@ -1939,13 +1940,13 @@ void
 Alpha_shape_3<Dt,EACT>::print_alpha_status(const Alpha_status& as) const
 {
   if ( get_mode() == GENERAL &&  as.is_Gabriel())
-  std::cerr << as.alpha_min() ;
-  else std::cerr <<  "---   " ;
-  std::cerr << "\t";
-  std::cerr <<  as.alpha_mid()  << "\t";
-  if(as.is_on_chull()) std::cerr <<  "---   ";
-  else   std::cerr << as.alpha_max();
-  std::cerr << std::endl;
+  Rcpp::Rcerr << as.alpha_min() ;
+  else Rcpp::Rcerr <<  "---   " ;
+  Rcpp::Rcerr << "\t";
+  Rcpp::Rcerr <<  as.alpha_mid()  << "\t";
+  if(as.is_on_chull()) Rcpp::Rcerr <<  "---   ";
+  else   Rcpp::Rcerr << as.alpha_max();
+  Rcpp::Rcerr << std::endl;
 }
 
 } //namespace CGAL

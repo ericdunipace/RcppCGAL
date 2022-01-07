@@ -14,6 +14,7 @@
 //
 // Author(s)     : Geert-Jan Giezeman
 
+#include <Rcpp.h>
 #include <CGAL/Triangle_2.h>
 #include <CGAL/kernel_assertions.h>
 #include <CGAL/number_utils.h>
@@ -243,10 +244,10 @@ Triangle_2_Triangle_2_pair<K>::intersection(
     for (i=0, cur = _pointlist.first;
          i<_pointlist.size;
          i++, cur = cur->next) {
-      std::cout << to_double(cur->point.x()) << ' ';
-      std::cout << to_double(cur->point.y()) << ' ';
+      Rcpp::Rcout << to_double(cur->point.x()) << ' ';
+      Rcpp::Rcout << to_double(cur->point.y()) << ' ';
     }
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
     return true;
 }
 

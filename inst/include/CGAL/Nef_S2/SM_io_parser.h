@@ -14,6 +14,7 @@
 #ifndef CGAL_SM_IO_PARSER_H
 #define CGAL_SM_IO_PARSER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 
@@ -128,7 +129,7 @@ std::string index(SHalfloop_const_handle l) const
 std::string index(SFace_const_handle f) const
 { return FI(f,verbose); }
 
-static void dump(const Decorator_& D, std::ostream& os = std::cerr);
+static void dump(const Decorator_& D, std::ostream& os = Rcpp::Rcerr);
 /*{\Mstatic prints the plane map decorated by |D| to |os|.}*/
 
 }; // SM_io_parser<Decorator_>
@@ -137,7 +138,7 @@ static void dump(const Decorator_& D, std::ostream& os = std::cerr);
 template <typename Decorator_>
 SM_io_parser<Decorator_>::
 SM_io_parser(std::istream& iin, const Base& H) :
-  Base(H), in(iin), out(std::cout), verbose(0),
+  Base(H), in(iin), out(Rcpp::Rcout), verbose(0),
   vn(0), en(0), ln(0), fn(0)
 { this->clear(); }
 
@@ -245,7 +246,7 @@ bool SM_io_parser<Decorator_>::read_edge(SHalfedge_handle e)
      (eo >= 0 && eo < en && epr >= 0 && epr < en && ene >= 0 && ene < en &&
       v >= 0 && v < vn && f >= 0 && f < fn ))
   {
-    std::cerr<<"wrong index in read_edge"<<std::endl;
+    Rcpp::Rcerr<<"wrong index in read_edge"<<std::endl;
     in.setstate(std::ios_base::badbit);
     return false;
   }
@@ -315,7 +316,7 @@ bool SM_io_parser<Decorator_>::read_face(SFace_handle f)
   while (in >> ei) {
     if(!(ei >= 0 && ei < en))
     {
-      std::cerr<<"wrong index in face cycle list."<<std::endl;
+      Rcpp::Rcerr<<"wrong index in face cycle list."<<std::endl;
       in.setstate(std::ios_base::badbit);
       return false;
     }
@@ -325,7 +326,7 @@ bool SM_io_parser<Decorator_>::read_face(SFace_handle f)
   while (in >> vi) {
     if(!(vi >= 0 && vi < vn))
     {
-      std::cerr<<"wrong index in iso vertex list."<<std::endl;
+      Rcpp::Rcerr<<"wrong index in iso vertex list."<<std::endl;
       in.setstate(std::ios_base::badbit);
       return false;
     }
@@ -335,7 +336,7 @@ bool SM_io_parser<Decorator_>::read_face(SFace_handle f)
   while (in >> li) {
     if(!(li >= 0 && li < 2))
     {
-      std::cerr<<"wrong index in iso vertex list."<<std::endl;
+      Rcpp::Rcerr<<"wrong index in iso vertex list."<<std::endl;
       in.setstate(std::ios_base::badbit);
       return false;
     }

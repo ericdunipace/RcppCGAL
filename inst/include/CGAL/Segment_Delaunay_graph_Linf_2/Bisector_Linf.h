@@ -14,6 +14,7 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_BISECTOR_LINF_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_BISECTOR_LINF_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -79,7 +80,7 @@ private:
     CGAL_assertion(p.is_point() && q.is_point());
     Point_2 pp = p.point();
     Point_2 pq = q.point();
-    //CGAL_SDG_DEBUG(std::cout << "debug bisector infinite "
+    //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector infinite "
     //          << "p=" << pp << " q=" << pq << std::endl;);
 
     Compare_x_2 compare_x_2;
@@ -102,7 +103,7 @@ private:
                    (cmpx == EQUAL)? 0 :
                    (  cmpx  == SMALLER )? -1 : +1);
 
-    //CGAL_SDG_DEBUG(std::cout << "debug: final direction d = "
+    //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug: final direction d = "
     //    << d << std::endl;) ;
 
     // midpoint m of two points p and q
@@ -151,7 +152,7 @@ private:
 
     Polychainline pcl(-d, points, points+npts, d);
 
-    //CGAL_SDG_DEBUG(std::cout <<
+    //CGAL_SDG_DEBUG(Rcpp::Rcout <<
     //    "debug bisector is " << pcl << std::endl;);
 
     return pcl;
@@ -160,7 +161,7 @@ private:
 
   result_type bisector_PS(const Site_2& p, const Site_2& q) const {
 
-    CGAL_SDG_DEBUG(std::cout << "bisector_PS entering with p=" << p
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "bisector_PS entering with p=" << p
               << " q=" << q << std::endl;);
 
     CGAL_assertion(p.is_point() && q.is_segment());
@@ -361,7 +362,7 @@ private:
 
         Polychainline pcl(d, points, points+npts, d);
 
-        //CGAL_SDG_DEBUG(std::cout << "about to return pcl" << std::endl;);
+        //CGAL_SDG_DEBUG(Rcpp::Rcout << "about to return pcl" << std::endl;);
         return pcl;
       }//end of general segment case, seg != hor or ver
 
@@ -374,7 +375,7 @@ private:
   result_type bisector_SS(const Site_2& p, const Site_2& q) const {
     CGAL_precondition( p.is_segment() && q.is_segment() );
 
-    CGAL_SDG_DEBUG(std::cout << "bisector_SS entering with p=" << p
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "bisector_SS entering with p=" << p
               << " q=" << q << std::endl;);
 
     // another precondition:
@@ -407,9 +408,9 @@ private:
     Full_Line_2 lp ( p.supporting_site().segment() );
     Full_Line_2 lq ( q.supporting_site().segment() );
 
-    CGAL_SDG_DEBUG(std::cout << "bisector_SS lp = "
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "bisector_SS lp = "
       << lp.a() << ' ' << lp.b() << ' ' << lp.c() << std::endl;);
-    CGAL_SDG_DEBUG(std::cout << "bisector_SS lq = "
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "bisector_SS lq = "
       << lq.a() << ' ' << lq.b() << ' ' << lq.c() << std::endl;);
 
     Point_2 points[1];
@@ -434,7 +435,7 @@ private:
         bisc = lp.c() * lq.b() + lp.b() * lq.c();
       }
 
-      CGAL_SDG_DEBUG(std::cout << "bisector_SS parallel bis = "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "bisector_SS parallel bis = "
         << bisa << ' ' << bisb << ' ' << bisc << std::endl;);
 
       Point_2 psrc = p.segment().source();
@@ -487,7 +488,7 @@ private:
             compute_linf_bisecting_direction(dirp, dirq) :
             compute_linf_bisecting_direction(dirq, dirp) ;
 
-        CGAL_SDG_DEBUG(std::cout << "debug bisector_SS: " <<
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector_SS: " <<
             "common endpoint case: dirp=" << dirp <<
             " dirq=" << dirq << " d=" << d << std::endl;);
 
@@ -502,9 +503,9 @@ private:
         Point_2 mid;
 
         // really compute intersection point of two lines
-        CGAL_SDG_DEBUG(std::cout << "debug bisector_SS lp=" <<
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector_SS lp=" <<
             lp.a() << ' ' << lp.b() << ' ' << lp.c() << std::endl;);
-        CGAL_SDG_DEBUG(std::cout << "debug bisector_SS lq=" <<
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector_SS lq=" <<
             lq.a() << ' ' << lq.b() << ' ' << lq.c() << std::endl;);
 
         mid = Point_2 ( - lp.c() * lq.b() + lq.c() * lp.b(),
@@ -513,7 +514,7 @@ private:
 
         points[0] = mid;
 
-        CGAL_SDG_DEBUG(std::cout << "debug bisector_SS mid=" <<
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector_SS mid=" <<
             mid << std::endl;);
 
         // check if mid is inside one of the segments
@@ -536,7 +537,7 @@ private:
         if ((cmpxpsm == cmpxmpt) && (cmpypsm == cmpympt))
         {
           // mid is inside p
-          CGAL_SDG_DEBUG(std::cout <<
+          CGAL_SDG_DEBUG(Rcpp::Rcout <<
               "debug bisector_SS mid in p" << std::endl;);
 
           // take any endpoint of q not the same as mid
@@ -547,33 +548,33 @@ private:
           Direction_2 dirpsrc ( Vector_2(mid, psrc) );
           Direction_2 dirptrg ( Vector_2(mid, ptrg) );
 
-          CGAL_SDG_DEBUG(std::cout << "debug bisector_SS psrc=" << psrc
+          CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector_SS psrc=" << psrc
               << " ptrg=" <<  ptrg << std::endl;);
 
           if (dirq.counterclockwise_in_between(dirpsrc, dirptrg))
           {
-            CGAL_SDG_DEBUG(std::cout <<
+            CGAL_SDG_DEBUG(Rcpp::Rcout <<
                 "debug bisector_SS q btw psrc ptrg" << std::endl;);
             dout = compute_linf_bisecting_direction(dirpsrc, dirq);
             dinc = compute_linf_bisecting_direction(dirq, dirptrg);
           } else
           {
-            CGAL_SDG_DEBUG(std::cout <<
+            CGAL_SDG_DEBUG(Rcpp::Rcout <<
                 "debug bisector_SS q not btw psrc ptrg" << std::endl;);
             dout = compute_linf_bisecting_direction(dirptrg, dirq);
             dinc = compute_linf_bisecting_direction(dirq, dirpsrc);
           }
 
-          CGAL_SDG_DEBUG(std::cout <<
+          CGAL_SDG_DEBUG(Rcpp::Rcout <<
               "debug bisector_SS dinc=" << dinc << std::endl;);
-          CGAL_SDG_DEBUG(std::cout <<
+          CGAL_SDG_DEBUG(Rcpp::Rcout <<
               "debug bisector_SS dout=" << dout << std::endl;);
 
         } else {
           if ((cmpxqsm == cmpxmqt) && (cmpyqsm == cmpymqt))
           {
             // mid is inside q
-            CGAL_SDG_DEBUG(std::cout <<
+            CGAL_SDG_DEBUG(Rcpp::Rcout <<
                 "debug bisector_SS mid in q" << std::endl;);
 
             // take any endpoint of p not the same as mid
@@ -586,29 +587,29 @@ private:
 
             if (dirp.counterclockwise_in_between(dirqsrc, dirqtrg))
             {
-              CGAL_SDG_DEBUG(std::cout <<
+              CGAL_SDG_DEBUG(Rcpp::Rcout <<
                   "debug bisector_SS spt" << std::endl;);
               dinc = compute_linf_bisecting_direction(dirqsrc, dirp);
               dout = compute_linf_bisecting_direction(dirp, dirqtrg);
             } else
             {
-              CGAL_SDG_DEBUG(std::cout <<
+              CGAL_SDG_DEBUG(Rcpp::Rcout <<
                   "debug bisector_SS tps" << std::endl;);
               dinc = compute_linf_bisecting_direction(dirqtrg, dirp);
               dout = compute_linf_bisecting_direction(dirp, dirqsrc);
             }
 
-            CGAL_SDG_DEBUG(std::cout <<
+            CGAL_SDG_DEBUG(Rcpp::Rcout <<
                 "debug bisector_SS dinc=" << dinc << std::endl;);
-            CGAL_SDG_DEBUG(std::cout <<
+            CGAL_SDG_DEBUG(Rcpp::Rcout <<
                 "debug bisector_SS dout=" << dout << std::endl;);
 
           } else {
             // here mid is neither inside p nor inside q
-            CGAL_SDG_DEBUG(std::cout <<
+            CGAL_SDG_DEBUG(Rcpp::Rcout <<
                 "debug bisector_SS mid not in p, q" << std::endl;);
 
-            CGAL_SDG_DEBUG(std::cout
+            CGAL_SDG_DEBUG(Rcpp::Rcout
                 << "debug bisector_SS cmpxpsm cmpypsm cmpxqsm cmpyqsm is"
                 << cmpxpsm << cmpypsm << cmpxqsm << cmpyqsm << std::endl;);
 
@@ -625,7 +626,7 @@ private:
             Direction_2 dirp ( Vector_2(mid, prep) );
             Direction_2 dirq ( Vector_2(mid, qrep) );
 
-            CGAL_SDG_DEBUG(std::cout << "debug bisector_SS dirp="
+            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector_SS dirp="
                 << dirp << " dirq=" << dirq << std::endl;);
 
             Direction_2 d =
@@ -633,7 +634,7 @@ private:
               compute_linf_bisecting_direction(dirp, dirq) :
               - compute_linf_bisecting_direction(dirq, dirp) ;
 
-            CGAL_SDG_DEBUG(std::cout << "debug bisector_SS d="
+            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector_SS d="
                 << d << std::endl;);
 
             dinc = -d;
@@ -643,7 +644,7 @@ private:
       } // end of compute intersection numerically
     } // end of case of non-parallel segments
 
-    //CGAL_SDG_DEBUG(std::cout << "debug bisector_SS points[0]="
+    //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bisector_SS points[0]="
     //  << points[0] << std::endl;);
 
     Polychainline pcl (dinc, points, points + 1, dout);
@@ -666,7 +667,7 @@ private:
     // and dirq is less than 180 degrees after dirp
     CGAL_assertion( dirq.counterclockwise_in_between(dirp, -dirp) );
 
-    CGAL_SDG_DEBUG(std::cout << "debug dir1 = " << dirp
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug dir1 = " << dirp
               << " dir2 = " << dirq << std::endl;);
 
     RT two(2);
@@ -678,7 +679,7 @@ private:
     RT C (dirq.dx());
     RT D (dirq.dy());
 
-    CGAL_SDG_DEBUG(std::cout << "debug ABCD = " << A << ' ' << B << ' '
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug ABCD = " << A << ' ' << B << ' '
               << C << ' ' << D << std::endl;);
 
     if ((CGAL::sign(A) == POSITIVE) &&

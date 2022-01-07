@@ -14,6 +14,7 @@
 #ifndef CGAL_INTERNAL_TETRAHEDRON_INTERSECTION_HELPERS_H
 #define CGAL_INTERNAL_TETRAHEDRON_INTERSECTION_HELPERS_H
 
+#include <Rcpp.h>
 #include <CGAL/kernel_basic.h>
 #include <list>
 #include <vector>
@@ -181,7 +182,7 @@ void fill_segments_infos(std::vector<Segment>& segments,
 
     if(w_s.s_dangling || w_s.t_dangling)
     {
-      std::cerr<<"Error. Kernel must have exact constructions to compute this intersection."<<std::endl;
+      Rcpp::Rcerr<<"Error. Kernel must have exact constructions to compute this intersection."<<std::endl;
       return;
     }
   }
@@ -245,7 +246,7 @@ void fill_points_list(std::list<Segment>& segments, std::list<Point>& points)
     }
     if(!found)
     {
-      std::cerr<<"Error. Kernel must have exact constructions to compute this intersection."<<std::endl;
+      Rcpp::Rcerr<<"Error. Kernel must have exact constructions to compute this intersection."<<std::endl;
       return;
     }
     segments.erase(seg_it);

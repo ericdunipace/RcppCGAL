@@ -14,6 +14,7 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_ANGLE_3_H
 #define CGAL_INTERNAL_STATIC_FILTERS_ANGLE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/Bbox_3.h>
 #include <CGAL/Profile_counter.h>
 #include <CGAL/internal/Static_filters/Static_filter_error.h>
@@ -122,9 +123,9 @@ public:
 
     double err = f.error();
     err += err * 2 * F::ulp(); // Correction due to "eps * m * m ".
-    std::cerr << "*** epsilon for Angle_3(Point_3, Point_3, Point_3) = "
+    Rcpp::Rcerr << "*** epsilon for Angle_3(Point_3, Point_3, Point_3) = "
               << err << std::endl;
-    std::cerr << "\n"
+    Rcpp::Rcerr << "\n"
               << "Now for underflow/overflows...\n"
               << "       min_double/eps  = "
               << (std::numeric_limits<double>::min)() / err << std::endl

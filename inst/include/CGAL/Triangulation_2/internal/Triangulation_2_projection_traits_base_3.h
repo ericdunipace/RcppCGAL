@@ -14,6 +14,7 @@
 #ifndef CGAL_INTERNAL_TRIANGULATION_2_PROJECTION_TRAITS_BASE_3_H
 #define CGAL_INTERNAL_TRIANGULATION_2_PROJECTION_TRAITS_BASE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_2.h>
 
 
@@ -203,7 +204,7 @@ public:
 
     auto planes_intersection = intersection(plane_1, plane_2);
     if(! planes_intersection) {
-      std::cerr << "planes_intersection is empty\n";
+      Rcpp::Rcerr << "planes_intersection is empty\n";
       return boost::none;
     }
     if(const Line* line = boost::get<Line>(&*planes_intersection))
@@ -216,7 +217,7 @@ public:
          * cross_product(normal, pi - s2.target()) > FT(0) )
       {
         // the intersection of the lines is not inside the segments
-        std::cerr << "intersection not inside\n";
+        Rcpp::Rcerr << "intersection not inside\n";
         return boost::none;
       }
       else
@@ -238,7 +239,7 @@ public:
     }
     if(boost::get<Plane_3>(&*planes_intersection))
     {
-      std::cerr << "coplanar lines\n";
+      Rcpp::Rcerr << "coplanar lines\n";
       CGAL_error();
       return boost::none;
     }

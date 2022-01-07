@@ -15,6 +15,7 @@
 #ifndef CGAL_GENERIC_DESCARTES
 #define CGAL_GENERIC_DESCARTES 1
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
@@ -218,8 +219,8 @@ public:
     ++end;
     begin=curr;
     do {
-      //std::cout << bitstream_tree.lower(begin) << " " << bitstream_tree.upper(begin) << std::endl;
-      //std::cout << bitstream_tree.min_var(begin) << " " << bitstream_tree.max_var(begin) << std::endl;
+      //Rcpp::Rcout << bitstream_tree.lower(begin) << " " << bitstream_tree.upper(begin) << std::endl;
+      //Rcpp::Rcout << bitstream_tree.min_var(begin) << " " << bitstream_tree.max_var(begin) << std::endl;
       int new_intervals = bitstream_tree.subdivide(begin,new_begin,helper);
       intervals += new_intervals-1;
       begin = new_begin;
@@ -241,7 +242,7 @@ public:
 
     }
     while (intervals != 1);
-    //std::cout << "Refined " << left_bound(i) << " " << right_bound(i) << std::endl;
+    //Rcpp::Rcout << "Refined " << left_bound(i) << " " << right_bound(i) << std::endl;
 
   }
 

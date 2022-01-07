@@ -14,6 +14,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_COMPUTE_NORMAL_H
 #define CGAL_POLYGON_MESH_PROCESSING_COMPUTE_NORMAL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/Compute_normal.h>
 
 #include <CGAL/Polygon_mesh_processing/internal/named_function_params.h>
@@ -105,8 +106,8 @@ void sum_normals(const PM& pmesh,
     const Vector n = internal::triangle_normal(pv, pvn, pvnn, traits);
 
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-    std::cout << "Normal of " << f << " pts: " << pv << " ; " << pvn << " ; " << pvnn << std::endl;
-    std::cout << " --> " << n << std::endl;
+    Rcpp::Rcout << "Normal of " << f << " pts: " << pv << " ; " << pvn << " ; " << pvnn << std::endl;
+    Rcpp::Rcout << " --> " << n << std::endl;
 #endif
 
     sum = traits.construct_sum_of_vectors_3_object()(sum, n);
@@ -242,7 +243,7 @@ void compute_face_normals(const PolygonMesh& pmesh,
     typename Kernel::Vector_3 vec = compute_face_normal(f, pmesh, np);
     put(face_normals, f, vec);
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-    std::cout << "normal at face " << f << " is " << get(face_normals, f) << std::endl;
+    Rcpp::Rcout << "normal at face " << f << " is " << get(face_normals, f) << std::endl;
 #endif
   }
 }
@@ -371,7 +372,7 @@ typename GT::Vector_3 compute_normals_bisector(const typename GT::Vector_3& ni,
     CGAL_assertion(!traits.collinear_3_object()(CGAL::ORIGIN + ni, CGAL::ORIGIN + nj, CGAL::ORIGIN + nk));
 
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-    std::cout << "Triplet: ni[" << ni << "] nj[" << nj << "] nk[" << nk << "]" << std::endl;
+    Rcpp::Rcout << "Triplet: ni[" << ni << "] nj[" << nj << "] nk[" << nk << "]" << std::endl;
 #endif
 
     const Point_3 c = traits.construct_circumcenter_3_object()(CGAL::ORIGIN + ni, CGAL::ORIGIN + nj, CGAL::ORIGIN + nk);
@@ -402,7 +403,7 @@ compute_most_visible_normal_2_points(std::vector<typename boost::graph_traits<Po
   typename GT::Construct_vector_3 cv_3 = traits.construct_vector_3_object();
 
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-  std::cout << "Trying to find enclosing normal with 2 normals" << std::endl;
+  Rcpp::Rcout << "Trying to find enclosing normal with 2 normals" << std::endl;
 #endif
 
   FT min_sp = -1;
@@ -449,7 +450,7 @@ compute_most_visible_normal_3_points(const std::vector<typename boost::graph_tra
   typedef typename boost::property_traits<FaceNormalVector>::reference     Vector_ref;
 
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-  std::cout << "Trying to find enclosing normal with 3 normals" << std::endl;
+  Rcpp::Rcout << "Trying to find enclosing normal with 3 normals" << std::endl;
 #endif
 
   FT min_sp = -1;
@@ -494,7 +495,7 @@ compute_most_visible_normal_3_points(const std::vector<typename boost::graph_tra
   }
 
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-  std::cout << "Best normal from 3-normals-approach: " << n << std::endl;
+  Rcpp::Rcout << "Best normal from 3-normals-approach: " << n << std::endl;
 #endif
 
   return n;
@@ -559,7 +560,7 @@ compute_vertex_normal_as_sum_of_weighted_normals(typename boost::graph_traits<Po
   typename GT::Compute_squared_length_3 csl_3 = traits.compute_squared_length_3_object();
 
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-  std::cout << "Compute normal as weighted sums; type: " << vn_type << std::endl;
+  Rcpp::Rcout << "Compute normal as weighted sums; type: " << vn_type << std::endl;
 #endif
 
   Vector_3 normal = cv_3(CGAL::NULL_VECTOR);
@@ -590,7 +591,7 @@ compute_vertex_normal_as_sum_of_weighted_normals(typename boost::graph_traits<Po
         if(den == FT(0))
         {
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-          std::cout << "Null denominator, switching to no weights" << std::endl;
+          Rcpp::Rcout << "Null denominator, switching to no weights" << std::endl;
 #endif
 
           return compute_vertex_normal_as_sum_of_weighted_normals(v, NO_WEIGHT, face_normals, vpmap, pmesh, traits);
@@ -601,7 +602,7 @@ compute_vertex_normal_as_sum_of_weighted_normals(typename boost::graph_traits<Po
       }
       else
       {
-        std::cerr << "Error: unknown vertex normal type" << std::endl;
+        Rcpp::Rcerr << "Error: unknown vertex normal type" << std::endl;
         CGAL_assertion(false);
         return CGAL::NULL_VECTOR;
       }
@@ -689,7 +690,7 @@ compute_vertex_normal(typename boost::graph_traits<PolygonMesh>::vertex_descript
   const bool must_compute_face_normals = is_default_parameter(get_parameter(np, internal_np::face_normal));
 
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-  std::cout << "<----- compute vertex normal at " << get(vpmap, v)
+  Rcpp::Rcout << "<----- compute vertex normal at " << get(vpmap, v)
             << ", must compute face normals? " << must_compute_face_normals << std::endl;
 #endif
 
@@ -710,11 +711,11 @@ compute_vertex_normal(typename boost::graph_traits<PolygonMesh>::vertex_descript
   }
 
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-  std::cout << "Incident face normals:" << std::endl;
+  Rcpp::Rcout << "Incident face normals:" << std::endl;
   for(halfedge_descriptor h : CGAL::halfedges_around_target(v, pmesh))
   {
     if(!is_border(h, pmesh))
-      std::cout << "get normal at f " << face(h, pmesh) << " : " << get(face_normals, face(h, pmesh)) << std::endl;
+      Rcpp::Rcout << "get normal at f " << face(h, pmesh) << " : " << get(face_normals, face(h, pmesh)) << std::endl;
   }
 #endif
 
@@ -722,7 +723,7 @@ compute_vertex_normal(typename boost::graph_traits<PolygonMesh>::vertex_descript
   if(traits.equal_3_object()(normal, CGAL::NULL_VECTOR)) // can't always find a most visible normal
   {
 #ifdef CGAL_PMP_COMPUTE_NORMAL_DEBUG_PP
-    std::cout << "Failed to find most visible normal, use weighted sum of normals" << std::endl;
+    Rcpp::Rcout << "Failed to find most visible normal, use weighted sum of normals" << std::endl;
 #endif
     normal = internal::compute_vertex_normal_as_sum_of_weighted_normals(
                v, internal::SIN_WEIGHT, face_normals, vpmap, pmesh, traits);

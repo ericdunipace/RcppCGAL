@@ -18,6 +18,7 @@
 #ifndef CGAL_CIRCULAR_KERNEL_PREDICATES_ON_CIRCULAR_ARC_2_H
 #define CGAL_CIRCULAR_KERNEL_PREDICATES_ON_CIRCULAR_ARC_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 
@@ -525,7 +526,7 @@ namespace CircularFunctors {
     //if ( ca1.right()!=ca2.left() )
     if ( CircularFunctors::compare_x<CK>(ca1.left(), ca2.left()) != SMALLER )
       {
-        //std::cout << " SWAP " << std::endl;
+        //Rcpp::Rcout << " SWAP " << std::endl;
         std::swap(ca1,ca2);
       }*/
   }

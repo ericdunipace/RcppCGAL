@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_TET_REMESHING_HELPERS_H
 #define CGAL_INTERNAL_TET_REMESHING_HELPERS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <utility>
@@ -1229,7 +1230,7 @@ bool are_cell_orientations_valid(const Tr& tr)
   }
   if (!facets.empty())
   {
-    std::cerr << "Warning : there are inverted cells!\n"
+    Rcpp::Rcerr << "Warning : there are inverted cells!\n"
               << "\tSee cells_with_negative_volume.polylines.txt" << std::endl;
     dump_facets(facets, "cells_with_negative_volume.polylines.txt");
   }
@@ -1605,7 +1606,7 @@ void dump_cells_with_small_dihedral_angle(const Tr& tr,
       }
     }
   }
-  std::cout << "bad cells : " << cells.size() << std::endl;
+  Rcpp::Rcout << "bad cells : " << cells.size() << std::endl;
   dump_cells<Tr>(cells, indices, filename);
   dump_cells_off(cells, tr, "bad_cells.off");
 }
@@ -1633,7 +1634,7 @@ void dump_vertices_by_dimension(const Tr& tr, const char* prefix)
     //dimension is i
     const std::vector<Vertex_handle>& vertices_di = vertices_per_dimension[i];
 
-    std::cout << "Dimension " << i << " : " << vertices_di.size() << std::endl;
+    Rcpp::Rcout << "Dimension " << i << " : " << vertices_di.size() << std::endl;
 
     std::ostringstream oss;
     oss << prefix << "_dimension_" << i << ".off";

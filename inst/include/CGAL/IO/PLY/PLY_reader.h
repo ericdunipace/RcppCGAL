@@ -11,6 +11,7 @@
 #ifndef CGAL_IO_PLY_PLY_READER_H
 #define CGAL_IO_PLY_PLY_READER_H
 
+#include <Rcpp.h>
 #include <CGAL/Container_helper.h>
 #include <CGAL/IO/io.h>
 #include <CGAL/is_iterator.h>
@@ -469,7 +470,7 @@ public:
         {
           // if wrong file format
           if(m_verbose)
-            std::cerr << "Error: incorrect file format line " << lineNumber << " of file" << std::endl;
+            Rcpp::Rcerr << "Error: incorrect file format line " << lineNumber << " of file" << std::endl;
           return false;
         }
       }
@@ -481,7 +482,7 @@ public:
         if( !(iss >> tag >> format_string >> version) )
         {
           if(m_verbose)
-            std::cerr << "Error line " << lineNumber << " of file" << std::endl;
+            Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
           return false;
         }
         if(format_string == "ascii") format = ASCII;
@@ -490,7 +491,7 @@ public:
         else
         {
           if(m_verbose)
-            std::cerr << "Error: unknown file format \"" << format_string << "\" line " << lineNumber << std::endl;
+            Rcpp::Rcerr << "Error: unknown file format \"" << format_string << "\" line " << lineNumber << std::endl;
           return false;
         }
       }
@@ -502,7 +503,7 @@ public:
         if(!(iss >> keyword))
         {
           if(m_verbose)
-            std::cerr << "Error line " << lineNumber << " of file" << std::endl;
+            Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
           return false;
         }
 
@@ -512,7 +513,7 @@ public:
           if(!(iss >> type >> name))
           {
             if(m_verbose)
-              std::cerr << "Error line " << lineNumber << " of file" << std::endl;
+              Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
             return false;
           }
 
@@ -525,7 +526,7 @@ public:
             if(!(iss >> index_type >> name))
             {
               if(m_verbose)
-                std::cerr << "Error line " << lineNumber << " of file" << std::endl;
+                Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
               return false;
             }
 
@@ -568,7 +569,7 @@ public:
           if(!(iss >> type >> number))
           {
             if(m_verbose)
-              std::cerr << "Error line " << lineNumber << " of file" << std::endl;
+              Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
             return false;
           }
 

@@ -20,6 +20,7 @@
 #ifndef GNUPLOT_OUTPUT_2_H
 #define GNUPLOT_OUTPUT_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 
@@ -143,7 +144,7 @@ void gnuplot_output_2 (const Graph& g, const std::string& prefix)
                      std::ofstream::out | std::ofstream::trunc);
     fs << gnuplot_vertex_list(g);
     fs.close();
-    std::cout << prefix << ".v" << " is generated. " << std::endl;
+    Rcpp::Rcout << prefix << ".v" << " is generated. " << std::endl;
 
     // Generate the Gnuplot Script to the .plt file
     fs.open((prefix + ".plt").c_str(),
@@ -188,7 +189,7 @@ void gnuplot_output_2 (const Graph& g, const std::string& prefix)
     //  fs << "replot" << std::endl;
 
     fs.close();
-    std::cout << prefix << ".plt" << " is generated. " << std::endl;
+    Rcpp::Rcout << prefix << ".plt" << " is generated. " << std::endl;
 }
 
 // directed graphs

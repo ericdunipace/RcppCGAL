@@ -16,6 +16,7 @@
 #ifndef CGAL_TRIANGLE_COORDINATES_2_H
 #define CGAL_TRIANGLE_COORDINATES_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Barycentric_coordinates_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -153,7 +154,7 @@ public:
     // Information Functions
 
     // This function prints some information about the used triangle and triangle coordinates.
-    void print_information(std::ostream &output_stream = std::cout) const
+    void print_information(std::ostream &output_stream = Rcpp::Rcout) const
     {
         output_stream << std::endl << "INFORMATION: " << std::endl;
 
@@ -162,7 +163,7 @@ public:
 
         output_stream << std::endl << "DEGENERACY: " << std::endl << std::endl;
         if(!collinear_2(vertex[0], vertex[1], vertex[2])) output_stream << "This triangle is not degenerate." << std::endl;
-        else std::cout << "This triangle is degenerate. The correct computation is not expected!" << std::endl;
+        else Rcpp::Rcout << "This triangle is degenerate. The correct computation is not expected!" << std::endl;
 
         output_stream << std::endl << "TYPE OF COORDINATES: " << std::endl << std::endl;
         output_stream << "The coordinate functions to be computed are triangle coordinates." << std::endl;

@@ -15,6 +15,7 @@
 #ifndef CGAL_PRIMES_H
 #define CGAL_PRIMES_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 namespace CGAL {
@@ -306,9 +307,9 @@ int get_next_lower_prime(int current_prime){
         int r = 1;
         for(int j=3; (j <= i/2 && (r != 0)); j++){
             r = i % j;
-//                std::cout<<"i " <<i<<std::endl;
-//                std::cout<<"j " <<j<<std::endl;
-//                std::cout<<"i%j " <<i%j<<std::endl;
+//                Rcpp::Rcout<<"i " <<i<<std::endl;
+//                Rcpp::Rcout<<"j " <<j<<std::endl;
+//                Rcpp::Rcout<<"i%j " <<i%j<<std::endl;
             if(j==i/2 && r != 0)
                 is_prime = true;
         }

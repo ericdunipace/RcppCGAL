@@ -20,6 +20,7 @@
  * \c Curved_kernel_via_analysis_2 with \c SoX::sweep_curves
  */
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #include <boost/optional.hpp>
@@ -35,7 +36,7 @@
 #ifndef SCA_CERR
 //#define SCA_DEBUG_PRINT_CERR
 #ifdef SCA_DEBUG_PRINT_CERR
-#define SCA_CERR(x) std::cerr << x
+#define SCA_CERR(x) Rcpp::Rcerr << x
 #else
 #define SCA_CERR(x) static_cast<void>(0)
 #endif

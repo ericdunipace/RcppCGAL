@@ -14,6 +14,7 @@
 #ifndef CGAL_TRAPEZOIDAL_DECOMPOSITION_FUNCTIONS_H
 #define CGAL_TRAPEZOIDAL_DECOMPOSITION_FUNCTIONS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 /*! \file
@@ -1611,8 +1612,8 @@ Trapezoidal_decomposition_2<Td_traits>::insert(Halfedge_const_handle he)
   m_number_of_curves++;
 
 #ifdef CGAL_TD_DEBUG
-  write(std::cout,*m_dag_root,*traits) << std::endl;
-  std::cout << "\nTD::insert() exited with data structure"
+  write(Rcpp::Rcout,*m_dag_root,*traits) << std::endl;
+  Rcpp::Rcout << "\nTD::insert() exited with data structure"
             << is_valid(*m_dag_root) << std::endl;
 #endif
 
@@ -1985,21 +1986,21 @@ vertical_ray_shoot(const Point & p,Locate_type & lt,
 //                   const X_monotone_curve_2& cv2)
 //{
 //#ifdef MICHAL_DEBUG
-//  std::cout << "SPLITTING: --------------------------" << std::endl;
-//  std::cout << "cv before split" << std::endl;
+//  Rcpp::Rcout << "SPLITTING: --------------------------" << std::endl;
+//  Rcpp::Rcout << "cv before split" << std::endl;
 //  print_cv_data(cv);
-//  std::cout << "cv1 before split" << std::endl;
+//  Rcpp::Rcout << "cv1 before split" << std::endl;
 //  print_cv_data(cv1);
-//  std::cout << "cv2 before split" << std::endl;
+//  Rcpp::Rcout << "cv2 before split" << std::endl;
 //  print_cv_data(cv2);
 //#endif
 //
 //#ifdef CGAL_TD_DEBUG
-//  std::cout << "\nTD::before_split_edge(" << cv << "," << cv1 << "," << cv2
+//  Rcpp::Rcout << "\nTD::before_split_edge(" << cv << "," << cv1 << "," << cv2
 //            << ") called with "
 //            << (is_valid(*m_dag_root) ? "valid" : "invalid")
 //            << " data structure" <<  std::endl;
-//  write(std::cout,*m_dag_root,*traits) << std::endl;
+//  write(Rcpp::Rcout,*m_dag_root,*traits) << std::endl;
 //#endif
 //
 //  if (m_with_guarantees) update();
@@ -2027,9 +2028,9 @@ vertical_ray_shoot(const Point & p,Locate_type & lt,
 //
 //  if (!traits->are_mergeable_2_object()(cv1,cv2))
 //  {
-//    std::cerr << "\ncv " << cv;
-//    std::cerr << "\ncv1 " << cv1;
-//    std::cerr << "\ncv1 " << cv2 << std::endl;
+//    Rcpp::Rcerr << "\ncv " << cv;
+//    Rcpp::Rcerr << "\ncv1 " << cv1;
+//    Rcpp::Rcerr << "\ncv1 " << cv2 << std::endl;
 //  }
 //  CGAL_precondition(traits != nullptr);
 //  CGAL_precondition(traits->are_mergeable_2_object()(cv1,cv2));
@@ -2161,10 +2162,10 @@ vertical_ray_shoot(const Point & p,Locate_type & lt,
 //  CGAL_precondition( he2 != invalid_he);
 //
 //#ifdef CGAL_TD_DEBUG
-//  std::cout << "\nTD::split_edge(" << cv << "," << he1 << "," << he2
+//  Rcpp::Rcout << "\nTD::split_edge(" << cv << "," << he1 << "," << he2
 //            << ") called with " << (is_valid(*m_dag_root) ? "valid" : "invalid")
 //            << " data structure" <<  std::endl;
-//  write(std::cout,*m_dag_root,*traits) << std::endl;
+//  write(Rcpp::Rcout,*m_dag_root,*traits) << std::endl;
 //#endif
 //
 //
@@ -2481,7 +2482,7 @@ vertical_ray_shoot(const Point & p,Locate_type & lt,
 //#else
 //
 //    if (!traits->equal_2_object()(top_it->bottom()->curve(), cv))
-//      std::cout << "\ntop_it->bottom()->curve() "<< top_it->bottom()->curve()
+//      Rcpp::Rcout << "\ntop_it->bottom()->curve() "<< top_it->bottom()->curve()
 //                << "\t cv= " << cv;
 //    CGAL_assertion(traits->equal_2_object()(top_it->bottom()->curve() ,cv));
 //
@@ -2542,9 +2543,9 @@ vertical_ray_shoot(const Point & p,Locate_type & lt,
 //  m_number_of_curves++;
 //
 //#ifdef CGAL_TD_DEBUG
-//  std::cout << "\nTD::split_edge() exited with data structure"
+//  Rcpp::Rcout << "\nTD::split_edge() exited with data structure"
 //            << is_valid(*m_dag_root) << std::endl;
-//  write(std::cout,*m_dag_root,*traits) << std::endl;
+//  write(Rcpp::Rcout,*m_dag_root,*traits) << std::endl;
 //#endif
 //}
 //
@@ -2566,11 +2567,11 @@ merge_edge(Halfedge_const_handle he1,
   CGAL_precondition( he2 != invalid_he);
 
 #ifdef CGAL_TD_DEBUG
-  std::cout << "\nTD::merge_edge(" << he1->curve() << "," << he2->curve()
+  Rcpp::Rcout << "\nTD::merge_edge(" << he1->curve() << "," << he2->curve()
             << "," << cv
             << ") called with " << (is_valid(*m_dag_root) ? "valid" : "invalid")
             << " data structure" <<  std::endl;
-  write(std::cout,*m_dag_root,*traits) << std::endl;
+  write(Rcpp::Rcout,*m_dag_root,*traits) << std::endl;
 #endif
 
   if (m_with_guarantees) update();
@@ -2807,9 +2808,9 @@ merge_edge(Halfedge_const_handle he1,
   m_number_of_curves--;
 
 #ifdef CGAL_TD_DEBUG
-  std::cout << "\nTD::merge_edge() exited with data structure"
+  Rcpp::Rcout << "\nTD::merge_edge() exited with data structure"
             << is_valid(*m_dag_root) << std::endl;
-  write(std::cout,*m_dag_root,*traits) << std::endl;
+  write(Rcpp::Rcout,*m_dag_root,*traits) << std::endl;
 #endif
 }
 

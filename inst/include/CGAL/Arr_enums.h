@@ -14,6 +14,7 @@
 #ifndef CGAL_ARR_ENUM_H
 #define CGAL_ARR_ENUM_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -178,7 +179,7 @@ OutputStream& operator<<(
     }
     break;
   case ::CGAL::IO::BINARY:
-    std::cerr << "BINARY format not yet implemented" << std::endl;
+    Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
     break;
   default:
     os << static_cast< int >(ps);

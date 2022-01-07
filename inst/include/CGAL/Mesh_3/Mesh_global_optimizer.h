@@ -17,6 +17,7 @@
 #ifndef CGAL_MESH_3_MESH_GLOBAL_OPTIMIZER_H
 #define CGAL_MESH_3_MESH_GLOBAL_OPTIMIZER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -608,7 +609,7 @@ Mesh_global_optimizer(C3T3& c3t3,
   tr_.set_lock_data_structure(get_lock_data_structure());
 
 #ifdef CGAL_MESH_3_OPTIMIZER_VERBOSE
-  std::cerr << "Fill sizing field...";
+  Rcpp::Rcerr << "Fill sizing field...";
   CGAL::Real_timer timer;
   timer.start();
 #endif
@@ -616,7 +617,7 @@ Mesh_global_optimizer(C3T3& c3t3,
   fill_sizing_field();
 
 #ifdef CGAL_MESH_3_OPTIMIZER_VERBOSE
-  std::cerr << "done (" << timer.time() << "s)\n";
+  Rcpp::Rcerr << "done (" << timer.time() << "s)\n";
 #endif
 }
 
@@ -647,7 +648,7 @@ operator()(int nb_iterations, Visitor visitor)
   std::size_t initial_vertices_nb = moving_vertices.size();
 #ifdef CGAL_MESH_3_OPTIMIZER_VERBOSE
   double step_begin = running_time_.time();
-  std::cerr << "Running " << Mf::name() << "-smoothing ("
+  Rcpp::Rcerr << "Running " << Mf::name() << "-smoothing ("
     << initial_vertices_nb << " vertices)" << std::endl;
 #endif //CGAL_MESH_3_OPTIMIZER_VERBOSE
 
@@ -693,7 +694,7 @@ operator()(int nb_iterations, Visitor visitor)
 
 #ifdef CGAL_MESH_3_OPTIMIZER_VERBOSE
     std::size_t moving_vertices_size = moving_vertices.size();
-    std::cerr << boost::format("\r             \r"
+    Rcpp::Rcerr << boost::format("\r             \r"
       "end iter.%1%, %2% / %3%, last step:%4$.2fs, step avg:%5$.2fs, avg big moves:%6$.3f ")
     % (i+1)
     % moving_vertices_size
@@ -711,7 +712,7 @@ operator()(int nb_iterations, Visitor visitor)
       break;
   }
 #ifdef CGAL_MESH_3_OPTIMIZER_VERBOSE
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
 #endif
 
   running_time_.stop();
@@ -725,22 +726,22 @@ operator()(int nb_iterations, Visitor visitor)
 
 #ifdef CGAL_MESH_3_OPTIMIZER_VERBOSE
   if ( do_freeze_ && nb_frozen_points_ == initial_vertices_nb )
-    std::cerr << "All vertices frozen" << std::endl;
+    Rcpp::Rcerr << "All vertices frozen" << std::endl;
   else if ( do_freeze_ && convergence_stop )
-    std::cerr << "Can't improve anymore" << std::endl;
+    Rcpp::Rcerr << "Can't improve anymore" << std::endl;
   else if ( is_time_limit_reached() )
-    std::cerr << "Time limit reached" << std::endl;
+    Rcpp::Rcerr << "Time limit reached" << std::endl;
   else if ( check_convergence() )
-    std::cerr << "Convergence reached" << std::endl;
+    Rcpp::Rcerr << "Convergence reached" << std::endl;
   else if( i >= nb_iterations )
-    std::cerr << "Max iteration number reached" << std::endl;
+    Rcpp::Rcerr << "Max iteration number reached" << std::endl;
 
-  std::cerr << "Total optimization time: " << running_time_.time()
+  Rcpp::Rcerr << "Total optimization time: " << running_time_.time()
             << "s" << std::endl << std::endl;
 #endif
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << std::endl << "Total optimization 'wall-clock' time: "
+  Rcpp::Rcerr << std::endl << "Total optimization 'wall-clock' time: "
             << optim_time << "s" << std::endl;
 #endif
 
@@ -783,7 +784,7 @@ compute_moves(Moving_vertices_set& moving_vertices)
   this->clear_big_moves();
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << "Computing moves...";
+  Rcpp::Rcerr << "Computing moves...";
   WallClockTimer t;
 #endif
 
@@ -854,7 +855,7 @@ compute_moves(Moving_vertices_set& moving_vertices)
   }
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << "done in " << t.elapsed() << " seconds." << std::endl;
+  Rcpp::Rcerr << "done in " << t.elapsed() << " seconds." << std::endl;
 #endif
 
   return moves;
@@ -928,7 +929,7 @@ update_mesh(const Moves_vector& moves,
   Outdated_cell_set outdated_cells;
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << "Moving vertices...";
+  Rcpp::Rcerr << "Moving vertices...";
   WallClockTimer t;
 #endif
 
@@ -962,7 +963,7 @@ update_mesh(const Moves_vector& moves,
         FT size = std::get<2>(*it);
 
 #ifdef CGAL_MESH_3_OPTIMIZER_VERBOSE
-        std::cout << "Moving #" << it - moves.begin()
+        Rcpp::Rcout << "Moving #" << it - moves.begin()
                   << " addr: " << &*v
                   << " pt: " << tr_.point(v)
                   << " move: " << move << std::endl;
@@ -988,12 +989,12 @@ update_mesh(const Moves_vector& moves,
   visitor.after_move_points();
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << "done in " << t.elapsed() << " seconds." << std::endl;
+  Rcpp::Rcerr << "done in " << t.elapsed() << " seconds." << std::endl;
 #endif
 
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << "Updating C3T3 (rebuilding restricted Delaunay)...";
+  Rcpp::Rcerr << "Updating C3T3 (rebuilding restricted Delaunay)...";
   t.reset();
 #endif
 
@@ -1013,7 +1014,7 @@ update_mesh(const Moves_vector& moves,
   visitor.after_rebuild_restricted_delaunay();
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << "Updating C3T3 done in " << t.elapsed() << " seconds." << std::endl;
+  Rcpp::Rcerr << "Updating C3T3 done in " << t.elapsed() << " seconds." << std::endl;
 #endif
 }
 

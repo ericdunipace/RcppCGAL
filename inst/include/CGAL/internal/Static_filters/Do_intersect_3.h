@@ -16,6 +16,7 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_DO_INTERSECT_3_H
 #define CGAL_INTERNAL_STATIC_FILTERS_DO_INTERSECT_3_H
 
+#include <Rcpp.h>
 #include <CGAL/Bbox_3.h>
 #include <CGAL/Profile_counter.h>
 #include <CGAL/internal/Static_filters/Static_filter_error.h>
@@ -381,7 +382,7 @@ public:
     F f1bis = (t1 - t1) - (t1 - t1);
     F f2 = f1*f1;
     F f3 = f2 - f2;
-    std::cerr << "epsilons:\n"
+    Rcpp::Rcerr << "epsilons:\n"
               << "  degre " << f1.degree() << ": " <<  f1.error() << "\n"
               << "  degre " << f1bis.degree() << ": " <<  f1bis.error() << "\n"
               << "  degre " << f2.degree() << ": " <<  f2.error() << "\n"
@@ -389,9 +390,9 @@ public:
 
     double err = f.error();
     err += err * 2 *  F::ulp(); // Correction due to "eps * m * m".  Do we need 2 ?
-    std::cerr << "*** epsilon for Do_intersect_3(Bbox_3, Segment_3) = "
+    Rcpp::Rcerr << "*** epsilon for Do_intersect_3(Bbox_3, Segment_3) = "
               << err << std::endl;
-    std::cerr << "\n"
+    Rcpp::Rcerr << "\n"
               << "Now for underflow/overflows...\n"
               << "        min_double/eps = "
               << (std::numeric_limits<double>::min)() / err << std::endl

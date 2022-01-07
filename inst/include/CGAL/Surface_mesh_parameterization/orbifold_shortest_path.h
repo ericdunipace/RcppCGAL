@@ -12,6 +12,7 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_SHORTEST_PATH_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_SHORTEST_PATH_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/disable_warnings.h>
@@ -124,7 +125,7 @@ void compute_shortest_paths_between_two_cones(const TriangleMesh& mesh,
                                               EdgeOutputIterator oi)
 {
   if(source == target) {
-    std::cerr << "Warning: the source and target are identical in 'shortest_path' " << std::endl;
+    Rcpp::Rcerr << "Warning: the source and target are identical in 'shortest_path' " << std::endl;
     return;
   }
 
@@ -144,7 +145,7 @@ void compute_shortest_paths_between_two_cones(const TriangleMesh& mesh,
   try {
     boost::dijkstra_shortest_paths(mesh, source, boost::predecessor_map(pred_pmap).visitor(vis));
   } catch (const std::exception& e) {
-    std::cerr << e.what() << std::endl;
+    Rcpp::Rcerr << e.what() << std::endl;
   }
 
   // Draw the path from target to source and collect the edges along the way

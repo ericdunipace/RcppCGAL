@@ -26,6 +26,7 @@
 // - parallel versions : per-thread and summing on all threads.
 // - Timer vs Real_timer ?
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <iostream>
 #include <iomanip>
@@ -51,7 +52,7 @@ struct Profile_timer
 
     ~Profile_timer()
     {
-        std::cerr << "[CGAL::Profile_timer] "
+        Rcpp::Rcerr << "[CGAL::Profile_timer] "
                   << std::setw(10) << t << " " << s << std::endl;
     }
 

@@ -12,6 +12,7 @@
 #ifndef CGAL_POINTMATCHER_REGISTER_POINT_SETS_H
 #define CGAL_POINTMATCHER_REGISTER_POINT_SETS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #if defined(CGAL_LINKED_WITH_POINTMATCHER) || defined(DOXYGEN_RUNNING)
@@ -222,7 +223,7 @@ namespace pointmatcher {
    \cgalNamedParamsEnd
 
    \return `true` if registration is converged, `false` otherwise. A log why it
-   failed to converge is written to `std::cerr` if the registration cannot converge.
+   failed to converge is written to `Rcpp::Rcerr` if the registration cannot converge.
 */
 template <class PointRange1, class PointRange2,
           class NamedParameters1, class NamedParameters2>

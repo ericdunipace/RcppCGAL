@@ -12,6 +12,7 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_ORBIFOLD_TUTTE_PARAMETERIZER_3_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_ORBIFOLD_TUTTE_PARAMETERIZER_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/disable_warnings.h>
@@ -104,19 +105,19 @@ Error_code read_cones(const TriangleMesh& tm, std::ifstream& in, VertexIndexMap 
     cones.push_back(cone_index);
 
 #ifdef CGAL_SMP_ORBIFOLD_DEBUG
-  std::cout << "Input cones: ";
+  Rcpp::Rcout << "Input cones: ";
   for(std::size_t i=0; i<cones.size(); ++i)
-    std::cout << cones[i] << " ";
-  std::cout << std::endl;
+    Rcpp::Rcout << cones[i] << " ";
+  Rcpp::Rcout << std::endl;
 #endif
 
   if(cones.size() < 3 || cones.size() > 4) {
-    std::cerr << "Error: Not enough or too many input cones" << std::endl;
+    Rcpp::Rcerr << "Error: Not enough or too many input cones" << std::endl;
     return ERROR_WRONG_PARAMETER;
   }
 
   if(!internal::are_cones_unique(cones)) {
-    std::cerr << "Error: The input cones are not unique" << std::endl;
+    Rcpp::Rcerr << "Error: The input cones are not unique" << std::endl;
     return ERROR_WRONG_PARAMETER;
   }
 
@@ -443,15 +444,15 @@ private:
   {
     if(orb_type == Parallelogram) {
       if(cmap.size() != 6) {
-        std::cerr << "Using orb_type '" << get_orbifold_type(orb_type)
+        Rcpp::Rcerr << "Using orb_type '" << get_orbifold_type(orb_type)
                   << "' requires 4 vertices marked as cones (thus 6 in the seam mesh)" << std::endl;
-        std::cerr << "currently: " << cmap.size() << std::endl;
+        Rcpp::Rcerr << "currently: " << cmap.size() << std::endl;
         return ERROR_WRONG_PARAMETER;
       }
     } else if(cmap.size() != 4){ // orb_type == Square, Diamond, Triangle
-      std::cerr << "Using orb_type '" << get_orbifold_type(orb_type)
+      Rcpp::Rcerr << "Using orb_type '" << get_orbifold_type(orb_type)
                 << "' requires 3 vertices marked as cones (thus 4 in the seam mesh)" << std::endl;
-      std::cerr << "currently: " << cmap.size() << std::endl;
+      Rcpp::Rcerr << "currently: " << cmap.size() << std::endl;
       return ERROR_WRONG_PARAMETER;
     }
 
@@ -869,7 +870,7 @@ private:
 
     Solver_traits solver;
     if(!solver.linear_solver(M, B, Xf, D)) {
-      std::cerr << "Could not solve linear system" << std::endl;
+      Rcpp::Rcerr << "Could not solve linear system" << std::endl;
       return ERROR_CANNOT_SOLVE_LINEAR_SYSTEM;
     }
     CGAL_assertion(D == 1.0);

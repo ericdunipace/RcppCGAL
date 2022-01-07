@@ -14,6 +14,7 @@
 #ifndef CGAL_DELAUNAY_TRIANGULATION_ON_SPHERE_2_H
 #define CGAL_DELAUNAY_TRIANGULATION_ON_SPHERE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_on_sphere_2.h>
 
 #include <CGAL/Triangulation_on_sphere_2.h>
@@ -1141,7 +1142,7 @@ is_valid_face(Face_handle fh, bool verbose, int /*level*/) const
   {
     if(verbose)
     {
-      std::cerr << " from is_valid_face\n face " << std::endl;
+      Rcpp::Rcerr << " from is_valid_face\n face " << std::endl;
       show_face(fh);
     }
   }
@@ -1160,7 +1161,7 @@ is_valid(bool verbose, int level) const
   if(!tds().is_valid(verbose, level))
   {
     if(verbose)
-      std::cerr << "invalid data structure" << std::endl;
+      Rcpp::Rcerr << "invalid data structure" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -1194,7 +1195,7 @@ is_valid(bool verbose, int level) const
 
   // in any dimension
   if(verbose)
-    std::cerr << " number of vertices " << number_of_vertices() << "\t" << std::endl;
+    Rcpp::Rcerr << " number of vertices " << number_of_vertices() << "\t" << std::endl;
 
   CGAL_triangulation_assertion(result);
   return result;

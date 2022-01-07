@@ -12,6 +12,7 @@
 #ifndef CGAL_MESH_3_WORKSHARING_DATA_STRUCTURES_H
 #define CGAL_MESH_3_WORKSHARING_DATA_STRUCTURES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -96,7 +97,7 @@ public:
     m_resolution_z = n / (bbox.zmax() - m_zmin);
 
 #ifdef CGAL_CONCURRENT_MESH_3_VERBOSE
-    std::cerr << "Worksharing data structure Bounding Box = ["
+    Rcpp::Rcerr << "Worksharing data structure Bounding Box = ["
       << bbox.xmin() << ", " << bbox.xmax() << "], "
       << bbox.ymin() << ", " << bbox.ymax() << "], "
       << bbox.zmin() << ", " << bbox.zmax() << "]"
@@ -214,7 +215,7 @@ public:
         }
       }
     }
-    //std::cerr << "Occ=" << m_occupation_grid[laziest_index]
+    //Rcpp::Rcerr << "Occ=" << m_occupation_grid[laziest_index]
     //  << " / Bat=" << m_num_batches_grid[laziest_index]
     //  << std::endl;
     return laziest_index;*/
@@ -222,11 +223,11 @@ public:
 
     // Rotate
     static std::atomic<int> last_cell_index;
-    //std::cerr << "last=" << last_cell_index << std::endl;
+    //Rcpp::Rcerr << "last=" << last_cell_index << std::endl;
     int i = (last_cell_index + 1) % m_num_cells;
     for ( ; i != last_cell_index ; i = (i + 1) % m_num_cells)
     {
-      //std::cerr << "#" << i << "=" << m_num_batches_grid[i] << std::endl;
+      //Rcpp::Rcerr << "#" << i << "=" << m_num_batches_grid[i] << std::endl;
       if (m_num_batches_grid[i] > 0)
       {
         break;
@@ -564,7 +565,7 @@ public:
     add_occupation(index, 1);
 
 #ifdef CGAL_CONCURRENT_MESH_3_VERY_VERBOSE
-    std::cerr << "Running a batch of " << wb.size() <<
+    Rcpp::Rcerr << "Running a batch of " << wb.size() <<
       " elements on cell #" << index << std::endl;
 #endif
     wb();

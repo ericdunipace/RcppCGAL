@@ -16,6 +16,7 @@
 #ifndef CGAL_DISCRETE_HARMONIC_2_H
 #define CGAL_DISCRETE_HARMONIC_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Barycentric_coordinates_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -343,7 +344,7 @@ private:
         boost::optional<OutputIterator> coordinates_on_unbounded_side_precise_2(const Point_2 &query_point, OutputIterator &output, bool warning_tag)
     {
         if(warning_tag)
-            std::cout << std::endl << "ATTENTION: Discrete harmonic coordinates might be not well-defined outside the polygon!" << std::endl;
+            Rcpp::Rcout << std::endl << "ATTENTION: Discrete harmonic coordinates might be not well-defined outside the polygon!" << std::endl;
 
         // Use the same formulas as for the bounded side since they are also valid on the unbounded side.
         return coordinates_on_bounded_side_precise_2(query_point, output);
@@ -355,7 +356,7 @@ private:
         boost::optional<OutputIterator> coordinates_on_unbounded_side_fast_2(const Point_2 &query_point, OutputIterator &output, bool warning_tag)
     {
         if(warning_tag)
-            std::cout << std::endl << "ATTENTION: Discrete harmonic coordinates might be not well-defined outside the polygon!" << std::endl;
+            Rcpp::Rcout << std::endl << "ATTENTION: Discrete harmonic coordinates might be not well-defined outside the polygon!" << std::endl;
 
         // Use the same formulas as for the bounded side since they are also valid on the unbounded side.
         return coordinates_on_bounded_side_fast_2(query_point, output);

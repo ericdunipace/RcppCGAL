@@ -13,6 +13,7 @@
 #ifndef CGAL_LAZY_H
 #define CGAL_LAZY_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
@@ -1062,8 +1063,8 @@ CGAL_Kernel_obj(Point_3)
 #undef CGAL_Kernel_obj
 
 
-  std::cerr << "object_cast inside Lazy_construction_rep::operator() failed. It needs more else if's (#2)" << std::endl;
-  std::cerr << "dynamic type of the Object : " << eto.type().name() << std::endl;
+  Rcpp::Rcerr << "object_cast inside Lazy_construction_rep::operator() failed. It needs more else if's (#2)" << std::endl;
+  Rcpp::Rcerr << "dynamic type of the Object : " << eto.type().name() << std::endl;
 
   return Object();
 }
@@ -1368,7 +1369,7 @@ public:
 
   #include <CGAL/Kernel/interface_macros.h>
 
-          std::cerr << "we need  more casts" << std::endl;
+          Rcpp::Rcerr << "we need  more casts" << std::endl;
         }
       return it;
       } catch (Uncertain_conversion_exception&) {}
@@ -1448,8 +1449,8 @@ public:
 
   #include <CGAL/Kernel/interface_macros.h>
 
-        std::cerr << "object_cast inside Lazy_construction_rep::operator() failed. It needs more else if's (#1)" << std::endl;
-        std::cerr << "dynamic type of the Object : " << lo.approx().type().name() << std::endl;
+        Rcpp::Rcerr << "object_cast inside Lazy_construction_rep::operator() failed. It needs more else if's (#1)" << std::endl;
+        Rcpp::Rcerr << "dynamic type of the Object : " << lo.approx().type().name() << std::endl;
         return Object();
       } catch (Uncertain_conversion_exception&) {}
     }
@@ -1503,8 +1504,8 @@ public:
       CGAL_Kernel_obj(Point_3)
 #undef CGAL_Kernel_obj
 
-        std::cerr << "object_cast inside Lazy_construction_rep::operator() failed. It needs more else if's (#1)" << std::endl;
-        std::cerr << "dynamic type of the Object : " << lo.approx().type().name() << std::endl;
+        Rcpp::Rcerr << "object_cast inside Lazy_construction_rep::operator() failed. It needs more else if's (#1)" << std::endl;
+        Rcpp::Rcerr << "dynamic type of the Object : " << lo.approx().type().name() << std::endl;
 
         return Object();
       } catch (Uncertain_conversion_exception&) {}
@@ -1538,8 +1539,8 @@ public:
 
 #include <CGAL/Kernel/interface_macros.h>
 
-        std::cerr << "object_cast inside Lazy_construction_rep::operator() failed. It needs more else if's (#1)" << std::endl;
-        std::cerr << "dynamic type of the Object : " << lo.approx().type().name() << std::endl;
+        Rcpp::Rcerr << "object_cast inside Lazy_construction_rep::operator() failed. It needs more else if's (#1)" << std::endl;
+        Rcpp::Rcerr << "dynamic type of the Object : " << lo.approx().type().name() << std::endl;
         return Object();
       } catch (Uncertain_conversion_exception&) {}
     }

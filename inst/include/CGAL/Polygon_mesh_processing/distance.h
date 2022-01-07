@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_DISTANCE_H
 #define CGAL_POLYGON_MESH_PROCESSING_DISTANCE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/distance.h>
 
 #include <CGAL/Polygon_mesh_processing/internal/mesh_to_point_set_hausdorff_distance.h>
@@ -1022,7 +1023,7 @@ double approximate_Hausdorff_distance(
   CGAL_assertion_msg (is_triangle,
         "Mesh is not triangulated. Distance computing impossible.");
   #ifdef CGAL_HAUSDORFF_DEBUG
-  std::cout << "Nb sample points " << sample_points.size() << "\n";
+  Rcpp::Rcout << "Nb sample points " << sample_points.size() << "\n";
   #endif
   typedef typename Kernel::Point_3 Point_3;
   std::vector<Point_3> sample_points

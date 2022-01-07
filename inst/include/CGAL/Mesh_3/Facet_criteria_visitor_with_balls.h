@@ -18,6 +18,7 @@
 #ifndef CGAL_MESH_3_FACET_CRITERIA_VISITOR_WITH_BALLS_H
 #define CGAL_MESH_3_FACET_CRITERIA_VISITOR_WITH_BALLS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Mesh_3/mesh_standard_criteria.h>
@@ -126,7 +127,7 @@ public:
     default: break;
     }
 
-    //std::cerr << "radius: " << radius_ortho_shpere << "  ratio: " << ratio << "  wp_nb:" << wp_nb_ << "\n";
+    //Rcpp::Rcerr << "radius: " << radius_ortho_shpere << "  ratio: " << ratio << "  wp_nb:" << wp_nb_ << "\n";
   }
 
   // Destructor

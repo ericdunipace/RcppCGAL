@@ -12,6 +12,7 @@
 #ifndef CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_3_H
 #define CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_3_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <vector>
@@ -117,13 +118,13 @@ struct Triangulation_mesher_level_traits_3 :
       sq_insertion_radius = (CGAL::min)(sq_insertion_radius,
                                         CGAL::squared_distance(v->point(),
                                                                (*vit)->point()) );
-    std::cerr << "insertion radius: " << CGAL::sqrt(sq_insertion_radius);
+    Rcpp::Rcerr << "insertion radius: " << CGAL::sqrt(sq_insertion_radius);
 #ifdef CGAL_MESH_3_DIRTY_DEBUG_SPHERES
-      std::cerr << " \t\tdistance: "
+      Rcpp::Rcerr << " \t\tdistance: "
                 << CGAL::sqrt(CGAL::squared_distance(v->point(),
                                       typename Tr::Geom_traits::Point_3(CGAL::ORIGIN)));
 #endif
-    std::cerr << std::endl;
+    Rcpp::Rcerr << std::endl;
     }
 #endif // CGAL_MESH_3_DEBUG_INSERTION_RADIUS
 

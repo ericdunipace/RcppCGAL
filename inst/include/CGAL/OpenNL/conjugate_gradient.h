@@ -31,6 +31,7 @@
 #ifndef __OPENNL_CONJUGATE_GRADIENT__
 #define __OPENNL_CONJUGATE_GRADIENT__
 
+#include <Rcpp.h>
 #include <CGAL/OpenNL/blas.h>
 #include <CGAL/assertions.h>
 
@@ -84,7 +85,7 @@ public:
     bool solve(const MATRIX &A, const VECTOR& b, VECTOR& x)
     {
 #ifdef DEBUG_TRACE
-        std::cerr << "  Call Conjugate Gradient" << std::endl;
+        Rcpp::Rcerr << "  Call Conjugate Gradient" << std::endl;
 #endif
         CGAL_assertion(A.dimension() > 0);
         unsigned int n = A.dimension() ;                        // (Square) matrix dimension
@@ -185,7 +186,7 @@ public:
     bool solve(const MATRIX &A, const PC_MATRIX &C, const VECTOR& b, VECTOR& x)
     {
 #ifdef DEBUG_TRACE
-        std::cerr << "  Call Conjugate Gradient with preconditioner" << std::endl;
+        Rcpp::Rcerr << "  Call Conjugate Gradient with preconditioner" << std::endl;
 #endif
         CGAL_assertion(A.dimension() > 0);
         unsigned int n = A.dimension() ;                        // (Square) matrix dimension

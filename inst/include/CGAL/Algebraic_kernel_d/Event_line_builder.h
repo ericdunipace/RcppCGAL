@@ -15,6 +15,7 @@
 #ifndef CGAL_ACK_EVENT_LINE_BUILDER
 #define CGAL_ACK_EVENT_LINE_BUILDER 1
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/Algebraic_structure_traits.h>
@@ -649,14 +650,14 @@ protected:
 
         long old_prec = CGAL::get_precision(BFI());
 
-        //std::cout << "p=" << p <<  std::endl;
-        //std::cout << "q=" << q <<  std::endl;
+        //Rcpp::Rcout << "p=" << p <<  std::endl;
+        //Rcpp::Rcout << "q=" << q <<  std::endl;
 
         long prec=16;
 
         while(true) {
             CGAL::set_precision(BFI(),prec);
-            //std::cout << "Increased to " << prec << std::endl;
+            //Rcpp::Rcout << "Increased to " << prec << std::endl;
             BFI isol_iv
                 = CGAL::hull(CGAL::convert_to_bfi(bit_des.left_bound(c)),
                              CGAL::convert_to_bfi(bit_des.right_bound(c)));
@@ -664,10 +665,10 @@ protected:
             if(! CGAL::in_zero(q_iv)) {
                 BFI p_iv = alpha_kernel.convert_to_bfi_object()(p);
                 BFI approx_iv = p_iv/q_iv;
-                //std::cout << "p_iv=[" << CGAL::lower(p_iv) << "," << CGAL::upper(p_iv) << "]" << std::endl;
-                //std::cout << "q_iv=[" << CGAL::lower(q_iv) << "," << CGAL::upper(q_iv) << "]"  << std::endl;
-                //std::cout << "isol_iv=[" << CGAL::lower(isol_iv) << "," << CGAL::upper(isol_iv) << "]" << std::endl;
-                //std::cout << "approx_iv=[" << CGAL::lower(approx_iv) << "," << CGAL::upper(approx_iv) << "]"  << std::endl;
+                //Rcpp::Rcout << "p_iv=[" << CGAL::lower(p_iv) << "," << CGAL::upper(p_iv) << "]" << std::endl;
+                //Rcpp::Rcout << "q_iv=[" << CGAL::lower(q_iv) << "," << CGAL::upper(q_iv) << "]"  << std::endl;
+                //Rcpp::Rcout << "isol_iv=[" << CGAL::lower(isol_iv) << "," << CGAL::upper(isol_iv) << "]" << std::endl;
+                //Rcpp::Rcout << "approx_iv=[" << CGAL::lower(approx_iv) << "," << CGAL::upper(approx_iv) << "]"  << std::endl;
                 if(CGAL::subset(approx_iv,isol_iv)) {
                     break;
                 }

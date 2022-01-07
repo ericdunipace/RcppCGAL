@@ -17,6 +17,7 @@
 #ifndef CGAL_TRIANGULATION_DATA_STRUCTURE_3_H
 #define CGAL_TRIANGULATION_DATA_STRUCTURE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/TDS_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -3557,7 +3558,7 @@ is_valid(bool verbose, int level ) const
 
       if(number_of_vertices() <= 4) {
         if (verbose)
-          std::cerr << "wrong number of vertices" << std::endl;
+          Rcpp::Rcerr << "wrong number of vertices" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3567,7 +3568,7 @@ is_valid(bool verbose, int level ) const
         return false;
       if ( number_of_vertices() != vertex_count ) {
         if (verbose)
-          std::cerr << "wrong number of vertices" << std::endl;
+          Rcpp::Rcerr << "wrong number of vertices" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3585,7 +3586,7 @@ is_valid(bool verbose, int level ) const
       // Euler relation
       if ( cell_count - facet_count + edge_count - vertex_count != 0 ) {
         if (verbose)
-            std::cerr << "Euler relation unsatisfied" << std::endl;
+            Rcpp::Rcerr << "Euler relation unsatisfied" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3597,7 +3598,7 @@ is_valid(bool verbose, int level ) const
 
       if(number_of_vertices() <= 3) {
         if (verbose)
-          std::cerr << "wrong number of vertices" << std::endl;
+          Rcpp::Rcerr << "wrong number of vertices" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3608,7 +3609,7 @@ is_valid(bool verbose, int level ) const
         return false;
       if ( number_of_vertices() != vertex_count ) {
         if (verbose)
-            std::cerr << "false number of vertices" << std::endl;
+            Rcpp::Rcerr << "false number of vertices" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3619,7 +3620,7 @@ is_valid(bool verbose, int level ) const
       // Euler for edges
       if ( edge_count != 3 * vertex_count - 6 ) {
         if (verbose)
-            std::cerr << "Euler relation unsatisfied - edges/vertices"
+            Rcpp::Rcerr << "Euler relation unsatisfied - edges/vertices"
                       << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
@@ -3631,7 +3632,7 @@ is_valid(bool verbose, int level ) const
       // Euler for facets
       if ( facet_count != 2 * vertex_count - 4 ) {
         if (verbose)
-            std::cerr << "Euler relation unsatisfied - facets/vertices"
+            Rcpp::Rcerr << "Euler relation unsatisfied - facets/vertices"
                       << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
@@ -3643,7 +3644,7 @@ is_valid(bool verbose, int level ) const
 
       if(number_of_vertices() <= 1) {
         if (verbose)
-          std::cerr << "wrong number of vertices" << std::endl;
+          Rcpp::Rcerr << "wrong number of vertices" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3653,7 +3654,7 @@ is_valid(bool verbose, int level ) const
           return false;
       if ( number_of_vertices() != vertex_count ) {
         if (verbose)
-            std::cerr << "false number of vertices" << std::endl;
+            Rcpp::Rcerr << "false number of vertices" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3663,7 +3664,7 @@ is_valid(bool verbose, int level ) const
       // Euler for edges
       if ( edge_count != vertex_count ) {
         if (verbose)
-            std::cerr << "false number of edges" << std::endl;
+            Rcpp::Rcerr << "false number of edges" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3673,7 +3674,7 @@ is_valid(bool verbose, int level ) const
     {
       if ( number_of_vertices() < 2 ) {
         if (verbose)
-            std::cerr << "fewer than 2 vertices but dimension 0" << std::endl;
+            Rcpp::Rcerr << "fewer than 2 vertices but dimension 0" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3683,7 +3684,7 @@ is_valid(bool verbose, int level ) const
     {
       if ( number_of_vertices() < 1 ) {
         if (verbose)
-          std::cerr << "no vertex but dimension -1" << std::endl;
+          Rcpp::Rcerr << "no vertex but dimension -1" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3693,14 +3694,14 @@ is_valid(bool verbose, int level ) const
         return false;
       if ( number_of_vertices() != vertex_count ) {
         if (verbose)
-          std::cerr << "false number of vertices" << std::endl;
+          Rcpp::Rcerr << "false number of vertices" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
     }
   } // end switch
   if (verbose)
-      std::cerr << "valid data structure" << std::endl;
+      Rcpp::Rcerr << "valid data structure" << std::endl;
   return true;
 }
 
@@ -3713,7 +3714,7 @@ is_valid(Vertex_handle v, bool verbose, int level) const
   result = result && v->cell()->has_vertex(v);
   if ( ! result ) {
     if ( verbose )
-      std::cerr << "invalid vertex" << std::endl;
+      Rcpp::Rcerr << "invalid vertex" << std::endl;
     CGAL_triangulation_assertion(false);
   }
   return result;
@@ -3733,14 +3734,14 @@ is_valid(Cell_handle c, bool verbose, int level) const
     {
       if ( c->vertex(0) == Vertex_handle() ) {
         if (verbose)
-            std::cerr << "vertex 0 nullptr" << std::endl;
+            Rcpp::Rcerr << "vertex 0 nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
       is_valid(c->vertex(0),verbose,level);
       if ( c->vertex(1) != Vertex_handle() || c->vertex(2) != Vertex_handle()) {
         if (verbose)
-            std::cerr << "vertex 1 or 2 != nullptr" << std::endl;
+            Rcpp::Rcerr << "vertex 1 or 2 != nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3748,7 +3749,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
            c->neighbor(1) != Cell_handle() ||
            c->neighbor(2) != Cell_handle()) {
         if (verbose)
-            std::cerr << "one neighbor != nullptr" << std::endl;
+            Rcpp::Rcerr << "one neighbor != nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3759,35 +3760,35 @@ is_valid(Cell_handle c, bool verbose, int level) const
       {
       if ( c->vertex(0) == Vertex_handle() ) {
         if (verbose)
-            std::cerr << "vertex 0 nullptr" << std::endl;
+            Rcpp::Rcerr << "vertex 0 nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
       is_valid(c->vertex(0),verbose,level);
       if ( c->neighbor (0) == Cell_handle() ) {
         if (verbose)
-            std::cerr << "neighbor 0 nullptr" << std::endl;
+            Rcpp::Rcerr << "neighbor 0 nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
       if ( c->vertex(1) != Vertex_handle() ||
            c->vertex(2) != Vertex_handle() ) {
         if (verbose)
-            std::cerr << "vertex 1 or 2 != nullptr" << std::endl;
+            Rcpp::Rcerr << "vertex 1 or 2 != nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
       if ( c->neighbor(1) != Cell_handle() ||
            c->neighbor(2) != Cell_handle() ) {
         if (verbose)
-            std::cerr << "neighbor 1 or 2 != nullptr" << std::endl;
+            Rcpp::Rcerr << "neighbor 1 or 2 != nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
 
       if ( ! c->neighbor(0)->has_vertex(c->vertex(0)) ) {
         if (verbose)
-            std::cerr << "neighbor 0 does not have vertex 0" << std::endl;
+            Rcpp::Rcerr << "neighbor 0 does not have vertex 0" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3803,7 +3804,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
 
       if ( v0 == Vertex_handle() || v1 == Vertex_handle() ) {
         if (verbose)
-            std::cerr << "vertex 0 or 1 nullptr" << std::endl;
+            Rcpp::Rcerr << "vertex 0 or 1 nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3811,21 +3812,21 @@ is_valid(Cell_handle c, bool verbose, int level) const
       is_valid(c->vertex(1),verbose,level);
       if ( n0 == Cell_handle() || n1 == Cell_handle() ) {
         if (verbose)
-            std::cerr << "neighbor 0 or 1 nullptr" << std::endl;
+            Rcpp::Rcerr << "neighbor 0 or 1 nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
 
       if ( v0 !=  n1->vertex(1) ) {
         if (verbose)
-            std::cerr << "neighbor 1 does not have vertex 0 as vertex 1"
+            Rcpp::Rcerr << "neighbor 1 does not have vertex 0 as vertex 1"
                       << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
       if ( v1 != n0->vertex(0) ) {
         if (verbose)
-            std::cerr << "neighbor 0 does not have vertex 1 as vertex 0"
+            Rcpp::Rcerr << "neighbor 0 does not have vertex 1 as vertex 0"
                       << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
@@ -3833,14 +3834,14 @@ is_valid(Cell_handle c, bool verbose, int level) const
 
       if ( n0->neighbor(1) != c ) {
         if (verbose)
-            std::cerr << "neighbor 0 does not have this as neighbor 1"
+            Rcpp::Rcerr << "neighbor 0 does not have this as neighbor 1"
                       << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
       if ( n1->neighbor(0) != c ) {
         if (verbose)
-            std::cerr << "neighbor 1 does not have this as neighbor 0"
+            Rcpp::Rcerr << "neighbor 1 does not have this as neighbor 0"
                       << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
@@ -3855,7 +3856,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
            c->vertex(1) == Vertex_handle() ||
            c->vertex(2) == Vertex_handle() ) {
         if (verbose)
-            std::cerr << "vertex 0, 1, or 2 nullptr" << std::endl;
+            Rcpp::Rcerr << "vertex 0, 1, or 2 nullptr" << std::endl;
         CGAL_triangulation_assertion(false);
         return false;
       }
@@ -3868,13 +3869,13 @@ is_valid(Cell_handle c, bool verbose, int level) const
         n = c->neighbor(i);
         if ( n == Cell_handle() ) {
           if (verbose)
-              std::cerr << "neighbor " << i << " nullptr" << std::endl;
+              Rcpp::Rcerr << "neighbor " << i << " nullptr" << std::endl;
           CGAL_triangulation_assertion(false);
           return false;
         }
         if ( ! n->has_vertex(c->vertex(cw(i)),in ) ) {
           if (verbose)
-              std::cerr << "vertex " << cw(i)
+              Rcpp::Rcerr << "vertex " << cw(i)
                         << " not vertex of neighbor " << i << std::endl;
           CGAL_triangulation_assertion(false);
           return false;
@@ -3882,7 +3883,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
         in = cw(in);
         if ( n->neighbor(in) != c ) {
           if (verbose)
-              std::cerr << "neighbor " << i
+              Rcpp::Rcerr << "neighbor " << i
                         << " does not have this as neighbor "
                         << in << std::endl;
           CGAL_triangulation_assertion(false);
@@ -3890,7 +3891,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
         }
         if ( c->vertex(ccw(i)) != n->vertex(cw(in)) ) {
           if (verbose)
-              std::cerr << "vertex " << ccw(i)
+              Rcpp::Rcerr << "vertex " << ccw(i)
                         << " is not vertex " << cw(in)
                         << " of neighbor " << i << std::endl;
           CGAL_triangulation_assertion(false);
@@ -3906,7 +3907,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
         for(i = 0; i < 4; i++) {
           if ( c->vertex(i) == Vertex_handle() ) {
             if (verbose)
-                std::cerr << "vertex " << i << " nullptr" << std::endl;
+                Rcpp::Rcerr << "vertex " << i << " nullptr" << std::endl;
             CGAL_triangulation_assertion(false);
             return false;
           }
@@ -3917,7 +3918,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
           Cell_handle n = c->neighbor(i);
           if ( n == Cell_handle() ) {
             if (verbose)
-              std::cerr << "neighbor " << i << " nullptr" << std::endl;
+              Rcpp::Rcerr << "neighbor " << i << " nullptr" << std::endl;
             CGAL_triangulation_assertion(false);
             return false;
           }
@@ -3930,28 +3931,28 @@ is_valid(Cell_handle c, bool verbose, int level) const
           if ( n->neighbor(3) == c) in = 3;
           if (in == 5) {
             if (verbose)
-              std::cerr << "neighbor of c has not c as neighbor" << std::endl;
+              Rcpp::Rcerr << "neighbor of c has not c as neighbor" << std::endl;
             CGAL_triangulation_assertion(false);
             return false;
           }
 
           int j1n=4,j2n=4,j3n=4;
           if ( ! n->has_vertex(c->vertex((i+1)&3),j1n) ) {
-            if (verbose) { std::cerr << "vertex " << ((i+1)&3)
+            if (verbose) { Rcpp::Rcerr << "vertex " << ((i+1)&3)
                                      << " not vertex of neighbor "
                                      << i << std::endl; }
             CGAL_triangulation_assertion(false);
             return false;
           }
           if ( ! n->has_vertex(c->vertex((i+2)&3),j2n) ) {
-            if (verbose) { std::cerr << "vertex " << ((i+2)&3)
+            if (verbose) { Rcpp::Rcerr << "vertex " << ((i+2)&3)
                                      << " not vertex of neighbor "
                                      << i << std::endl; }
             CGAL_triangulation_assertion(false);
             return false;
           }
           if ( ! n->has_vertex(c->vertex((i+3)&3),j3n) ) {
-            if (verbose) { std::cerr << "vertex " << ((i+3)&3)
+            if (verbose) { Rcpp::Rcerr << "vertex " << ((i+3)&3)
                                      << " not vertex of neighbor "
                                      << i << std::endl; }
             CGAL_triangulation_assertion(false);
@@ -3959,7 +3960,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
           }
 
           if ( in+j1n+j2n+j3n != 6) {
-            if (verbose) { std::cerr << "sum of the indices != 6 "
+            if (verbose) { Rcpp::Rcerr << "sum of the indices != 6 "
                                      << std::endl; }
             CGAL_triangulation_assertion(false);
             return false;
@@ -3970,7 +3971,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
             if ( j1n == ((in+1)&3) ) {
               if ( ( j2n != ((in+3)&3) ) || ( j3n != ((in+2)&3) ) ) {
                 if (verbose)
-                  std::cerr << " pb orientation with neighbor "
+                  Rcpp::Rcerr << " pb orientation with neighbor "
                             << i << std::endl;
                 CGAL_triangulation_assertion(false);
                 return false;
@@ -3979,7 +3980,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
             if ( j1n == ((in+2)&3) ) {
               if ( ( j2n != ((in+1)&3) ) || ( j3n != ((in+3)&3) ) ) {
                 if (verbose)
-                  std::cerr << " pb orientation with neighbor "
+                  Rcpp::Rcerr << " pb orientation with neighbor "
                             << i << std::endl;
                 CGAL_triangulation_assertion(false);
                 return false;
@@ -3988,7 +3989,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
             if ( j1n == ((in+3)&3) ) {
               if ( ( j2n != ((in+2)&3) ) || ( j3n != ((in+1)&3) ) ) {
                 if (verbose)
-                  std::cerr << " pb orientation with neighbor "
+                  Rcpp::Rcerr << " pb orientation with neighbor "
                             << i << std::endl;
                 CGAL_triangulation_assertion(false);
                 return false;
@@ -3999,7 +4000,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
             if ( j1n == ((in+1)&3) ) {
               if ( ( j2n != ((in+2)&3) ) || ( j3n != ((in+3)&3) ) ) {
                 if (verbose)
-                  std::cerr << " pb orientation with neighbor "
+                  Rcpp::Rcerr << " pb orientation with neighbor "
                             << i << std::endl;
                 CGAL_triangulation_assertion(false);
                 return false;
@@ -4008,7 +4009,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
             if ( j1n == ((in+2)&3) ) {
               if ( ( j2n != ((in+3)&3) ) || ( j3n != ((in+1)&3) ) ) {
                 if (verbose)
-                  std::cerr << " pb orientation with neighbor "
+                  Rcpp::Rcerr << " pb orientation with neighbor "
                             << i << std::endl;
                 CGAL_triangulation_assertion(false);
                 return false;
@@ -4017,7 +4018,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
             if ( j1n == ((in+3)&3) ) {
               if ( ( j2n != ((in+1)&3) ) || ( j3n != ((in+2)&3) ) ) {
                 if (verbose)
-                  std::cerr << " pb orientation with neighbor "
+                  Rcpp::Rcerr << " pb orientation with neighbor "
                             << i << std::endl;
                 CGAL_triangulation_assertion(false);
                 return false;
@@ -4179,7 +4180,7 @@ count_vertices(size_type & i, bool verbose, int level) const
   for (Vertex_iterator it = vertices_begin(); it != vertices_end(); ++it) {
     if ( ! is_valid(it,verbose,level) ) {
       if (verbose)
-          std::cerr << "invalid vertex" << std::endl;
+          Rcpp::Rcerr << "invalid vertex" << std::endl;
       CGAL_triangulation_assertion(false);
       return false;
     }
@@ -4199,7 +4200,7 @@ count_facets(size_type & i, bool verbose, int level) const
   for (Facet_iterator it = facets_begin(); it != facets_end(); ++it) {
     if ( ! is_valid((*it).first,verbose, level) ) {
       if (verbose)
-          std::cerr << "invalid facet" << std::endl;
+          Rcpp::Rcerr << "invalid facet" << std::endl;
       CGAL_triangulation_assertion(false);
       return false;
     }
@@ -4219,7 +4220,7 @@ count_edges(size_type & i, bool verbose, int level) const
   for (Edge_iterator it = edges_begin(); it != edges_end(); ++it) {
     if ( ! is_valid((*it).first,verbose, level) ) {
       if (verbose)
-          std::cerr << "invalid edge" << std::endl;
+          Rcpp::Rcerr << "invalid edge" << std::endl;
       CGAL_triangulation_assertion(false);
       return false;
     }
@@ -4239,7 +4240,7 @@ count_cells(size_type & i, bool verbose, int level) const
   for (Cell_iterator it = cells_begin(); it != cells_end(); ++it) {
     if ( ! is_valid(it,verbose, level) ) {
       if (verbose)
-          std::cerr << "invalid cell" << std::endl;
+          Rcpp::Rcerr << "invalid cell" << std::endl;
       CGAL_triangulation_assertion(false);
       return false;
     }

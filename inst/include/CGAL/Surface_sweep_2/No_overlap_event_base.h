@@ -15,6 +15,7 @@
 #ifndef CGAL_SURFACE_SWEEP_2_NO_OVERLAP_EVENT_BASE_H
 #define CGAL_SURFACE_SWEEP_2_NO_OVERLAP_EVENT_BASE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file
@@ -485,44 +486,44 @@ public:
 template <typename Traits, typename Subcurve>
 void No_overlap_event_base<Traits, Subcurve>::Print()
 {
-  std::cout << "\tEvent info: "  << "\n" ;
-  if (this->is_closed()) std::cout << "\t" << m_point << "\n" ;
+  Rcpp::Rcout << "\tEvent info: "  << "\n" ;
+  if (this->is_closed()) Rcpp::Rcout << "\t" << m_point << "\n" ;
   else {
-    std::cout << "\t";
+    Rcpp::Rcout << "\t";
     Arr_parameter_space ps_x = this->parameter_space_in_x();
     Arr_parameter_space ps_y = this->parameter_space_in_y();
 
     switch (ps_x) {
-     case ARR_LEFT_BOUNDARY:  std::cout << "left boundary"; break;
-     case ARR_RIGHT_BOUNDARY: std::cout << "right boundary"; break;
+     case ARR_LEFT_BOUNDARY:  Rcpp::Rcout << "left boundary"; break;
+     case ARR_RIGHT_BOUNDARY: Rcpp::Rcout << "right boundary"; break;
      case ARR_INTERIOR:
      default:
       switch (ps_y) {
-       case ARR_BOTTOM_BOUNDARY: std::cout << "bottom boundary"; break;
-       case ARR_TOP_BOUNDARY:    std::cout << "top boundary"; break;
+       case ARR_BOTTOM_BOUNDARY: Rcpp::Rcout << "bottom boundary"; break;
+       case ARR_TOP_BOUNDARY:    Rcpp::Rcout << "top boundary"; break;
        case ARR_INTERIOR:
        default: CGAL_error();
       }
     }
   }
-  std::cout << "\n";
+  Rcpp::Rcout << "\n";
 
-  std::cout << "\tLeft curves: \n" ;
+  Rcpp::Rcout << "\tLeft curves: \n" ;
   Subcurve_iterator iter;
   for (iter = m_left_curves.begin(); iter != m_left_curves.end(); ++iter) {
-    std::cout << "\t";
+    Rcpp::Rcout << "\t";
     (*iter)->Print();
-    std::cout << "\n";
+    Rcpp::Rcout << "\n";
   }
-  std::cout << std::endl;
-  std::cout << "\tRight curves: \n" ;
+  Rcpp::Rcout << std::endl;
+  Rcpp::Rcout << "\tRight curves: \n" ;
   for (iter = m_right_curves.begin(); iter != m_right_curves.end(); ++iter) {
-    std::cout << "\t";
+    Rcpp::Rcout << "\t";
     (*iter)->Print();
-    std::cout << "\n";
+    Rcpp::Rcout << "\n";
   }
 
-  std::cout << std::endl;
+  Rcpp::Rcout << std::endl;
 }
 #endif // CGAL_SS_VERBOSE
 

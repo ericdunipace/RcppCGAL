@@ -23,6 +23,7 @@
 #ifndef CGAL_ALGEBRAIC_CURVE_KERNEL_D_2_H
 #define CGAL_ALGEBRAIC_CURVE_KERNEL_D_2_H
 
+#include <Rcpp.h>
 #include <limits>
 #include <CGAL/iterator.h>
 #include <CGAL/assertions.h>
@@ -395,7 +396,7 @@ public:
     {
       _m_curve_cache_2 = std::shared_ptr<Curve_cache_2>(new Curve_cache_2(this));
       _m_curve_pair_cache_2 =  std::shared_ptr<Curve_pair_cache_2> (new Curve_pair_cache_2(this));
-      // std::cout << "CONSTRUCTION  Algebraic_curve_kernel_2 " << std::endl;
+      // Rcpp::Rcout << "CONSTRUCTION  Algebraic_curve_kernel_2 " << std::endl;
     }
 
 public:
@@ -1411,7 +1412,7 @@ public:
              typename Cmp_xy_map::Find_result r =
                 _m_kernel->_m_cmp_xy.find(p);
              if(r.second) {
-               //std::cerr << "Xy_coordinate2: precached compare_xy result\n";
+               //Rcpp::Rcerr << "Xy_coordinate2: precached compare_xy result\n";
                  return (swap ? -(r.first->second) : r.first->second);
              }*/
 
@@ -1667,8 +1668,8 @@ public:
 
             if(f == g) {
               // both curves are equal, but have different representations!
-              // std::cout <<"f: " << f <<std::endl;
-              // std::cout <<"g: " << g <<std::endl;
+              // Rcpp::Rcout <<"f: " << f <<std::endl;
+              // Rcpp::Rcout <<"g: " << g <<std::endl;
               CGAL_assertion(false);
               return false;
             }

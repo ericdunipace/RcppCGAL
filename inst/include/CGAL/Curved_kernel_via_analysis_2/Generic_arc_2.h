@@ -20,6 +20,7 @@
  *  adds support for isolated points to native CKvA_2 object
  */
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/Handle_with_policy.h>
 
@@ -287,7 +288,7 @@ template <class SweepCurvesAdaptor_2, class Rep_>
 std::istream& operator >> (std::istream& is,
                            Generic_arc_2<SweepCurvesAdaptor_2, Rep_>& /* arc */) {
 
-    std::cerr << "bogus >> call for generic_arc\n";
+    Rcpp::Rcerr << "bogus >> call for generic_arc\n";
     return is;
 }
 

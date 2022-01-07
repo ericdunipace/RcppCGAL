@@ -14,6 +14,7 @@
 #ifndef CGAL_IO_OBJ_H
 #define CGAL_IO_OBJ_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/OBJ/File_writer_wavefront.h>
 #include <CGAL/IO/Generic_writer.h>
 #include <CGAL/IO/io.h>
@@ -56,7 +57,7 @@ bool read_OBJ(std::istream& is,
   if(!is.good())
   {
     if(verbose)
-      std::cerr<<"File doesn't exist."<<std::endl;
+      Rcpp::Rcerr<<"File doesn't exist."<<std::endl;
     return false;
   }
 
@@ -84,7 +85,7 @@ bool read_OBJ(std::istream& is,
       if(!(iss >> p))
       {
         if(verbose)
-          std::cerr << "error while reading OBJ vertex." << std::endl;
+          Rcpp::Rcerr << "error while reading OBJ vertex." << std::endl;
         return false;
       }
 
@@ -153,27 +154,27 @@ bool read_OBJ(std::istream& is,
     else
     {
       if(verbose)
-        std::cerr << "error: unrecognized line: " << s << std::endl;
+        Rcpp::Rcerr << "error: unrecognized line: " << s << std::endl;
       return false;
     }
   }
 
   if(norm_found && verbose)
-    std::cout<<"NOTE: normals were found in this file, but were discarded."<<std::endl;
+    Rcpp::Rcout<<"NOTE: normals were found in this file, but were discarded."<<std::endl;
   if(tex_found && verbose)
-    std::cout<<"NOTE: textures were found in this file, but were discarded."<<std::endl;
+    Rcpp::Rcout<<"NOTE: textures were found in this file, but were discarded."<<std::endl;
 
   if(points.empty() || polygons.empty())
   {
     if(verbose)
-      std::cerr << "warning: empty file?" << std::endl;
+      Rcpp::Rcerr << "warning: empty file?" << std::endl;
     return false;
   }
 
   if(maxi > static_cast<int>(points.size()) || mini < -static_cast<int>(points.size()))
   {
     if(verbose)
-      std::cerr << "error: invalid face index" << std::endl;
+      Rcpp::Rcerr << "error: invalid face index" << std::endl;
     return false;
   }
 

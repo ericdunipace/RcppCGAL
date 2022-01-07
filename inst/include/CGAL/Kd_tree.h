@@ -14,6 +14,7 @@
 #ifndef CGAL_KD_TREE_H
 #define CGAL_KD_TREE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Spatial_searching.h>
 
 #include <CGAL/disable_warnings.h>
@@ -613,7 +614,7 @@ public:
       }
       root()->print();
     }else{
-      std::cout << "empty tree\n";
+      Rcpp::Rcout << "empty tree\n";
     }
   }
 

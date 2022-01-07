@@ -13,6 +13,7 @@
 #ifndef CGAL_MESHER_LEVEL_H
 #define CGAL_MESHER_LEVEL_H
 
+#include <Rcpp.h>
 #include <string>
 
 namespace CGAL {
@@ -315,17 +316,17 @@ public:
 
     const Mesher_level_conflict_status result = test_point_conflict(p, zone);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    std::cerr << "(" << p << ") ";
+    Rcpp::Rcerr << "(" << p << ") ";
     switch( result )
     {
     case NO_CONFLICT:
-      std::cerr << "accepted\n";
+      Rcpp::Rcerr << "accepted\n";
       break;
     case CONFLICT_BUT_ELEMENT_CAN_BE_RECONSIDERED:
-      std::cerr << "rejected (temporarily)\n";
+      Rcpp::Rcerr << "rejected (temporarily)\n";
       break;
     case CONFLICT_AND_ELEMENT_SHOULD_BE_DROPPED:
-      std::cerr << "rejected (permanent)\n";
+      Rcpp::Rcerr << "rejected (permanent)\n";
       break;
     }
 #endif

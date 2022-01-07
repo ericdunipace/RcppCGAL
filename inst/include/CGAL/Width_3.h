@@ -13,6 +13,7 @@
 #ifndef CGAL_WIDTH_3_H
 #define CGAL_WIDTH_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polytope_distance_d.h>
 
 
@@ -1132,7 +1133,7 @@ class Width_3 {
       ++vtxit;
     }
     //There must be a new EE-pair. If not, an error occurs
-    std::cerr<<"No new EE-pair found!"<<std::endl;
+    Rcpp::Rcerr<<"No new EE-pair found!"<<std::endl;
     CGAL_error();
   }
 

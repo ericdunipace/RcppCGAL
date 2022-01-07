@@ -25,6 +25,7 @@
 #ifndef _CORE_BIGFLOATREP_H_
 #define _CORE_BIGFLOATREP_H_
 
+#include <Rcpp.h>
 #include <CGAL/CORE/BigRat.h>
 #include <CGAL/CORE/CoreAux.h>
 #include <CGAL/CORE/CoreDefs.h>
@@ -427,14 +428,14 @@ inline std::string BigFloatRep::toString(long prec, bool sci) const {
 }
 
 inline void BigFloatRep::dump() const {
-  std::cout << "---- BFRep: " << this << " ----" << std::endl;
-  std::cout << "  BF value: ";
-  this->operator<<(std::cout);
-  std::cout <<  std::endl;
-  std::cout << "  m = " << m << std::endl;
-  std::cout << "  err = " << err << std::endl;
-  std::cout << "  exp = " << exp << std::endl;
-  std::cout << " -- End of BFRep " << this << " -- " << std::endl;
+  Rcpp::Rcout << "---- BFRep: " << this << " ----" << std::endl;
+  Rcpp::Rcout << "  BF value: ";
+  this->operator<<(Rcpp::Rcout);
+  Rcpp::Rcout <<  std::endl;
+  Rcpp::Rcout << "  m = " << m << std::endl;
+  Rcpp::Rcout << "  err = " << err << std::endl;
+  Rcpp::Rcout << "  exp = " << exp << std::endl;
+  Rcpp::Rcout << " -- End of BFRep " << this << " -- " << std::endl;
 }
 
 

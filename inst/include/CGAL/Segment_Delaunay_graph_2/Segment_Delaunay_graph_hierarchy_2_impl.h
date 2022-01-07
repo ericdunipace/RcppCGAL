@@ -957,11 +957,11 @@ is_valid(bool verbose, int level) const
   //verify correctness of triangulation at all levels
   for(unsigned int i = 0; i < sdg_hierarchy_2__maxlevel; ++i) {
     if ( verbose ) {
-      std::cerr << "Level " << i << ": " << std::flush;
+      Rcpp::Rcerr << "Level " << i << ": " << std::flush;
     }
     result = result && hierarchy[i]->is_valid(verbose, level);
     if ( verbose ) {
-      std::cerr << std::endl;
+      Rcpp::Rcerr << std::endl;
     }
   }
   //verify that lower level has no down pointers
@@ -996,15 +996,15 @@ print_error_message() const
   CGAL_STATIC_THREAD_LOCAL_VARIABLE(int, once, 0);
   if(once == 0){
     ++once;
-    std::cerr << std::endl;
-    std::cerr << "ATTENTION:" << std::endl;
-    std::cerr << "A segment-segment intersection was found."
+    Rcpp::Rcerr << std::endl;
+    Rcpp::Rcerr << "ATTENTION:" << std::endl;
+    Rcpp::Rcerr << "A segment-segment intersection was found."
               << std::endl;
-    std::cerr << "The Segment_Delaunay_graph_hierarchy_2 class is not"
+    Rcpp::Rcerr << "The Segment_Delaunay_graph_hierarchy_2 class is not"
               << " configured to handle this situation." << std::endl;
-    std::cerr << "Please look at the documentation on how to handle"
+    Rcpp::Rcerr << "Please look at the documentation on how to handle"
               << " this behavior." << std::endl;
-    std::cerr << std::endl;
+    Rcpp::Rcerr << std::endl;
   }
 }
 

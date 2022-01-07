@@ -31,6 +31,7 @@
 #ifndef __OPENNL_BICGSTAB__
 #define __OPENNL_BICGSTAB__
 
+#include <Rcpp.h>
 #include <CGAL/OpenNL/blas.h>
 #include <CGAL/assertions.h>
 
@@ -84,7 +85,7 @@ public:
     bool solve(const MATRIX &A, const VECTOR& b, VECTOR& x)
     {
 #ifdef DEBUG_TRACE
-        std::cerr << "  Call BICGSTAB" << std::endl;
+        Rcpp::Rcerr << "  Call BICGSTAB" << std::endl;
 #endif
         CGAL_assertion(A.dimension() > 0);
         unsigned int n = A.dimension() ;                        // (Square) matrix dimension
@@ -140,14 +141,14 @@ public:
             if (omega == 0.0)                                   // stop if omega==0 (success)
             {
 #ifdef DEBUG_TRACE
-                std::cerr << "  BICGSTAB: omega=0" << std::endl;
+                Rcpp::Rcerr << "  BICGSTAB: omega=0" << std::endl;
 #endif
                 break;
             }
             if (rTh == 0.0)                                     // stop if rTh==0 (failure)
             {
 #ifdef DEBUG_TRACE
-                std::cerr << "  BICGSTAB: rTh=0" << std::endl;
+                Rcpp::Rcerr << "  BICGSTAB: rTh=0" << std::endl;
 #endif
                 break;
             }
@@ -225,7 +226,7 @@ public:
     bool solve(const MATRIX &A, const PC_MATRIX &C, const VECTOR& b, VECTOR& x)
     {
 #ifdef DEBUG_TRACE
-        std::cerr << "  Call BICGSTAB with preconditioner" << std::endl;
+        Rcpp::Rcerr << "  Call BICGSTAB with preconditioner" << std::endl;
 #endif
         CGAL_assertion(A.dimension() > 0);
         unsigned int n = A.dimension() ;                        // (Square) matrix dimension
@@ -263,7 +264,7 @@ public:
             if (rTSd == 0.0)                                     // stop if rTSd==0 (failure)
             {
 #ifdef DEBUG_TRACE
-                std::cerr << "  BICGSTAB with preconditioner: rTSd=0" << std::endl;
+                Rcpp::Rcerr << "  BICGSTAB with preconditioner: rTSd=0" << std::endl;
 #endif
                 break;
             }
@@ -290,14 +291,14 @@ public:
             if (omega == 0.0)                                   // stop if omega==0 (success)
             {
 #ifdef DEBUG_TRACE
-                std::cerr << "  BICGSTAB with preconditioner: omega=0" << std::endl;
+                Rcpp::Rcerr << "  BICGSTAB with preconditioner: omega=0" << std::endl;
 #endif
                 break;
             }
             if (rTh == 0.0)                                     // stop if rTh==0 (failure)
             {
 #ifdef DEBUG_TRACE
-                std::cerr << "  BICGSTAB with preconditioner: rTh=0" << std::endl;
+                Rcpp::Rcerr << "  BICGSTAB with preconditioner: rTh=0" << std::endl;
 #endif
                 break;
             }

@@ -16,6 +16,7 @@
 
 #ifndef CGAL_MPZF_H
 #define CGAL_MPZF_H
+#include <Rcpp.h>
 #include <cstdlib>
 #include <algorithm>
 #include <climits>
@@ -525,16 +526,16 @@ struct Mpzf {
 #if 0
   // For debug purposes only
   void print()const{
-    //std::cout << "size: " << size << std::endl;
-    if(size==0) { std::cout << "zero\n"; return; }
-    if(size<0) std::cout << "- ";
+    //Rcpp::Rcout << "size: " << size << std::endl;
+    if(size==0) { Rcpp::Rcout << "zero\n"; return; }
+    if(size<0) Rcpp::Rcout << "- ";
     int asize = std::abs(size);
-    std::cout << std::hex;
-    while(--asize>=0) { std::cout << data()[asize] << ' '; }
-    std::cout << std::dec << "exp " << exp << ' ';
-    std::cout << std::dec << "size " << size << ' ';
+    Rcpp::Rcout << std::hex;
+    while(--asize>=0) { Rcpp::Rcout << data()[asize] << ' '; }
+    Rcpp::Rcout << std::dec << "exp " << exp << ' ';
+    Rcpp::Rcout << std::dec << "size " << size << ' ';
     asize = std::abs(size);
-    std::cout << "double: " << std::ldexp((double)data()[asize-1],64*(exp+asize-1))*((size<0)?-1:1) << '\n';
+    Rcpp::Rcout << "double: " << std::ldexp((double)data()[asize-1],64*(exp+asize-1))*((size<0)?-1:1) << '\n';
   }
 #endif
 

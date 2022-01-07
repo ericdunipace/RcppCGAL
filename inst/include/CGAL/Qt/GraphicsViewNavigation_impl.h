@@ -14,6 +14,7 @@
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
+#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #else
@@ -187,7 +188,7 @@ namespace Qt {
       }
       if( dragging )
       {
-//         std::cerr << boost::format("mouseMove: globalpos=(%1%, %2%)\n"
+//         Rcpp::Rcerr << boost::format("mouseMove: globalpos=(%1%, %2%)\n"
 //                                    "           pos=(%3%, %4%)\n"
 //                                    "           sender=%5% (class %6%), parent class %7%\n")
 //           % mouseEvent->globalPos().x()
@@ -248,13 +249,13 @@ namespace Qt {
   {
     QPoint dragging_start_in_view = v->mapFromScene(dragging_start);
     QPoint offset = new_pos - dragging_start_in_view;
-//     std::cerr << boost::format("drag_to: origin=(%1%, %2%)\n"
+//     Rcpp::Rcerr << boost::format("drag_to: origin=(%1%, %2%)\n"
 //                                "         offset=(%3%, %4%)\n")
 //       % dragging_start_in_view.x() % dragging_start_in_view.y()
 //       % offset.x() % offset.y();
     translateView(v, -offset.x(), -offset.y());
     dragging_start_in_view = v->mapFromScene(dragging_start);
-//     std::cerr << boost::format("         after=(%1%, %2%)\n")
+//     Rcpp::Rcerr << boost::format("         after=(%1%, %2%)\n")
 //       % dragging_start_in_view.x() % dragging_start_in_view.y();
   }
 
@@ -304,7 +305,7 @@ namespace Qt {
   CGAL_INLINE_FUNCTION
   void GraphicsViewNavigation::display_parameters(QGraphicsView* v)
   {
-    std::cerr <<
+    Rcpp::Rcerr <<
       boost::format("matrix translation=(%1%, %2%)\n"
                     "       rotation=(%3% - %4% )\n"
                     "                (%5% - %6% )\n")
@@ -321,15 +322,15 @@ namespace Qt {
     QPointF top_left = v->mapToScene(vp_top_left);
     QPointF bottom_right = v->mapToScene(vp_bottom_right);
 
-    std::cerr <<
+    Rcpp::Rcerr <<
       boost::format("view=(%1% - %2%) x (%3% - %4%)\n")
       % top_left.x() % bottom_right.x()
       % top_left.y() % bottom_right.y();
-    std::cerr <<
+    Rcpp::Rcerr <<
       boost::format("viewport=(%1% - %2%) x (%3% - %4%)\n")
       % vp_top_left.x() % vp_bottom_right.x()
       % vp_top_left.y() % vp_bottom_right.y();
-    std::cerr <<
+    Rcpp::Rcerr <<
       boost::format("scrollbars=(%1% <= %2% <= %3%) x (%4% <= %5% <= %6%)\n")
       % v->horizontalScrollBar()->minimum()
       % v->horizontalScrollBar()->value()

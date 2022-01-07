@@ -17,6 +17,7 @@
 #ifndef CGAL_PERIODIC_3_TRIANGULATION_3_H
 #define CGAL_PERIODIC_3_TRIANGULATION_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_triangulation_3.h>
 
 #include <CGAL/basic.h>
@@ -1280,7 +1281,7 @@ private:
   template <class Point_iterator, class Offset_iterator>
   void periodic_sort(Point_iterator /*p_begin*/, Point_iterator /*p_end*/,
                      Offset_iterator /*o_begin*/, Offset_iterator /*o_end*/) const {
-    std::cout << "Periodic_sort not yet implemented" << std::endl;
+    Rcpp::Rcout << "Periodic_sort not yet implemented" << std::endl;
   }
 
   Vertex_handle create_initial_triangulation(const Point& p);
@@ -2989,8 +2990,8 @@ is_valid(bool verbose, int level) const
     if(orientation(*p[0], *p[1], *p[2], *p[3],
                    off[0], off[1], off[2], off[3]) != POSITIVE) {
       if(verbose) {
-        std::cerr<<"Periodic_3_triangulation_3: wrong orientation:"<<std::endl;
-        std::cerr<<off[0]<<'\t'<<*p[0]<<'\n'
+        Rcpp::Rcerr<<"Periodic_3_triangulation_3: wrong orientation:"<<std::endl;
+        Rcpp::Rcerr<<off[0]<<'\t'<<*p[0]<<'\n'
                          <<off[1]<<'\t'<<*p[1]<<'\n'
                          <<off[2]<<'\t'<<*p[2]<<'\n'
                          <<off[3]<<'\t'<<*p[3]<<std::endl;
@@ -3045,7 +3046,7 @@ is_valid_conflict(ConflictTester& tester, bool verbose, int level) const
                 it->neighbor(i)->vertex(it->neighbor(i)->index(it))->point(),
                 o_vt - o_nb)) {
         if(verbose) {
-          std::cerr << "non-empty sphere:\n"
+          Rcpp::Rcerr << "non-empty sphere:\n"
                     << "Point[0]: " << it->vertex(0)->point()
                     << " Off: " << int_to_off(it->offset(0)) << "\n"
                     << "Point[1]: " << it->vertex(1)->point()

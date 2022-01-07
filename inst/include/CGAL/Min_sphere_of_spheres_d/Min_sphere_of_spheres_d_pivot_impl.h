@@ -14,6 +14,7 @@
 #ifndef CGAL_MINIBALL_PIVOT_C
 #define CGAL_MINIBALL_PIVOT_C
 
+#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -96,7 +97,7 @@ namespace CGAL_MINIBALL_NAMESPACE {
       // Here, no basis has been found (this only happens because
       // of rounding errors):
       #ifdef CGAL_MINIBALL_WARNINGS
-      std::cerr << '!';
+      Rcpp::Rcerr << '!';
       #endif
 
       // revert basis:

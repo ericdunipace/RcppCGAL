@@ -13,6 +13,7 @@
 #ifndef CGAL_TETRAHEDRAL_REMESHING_FMLS_H
 #define CGAL_TETRAHEDRAL_REMESHING_FMLS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 // -------------------------------------------
@@ -586,7 +587,7 @@ void createMLSSurfaces(Subdomain__FMLS& subdomain_FMLS,
   if (upsample > 0)
   {
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-    std::cout << "Up sampling MLS " << upsample << std::endl;
+    Rcpp::Rcout << "Up sampling MLS " << upsample << std::endl;
 #endif
     for (typename C3t3::Facets_in_complex_iterator
       fit = c3t3.facets_in_complex_begin();
@@ -811,7 +812,7 @@ void createMLSSurfaces(Subdomain__FMLS& subdomain_FMLS,
       count++;
     }
     else {
-      std::cout << "Problem of number for MLS : " << current_v_count[it->second] << std::endl;
+      Rcpp::Rcout << "Problem of number for MLS : " << current_v_count[it->second] << std::endl;
     }
   }
 }

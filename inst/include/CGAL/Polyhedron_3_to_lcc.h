@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYHEDRON_3_TO_LCC_H
 #define CGAL_POLYHEDRON_3_TO_LCC_H
 
+#include <Rcpp.h>
 #include <CGAL/Polyhedron_3.h>
 #include <CGAL/assertions.h>
 #include <iostream>
@@ -102,7 +103,7 @@ namespace CGAL {
   {
     if (!ais.good())
     {
-      std::cout << "Error reading flux." << std::endl;
+      Rcpp::Rcout << "Error reading flux." << std::endl;
       return LCC::null_handle;
     }
     CGAL::Polyhedron_3<typename LCC::Traits> P;

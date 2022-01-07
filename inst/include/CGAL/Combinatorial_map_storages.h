@@ -12,6 +12,7 @@
 #ifndef CGAL_COMBINATORIAL_MAP_STORAGES_H
 #define CGAL_COMBINATORIAL_MAP_STORAGES_H 1
 
+#include <Rcpp.h>
 #include <CGAL/Compact_container.h>
 #include <CGAL/Concurrent_compact_container.h>
 #include <CGAL/Dart.h>
@@ -363,11 +364,11 @@ namespace CGAL {
 
     // Debug function
     void display_dart(Dart_const_handle ADart) const
-    { std::cout<<mdarts.index(ADart); }
+    { Rcpp::Rcout<<mdarts.index(ADart); }
 
     template<unsigned int i>
     void display_attribute(typename Attribute_const_handle<i>::type ah) const
-    { std::cout<< std::get<Helper::template Dimension_index<i>::value>
+    { Rcpp::Rcout<< std::get<Helper::template Dimension_index<i>::value>
         (mattribute_containers).index(ah); }
 
   protected:

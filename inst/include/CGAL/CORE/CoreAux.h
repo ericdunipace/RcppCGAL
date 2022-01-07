@@ -25,6 +25,7 @@
 #ifndef _CORE_COREAUX_H_
 #define _CORE_COREAUX_H_
 
+#include <Rcpp.h>
 #include <iostream>
 #include <fstream>
 #include "CGAL/CORE/Impl.h"
@@ -159,13 +160,13 @@ CGAL_CORE_EXPORT int IntExponent(double d);
 /// Writes out an error or warning message in the local file CORE_DIAGFILE
 /** If last argument (err) is TRUE, then this is considered an error
  *  (not just warning).  In this case, the message is also printed in
- *  std::cerr, using std::perror().
+ *  Rcpp::Rcerr, using std::perror().
  *  */
 CGAL_CORE_EXPORT void core_error(std::string msg, std::string file, int lineno, bool err);
 
 /// This is for debugging messages
 inline void core_debug(std::string msg){
-  std::cout << __FILE__ << "::" << __LINE__ << ": " << msg
+  Rcpp::Rcout << __FILE__ << "::" << __LINE__ << ": " << msg
             << std::endl;
 }
 

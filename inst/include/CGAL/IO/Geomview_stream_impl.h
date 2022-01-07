@@ -22,6 +22,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <sstream>
 #include <csignal>
 #include <cerrno>
@@ -65,7 +66,7 @@ void Geomview_stream::setup_geomview(const char *machine, const char *login)
     // Communication between CGAL and geomview should be possible
     // in two directions. To achieve this we open two pipes
 
-    std::cout << "Starting Geomview..." << std::flush;
+    Rcpp::Rcout << "Starting Geomview..." << std::flush;
     if (pipe(pipe_out) < 0) {
         CGAL_error_msg( "out pipe failed" );
     }
@@ -82,9 +83,9 @@ void Geomview_stream::setup_geomview(const char *machine, const char *login)
         close(pipe_in[0]);  // does not read from the in pipe.
 
         if (dup2(pipe_out[0], 0) != 0)
-            std::cerr << "Connect pipe to stdin failed." << std::endl;
+            Rcpp::Rcerr << "Connect pipe to stdin failed." << std::endl;
         if (dup2(pipe_in[1], 1) != 1)
-            std::cerr << "Connect pipe to stdout failed." << std::endl;
+            Rcpp::Rcerr << "Connect pipe to stdout failed." << std::endl;
 
         if (machine && (std::strlen(machine)>0)) {
             std::string s (" rgeomview ");
@@ -98,20 +99,20 @@ void Geomview_stream::setup_geomview(const char *machine, const char *login)
         }
 
         // if we get to this point something went wrong.
-        std::cerr << "execl geomview failed" << std::endl;
+        Rcpp::Rcerr << "execl geomview failed" << std::endl;
         switch(errno) {
         case EACCES:
-            std::cerr << "please check your environment variable PATH"
+            Rcpp::Rcerr << "please check your environment variable PATH"
                       << std::endl;
-            std::cerr << "make sure the file `geomview' is contained in it"
+            Rcpp::Rcerr << "make sure the file `geomview' is contained in it"
                       << std::endl;
-            std::cerr << "and is executable" << std::endl;
+            Rcpp::Rcerr << "and is executable" << std::endl;
             break;
         case ELOOP:
-            std::cerr << "too many links for filename `geomview'" << std::endl;
+            Rcpp::Rcerr << "too many links for filename `geomview'" << std::endl;
             break;
         default:
-            std::cerr << "error number " << errno << " (check `man execlp')"
+            Rcpp::Rcerr << "error number " << errno << " (check `man execlp')"
                       << std::endl;
         };
         CGAL_error();
@@ -148,7 +149,7 @@ void Geomview_stream::setup_geomview(const char *machine, const char *login)
 
         if (std::strncmp(inbuf, "started", 7) == 0)
         {
-            // std::cerr << "You still have a .geomview file with the\n"
+            // Rcpp::Rcerr << "You still have a .geomview file with the\n"
                    // << "(echo \"started\") command. Note that this is not\n"
                    // << "compulsory anymore, since CGAL 2.3" << std::endl;
 
@@ -156,16 +157,16 @@ void Geomview_stream::setup_geomview(const char *machine, const char *login)
             retread=::read(in, inbuf, 7);
             (void)retread;
             if (std::strncmp(inbuf, "CGAL-3D", 7) != 0)
-                std::cerr << "Unexpected string from Geomview !" << std::endl;
+                Rcpp::Rcerr << "Unexpected string from Geomview !" << std::endl;
         }
         else if (std::strncmp(inbuf, "CGAL-3D", 7) == 0)
         {
-            // std::cerr << "Good, you don't have a .geomview file with the\n"
+            // Rcpp::Rcerr << "Good, you don't have a .geomview file with the\n"
                       // << "(echo \"started\") command" << std::endl;
         }
         else
         {
-            std::cerr << "Unexcepted string from Geomview at initialization!\n"
+            Rcpp::Rcerr << "Unexcepted string from Geomview at initialization!\n"
                       << "Going on nevertheless !" << std::endl;
         }
 #else
@@ -176,7 +177,7 @@ void Geomview_stream::setup_geomview(const char *machine, const char *login)
         (void)retread;
 #endif
 
-        std::cout << "done." << std::endl;
+        Rcpp::Rcout << "done." << std::endl;
 
         (*this) << "(normalization g* none)(bbox-draw g* no)";
     }

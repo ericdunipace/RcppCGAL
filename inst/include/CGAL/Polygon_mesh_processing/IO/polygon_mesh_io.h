@@ -15,6 +15,7 @@
 #ifndef CGAL_PMP_IO_POLYGON_MESH_IO_H
 #define CGAL_PMP_IO_POLYGON_MESH_IO_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing.h>
 
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
@@ -104,7 +105,7 @@ bool read_polygon_mesh(const std::string& fname,
   if(!CGAL::IO::read_polygon_soup(fname, points, faces))
   {
     if(verbose)
-      std::cerr << "Warning: cannot read polygon soup" << std::endl;
+      Rcpp::Rcerr << "Warning: cannot read polygon soup" << std::endl;
     return false;
   }
 
@@ -115,13 +116,13 @@ bool read_polygon_mesh(const std::string& fname,
   if(!PMP::orient_polygon_soup(points, faces))
   {
     if(verbose)
-      std::cerr << "Some duplication happened during polygon soup orientation" << std::endl;
+      Rcpp::Rcerr << "Some duplication happened during polygon soup orientation" << std::endl;
   }
 
   if(!PMP::is_polygon_soup_a_polygon_mesh(faces))
   {
     if(verbose)
-      std::cerr << "Warning: polygon soup does not describe a polygon mesh" << std::endl;
+      Rcpp::Rcerr << "Warning: polygon soup does not describe a polygon mesh" << std::endl;
     return false;
   }
 

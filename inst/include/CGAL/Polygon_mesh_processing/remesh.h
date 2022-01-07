@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REMESH_H
 #define CGAL_POLYGON_MESH_PROCESSING_REMESH_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/disable_warnings.h>
@@ -191,10 +192,10 @@ void isotropic_remeshing(const FaceRange& faces
   using parameters::choose_parameter;
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-  std::cout << std::endl;
+  Rcpp::Rcout << std::endl;
   CGAL::Timer t;
-  std::cout << "Remeshing parameters...";
-  std::cout.flush();
+  Rcpp::Rcout << "Remeshing parameters...";
+  Rcpp::Rcout.flush();
   t.start();
 #endif
 
@@ -259,9 +260,9 @@ void isotropic_remeshing(const FaceRange& faces
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
   t.stop();
-  std::cout << "\rRemeshing parameters done ("<< t.time() <<" sec)" << std::endl;
-  std::cout << "Remesher construction...";
-  std::cout.flush();
+  Rcpp::Rcout << "\rRemeshing parameters done ("<< t.time() <<" sec)" << std::endl;
+  Rcpp::Rcout << "Remesher construction...";
+  Rcpp::Rcout.flush();
   t.reset(); t.start();
 #endif
 
@@ -271,7 +272,7 @@ void isotropic_remeshing(const FaceRange& faces
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
   t.stop();
-  std::cout << " done ("<< t.time() <<" sec)." << std::endl;
+  Rcpp::Rcout << " done ("<< t.time() <<" sec)." << std::endl;
 #endif
 
   bool collapse_constraints = choose_parameter(get_parameter(np, internal_np::collapse_constraints), true);
@@ -283,16 +284,16 @@ void isotropic_remeshing(const FaceRange& faces
   bool do_flip = choose_parameter(get_parameter(np, internal_np::do_flip), true);
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-  std::cout << std::endl;
-  std::cout << "Remeshing (size = " << target_edge_length;
-  std::cout << ", #iter = " << nb_iterations << ")..." << std::endl;
+  Rcpp::Rcout << std::endl;
+  Rcpp::Rcout << "Remeshing (size = " << target_edge_length;
+  Rcpp::Rcout << ", #iter = " << nb_iterations << ")..." << std::endl;
   t.reset(); t.start();
 #endif
 
   for (unsigned int i = 0; i < nb_iterations; ++i)
   {
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-    std::cout << " * Iteration " << (i + 1) << " *" << std::endl;
+    Rcpp::Rcout << " * Iteration " << (i + 1) << " *" << std::endl;
 #endif
     if (target_edge_length>0)
     {
@@ -307,15 +308,15 @@ void isotropic_remeshing(const FaceRange& faces
     if ( choose_parameter(get_parameter(np, internal_np::do_project), true) )
       remesher.project_to_surface(get_parameter(np, internal_np::projection_functor));
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
 #endif
   }
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
   t.stop();
-  std::cout << "Remeshing done (size = " << target_edge_length;
-  std::cout << ", #iter = " << nb_iterations;
-  std::cout << ", " << t.time() << " sec )." << std::endl;
+  Rcpp::Rcout << "Remeshing done (size = " << target_edge_length;
+  Rcpp::Rcout << ", #iter = " << nb_iterations;
+  Rcpp::Rcout << ", " << t.time() << " sec )." << std::endl;
 #endif
 }
 

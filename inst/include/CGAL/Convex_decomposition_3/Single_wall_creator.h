@@ -12,6 +12,7 @@
 #ifndef CGAL_CD3_SINGLE_WALL_CREATOR_H
 #define CGAL_CD3_SINGLE_WALL_CREATOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 
@@ -161,11 +162,11 @@ class Single_wall_creator : public Modifier_base<typename Nef_::SNC_and_PL> {
     /*
     Sphere_segment test_seg(estart->point(), lateral_svertex->point(), c);
     if(lateral_svertex->point() != Sphere_point(1,0,0)) {
-      //      std::cerr << lateral_svertex->point() << std::endl;
+      //      Rcpp::Rcerr << lateral_svertex->point() << std::endl;
       CGAL_assertion(!test_seg.has_on(Sphere_point(1,0,0)));
     }
     if(lateral_svertex->point() != Sphere_point(-1,0,0)) {
-      //      std::cerr << lateral_svertex->point() << std::endl;
+      //      Rcpp::Rcerr << lateral_svertex->point() << std::endl;
       CGAL_assertion(!test_seg.has_on(Sphere_point(-1,0,0)));
     }
     */
@@ -328,7 +329,7 @@ class Single_wall_creator : public Modifier_base<typename Nef_::SNC_and_PL> {
     sncp = sncpl.sncp;
     pl = sncpl.pl;
 
-    //    SNC_io_parser<SNC_structure> O0(std::cerr,*sncp);
+    //    SNC_io_parser<SNC_structure> O0(Rcpp::Rcerr,*sncp);
     //    O0.print();
 
     //    CGAL_NEF_SETDTHREAD(229*227);

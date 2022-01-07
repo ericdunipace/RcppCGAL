@@ -17,9 +17,9 @@
 #  define CGAL_MESHES_OUTPUT_STREAM CGAL::Verbose_ostream()
 #else
 #  ifndef CGAL_MESHES_OUTPUT_ON_CERR
-#    define CGAL_MESHES_OUTPUT_STREAM std::cout
+#    define CGAL_MESHES_OUTPUT_STREAM Rcpp::Rcout
 #  else
-#    define CGAL_MESHES_OUTPUT_STREAM std::cerr
+#    define CGAL_MESHES_OUTPUT_STREAM Rcpp::Rcerr
 #  endif
 #endif
 

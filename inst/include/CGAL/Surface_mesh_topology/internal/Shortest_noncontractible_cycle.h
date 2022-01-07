@@ -12,6 +12,7 @@
 #ifndef CGAL_SHORTEST_NONCONTRACTIBLE_CYCLE_H
 #define CGAL_SHORTEST_NONCONTRACTIBLE_CYCLE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Path_on_surface.h>
@@ -101,7 +102,7 @@ public:
     if (display_time)
     {
       t.stop();
-      std::cout<<"[TIME] Shortest_noncontractible_cycle constructor: "
+      Rcpp::Rcout<<"[TIME] Shortest_noncontractible_cycle constructor: "
                <<t.time()<<" seconds."<<std::endl;
     }
   }
@@ -140,7 +141,7 @@ public:
     if (display_time)
     {
       t.stop();
-      std::cout<<"[TIME] compute_cycle: "<<t.time()<<" seconds."<<std::endl;
+      Rcpp::Rcout<<"[TIME] compute_cycle: "<<t.time()<<" seconds."<<std::endl;
     }
 
     return m_cycle;
@@ -193,7 +194,7 @@ public:
     if (display_time)
     {
       t.stop();
-      std::cout<<"[TIME] compute_shortest_non_contractible_cycle: "<<t.time()<<" seconds."<<std::endl;
+      Rcpp::Rcout<<"[TIME] compute_shortest_non_contractible_cycle: "<<t.time()<<" seconds."<<std::endl;
     }
 
     return m_cycle;

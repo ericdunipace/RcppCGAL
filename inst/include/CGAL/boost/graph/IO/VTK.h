@@ -12,6 +12,7 @@
 #ifndef CGAL_BGL_IO_VTK_H
 #define CGAL_BGL_IO_VTK_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/VTK.h>
 
 #include <CGAL/boost/graph/Euler_operations.h>
@@ -154,7 +155,7 @@ bool read_VTP(const std::string& fname,
   std::ifstream test(fname);
   if(!test.good())
   {
-    std::cerr<<"File doesn't exist."<<std::endl;
+    Rcpp::Rcerr<<"File doesn't exist."<<std::endl;
     return false;
   }
   test.close();

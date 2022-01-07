@@ -12,6 +12,7 @@
 #ifndef CGAL_OM_ITERATOR_FROM_CICULATOR_H
 #define CGAL_OM_ITERATOR_FROM_CICULATOR_H
 
+#include <Rcpp.h>
 #include <iostream>
 #include <cstddef>
 
@@ -127,7 +128,7 @@ public:
     return *this;
   }
   Self  operator++(int) {
-    std::cerr << "operator++(int)" << std::endl;
+    Rcpp::Rcerr << "operator++(int)" << std::endl;
     Self tmp = *this;
     ++*this;
     return tmp;

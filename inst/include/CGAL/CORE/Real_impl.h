@@ -31,6 +31,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <ctype.h>
@@ -171,7 +172,7 @@ void Real::constructFromString(const char *str, const extLong& prec )
     //               get_static_defInputDigits()
     // Note: get_static_defInputDigits() should be at least log_2(10).
     //       We default get_static_defInputDigits() to 4.
-    //std::cout << "(m,ten)=" << m << "," << ten << std::endl;
+    //Rcpp::Rcout << "(m,ten)=" << m << "," << ten << std::endl;
     BigRat r(m, ten);
     if (prec.isInfty()) { // convert exactly! to a big rational
       rep = new RealBigRat(r);

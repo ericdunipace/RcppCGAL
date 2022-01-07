@@ -13,6 +13,7 @@
 #ifndef CGAL_CLASSIFICATION_CLASSIFY_H
 #define CGAL_CLASSIFICATION_CLASSIFY_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/boost/graph/alpha_expansion_graphcut.h>
@@ -310,8 +311,8 @@ namespace Classification {
       }
 
 #ifdef CGAL_CLASSIFICATION_VERBOSE
-    std::cerr << "Number of divisions = " << nb_x * nb_y << std::endl;
-    std::cerr << " -> Size of division: " << Dx / nb_x << " " << Dy / nb_y << std::endl;
+    Rcpp::Rcerr << "Number of divisions = " << nb_x * nb_y << std::endl;
+    Rcpp::Rcerr << " -> Size of division: " << Dx / nb_x << " " << Dy / nb_y << std::endl;
 #endif
 
     std::vector<std::vector<std::size_t> > indices (nb);

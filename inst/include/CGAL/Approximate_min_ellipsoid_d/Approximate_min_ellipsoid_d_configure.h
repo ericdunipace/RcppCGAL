@@ -13,6 +13,7 @@
 #ifndef CGAL_APPROX_MIN_ELL_CONFIGURE_H
 #define CGAL_APPROX_MIN_ELL_CONFIGURE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -74,7 +75,7 @@
 // - CGAL_APPEL_TIMER_PRINT(channel,timer,msg): Prints the string msg followed
 //   by the time elapsed since the last CGAL_APPEL_TIMER_START(timer).  The
 //   destination is either channel 'channel' in case logging mode is on,
-//   or std::cout otherwise.
+//   or Rcpp::Rcout otherwise.
 //
 // - CGAL_APPEL_TIMER_STRING(timer): Returns a string with the number of
 //   seconds elapsed since the last CGAL_APPEL_TIMER_START(timer).
@@ -135,7 +136,7 @@
    #else
      #define CGAL_APPEL_TIMER_PRINT(channel,timer,msg) \
        { \
-         std::cerr << msg << std::setiosflags(std::ios::fixed) \
+         Rcpp::Rcerr << msg << std::setiosflags(std::ios::fixed) \
                    << std::setprecision(5) \
                    << CGAL::Approximate_min_ellipsoid_d_impl:: \
                       Timer::instance().lapse(timer) \

@@ -11,6 +11,7 @@
 #ifndef CGAL_POLYGONAL_SURFACE_RECONSTRUCTION_HYPOTHESIS_H
 #define CGAL_POLYGONAL_SURFACE_RECONSTRUCTION_HYPOTHESIS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygonal_surface_reconstruction.h>
 
 #include <CGAL/Surface_mesh.h>
@@ -350,7 +351,7 @@ namespace CGAL {
                                 delete plane;
                         }
                         else
-                                std::cerr << "Fatal error: should not reach here" << std::endl;
+                                Rcpp::Rcerr << "Fatal error: should not reach here" << std::endl;
 
                         pos = std::find(segments.begin(), segments.end(), s2);
                         if (pos != segments.end()) {
@@ -361,7 +362,7 @@ namespace CGAL {
                                 delete plane;
                         }
                         else
-                                std::cerr << "Fatal error: should not reach here" << std::endl;
+                                Rcpp::Rcerr << "Fatal error: should not reach here" << std::endl;
                 }
 
                 template <typename Kernel>
@@ -592,7 +593,7 @@ namespace CGAL {
                                                         intersecting_points_source_planes.push_back(planes);
                                                 }
                                                 else
-                                                        std::cerr << "Fatal error: should have intersection" << std::endl;
+                                                        Rcpp::Rcerr << "Fatal error: should have intersection" << std::endl;
                                         }
                                         else {
                                                 if (ss == CGAL::ON_ORIENTED_BOUNDARY && st != CGAL::ON_ORIENTED_BOUNDARY) {
@@ -665,7 +666,7 @@ namespace CGAL {
                                                                 CGAL_assertion(edge_supporting_planes[ed].size() == 2);
                                                         }
                                                         else // If reached here, there must be topological errors.
-                                                                std::cerr << "topological error" << std::endl;
+                                                                Rcpp::Rcerr << "topological error" << std::endl;
 
                                                         ++hbegin;
                                                 } while (hbegin != done);
@@ -847,7 +848,7 @@ namespace CGAL {
 
                         Halfedge_descriptor h = Euler::split_face(h0, h1, mesh);
                         if (h == Polygon_mesh::null_halfedge() || mesh.face(h) == Polygon_mesh::null_face()) {
-                                std::cerr << "Fatal error. could not split face" << std::endl;
+                                Rcpp::Rcerr << "Fatal error. could not split face" << std::endl;
                                 return new_faces;
                         }
 
@@ -943,10 +944,10 @@ namespace CGAL {
                                                                         new_vts.push_back(EdgePos(ed, p));
                                                         }
                                                         else
-                                                                std::cerr << "Fatal error: should have intersection" << std::endl;
+                                                                Rcpp::Rcerr << "Fatal error: should have intersection" << std::endl;
                                                 }
                                                 else
-                                                        std::cerr << "Fatal error: should not have duplicated planes." << std::endl;
+                                                        Rcpp::Rcerr << "Fatal error: should not have duplicated planes." << std::endl;
                                         }
                                 }
 

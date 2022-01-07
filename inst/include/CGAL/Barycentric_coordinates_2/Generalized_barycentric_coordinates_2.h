@@ -16,6 +16,7 @@
 #ifndef CGAL_GENERALIZED_BARYCENTRIC_COORDINATES_2_H
 #define CGAL_GENERALIZED_BARYCENTRIC_COORDINATES_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Barycentric_coordinates_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -234,7 +235,7 @@ public:
     // Information Functions
 
     // This function prints some information about the used polygon and coordinate functions.
-    void print_information(std::ostream &output_stream = std::cout) const
+    void print_information(std::ostream &output_stream = Rcpp::Rcout) const
     {
         output_stream << std::endl << "INFORMATION: " << std::endl;
 

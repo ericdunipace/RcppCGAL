@@ -14,6 +14,7 @@
 #ifndef CGAL_SQRT_EXTENSION_ALGEBRAIC_STRUCTURE_TRAITS_H
 #define CGAL_SQRT_EXTENSION_ALGEBRAIC_STRUCTURE_TRAITS_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 namespace CGAL {
@@ -80,11 +81,11 @@ public:
     BOOL operator()( const Type& x, const Type& y, Type& q) const {
       Divides_coeff divides;
 
-//            std::cout<<"integral domain for sqrt"<<std::endl;
+//            Rcpp::Rcout<<"integral domain for sqrt"<<std::endl;
       BOOL result;
       COEFF q1, q2;
       if(x.is_extended()){
-//                std::cout<<" y is extended "<<std::endl;
+//                Rcpp::Rcout<<" y is extended "<<std::endl;
         COEFF denom = x.a0()*x.a0() - x.a1()*x.a1() * Root_nt_cast()(x.root());
         if ( denom == COEFF(0) ) {
           // this is for the rare case in which root is a square
@@ -104,7 +105,7 @@ public:
           q =  Type( q1, q2, y.root());
         }
       }else{
-//                std::cout<<" x is not extended "<<std::endl;
+//                Rcpp::Rcout<<" x is not extended "<<std::endl;
         if(y.is_extended()){
           result = divides(x.a0(),y.a0(),q1);
           if(!result) return false;

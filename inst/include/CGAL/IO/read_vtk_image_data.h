@@ -14,6 +14,7 @@
 #ifndef CGAL_IO_READ_VTK_IMAGE_DATA_H
 #define CGAL_IO_READ_VTK_IMAGE_DATA_H
 
+#include <Rcpp.h>
 #include <CGAL/Image_3.h>
 #include <CGAL/Image_3_vtk_interface.h>
 
@@ -85,7 +86,7 @@ read_vtk_image_data(vtkImageData* vtk_image, Image_3::Own owning = Image_3::OWN_
   CGAL_assertion(vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples() == dims[0]*dims[1]*dims[2]);
   if(owning == Image_3::OWN_THE_DATA) {
     image->data = ::ImageIO_alloc(dims[0]*dims[1]*dims[2]*image->wdim);
-    // std::cerr << "GetNumberOfTuples()=" << vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples()
+    // Rcpp::Rcerr << "GetNumberOfTuples()=" << vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples()
     //           << "\nimage->size()=" << dims[0]*dims[1]*dims[2]
     //           << "\nwdim=" << image->wdim << '\n';
     vtk_image->GetPointData()->GetScalars()->ExportToVoidPointer(image->data);

@@ -12,6 +12,7 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_BOX_INTERNAL_OPTIMIZE_2_H
 #define CGAL_OPTIMAL_BOUNDING_BOX_INTERNAL_OPTIMIZE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/ch_akl_toussaint.h>
@@ -167,9 +168,9 @@ void optimize_along_OBB_axes(typename Traits::Matrix& rot,
   typename std::iterator_traits<decltype(it)>::difference_type d = std::distance(volumes.begin(), it);
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG_PP
-  std::cout << "volumes: " << volumes[0] << " " << volumes[1] << " " << volumes[2] << std::endl;
-  std::cout << "angles: " << angles[0] << " " << angles[1] << " " << angles[2] << std::endl;
-  std::cout << "min at " << d << std::endl;
+  Rcpp::Rcout << "volumes: " << volumes[0] << " " << volumes[1] << " " << volumes[2] << std::endl;
+  Rcpp::Rcout << "angles: " << angles[0] << " " << angles[1] << " " << angles[2] << std::endl;
+  Rcpp::Rcout << "min at " << d << std::endl;
 #endif
 
   if(d == 0) // Along_Z

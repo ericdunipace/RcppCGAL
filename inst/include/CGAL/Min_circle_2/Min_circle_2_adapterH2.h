@@ -13,6 +13,7 @@
 #ifndef CGAL_MIN_CIRCLE_2_ADAPTERH2_H
 #define CGAL_MIN_CIRCLE_2_ADAPTERH2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -347,8 +348,8 @@ operator >> ( std::istream& is,
     switch ( CGAL::IO::get_mode( is)) {
 
       case CGAL::IO::PRETTY:
-        std::cerr << std::endl;
-        std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+        Rcpp::Rcerr << std::endl;
+        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
         break;
 
       case CGAL::IO::ASCII:

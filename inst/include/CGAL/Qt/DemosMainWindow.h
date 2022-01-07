@@ -14,6 +14,7 @@
 #ifndef CGAL_QT_DEMOS_MAIN_WINDOW_H
 #define CGAL_QT_DEMOS_MAIN_WINDOW_H
 
+#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 
@@ -57,7 +58,7 @@ public:
 
   virtual void open(QString)
   {
-    std::cerr << "You should implement open(QString);" << std::endl;
+    Rcpp::Rcerr << "You should implement open(QString);" << std::endl;
   }
 
 public:

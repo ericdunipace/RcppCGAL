@@ -14,6 +14,7 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_BOX_EVOLUTION_H
 #define CGAL_OPTIMAL_BOUNDING_BOX_EVOLUTION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/Optimal_bounding_box/internal/fitness_function.h>
@@ -140,32 +141,32 @@ public:
     for(;;)
     {
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG_PP
-      std::cout << "- - - - generation #" << gen_iter << "\n";
+      Rcpp::Rcout << "- - - - generation #" << gen_iter << "\n";
 #endif
 
       genetic_algorithm();
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG_PP
-      std::cout << "population after genetic" << std::endl;
+      Rcpp::Rcout << "population after genetic" << std::endl;
       pop.show_population();
-      std::cout << std::endl;
+      Rcpp::Rcout << std::endl;
 #endif
 
       for(std::size_t s=0; s<population_size; ++s)
         nelder_mead(m_population[s], nelder_mead_iterations, m_points, m_traits);
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG_PP
-      std::cout << "population after nelder mead: " << std::endl;
+      Rcpp::Rcout << "population after nelder mead: " << std::endl;
       pop.show_population();
-      std::cout << std::endl;
+      Rcpp::Rcout << std::endl;
 #endif
 
       m_best_v = &(m_population.get_best_vertex());
       Matrix& best_m = m_best_v->matrix();
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG_PP
-      std::cout << "new best matrix: " << std::endl << best_m << std::endl;
-      std::cout << "fitness: " << m_best_v->fitness() << std::endl;
+      Rcpp::Rcout << "new best matrix: " << std::endl << best_m << std::endl;
+      Rcpp::Rcout << "fitness: " << m_best_v->fitness() << std::endl;
 #endif
 
       // optimize the current best rotation by using the exact OBB 2D algorithm
@@ -179,9 +180,9 @@ public:
       const FT difference = new_fit_value - prev_fit_value;
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG_PP
-      std::cout << "post 2D optimization matrix: " << std::endl << best_m << std::endl;
-      std::cout << "new fit value: " << new_fit_value << std::endl;
-      std::cout << "difference: " << difference << std::endl;
+      Rcpp::Rcout << "post 2D optimization matrix: " << std::endl << best_m << std::endl;
+      Rcpp::Rcout << "new fit value: " << new_fit_value << std::endl;
+      Rcpp::Rcout << "difference: " << difference << std::endl;
 #endif
 
       if(CGAL::abs(difference) < tolerance * new_fit_value)

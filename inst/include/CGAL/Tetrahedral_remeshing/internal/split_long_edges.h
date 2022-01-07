@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_SPLIT_LONG_EDGES_H
 #define CGAL_INTERNAL_SPLIT_LONG_EDGES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <boost/bimap.hpp>
@@ -212,10 +213,10 @@ bool can_be_split(const typename C3T3::Edge& e,
 #ifdef CGAL_TETRAHEDRAL_REMESHING_DEBUG
     if (!is_internal(e, c3t3, cell_selector))
     {
-      std::cerr << "e is not inside!?" << std::endl;
+      Rcpp::Rcerr << "e is not inside!?" << std::endl;
       typename C3T3::Vertex_handle v1 = e.first->vertex(e.second);
       typename C3T3::Vertex_handle v2 = e.first->vertex(e.third);
-      std::cerr << v1->point() << " " << v2->point() << std::endl;
+      Rcpp::Rcerr << v1->point() << " " << v2->point() << std::endl;
     }
 #endif
 
@@ -250,8 +251,8 @@ void split_long_edges(C3T3& c3t3,
   typedef typename Boost_bimap::value_type               long_edge;
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  std::cout << "Split long edges (" << high << ")...";
-  std::cout.flush();
+  Rcpp::Rcout << "Split long edges (" << high << ")...";
+  Rcpp::Rcout.flush();
   std::size_t nb_splits = 0;
 #endif
   const FT sq_high = high*high;
@@ -318,11 +319,11 @@ void split_long_edges(C3T3& c3t3,
 #endif
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE_PROGRESS
-      std::cout << "\rSplit (" << high << ")... ("
+      Rcpp::Rcout << "\rSplit (" << high << ")... ("
                 << long_edges.left.size() << " long edges, "
                 << "length  = " << std::sqrt(sqlen) << ", "
                 << nb_splits << " splits)";
-      std::cout.flush();
+      Rcpp::Rcout.flush();
 #endif
     }
   }//end loop on long_edges
@@ -333,7 +334,7 @@ void split_long_edges(C3T3& c3t3,
 #endif
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  std::cout << " done (" << nb_splits << " splits)." << std::endl;
+  Rcpp::Rcout << " done (" << nb_splits << " splits)." << std::endl;
 #endif
 }
 

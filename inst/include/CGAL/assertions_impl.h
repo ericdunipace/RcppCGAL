@@ -20,6 +20,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/assertions.h>
 #include <CGAL/assertions_behaviour.h>
@@ -76,11 +77,11 @@ _standard_error_handler(
         const char* msg )
 {
 #if defined(__GNUG__) && !defined(__llvm__)
-    // After g++ 3.4, std::terminate defaults to printing to std::cerr itself.
+    // After g++ 3.4, std::terminate defaults to printing to Rcpp::Rcerr itself.
     if (get_static_error_behaviour() == THROW_EXCEPTION)
         return;
 #endif
-    std::cerr << "CGAL error: " << what << " violation!" << std::endl
+    Rcpp::Rcerr << "CGAL error: " << what << " violation!" << std::endl
          << "Expression : " << expr << std::endl
          << "File       : " << file << std::endl
          << "Line       : " << line << std::endl
@@ -101,11 +102,11 @@ _standard_warning_handler( const char *,
                           const char* msg )
 {
 #if defined(__GNUG__) && !defined(__llvm__)
-    // After g++ 3.4, std::terminate defaults to printing to std::cerr itself.
+    // After g++ 3.4, std::terminate defaults to printing to Rcpp::Rcerr itself.
     if (get_static_warning_behaviour() == THROW_EXCEPTION)
         return;
 #endif
-    std::cerr << "CGAL warning: check violation!" << std::endl
+    Rcpp::Rcerr << "CGAL warning: check violation!" << std::endl
          << "Expression : " << expr << std::endl
          << "File       : " << file << std::endl
          << "Line       : " << line << std::endl

@@ -18,6 +18,7 @@
 #ifndef CGAL_MESH_3_MESH_COMPLEX_3_IN_TRIANGULATION_3_BASE_H
 #define CGAL_MESH_3_MESH_COMPLEX_3_IN_TRIANGULATION_3_BASE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -313,8 +314,8 @@ public:
       case BOUNDARY: ++number_of_boundary_incident_edges; break;
       default :
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-        std::cerr << "singular edge...\n";
-        std::cerr << tr_.point(v) << std::endl;
+        Rcpp::Rcerr << "singular edge...\n";
+        Rcpp::Rcerr << tr_.point(v) << std::endl;
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
         return SINGULAR;
       }
@@ -324,14 +325,14 @@ public:
     const std::size_t nb_components = union_find_of_incident_facets(v);
     if(nb_components > 1) {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-      std::cerr << "singular vertex: nb_components=" << nb_components << std::endl;
-      std::cerr << tr_.point(v) << std::endl;
+      Rcpp::Rcerr << "singular vertex: nb_components=" << nb_components << std::endl;
+      Rcpp::Rcerr << tr_.point(v) << std::endl;
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
       return SINGULAR;
     }
     else { // REGULAR OR BOUNDARY
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-      std::cerr << "regular or boundary: " << tr_.point(v) << std::endl;
+      Rcpp::Rcerr << "regular or boundary: " << tr_.point(v) << std::endl;
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
       if (number_of_boundary_incident_edges != 0)
         return BOUNDARY;
@@ -1014,7 +1015,7 @@ Mesh_complex_3_in_triangulation_3_base<Tr,Ct>::add_to_complex(
         if (j != i) {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
           if(cell->vertex(j)->is_c2t3_cache_valid())
-            std::cerr << "(" << tr_.point(cell, j) << ")->invalidate_c2t3_cache()\n";
+            Rcpp::Rcerr << "(" << tr_.point(cell, j) << ")->invalidate_c2t3_cache()\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
           cell->vertex(j)->invalidate_c2t3_cache();
         }
@@ -1065,7 +1066,7 @@ Mesh_complex_3_in_triangulation_3_base<Tr,Ct>::remove_from_complex(const Facet& 
         if (j != facet.second) {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
           if(cell->vertex(j)->is_c2t3_cache_valid())
-            std::cerr << "(" << tr_.point(cell, j) << ")->invalidate_c2t3_cache()\n";
+            Rcpp::Rcerr << "(" << tr_.point(cell, j) << ")->invalidate_c2t3_cache()\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
           cell->vertex(j)->invalidate_c2t3_cache();
         }

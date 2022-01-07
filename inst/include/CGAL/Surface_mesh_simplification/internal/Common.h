@@ -11,6 +11,7 @@
 #ifndef CGAL_SURFACE_MESH_SIMPLIFICATION_DETAIL_COMMON_H
 #define CGAL_SURFACE_MESH_SIMPLIFICATION_DETAIL_COMMON_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_simplification.h>
 
 #include <CGAL/algorithm.h>
@@ -116,7 +117,7 @@ inline std::string optional_to_string(const boost::optional<T>& o) {
   #define CGAL_SMS_TRACE_IMPL(m) \
     if(::internal::cgal_enable_sms_trace) { \
     std::ostringstream ss; ss << m; std::string s = ss.str(); \
-    /*Surface_simplification_external_trace(s)*/ std::cerr << s << std::endl; \
+    /*Surface_simplification_external_trace(s)*/ Rcpp::Rcerr << s << std::endl; \
     }
 
   #define CGAL_SMS_DEBUG_CODE(code) code
