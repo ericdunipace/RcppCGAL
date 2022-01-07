@@ -160,7 +160,7 @@ assertion_fail( const char* expr,
     get_static_error_handler()("assertion", expr, file, line, msg);
     switch (get_static_error_behaviour()) {
     case ABORT:
-        Rcpp::stop('Error');
+        Rcpp::stop("Error"");
     case EXIT:
         std::exit(1);  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
@@ -182,7 +182,7 @@ precondition_fail( const char* expr,
     get_static_error_handler()("precondition", expr, file, line, msg);
     switch (get_static_error_behaviour()) {
     case ABORT:
-        Rcpp::stop('Error');
+        Rcpp::stop("Error"");
     case EXIT:
         std::exit(1);  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
@@ -204,7 +204,7 @@ postcondition_fail(const char* expr,
     get_static_error_handler()("postcondition", expr, file, line, msg);
     switch (get_static_error_behaviour()) {
     case ABORT:
-        Rcpp::stop('Error');
+        Rcpp::stop("Error"");
     case EXIT:
         std::exit(1);  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
@@ -229,7 +229,7 @@ warning_fail( const char* expr,
     get_static_warning_handler()("warning", expr, file, line, msg);
     switch (get_static_warning_behaviour()) {
     case ABORT:
-        Rcpp::stop('Error');
+        Rcpp::stop("Error"");
     case EXIT:
         std::exit(1);  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
