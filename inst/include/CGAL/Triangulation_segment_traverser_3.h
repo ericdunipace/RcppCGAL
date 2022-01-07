@@ -14,6 +14,8 @@
 #define CGAL_TRIANGULATION_SEGMENT_TRAVERSER_3_H
 
 #include <Rcpp.h>
+#include <Rcpp.h>
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <iostream>

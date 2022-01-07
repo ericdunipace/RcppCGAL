@@ -110,6 +110,8 @@ a minimum cut on the following graph:
 ///////////////////////////////////////////////////
 
 #include <Rcpp.h>
+#include <Rcpp.h>
+#include <Rcpp.h>
 #include <stdio.h>
 #include "graph.h"
 

@@ -16,6 +16,8 @@
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_2_VERTEX_CONFLICT_C2_H
 
 #include <Rcpp.h>
+#include <Rcpp.h>
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_2.h>
 
 
