@@ -100,7 +100,7 @@
   dest_folder <- file.path(pkg_path, "include", "CGAL")
   
   # check to see if changes have already been done before
-  stored_change_log <- file.path(pkg_path, "OUTPUT_CHANGED")
+  stored_change_log <- file.path(pkg_path, "saveCheck", "OUTPUT_CHANGED")
   
   if(!file.exists(stored_change_log)) {
     file.create(stored_change_log)
@@ -129,7 +129,7 @@
   writeLines(CHANGED, con = stored_change_log)
 }
 
-
+# for use on my machine to change files uploaded to github
 .cgal.cerr.remover.github <- function() {
   path <- file.path(getwd(), "inst")
   .cgal.cerr.remover(path)
