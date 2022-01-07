@@ -123,18 +123,22 @@
     tx[first]  <- sub(pattern = "#include",   replacement = "#include <Rcpp.h>\n#include", x = tx[first])
     tx[search]  <- gsub(pattern = "std::cerr", replacement = "Rcpp::Rcerr", x = tx[search])
     tx[search]  <- gsub(pattern = "std::cout", replacement = "Rcpp::Rcout", x = tx[search])
+    tx[search]  <- gsub(pattern = "std::abort\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
     tx[search]  <- gsub(pattern = "abort\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
+    tx[search]  <- gsub(pattern = "std::exit\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
     tx[search]  <- gsub(pattern = "exit\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
     writeLines(tx, con=f)
   }
   CHANGED <- "TRUE"
   writeLines(CHANGED, con = stored_change_log)
+  return(invisible())
 }
 
 # for use on my machine to change files uploaded to github
 .cgal.cerr.remover.github <- function() {
   path <- file.path(getwd(), "inst")
   .cgal.cerr.remover(path)
+  return(invisible())
 }
 
 
