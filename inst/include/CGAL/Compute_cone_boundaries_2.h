@@ -149,7 +149,7 @@ public:
 
         if (cone_number<2) {
             Rcpp::Rcout << "The number of cones must be larger than 1!" << std::endl;
-            std::exit(1);
+            Rcpp::stop("Error");
         }
 
         // Since CGAL::root_of() gives the k-th smallest root,

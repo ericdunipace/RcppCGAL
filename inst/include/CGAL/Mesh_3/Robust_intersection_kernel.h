@@ -16,6 +16,7 @@
 #ifndef CGAL_MESH_3_ROBUST_INTERSECTION_KERNEL_3_H
 #define CGAL_MESH_3_ROBUST_INTERSECTION_KERNEL_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -60,7 +61,7 @@ public:
     Back_from_exact back_from_exact;
     EK::Intersect_3 exact_intersection = EK().intersect_3_object();
     Object object = exact_intersection(to_exact(line), to_exact(plane));
-    // std::exit(1);
+    // Rcpp::stop("Error");
     if ( const EK::Point_3* p = object_cast<EK::Point_3>(&object) )
       return make_object(back_from_exact(*p));
     else if ( const EK::Segment_3* seg = object_cast<EK::Segment_3>(&object) )

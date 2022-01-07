@@ -162,9 +162,9 @@ assertion_fail( const char* expr,
     case ABORT:
         Rcpp::stop("Error");
     case EXIT:
-        std::exit(1);  // EXIT_FAILURE
+        Rcpp::stop("Error");  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
-        std::exit(0);  // EXIT_SUCCESS
+        Rcpp::stop("Error");  // EXIT_SUCCESS
     case CONTINUE: // The CONTINUE case should not be used anymore.
     case THROW_EXCEPTION:
     default:
@@ -184,9 +184,9 @@ precondition_fail( const char* expr,
     case ABORT:
         Rcpp::stop("Error");
     case EXIT:
-        std::exit(1);  // EXIT_FAILURE
+        Rcpp::stop("Error");  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
-        std::exit(0);  // EXIT_SUCCESS
+        Rcpp::stop("Error");  // EXIT_SUCCESS
     case CONTINUE:
     case THROW_EXCEPTION:
     default:
@@ -206,9 +206,9 @@ postcondition_fail(const char* expr,
     case ABORT:
         Rcpp::stop("Error");
     case EXIT:
-        std::exit(1);  // EXIT_FAILURE
+        Rcpp::stop("Error");  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
-        std::exit(0);  // EXIT_SUCCESS
+        Rcpp::stop("Error");  // EXIT_SUCCESS
     case CONTINUE:
     case THROW_EXCEPTION:
     default:
@@ -231,9 +231,9 @@ warning_fail( const char* expr,
     case ABORT:
         Rcpp::stop("Error");
     case EXIT:
-        std::exit(1);  // EXIT_FAILURE
+        Rcpp::stop("Error");  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
-        std::exit(0);  // EXIT_SUCCESS
+        Rcpp::stop("Error");  // EXIT_SUCCESS
     case THROW_EXCEPTION:
         throw Warning_exception("CGAL", expr, file, line, msg);
     case CONTINUE:

@@ -119,7 +119,7 @@
   tx <- first <- search <- NULL
   for (f in files) {
     tx  <- readLines(f, warn = FALSE)
-    search <- grep(pattern = "std::cerr|std::cout|abort\\(\\)|exit\\(\\)", x = tx)
+    search <- grep(pattern = "std::cerr|std::cout|abort\\(|exit\\(", x = tx)
     if (length(search)==0) next
     first <- grep("#include", tx)[1]
     tx[first]  <- sub(pattern = "#include",   replacement = "#include <Rcpp.h>\n#include", x = tx[first])
