@@ -117,12 +117,14 @@
   tx <- first <- search <- NULL
   for (f in files) {
     tx  <- readLines(f, warn = FALSE)
-    search <- grep(pattern = "std::cerr|std::cout", x = tx)
+    search <- grep(pattern = "std::cerr|std::cout|abort\\(\\)|exit\\(\\)", x = tx)
     if (length(search)==0) next
     first <- grep("#include", tx)[1]
     tx[first]  <- sub(pattern = "#include",   replacement = "#include <Rcpp.h>\n#include", x = tx[first])
     tx[search]  <- gsub(pattern = "std::cerr", replacement = "Rcpp::Rcerr", x = tx[search])
     tx[search]  <- gsub(pattern = "std::cout", replacement = "Rcpp::Rcout", x = tx[search])
+    tx[search]  <- gsub(pattern = "abort\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
+    tx[search]  <- gsub(pattern = "exit\\(\\)", replacement = "Rcpp::Rstop()", x = tx[search])
     writeLines(tx, con=f)
   }
   CHANGED <- "TRUE"
