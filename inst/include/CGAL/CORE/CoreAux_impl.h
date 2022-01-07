@@ -191,7 +191,7 @@ void core_error(std::string msg, std::string file, int lineno, bool err) {
   if (!outFile) {
      // perror("CORE ERROR: cannot open Core Diagnostics file");
      Rcpp::Rcerr << "CORE ERROR: can't open Core Diagnostics file"<<std::endl;
-     std::exit(1); //Note: do not call Rcpp::stop("Error"")
+     std::exit(1); //Note: do not call Rcpp::stop("Error")
   }
   outFile << "CORE " << (err? "ERROR" : "WARNING")
      << " (at " << file << ": " << lineno << "): "
@@ -203,7 +203,7 @@ void core_error(std::string msg, std::string file, int lineno, bool err) {
      //        + core_itoa(lineno,buf, 65) +"):" + msg + "\n").c_str());
      Rcpp::Rcerr << (std::string("CORE ERROR") + " (file " + file + ", line "
                    + core_itoa(lineno,buf, 65) +"):" + msg + "\n").c_str();
-     std::exit(1); //Note: do not call Rcpp::stop("Error"")
+     std::exit(1); //Note: do not call Rcpp::stop("Error")
   }
 }
 
