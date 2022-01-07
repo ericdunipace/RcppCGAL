@@ -103,8 +103,8 @@ Rcpp::IntegerVector hilbertSort(const Eigen::MatrixXd & A)
 ```
 
 Saving this code as `hilbertSort.cpp` and sourcing with Rcpp `Rcpp::sourceCpp("hilbertSort.cpp")`
-makes the function `hilbertSort()`. Note that version 5.2.1
-relies on the C++14 standard. Also, be aware that thisexample 
+makes the function `hilbertSort()`. Note that version 5.3.1
+relies on the C++14 standard. Also, be aware that this example 
 function example assumes that the observations are stored by
 column rather than by row, that is as the transpose of the 
 usual `R` `matrix` or `data.frame`.
