@@ -1,7 +1,9 @@
 # downloads CGAL if necessary
 .onLoad <- function(libname, pkgname) {
-  return(.cgal.downloader())
+  file <- .cgal.downloader()
   # cgal overwrite std::cerr
+  .cgal.cerr.remover()
+  return(invisible(file))
 }
 
 .onAttach <- function(libname, pkgname) {
