@@ -2,15 +2,15 @@ citHeader("To cite RcppCGAL in publications use:")
 
 citEntry(entry = "Misc",
   title        = "{RcppCGAL}: Rcpp Integration for CGAL",
-  author       = personList(as.person("Eric Dunipace"),
-                  as.person("et al.")),
+  author       = personList(person(given = "Eric", family = "Dunipace", middle = "A.", role = c("cre","aut")),
+                  person("CGAL team", role = "aut")),
   year         = "2022",
   url = "https://CRAN.R-project.org/package=RcppCGAL",
   version = "5.3.1.1",
   date = "2022-01-06",
 
   textVersion  =
-  paste("Eric Dunipace et al (2022).",
+  paste("Eric Dunipace and the CGAL Team (2022).",
         "RcppCGAL: Rcpp Integration for CGAL",
         "version 5.3.1.1",
         "URL https://cran.r-project.org/web/packages/RcppCGAL/index.html.")
