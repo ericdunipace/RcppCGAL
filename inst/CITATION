@@ -5,7 +5,7 @@ citEntry(entry = "Misc",
   author       = personList(as.person("Eric Dunipace"),
                   as.person("et al.")),
   year         = "2022",
-  url = "https://cran.r-project.org/web/packages/RcppCGAL/index.html",
+  url = "https://CRAN.R-project.org/package=RcppCGAL",
   version = "5.3.1.1",
   date = "2022-01-06",
 
