@@ -15,7 +15,7 @@ Description: Creates a header only package to link to the CGAL
   see the CGAL documentation at <https://www.cgal.org>. Currently 
   includes the CGAL 5.3.1 stable release.
 License: GPL (>=3)
-Imports: utils
+Imports: utils, Rcpp
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
 RoxygenNote: 7.1.1
