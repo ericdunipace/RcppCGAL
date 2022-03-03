@@ -14,6 +14,7 @@
 #ifndef CGAL_ALGEBRAIC_KERNEL_D_BITSTREAM_DESCARTES_RNDL_TREE_TRAITS_H
 #define CGAL_ALGEBRAIC_KERNEL_D_BITSTREAM_DESCARTES_RNDL_TREE_TRAITS_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
@@ -166,7 +167,7 @@ public:
 
         Integer operator() (Coefficient f, long p) {
 
-            //std::cout << "Called approximator with f=" << f
+            //Rcpp::Rcout << "Called approximator with f=" << f
             //          << " and p=" << p << std::endl;
 
             typename CGAL::internal::Float_traits<BF>::Get_exponent get_exp;
@@ -212,7 +213,7 @@ public:
 //             }
             CGAL::set_precision(BFI(),old_prec);
 
-            //std::cout << "returns " << bfi_m << std::endl;
+            //Rcpp::Rcout << "returns " << bfi_m << std::endl;
 
             return bfi_m;
         }
@@ -236,7 +237,7 @@ public:
         Lower_bound_log2_abs() {};
 
         long operator() (Coefficient f) {
-            //std::cout << "Called lower_bound_log2_abs with "
+            //Rcpp::Rcout << "Called lower_bound_log2_abs with "
             //          << f << std::flush;
 
             CGAL_assertion(! _m_kernel.is_zero_object()(f));
@@ -273,7 +274,7 @@ public:
 
             }
 
-            //std::cout << "returning " << result << std::endl;
+            //Rcpp::Rcout << "returning " << result << std::endl;
             CGAL::set_precision(BFI(),old_prec);
 
             return result;
@@ -315,7 +316,7 @@ public:
 
         bool improve_upper_bound
         (const Coefficient f, long& ub_log2_abs,bool& is_certainly_zero) {
-            //std::cout << "improve upper bound.."
+            //Rcpp::Rcout << "improve upper bound.."
             // << f << std::endl;
 
             long old_prec = CGAL::get_precision(BFI());
@@ -323,26 +324,26 @@ public:
             if(std::find(zeroes.begin(),
                          zeroes.end(),
                          f)!=zeroes.end()) {
-                //std::cout << "ZERO FROM CACHE" << std::endl;
+                //Rcpp::Rcout << "ZERO FROM CACHE" << std::endl;
                 is_certainly_zero=true;
                 return true;
             }
             else if(std::find(non_zeroes.begin(),
                               non_zeroes.end(),
                               f)!=non_zeroes.end()) {
-                //std::cout << "NON-ZERO FROM CACHE" << std::endl;
+                //Rcpp::Rcout << "NON-ZERO FROM CACHE" << std::endl;
                 is_certainly_zero=false;
             }
             else {
                 bool zero = _m_kernel.is_zero_object()(f);
                 if(zero) {
-                    //std::cout << "THAT IS ZERO!" << std::endl;
+                    //Rcpp::Rcout << "THAT IS ZERO!" << std::endl;
                     zeroes.push_back(f);
                     is_certainly_zero=true;
                     return true;
                 }
                 else {
-                    //std::cout << "THAT IS NOT ZERO!" << std::endl;
+                    //Rcpp::Rcout << "THAT IS NOT ZERO!" << std::endl;
                     non_zeroes.push_back(f);
                     is_certainly_zero=false;
                 }
@@ -380,7 +381,7 @@ public:
                 return ((ub_log2_abs - lb_log2_abs) <= 2);
             }
             else {
-                //std::cout << "Upper: " << ub_log2_abs << std::endl;
+                //Rcpp::Rcout << "Upper: " << ub_log2_abs << std::endl;
                 CGAL::set_precision(BFI(),old_prec);
                 return false;
             }

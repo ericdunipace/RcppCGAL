@@ -61,6 +61,7 @@
 #ifndef CORE_CURVES_H
 #define CORE_CURVES_H
 
+#include <Rcpp.h>
 #include <fstream>
 #include <list>
 #include "CGAL/CORE/poly/Poly.h"
@@ -98,7 +99,7 @@ class Monomial{
   }
 
   void dump(){
-    std::cout << coeff << "X^" << xdeg << " Y^" << ydeg;
+    Rcpp::Rcout << coeff << "X^" << xdeg << " Y^" << ydeg;
   }
 };
 

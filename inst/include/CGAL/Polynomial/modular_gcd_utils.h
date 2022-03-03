@@ -19,6 +19,7 @@
 #ifndef CGAL_POLYNOMIAL_MODULAR_GCD_UTILS_H
 #define CGAL_POLYNOMIAL_MODULAR_GCD_UTILS_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <vector>
 #include <CGAL/Polynomial.h>
@@ -45,7 +46,7 @@ void euclidean_division_obstinate(const Polynomial<NT>& F1,
         const Polynomial<NT>& F2,
         Polynomial<NT>& Q, Polynomial<NT>& R){
 
-//    std::cout<<" my_modular_gcd_utils "<<std::endl;
+//    Rcpp::Rcout<<" my_modular_gcd_utils "<<std::endl;
     CGAL_precondition(!F2.is_zero());
     int d1 = F1.degree();
     int d2 = F2.degree();

@@ -12,6 +12,7 @@
 #ifndef CGAL_POISSON_RECONSTRUCTION_FUNCTION_H
 #define CGAL_POISSON_RECONSTRUCTION_FUNCTION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -497,7 +498,7 @@ public:
                                                                      &coarse_poisson_function);
 
       sizing_field_timer.stop();
-      std::cerr << "Construction time of the sizing field: " << sizing_field_timer.time()
+      Rcpp::Rcerr << "Construction time of the sizing field: " << sizing_field_timer.time()
                 << " seconds" << std::endl;
 
       NB.push_back( delaunay_refinement(radius_edge_ratio_bound,
@@ -531,7 +532,7 @@ public:
     double lambda = 0.1;
     if ( ! solve_poisson(solver, lambda) )
     {
-      std::cerr << "Error: cannot solve Poisson equation" << std::endl;
+      Rcpp::Rcerr << "Error: cannot solve Poisson equation" << std::endl;
       return false;
     }
 
@@ -663,7 +664,7 @@ public:
       }
       ++i;
     }
-    std::cerr << N << " out of " << i << " cells have NULL_VECTOR as normal" << std::endl;
+    Rcpp::Rcerr << N << " out of " << i << " cells have NULL_VECTOR as normal" << std::endl;
   }
 
   void initialize_duals() const
@@ -886,7 +887,7 @@ private:
     std::size_t size = values.size();
     if(size == 0)
     {
-      std::cerr << "Contouring: no input points\n";
+      Rcpp::Rcerr << "Contouring: no input points\n";
       return 0.0;
     }
 
@@ -934,9 +935,9 @@ private:
     c = std::fabs(volume(pb,pa,pd,p) / v);
     d = std::fabs(volume(pb,pc,pa,p) / v);
 
-    std::cerr << "_________________________________\n";
-    std::cerr << aa << "  " << bb << "  " << cc << "  " << dd << std::endl;
-    std::cerr << a << "  " << b << "  " << c << "  " << d << std::endl;
+    Rcpp::Rcerr << "_________________________________\n";
+    Rcpp::Rcerr << aa << "  " << bb << "  " << cc << "  " << dd << std::endl;
+    Rcpp::Rcerr << a << "  " << b << "  " << c << "  " << d << std::endl;
 
 #endif
   }
@@ -1238,16 +1239,16 @@ private:
 
         if(m_tr->is_constrained(vj)){
           if(! is_valid(vj->f())){
-            std::cerr << "vj->f() = " << vj->f() << " is not valid" << std::endl;
+            Rcpp::Rcerr << "vj->f() = " << vj->f() << " is not valid" << std::endl;
           }
           B[vi->index()] -= cij * vj->f(); // change rhs
           if(! is_valid( B[vi->index()])){
-            std::cerr << " B[vi->index()] = " <<  B[vi->index()] << " is not valid" << std::endl;
+            Rcpp::Rcerr << " B[vi->index()] = " <<  B[vi->index()] << " is not valid" << std::endl;
           }
 
         } else {
           if(! is_valid(cij)){
-            std::cerr << "cij = " << cij << " is not valid" << std::endl;
+            Rcpp::Rcerr << "cij = " << cij << " is not valid" << std::endl;
           }
           A.set_coef(vi->index(),vj->index(), -cij, true /*new*/); // off-diagonal coefficient
         }

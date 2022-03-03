@@ -13,6 +13,7 @@
 #ifndef CGAL_ALPHA_SHAPE_2_H
 #define CGAL_ALPHA_SHAPE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Alpha_shapes_2.h>
 
 #include <CGAL/Alpha_shapes_2/internal/Lazy_alpha_nt_2.h>
@@ -1408,7 +1409,7 @@ Alpha_shape_2<Dt,EACT>::find_optimal_alpha(size_type nb_components)
       middle = first + half;
 
 #ifdef CGAL_DEBUG_ALPHA_SHAPE_2
-      std::cout << "first : " << *first << " last : " << *(first+len)
+      Rcpp::Rcout << "first : " << *first << " last : " << *(first+len)
                 << " mid : " << *middle
                 << " nb comps : " << number_of_solid_components(*middle)
                 << std::endl;
@@ -1830,7 +1831,7 @@ void Alpha_shape_2<Dt,EACT>::print_edge_map()
     Edge edge = (*iemapit).second;
     Point p1 = point(edge.first, cw(edge.second));
     Point p2 = point(edge.first, ccw(edge.second));
-    std::cout << "[ (" <<        p1 << ") - (" << p2 << ") ] :            "
+    Rcpp::Rcout << "[ (" <<        p1 << ") - (" << p2 << ") ] :            "
               << interval.first << " "
               << interval.second << " " << interval.third << std::endl;
   }

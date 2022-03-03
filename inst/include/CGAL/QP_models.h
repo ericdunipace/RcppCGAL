@@ -13,6 +13,7 @@
 #ifndef CGAL_QP_MODELS_H
 #define CGAL_QP_MODELS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/QP_solver.h>
 
 #include <CGAL/disable_warnings.h>
@@ -858,7 +859,7 @@ protected:
   }
 
   void warn(const std::string& msg) const {
-    std::cerr << "Warning: " << msg << '.' << std::endl;
+    Rcpp::Rcerr << "Warning: " << msg << '.' << std::endl;
   }
 
   void warn1(const std::string& msg,const std::string& parameter1) const {

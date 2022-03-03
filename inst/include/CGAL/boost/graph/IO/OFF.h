@@ -12,6 +12,7 @@
 #ifndef CGAL_BGL_IO_OFF_H
 #define CGAL_BGL_IO_OFF_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/OFF.h>
 #include <CGAL/IO/helpers.h>
 #include <CGAL/boost/graph/IO/Generic_facegraph_builder.h>
@@ -498,7 +499,7 @@ bool write_OFF(const std::string& fname,
   std::ofstream os(fname);
   if(!os)
   {
-    std::cerr<<"Could not create file.";
+    Rcpp::Rcerr<<"Could not create file.";
     return false;
   }
 

@@ -14,6 +14,7 @@
 
 #ifdef CGAL_LINKED_WITH_TBB
 
+#include <Rcpp.h>
 #include <CGAL/Bbox_3.h>
 
 #include <atomic>
@@ -64,7 +65,7 @@ public:
     m_resolution_z = n / (bbox.zmax() - bbox.zmin());
 
 #ifdef CGAL_CONCURRENT_MESH_3_VERBOSE
-    std::cerr << "Locking data structure Bounding Box = "
+    Rcpp::Rcerr << "Locking data structure Bounding Box = "
       << "[" << bbox.xmin() << ", " << bbox.xmax() << "], "
       << "[" << bbox.ymin() << ", " << bbox.ymax() << "], "
       << "[" << bbox.zmin() << ", " << bbox.zmax() << "]"

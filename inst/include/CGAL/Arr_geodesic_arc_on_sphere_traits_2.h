@@ -13,6 +13,7 @@
 #ifndef CGAL_ARR_GEODESIC_ARC_ON_SPHERE_TRAITS_2_H
 #define CGAL_ARR_GEODESIC_ARC_ON_SPHERE_TRAITS_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -2029,9 +2030,9 @@ public:
     OutputIterator operator()(const Curve_2& c, OutputIterator oi) const {
       typedef boost::variant<Point_2, X_monotone_curve_2>
         Make_x_monotone_result;
-      // std::cout << "full: " << c.is_full() << std::endl;
-      // std::cout << "vert: " << c.is_vertical() << std::endl;
-      // std::cout << "xmon: " << c.is_x_monotone() << std::endl;
+      // Rcpp::Rcout << "full: " << c.is_full() << std::endl;
+      // Rcpp::Rcout << "vert: " << c.is_vertical() << std::endl;
+      // Rcpp::Rcout << "xmon: " << c.is_x_monotone() << std::endl;
       if (c.is_degenerate()) {
         // The spherical_arc is a degenerate point - wrap it with an object:
         *oi++ = Make_x_monotone_result(c.right());
@@ -2294,7 +2295,7 @@ public:
       Direction_2 r1 = project(r1_3);
       Direction_2 l2 = project(l2_3);
       Direction_2 r2 = project(r2_3);
-      // std::cout << "l1: " << l1 << ", r1: " << r1 << std::endl
+      // Rcpp::Rcout << "l1: " << l1 << ", r1: " << r1 << std::endl
       //           << "l2: " << l2 << ", r2: " << r2 << std::endl;
 
       // Handle full circles first
@@ -2527,7 +2528,7 @@ public:
                               const X_monotone_curve_2& xc2,
                               OutputIterator oi) const
     {
-      // std::cout << "xc1: " << xc1 << std::endl
+      // Rcpp::Rcout << "xc1: " << xc1 << std::endl
       //           << "xc2: " << xc2 << std::endl;
       CGAL_precondition(!xc1.is_degenerate());
       CGAL_precondition(!xc2.is_degenerate());

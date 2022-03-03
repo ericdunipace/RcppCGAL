@@ -15,6 +15,7 @@
 #ifndef CGAL_ARR_SPHERICAL_OVERLAY_HELPER_H
 #define CGAL_ARR_SPHERICAL_OVERLAY_HELPER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 /*! \file
@@ -119,13 +120,13 @@ public:
     //    a. the event coincides with the top boundary (north pole), or
     //    b. the curve lies on the identification curve
     // 3. The right curves are ordered bottom to top
-    // std::cout << "before_handle_event: " << event->point() << std::endl;
-    // std::cout << "# left: " << event->number_of_left_curves() << std::endl;
+    // Rcpp::Rcout << "before_handle_event: " << event->point() << std::endl;
+    // Rcpp::Rcout << "# left: " << event->number_of_left_curves() << std::endl;
     // for (auto it = event->left_curves_begin();
     //      it != event->left_curves_end(); ++it) {
     //   if ((*it)->color() == Gt2::RED) {
     //     const Subcurve* sc_red = *it;
-    //     std::cout << "  Red: "
+    //     Rcpp::Rcout << "  Red: "
     //               << sc_red->red_halfedge_handle()->source()->point() << " => "
     //               << sc_red->red_halfedge_handle()->target()->point() << ", "
     //               << sc_red->red_halfedge_handle()->direction()
@@ -133,19 +134,19 @@ public:
     //   }
     //   else {
     //     const Subcurve* sc_blue = *it;
-    //     std::cout << "  Blue: "
+    //     Rcpp::Rcout << "  Blue: "
     //               << sc_blue->blue_halfedge_handle()->source()->point() << " => "
     //               << sc_blue->blue_halfedge_handle()->target()->point() << ", "
     //               << sc_blue->blue_halfedge_handle()->direction()
     //               << std::endl;
     //   }
     // }
-    // std::cout << "# right: " << event->number_of_right_curves() << std::endl;
+    // Rcpp::Rcout << "# right: " << event->number_of_right_curves() << std::endl;
     // for (auto it = event->right_curves_begin();
     //      it != event->right_curves_end(); ++it) {
     //   if ((*it)->color() == Gt2::RED) {
     //     const Subcurve* sc = *it;
-    //     std::cout << "  Red: "
+    //     Rcpp::Rcout << "  Red: "
     //               << sc->red_halfedge_handle()->source()->point() << " => "
     //               << sc->red_halfedge_handle()->target()->point() << ", "
     //               << sc->red_halfedge_handle()->direction()
@@ -153,7 +154,7 @@ public:
     //   }
     //   else {
     //     const Subcurve* sc = *it;
-    //     std::cout << "  Blue: "
+    //     Rcpp::Rcout << "  Blue: "
     //               << sc->blue_halfedge_handle()->source()->point() << " => "
     //               << sc->blue_halfedge_handle()->target()->point() << ", "
     //               << sc->blue_halfedge_handle()->direction()

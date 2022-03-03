@@ -14,6 +14,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REMESH_IMPL_H
 #define CGAL_POLYGON_MESH_PROCESSING_REMESH_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/Polygon_mesh_processing/compute_normal.h>
@@ -188,7 +189,7 @@ namespace internal {
       if (do_init)
       {
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-        std::cout << "Compute connected components property map." << std::endl;
+        Rcpp::Rcout << "Compute connected components property map." << std::endl;
 #endif
         if ( same_range(face_range, (faces(pmesh))) )
         {
@@ -395,8 +396,8 @@ namespace internal {
       typedef typename Boost_bimap::value_type                       long_edge;
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "Split long edges (" << high << ")...";
-      std::cout.flush();
+      Rcpp::Rcout << "Split long edges (" << high << ")...";
+      Rcpp::Rcout.flush();
 #endif
       double sq_high = high*high;
 
@@ -431,7 +432,7 @@ namespace internal {
         vertex_descriptor vnew = target(hnew, mesh_);
         put(vpmap_, vnew, refinement_point);
 #ifdef CGAL_PMP_REMESHING_VERY_VERBOSE
-        std::cout << "   refinement point : " << refinement_point << std::endl;
+        Rcpp::Rcout << "   refinement point : " << refinement_point << std::endl;
 #endif
 
         //check sub-edges
@@ -461,7 +462,7 @@ namespace internal {
         }
       }
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << " done (" << nb_splits << " splits)." << std::endl;
+      Rcpp::Rcout << " done (" << nb_splits << " splits)." << std::endl;
 #endif
 #ifdef CGAL_DUMP_REMESHING_STEPS
       dump("0-border_split.off");
@@ -480,7 +481,7 @@ namespace internal {
       typedef typename Boost_bimap::value_type                       long_edge;
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "Split long edges (" << high << ")..." << std::endl;
+      Rcpp::Rcout << "Split long edges (" << high << ")..." << std::endl;
 #endif
       double sq_high = high*high;
 
@@ -506,9 +507,9 @@ namespace internal {
         long_edges.right.erase(eit);
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE_PROGRESS
-        std::cout << "\r\t(" << long_edges.left.size() << " long edges, ";
-        std::cout << nb_splits << " splits)";
-        std::cout.flush();
+        Rcpp::Rcout << "\r\t(" << long_edges.left.size() << " long edges, ";
+        Rcpp::Rcout << nb_splits << " splits)";
+        Rcpp::Rcout.flush();
 #endif
 
         if (protect_constraints_ && !is_longest_on_faces(edge(he, mesh_)))
@@ -529,7 +530,7 @@ namespace internal {
         vertex_descriptor vnew = target(hnew, mesh_);
         put(vpmap_, vnew, refinement_point);
 #ifdef CGAL_PMP_REMESHING_VERY_VERBOSE
-        std::cout << "   Refinement point : " << refinement_point << std::endl;
+        Rcpp::Rcout << "   Refinement point : " << refinement_point << std::endl;
 #endif
 
         //after splitting
@@ -593,7 +594,7 @@ namespace internal {
         }
       }
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << " done ("<< nb_splits << " splits)." << std::endl;
+      Rcpp::Rcout << " done ("<< nb_splits << " splits)." << std::endl;
 #endif
 
 #ifdef CGAL_PMP_REMESHING_DEBUG
@@ -620,12 +621,12 @@ namespace internal {
       typedef typename Boost_bimap::value_type                    short_edge;
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "Collapse short edges (" << low << ", " << high << ")..."
+      Rcpp::Rcout << "Collapse short edges (" << low << ", " << high << ")..."
                 << std::endl;
 #endif
 #ifdef CGAL_PMP_REMESHING_VERBOSE_PROGRESS
-      std::cout << "Fill bimap...";
-      std::cout.flush();
+      Rcpp::Rcout << "Fill bimap...";
+      Rcpp::Rcout.flush();
 #endif
       double sq_low = low*low;
       double sq_high = high*high;
@@ -638,7 +639,7 @@ namespace internal {
           short_edges.insert(short_edge(halfedge(e, mesh_), sqlen));
       }
 #ifdef CGAL_PMP_REMESHING_VERBOSE_PROGRESS
-      std::cout << "done." << std::endl;
+      Rcpp::Rcout << "done." << std::endl;
 #endif
 
       unsigned int nb_collapses = 0;
@@ -650,9 +651,9 @@ namespace internal {
         short_edges.right.erase(eit);
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE_PROGRESS
-        std::cout << "\r\t(" << short_edges.left.size() << " short edges, ";
-        std::cout << nb_collapses << " collapses)";
-        std::cout.flush();
+        Rcpp::Rcout << "\r\t(" << short_edges.left.size() << " short edges, ";
+        Rcpp::Rcout << nb_collapses << " collapses)";
+        Rcpp::Rcout.flush();
 #endif
 
         edge_descriptor e = edge(he, mesh_);
@@ -802,7 +803,7 @@ namespace internal {
       }
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << " done (" << nb_collapses << " collapses)." << std::endl;
+      Rcpp::Rcout << " done (" << nb_collapses << " collapses)." << std::endl;
 #endif
 
 #ifdef CGAL_DUMP_REMESHING_STEPS
@@ -826,7 +827,7 @@ namespace internal {
     void flip_edges_for_valence_and_shape()
     {
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "Equalize valences..." << std::endl;
+      Rcpp::Rcout << "Equalize valences..." << std::endl;
 #endif
 
       typedef typename boost::property_map<PM, CGAL::dynamic_vertex_property_t<int> >::type Vertex_degree;
@@ -908,8 +909,8 @@ namespace internal {
         ++nb_flips;
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE_PROGRESS
-        std::cout << "\r\t(" << nb_flips << " flips)";
-        std::cout.flush();
+        Rcpp::Rcout << "\r\t(" << nb_flips << " flips)";
+        Rcpp::Rcout.flush();
 #endif
         CGAL_assertion_code(Halfedge_status s2 = status(he));
         CGAL_assertion_code(Halfedge_status s2o = status(opposite(he, mesh_)));
@@ -971,7 +972,7 @@ namespace internal {
       }
 
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "\r\tdone ("<< nb_flips << " flips)" << std::endl;
+      Rcpp::Rcout << "\r\tdone ("<< nb_flips << " flips)" << std::endl;
 #endif
 
 #ifdef CGAL_PMP_REMESHING_DEBUG
@@ -995,15 +996,15 @@ namespace internal {
                              , const unsigned int nb_iterations)
     {
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "Tangential relaxation (" << nb_iterations << " iter.)...";
-      std::cout << std::endl;
+      Rcpp::Rcout << "Tangential relaxation (" << nb_iterations << " iter.)...";
+      Rcpp::Rcout << std::endl;
 #endif
       for (unsigned int nit = 0; nit < nb_iterations; ++nit)
       {
 #ifdef CGAL_PMP_REMESHING_VERBOSE_PROGRESS
-        std::cout << "\r\t(iteration " << (nit + 1) << " / ";
-        std::cout << nb_iterations << ") ";
-        std::cout.flush();
+        Rcpp::Rcout << "\r\t(iteration " << (nit + 1) << " / ";
+        Rcpp::Rcout << nb_iterations << ") ";
+        Rcpp::Rcout.flush();
 #endif
         typedef std::tuple<vertex_descriptor, Vector_3, Point> VNP;
         std::vector< VNP > barycenters;
@@ -1099,7 +1100,7 @@ namespace internal {
       debug_self_intersections();
 #endif
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "done." << std::endl;
+      Rcpp::Rcout << "done." << std::endl;
 #endif
 #ifdef CGAL_DUMP_REMESHING_STEPS
       dump("4-relaxation.off");
@@ -1112,8 +1113,8 @@ namespace internal {
     {
       //todo : handle the case of boundary vertices
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "Project to surface...";
-      std::cout.flush();
+      Rcpp::Rcout << "Project to surface...";
+      Rcpp::Rcout.flush();
 #endif
 
       for(vertex_descriptor v : vertices(mesh_))
@@ -1130,7 +1131,7 @@ namespace internal {
       debug_self_intersections();
 #endif
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "done." << std::endl;
+      Rcpp::Rcout << "done." << std::endl;
 #endif
 
 #ifdef CGAL_DUMP_REMESHING_STEPS
@@ -1143,8 +1144,8 @@ namespace internal {
     {
       //todo : handle the case of boundary vertices
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "Project to surface...";
-      std::cout.flush();
+      Rcpp::Rcout << "Project to surface...";
+      Rcpp::Rcout.flush();
 #endif
       for(vertex_descriptor v : vertices(mesh_))
       {
@@ -1158,7 +1159,7 @@ namespace internal {
       debug_self_intersections();
 #endif
 #ifdef CGAL_PMP_REMESHING_VERBOSE
-      std::cout << "done." << std::endl;
+      Rcpp::Rcout << "done." << std::endl;
 #endif
 
 #ifdef CGAL_DUMP_REMESHING_STEPS
@@ -1957,19 +1958,19 @@ private:
 #ifdef CGAL_PMP_REMESHING_DEBUG
     void debug_self_intersections() const
     {
-      std::cout << "Test self intersections...";
+      Rcpp::Rcout << "Test self intersections...";
       std::vector<std::pair<face_descriptor, face_descriptor> > facets;
       PMP::self_intersections(mesh_,
                               std::back_inserter(facets),
                               PMP::parameters::vertex_point_map(vpmap_)
                                               .geom_traits(gt_));
       //CGAL_assertion(facets.empty());
-      std::cout << "done ("<< facets.size() <<" facets)." << std::endl;
+      Rcpp::Rcout << "done ("<< facets.size() <<" facets)." << std::endl;
     }
 
     void debug_self_intersections(const vertex_descriptor& v) const
     {
-      std::cout << "Test self intersections...";
+      Rcpp::Rcout << "Test self intersections...";
       std::vector<std::pair<face_descriptor, face_descriptor> > facets;
       PMP::self_intersections(faces_around_target(halfedge(v, mesh_), mesh_),
                               mesh_,
@@ -1977,7 +1978,7 @@ private:
                               PMP::parameters::vertex_point_map(vpmap_)
                                               .geom_traits(gt_));
       //CGAL_assertion(facets.empty());
-      std::cout << "done ("<< facets.size() <<" facets)." << std::endl;
+      Rcpp::Rcout << "done ("<< facets.size() <<" facets)." << std::endl;
     }
 #endif
 

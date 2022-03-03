@@ -21,6 +21,7 @@
  * \brief defines \c Make_x_monotone_2 functor
  */
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/iterator.h>
 #include <CGAL/Handle_with_policy.h>
@@ -175,7 +176,7 @@ struct Make_x_monotone_2 :
     for (k = 0; k < evt_line1.number_of_events(); k++)
       max_pts.push_back(construct_point(max_x, curve, k));
 
-    //std::cout << "handling events over the 1st interval\n";
+    //Rcpp::Rcout << "handling events over the 1st interval\n";
     for (k = 0; k < int_line.number_of_events(); k++) {
 
       info1 = map_interval_arcno(evt_line1, 1, k);
@@ -319,7 +320,7 @@ private:
     for (j = 0; j < n; j++) {
       ipair = cv_line.number_of_incident_branches(j);
       if (ipair.first == 0&&ipair.second == 0) {
-        //std::cout << "isolated point found\n";
+        //Rcpp::Rcout << "isolated point found\n";
         typename Curved_kernel_via_analysis_2::Construct_point_2
           construct_point = _m_curved_kernel->construct_point_2_object();
 

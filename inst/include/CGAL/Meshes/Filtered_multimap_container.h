@@ -12,6 +12,7 @@
 #ifndef CGAL_MESHES_FILTERED_MULTIMAP_CONTAINER_H
 #define CGAL_MESHES_FILTERED_MULTIMAP_CONTAINER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -121,14 +122,14 @@ namespace CGAL {
     void splice_local_lists_impl(Container &container)
     {
 #ifdef CGAL_MESH_3_VERY_VERBOSE
-      std::cerr << "Filtered_multimap_container::splice_local_lists_impl()\n";
+      Rcpp::Rcerr << "Filtered_multimap_container::splice_local_lists_impl()\n";
 #endif
       for(typename LocalList::iterator it_list = m_local_lists.begin() ;
           it_list != m_local_lists.end() ;
           ++it_list )
       {
 #ifdef CGAL_MESH_3_VERY_VERBOSE
-        std::cerr << "  - " << it_list->size() << " elements\n";
+        Rcpp::Rcerr << "  - " << it_list->size() << " elements\n";
 #endif
         container.insert(it_list->begin(), it_list->end());
         it_list->clear();

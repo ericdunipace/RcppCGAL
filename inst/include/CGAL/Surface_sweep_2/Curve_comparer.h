@@ -15,6 +15,7 @@
 #ifndef CGAL_SURFACE_SWEEP_2_CURVE_COMPARER_H
 #define CGAL_SURFACE_SWEEP_2_CURVE_COMPARER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file
@@ -152,16 +153,16 @@ private:
     Arr_parameter_space ps_y_min = ps_y_op(cv, ARR_MIN_END);
     Arr_parameter_space ps_y_max = ps_y_op(cv, ARR_MAX_END);
 
-    CGAL::set_pretty_mode(std::cout);
-    std::cout << "\n FUNCTOR pt-cv" << std::endl;
-    std::cout << "pt: " << pt << std::endl;
-    std::cout << "ps_x1: " << ps_x1 << std::endl;
-    std::cout << "ps_y1: " << ps_y1 << std::endl;
-    std::cout << "cv: " << cv << std::endl;
-    std::cout << "ps_x_min: " << ps_x_min << std::endl;
-    std::cout << "ps_y_min: " << ps_y_min << std::endl;
-    std::cout << "ps_x_max: " << ps_x_max << std::endl;
-    std::cout << "ps_y_max: " << ps_y_max << std::endl;
+    CGAL::set_pretty_mode(Rcpp::Rcout);
+    Rcpp::Rcout << "\n FUNCTOR pt-cv" << std::endl;
+    Rcpp::Rcout << "pt: " << pt << std::endl;
+    Rcpp::Rcout << "ps_x1: " << ps_x1 << std::endl;
+    Rcpp::Rcout << "ps_y1: " << ps_y1 << std::endl;
+    Rcpp::Rcout << "cv: " << cv << std::endl;
+    Rcpp::Rcout << "ps_x_min: " << ps_x_min << std::endl;
+    Rcpp::Rcout << "ps_y_min: " << ps_y_min << std::endl;
+    Rcpp::Rcout << "ps_x_max: " << ps_x_max << std::endl;
+    Rcpp::Rcout << "ps_y_max: " << ps_y_max << std::endl;
 #endif
 
     if (ps_y1 == ARR_TOP_BOUNDARY) return LARGER;

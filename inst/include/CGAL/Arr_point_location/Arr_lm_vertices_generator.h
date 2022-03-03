@@ -12,6 +12,7 @@
 #ifndef CGAL_ARR_LANDMARKS_VERTICES_GENERATOR_H
 #define CGAL_ARR_LANDMARKS_VERTICES_GENERATOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -89,7 +90,7 @@ public:
 
   virtual void _create_points_set(Points_set & /* points */)
   {
-    std::cerr << "should not reach here!" << std::endl;
+    Rcpp::Rcerr << "should not reach here!" << std::endl;
     CGAL_error();
   }
 

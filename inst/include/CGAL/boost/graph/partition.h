@@ -19,6 +19,7 @@
 * free functions of this package.
 */
 
+#include <Rcpp.h>
 #include <CGAL/boost/graph/METIS/partition_graph.h>
 #include <CGAL/boost/graph/METIS/partition_dual_graph.h>
 
@@ -68,7 +69,7 @@ void output_partition(const TriangleMesh& tm,
     Filtered_graph m_part(tm, i, fpmap);
     if(!m_part.is_selection_valid())
     {
-      std::cerr << "Warning: cannot extract subdomain #" << i << " because it is "
+      Rcpp::Rcerr << "Warning: cannot extract subdomain #" << i << " because it is "
                 << "not a manifold mesh" << std::endl;
       continue;
     }

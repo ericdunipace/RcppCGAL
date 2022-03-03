@@ -23,6 +23,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/assertions.h>
 #include <CGAL/assertions_behaviour.h>
@@ -79,11 +80,11 @@ _standard_error_handler(
         const char* msg )
 {
 #if defined(__GNUG__) && !defined(__llvm__)
-    // After g++ 3.4, std::terminate defaults to printing to std::cerr itself.
+    // After g++ 3.4, std::terminate defaults to printing to Rcpp::Rcerr itself.
     if (get_static_error_behaviour() == THROW_EXCEPTION)
         return;
 #endif
-    std::cerr << "CGAL error: " << what << " violation!" << std::endl
+    Rcpp::Rcerr << "CGAL error: " << what << " violation!" << std::endl
          << "Expression : " << expr << std::endl
          << "File       : " << file << std::endl
          << "Line       : " << line << std::endl
@@ -104,11 +105,11 @@ _standard_warning_handler( const char *,
                           const char* msg )
 {
 #if defined(__GNUG__) && !defined(__llvm__)
-    // After g++ 3.4, std::terminate defaults to printing to std::cerr itself.
+    // After g++ 3.4, std::terminate defaults to printing to Rcpp::Rcerr itself.
     if (get_static_warning_behaviour() == THROW_EXCEPTION)
         return;
 #endif
-    std::cerr << "CGAL warning: check violation!" << std::endl
+    Rcpp::Rcerr << "CGAL warning: check violation!" << std::endl
          << "Expression : " << expr << std::endl
          << "File       : " << file << std::endl
          << "Line       : " << line << std::endl
@@ -162,11 +163,11 @@ assertion_fail( const char* expr,
     get_static_error_handler()("assertion", expr, file, line, msg);
     switch (get_static_error_behaviour()) {
     case ABORT:
-        std::abort();
+        Rcpp::stop("Error");
     case EXIT:
-        std::exit(1);  // EXIT_FAILURE
+        Rcpp::stop("Error");  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
-        std::exit(0);  // EXIT_SUCCESS
+        Rcpp::stop("Error");  // EXIT_SUCCESS
     case CONTINUE: // The CONTINUE case should not be used anymore.
     case THROW_EXCEPTION:
     default:
@@ -184,11 +185,11 @@ precondition_fail( const char* expr,
     get_static_error_handler()("precondition", expr, file, line, msg);
     switch (get_static_error_behaviour()) {
     case ABORT:
-        std::abort();
+        Rcpp::stop("Error");
     case EXIT:
-        std::exit(1);  // EXIT_FAILURE
+        Rcpp::stop("Error");  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
-        std::exit(0);  // EXIT_SUCCESS
+        Rcpp::stop("Error");  // EXIT_SUCCESS
     case CONTINUE:
     case THROW_EXCEPTION:
     default:
@@ -206,11 +207,11 @@ postcondition_fail(const char* expr,
     get_static_error_handler()("postcondition", expr, file, line, msg);
     switch (get_static_error_behaviour()) {
     case ABORT:
-        std::abort();
+        Rcpp::stop("Error");
     case EXIT:
-        std::exit(1);  // EXIT_FAILURE
+        Rcpp::stop("Error");  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
-        std::exit(0);  // EXIT_SUCCESS
+        Rcpp::stop("Error");  // EXIT_SUCCESS
     case CONTINUE:
     case THROW_EXCEPTION:
     default:
@@ -231,11 +232,11 @@ warning_fail( const char* expr,
     get_static_warning_handler()("warning", expr, file, line, msg);
     switch (get_static_warning_behaviour()) {
     case ABORT:
-        std::abort();
+        Rcpp::stop("Error");
     case EXIT:
-        std::exit(1);  // EXIT_FAILURE
+        Rcpp::stop("Error");  // EXIT_FAILURE
     case EXIT_WITH_SUCCESS:
-        std::exit(0);  // EXIT_SUCCESS
+        Rcpp::stop("Error");  // EXIT_SUCCESS
     case THROW_EXCEPTION:
         throw Warning_exception("CGAL", expr, file, line, msg);
     case CONTINUE:

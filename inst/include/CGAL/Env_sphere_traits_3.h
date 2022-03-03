@@ -15,6 +15,7 @@
 #ifndef CGAL_ENV_SPHERE_TRAITS_3_H
 #define CGAL_ENV_SPHERE_TRAITS_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Envelope_3.h>
 
 
@@ -810,9 +811,9 @@ public:
       Algebraic A2 = sqr_r2 - x_diff2*x_diff2 - y_diff2*y_diff2;
 
       if (CGAL_NTS sign(A1) == NEGATIVE)
-        std::cout << "A1 = " << A1 << std::endl;
+        Rcpp::Rcout << "A1 = " << A1 << std::endl;
       if (CGAL_NTS sign(A2) == NEGATIVE)
-        std::cout << "A2 = " << A2 << std::endl;
+        Rcpp::Rcout << "A2 = " << A2 << std::endl;
 
       Sign res;
       // sign_a_plus_b_x_sqrt_e_plus_c_x_sqrt_f is a CGAL method which

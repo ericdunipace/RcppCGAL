@@ -13,6 +13,7 @@
 #ifndef CGAL_PMP_INTERNAL_AABB_TRAVERSAL_TRAITS_WITH_HAUSDORFF_DISTANCE
 #define CGAL_PMP_INTERNAL_AABB_TRAVERSAL_TRAITS_WITH_HAUSDORFF_DISTANCE
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/distance.h>
 
 // STL includes.
@@ -420,8 +421,8 @@ namespace CGAL {
 
         const FT hdist = (h_global_bounds.lower + h_global_bounds.upper) / FT(2);
         m_early_quit = (hdist >= m_distance_bound);
-        // std::cout << "- hdist: " <<  hdist << std::endl;
-        // std::cout << "- early quit: " << m_early_quit << std::endl;
+        // Rcpp::Rcout << "- hdist: " <<  hdist << std::endl;
+        // Rcpp::Rcout << "- early quit: " << m_early_quit << std::endl;
       }
       if (m_early_quit) return std::make_pair(false, FT(0));
 

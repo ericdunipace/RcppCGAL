@@ -15,6 +15,7 @@
 #ifndef CGAL_SNC_STRUCTURE_H
 #define CGAL_SNC_STRUCTURE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -656,7 +657,7 @@ public:
   Size_type number_of_sfaces() const { return sfaces_.size();}
   /*{\Mop returns the number of sfaces.}*/
 
-  void print_statistics(std::ostream& os = std::cout) const
+  void print_statistics(std::ostream& os = Rcpp::Rcout) const
   /*{\Mop print the statistics of |P|: the number of vertices, edges,
       faces, volumes and sobjects.}*/
   {

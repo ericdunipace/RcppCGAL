@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REFINE_POLYHEDRON_3_H
 #define CGAL_POLYGON_MESH_PROCESSING_REFINE_POLYHEDRON_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 
@@ -162,7 +163,7 @@ private:
     collect_interior_edges(new_faces, border_edges, interior_edges, included_map);
 
     #ifdef CGAL_PMP_REFINE_DEBUG
-    std::cerr << "Test " << interior_edges.size() << " edges " << std::endl;
+    Rcpp::Rcerr << "Test " << interior_edges.size() << " edges " << std::endl;
     #endif
     //do not just use std::set (included_map) for iteration, the order effects the output (we like to make it deterministic)
     for(halfedge_descriptor h : interior_edges)
@@ -173,7 +174,7 @@ private:
     }
 
     #ifdef CGAL_PMP_REFINE_DEBUG
-    std::cerr  << "|flips| = " << flips << std::endl;
+    Rcpp::Rcerr  << "|flips| = " << flips << std::endl;
     #endif
     return flips > 0;
   }
@@ -316,14 +317,14 @@ public:
       #endif
       bool is_subdivided = subdivide(all_faces, border_edges, scale_attribute, vertex_out, facet_out, new_faces, alpha);
       #ifdef CGAL_PMP_REFINE_DEBUG
-      std::cerr  << "**Timer** subdivide() :" << timer.time() << std::endl; timer.reset();
+      Rcpp::Rcerr  << "**Timer** subdivide() :" << timer.time() << std::endl; timer.reset();
       #endif
       if(!is_subdivided)
         break;
 
       bool is_relaxed = relax(faces, new_faces, border_edges);
       #ifdef CGAL_PMP_REFINE_DEBUG
-      std::cerr << "**Timer** relax() :" << timer.time() << std::endl;
+      Rcpp::Rcerr << "**Timer** relax() :" << timer.time() << std::endl;
       #endif
       if(!is_relaxed)
         break;
@@ -331,7 +332,7 @@ public:
     }
 
     #ifdef CGAL_PMP_REFINE_DEBUG
-    std::cerr << "**Timer** TOTAL: " << total_timer.time() << std::endl;
+    Rcpp::Rcerr << "**Timer** TOTAL: " << total_timer.time() << std::endl;
     #endif
   }
 

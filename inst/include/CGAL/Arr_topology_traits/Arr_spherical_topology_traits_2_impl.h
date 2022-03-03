@@ -13,6 +13,7 @@
 #ifndef CGAL_ARR_SPHERICAL_TOPOLOGY_TRAITS_2_IMPL_H
 #define CGAL_ARR_SPHERICAL_TOPOLOGY_TRAITS_2_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 /*! \file
@@ -136,7 +137,7 @@ void Arr_spherical_topology_traits_2<GeomTraits_, Dcel_>::dcel_updated()
 template <typename GeomTraits, typename Dcel>
 void Arr_spherical_topology_traits_2<GeomTraits, Dcel>::init_dcel()
 {
-  // std::cout << "init_dcel()" << std::endl;
+  // Rcpp::Rcout << "init_dcel()" << std::endl;
   // Clear the current DCEL.
   m_dcel.delete_all();
   m_boundary_vertices.clear();
@@ -167,7 +168,7 @@ is_in_face(const Face* f, const Point_2& p, const Vertex* v) const
    * If the face has no outer ccb's, it contains everything:
    */
 #if 0
-  std::cout << "p: " << p
+  Rcpp::Rcout << "p: " << p
             << ", # outer_ccbs: " << f->number_of_outer_ccbs()
             << ", # inner ccbs: " << f->number_of_inner_ccbs()
             << std::endl;
@@ -445,7 +446,7 @@ Comparison_result
 Arr_spherical_topology_traits_2<GeomTraits, Dcel>::
 compare_y_at_x(const Point_2& p, const Halfedge* he) const
 {
-  // std::cout << "compare_y_at_x(Point_2&,Halfedge*)" << std::endl;
+  // Rcpp::Rcout << "compare_y_at_x(Point_2&,Halfedge*)" << std::endl;
   return m_geom_traits->compare_y_at_x_2_object()(p, he->curve());
 }
 
@@ -457,7 +458,7 @@ are_equal(const Vertex* v,
           Arr_parameter_space ps_x, Arr_parameter_space ps_y) const
 {
 #if 0
-  std::cout << "are_equal"
+  Rcpp::Rcout << "are_equal"
             << ", v: " << v->point()
             << ", xc: " << xc << ", " << ind
             << std::endl;
@@ -579,7 +580,7 @@ place_boundary_vertex(Face* /* f */,
   typedef boost::variant<Vertex*, Halfedge*>    Non_optional_result;
   typedef boost::optional<Non_optional_result>  Result;
 
-  // std::cout << "place_boundary_vertex()" << std::endl;
+  // Rcpp::Rcout << "place_boundary_vertex()" << std::endl;
   if (ps_y == ARR_BOTTOM_BOUNDARY) {
     if (m_south_pole == nullptr) return boost::none;
     return Result(Non_optional_result(m_south_pole));
@@ -749,7 +750,7 @@ Arr_spherical_topology_traits_2<GeomTraits, Dcel>::X_monotone_curve_2&
 Arr_spherical_topology_traits_2<GeomTraits, Dcel>::
 _curve(const Vertex* v, Arr_curve_end& ind) const
 {
-  // std::cout << "curve()" << std::endl;
+  // Rcpp::Rcout << "curve()" << std::endl;
   const Halfedge* he = v->halfedge();
   ind = (he->direction() == ARR_LEFT_TO_RIGHT) ? ARR_MAX_END : ARR_MIN_END;
   return he->curve();
@@ -818,7 +819,7 @@ _locate_around_pole(Vertex* v,
 {
   CGAL_assertion((v == m_south_pole) || (v == m_north_pole));
 
-  // std::cout << "locate_around_pole() " << ind << std::endl;
+  // Rcpp::Rcout << "locate_around_pole() " << ind << std::endl;
   // If the vertex is isolated, return a null halfedge:
   if (v->is_isolated()) return nullptr;
 
@@ -965,13 +966,13 @@ _face_below_vertex_on_discontinuity(Vertex* v) const
   // have to return its twin.
   first =
     (lowest_left != nullptr) ? lowest_left->opposite() : top_right->opposite();
-  // std::cout << "first: " << first->opposite()->vertex()->point() << " => "
+  // Rcpp::Rcout << "first: " << first->opposite()->vertex()->point() << " => "
   //           << first->vertex()->point() << std::endl;
 
   // Face* f = (first->is_on_inner_ccb()) ?
   //   first->inner_ccb()->face() : first->outer_ccb()->face();
-  // std::cout << "outer: " << f->number_of_outer_ccbs() << std::endl;
-  // std::cout << "inner: " << f->number_of_inner_ccbs() << std::endl;
+  // Rcpp::Rcout << "outer: " << f->number_of_outer_ccbs() << std::endl;
+  // Rcpp::Rcout << "inner: " << f->number_of_inner_ccbs() << std::endl;
   // Return the incident face.
   return ((first->is_on_inner_ccb()) ?
           first->inner_ccb()->face() : first->outer_ccb()->face());

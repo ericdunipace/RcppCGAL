@@ -12,6 +12,7 @@
 #ifndef CGAL_REGULAR_TRIANGULATION_2_H
 #define CGAL_REGULAR_TRIANGULATION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_2.h>
 
 #include <CGAL/Triangulation_2.h>
@@ -957,11 +958,11 @@ is_valid_vertex(Vertex_handle vh) const
       result = result && power_test(vh->face(),vh->point()) == ON_NEGATIVE_SIDE;
 
 //      if(!result) {
-//        std::cerr << " from is_valid_vertex " << std::endl;
-//        std::cerr << "sommet cache " << &*(vh)
+//        Rcpp::Rcerr << " from is_valid_vertex " << std::endl;
+//        Rcpp::Rcerr << "sommet cache " << &*(vh)
 //                  << "vh_point " <<vh->point() << " " << std::endl;
-//        std::cerr << "vh_>face " << &*(vh->face())  << " " << std::endl;
-//        std::cerr <<  "loc      " <<  &*(loc)
+//        Rcpp::Rcerr << "vh_>face " << &*(vh->face())  << " " << std::endl;
+//        Rcpp::Rcerr <<  "loc      " <<  &*(loc)
 //                   << " lt " << lt  << " li " << li << std::endl;
 //        show_face(vh->face());
 //        show_face(loc);
@@ -971,10 +972,10 @@ is_valid_vertex(Vertex_handle vh) const
   else { // normal vertex
     result = result && vh->face()->has_vertex(vh);
 //    if(!result) {
-//      std::cerr << " from is_valid_vertex " << std::endl;
-//      std::cerr << "normal vertex " << &(*vh) << std::endl;
-//      std::cerr << vh->point() << " " << std::endl;
-//      std::cerr << "vh_>face " << &*(vh->face())  << " " << std::endl;
+//      Rcpp::Rcerr << " from is_valid_vertex " << std::endl;
+//      Rcpp::Rcerr << "normal vertex " << &(*vh) << std::endl;
+//      Rcpp::Rcerr << vh->point() << " " << std::endl;
+//      Rcpp::Rcerr << "vh_>face " << &*(vh->face())  << " " << std::endl;
 //      show_face(vh->face());
 //    }
   }
@@ -1069,7 +1070,7 @@ is_valid(bool verbose, int /* level */) const
 
   // in any dimension
   if(verbose) {
-    std::cerr << " nombres de sommets " << number_of_vertices() << "\t"
+    Rcpp::Rcerr << " nombres de sommets " << number_of_vertices() << "\t"
               << "nombres de sommets  caches " << number_of_hidden_vertices()
               << std::endl;
   }
@@ -1087,12 +1088,12 @@ show_face(Face_handle fh) const
   Base::show_face(fh);
 
   typename Vertex_list::iterator current;
-  std::cerr << "  +++++>>>    ";
+  Rcpp::Rcerr << "  +++++>>>    ";
   for(current= fh->vertex_list().begin();
        current!= fh->vertex_list().end() ; current++) {
-        std::cerr <<"[ "<< ((*current)->point()) << " ] ,  ";
+        Rcpp::Rcerr <<"[ "<< ((*current)->point()) << " ] ,  ";
   }
-  std::cerr <<std::endl;
+  Rcpp::Rcerr <<std::endl;
 }
 
 template < class Gt, class Tds >
@@ -1100,16 +1101,16 @@ void
 Regular_triangulation_2<Gt,Tds>::
 show_all() const
 {
-  std::cerr << "PRINT THE FULL TRIANGULATION :" << std::endl;
-  std::cerr << std::endl << "====> "<< this ;
-  std::cerr << " dimension " <<  dimension() << std::endl;
-  std::cerr << " nb of vertices " << number_of_vertices()
+  Rcpp::Rcerr << "PRINT THE FULL TRIANGULATION :" << std::endl;
+  Rcpp::Rcerr << std::endl << "====> "<< this ;
+  Rcpp::Rcerr << " dimension " <<  dimension() << std::endl;
+  Rcpp::Rcerr << " nb of vertices " << number_of_vertices()
             << " nb of hidden vertices " << number_of_hidden_vertices()
             <<   std::endl;
 
   if(dimension() < 1) return;
   if(dimension() == 1) {
-    std::cerr << " all edges " <<std::endl;
+    Rcpp::Rcerr << " all edges " <<std::endl;
     All_edges_iterator aeit;
     for(aeit = all_edges_begin(); aeit != all_edges_end(); aeit++){
       show_face(aeit->first);
@@ -1117,13 +1118,13 @@ show_all() const
   }
 
   else{ //dimension ==2
-    std::cerr << " finite faces " << std::endl;
+    Rcpp::Rcerr << " finite faces " << std::endl;
     Finite_faces_iterator fi;
     for(fi = finite_faces_begin(); fi != finite_faces_end(); fi++) {
       show_face(fi);
     }
 
-    std::cerr << " infinite faces " << std::endl;
+    Rcpp::Rcerr << " infinite faces " << std::endl;
     All_faces_iterator afi;
     for(afi = all_faces_begin(); afi != all_faces_end(); afi++) {
       if(is_infinite(afi)) show_face(afi);
@@ -1131,21 +1132,21 @@ show_all() const
   }
 
   if(number_of_vertices()>1) {
-    std::cerr << "printing vertices of the regular triangulation" << std::endl;
+    Rcpp::Rcerr << "printing vertices of the regular triangulation" << std::endl;
     All_vertices_iterator vi;
     for(vi = all_vertices_begin(); vi != all_vertices_end(); vi++){
       show_vertex(vi);
-      std::cerr << "  / associated face : "
+      Rcpp::Rcerr << "  / associated face : "
                 << &*(vi->face()) << std::endl;
     }
-    std::cerr << std::endl;
+    Rcpp::Rcerr << std::endl;
   }
 
-  std::cerr << "hidden vertices " << std::endl;
+  Rcpp::Rcerr << "hidden vertices " << std::endl;
   Hidden_vertices_iterator hvi = hidden_vertices_begin();
   for(; hvi != hidden_vertices_end(); hvi++) {
     show_vertex(hvi);
-    std::cerr << "  / associated face : "
+    Rcpp::Rcerr << "  / associated face : "
               << &*(hvi->face()) << std::endl;
   }
   return;
@@ -1359,14 +1360,14 @@ reinsert(Vertex_handle v, Face_handle start)
   _hidden_vertices--;
 
 //  // to debug
-//  std::cerr << "from reinsert " << std::endl;
+//  Rcpp::Rcerr << "from reinsert " << std::endl;
 //  show_vertex(v);
 //  Locate_type lt;
 //  int li;
 //  Face_handle loc = locate(v->point(), lt, li, start);
-//  std::cerr << "locate " << &(*loc) << "\t" << lt << "\t" << li << std::endl;
+//  Rcpp::Rcerr << "locate " << &(*loc) << "\t" << lt << "\t" << li << std::endl;
 //  show_face(loc);
-//  std::cerr << std::endl;
+//  Rcpp::Rcerr << std::endl;
 
   Vertex_handle vh = insert(v->point(), start);
   if(vh->is_hidden())
@@ -1389,9 +1390,9 @@ exchange_hidden(Vertex_handle va, Vertex_handle vb)
   CGAL_triangulation_assertion(vb == vb->face()->vertex_list().back());
 
 //  //to debug
-//  std::cerr << "from exchange hidden 1" << std::endl;
+//  Rcpp::Rcerr << "from exchange hidden 1" << std::endl;
 //  show_vertex(vb);
-//  std::cerr << "  / associated face : "
+//  Rcpp::Rcerr << "  / associated face : "
 //            << &*(vb->face()) << std::endl;
 
   vb->face()->vertex_list().pop_back();
@@ -1399,9 +1400,9 @@ exchange_hidden(Vertex_handle va, Vertex_handle vb)
   hide_vertex(vb->face(), va);
 
 //  //to debug
-//  std::cerr << "from exchange hidden 1" << std::endl;
+//  Rcpp::Rcerr << "from exchange hidden 1" << std::endl;
 //  show_vertex(va);
-//  std::cerr << "  / associated face : "
+//  Rcpp::Rcerr << "  / associated face : "
 //            << &*(va->face()) << std::endl << std::endl;
 }
 

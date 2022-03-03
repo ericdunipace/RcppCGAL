@@ -12,6 +12,7 @@
 #ifndef CGAL_CURVES_ON_SURFACE_TOPOLOGY_H
 #define CGAL_CURVES_ON_SURFACE_TOPOLOGY_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Surface_mesh_topology/internal/Minimal_quadrangulation.h>
@@ -180,7 +181,7 @@ public:
 //================================================================================
 // Utility functions
 
-  // Set whether to display warning message in `std::cerr` when input doesn't meet
+  // Set whether to display warning message in `Rcpp::Rcerr` when input doesn't meet
   // prerequesite
   void set_verbose(bool is_verbose)
   {

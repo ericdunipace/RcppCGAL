@@ -14,6 +14,7 @@
 #ifndef CGAL_APOLLONIUS_GRAPH_2_IMPL_H
 #define CGAL_APOLLONIUS_GRAPH_2_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Apollonius_graph_2.h>
 
 
@@ -44,7 +45,7 @@ is_valid(bool verbose, int level) const
   //  CGAL_assertion( result );
 
   if ( result && verbose ) {
-    std::cerr << "AGDS is ok... " << std::flush;
+    Rcpp::Rcerr << "AGDS is ok... " << std::flush;
   }
 
   if (level == 0) { return result; }
@@ -77,10 +78,10 @@ is_valid(bool verbose, int level) const
   }
 
   if ( result && verbose ) {
-    std::cerr << "Apollonius diagram is ok..." << std::flush;
+    Rcpp::Rcerr << "Apollonius diagram is ok..." << std::flush;
   }
   if ( !result && verbose ) {
-    std::cerr << "Apollonius diagram is NOT valid..." << std::flush;
+    Rcpp::Rcerr << "Apollonius diagram is NOT valid..." << std::flush;
   }
 
   //  CGAL_triangulation_assertion(result);

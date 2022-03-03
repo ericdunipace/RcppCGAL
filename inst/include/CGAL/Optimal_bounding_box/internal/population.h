@@ -14,6 +14,7 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_BOX_POPULATION_H
 #define CGAL_OPTIMAL_BOUNDING_BOX_POPULATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/Optimal_bounding_box/internal/fitness_function.h>
@@ -147,9 +148,9 @@ public:
     std::size_t id = 0;
     for(const Simplex& s : m_simplices)
     {
-      std::cout << "Simplex: " << id++ << std::endl;
+      Rcpp::Rcout << "Simplex: " << id++ << std::endl;
       for(const Matrix& m : s)
-        std::cout << m << "\n\n";
+        Rcpp::Rcout << m << "\n\n";
       std:: cout << std:: endl;
     }
   }

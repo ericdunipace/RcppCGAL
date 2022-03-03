@@ -11,6 +11,7 @@
 #ifndef CGAL_SURFACE_MESH_SIMPLIFICATION_DETAIL_EDGE_COLLAPSE_H
 #define CGAL_SURFACE_MESH_SIMPLIFICATION_DETAIL_EDGE_COLLAPSE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_simplification.h>
 
 #include <CGAL/Surface_mesh_simplification/internal/Common.h>
@@ -625,7 +626,7 @@ loop()
         if(is_collapse_geometrically_valid(profile, placement))
         {
 #ifdef CGAL_SURF_SIMPL_INTERMEDIATE_STEPS_PRINTING
-          std::cout << "step " << i_rm << " " << get(m_vpm, source(*h, m_tm))
+          Rcpp::Rcout << "step " << i_rm << " " << get(m_vpm, source(*h, m_tm))
                                        << " " << get(m_vpm, target(*h, m_tm)) << "\n";
 #endif
           if(m_should_ignore(profile, placement)!= boost::none){

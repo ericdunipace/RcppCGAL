@@ -12,6 +12,7 @@
 #ifndef CGAL_SCANLINE_ORIENT_NORMALS_H
 #define CGAL_SCANLINE_ORIENT_NORMALS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/squared_distance_3.h>
@@ -262,9 +263,9 @@ void orient_scanline (Iterator begin, Iterator end,
   {
 #ifdef CGAL_SCANLINE_ORIENT_VERBOSE
     if (!solver_success)
-      std::cerr << "Inverting because olver failed: ";
+      Rcpp::Rcerr << "Inverting because olver failed: ";
     else
-      std::cerr << "Inverting because scanner under scanline: ";
+      Rcpp::Rcerr << "Inverting because scanner under scanline: ";
 #endif
 
     direction = -direction;
@@ -281,11 +282,11 @@ void orient_scanline (Iterator begin, Iterator end,
 
 #ifdef CGAL_SCANLINE_ORIENT_VERBOSE
     if (solver_success && scan_position.z() > mean_z)
-      std::cerr << "SOLVED" << std::endl;
+      Rcpp::Rcerr << "SOLVED" << std::endl;
     else if (!solver_success)
-      std::cerr << "FAILED, solver failure" << std::endl;
+      Rcpp::Rcerr << "FAILED, solver failure" << std::endl;
     else
-      std::cerr << "FAILED, scanner under scanline" << std::endl;
+      Rcpp::Rcerr << "FAILED, scanner under scanline" << std::endl;
 #endif
   }
 
@@ -544,7 +545,7 @@ void scanline_orient_normals (PointRange& points, const NamedParameters& np)
      scan_angle_map, Fallback_scan_angle());
 
 #ifdef CGAL_SCANLINE_ORIENT_VERBOSE
-  std::cerr << nb_scanlines << " scanline(s) identified (mean length = "
+  Rcpp::Rcerr << nb_scanlines << " scanline(s) identified (mean length = "
             << std::size_t(points.size() / double(nb_scanlines))
             << " point(s))" << std::endl;
 #endif

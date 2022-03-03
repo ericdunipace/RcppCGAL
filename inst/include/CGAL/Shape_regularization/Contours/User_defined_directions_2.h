@@ -14,6 +14,7 @@
 #ifndef CGAL_SHAPE_REGULARIZATION_USER_DEFINED_PRINCIPAL_DIRECTIONS_2_H
 #define CGAL_SHAPE_REGULARIZATION_USER_DEFINED_PRINCIPAL_DIRECTIONS_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Shape_regularization.h>
 
 // Internal includes.
@@ -131,11 +132,11 @@ namespace Contours {
       }
 
       if (verbose()) {
-        std::cout << "* assigned directions: ";
+        Rcpp::Rcout << "* assigned directions: ";
         for (std::size_t direction_index : m_assigned) {
-          std::cout << direction_index << " ";
+          Rcpp::Rcout << direction_index << " ";
         }
-        std::cout << std::endl;
+        Rcpp::Rcout << std::endl;
       }
     }
 

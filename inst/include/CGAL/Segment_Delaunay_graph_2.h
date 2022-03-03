@@ -15,6 +15,7 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -844,11 +845,11 @@ protected:
                             bool is_src, int,
                             typename SSite::Has_info_tag const* = 0) const
   {
-    //    std::cerr << "converting info..." << std::flush;
+    //    Rcpp::Rcerr << "converting info..." << std::flush;
     typename Storage_traits::Convert_info convert = st_.convert_info_object();
 
     ss_trg.set_info( convert(ss_src.info(), is_src) );
-    //    std::cerr << " done!" << std::endl;
+    //    Rcpp::Rcerr << " done!" << std::endl;
   }
 
   template<class SSite>
@@ -871,14 +872,14 @@ protected:
   inline void merge_info1(Vertex_handle v, const SSite& ss, int,
                           typename SSite::Has_info_tag const* = 0)
   {
-    //    std::cerr << "merging info..." << std::flush;
+    //    Rcpp::Rcerr << "merging info..." << std::flush;
     Storage_site_2 ss_v = v->storage_site();
 
     typename Storage_traits::Merge_info merge = st_.merge_info_object();
 
     ss_v.set_info( merge(ss_v.info(), ss.info()) );
     v->set_site(ss_v);
-    //    std::cerr << " done!" << std::endl;
+    //    Rcpp::Rcerr << " done!" << std::endl;
   }
 
   template<class SSite>

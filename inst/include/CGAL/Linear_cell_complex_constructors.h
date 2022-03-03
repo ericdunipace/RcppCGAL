@@ -12,6 +12,7 @@
 #ifndef CGAL_LINEAR_CELL_COMPLEX_CONSTRUCTORS_H
 #define CGAL_LINEAR_CELL_COMPLEX_CONSTRUCTORS_H 1
 
+#include <Rcpp.h>
 #include <CGAL/IO/OFF.h>
 #include <CGAL/Linear_cell_complex_incremental_builder.h>
 
@@ -150,7 +151,7 @@ namespace CGAL {
     {
       if (!ais.good())
       {
-        std::cout << "Problem: file does not contain enough vertices."
+        Rcpp::Rcout << "Problem: file does not contain enough vertices."
                   << std::endl;
         return alcc.null_handle;
       }
@@ -166,7 +167,7 @@ namespace CGAL {
     {
       if (!ais.good())
       {
-        std::cout << "Problem: file does not contain enough edges."
+        Rcpp::Rcout << "Problem: file does not contain enough edges."
                   << std::endl;
         return alcc.null_handle;
       }
@@ -236,9 +237,9 @@ namespace CGAL {
       /* TODO manage errors
          if( ! in || B.error() || no < 3) {
          if ( scanner.verbose()) {
-         std::cerr << " " << std::endl;
-         std::cerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
-         std::cerr << "operator()(): input error: facet " << i
+         Rcpp::Rcerr << " " << std::endl;
+         Rcpp::Rcerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
+         Rcpp::Rcerr << "operator()(): input error: facet " << i
          << " has fewer than 3 vertices." << std::endl;
          }
          B.rollback();
@@ -266,9 +267,9 @@ namespace CGAL {
        if ( B.check_unconnected_vertices()) {
        if ( ! B.remove_unconnected_vertices()) {
        if ( scanner.verbose()) {
-       std::cerr << " " << std::endl;
-       std::cerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
-       std::cerr << "operator()(): input error: cannot "
+       Rcpp::Rcerr << " " << std::endl;
+       Rcpp::Rcerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
+       Rcpp::Rcerr << "operator()(): input error: cannot "
        "successfully remove isolated vertices."
        << std::endl;
        }
@@ -300,7 +301,7 @@ namespace CGAL {
   {
     if (!alcc.are_all_faces_closed())
     {
-      std::cerr<<"Impossible to write in off a map having open faces."<<std::endl;
+      Rcpp::Rcerr<<"Impossible to write in off a map having open faces."<<std::endl;
       return false;
     }
 

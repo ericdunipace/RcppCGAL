@@ -13,6 +13,7 @@
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
+#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #else
@@ -305,33 +306,33 @@ void CGAL::QGLViewer::initializeGL() {
     {
       if(!vertex_shader.compileSourceCode(v_s))
       {
-        std::cerr<<"Compiling vertex source FAILED"<<std::endl;
+        Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl;
       }
 
       if(!fragment_shader.compileSourceCode(f_s))
       {
-        std::cerr<<"Compiling fragmentsource FAILED"<<std::endl;
+        Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl;
       }
     }
     else
     {
       if(!vertex_shader.compileSourceCode(v_source_comp))
       {
-        std::cerr<<"Compiling vertex source FAILED"<<std::endl;
+        Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl;
       }
 
       if(!fragment_shader.compileSourceCode(f_source_comp))
       {
-        std::cerr<<"Compiling fragmentsource FAILED"<<std::endl;
+        Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl;
       }
     }
     if(!rendering_program.addShader(&vertex_shader))
     {
-      std::cerr<<"adding vertex shader FAILED"<<std::endl;
+      Rcpp::Rcerr<<"adding vertex shader FAILED"<<std::endl;
     }
     if(!rendering_program.addShader(&fragment_shader))
     {
-      std::cerr<<"adding fragment shader FAILED"<<std::endl;
+      Rcpp::Rcerr<<"adding fragment shader FAILED"<<std::endl;
     }
     if(!rendering_program.link())
     {
@@ -453,33 +454,33 @@ void CGAL::QGLViewer::initializeGL() {
     {
       if(!vertex_shader.compileSourceCode(vertex_source))
       {
-        std::cerr<<"Compiling vertex source FAILED"<<std::endl;
+        Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl;
       }
 
       if(!fragment_shader.compileSourceCode(fragment_source))
       {
-        std::cerr<<"Compiling fragmentsource FAILED"<<std::endl;
+        Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl;
       }
     }
     else
     {
       if(!vertex_shader.compileSourceCode(vertex_source_comp))
       {
-        std::cerr<<"Compiling vertex source FAILED"<<std::endl;
+        Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl;
       }
 
       if(!fragment_shader.compileSourceCode(fragment_source_comp))
       {
-        std::cerr<<"Compiling fragmentsource FAILED"<<std::endl;
+        Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl;
       }
     }
     if(!rendering_program_light.addShader(&vertex_shader))
     {
-      std::cerr<<"adding vertex shader FAILED"<<std::endl;
+      Rcpp::Rcerr<<"adding vertex shader FAILED"<<std::endl;
     }
     if(!rendering_program_light.addShader(&fragment_shader))
     {
-      std::cerr<<"adding fragment shader FAILED"<<std::endl;
+      Rcpp::Rcerr<<"adding fragment shader FAILED"<<std::endl;
     }
     rendering_program_light.bindAttributeLocation("colors", 1);//because of MacOs
     if(!rendering_program_light.link())

@@ -11,6 +11,7 @@
 
 #ifndef CGAL_KD_COAFFINE_H
 #define CGAL_KD_COAFFINE_H
+#include <Rcpp.h>
 #include <vector>
 #include <algorithm>
 #include <iterator>
@@ -79,7 +80,7 @@ template<class R_> struct Construct_flat_orientation : private Store_kernel<R_> 
                 std::vector<int>& rest=o.rest; rest.reserve(dim+1);
                 for(int i=0; i<dim+1; ++i) rest.push_back(i);
                 for( ; f != e ; ++col, ++f ) {
-      //std::cerr << "(*f)[0]=" << (*f)[0] << std::endl;
+      //Rcpp::Rcerr << "(*f)[0]=" << (*f)[0] << std::endl;
                         Point const&p=*f;
                         // use a coordinate iterator instead?
                         for(int i=0; i<dim; ++i) coord(col, i) = ccc(p, i);

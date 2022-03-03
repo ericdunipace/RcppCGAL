@@ -14,6 +14,7 @@
 #ifndef CGAL_VARIATIONAL_SHAPE_APPROXIMATION_H
 #define CGAL_VARIATIONAL_SHAPE_APPROXIMATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_approximation.h>
 
 
@@ -435,7 +436,7 @@ public:
 
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
     static std::size_t count = 0;
-    std::cerr << '#' << count++ << ": " << sum_error << std::endl;
+    Rcpp::Rcerr << '#' << count++ << ": " << sum_error << std::endl;
 #endif
 
     return sum_error;
@@ -468,7 +469,7 @@ public:
    */
   std::size_t add_proxies_error_diffusion(const std::size_t nb_proxies) {
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
-    std::cerr << "#px " << m_proxies.size() << std::endl;
+    Rcpp::Rcerr << "#px " << m_proxies.size() << std::endl;
 #endif
 
     const double sum_error = CGAL::to_double(compute_total_error());
@@ -479,7 +480,7 @@ public:
     if (avg_error <= 0.0) {
       // rare case on extremely regular geometry like a cube
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
-      std::cerr << "zero error, diffuse w.r.t. number of faces" << std::endl;
+      Rcpp::Rcerr << "zero error, diffuse w.r.t. number of faces" << std::endl;
 #endif
       const double avg_face =
         static_cast<double>(m_nb_of_faces) / static_cast<double>(nb_proxies);
@@ -514,7 +515,7 @@ public:
 
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
       for (std::size_t i = 0; i < px_error.size(); ++i)
-        std::cerr << "#px " << px_error[i].px
+        Rcpp::Rcerr << "#px " << px_error[i].px
           << ", #error " << px_error[i].err
           << ", #num_to_add " << num_to_add[px_error[i].px] << std::endl;
 #endif
@@ -534,7 +535,7 @@ public:
     }
 
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
-    std::cerr << "#requested/added "
+    Rcpp::Rcerr << "#requested/added "
       << nb_proxies << '/' << num_added << std::endl;
 #endif
 
@@ -607,7 +608,7 @@ public:
       run(nb_iterations);
 
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
-      std::cerr << "teleported" << std::endl;
+      Rcpp::Rcerr << "teleported" << std::endl;
 #endif
     }
 
@@ -1252,7 +1253,7 @@ private:
    */
   bool add_to_furthest_proxy() {
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
-    std::cerr << "add furthest " << m_proxies.size() << std::endl;
+    Rcpp::Rcerr << "add furthest " << m_proxies.size() << std::endl;
 #endif
     FT max_error = m_proxies.front().err;
     std::size_t px_worst = 0;
@@ -1447,7 +1448,7 @@ private:
     for(const std::list<face_descriptor>& cc_patch : cc_patches)
       m_proxies.push_back(fit_proxy_from_patch(cc_patch, m_proxies.size()));
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
-    std::cerr << "#cc " << m_proxies.size() << std::endl;
+    Rcpp::Rcerr << "#cc " << m_proxies.size() << std::endl;
 #endif
   }
 
@@ -1540,7 +1541,7 @@ private:
       m_bcycles.push_back(Boundary_cycle(he_start));
 
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
-      std::cerr << "#bcycle " << m_bcycles.size() << std::endl;
+      Rcpp::Rcerr << "#bcycle " << m_bcycles.size() << std::endl;
 #endif
 
       const halfedge_descriptor he_mark = he_start;
@@ -1551,7 +1552,7 @@ private:
           subdivision_ratio, relative_to_chord, with_dihedral_angle);
 
 #ifdef CGAL_SURFACE_MESH_APPROXIMATION_DEBUG
-        std::cerr << "#chord_anchor " << m_bcycles.back().num_anchors << std::endl;
+        Rcpp::Rcerr << "#chord_anchor " << m_bcycles.back().num_anchors << std::endl;
 #endif
 
         for(const halfedge_descriptor& he : chord)

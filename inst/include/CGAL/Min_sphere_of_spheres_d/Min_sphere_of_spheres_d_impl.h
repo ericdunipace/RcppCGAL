@@ -14,6 +14,7 @@
 #ifndef CGAL_MINIBALL_MINIBALL_C
 #define CGAL_MINIBALL_MINIBALL_C
 
+#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -248,7 +249,7 @@ namespace  Bounding_volumes {
   bool Min_sphere_of_spheres_d<Traits>::
     is_valid(const Tag_true /* is_exact */) {
     using namespace Min_sphere_of_spheres_d_impl;
-    using std::cerr;
+    using Rcpp::Rcerr;
     using std::endl;
 
     // check size of support set:

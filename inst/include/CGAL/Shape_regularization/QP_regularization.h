@@ -14,6 +14,7 @@
 #ifndef CGAL_SHAPE_REGULARIZATION_QP_REGULARIZATION_H
 #define CGAL_SHAPE_REGULARIZATION_QP_REGULARIZATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Shape_regularization.h>
 
 // Internal includes.
@@ -185,19 +186,19 @@ namespace Shape_regularization {
       // Graph = edges connecting neighbor segments.
       build_graph_of_neighbors();
       if (m_graph.size() == 0) {
-        std::cerr << "Error: the number of edges in the graph is zero!" << std::endl;
+        Rcpp::Rcerr << "Error: the number of edges in the graph is zero!" << std::endl;
         clear(); return;
       }
 
       // Bounds = number of input segments.
       obtain_bounds();
       if (m_bounds.size() == 0) {
-        std::cerr << "Error: the number of bound values is zero!" << std::endl;
+        Rcpp::Rcerr << "Error: the number of bound values is zero!" << std::endl;
         clear(); return;
       }
 
       if (m_bounds.size() != m_input_range.size()) {
-        std::cerr << "Error: the number of bounds is not equal to the number " <<
+        Rcpp::Rcerr << "Error: the number of bounds is not equal to the number " <<
         "of input segments!" << std::endl;
         clear(); return;
       }
@@ -205,7 +206,7 @@ namespace Shape_regularization {
       // Targets = number of graph edges.
       obtain_targets();
       if (m_targets.size() == 0) {
-        // std::cerr << "Warning: the number of target values is zero!" << std::endl;
+        // Rcpp::Rcerr << "Warning: the number of target values is zero!" << std::endl;
         clear(); return;
       }
 
@@ -216,7 +217,7 @@ namespace Shape_regularization {
       std::vector<FT> solution;
       solve_quadratic_program(m_quadratic_program, solution);
       if (solution.size() != m_input_range.size() + m_targets.size()) {
-        std::cerr << "Error: the number of solution values is not equal to the " <<
+        Rcpp::Rcerr << "Error: the number of solution values is not equal to the " <<
         "number of input segments + the number of edges in the graph!" << std::endl;
         clear(); return;
       }
@@ -454,7 +455,7 @@ namespace Shape_regularization {
       const auto success = qp.solve(
         std::back_inserter(solution));
       if (!success) {
-        std::cerr << "WARNING: The solver has not converged!" << std::endl;
+        Rcpp::Rcerr << "WARNING: The solver has not converged!" << std::endl;
       }
       CGAL_assertion(solution.size() == n);
     }

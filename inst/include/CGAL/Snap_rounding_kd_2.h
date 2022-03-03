@@ -14,6 +14,7 @@
 #ifndef CGAL_SNAP_ROUNDING_KD_2_H
 #define CGAL_SNAP_ROUNDING_KD_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Snap_rounding_2.h>
 
 
@@ -467,7 +468,7 @@ public:
     delete[] kd_counter;
 
 #ifdef CGAL_SR_DEBUG
-    std::cout << "Actual number of kd-trees created : " <<
+    Rcpp::Rcout << "Actual number of kd-trees created : " <<
       number_of_actual_kd_trees << std::endl;
 #endif
 

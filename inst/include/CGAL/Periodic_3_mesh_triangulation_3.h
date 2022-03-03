@@ -15,6 +15,7 @@
 #ifndef CGAL_PERIODIC_3_MESH_3_MESH_TRIANGULATION_3_H
 #define CGAL_PERIODIC_3_MESH_3_MESH_TRIANGULATION_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_mesh_3.h>
 
 #include <CGAL/Periodic_3_mesh_3/config.h>
@@ -145,7 +146,7 @@ public:
   bool try_lock_and_get_incident_cells(Vertex_handle /* v */,
                                        std::vector<Cell_handle>& /* cells */) const
   {
-    std::cerr << "ERROR: implement try_lock_and_get_incident_cells()"<< std::endl;
+    Rcpp::Rcerr << "ERROR: implement try_lock_and_get_incident_cells()"<< std::endl;
     return true;
   }
 

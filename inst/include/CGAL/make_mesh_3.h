@@ -17,6 +17,7 @@
 #ifndef CGAL_MAKE_MESH_3_H
 #define CGAL_MAKE_MESH_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -270,7 +271,7 @@ struct C3t3_initializer < C3T3, MD, MC, false, HasFeatures >
   {
     if ( with_features )
     {
-      std::cerr << "Warning: you requested a mesh with features from a domain"
+      Rcpp::Rcerr << "Warning: you requested a mesh with features from a domain"
                 << " without features !" << std::endl;
     }
 
@@ -352,7 +353,7 @@ struct C3t3_initializer < C3T3, MD, MC, true, CGAL::Tag_false >
   {
     if ( with_features )
     {
-      std::cerr << "Warning: you requested a mesh with features from a domain"
+      Rcpp::Rcerr << "Warning: you requested a mesh with features from a domain"
                 << " without features !" << std::endl;
     }
 

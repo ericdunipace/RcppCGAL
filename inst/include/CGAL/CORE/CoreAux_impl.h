@@ -29,6 +29,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <CGAL/use.h>
 #include <CGAL/CORE/CoreAux.h>
 #include <CGAL/gmp.h>
@@ -159,7 +160,7 @@ int IntExponent(double d) {
 
 /// core_error is the method to write Core Library warning or error messages
 /**         Both warnings and errors are written to a file called CORE_DIAGFILE.
- *        But errors are also written on std::cerr (similar to std::perror()).
+ *        But errors are also written on Rcpp::Rcerr (similar to std::perror()).
  * */
 // Usage: core_error(message, file_with_error, line_number, err_type)
 //   where err_type=0 means WARNING, error_type=0 means ERROR
@@ -168,17 +169,17 @@ void core_error(std::string msg, std::string file, int lineno, bool err) {
   std::ofstream outFile(CORE_DIAGFILE, std::ios::app);  // open to append
   if (!outFile) {
      // perror("CORE ERROR: cannot open Core Diagnostics file");
-     std::cerr << "CORE ERROR: can't open Core Diagnostics file"<<std::endl;
-     std::exit(1); //Note: do not call abort()
+     Rcpp::Rcerr << "CORE ERROR: can't open Core Diagnostics file"<<std::endl;
+     Rcpp::stop("Error"); //Note: do not call Rcpp::stop("Error")
   }
   outFile << "CORE " << (err? "ERROR" : "WARNING")
      << " (at " << file << ": " << lineno << "): "
      << msg << std::endl;
   outFile.close();
   if (err) {
-     std::cerr << (std::string("CORE ERROR") + " (file " + file + ", line "
+     Rcpp::Rcerr << (std::string("CORE ERROR") + " (file " + file + ", line "
                    + std::to_string(lineno) +"):" + msg + "\n").c_str();
-     std::exit(1); //Note: do not call abort()
+     Rcpp::stop("Error"); //Note: do not call Rcpp::stop("Error")
   }
 }
 

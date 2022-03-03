@@ -15,6 +15,7 @@
 #ifndef CGAL_ARR_POLYCURVE_TRAITS_2_H
 #define CGAL_ARR_POLYCURVE_TRAITS_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -878,7 +879,7 @@ public:
         }
 
         else if (left_coincides && ! right_coincides) {
-          // std::cout << "Left is coinciding but right is not." << std::endl;
+          // Rcpp::Rcout << "Left is coinciding but right is not." << std::endl;
           // The left point of the current subcurve of one polycurve
           // coincides with the current subcurve of the other polycurve.
           if (left_overlap) {

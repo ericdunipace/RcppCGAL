@@ -14,6 +14,7 @@
 #ifndef CGAL_ENVELOPE_DIVIDE_AND_CONQUER_3_H
 #define CGAL_ENVELOPE_DIVIDE_AND_CONQUER_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Envelope_3.h>
 
 
@@ -1567,11 +1568,11 @@ protected:
 
       all_ok &= (hh->get_is_set());
       if (!all_ok)
-        std::cerr << "edge: " << hh->curve() << std::endl;
+        Rcpp::Rcerr << "edge: " << hh->curve() << std::endl;
       CGAL_assertion_msg(all_ok, "data not set over edge");
       all_ok &= (!hh->has_no_data());
       if (!all_ok)
-        std::cerr << "edge: " << hh->curve() << std::endl;
+        Rcpp::Rcerr << "edge: " << hh->curve() << std::endl;
       CGAL_assertion_msg(all_ok, "data empty over edge");
 
       /*all_ok &= (!hh->get_is_fake());*/

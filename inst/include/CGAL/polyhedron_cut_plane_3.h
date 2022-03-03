@@ -15,6 +15,7 @@
 #ifndef CGAL_POLYHEDRON_CUT_PLANE_3_H
 #define CGAL_POLYHEDRON_CUT_PLANE_3_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Polyhedron.h>
 
 #include <CGAL/disable_warnings.h>
@@ -88,9 +89,9 @@ struct I_Construct_point_3 {
                 return pt;
             }
         }
-        std::cerr << "ERROR: coplanar planes used for computing "
+        Rcpp::Rcerr << "ERROR: coplanar planes used for computing "
                      "intersecting point." << std::endl;
-        std::cerr << "       Return ORIGIN. Don't trust result." << std::endl;
+        Rcpp::Rcerr << "       Return ORIGIN. Don't trust result." << std::endl;
         return ORIGIN;
     }
 };

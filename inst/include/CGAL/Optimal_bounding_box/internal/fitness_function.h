@@ -14,6 +14,7 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_FITNESS_FUNCTION_H
 #define CGAL_OPTIMAL_BOUNDING_FITNESS_FUNCTION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/assertions.h>
@@ -89,7 +90,7 @@ compute_fitness_if_smaller(const typename Traits::Matrix& R, // rotation matrix
   const std::size_t mpn = (std::max)(pn / 10, std::size_t(1000));
   std::size_t next_check = mpn; // to avoid a costly modulo
 
-//  std::cout << "pn, mpn, next_check: " << pn << " " << mpn << std::endl;
+//  Rcpp::Rcout << "pn, mpn, next_check: " << pn << " " << mpn << std::endl;
 
   std::size_t i = 0;
   for(const Point& pt : points)

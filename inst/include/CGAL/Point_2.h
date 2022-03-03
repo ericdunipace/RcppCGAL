@@ -17,6 +17,7 @@
 #ifndef CGAL_POINT_2_H
 #define CGAL_POINT_2_H
 
+#include <Rcpp.h>
 #include <CGAL/Origin.h>
 #include <CGAL/Bbox_2.h>
 #include <CGAL/assertions.h>
@@ -249,8 +250,8 @@ extract(std::istream& is, Point_2<R>& p, const Cartesian_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        std::cerr << "" << std::endl;
-        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
+        Rcpp::Rcerr << "" << std::endl;
+        Rcpp::Rcerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
     }
     if (is)
@@ -276,8 +277,8 @@ extract(std::istream& is, Point_2<R>& p, const Homogeneous_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        std::cerr << "" << std::endl;
-        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
+        Rcpp::Rcerr << "" << std::endl;
+        Rcpp::Rcerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
   }
   if (is)

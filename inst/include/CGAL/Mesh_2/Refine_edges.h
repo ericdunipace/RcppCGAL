@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_2_REFINE_EDGES_H
 #define CGAL_MESH_2_REFINE_EDGES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 
@@ -505,11 +506,11 @@ public:
     vb = edge.first->vertex(tr.ccw(edge.second));
 
 #ifdef CGAL_MESH_2_DEBUG_REFINEMENT_POINTS
-    std::cerr << "refinement_point_impl("
+    Rcpp::Rcerr << "refinement_point_impl("
               << "#" << va->time_stamp() << ": " << va->point() << ", "
               << "#" << vb->time_stamp() << ": " << vb->point() << ") = ";
     auto p = midpoint(va->point(), vb->point());
-    std::cerr << p << '\n';
+    Rcpp::Rcerr << p << '\n';
     return p;
 #endif // CGAL_MESH_2_DEBUG_BAD_FACES
     return midpoint(va->point(), vb->point());
@@ -566,7 +567,7 @@ public:
   void after_insertion_impl(const Vertex_handle& v)
   {
 #ifdef CGAL_MESH_2_VERBOSE
-    std::cerr << "E";
+    Rcpp::Rcerr << "E";
 #endif
     // @todo Perhaps we should remove destroyed edges too.
     // @warning This code has been rewroten!

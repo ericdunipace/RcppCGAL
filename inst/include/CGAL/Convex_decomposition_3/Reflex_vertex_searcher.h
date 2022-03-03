@@ -12,6 +12,7 @@
 #ifndef CGAL_CD3_REFLEX_VERTEX_SEARCHER_H
 #define CGAL_CD3_REFLEX_VERTEX_SEARCHER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 
@@ -185,7 +186,7 @@ class Reflex_vertex_searcher : public Modifier_base<typename Nef_::SNC_structure
     for(sei = v->shalfedges_begin();
         sei != v->shalfedges_end(); ++sei) {
       int isrse = is_reflex_sedge<SNC_structure>(sei, dir);
-      std::cerr << "check " << sei->source()->source()->point()
+      Rcpp::Rcerr << "check " << sei->source()->source()->point()
                 << "->" << sei->source()->twin()->source()->point()
                 << ": " << isrse << std::endl;
     }

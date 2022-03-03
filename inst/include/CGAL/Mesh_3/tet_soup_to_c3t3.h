@@ -17,6 +17,7 @@
 #ifndef CGAL_MESH_3_TET_SOUP_TO_C3T3_H
 #define CGAL_MESH_3_TET_SOUP_TO_C3T3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -91,7 +92,7 @@ bool add_facet_to_incident_cells_map(const typename Tr::Cell_handle c, int i,
     if (is_insert_successful.first->second.size() != 1)
     {
       if(verbose)
-        std::cout << "Error in add_facet_to_incident_cells_map" << std::endl;
+        Rcpp::Rcout << "Error in add_facet_to_incident_cells_map" << std::endl;
       return false;
     }
     is_insert_successful.first->second.push_back(e);
@@ -361,7 +362,7 @@ bool build_triangulation(Tr& tr,
 
   if(finite_cells.empty())
   {
-    std::cout << "WARNING: No finite cells were provided. Only the points will be loaded."<<std::endl;
+    Rcpp::Rcout << "WARNING: No finite cells were provided. Only the points will be loaded."<<std::endl;
   }
 
   tr.tds().clear(); // not tr.clear() since it calls tr.init() which we don't want
@@ -383,12 +384,12 @@ bool build_triangulation(Tr& tr,
       return false;
     if (verbose)
     {
-      std::cout << "built triangulation : " << std::endl;
-      std::cout << tr.number_of_cells() << " cells" << std::endl;
+      Rcpp::Rcout << "built triangulation : " << std::endl;
+      Rcpp::Rcout << tr.number_of_cells() << " cells" << std::endl;
     }
   }
   if(verbose)
-    std::cout << tr.number_of_vertices() << " vertices" << std::endl;
+    Rcpp::Rcout << tr.number_of_vertices() << " vertices" << std::endl;
 
   if(c3t3_loader_failed)
     return true;
@@ -420,7 +421,7 @@ bool build_triangulation_from_file(std::istream& is,
 
   CGAL_assertion(dim == 3);
 
-  std::cout << "Reading .mesh file..." << std::endl;
+  Rcpp::Rcout << "Reading .mesh file..." << std::endl;
   while(is >> word && word != "End")
   {
     if(word == "Vertices")
@@ -479,9 +480,9 @@ bool build_triangulation_from_file(std::istream& is,
     }
   }
 
-  std::cout << points.size() << " points" << std::endl;
-  std::cout << border_facets.size() << " border facets" << std::endl;
-  std::cout << finite_cells.size() << " cells" << std::endl;
+  Rcpp::Rcout << points.size() << " points" << std::endl;
+  Rcpp::Rcout << border_facets.size() << " border facets" << std::endl;
+  Rcpp::Rcout << finite_cells.size() << " cells" << std::endl;
 
   if(finite_cells.empty())
     return false;

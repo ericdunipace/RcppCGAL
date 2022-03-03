@@ -12,6 +12,7 @@
 #ifndef CGAL_INTERNAL_COMBINATION_ENUMERATOR_H
 #define CGAL_INTERNAL_COMBINATION_ENUMERATOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation.h>
 
 #include <CGAL/disable_warnings.h>
@@ -124,12 +125,12 @@ public:
 #if 0
     void test()
     {
-        std::cerr << '\n';
+        Rcpp::Rcerr << '\n';
         while( ! end() )
         {
-            std::cerr << '\n';
+            Rcpp::Rcerr << '\n';
             for( int i = 0; i < k_; ++i )
-                std::cerr << element(i) << ' ';
+                Rcpp::Rcerr << element(i) << ' ';
             ++(*this);
         }
         init();

@@ -13,6 +13,7 @@
 #ifndef CGAL_APOLLONIUS_GRAPH_HIERARCHY_2_IMPL_H
 #define CGAL_APOLLONIUS_GRAPH_HIERARCHY_2_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Apollonius_graph_2.h>
 
 
@@ -126,11 +127,11 @@ is_valid(bool verbose, int level) const
   //verify correctness of triangulation at all levels
   for(unsigned int i = 0; i < ag_hierarchy_2__maxlevel; ++i) {
     if ( verbose ) {
-      std::cerr << "Level " << i << ": " << std::flush;
+      Rcpp::Rcerr << "Level " << i << ": " << std::flush;
     }
     result = result && hierarchy[i]->is_valid(verbose, level);
     if ( verbose ) {
-      std::cerr << std::endl;
+      Rcpp::Rcerr << std::endl;
     }
   }
   //verify that lower level has no down pointers

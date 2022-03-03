@@ -12,6 +12,7 @@
 #ifndef CGAL_MS3_GAUSSIAN_MAP
 #define CGAL_MS3_GAUSSIAN_MAP
 
+#include <Rcpp.h>
 #include <CGAL/license/Minkowski_sum_3.h>
 
 
@@ -644,7 +645,7 @@ class Gaussian_map :
 
   void erase_redundant_vertices() {
 
-    std::cerr << "erase redundant vertices " << std::endl;
+    Rcpp::Rcerr << "erase redundant vertices " << std::endl;
 
     /*
     SVertex_iterator svi;
@@ -688,31 +689,31 @@ class Gaussian_map :
       SVertex_handle src((*ri)->source());
       SVertex_handle tgt((*ri)->twin()->source());
 
-      std::cerr << "erase " << src->point() << std::endl;
-      std::cerr << &*src << " " << &*tgt << std::endl;
+      Rcpp::Rcerr << "erase " << src->point() << std::endl;
+      Rcpp::Rcerr << &*src << " " << &*tgt << std::endl;
 
       SHalfedge_handle prev((*ri)->sprev());
       SHalfedge_handle next((*ri)->snext());
 
-      std::cerr << "prev " << &*prev->source()
+      Rcpp::Rcerr << "prev " << &*prev->source()
                 << "->" << &*prev->twin()->source() << std::endl;
-      std::cerr << "next " << &*next->source()
+      Rcpp::Rcerr << "next " << &*next->source()
                 << "->" << &*next->twin()->source() << std::endl;
 
       if(prev->source() ==
          next->twin()->source()) {
-        std::cerr << "delete before" << std::endl;
+        Rcpp::Rcerr << "delete before" << std::endl;
         SHalfedge_handle sein;
         SHalfedge_handle se_cas(next->twin()->snext());
         SFace_handle sf(next->twin()->incident_sface());
         if(sf != SFace_handle()) {
-          std::cerr << "not null " << std::endl;
+          Rcpp::Rcerr << "not null " << std::endl;
           SFace_cycle_iterator sfci(sf->sface_cycles_begin());
           CGAL_assertion(sfci.is_shalfedge());
           sein = sfci;
           undo_sm_boundary_object(sein, sf);
           sein = next->twin()->sprev();
-          std::cerr << "sein " << sein->source()->point()
+          Rcpp::Rcerr << "sein " << sein->source()->point()
                     << "->" << sein->twin()->source()->point()
                     << std::endl;
         }
@@ -731,7 +732,7 @@ class Gaussian_map :
       SHalfedge_handle tnext((*ri)->twin()->snext());
       if(tprev->source() ==
          tnext->twin()->source()) {
-        std::cerr << "delete twin" << std::endl;
+        Rcpp::Rcerr << "delete twin" << std::endl;
         SHalfedge_handle sein;
         SHalfedge_handle se_cap(tprev->twin()->sprev());
         SFace_handle sf(tprev->twin()->incident_sface());
@@ -751,13 +752,13 @@ class Gaussian_map :
       tprev->snext() = tnext;
       tnext->sprev() = tprev;
 
-      std::cerr << "tprev " << &*tprev->source()
+      Rcpp::Rcerr << "tprev " << &*tprev->source()
                 << "->" << &*tprev->twin()->source() << std::endl;
-      std::cerr << "tnext " << &*tnext->source()
+      Rcpp::Rcerr << "tnext " << &*tnext->source()
                 << "->" << &*tnext->twin()->source() << std::endl;
 
       while(next != tnext) {
-      std::cerr << "next " << &*next->source()
+      Rcpp::Rcerr << "next " << &*next->source()
                 << "->" << &*next->twin()->source() << std::endl;
         SHalfedge_handle se_cas(next->twin()->snext());
         next->source() = src;
@@ -1089,7 +1090,7 @@ class Gaussian_map :
     O.subdivide(G1.sphere_map(), G2.sphere_map(), true);
 #ifdef CGAL_NEF3_TIMER_OVERLAY
     t.stop();
-    std::cout << "Runtime_overlay " << t.time() << std::endl;
+    Rcpp::Rcout << "Runtime_overlay " << t.time() << std::endl;
 #endif // CGAL_NEF3_TIMER_OVERLAY
     VECTOR_ADDITION va;
     O.select(va);

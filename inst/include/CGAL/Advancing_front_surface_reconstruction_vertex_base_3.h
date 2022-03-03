@@ -12,6 +12,7 @@
 #ifndef CGAL_ADVANCING_FRONT_SURFACE_RECONSTRUCTION_VERTEX_BASE_WITH_ID_3_H
 #define CGAL_ADVANCING_FRONT_SURFACE_RECONSTRUCTION_VERTEX_BASE_WITH_ID_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Advancing_front_surface_reconstruction.h>
 
 
@@ -220,7 +221,7 @@ namespace CGAL {
       else
         {
           if (m_incident_border->second->first != nullptr)
-            std::cerr << "+++probleme de MAJ du bord <Vertex_base>" << std::endl;
+            Rcpp::Rcerr << "+++probleme de MAJ du bord <Vertex_base>" << std::endl;
           *m_incident_border->second = elt;
         }
     }

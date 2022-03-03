@@ -14,6 +14,7 @@
 #ifndef CGAL_CORE_BIGFLOAT_H
 #define CGAL_CORE_BIGFLOAT_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/number_type_basic.h>
 #include <CGAL/CORE_coercion_traits.h>
@@ -109,7 +110,7 @@ public:
       Interval operator()( const Interval& a, const Interval& b ) const {
             BOOST_USING_STD_MAX();
             BOOST_USING_STD_MIN();
-            // std::cout <<"a= (" << a.m() << "+-" << a.err() << ")*2^" << a.exp() << std::endl;
+            // Rcpp::Rcout <<"a= (" << a.m() << "+-" << a.err() << ")*2^" << a.exp() << std::endl;
             Bound l(max BOOST_PREVENT_MACRO_SUBSTITUTION (Lower()(a),Lower()(b)));
             Bound u(min BOOST_PREVENT_MACRO_SUBSTITUTION (Upper()(a),Upper()(b)));
 
@@ -132,7 +133,7 @@ public:
       // for debugging
 /*      void print_bf(CORE::BigFloat bf, std::string s) const {
 
-        std::cout << s << ".m()=" << bf.m() << ","
+        Rcpp::Rcout << s << ".m()=" << bf.m() << ","
                   << s << ".err()=" << bf.err() << ","
                   << s << ".exp()=" << bf.exp() << ","
                   << "td=" << bf << std::endl;
@@ -171,16 +172,16 @@ public:
 
             //print_bf(err,"err");
 
-            //std::cout << "lower    " << lower << std::endl;
-            //std::cout << "upper    " << upper << std::endl;
-            //std::cout << "mid      " << mid << std::endl;
-            //std::cout << "err I    " << err << std::endl;
+            //Rcpp::Rcout << "lower    " << lower << std::endl;
+            //Rcpp::Rcout << "upper    " << upper << std::endl;
+            //Rcpp::Rcout << "mid      " << mid << std::endl;
+            //Rcpp::Rcout << "err I    " << err << std::endl;
 
             // shift such that err.m()+err.err() fits into long
             int digits_long = std::numeric_limits<long>::digits;
             if(::CORE::bitLength(err.m()+err.err()) >= digits_long){
                 long shift = ::CORE::bitLength(err.m()) - digits_long + 1 ;
-                //std::cout << "shift " << shift<< std::endl;
+                //Rcpp::Rcout << "shift " << shift<< std::endl;
                 long new_err = ((err.m()+err.err()) >> shift).longValue()+1;
                 err = CORE::BigFloat(0,new_err,0) * CORE::BigFloat::exp2(err.exp()*CORE::CHUNK_BIT+shift);
             }else{
@@ -262,13 +263,13 @@ round(const CORE::BigFloat& x, long rel_prec = CORE::get_static_defRelPrec().toL
     long         exp = x.exp();
 
 
-//    std::cout <<"(" << m << "+-" <<err << ")*2^"<<(CORE::CHUNK_BIT*exp) << std::endl;
+//    Rcpp::Rcout <<"(" << m << "+-" <<err << ")*2^"<<(CORE::CHUNK_BIT*exp) << std::endl;
 //    if (err != 0)
-//      std::cout <<"current prec: " <<  CGAL::relative_precision(x) << std::endl;
+//      Rcpp::Rcout <<"current prec: " <<  CGAL::relative_precision(x) << std::endl;
 //    else
-//      std::cout <<"current prec: " << " SINGLETON " << std::endl;
-//    std::cout <<"desired prec: " << rel_prec << std::endl;
-//    std::cout <<"bitLength: " << CORE::bitLength(m) << std::endl;
+//      Rcpp::Rcout <<"current prec: " << " SINGLETON " << std::endl;
+//    Rcpp::Rcout <<"desired prec: " << rel_prec << std::endl;
+//    Rcpp::Rcout <<"bitLength: " << CORE::bitLength(m) << std::endl;
 //    long shift = ::CORE::bitLength(m) - rel_prec - 1;
 
     long shift ;
@@ -285,12 +286,12 @@ round(const CORE::BigFloat& x, long rel_prec = CORE::get_static_defRelPrec().toL
         xr = x;
     }
 
-//    std::cout <<"(" <<m << "+-" <<err+1 << ")*2^"<<(CORE::CHUNK_BIT*exp) << std::endl;
+//    Rcpp::Rcout <<"(" <<m << "+-" <<err+1 << ")*2^"<<(CORE::CHUNK_BIT*exp) << std::endl;
 //    if (xr.err() != 0)
-//      std::cout <<"current prec: " <<  CGAL::relative_precision(xr) << std::endl;
+//      Rcpp::Rcout <<"current prec: " <<  CGAL::relative_precision(xr) << std::endl;
 //    else
-//      std::cout <<"current prec: " << " SINGLETON "<< std::endl;
-//    std::cout <<"desired prec: " << rel_prec << std::endl;
+//      Rcpp::Rcout <<"current prec: " << " SINGLETON "<< std::endl;
+//    Rcpp::Rcout <<"desired prec: " << rel_prec << std::endl;
 
 // endif
     CGAL_postcondition(singleton(xr) || CGAL::relative_precision(xr) - rel_prec >= 0);

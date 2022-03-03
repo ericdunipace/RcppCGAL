@@ -15,6 +15,7 @@
 #ifndef CGAL_SURFACE_SWEEP_2_NO_OVERLAP_SUBCURVE_H
 #define CGAL_SURFACE_SWEEP_2_NO_OVERLAP_SUBCURVE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file
@@ -203,7 +204,7 @@ public:
 #ifdef CGAL_SS_VERBOSE
 template <typename Gt2, typename Evt, typename Allocator, typename Scv>
 void No_overlap_subcurve<Gt2, Evt, Allocator, Scv>::Print() const
-{ std::cout << "Curve " << this << "  (" << last_curve() << ") "; }
+{ Rcpp::Rcout << "Curve " << this << "  (" << last_curve() << ") "; }
 #endif
 
 } // namespace Surface_sweep_2

@@ -14,6 +14,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_SMOOTH_SHAPE_H
 #define CGAL_POLYGON_MESH_PROCESSING_SMOOTH_SHAPE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #if defined(CGAL_EIGEN3_ENABLED)
@@ -173,7 +174,7 @@ void smooth_shape(const FaceRange& faces,
   for(unsigned int iter=0; iter<nb_iterations; ++iter)
   {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    std::cout << "iteration #" << iter << std::endl;
+    Rcpp::Rcout << "iteration #" << iter << std::endl;
 #endif
 
     smoother.setup_system(A, bx, by, bz, stiffness, time);
@@ -185,7 +186,7 @@ void smooth_shape(const FaceRange& faces,
     else
     {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-      std::cerr << "Failed to solve system!" << std::endl;
+      Rcpp::Rcerr << "Failed to solve system!" << std::endl;
 #endif
       break;
     }

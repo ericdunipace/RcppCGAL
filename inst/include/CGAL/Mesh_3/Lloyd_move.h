@@ -17,6 +17,7 @@
 #ifndef CGAL_MESH_3_LLOYD_MOVE_H
 #define CGAL_MESH_3_LLOYD_MOVE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -77,7 +78,7 @@ public:
                       const Sizing_field& sizing_field = Sizing_field() ) const
   {
 #ifdef CGAL_MESH_3_OPTIMIZER_DEBUG_VERBOSE
-    std::cout << "computing move of: " << &*v
+    Rcpp::Rcout << "computing move of: " << &*v
               << " pos: " << c3t3.triangulation().point(v)
               << " dim: " << c3t3.in_dimension(v) << std::endl;
 #endif

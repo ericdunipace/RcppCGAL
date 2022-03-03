@@ -13,6 +13,7 @@
 #ifndef CGAL_MESHES_DOUBLE_MAP_CONTAINER_H
 #define CGAL_MESHES_DOUBLE_MAP_CONTAINER_H
 
+#include <Rcpp.h>
 #include <set>
 #include <iostream>
 #include <CGAL/Double_map.h>
@@ -58,9 +59,9 @@ namespace CGAL {
       {
         CGAL_assertion(!m.empty());
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-        std::cerr << "get_next_element_impl(";
-        debug_element(std::cerr, m.front()->second);
-        std::cerr << ")\n";
+        Rcpp::Rcerr << "get_next_element_impl(";
+        debug_element(Rcpp::Rcerr, m.front()->second);
+        Rcpp::Rcerr << ")\n";
 #endif
         return m.front()->second;
 
@@ -69,9 +70,9 @@ namespace CGAL {
       void add_bad_element(const Element& e, const Quality& q)
       {
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-        std::cerr << "add_bad_element(";
-        debug_element(std::cerr, e);
-        std::cerr << ")\n";
+        Rcpp::Rcerr << "add_bad_element(";
+        debug_element(Rcpp::Rcerr, e);
+        Rcpp::Rcerr << ")\n";
 #endif
         m.insert(e, q);
       }
@@ -84,9 +85,9 @@ namespace CGAL {
       void remove_element(const Element& e)
       {
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-        std::cerr << "remove_element(";
-        debug_element(std::cerr, e);
-        std::cerr << ")\n";
+        Rcpp::Rcerr << "remove_element(";
+        debug_element(Rcpp::Rcerr, e);
+        Rcpp::Rcerr << ")\n";
 #endif
         m.erase(e);
       }

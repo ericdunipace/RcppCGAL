@@ -17,6 +17,7 @@
 #ifndef CGAL_CORE_EXPR_H
 #define CGAL_CORE_EXPR_H
 
+#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/number_type_basic.h>
@@ -96,7 +97,7 @@ template <> class Algebraic_structure_traits< CORE::Expr >
             CORE::extLong r(16),a(16);
             while((eval_at_lower.isZeroIn() ||
                    eval_at_upper.isZeroIn())){
-                //std::cout << "while"<<std::endl;
+                //Rcpp::Rcout << "while"<<std::endl;
                 r*=2;
                 a*=2;
                 lower_bf.approx(lower,r,a);

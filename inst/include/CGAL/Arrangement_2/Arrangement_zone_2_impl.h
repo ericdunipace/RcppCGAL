@@ -14,6 +14,7 @@
 #ifndef CGAL_ARRANGEMENT_ZONE_2_IMPL_H
 #define CGAL_ARRANGEMENT_ZONE_2_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 /*! \file
@@ -31,7 +32,7 @@ void Arrangement_zone_2<Arrangement, ZoneVisitor>::
 init_with_hint(const X_monotone_curve_2& cv, Pl_result_type obj)
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "init_with_hint()" << std::endl;
+  Rcpp::Rcout << "init_with_hint()" << std::endl;
 #endif
 
   // Set the curve and check whether its ends are bounded, therefore
@@ -83,7 +84,7 @@ template <typename Arrangement, typename ZoneVisitor>
 void Arrangement_zone_2<Arrangement, ZoneVisitor>::compute_zone()
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "compute_zone()" << std::endl;
+  Rcpp::Rcout << "compute_zone()" << std::endl;
 #endif
 
   // Initialize flags and set all handles to be invalid.
@@ -310,7 +311,7 @@ bool Arrangement_zone_2<Arrangement, ZoneVisitor>::
 _find_prev_around_vertex(Vertex_handle v, Halfedge_handle& he)
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_find_prev_around_vertex(" << v->point() << ")" << std::endl;
+  Rcpp::Rcout << "_find_prev_around_vertex(" << v->point() << ")" << std::endl;
 #endif
 
   // Go over the incident halfedges of v, going in a clockwise order.
@@ -351,9 +352,9 @@ _find_prev_around_vertex(Vertex_handle v, Halfedge_handle& he)
                                  (he_next->direction() == ARR_RIGHT_TO_LEFT),
                                  v->point(),
                                  cv_equals_curr, cv_equals_next);
-    // std::cout << "between: " << between << std::endl;
-    // std::cout << "cv_equals_curr: " << cv_equals_curr << std::endl;
-    // std::cout << "cv_equals_next: " << cv_equals_next << std::endl;
+    // Rcpp::Rcout << "between: " << between << std::endl;
+    // Rcpp::Rcout << "cv_equals_curr: " << cv_equals_curr << std::endl;
+    // Rcpp::Rcout << "cv_equals_next: " << cv_equals_next << std::endl;
 
     // Check the case of overlaps:
     if (cv_equals_curr) {
@@ -396,10 +397,10 @@ _direct_intersecting_edge_to_right(const X_monotone_curve_2& cv_ins,
                                    Halfedge_handle query_he)
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_direct_intersecting_edge_to_right() " << cv_left_pt
+  Rcpp::Rcout << "_direct_intersecting_edge_to_right() " << cv_left_pt
             << std::endl;
-  std::cout << "  " << cv_ins << std::endl;
-  std::cout << "  " << query_he->curve() << std::endl;
+  Rcpp::Rcout << "  " << cv_ins << std::endl;
+  Rcpp::Rcout << "  " << query_he->curve() << std::endl;
 #endif
 
   // Make sure that the left endpoint of cv_ins lies on query_he.
@@ -449,7 +450,7 @@ _direct_intersecting_edge_to_left(const X_monotone_curve_2& cv_ins,
                                   Halfedge_handle query_he)
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_direct_intersecting_edge_to_left()" << std::endl;
+  Rcpp::Rcout << "_direct_intersecting_edge_to_left()" << std::endl;
 #endif
 
   // Make sure that the right endpoint of cv_ins lies on query_he.
@@ -516,7 +517,7 @@ _compute_next_intersection(Halfedge_handle he,
                            bool& intersection_on_right_boundary)
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_compute_next_intersection(" << he->curve() << ", "
+  Rcpp::Rcout << "_compute_next_intersection(" << he->curve() << ", "
             << skip_first_point << ")" << std::endl;
 #endif
 
@@ -695,7 +696,7 @@ _is_to_left_impl(const Point_2& p, Halfedge_handle he,
                  Arr_not_all_sides_oblivious_tag) const
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_is_to_left_impl(" << p << "," << he->curve() << ")"
+  Rcpp::Rcout << "_is_to_left_impl(" << p << "," << he->curve() << ")"
             << std::endl;
 #endif
 
@@ -732,7 +733,7 @@ _is_to_right_impl(const Point_2& p, Halfedge_handle he,
                   Arr_not_all_sides_oblivious_tag) const
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_is_to_right_impl(" << p << "," << he->curve() << ")"
+  Rcpp::Rcout << "_is_to_right_impl(" << p << "," << he->curve() << ")"
             << std::endl;
 #endif
 
@@ -771,7 +772,7 @@ _leftmost_intersection(Ccb_halfedge_circulator he_curr, bool on_boundary,
                        bool& leftmost_on_right_boundary)
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_leftmost_intersection(" << he_curr->curve() << ", "
+  Rcpp::Rcout << "_leftmost_intersection(" << he_curr->curve() << ", "
             << on_boundary << ")" << std::endl;
 #endif
 
@@ -883,7 +884,7 @@ void Arrangement_zone_2<Arrangement, ZoneVisitor>::
 _leftmost_intersection_with_face_boundary(Face_handle face, bool on_boundary)
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_leftmost_intersection_with_face_boundary(" << on_boundary
+  Rcpp::Rcout << "_leftmost_intersection_with_face_boundary(" << on_boundary
             << ")" << std::endl;
 #endif
   // Mark that we have not found any intersection (or overlap) yet.
@@ -963,7 +964,7 @@ bool Arrangement_zone_2<Arrangement, ZoneVisitor>::
 _zone_in_face(Face_handle face, bool on_boundary)
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_zone_in_face(" << on_boundary << ")" << std::endl;
+  Rcpp::Rcout << "_zone_in_face(" << on_boundary << ")" << std::endl;
 #endif
 
   // Obtain some geometry-traits functors.
@@ -1193,7 +1194,7 @@ template <typename Arrangement, typename ZoneVisitor>
 bool Arrangement_zone_2<Arrangement, ZoneVisitor>::_zone_in_overlap()
 {
 #if defined(ARR_ZONE_VERBOSE)
-  std::cout << "_zone_in_overlap()" << std::endl;
+  Rcpp::Rcout << "_zone_in_overlap()" << std::endl;
 #endif
 
   // Obtain some geometry-traits functors.

@@ -13,6 +13,7 @@
 #ifndef CGAL_ARR_TRAPEZOID_RIC_POINT_LOCATION_FUNCTIONS_H
 #define CGAL_ARR_TRAPEZOID_RIC_POINT_LOCATION_FUNCTIONS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -24,7 +25,7 @@
 #define CGAL_TRAP_DEBUG
 
 #ifdef CGAL_TRG_DEBUG
-        #define CGAL_TRAP_PRINT_DEBUG(expr)   std::cout << expr << std::endl
+        #define CGAL_TRAP_PRINT_DEBUG(expr)   Rcpp::Rcout << expr << std::endl
 #else
         #define CGAL_TRAP_PRINT_DEBUG(expr)
 #endif
@@ -92,7 +93,7 @@ Arr_trapezoid_ric_point_location<Arrangement_2>::locate(const Point_2& p) const
         return make_result(h);
       else {
         //ixx
-        std::cerr << "curve is: "<< h->curve() <<" point is: "<< p <<std::endl;
+        Rcpp::Rcerr << "curve is: "<< h->curve() <<" point is: "<< p <<std::endl;
         CGAL_error();
       }
     }

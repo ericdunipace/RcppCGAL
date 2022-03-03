@@ -12,6 +12,7 @@
 #ifndef CGAL_COMBINATORIAL_MAP_FUNCTORS_H
 #define CGAL_COMBINATORIAL_MAP_FUNCTORS_H
 
+#include <Rcpp.h>
 #include <CGAL/Dart_const_iterators.h>
 #include <CGAL/Combinatorial_map/internal/Combinatorial_map_internal_functors.h>
 #include <vector>
@@ -73,7 +74,7 @@ struct Display_attribute_functor
                   typename CMap::Dart_const_handle adart)
   {
     if ( amap.template attribute<i>(adart)==nullptr )
-      std::cout<<"nullptr";
+      Rcpp::Rcout<<"nullptr";
     else
       amap.template display_attribute<i>(amap.template attribute<i>(adart));
   }

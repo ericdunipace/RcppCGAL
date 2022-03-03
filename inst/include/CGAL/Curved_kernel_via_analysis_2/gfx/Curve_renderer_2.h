@@ -23,6 +23,7 @@
 #define CGAL_AK_ENABLE_DEPRECATED_INTERFACE 1
 #endif
 
+#include <Rcpp.h>
 #include <vector>
 #include <stack>
 #include <cmath>
@@ -1147,10 +1148,10 @@ void draw_lump(std::vector< Coord_2 >& rev_points, int& last_x,
         if(pix.x >= pix_2.x-1||pix.x <= pix_1.x+1)
             goto Lexit;
 
-        //std::cout << "New seed point required at: " << pix << std::endl;
+        //Rcpp::Rcout << "New seed point required at: " << pix << std::endl;
         if(!get_seed_point(engine.x_min_r+pix.x*engine.pixel_w_r, start, dir,
                  b_taken, b_coincide)) {
-            std::cerr << " wrong seed point found " << std::endl;
+            Rcpp::Rcerr << " wrong seed point found " << std::endl;
             throw internal::Insufficient_rasterize_precision_exception();
         }
 
@@ -1166,7 +1167,7 @@ void draw_lump(std::vector< Coord_2 >& rev_points, int& last_x,
         else if(b_taken[1] != -1)
             new_dir = dir[b_taken[1] != direction_taken ? 1: 0];
         else {
-            std::cerr << "ERROR: wrong backward dir after seed point: " <<
+            Rcpp::Rcerr << "ERROR: wrong backward dir after seed point: " <<
                 dir[0] << " " << dir[1] << std::endl;
             throw internal::Insufficient_rasterize_precision_exception();
         }
@@ -1213,13 +1214,13 @@ bool subdivide(Pixel_2& pix, int back_dir, int& new_dir) {
     int idx, pref_dir = back_dir>>1;
 
     if(pix.level >= MAX_SUBDIVISION_LEVEL) {
-        std::cerr << "reached maximum subdivision level: " << pix <<
+        Rcpp::Rcerr << "reached maximum subdivision level: " << pix <<
             std::endl;
         throw internal::Insufficient_rasterize_precision_exception();
     }
 
     if(limit(engine.pixel_w * inv) || limit(engine.pixel_h * inv)) {
-        std::cerr << "too small subpixel size: " << pix << std::endl;
+        Rcpp::Rcerr << "too small subpixel size: " << pix << std::endl;
         throw internal::Insufficient_rasterize_precision_exception();
     }
 
@@ -1231,7 +1232,7 @@ bool subdivide(Pixel_2& pix, int back_dir, int& new_dir) {
     if(back_dir & 1) { // diagonal direction
         idx = get_subpixel_diag(pix,pref_dir);
         if(idx == -1) {
-            std::cerr << "wrong diag subpixel: " << pix << " direction: " <<
+            Rcpp::Rcerr << "wrong diag subpixel: " << pix << " direction: " <<
                 pref_dir << std::endl;
             throw internal::Insufficient_rasterize_precision_exception();
         }
@@ -1240,7 +1241,7 @@ bool subdivide(Pixel_2& pix, int back_dir, int& new_dir) {
     } else {
         idx = get_subpixel_hv(pix,pref_dir);
         if(idx == -1) {
-            std::cerr << "wrong h/v subpixel" << pix << " direction: " <<
+            Rcpp::Rcerr << "wrong h/v subpixel" << pix << " direction: " <<
                 pref_dir << std::endl;
             throw internal::Insufficient_rasterize_precision_exception();
         }
@@ -1309,14 +1310,14 @@ bool get_seed_point(const Rational& seed, Pixel_2& start, int *dir,
 
         //Gfx_OUT("refining starting pixel: " << start << std::endl);
         if(start.level >= MAX_SUBDIVISION_LEVEL) {
-            std::cerr << "get_seed_point: reached maximum subdivision level "
+            Rcpp::Rcerr << "get_seed_point: reached maximum subdivision level "
                 << start.level << std::endl;
             throw internal::Insufficient_rasterize_precision_exception();
         }
         //dump_neighbourhood(start);
 
         if(limit(engine.pixel_w/NT(lvl))||limit(engine.pixel_h/NT(lvl))) {
-            std::cerr << "get_seed_point: too small subpixel size: " <<
+            Rcpp::Rcerr << "get_seed_point: too small subpixel size: " <<
                  start.level << std::endl;
             throw internal::Insufficient_rasterize_precision_exception();
         }
@@ -2108,7 +2109,7 @@ bool test_neighbourhood(Pixel_2& pix, int dir, int& new_dir)
 //                     (current_level < CGAL_COINCIDE_LEVEL))
 //                     return false; // level is too small
 //                 set_coincide = true; // diagonal coincide mode
-//                 //std::cerr << "diagonal coincide mode\n";
+//                 //Rcpp::Rcerr << "diagonal coincide mode\n";
 //             }
             new_dir = tmp;
             if(n_sign > 1) {
@@ -2225,7 +2226,7 @@ bool compute_double_approx(int var, const NT& l_, const NT& r_,
     }
 
     if(eval1 == eval2) {
-        std::cerr << "ERROR: no sign change in compute_double_approx: " <<
+        Rcpp::Rcerr << "ERROR: no sign change in compute_double_approx: " <<
             eval1 << " and " << eval2 << "\n";
         l = (l+r)/NT(2);
         make_exact(l);
@@ -2547,7 +2548,7 @@ bool get_isolating_box(const Rational& x_s, const Rational& y_s, Pixel_2& res)
                 event.upper_boundary(arcno))/2;
         }*/
         if(res.level >= MAX_SUBDIVISION_LEVEL) {
-        std::cerr("get_isolating_box: reached maximum subdivision level "
+        Rcpp::Rcerr("get_isolating_box: reached maximum subdivision level "
                 << res.level << std::endl);
             return false;
         }
@@ -2586,8 +2587,8 @@ inline bool is_isolated_pixel(const Pixel_2& /* pix */) {
 // DEBUG ONLY
 #ifdef Gfx_USE_OUT
 void dump_neighbourhood(const Pixel_2& pix) {
-    CGAL::IO::set_mode(std::cerr, CGAL::IO::PRETTY);
-    CGAL::IO::set_mode(std::cout, CGAL::IO::PRETTY);
+    CGAL::IO::set_mode(Rcpp::Rcerr, CGAL::IO::PRETTY);
+    CGAL::IO::set_mode(Rcpp::Rcout, CGAL::IO::PRETTY);
 
     Stripe box[2]; // 0 - left-right stripe, 1 - bottom-top stripe
     //NT inv = NT(1) / NT(one << pix.level);

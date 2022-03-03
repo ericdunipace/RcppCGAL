@@ -14,6 +14,7 @@
 #ifndef CGAL_ENVELOPE_OVERLAY_2_H
 #define CGAL_ENVELOPE_OVERLAY_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Envelope_3.h>
 
 
@@ -66,28 +67,28 @@ public:
   /*
   void print_face(Face_handle fh)
   {
-    std::cout << (fh->is_unbounded() ? "unbounded" : "bounded");
+    Rcpp::Rcout << (fh->is_unbounded() ? "unbounded" : "bounded");
 
     if (fh->get_is_set())
     {
-      std::cout << " #data= " << fh->number_of_data_objects();
+      Rcpp::Rcout << " #data= " << fh->number_of_data_objects();
       if (fh->number_of_data_objects() > 0)
-        std::cout << " data= " << fh->get_data();
+        Rcpp::Rcout << " data= " << fh->get_data();
     }
 
     if (fh->get_aux_is_set(0))
     {
-      std::cout << " #data1= " << get_number_of_aux_data_objects(fh, 0);
+      Rcpp::Rcout << " #data1= " << get_number_of_aux_data_objects(fh, 0);
       if (get_number_of_aux_data_objects(fh, 0)>0)
-        std::cout << " data#1= " << get_aux_data(fh, 0);
+        Rcpp::Rcout << " data#1= " << get_aux_data(fh, 0);
     }
     if (fh->get_aux_is_set(1))
     {
-      std::cout << " #data2= " << get_number_of_aux_data_objects(fh, 1);
+      Rcpp::Rcout << " #data2= " << get_number_of_aux_data_objects(fh, 1);
       if (get_number_of_aux_data_objects(fh, 1)>0)
-        std::cout << " data#2= " << get_aux_data(fh, 1);
+        Rcpp::Rcout << " data#2= " << get_aux_data(fh, 1);
     }
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
   }
 
   // print the aux data in the faces of md
@@ -99,7 +100,7 @@ public:
       Face_handle fh = fit;
       print_face(fh);
     }
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
   }
 
   void print_vertices(Minimization_diagram_2& md)
@@ -108,30 +109,30 @@ public:
     for(; vit != md.vertices_end(); ++vit)
     {
       Vertex_handle vh = vit;
-      std::cout << vh->point();
+      Rcpp::Rcout << vh->point();
 
       if (vh->get_is_set())
       {
-        std::cout << " #data= " << vh->number_of_data_objects();
+        Rcpp::Rcout << " #data= " << vh->number_of_data_objects();
         if (vh->number_of_data_objects() > 0)
-          std::cout << " data= " << vh->get_data();
+          Rcpp::Rcout << " data= " << vh->get_data();
       }
 
       if (vh->get_aux_is_set(0))
       {
-        std::cout << " #data1= " << get_number_of_aux_data_objects(vh, 0);
+        Rcpp::Rcout << " #data1= " << get_number_of_aux_data_objects(vh, 0);
         if (get_number_of_aux_data_objects(vh, 0)>0)
-          std::cout << " data#1= " << get_aux_data(vh, 0);
+          Rcpp::Rcout << " data#1= " << get_aux_data(vh, 0);
       }
       if (vh->get_aux_is_set(1))
       {
-        std::cout << " #data2= " << get_number_of_aux_data_objects(vh, 1);
+        Rcpp::Rcout << " #data2= " << get_number_of_aux_data_objects(vh, 1);
         if (get_number_of_aux_data_objects(vh, 1)>0)
-          std::cout << " data#2= " << get_aux_data(vh, 1);
+          Rcpp::Rcout << " data#2= " << get_aux_data(vh, 1);
       }
-      std::cout << std::endl;
+      Rcpp::Rcout << std::endl;
     }
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
   }
 
   void print_edges(Minimization_diagram_2& md)
@@ -140,32 +141,32 @@ public:
     for(; hit != md.halfedges_end(); ++hit, ++hit)
     {
       Halfedge_handle hh = hit;
-      std::cout << hh->curve();
+      Rcpp::Rcout << hh->curve();
 
       if (hh->get_is_set())
       {
-        std::cout << " #data= " << hh->number_of_data_objects();
+        Rcpp::Rcout << " #data= " << hh->number_of_data_objects();
         if (hh->number_of_data_objects() > 0)
-          std::cout << " data= " << hh->get_data();
+          Rcpp::Rcout << " data= " << hh->get_data();
       }
 
 
       if (hh->get_aux_is_set(0))
       {
-        std::cout << " #data1= " << get_number_of_aux_data_objects(hh, 0);
+        Rcpp::Rcout << " #data1= " << get_number_of_aux_data_objects(hh, 0);
         if (get_number_of_aux_data_objects(hh, 0)>0)
-          std::cout << " data#1= " << get_aux_data(hh, 0);
+          Rcpp::Rcout << " data#1= " << get_aux_data(hh, 0);
       }
       if (hh->get_aux_is_set(1))
       {
-        std::cout << " #data2= " << get_number_of_aux_data_objects(hh, 1);
+        Rcpp::Rcout << " #data2= " << get_number_of_aux_data_objects(hh, 1);
 
         if (get_number_of_aux_data_objects(hh, 1)>0)
-          std::cout << " data#2= " << get_aux_data(hh, 1);
+          Rcpp::Rcout << " data#2= " << get_aux_data(hh, 1);
       }
-      std::cout << std::endl;
+      Rcpp::Rcout << std::endl;
     }
-    std::cout << std::endl;
+    Rcpp::Rcout << std::endl;
   }
   */
 

@@ -12,6 +12,7 @@
 #ifndef CGAL_PATH_ON_SURFACE_H
 #define CGAL_PATH_ON_SURFACE_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Combinatorial_map_operations.h>
@@ -371,7 +372,7 @@ public:
   void simplify_flips(bool show_flips_left=false)
   {
     if (show_flips_left)
-    { std::cout<<"Flips left (maybe none) : "<<std::flush; }
+    { Rcpp::Rcout<<"Flips left (maybe none) : "<<std::flush; }
     for(unsigned int i=0; i<length(); ++i)
     {
       if (m_flip[i] && !get_map().template is_free<2>(m_path[i]))
@@ -380,10 +381,10 @@ public:
         m_flip[i]=!m_flip[i];
       }
       else if (show_flips_left)
-      { std::cout<<i<<" "<<std::flush; }
+      { Rcpp::Rcout<<i<<" "<<std::flush; }
     }
     if (show_flips_left)
-    { std::cout<<std::endl; }
+    { Rcpp::Rcout<<std::endl; }
   }
 
   /// @return the number of flips of this path.
@@ -423,7 +424,7 @@ public:
   /// Debugging method.
   void display_failed_extention(const std::string& /*name_of_function*/)
   {
-    // std::cout<<"Cant extend the path this way ("<<name_of_function<<")"
+    // Rcpp::Rcout<<"Cant extend the path this way ("<<name_of_function<<")"
     //          <<std::endl;
   }
 
@@ -953,7 +954,7 @@ public:
       if (last_vertex==Map::null_handle)
       {
         if (display_error)
-        { std::cout<<"Invalid path: one of the vertices doesn't exist"
+        { Rcpp::Rcout<<"Invalid path: one of the vertices doesn't exist"
                    <<std::endl; }
         return false;
       }
@@ -962,7 +963,7 @@ public:
           (m_flip[i]?get_map().next(m_path[i]):m_path[i], last_vertex))
       {
         if (display_error)
-        { std::cout<<"Invalid path: dart "<<i-1<<" and dart "<<i
+        { Rcpp::Rcout<<"Invalid path: dart "<<i-1<<" and dart "<<i
                    <<" are not adjacents"<<std::endl; }
         return false;
       }
@@ -973,7 +974,7 @@ public:
       if (last_vertex==Map::null_handle)
       {
         if (display_error)
-        { std::cout<<"Invalid path: one of the vertices doesn't exist"
+        { Rcpp::Rcout<<"Invalid path: one of the vertices doesn't exist"
                    <<std::endl; }
         return false;
       }
@@ -981,7 +982,7 @@ public:
           (front_flip()?get_map().next(front()):front(), last_vertex))
       {
         if (display_error)
-        { std::cout<<"Invalid path: m_is_closed is true but the path is "
+        { Rcpp::Rcout<<"Invalid path: m_is_closed is true but the path is "
                    <<"not closed"<<std::endl; }
         return false;
       }
@@ -991,7 +992,7 @@ public:
       if (last_vertex==Map::null_handle)
       {
         if (display_error)
-        { std::cout<<"Invalid path: one of the vertices doesn't exist"
+        { Rcpp::Rcout<<"Invalid path: one of the vertices doesn't exist"
                    <<std::endl; }
         return false;
       }
@@ -999,7 +1000,7 @@ public:
           (front_flip()?get_map().next(front()):front(), last_vertex))
       {
         if (display_error)
-        { std::cout<<"Invalid path: m_is_closed is false but the path "
+        { Rcpp::Rcout<<"Invalid path: m_is_closed is false but the path "
                    <<"is closed"<<std::endl; }
         return false;
       }
@@ -1257,26 +1258,26 @@ public:
 
   void display_positive_turns() const
   {
-    std::cout<<"+(";
+    Rcpp::Rcout<<"+(";
     std::vector<std::size_t> res=compute_positive_turns();
     for (std::size_t i=0; i<res.size(); ++i)
-    { std::cout<<res[i]<<(i<res.size()-1?" ":""); }
-    std::cout<<")";
+    { Rcpp::Rcout<<res[i]<<(i<res.size()-1?" ":""); }
+    Rcpp::Rcout<<")";
   }
 
   void display_negative_turns() const
   {
-    std::cout<<"-(";
+    Rcpp::Rcout<<"-(";
     std::vector<std::size_t> res=compute_negative_turns();
     for (std::size_t i=0; i<res.size(); ++i)
-    { std::cout<<res[i]<<(i<res.size()-1?" ":""); }
-    std::cout<<")";
+    { Rcpp::Rcout<<res[i]<<(i<res.size()-1?" ":""); }
+    Rcpp::Rcout<<")";
   }
 
   void display_pos_and_neg_turns() const
   {
     display_positive_turns();
-    std::cout<<"  ";
+    Rcpp::Rcout<<"  ";
     display_negative_turns();
   }
 
@@ -1284,13 +1285,13 @@ public:
   {
     for (std::size_t i=0; i<length(); ++i)
     {
-      std::cout<<m_map.darts().index(get_ith_dart(i));
+      Rcpp::Rcout<<m_map.darts().index(get_ith_dart(i));
       if (m_flip[i])
-      { std::cout<<"f"; }
-      if (i<length()-1) { std::cout<<" "; }
+      { Rcpp::Rcout<<"f"; }
+      if (i<length()-1) { Rcpp::Rcout<<" "; }
     }
      if (is_closed())
-     { std::cout<<" c "; } //<<m_map.darts().index(get_ith_dart(0)); }
+     { Rcpp::Rcout<<" c "; } //<<m_map.darts().index(get_ith_dart(0)); }
   }
 
   friend std::ostream& operator<<(std::ostream& os, const Self& p)

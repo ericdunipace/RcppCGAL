@@ -14,6 +14,7 @@
 #ifndef CGAL_NO_INTERSECTION_SURFACE_SWEEP_2_H
 #define CGAL_NO_INTERSECTION_SURFACE_SWEEP_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file
@@ -58,7 +59,7 @@
 #include <iostream>
 
 #define CGAL_SS_DEBUG(a) {a;}
-#define CGAL_SS_PRINT(a) std::cout << a
+#define CGAL_SS_PRINT(a) Rcpp::Rcout << a
 #define CGAL_SS_PRINT_TEXT(text) this->print_text(text)
 #define CGAL_SS_PRINT_EOL() this->print_eol()
 #define CGAL_SS_PRINT_START(name) this->print_start(name, false)

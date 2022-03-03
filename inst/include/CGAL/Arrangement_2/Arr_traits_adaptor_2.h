@@ -21,6 +21,7 @@
 #ifndef CGAL_ARR_TRAITS_ADAPTOR_2_H
 #define CGAL_ARR_TRAITS_ADAPTOR_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 /*! \file
@@ -1223,7 +1224,7 @@ public:
         }
         // both are vertical
         if (ps_y1 == ps_y2) { // both ends converge to the same infinity
-          //std::cout << "resBB1 EQUAL" << std::endl;
+          //Rcpp::Rcout << "resBB1 EQUAL" << std::endl;
           Comparison_result res = CGAL::EQUAL;
           return res;
         }
@@ -1256,7 +1257,7 @@ public:
           //_compare_curve_ends_same_x_different_ends(ce1, ce2);
           // TODO
           Comparison_result res = ((ce1 == CGAL::ARR_MIN_END) ? CGAL::LARGER : CGAL::SMALLER);
-          //std::cout << "resBBB: " << res << std::endl;
+          //Rcpp::Rcout << "resBBB: " << res << std::endl;
           return res;
         }
       }
@@ -1294,10 +1295,10 @@ public:
       Comparison_result res =
         m_self->compare_x_on_boundary_2_object()(xcv1, ce1, xcv2, ce2);
       if (res == EQUAL) {
-        //std::cout << "resAA: " << res << std::endl;
+        //Rcpp::Rcout << "resAA: " << res << std::endl;
         res = _compare_curve_ends_same_x(xcv1, ce1, xcv2, ce2);
       }
-      //std::cout << "resAB: " << res << std::endl;
+      //Rcpp::Rcout << "resAB: " << res << std::endl;
       return res;
     }
 
@@ -2048,7 +2049,7 @@ public:
                     const Point_2& p,
                     bool& cv_equal_cv1, bool& cv_equal_cv2) const
     {
-      // std::cout << "is_between(" << std::endl
+      // Rcpp::Rcout << "is_between(" << std::endl
       //           << "  " << cv << "," << cv_to_right << "," << std::endl
       //           << "  " << cv1 << "," << cv1_to_right << "," << std::endl
       //           << "  " << cv2 << "," << cv2_to_right << "," << std::endl

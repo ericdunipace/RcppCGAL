@@ -12,6 +12,7 @@
 #ifndef CGAL_SURFACE_MESH_H
 #define CGAL_SURFACE_MESH_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh.h>
 
 #include <CGAL/disable_warnings.h>
@@ -1415,7 +1416,7 @@ public:
     ///@{
 
     /// perform an expensive validity check on the data structure and
-    /// print found errors to `std::cerr` when `verbose == true`.
+    /// print found errors to `Rcpp::Rcerr` when `verbose == true`.
   bool is_valid(bool verbose = true) const
     {
         bool valid = true;
@@ -1426,7 +1427,7 @@ public:
             valid = valid && opposite(*it).is_valid();
             if(!valid) {
                 if (verbose)
-                  std::cerr << "Integrity of halfedge " << *it << " corrupted."  << std::endl;
+                  Rcpp::Rcerr << "Integrity of halfedge " << *it << " corrupted."  << std::endl;
                 break;
             }
 
@@ -1434,35 +1435,35 @@ public:
             valid = valid && (opposite(opposite(*it)) == *it);
             if(!valid) {
               if (verbose)
-                std::cerr << "Integrity of opposite halfedge of " << *it << " corrupted."  << std::endl;
+                Rcpp::Rcerr << "Integrity of opposite halfedge of " << *it << " corrupted."  << std::endl;
               break;
             }
 
             valid = valid && (next(prev(*it)) == *it);
             if(!valid) {
                 if (verbose)
-                  std::cerr << "Integrity of previous halfedge of " << *it << " corrupted."  << std::endl;
+                  Rcpp::Rcerr << "Integrity of previous halfedge of " << *it << " corrupted."  << std::endl;
                 break;
             }
 
             valid = valid && (prev(next(*it)) == *it);
             if(!valid) {
                 if (verbose)
-                  std::cerr << "Integrity of next halfedge of " << *it << " corrupted."  << std::endl;
+                  Rcpp::Rcerr << "Integrity of next halfedge of " << *it << " corrupted."  << std::endl;
                 break;
             }
 
             valid = valid && target(*it).is_valid();
             if(!valid) {
                 if (verbose)
-                  std::cerr << "Integrity of vertex of halfedge " << *it << " corrupted."  << std::endl;
+                  Rcpp::Rcerr << "Integrity of vertex of halfedge " << *it << " corrupted."  << std::endl;
                 break;
             }
 
             valid = valid && (target(*it) == target(opposite(next(*it))));
             if(!valid) {
                 if (verbose)
-                  std::cerr << "Halfedge vertex of next opposite is not the same for " << *it << "."  << std::endl;
+                  Rcpp::Rcerr << "Halfedge vertex of next opposite is not the same for " << *it << "."  << std::endl;
                 break;
             }
         }
@@ -1474,7 +1475,7 @@ public:
                 valid = valid && (target(halfedge(*it)) == *it);
                 if(!valid) {
                     if (verbose)
-                      std::cerr << "Halfedge of " << *it << " is not an incoming halfedge." << std::endl;
+                      Rcpp::Rcerr << "Halfedge of " << *it << " is not an incoming halfedge." << std::endl;
                     break;
                 }
             }
@@ -1485,17 +1486,17 @@ public:
 
         valid = valid && (vcount == number_of_vertices());
         if(!valid && verbose){
-          std::cerr << "#vertices: iterated: " << vcount << " vs number_of_vertices(): " << number_of_vertices()<< std::endl;
+          Rcpp::Rcerr << "#vertices: iterated: " << vcount << " vs number_of_vertices(): " << number_of_vertices()<< std::endl;
         }
 
         valid = valid && (hcount == number_of_halfedges());
         if(!valid && verbose){
-          std::cerr << "#halfedges: iterated: " << hcount << " vs number_of_halfedges(): " << number_of_halfedges()<< std::endl;
+          Rcpp::Rcerr << "#halfedges: iterated: " << hcount << " vs number_of_halfedges(): " << number_of_halfedges()<< std::endl;
         }
 
         valid = valid && (fcount == number_of_faces());
         if(!valid && verbose){
-          std::cerr << "#faces: iterated: " << fcount << " vs number_of_faces(): " << number_of_faces()<< std::endl;
+          Rcpp::Rcerr << "#faces: iterated: " << fcount << " vs number_of_faces(): " << number_of_faces()<< std::endl;
         }
 
         size_type inf = (std::numeric_limits<size_type>::max)();
@@ -1531,7 +1532,7 @@ public:
     bool is_valid(Vertex_index v) const {
         Halfedge_index h = vconn_[v].halfedge_;
         if(h!= null_halfedge() && (!has_valid_index(h) || is_removed(h))) {
-          std::cerr << "Vertex connectivity halfedge error in " << (size_type)v
+          Rcpp::Rcerr << "Vertex connectivity halfedge error in " << (size_type)v
                     << " with " << (size_type)h << std::endl;
             return false;
         }
@@ -1549,7 +1550,7 @@ public:
         // don't validate the face if this is a border halfedge
         if(!is_border(h)) {
             if(!has_valid_index(f) || is_removed(f)) {
-                std::cerr << "Halfedge connectivity Face "
+                Rcpp::Rcerr << "Halfedge connectivity Face "
                           << (!has_valid_index(f) ? "invalid" : "removed")
                           << " in " << (size_type)h << std::endl;
                 valid = false;
@@ -1557,20 +1558,20 @@ public:
         }
 
         if(!has_valid_index(v) || is_removed(v)) {
-            std::cerr << "Halfedge connectivity Vertex "
+            Rcpp::Rcerr << "Halfedge connectivity Vertex "
                       << (!has_valid_index(v) ? "invalid" : "removed")
                       << " in " << (size_type)h << std::endl;
             valid = false;
         }
 
         if(!has_valid_index(hn) || is_removed(hn)) {
-            std::cerr << "Halfedge connectivity hnext "
+            Rcpp::Rcerr << "Halfedge connectivity hnext "
                       << (!has_valid_index(hn) ? "invalid" : "removed")
                       << " in " << (size_type)h << std::endl;
             valid = false;
         }
         if(!has_valid_index(hp) || is_removed(hp)) {
-            std::cerr << "Halfedge connectivity hprev "
+            Rcpp::Rcerr << "Halfedge connectivity hprev "
                       << (!has_valid_index(hp) ? "invalid" : "removed")
                       << " in " << (size_type)h << std::endl;
             valid = false;
@@ -1590,7 +1591,7 @@ public:
     bool is_valid(Face_index f) const {
         Halfedge_index h = fconn_[f].halfedge_;
         if(!has_valid_index(h) || is_removed(h)) {
-          std::cerr << "Face connectivity halfedge error in " << (size_type)f
+          Rcpp::Rcerr << "Face connectivity halfedge error in " << (size_type)f
                       << " with " << (size_type)h << std::endl;
             return false;
         }
@@ -2061,7 +2062,7 @@ private: //--------------------------------------------------- property handling
     /// prints property statistics to the stream `out`. The output is human-readable but
     /// not machine-friendly.
     ///
-    void property_stats(std::ostream& out = std::cout) const;
+    void property_stats(std::ostream& out = Rcpp::Rcout) const;
     /// @endcond
     ///@}
 

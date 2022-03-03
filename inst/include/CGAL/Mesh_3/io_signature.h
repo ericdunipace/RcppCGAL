@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_3_IO_SIGNATURE_H
 #define CGAL_MESH_3_IO_SIGNATURE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #define CGAL_MESH_3_IO_H // the old include macro, tested by other files
@@ -66,7 +67,7 @@ struct Get_io_signature_aux<T, false>
 {
   std::string operator()() const
   {
-    std::cerr << "Type without signature: " << typeid(T).name() << std::endl;
+    Rcpp::Rcerr << "Type without signature: " << typeid(T).name() << std::endl;
     return std::string();
   }
 }; // end template partial specialization Get_io_signature_aux<T, false>

@@ -12,6 +12,7 @@
 #ifndef CGAL_POINT_SET_PROCESSING_READ_XYZ_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_READ_XYZ_POINTS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/property_map.h>
@@ -111,7 +112,7 @@ bool read_XYZ(std::istream& is,
 
   if(!is)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -154,7 +155,7 @@ bool read_XYZ(std::istream& is,
           if(iss >> iformat(ny) >> iformat(nz)){
             normal = Vector(nx,ny,nz);
           } else {
-            std::cerr << "Error line " << lineNumber << " of file (incomplete normal coordinates)" << std::endl;
+            Rcpp::Rcerr << "Error line " << lineNumber << " of file (incomplete normal coordinates)" << std::endl;
             return false;
           }
         }
@@ -177,7 +178,7 @@ bool read_XYZ(std::istream& is,
     }
     else // if wrong file format
     {
-      std::cerr << "Error line " << lineNumber << " of file (expected point coordinates)" << std::endl;
+      Rcpp::Rcerr << "Error line " << lineNumber << " of file (expected point coordinates)" << std::endl;
       return false;
     }
   }

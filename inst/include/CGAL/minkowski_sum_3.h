@@ -12,6 +12,7 @@
 #ifndef CGAL_MINKOWSKI_SUM_3_H
 #define CGAL_MINKOWSKI_SUM_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Minkowski_sum_3.h>
 
 
@@ -67,17 +68,17 @@ minkowski_sum_3(Nef_polyhedron_3& N0, Nef_polyhedron_3& N1)
   typedef typename Nef_polyhedron_3::Kernel Kernel;
   typedef typename Is_extended_kernel<Kernel>::value_type Is_extended_kernel;
   if(check_tag(Is_extended_kernel())) {
-    std::cerr << "extended kernel is not supported" << std::endl;
+    Rcpp::Rcerr << "extended kernel is not supported" << std::endl;
     return N0;
   }
 
   if(N0.volumes_begin()->mark()) {
-    std::cerr << "first parameter is an infinite point set" << std::endl;
+    Rcpp::Rcerr << "first parameter is an infinite point set" << std::endl;
     return N0;
   }
 
   if(N1.volumes_begin()->mark()) {
-    std::cerr << "second parameter is an infinite point set" << std::endl;
+    Rcpp::Rcerr << "second parameter is an infinite point set" << std::endl;
     return N1;
   }
 

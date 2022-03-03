@@ -17,6 +17,7 @@
 // accompanying documentation sheet (and not to the above paper), see
 // the file(s) in documentation/.
 
+#include <Rcpp.h>
 #include <numeric>
 
 #include <CGAL/tags.h>
@@ -497,7 +498,7 @@ namespace CGAL {
     // debugging output:
     if (verbose) {
       CGAL_APPEL_IF_STATS(
-        std::cout << "The overall error in the matrix inverse is:   "
+        Rcpp::Rcout << "The overall error in the matrix inverse is:   "
                   << max_error_m_all << "." << "\n");
     }
 

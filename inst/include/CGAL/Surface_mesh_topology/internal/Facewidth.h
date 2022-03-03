@@ -12,6 +12,7 @@
 #ifndef CGAL_FACEWIDTH_H
 #define CGAL_FACEWIDTH_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Path_on_surface.h>
@@ -108,7 +109,7 @@ public:
     if (display_time)
     {
       t.stop();
-      std::cout<<"[TIME] Facewidth constructor: "<<t.time()<<" seconds."<<std::endl;
+      Rcpp::Rcout<<"[TIME] Facewidth constructor: "<<t.time()<<" seconds."<<std::endl;
     }
   }
 
@@ -135,7 +136,7 @@ public:
     if (display_time)
     {
       t.stop();
-      std::cout<<"[TIME] compute_face_width: "<<t.time()<<" seconds."<<std::endl;
+      Rcpp::Rcout<<"[TIME] compute_face_width: "<<t.time()<<" seconds."<<std::endl;
     }
 
     return cycle;

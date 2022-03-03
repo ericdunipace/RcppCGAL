@@ -16,6 +16,7 @@
 #ifndef CGAL_QP_SOLVER_H
 #define CGAL_QP_SOLVER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/QP_solver.h>
 
 #include <CGAL/disable_warnings.h>
@@ -708,7 +709,7 @@ private:
   void  set_pricing_strategy ( Quadratic_program_pricing_strategy strategy);
 
   // diagnostic output
-  void  set_verbosity( int verbose = 0, std::ostream& stream = std::cout);
+  void  set_verbosity( int verbose = 0, std::ostream& stream = Rcpp::Rcout);
 
 
 public:

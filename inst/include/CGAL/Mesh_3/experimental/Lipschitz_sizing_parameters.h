@@ -14,6 +14,7 @@
 #ifndef CGAL_LIP_SIZING_PARAMETERS_H
 #define CGAL_LIP_SIZING_PARAMETERS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <map>
@@ -73,7 +74,7 @@ public:
   {
     typename Parameters_map::iterator it = m_parameters.find(index);
     if (it != m_parameters.end())
-      std::cout << "Warning : sizing parameters for subdomain " << index
+      Rcpp::Rcout << "Warning : sizing parameters for subdomain " << index
                 << "will be overwritten." << std::endl;
 
     if (index == -1)

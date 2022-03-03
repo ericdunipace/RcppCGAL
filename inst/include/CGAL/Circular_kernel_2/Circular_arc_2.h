@@ -18,6 +18,7 @@
 #ifdef CGAL_INTERSECTION_MAP_FOR_XMONOTONIC_ARC_WITH_SAME_SUPPORTING_CIRCLE
 #define CGAL_USEFUL_MAPS_FOR_THE_CIRCULAR_KERNEL
 
+#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 #endif
@@ -267,8 +268,8 @@ namespace internal {
       *this = Circular_arc_2_base(c,
                              l1, compare_xy(begin, middle) < 0,
                              l2, compare_xy(end,   middle) < 0);*/
-          //std::cout << source() << std::endl;
-          //std::cout << target() << std::endl;
+          //Rcpp::Rcout << source() << std::endl;
+          //Rcpp::Rcout << target() << std::endl;
     }
 
     Circular_arc_2_base(const Circle_2 &support,

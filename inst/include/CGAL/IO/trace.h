@@ -11,6 +11,7 @@
 #ifndef CGAL_IO_TRACE_H
 #define CGAL_IO_TRACE_H
 
+#include <Rcpp.h>
 #include <iostream>
 
 /// \cond SKIP_IN_MANUAL
@@ -19,12 +20,12 @@
 // ---------------
 
 
-// CGAL_TRACE_STREAM = C++ stream that prints to std::cerr
+// CGAL_TRACE_STREAM = C++ stream that prints to Rcpp::Rcerr
 // if DEBUG_TRACE is defined (ignored otherwise)
 #ifdef DEBUG_TRACE
-  #define CGAL_TRACE_STREAM  std::cerr
+  #define CGAL_TRACE_STREAM  Rcpp::Rcerr
 #else
-  #define CGAL_TRACE_STREAM  if (false) std::cerr
+  #define CGAL_TRACE_STREAM  if (false) Rcpp::Rcerr
 #endif
 
 /// \endcond

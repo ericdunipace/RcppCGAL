@@ -13,6 +13,7 @@
 #ifndef CGAL_SORTED_MATRIX_SEARCH_H
 #define CGAL_SORTED_MATRIX_SEARCH_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Matrix_search.h>
 
 
@@ -101,7 +102,7 @@ public:
     for (int i = 0; i < dim; ++i)
       for (int j = 0; j < dim; ++j) {
         if (CGAL_NTS abs(base_matrix(x + i, y + j) - v) < Value(1E-10))
-          std::cerr << "***" << base_matrix(x + i, y + j) << std::endl;
+          Rcpp::Rcerr << "***" << base_matrix(x + i, y + j) << std::endl;
         if (base_matrix(x + i, y + j) == v)
           return true;
       }

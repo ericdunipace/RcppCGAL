@@ -13,6 +13,7 @@
 #ifndef CGAL_NEF_2_DEBUG_H
 #define CGAL_NEF_2_DEBUG_H
 
+#include <Rcpp.h>
 #include <iostream>
 
 #ifdef NDEBUG
@@ -42,33 +43,33 @@
 
 #ifdef CGAL_USE_TRACE
 #define CGAL_NEF_TRACE(t) if((debugthread%CGAL_NEF_DEBUG)==0) \
-    { std::cerr<<" "<<t; }
+    { Rcpp::Rcerr<<" "<<t; }
 #else
 #define CGAL_NEF_TRACE(t) (static_cast<void>(0))
 #endif
 
 #ifdef CGAL_USE_TRACE
 #define CGAL_NEF_TRACEV(t) if((debugthread%CGAL_NEF_DEBUG)==0) \
-    { std::cerr<<" "<<#t<<" = "<<(t)<<std::endl; }
+    { Rcpp::Rcerr<<" "<<#t<<" = "<<(t)<<std::endl; }
 #else
 #define CGAL_NEF_TRACEV(t) (static_cast<void>(0))
 #endif
 
 #ifdef CGAL_USE_TRACE
 #define CGAL_NEF_TRACEN(t) if((debugthread%CGAL_NEF_DEBUG)==0) \
-    { std::cerr<< " "<<t<<std::endl; }
+    { Rcpp::Rcerr<< " "<<t<<std::endl; }
 #else
 #define CGAL_NEF_TRACEN(t) (static_cast<void>(0))
 #endif
 
 #ifdef CGAL_USE_TRACE
-#define CGAL_NEF_CTRACE(b,t) if(b) {std::cerr<<" "<<t;} else {std::cerr<<" 0"}
+#define CGAL_NEF_CTRACE(b,t) if(b) {Rcpp::Rcerr<<" "<<t;} else {Rcpp::Rcerr<<" 0"}
 #else
 #define CGAL_NEF_CTRACE(b,t) (static_cast<void>(0))
 #endif
 
 #ifdef CGAL_USE_TRACE
-#define CGAL_NEF_CTRACEN(b,t) if(b){ std::cerr<<" "<<t<<"\n";} else {std::cerr<<" 0\n"}
+#define CGAL_NEF_CTRACEN(b,t) if(b){ Rcpp::Rcerr<<" "<<t<<"\n";} else {Rcpp::Rcerr<<" 0\n"}
 #else
 #define CGAL_NEF_CTRACEN(b,t) (static_cast<void>(0))
 #endif

@@ -12,6 +12,7 @@
 #ifndef CGAL_POINT_SET_PROCESSING_WRITE_OFF_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_WRITE_OFF_POINTS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/IO/helpers.h>
@@ -61,7 +62,7 @@ bool write_OFF_PSP(std::ostream& os,
 
   if(!os)
   {
-    std::cerr << "Error: cannot open file" << std::endl;
+    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
     return false;
   }
 

@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_CONNECTED_COMPONENTS_H
 #define CGAL_POLYGON_MESH_PROCESSING_CONNECTED_COMPONENTS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/connected_components.h>
 
 #include <CGAL/disable_warnings.h>
@@ -705,7 +706,7 @@ void keep_or_remove_connected_components(PolygonMesh& pmesh
       face_descriptor fh = face(h, pmesh), ofh = face(oh, pmesh);
       if (is_border(h, pmesh) && is_border(oh, pmesh)){
 #ifdef CGAL_CC_DEBUG
-        std::cerr << "null_face on both sides of " << e << " is kept\n";
+        Rcpp::Rcerr << "null_face on both sides of " << e << " is kept\n";
 #endif
       }
       else if ((is_border(oh, pmesh) && get(fcm,fh)) ||

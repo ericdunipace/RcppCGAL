@@ -14,6 +14,7 @@
 #ifndef CGAL_SHAPE_REGULARIZATION_CONTOUR_BASE_2_H
 #define CGAL_SHAPE_REGULARIZATION_CONTOUR_BASE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Shape_regularization.h>
 
 // Internal includes.
@@ -107,12 +108,12 @@ namespace internal {
       std::ofstream file(path.c_str(), std::ios_base::out);
       CGAL::IO::set_ascii_mode(file);
       if (!file) {
-        std::cout <<
+        Rcpp::Rcout <<
           "Error: cannot save the file: " << path << std::endl;
         return;
       }
       file << out.str() << std::endl; file.close();
-      std::cout <<
+      Rcpp::Rcout <<
         "* segments are saved in " << path << std::endl;
     }
 
@@ -252,7 +253,7 @@ namespace internal {
 
         } while (!stop && max_count < n);
         if (stop || max_count >= n) {
-          std::cerr <<
+          Rcpp::Rcerr <<
             "Warning: revert back to the first direction!" << std::endl;
           assigned[i] = 0;
         }
@@ -336,7 +337,7 @@ namespace internal {
 
         } while (max_count < n);
         if (stop || max_count >= n) {
-          std::cerr <<
+          Rcpp::Rcerr <<
             "Warning: revert back to the first direction!" << std::endl;
           assigned[i] = 0;
         }

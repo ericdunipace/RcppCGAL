@@ -17,6 +17,7 @@
 #ifndef CGAL_HALFEDGEDS_DECORATOR_H
 #define CGAL_HALFEDGEDS_DECORATOR_H 1
 
+#include <Rcpp.h>
 #include <CGAL/HalfedgeDS_items_decorator.h>
 #include <CGAL/HalfedgeDS_const_decorator.h>
 #include <CGAL/HalfedgeDS_iterator.h>
@@ -823,7 +824,7 @@ public:
         }
 
 //         if (nb_isolated_vertices > 0)
-//           std::cerr << "  Erased " << nb_isolated_vertices << " isolated vertices\n";
+//           Rcpp::Rcerr << "  Erased " << nb_isolated_vertices << " isolated vertices\n";
 
         return nb_erased_components;
     }

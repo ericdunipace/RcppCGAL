@@ -14,6 +14,7 @@
 #ifndef CGAL_INTERNAL_PROJECTION_TRAITS_BASE_3_H
 #define CGAL_INTERNAL_PROJECTION_TRAITS_BASE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/Profile_timer.h>
 #include <CGAL/intersections.h>
 #include <CGAL/predicates/sign_of_determinant.h>
@@ -202,7 +203,7 @@ public:
     auto planes_intersection = intersection(plane_1, plane_2);
     if(! planes_intersection) {
 #ifdef CGAL_T2_PTB_3_DEBUG
-      std::cerr << "planes_intersection is empty\n";
+      Rcpp::Rcerr << "planes_intersection is empty\n";
 #endif
       return boost::none;
     }
@@ -220,7 +221,7 @@ public:
       {
         // the intersection of the supporting lines is not inside both segments
 #ifdef CGAL_T2_PTB_3_DEBUG
-        std::cerr << "intersection not inside\n";
+        Rcpp::Rcerr << "intersection not inside\n";
 #endif
         return boost::none;
       }
@@ -243,7 +244,7 @@ public:
     if(boost::get<Plane_3>(&*planes_intersection))
     {
 #ifdef CGAL_T2_PTB_3_DEBUG
-      std::cerr << "coplanar supporting lines\n";
+      Rcpp::Rcerr << "coplanar supporting lines\n";
 #endif
       auto is_inside_segment = [](const Segment& s, const Point& q)
       {

@@ -17,6 +17,7 @@
 #ifndef CGAL_MATRIX___H
 #define CGAL_MATRIX___H
 
+#include <Rcpp.h>
 #include <CGAL/Kernel_d/Vector__.h>
 #include <CGAL/use.h>
 #include <CGAL/tss.h>
@@ -804,7 +805,7 @@ std::istream&  operator>>(std::istream& is, Matrix_<NT_,AL_>& M)
         is >> M(i/rdim,i%cdim);
       break;
     default:
-      std::cerr<<"\nStream must be in ASCII or binary mode"<<std::endl;
+      Rcpp::Rcerr<<"\nStream must be in ASCII or binary mode"<<std::endl;
       break;
   }
   return is;

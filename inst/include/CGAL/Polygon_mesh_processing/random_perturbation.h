@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_RANDOM_PERTURBATION_H
 #define CGAL_POLYGON_MESH_PROCESSING_RANDOM_PERTURBATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/disable_warnings.h>
@@ -165,10 +166,10 @@ void random_perturbation(VertexRange vertices
   typedef typename boost::graph_traits<PM>::vertex_descriptor vertex_descriptor;
 
 #ifdef CGAL_PMP_RANDOM_PERTURBATION_VERBOSE
-  std::cout << std::endl;
+  Rcpp::Rcout << std::endl;
   CGAL::Timer t;
-  std::cout << "Random perturbation (max size = "<< perturbation_max_size<<")...";
-  std::cout.flush();
+  Rcpp::Rcout << "Random perturbation (max size = "<< perturbation_max_size<<")...";
+  Rcpp::Rcout.flush();
   t.start();
 #endif
 
@@ -203,8 +204,8 @@ void random_perturbation(VertexRange vertices
 
 #ifdef CGAL_PMP_RANDOM_PERTURBATION_VERBOSE
   t.stop();
-  std::cout << "Perturbation done (";
-  std::cout << t.time() << " sec )." << std::endl;
+  Rcpp::Rcout << "Perturbation done (";
+  Rcpp::Rcout << t.time() << " sec )." << std::endl;
 #endif
 }
 

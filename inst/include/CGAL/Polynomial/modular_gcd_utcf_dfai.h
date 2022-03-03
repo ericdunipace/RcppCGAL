@@ -18,6 +18,7 @@
 #ifndef CGAL_POLYNOMIAL_MODULAR_GCD_UTCF_DFAI_H
 #define CGAL_POLYNOMIAL_MODULAR_GCD_UTCF_DFAI_H 1
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Scalar_factor_traits.h>
 #include <CGAL/Chinese_remainder_traits.h>
@@ -122,8 +123,8 @@ Polynomial<NT> modular_gcd_utcf_dfai(
     denom *= nfac(denom);
 
     Scalar denominator = scalar_factor(denom);
-    //std::cout <<" F1*denom*nafc: " << F1 <<std::endl;
-    //std::cout <<" F2*denom*nfac: " << F2 <<std::endl;
+    //Rcpp::Rcout <<" F1*denom*nafc: " << F1 <<std::endl;
+    //Rcpp::Rcout <<" F2*denom*nfac: " << F2 <<std::endl;
 
     Scalar f1 = scalar_factor(F1.lcoeff());  // ilcoeff(F1)
     Scalar f2 = scalar_factor(F2.lcoeff());  // ilcoeff(F2)
@@ -157,7 +158,7 @@ Polynomial<NT> modular_gcd_utcf_dfai(
             do{
                 prime_index++;
                 if(prime_index >= 2000){
-                    std::cerr<<"primes exhausted"<<std::endl;
+                    Rcpp::Rcerr<<"primes exhausted"<<std::endl;
 //                    return CGAL::internal::gcd_utcf_Integral_domain(FF1,FF2);
                     current_prime = internal::get_next_lower_prime(current_prime);
                 }
@@ -230,7 +231,7 @@ Polynomial<NT> modular_gcd_utcf_dfai(
         while(prs_degrees_old > prs_degrees_new);
         // check that everything went fine
         if( prs_degrees_old < prs_degrees_new ){
-            if( n != 0 ) std::cout << "UNLUCKY PRIME !!"<< std::endl;
+            if( n != 0 ) Rcpp::Rcout << "UNLUCKY PRIME !!"<< std::endl;
 
             // restart chinese remainder
             // ignore previous unlucky primes
@@ -288,12 +289,12 @@ Polynomial<NT> modular_gcd_utcf_dfai(
 //                Poly::pseudo_division(F2,Gs,H2s,r2,dummy);
                 if (div1 && div2){
                     solved = true;
-//                    std::cout << "number of primes used : "<< n << std::endl;
+//                    Rcpp::Rcout << "number of primes used : "<< n << std::endl;
                 }
 
 //                if (r1.is_zero() && r2.is_zero()){
 //                    solved = true;
-//                    std::cout << "number of primes used : "<< n << std::endl;
+//                    Rcpp::Rcout << "number of primes used : "<< n << std::endl;
 //                }
 
 #ifdef CGAL_MODULAR_GCD_TIMER

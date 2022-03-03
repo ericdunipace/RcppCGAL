@@ -13,6 +13,7 @@
 #ifndef CGAL_TRIANGULATION_DATA_STRUCTURE_2_H
 #define CGAL_TRIANGULATION_DATA_STRUCTURE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/TDS_2.h>
 
 
@@ -400,7 +401,7 @@ public:
 
   Vertex_handle collapse_edge(Edge e)
   {
-    std::cout << "before collapse"<<std::endl;
+    Rcpp::Rcout << "before collapse"<<std::endl;
     Face_handle fh = e.first;
     int i = e.second;
     Vertex_handle vh = fh->vertex(cw(i));
@@ -428,7 +429,7 @@ public:
     delete_face(fh);
     delete_face(nh);
     delete_vertex(wh);
-    std::cout << "after collapse"<<std::endl;
+    Rcpp::Rcout << "after collapse"<<std::endl;
     return vh;
   }
 

@@ -13,6 +13,7 @@
 #ifndef CGAL_THREE_EXCEPTIONS_H
 #define CGAL_THREE_EXCEPTIONS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Three.h>
 
 
@@ -88,19 +89,19 @@ wrap_a_call_to_cpp(Callable f,
       QScriptContext* context = qs->context();
       QStringList qt_bt = context->backtrace();
       if(se) qt_bt = se->backtrace();
-      std::cerr << "Backtrace:\n";
+      Rcpp::Rcerr << "Backtrace:\n";
       Q_FOREACH(QString s, qt_bt)
       {
-        std::cerr << "  " << qPrintable(s) << std::endl;
+        Rcpp::Rcerr << "  " << qPrintable(s) << std::endl;
       }
       context = context->parentContext();
       if(c == PARENT_CONTEXT) {
-        std::cerr << "> parent";
+        Rcpp::Rcerr << "> parent";
         context = context->parentContext();
       } else {
-        std::cerr << "> current";
+        Rcpp::Rcerr << "> current";
       }
-      std::cerr << " context: "
+      Rcpp::Rcerr << " context: "
                 << qPrintable(context->toString()) << std::endl;
       QString error;
       if(se) {
@@ -119,7 +120,7 @@ wrap_a_call_to_cpp(Callable f,
       QScriptValue v = context->throwError(error);
       v.setProperty("backtrace",
                     qScriptValueFromSequence(context->engine(), qt_bt));
-      std::cerr << "result after throwError: "
+      Rcpp::Rcerr << "result after throwError: "
                 << qPrintable(v.toString()) << std::endl;
       return Return_type();
     }

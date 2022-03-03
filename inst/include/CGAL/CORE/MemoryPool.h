@@ -24,6 +24,7 @@
 #ifndef _CORE_MEMORYPOOL_H_
 #define _CORE_MEMORYPOOL_H_
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/tss.h>
 
@@ -120,7 +121,7 @@ void MemoryPool< T, nObjects >::free(void* t) {
    CGAL_assertion(t != 0);
    if (t == 0) return; // for safety
    if(blocks.empty()){
-     std::cerr << typeid(T).name() << std::endl;
+     Rcpp::Rcerr << typeid(T).name() << std::endl;
    }
    CGAL_assertion (! blocks.empty());
 

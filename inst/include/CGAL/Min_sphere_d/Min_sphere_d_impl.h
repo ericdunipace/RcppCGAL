@@ -11,6 +11,7 @@
 // Author(s)     : Sven Schoenherr <sven@inf.fu-berlin.de>
 //                 Bernd Gaertner
 
+#include <Rcpp.h>
 #include <iterator>
 
 namespace CGAL {
@@ -76,8 +77,8 @@ operator >> ( std::istream& is, Min_sphere_d<Traits>& min_sphere)
     switch ( IO::get_mode( is)) {
 
       case IO::PRETTY:
-        std::cerr << std::endl;
-        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
+        Rcpp::Rcerr << std::endl;
+        Rcpp::Rcerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
 
       case IO::ASCII:

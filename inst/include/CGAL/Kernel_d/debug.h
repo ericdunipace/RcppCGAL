@@ -17,6 +17,7 @@
 #ifndef CGAL_KERNEL_D_DEBUG_H
 #define CGAL_KERNEL_D_DEBUG_H
 
+#include <Rcpp.h>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -44,33 +45,33 @@ static int debugthread=3141592;
 
 #if CGAL_KD_DEBUG>0
 #define CGAL_KD_TRACE(t)   if((CGAL::Kernel_d_internal::debugthread%CGAL_KD_DEBUG)==0)\
- std::cerr<<" "<<t;std::cerr.flush()
+ Rcpp::Rcerr<<" "<<t;Rcpp::Rcerr.flush()
 #else
 #define CGAL_KD_TRACE(t)
 #endif
 
 #if CGAL_KD_DEBUG>0
 #define CGAL_KD_TRACEV(t)  if((CGAL::Kernel_d_internal::debugthread%CGAL_KD_DEBUG)==0)\
- std::cerr<<" "<<#t<<" = "<<(t)<<std::endl;std::cerr.flush()
+ Rcpp::Rcerr<<" "<<#t<<" = "<<(t)<<std::endl;Rcpp::Rcerr.flush()
 #else
 #define CGAL_KD_TRACEV(t)
 #endif
 
 #if CGAL_KD_DEBUG>0
 #define CGAL_KD_TRACEN(t)  if((CGAL::Kernel_d_internal::debugthread%CGAL_KD_DEBUG)==0)\
- std::cerr<<" "<<t<<std::endl;std::cerr.flush()
+ Rcpp::Rcerr<<" "<<t<<std::endl;Rcpp::Rcerr.flush()
 #else
 #define CGAL_KD_TRACEN(t)
 #endif
 
 #if CGAL_KD_DEBUG>0
-#define CGAL_KD_CTRACE(b,t)  if(b) std::cerr << " " << t; else std::cerr << " 0"
+#define CGAL_KD_CTRACE(b,t)  if(b) Rcpp::Rcerr << " " << t; else Rcpp::Rcerr << " 0"
 #else
 #define CGAL_KD_CTRACE(b,t)
 #endif
 
 #if CGAL_KD_DEBUG>0
-#define CGAL_KD_CTRACEN(b,t)  if(b) std::cerr<< " " <<t<<"\n"; else std::cerr<<" 0\n"
+#define CGAL_KD_CTRACEN(b,t)  if(b) Rcpp::Rcerr<< " " <<t<<"\n"; else Rcpp::Rcerr<<" 0\n"
 #else
 #define CGAL_KD_CTRACEN(b,t)
 #endif
@@ -80,9 +81,9 @@ static int debugthread=3141592;
 #else
 #define CGAL_KD_ASSERT(cond,fstr)   \
   if (!(cond)) {       \
-    std::cerr << "   ASSERT:   " << #fstr << std::endl; \
-    std::cerr << "   COND:     " << #cond << std::endl; \
-    std::cerr << "   POSITION: " << __FILE__ << " at line "<< __LINE__ \
+    Rcpp::Rcerr << "   ASSERT:   " << #fstr << std::endl; \
+    Rcpp::Rcerr << "   COND:     " << #cond << std::endl; \
+    Rcpp::Rcerr << "   POSITION: " << __FILE__ << " at line "<< __LINE__ \
               << std::endl; \
     CGAL_error(); \
   }

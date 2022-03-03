@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_SIDE_OF_ORIENTED_SPHERE_3_H
 #define CGAL_INTERNAL_STATIC_FILTERS_SIDE_OF_ORIENTED_SPHERE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/Profile_counter.h>
 #include <CGAL/Filtered_kernel/internal/Static_filters/Static_filter_error.h>
 
@@ -161,7 +162,7 @@ public:
     double err = det.error();
     err += err * 3 * F::ulp(); // Correction due to "eps * maxx * ...".
 
-    std::cerr << "*** epsilon for Side_of_oriented_sphere_3 = " << err << std::endl;
+    Rcpp::Rcerr << "*** epsilon for Side_of_oriented_sphere_3 = " << err << std::endl;
     return err;
   }
 };

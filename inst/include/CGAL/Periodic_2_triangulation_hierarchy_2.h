@@ -14,6 +14,7 @@
 #ifndef CGAL_PERIODIC_2_TRIANGULATION_HIERARCHY_2_H
 #define CGAL_PERIODIC_2_TRIANGULATION_HIERARCHY_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Periodic_2_triangulation_2.h>
 
 
@@ -308,7 +309,7 @@ is_valid(bool verbose, int level) const
   for(i = 0; i < m_maxlevel; ++i)
     {
       if(verbose) // print  number of vertices at each level
-        std::cout << "number_of_vertices "
+        Rcpp::Rcout << "number_of_vertices "
                   <<  hierarchy[i]->number_of_vertices() << std::endl;
       result = result && hierarchy[i]->is_valid(verbose, level);
     }

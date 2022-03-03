@@ -17,6 +17,7 @@
 #ifndef CGAL_IEEE_754_UNIONS_H
 #define CGAL_IEEE_754_UNIONS_H
 
+#include <Rcpp.h>
 #include <iomanip>
 #include <iostream>
 
@@ -58,20 +59,20 @@ inline
 void
 show( IEEE_754_double* p)
 {
-  std::cout << std::endl;
-  std::cout << std::hex << std::setw(8) << std::setfill('0') << p->c.H;
-  std::cout << ' ';
-  std::cout << std::hex << std::setw(8) << std::setfill('0') << p->c.L;
-  std::cout << std::endl;
+  Rcpp::Rcout << std::endl;
+  Rcpp::Rcout << std::hex << std::setw(8) << std::setfill('0') << p->c.H;
+  Rcpp::Rcout << ' ';
+  Rcpp::Rcout << std::hex << std::setw(8) << std::setfill('0') << p->c.L;
+  Rcpp::Rcout << std::endl;
 }
 
 inline
 void
 show( IEEE_754_float* p)
 {
-  std::cout << std::endl;
-  std::cout << std::hex << std::setw(8) << std::setfill('0') << p->c;
-  std::cout << std::endl;
+  Rcpp::Rcout << std::endl;
+  Rcpp::Rcout << std::hex << std::setw(8) << std::setfill('0') << p->c;
+  Rcpp::Rcout << std::endl;
 }
 
 #endif // CGAL_IEEE_754_UNIONS_H

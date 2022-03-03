@@ -20,6 +20,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <ctime>
 #include <iostream>
 #include <sstream>
@@ -53,7 +54,7 @@ Random(internal::Random_print_seed)
     std::time_t s;
     std::time( &s);
     seed = (unsigned int)s;
-    std::cerr << "CGAL::Random()::get_seed() = " << seed << std::endl;
+    Rcpp::Rcerr << "CGAL::Random()::get_seed() = " << seed << std::endl;
     // initialize random numbers generator
     rng.seed(static_cast<boost::int32_t>(seed));
     random_value = get_int(0, 1<<15);

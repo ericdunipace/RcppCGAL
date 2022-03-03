@@ -12,6 +12,7 @@
 #ifndef CGAL_SURFACE_MESH_IO_3MF_H
 #define CGAL_SURFACE_MESH_IO_3MF_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh.h>
 
 #include <CGAL/Surface_mesh/Surface_mesh_fwd.h>
@@ -67,7 +68,7 @@ bool read_3MF(const std::string& filename,
   const bool success = CGAL::IO::read_3MF(filename, all_points, all_triangles, all_colors, names);
   if(!success)
   {
-    std::cerr << "Error in reading meshes." << std::endl;
+    Rcpp::Rcerr << "Error in reading meshes." << std::endl;
     return false;
   }
 

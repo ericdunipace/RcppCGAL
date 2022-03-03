@@ -18,6 +18,7 @@
  * \brief defines Curved_kernel_via_analysis_2 function objects + class
  */
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/Curved_kernel_via_analysis_2/Make_x_monotone_2.h>
 #include <CGAL/iterator.h>
@@ -28,7 +29,7 @@ namespace internal {
 #ifndef CERR
 //#define CKvA_DEBUG_PRINT_CERR
 #ifdef CKvA_DEBUG_PRINT_CERR
-#define CERR(x) std::cerr << x
+#define CERR(x) Rcpp::Rcerr << x
 #else
 #define CERR(x) static_cast<void>(0)
 #endif
@@ -231,7 +232,7 @@ public:
         // avoid compiler warning
         (void)arc;
 
-        //CGAL::IO::set_pretty_mode(std::cerr);
+        //CGAL::IO::set_pretty_mode(Rcpp::Rcerr);
         CERR("Construct_pt_on_arc: " << CGAL::to_double(x) << ", " << arcno <<
              ", " << c.id() <<  "\narc = " << arc << "\n");
 
@@ -1955,7 +1956,7 @@ public:
 
     if (CGAL::assign(curve, obj)) oi = (*this)(curve, oi);
     else if (CGAL::assign(nxarc, obj))
-      std::cerr << "AU BACKE" << std::endl;
+      Rcpp::Rcerr << "AU BACKE" << std::endl;
     //oi = std::transform(nxarc.begin(), nxarc.end(), oi,
     //      std::ptr_fun(CGAL::make_object<Arc_2>));
     else if (CGAL::assign(xcv, obj)) *oi++ = Make_x_monotone_result(xcv);

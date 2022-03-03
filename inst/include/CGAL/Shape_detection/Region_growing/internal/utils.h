@@ -14,6 +14,7 @@
 #ifndef CGAL_SHAPE_DETECTION_REGION_GROWING_INTERNAL_UTILS_H
 #define CGAL_SHAPE_DETECTION_REGION_GROWING_INTERNAL_UTILS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Shape_detection.h>
 
 // STL includes.
@@ -49,8 +50,8 @@ namespace internal {
       if (value < FT(0)) return FT(0); // clamp to zero
       const bool is_value_ok = (value >= FT(0));
       if (!is_value_ok) { // TODO: remove that!
-        std::cout.precision(20);
-        std::cout << "- wrong value: " << value << std::endl;
+        Rcpp::Rcout.precision(20);
+        Rcpp::Rcout << "- wrong value: " << value << std::endl;
       }
       CGAL_precondition(is_value_ok);
       return static_cast<FT>(CGAL::sqrt(CGAL::to_double(value)));

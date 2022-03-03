@@ -11,6 +11,7 @@
 #ifndef CGAL_STRAIGHT_SKELETON_BUILDER_TRAITS_2_H
 #define CGAL_STRAIGHT_SKELETON_BUILDER_TRAITS_2_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Straight_skeleton_2.h>
 
 #include <CGAL/constructions/Straight_skeleton_cons_ftC2.h>
@@ -565,7 +566,7 @@ public:
     Ray_2 bisect_ray(aNode->point(), lV12) ;
 
     // F2C to_input;
-    // std::cout << "bisect " << aNode->point() << " " << aNode->point() + to_input(lV12) << "\n";
+    // Rcpp::Rcout << "bisect " << aNode->point() << " " << aNode->point() + to_input(lV12) << "\n";
 
     for ( Halfedge_handle_vector_iterator i = contour_halfedges_begin; i != contour_halfedges_end; ++ i )
     {
@@ -869,7 +870,7 @@ public:
     Target_Ray_2 bisect_ray(laP, lV12) ;
 
     // F2C to_input;
-    // std::cout << "bisect " << aNode->point() << " " << aNode->point() + to_input(lV12) << "\n";
+    // Rcpp::Rcout << "bisect " << aNode->point() << " " << aNode->point() + to_input(lV12) << "\n";
 
     for ( Halfedge_handle_vector_iterator i = contour_halfedges_begin; i != contour_halfedges_end; ++ i )
     {

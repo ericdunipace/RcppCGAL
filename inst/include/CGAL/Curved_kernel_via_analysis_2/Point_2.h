@@ -19,6 +19,7 @@
  * be analyzed.
  */
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #include <boost/optional.hpp>
@@ -695,7 +696,7 @@ public:
             os << std::flush;
             break;
         case ::CGAL::IO::BINARY:
-            std::cerr << "BINARY format not yet implemented" << std::endl;
+            Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
             break;
         default:
           // ASCII

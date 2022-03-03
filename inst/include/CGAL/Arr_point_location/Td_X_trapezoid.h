@@ -14,6 +14,7 @@
 #ifndef CGAL_TD_X_TRAPEZOID_H
 #define CGAL_TD_X_TRAPEZOID_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -744,18 +745,18 @@ public:
       {
         if (get_node() && **get_node()!=*this)
         {
-          std::cerr << "\nthis=";
-          write(std::cerr,*this,*traits,false);
-          std::cerr << "\nget_node= ";
-          write(std::cerr,**get_node(),*traits,false) << std::flush;
+          Rcpp::Rcerr << "\nthis=";
+          write(Rcpp::Rcerr,*this,*traits,false);
+          Rcpp::Rcerr << "\nget_node= ";
+          write(Rcpp::Rcerr,**get_node(),*traits,false) << std::flush;
           CGAL_warning(**get_node()==*this);
           return false;
         }
         if (!is_on_left_boundary() && !is_on_right_boundary() &&
             CGAL_POINT_IS_LEFT_LOW(right(),left()))
         {
-          std::cerr << "\nthis=";
-          write(std::cerr,*this,*traits,false) << std::flush;
+          Rcpp::Rcerr << "\nthis=";
+          write(Rcpp::Rcerr,*this,*traits,false) << std::flush;
           CGAL_warning(!CGAL_POINT_IS_LEFT_LOW(right(),left()));
           return false;
         }
@@ -764,8 +765,8 @@ public:
         {
           if (is_on_left_boundary() || is_on_right_boundary())
           {
-            std::cerr << "\nthis=";
-            write(std::cerr,*this,*traits,false) << std::flush;
+            Rcpp::Rcerr << "\nthis=";
+            write(Rcpp::Rcerr,*this,*traits,false) << std::flush;
             CGAL_warning(!(is_on_left_boundary() ||is_on_right_boundary()));
             return false;
           }
@@ -776,9 +777,9 @@ public:
           }
           if (!b || t == SMALLER)
           {
-            std::cerr << "\nthis=";
-            write(std::cerr,*this,*traits,false) << std::flush;
-            std::cerr << "\nt==" << t << std::flush;
+            Rcpp::Rcerr << "\nthis=";
+            write(Rcpp::Rcerr,*this,*traits,false) << std::flush;
+            Rcpp::Rcerr << "\nt==" << t << std::flush;
             CGAL_warning(b);
             CGAL_warning(t != SMALLER);
             return false;
@@ -790,9 +791,9 @@ public:
           }
           if (!b || t == SMALLER)
           {
-            std::cerr << "\nthis=";
-            write(std::cerr,*this,*traits,false) << std::flush;
-            std::cerr << "\nt==" << t << std::flush;
+            Rcpp::Rcerr << "\nthis=";
+            write(Rcpp::Rcerr,*this,*traits,false) << std::flush;
+            Rcpp::Rcerr << "\nt==" << t << std::flush;
             CGAL_warning(b);
             CGAL_warning(t != SMALLER);
             return false;
@@ -802,8 +803,8 @@ public:
         {
           if (is_on_left_boundary() || is_on_right_boundary())
           {
-            std::cerr << "\nthis=";
-            write(std::cerr,*this,*traits,false) << std::flush;
+            Rcpp::Rcerr << "\nthis=";
+            write(Rcpp::Rcerr,*this,*traits,false) << std::flush;
             CGAL_warning(!(is_on_left_boundary() || is_on_right_boundary()));
             return false;
           }
@@ -814,9 +815,9 @@ public:
           }
           if (!b || t == LARGER)
           {
-            std::cerr << "\nthis=";
-            write(std::cerr,*this,*traits,false) << std::flush;
-            std::cerr << "\nt==" << t << std::flush;
+            Rcpp::Rcerr << "\nthis=";
+            write(Rcpp::Rcerr,*this,*traits,false) << std::flush;
+            Rcpp::Rcerr << "\nt==" << t << std::flush;
             CGAL_warning(b);
             CGAL_warning(t != LARGER);
             return false;
@@ -828,9 +829,9 @@ public:
           }
           if (!b || t == LARGER)
           {
-            std::cerr << "\nthis=";
-            write(std::cerr,*this,*traits,false) << std::flush;
-            std::cerr << "\nt==" << t << std::flush;
+            Rcpp::Rcerr << "\nthis=";
+            write(Rcpp::Rcerr,*this,*traits,false) << std::flush;
+            Rcpp::Rcerr << "\nt==" << t << std::flush;
             CGAL_warning(b);
             CGAL_warning(t != LARGER);
             return false;
@@ -855,8 +856,8 @@ public:
               lb() &&
               traits->is_degenerate(*lb()))
           {
-            std::cerr << "\nthis=";
-            write(std::cerr,*this,*traits,false) << std::flush;
+            Rcpp::Rcerr << "\nthis=";
+            write(Rcpp::Rcerr,*this,*traits,false) << std::flush;
             CGAL_warning(!(rt() &&
                            (! is_top_curve_equal(*rt(), traits))));
             CGAL_warning(!(lt() &&
@@ -880,7 +881,7 @@ public:
               rb()&&!rb()->is_active()||
               lb()&&!lb()->is_active())
           {
-            std::cerr << "\nleft=" << left() << " right=" << right()
+            Rcpp::Rcerr << "\nleft=" << left() << " right=" << right()
                       << " bottom=" << bottom() << " top=" << top()
                       << std::flush;
             CGAL_warning(!(rt() &&
@@ -906,10 +907,10 @@ public:
               is_on_right_boundary()
               )
           {
-            std::cerr << "\nbottom()==" << bottom() << std::flush;
-            std::cerr << "\ntop()==" << top() << std::flush;
-            std::cerr << "\nleft()==" << left() << std::flush;
-            std::cerr << "\nright()==" << right() << std::flush;
+            Rcpp::Rcerr << "\nbottom()==" << bottom() << std::flush;
+            Rcpp::Rcerr << "\ntop()==" << top() << std::flush;
+            Rcpp::Rcerr << "\nleft()==" << left() << std::flush;
+            Rcpp::Rcerr << "\nright()==" << right() << std::flush;
             CGAL_warning((!is_on_bottom_boundary()));
             CGAL_warning((!is_on_top_boundary()));
             CGAL_warning((!is_on_left_boundary()));
@@ -919,8 +920,8 @@ public:
           if (!CGAL_IS_IN_X_RANGE(bottom(),left()) ||
               CGAL_CURVE_COMPARE_Y_AT_X(left(), bottom()) != EQUAL)
           {
-            std::cerr << "\nbottom()==" << bottom() << std::flush;
-            std::cerr << "\nleft()==" << left() << std::flush;
+            Rcpp::Rcerr << "\nbottom()==" << bottom() << std::flush;
+            Rcpp::Rcerr << "\nleft()==" << left() << std::flush;
             CGAL_warning(CGAL_IS_IN_X_RANGE(bottom(),left()) &&
                          CGAL_CURVE_COMPARE_Y_AT_X(left(), bottom()) ==
                          EQUAL);
@@ -929,8 +930,8 @@ public:
           if (!CGAL_IS_IN_X_RANGE(bottom(),right()) ||
               CGAL_CURVE_COMPARE_Y_AT_X(right(), bottom()) != EQUAL)
           {
-            std::cerr << "\nbottom()==" << bottom() << std::flush;
-            std::cerr << "\nright()==" << right() << std::flush;
+            Rcpp::Rcerr << "\nbottom()==" << bottom() << std::flush;
+            Rcpp::Rcerr << "\nright()==" << right() << std::flush;
             CGAL_warning(CGAL_IS_IN_X_RANGE(bottom(),right()) &&
                          CGAL_CURVE_COMPARE_Y_AT_X(right(), bottom()) ==
                          EQUAL);
@@ -939,8 +940,8 @@ public:
           if (!CGAL_IS_IN_X_RANGE(top(),left()) ||
               CGAL_CURVE_COMPARE_Y_AT_X(left(), top()) != EQUAL)
           {
-            std::cerr << "\ntop()==" << top() << std::flush;
-            std::cerr << "\nleft()==" << left() << std::flush;
+            Rcpp::Rcerr << "\ntop()==" << top() << std::flush;
+            Rcpp::Rcerr << "\nleft()==" << left() << std::flush;
             CGAL_warning(!CGAL_IS_IN_X_RANGE(top(),left()) &&
                          CGAL_CURVE_COMPARE_Y_AT_X(left(), top()) == EQUAL);
             return false;
@@ -948,8 +949,8 @@ public:
           if (!CGAL_IS_IN_X_RANGE(top(),right()) ||
               CGAL_CURVE_COMPARE_Y_AT_X(right(), top()) != EQUAL)
           {
-            std::cerr << "\ntop()==" << top() << std::flush;
-            std::cerr << "\nright()==" << right() << std::flush;
+            Rcpp::Rcerr << "\ntop()==" << top() << std::flush;
+            Rcpp::Rcerr << "\nright()==" << right() << std::flush;
             CGAL_warning(CGAL_IS_IN_X_RANGE(top(),right()) &&
                          CGAL_CURVE_COMPARE_Y_AT_X(right(), top()) == EQUAL);
             return false;
@@ -1033,8 +1034,8 @@ public:
             }
             if (!traits->equal_curve_end_2_object()(left(),right()))
             {
-              std::cerr << "\nleft()==" << left() << std::flush;
-              std::cerr << "\nright()==" << right() << std::flush;
+              Rcpp::Rcerr << "\nleft()==" << left() << std::flush;
+              Rcpp::Rcerr << "\nright()==" << right() << std::flush;
               CGAL_warning(traits->equal_curve_end_2_object()(left(),right()));
               return false;
             }

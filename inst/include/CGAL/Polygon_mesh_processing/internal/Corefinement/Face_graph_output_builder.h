@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_FACE_GRAPH_OUTPUT_BUILDER_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_FACE_GRAPH_OUTPUT_BUILDER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/corefinement.h>
 
 
@@ -774,7 +775,7 @@ public:
       halfedge_descriptor h2 = it->second.first[&tm2];
 
 #ifdef CGAL_COREFINEMENT_DEBUG
-      std::cout << "Looking at triangles around edge " << tm1.point(source(h1, tm1)) << " " << tm1.point(target(h1, tm1)) << "\n";
+      Rcpp::Rcout << "Looking at triangles around edge " << tm1.point(source(h1, tm1)) << " " << tm1.point(target(h1, tm1)) << "\n";
 #endif
 
       CGAL_assertion(ids.first==vertex_to_node_id1[source(h1,tm1)]);
@@ -852,7 +853,7 @@ public:
               {
                 //Nothing allowed
 #ifdef CGAL_COREFINEMENT_DEBUG
-                std::cout << "  Non-manifold edge case 1\n";
+                Rcpp::Rcout << "  Non-manifold edge case 1\n";
 #endif
                 impossible_operation.set();
                 return;
@@ -865,7 +866,7 @@ public:
           if (!used_to_clip_a_surface && !used_to_classify_patches)
           {
 #ifdef CGAL_COREFINEMENT_DEBUG
-              std::cout << "  Non-manifold edge case 2\n";
+              Rcpp::Rcout << "  Non-manifold edge case 2\n";
 #endif
             //Ambiguous, we can do nothing
             impossible_operation.set();
@@ -941,7 +942,7 @@ public:
           if (!used_to_classify_patches)
           {
 #ifdef CGAL_COREFINEMENT_DEBUG
-            std::cout << "  Non-manifold edge case 3\n";
+            Rcpp::Rcout << "  Non-manifold edge case 3\n";
 #endif
             impossible_operation.set();
             return;
@@ -1226,7 +1227,7 @@ public:
                 // poly_first \cap poly_second          = q1q2
                 // opposite( poly_first U poly_second ) = p2p1
 #ifdef CGAL_COREFINEMENT_DEBUG
-              std::cout << "  Non-manifold edge case 4\n";
+              Rcpp::Rcout << "  Non-manifold edge case 4\n";
 #endif
                 impossible_operation.set(TM1_MINUS_TM2); // tm1-tm2 is non-manifold
               }
@@ -1242,7 +1243,7 @@ public:
                 if (!used_to_clip_a_surface)
                 {
 #ifdef CGAL_COREFINEMENT_DEBUG
-              std::cout << "  Non-manifold edge case 5\n";
+              Rcpp::Rcout << "  Non-manifold edge case 5\n";
 #endif
                   impossible_operation.set(INTERSECTION); // tm1 n tm2 is non-manifold
                 }
@@ -1262,7 +1263,7 @@ public:
                 if (!used_to_clip_a_surface)
                 {
 #ifdef CGAL_COREFINEMENT_DEBUG
-              std::cout << "  Non-manifold edge case 6\n";
+              Rcpp::Rcout << "  Non-manifold edge case 6\n";
 #endif
                   impossible_operation.set();
                   return;
@@ -1287,7 +1288,7 @@ public:
                 if (!used_to_clip_a_surface)
                 {
 #ifdef CGAL_COREFINEMENT_DEBUG
-              std::cout << "  Non-manifold edge case 7\n";
+              Rcpp::Rcout << "  Non-manifold edge case 7\n";
 #endif
                   impossible_operation.set();
                   return;
@@ -1312,7 +1313,7 @@ public:
                 // poly_first \cap poly_second          = {0}
                 // opposite( poly_first U poly_second ) = p2q1 U q2p1
 #ifdef CGAL_COREFINEMENT_DEBUG
-              std::cout << "  Non-manifold edge case 8\n";
+              Rcpp::Rcout << "  Non-manifold edge case 8\n";
 #endif
                 impossible_operation.set(UNION); // tm1 U tm2 is non-manifold
               }
@@ -1326,7 +1327,7 @@ public:
                 // poly_first \cap poly_second          = p1p2
                 // opposite( poly_first U poly_second ) = q2q1
 #ifdef CGAL_COREFINEMENT_DEBUG
-              std::cout << "  Non-manifold edge case 9\n";
+              Rcpp::Rcout << "  Non-manifold edge case 9\n";
 #endif
                 impossible_operation.set(TM2_MINUS_TM1); // tm2 - tm1 is non-manifold
               }
@@ -1532,22 +1533,22 @@ public:
 #endif // CGAL_COREFINEMENT_POLYHEDRA_DEBUG
 
 #ifdef CGAL_COREFINEMENT_DEBUG
-    std::cout << "is_patch_inside_tm2 " <<  is_patch_inside_tm2 << "\n";
-    std::cout << "is_patch_inside_tm1 " << is_patch_inside_tm1 << "\n";
-    std::cout << "coplanar_patches_of_tm1 " << coplanar_patches_of_tm1 << "\n";
-    std::cout << "coplanar_patches_of_tm2 " << coplanar_patches_of_tm2 << "\n";
-    std::cout << "coplanar_patches_of_tm1_for_union_and_intersection "
+    Rcpp::Rcout << "is_patch_inside_tm2 " <<  is_patch_inside_tm2 << "\n";
+    Rcpp::Rcout << "is_patch_inside_tm1 " << is_patch_inside_tm1 << "\n";
+    Rcpp::Rcout << "coplanar_patches_of_tm1 " << coplanar_patches_of_tm1 << "\n";
+    Rcpp::Rcout << "coplanar_patches_of_tm2 " << coplanar_patches_of_tm2 << "\n";
+    Rcpp::Rcout << "coplanar_patches_of_tm1_for_union_and_intersection "
               << coplanar_patches_of_tm1_for_union_and_intersection << "\n";
-    std::cout << "coplanar_patches_of_tm2_for_union_and_intersection "
+    Rcpp::Rcout << "coplanar_patches_of_tm2_for_union_and_intersection "
               << coplanar_patches_of_tm2_for_union_and_intersection << "\n";
-    std::cout << "Size of patches of tm1: ";
+    Rcpp::Rcout << "Size of patches of tm1: ";
     std::copy(tm1_patch_sizes.rbegin(), tm1_patch_sizes.rend(),
-              std::ostream_iterator<std::size_t>(std::cout," ") );
-    std::cout << "\n";
-    std::cout << "Size of patches of tm2: ";
+              std::ostream_iterator<std::size_t>(Rcpp::Rcout," ") );
+    Rcpp::Rcout << "\n";
+    Rcpp::Rcout << "Size of patches of tm2: ";
     std::copy(tm2_patch_sizes.rbegin(), tm2_patch_sizes.rend(),
-              std::ostream_iterator<std::size_t>(std::cout," ") );
-    std::cout << "\n";
+              std::ostream_iterator<std::size_t>(Rcpp::Rcout," ") );
+    Rcpp::Rcout << "\n";
 #endif
 
     //backup an halfedge per polyline
@@ -1696,14 +1697,14 @@ public:
     }
 
     #ifdef CGAL_COREFINEMENT_DEBUG
-    std::cout << "patches_of_tm1_used[UNION] " << patches_of_tm1_used[UNION] << "\n";
-    std::cout << "patches_of_tm2_used[UNION] " << patches_of_tm2_used[UNION] << "\n";
-    std::cout << "patches_of_tm1_used[INTERSECTION] " << patches_of_tm1_used[INTERSECTION] << "\n";
-    std::cout << "patches_of_tm2_used[INTERSECTION] " << patches_of_tm2_used[INTERSECTION] << "\n";
-    std::cout << "patches_of_tm1_used[TM1_MINUS_TM2] " << patches_of_tm1_used[TM1_MINUS_TM2] << "\n";
-    std::cout << "patches_of_tm2_used[TM1_MINUS_TM2] " << patches_of_tm2_used[TM1_MINUS_TM2] << "\n";
-    std::cout << "patches_of_tm1_used[TM2_MINUS_TM1] " << patches_of_tm1_used[TM2_MINUS_TM1] << "\n";
-    std::cout << "patches_of_tm2_used[TM2_MINUS_TM1] " << patches_of_tm2_used[TM2_MINUS_TM1] << "\n";
+    Rcpp::Rcout << "patches_of_tm1_used[UNION] " << patches_of_tm1_used[UNION] << "\n";
+    Rcpp::Rcout << "patches_of_tm2_used[UNION] " << patches_of_tm2_used[UNION] << "\n";
+    Rcpp::Rcout << "patches_of_tm1_used[INTERSECTION] " << patches_of_tm1_used[INTERSECTION] << "\n";
+    Rcpp::Rcout << "patches_of_tm2_used[INTERSECTION] " << patches_of_tm2_used[INTERSECTION] << "\n";
+    Rcpp::Rcout << "patches_of_tm1_used[TM1_MINUS_TM2] " << patches_of_tm1_used[TM1_MINUS_TM2] << "\n";
+    Rcpp::Rcout << "patches_of_tm2_used[TM1_MINUS_TM2] " << patches_of_tm2_used[TM1_MINUS_TM2] << "\n";
+    Rcpp::Rcout << "patches_of_tm1_used[TM2_MINUS_TM1] " << patches_of_tm1_used[TM2_MINUS_TM1] << "\n";
+    Rcpp::Rcout << "patches_of_tm2_used[TM2_MINUS_TM1] " << patches_of_tm2_used[TM2_MINUS_TM1] << "\n";
     #endif // CGAL_COREFINEMENT_DEBUG
     // Schedule the order in which the different boolean operations
     // should be done. First operations are those filling meshes

@@ -16,6 +16,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <CGAL/assertions.h>
 
 namespace CGAL {
@@ -31,7 +32,7 @@ bool Image_3::private_read(_image* im, Own own)
     }
     image_ptr = Image_shared_ptr(im, Image_deleter(own == OWN_THE_DATA));
 
-//     std::cerr <<
+//     Rcpp::Rcerr <<
 //       boost::format("image=%1% (xdim=%2%, ydim=%3%, zdim=%4%)\n")
 //       % image_ptr.get() % image_ptr->xdim % image_ptr->ydim % image_ptr->zdim;
 
@@ -103,7 +104,7 @@ Image_3::read_vtk_image_data(vtkImageData* vtk_image)
   image->wordKind = imageio_type.wordKind;
   image->sign = imageio_type.sign;
   image->data = ::ImageIO_alloc(dims[0]*dims[1]*dims[2]*image->wdim);
-  std::cerr << "GetNumberOfTuples()=" << vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples()
+  Rcpp::Rcerr << "GetNumberOfTuples()=" << vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples()
             << "\nimage->size()=" << dims[0]*dims[1]*dims[2]
             << "\nwdim=" << image->wdim << '\n';
   CGAL_assertion(vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples() == dims[0]*dims[1]*dims[2]);

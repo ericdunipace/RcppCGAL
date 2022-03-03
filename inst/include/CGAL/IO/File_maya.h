@@ -12,6 +12,7 @@
 #ifndef CGAL_IO_FILE_MAYA_H
 #define CGAL_IO_FILE_MAYA_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Time_stamper.h>
@@ -43,7 +44,7 @@ output_to_maya(std::ostream& os,
   typedef CGAL::Hash_handles_with_or_without_timestamps Hash_fct;
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  std::cerr << "Output to maya:\n";
+  Rcpp::Rcerr << "Output to maya:\n";
 #endif
 
   const Tr& tr = c3t3.triangulation();
@@ -307,7 +308,7 @@ output_to_maya(std::ostream& os,
   //-------------------------------------------------------
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  std::cerr << "done.\n";
+  Rcpp::Rcerr << "done.\n";
 #endif
 } // end output_to_maya(...)
 

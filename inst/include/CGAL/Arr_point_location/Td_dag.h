@@ -16,6 +16,7 @@
 #ifndef CGAL_TD_DAG_H
 #define CGAL_TD_DAG_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -268,7 +269,7 @@ public:
   {
     if (!operator!())
       {
-        std::cout << operator*() << '\t';
+        Rcpp::Rcout << operator*() << '\t';
         left().preorder();
         right().preorder();
       }
@@ -278,7 +279,7 @@ public:
     if (!operator!())
       {
         left().inorder();
-        std::cout << operator*() << '\t';
+        Rcpp::Rcout << operator*() << '\t';
         right().inorder();
       }
   }
@@ -288,7 +289,7 @@ public:
       {
         left().postorder();
         right().postorder();
-        std::cout << operator*() << '\t';
+        Rcpp::Rcout << operator*() << '\t';
       }
   }
 #endif

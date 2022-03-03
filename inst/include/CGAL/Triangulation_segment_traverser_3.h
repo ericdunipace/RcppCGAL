@@ -13,6 +13,7 @@
 #ifndef CGAL_TRIANGULATION_SEGMENT_TRAVERSER_3_H
 #define CGAL_TRIANGULATION_SEGMENT_TRAVERSER_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <iostream>
@@ -1066,7 +1067,7 @@ private:
     else if (v1b == v2a || v1b == v2b)
       return v1b;
 
-    std::cerr << "There is no vertex shared by e1 and e2" << std::endl;
+    Rcpp::Rcerr << "There is no vertex shared by e1 and e2" << std::endl;
     CGAL_assertion(false);
     return Vertex_handle();
   }
@@ -1092,7 +1093,7 @@ private:
       }
     } while (++circ != end);
 
-    std::cerr << "There is no facet shared by e1 and e2" << std::endl;
+    Rcpp::Rcerr << "There is no facet shared by e1 and e2" << std::endl;
     CGAL_assertion(false);
     return Facet(Cell_handle(), 0);
   }
@@ -1110,7 +1111,7 @@ private:
         return f;
     } while (++circ != end);
 
-    std::cerr << "There is no facet shared by e and v" << std::endl;
+    Rcpp::Rcerr << "There is no facet shared by e and v" << std::endl;
     CGAL_assertion(false);
     return Facet(Cell_handle(), 0);
   }
@@ -1127,7 +1128,7 @@ private:
         return c;
     } while (++circ != end);
 
-    std::cerr << "There is no cell shared by e and v" << std::endl;
+    Rcpp::Rcerr << "There is no cell shared by e and v" << std::endl;
     CGAL_assertion(false);
     return Cell_handle();
   }

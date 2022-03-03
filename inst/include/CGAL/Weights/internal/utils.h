@@ -15,6 +15,7 @@
 #define CGAL_WEIGHTS_INTERNAL_UTILS_H
 
 // STL includes.
+#include <Rcpp.h>
 #include <cmath>
 #include <string>
 #include <memory>
@@ -477,18 +478,18 @@ namespace internal {
   // Compute WP weights for q1 which is not on the plane [p0, p1, p2].
 
   // Point_3 q1(3, 1, 2);
-  // std::cout << "3D wachspress (WP, q1): ";
-  // std::cout << CGAL::Weights::three_point_family_weight(p0, p1, p2, q1, wp) << std::endl;
+  // Rcpp::Rcout << "3D wachspress (WP, q1): ";
+  // Rcpp::Rcout << CGAL::Weights::three_point_family_weight(p0, p1, p2, q1, wp) << std::endl;
 
   // Converge q1 towards q0 that is we flatten the configuration.
   // We also compare the result with the authalic weight.
 
-  // std::cout << "Converge q1 to q0: " << std::endl;
+  // Rcpp::Rcout << "Converge q1 to q0: " << std::endl;
   // for (FT x = FT(0); x <= FT(1); x += step) {
-  //   std::cout << "3D wachspress/authalic: ";
+  //   Rcpp::Rcout << "3D wachspress/authalic: ";
   //   q1 = Point_3(3, 1, FT(2) - x);
-  //   std::cout << CGAL::Weights::three_point_family_weight(p0, p1, p2, q1, wp) << "/";
-  //   std::cout << CGAL::Weights::authalic_weight(p0, p1, p2, q1) << std::endl;
+  //   Rcpp::Rcout << CGAL::Weights::three_point_family_weight(p0, p1, p2, q1, wp) << "/";
+  //   Rcpp::Rcout << CGAL::Weights::authalic_weight(p0, p1, p2, q1) << std::endl;
   // }
 
   // Flattens an arbitrary quad into a planar quad.
@@ -504,7 +505,7 @@ namespace internal {
     typename GeomTraits::Point_2& pf,
     typename GeomTraits::Point_2& qf) {
 
-    // std::cout << std::endl;
+    // Rcpp::Rcout << std::endl;
     using Point_3 = typename GeomTraits::Point_3;
     using Vector_3 = typename GeomTraits::Vector_3;
 
@@ -517,7 +518,7 @@ namespace internal {
 
     // Compute centroid.
     const auto center = centroid_3(t, r, p, q);
-    // std::cout << "centroid: " << center << std::endl;
+    // Rcpp::Rcout << "centroid: " << center << std::endl;
 
     // Translate.
     const Point_3 t1 = Point_3(
@@ -529,10 +530,10 @@ namespace internal {
     const Point_3 q1 = Point_3(
       q.x() - center.x(), q.y() - center.y(), q.z() - center.z());
 
-    // std::cout << "translated t1: " << t1 << std::endl;
-    // std::cout << "translated r1: " << r1 << std::endl;
-    // std::cout << "translated p1: " << p1 << std::endl;
-    // std::cout << "translated q1: " << q1 << std::endl;
+    // Rcpp::Rcout << "translated t1: " << t1 << std::endl;
+    // Rcpp::Rcout << "translated r1: " << r1 << std::endl;
+    // Rcpp::Rcout << "translated p1: " << p1 << std::endl;
+    // Rcpp::Rcout << "translated q1: " << q1 << std::endl;
 
     // Middle axis.
     auto ax = construct_vector_3(q1, r1);
@@ -552,19 +553,19 @@ namespace internal {
     normalize_3(traits, n1);
     normalize_3(traits, n2);
 
-    // std::cout << "normal n1: " << n1 << std::endl;
-    // std::cout << "normal n2: " << n2 << std::endl;
+    // Rcpp::Rcout << "normal n1: " << n1 << std::endl;
+    // Rcpp::Rcout << "normal n2: " << n2 << std::endl;
 
     // Angle between two normals.
     const double angle_rad = angle_3(traits, n1, n2);
-    // std::cout << "angle deg n1 <-> n2: " << angle_rad * 180.0 / CGAL_PI << std::endl;
+    // Rcpp::Rcout << "angle deg n1 <-> n2: " << angle_rad * 180.0 / CGAL_PI << std::endl;
 
     // Rotate p1 around ax so that it lands onto the plane [q1, t1, r1].
     const auto& t2 = t1;
     const auto& r2 = r1;
     const auto  p2 = rotate_point_3(traits, angle_rad, ax, p1);
     const auto& q2 = q1;
-    // std::cout << "rotated p2: " << p2 << std::endl;
+    // Rcpp::Rcout << "rotated p2: " << p2 << std::endl;
 
     // Compute orthogonal base vectors.
     Vector_3 b1, b2;
@@ -572,7 +573,7 @@ namespace internal {
     orthogonal_bases_3(traits, normal, b1, b2);
 
     // const auto angle12 = angle_3(traits, b1, b2);
-    // std::cout << "angle deg b1 <-> b2: " << angle12 * 180.0 / CGAL_PI << std::endl;
+    // Rcpp::Rcout << "angle deg b1 <-> b2: " << angle12 * 180.0 / CGAL_PI << std::endl;
 
     // Flatten a quad.
     const auto& origin = q2;
@@ -581,15 +582,15 @@ namespace internal {
     pf = to_2d(traits, b1, b2, origin, p2);
     qf = to_2d(traits, b1, b2, origin, q2);
 
-    // std::cout << "flattened qf: " << qf << std::endl;
-    // std::cout << "flattened tf: " << tf << std::endl;
-    // std::cout << "flattened rf: " << rf << std::endl;
-    // std::cout << "flattened pf: " << pf << std::endl;
+    // Rcpp::Rcout << "flattened qf: " << qf << std::endl;
+    // Rcpp::Rcout << "flattened tf: " << tf << std::endl;
+    // Rcpp::Rcout << "flattened rf: " << rf << std::endl;
+    // Rcpp::Rcout << "flattened pf: " << pf << std::endl;
 
-    // std::cout << "A1: " << area_2(traits, rf, qf, pf) << std::endl;
-    // std::cout << "A2: " << area_2(traits, pf, qf, rf) << std::endl;
-    // std::cout << "C: "  << area_2(traits, tf, rf, pf) << std::endl;
-    // std::cout << "B: "  << area_2(traits, pf, qf, tf) << std::endl;
+    // Rcpp::Rcout << "A1: " << area_2(traits, rf, qf, pf) << std::endl;
+    // Rcpp::Rcout << "A2: " << area_2(traits, pf, qf, rf) << std::endl;
+    // Rcpp::Rcout << "C: "  << area_2(traits, tf, rf, pf) << std::endl;
+    // Rcpp::Rcout << "B: "  << area_2(traits, pf, qf, tf) << std::endl;
   }
 
   // Computes area of a 2D triangle.

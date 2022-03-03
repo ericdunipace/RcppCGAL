@@ -15,6 +15,7 @@
 #ifndef CGAL_NO_INTERSECTION_SURFACE_SWEEP_2_IMPL_H
 #define CGAL_NO_INTERSECTION_SURFACE_SWEEP_2_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file
@@ -225,9 +226,9 @@ void No_intersection_surface_sweep_2<Vis>::_init_point(const Point_2& pt,
   Arr_parameter_space ps_x = m_traits->parameter_space_in_x_2_object()(pt);
   Arr_parameter_space ps_y = m_traits->parameter_space_in_y_2_object()(pt);
 #if 0
-  CGAL::set_pretty_mode(std::cout);
-  std::cout << "init pt ps_x: " << ps_x << std::endl;
-  std::cout << "init pt ps_y: " << ps_y << std::endl;
+  CGAL::set_pretty_mode(Rcpp::Rcout);
+  Rcpp::Rcout << "init pt ps_x: " << ps_x << std::endl;
+  Rcpp::Rcout << "init pt ps_y: " << ps_y << std::endl;
 #endif
 
   const std::pair<Event*, bool>& pair_res =
@@ -883,10 +884,10 @@ No_intersection_surface_sweep_2<Vis>::_push_event(const X_monotone_curve_2& cv,
     // queue, so we just have to update it.
     e = *(pair_res.first);
 #if 0
-    std::cout << "ps_x: " << ps_x << std::endl;
-    std::cout << "ps_y: " << ps_y << std::endl;
-    std::cout << "es_x: " << e->parameter_space_in_x() << std::endl;
-    std::cout << "es_y: " << e->parameter_space_in_y() << std::endl;
+    Rcpp::Rcout << "ps_x: " << ps_x << std::endl;
+    Rcpp::Rcout << "ps_y: " << ps_y << std::endl;
+    Rcpp::Rcout << "es_x: " << e->parameter_space_in_x() << std::endl;
+    Rcpp::Rcout << "es_y: " << e->parameter_space_in_y() << std::endl;
 #endif
     CGAL_assertion(e->parameter_space_in_x() == ps_x);
     CGAL_assertion(e->parameter_space_in_y() == ps_y);

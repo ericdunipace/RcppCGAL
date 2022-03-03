@@ -14,6 +14,7 @@
 #ifndef CGAL_ROTATIONAL_SWEEP_VISIBILITY_2_H
 #define CGAL_ROTATIONAL_SWEEP_VISIBILITY_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Visibility_2.h>
 
 
@@ -566,7 +567,7 @@ private:
     }
 
     //angular sweep begins
-//    std::cout<<active_edges.size()<<std::endl;
+//    Rcpp::Rcout<<active_edges.size()<<std::endl;
     for (typename VHs::size_type i=0; i!=vs.size(); i++) {
       VH vh = vs[i];
       EH closest_e = *active_edges.begin();
@@ -676,7 +677,7 @@ private:
   }
 
   void print_edge(const EH e) const {
-    std::cout << e->source()->point() <<"->"<< e->target()->point() <<std::endl;
+    Rcpp::Rcout << e->source()->point() <<"->"<< e->target()->point() <<std::endl;
   }
 
   //compute the intersection of ray(q->dp) and segment(s, t)

@@ -20,23 +20,23 @@ Segment_Delaunay_graph_Linf_2<Gt,ST,D_S,LTag>::
 face_output(const char *before, Face_handle f,
             const char *after) const
 {
-  std::cout << before;
+  Rcpp::Rcout << before;
   if (is_infinite(f->vertex(0))) {
-    std::cout << " infv";
+    Rcpp::Rcout << " infv";
   } else {
-    std::cout << ' ' << f->vertex(0)->site();
+    Rcpp::Rcout << ' ' << f->vertex(0)->site();
   }
   if (is_infinite(f->vertex(1))) {
-    std::cout << " infv";
+    Rcpp::Rcout << " infv";
   } else {
-    std::cout << ' ' << f->vertex(1)->site();
+    Rcpp::Rcout << ' ' << f->vertex(1)->site();
   }
   if (is_infinite(f->vertex(2))) {
-    std::cout << " infv";
+    Rcpp::Rcout << " infv";
   } else {
-    std::cout << ' ' << f->vertex(2)->site();
+    Rcpp::Rcout << ' ' << f->vertex(2)->site();
   }
-  std::cout << after;
+  Rcpp::Rcout << after;
 }
 
 
@@ -63,7 +63,7 @@ oriented_side_face_tiebreak(
       CGAL_assertion(  !is_infinite( f->vertex(ccw_v) )  );
       CGAL_assertion( f->vertex(ccw_v)->site().is_point() );
       sv_ep = f->vertex(ccw_v)->site();
-      CGAL_SDG_DEBUG( std::cout <<
+      CGAL_SDG_DEBUG( Rcpp::Rcout <<
           "debug sv_ep = " << sv_ep << std::endl;
           );
       os = oriented_side(sitev, sv_ep, sitev_supp, t, t.point());
@@ -71,7 +71,7 @@ oriented_side_face_tiebreak(
       CGAL_assertion(  !is_infinite( f->vertex( cw_v) )  );
       CGAL_assertion( f->vertex( cw_v)->site().is_point() );
       sv_ep = f->vertex( cw_v)->site();
-      CGAL_SDG_DEBUG( std::cout <<
+      CGAL_SDG_DEBUG( Rcpp::Rcout <<
           "debug sv_ep = " << sv_ep << std::endl;
           );
       os = oriented_side(sv_ep, sitev, sitev_supp, t, t.point());
@@ -95,7 +95,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
 {
   CGAL_precondition( v->is_segment() );
 
-  CGAL_SDG_DEBUG(std::cout << "debug: impl find_faces_to_split enters "
+  CGAL_SDG_DEBUG(Rcpp::Rcout << "debug: impl find_faces_to_split enters "
       << "with v=" << v->site() << " t=" << t << std::endl; );
 
 #ifndef CGAL_NO_ASSERTIONS
@@ -111,10 +111,10 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
       n_faces++;
     } while ( fc != fc_start );
 
-    CGAL_SDG_DEBUG( std::cout
+    CGAL_SDG_DEBUG( Rcpp::Rcout
         << "debug: impl find_faces_to_split: n_faces="
         << n_faces << std::endl; );
-    CGAL_SDG_DEBUG( std::cout
+    CGAL_SDG_DEBUG( Rcpp::Rcout
         << "debug: impl find_faces_to_split: n_inf="
         << n_inf << std::endl; );
 
@@ -158,14 +158,14 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
   Site_2 sitev = v->site();
   Site_2 sitev_supp = v->site().supporting_site();
 
-  CGAL_SDG_DEBUG( std::cout
+  CGAL_SDG_DEBUG( Rcpp::Rcout
       << "debug: impl find_faces_to_split: vsite="
       << v->site() << " with supporting site="
       << v->site().supporting_site() << std::endl; );
 
   do {
 
-    CGAL_SDG_DEBUG(std::cout << "debug impl start (found_f1 found_f2)= "
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl start (found_f1 found_f2)= "
                    << found_f1 << " " << found_f2 << std::endl;);
 
     Face_handle ff1(fc1), ff2(fc2);
@@ -186,7 +186,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
         CGAL_assertion(  !is_infinite( ff1->vertex(ccw_v) )  );
         CGAL_assertion( ff1->vertex(ccw_v)->site().is_point() );
         sv_ep = ff1->vertex(ccw_v)->site();
-        CGAL_SDG_DEBUG( std::cout <<
+        CGAL_SDG_DEBUG( Rcpp::Rcout <<
             "debug sv_ep = " << sv_ep << std::endl;
             );
         os1 = oriented_side(sitev, sv_ep, sitev_supp, t);
@@ -194,7 +194,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
         CGAL_assertion(  !is_infinite( ff1->vertex( cw_v) )  );
         CGAL_assertion( ff1->vertex( cw_v)->site().is_point() );
         sv_ep = ff1->vertex( cw_v)->site();
-        CGAL_SDG_DEBUG( std::cout <<
+        CGAL_SDG_DEBUG( Rcpp::Rcout <<
             "debug sv_ep = " << sv_ep << std::endl;
             );
         os1 = oriented_side(sv_ep, sitev, sitev_supp, t);
@@ -206,7 +206,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
                           sitev_supp, t);
     }
 
-    CGAL_SDG_DEBUG( std::cout <<
+    CGAL_SDG_DEBUG( Rcpp::Rcout <<
         "debug os1 = " << os1 << std::endl; );
 
     if ( is_infinite(ff2) ) {
@@ -233,20 +233,20 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
                           sitev_supp, t);
     }
 
-    CGAL_SDG_DEBUG( std::cout <<
+    CGAL_SDG_DEBUG( Rcpp::Rcout <<
         "debug os2 = " << os2 << std::endl; );
 
 #ifdef CGAL_SDG_VERBOSE
     face_output("debug ff1=[", ff1, "] has os1=");
-    std::cout << os1 << std::endl;
+    Rcpp::Rcout << os1 << std::endl;
     face_output("debug ff2=[", ff2, "] has os2=");
-    std::cout << os2 << std::endl;
+    Rcpp::Rcout << os2 << std::endl;
 #endif
 
     if (os1 == ON_ORIENTED_BOUNDARY) {
       ++count_zeros;
       if (fc_start == fc1) {
-        CGAL_SDG_DEBUG(std::cout << "debug impl start face has os=0"
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl start face has os=0"
             << std::endl;);
         os0_fc_start = true;
       }
@@ -254,13 +254,13 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
         CGAL_assertion(! is_set_f0_on);
         CGAL_assertion_code( is_set_f0_on = true ) ;
         f0_on = ff1;
-        CGAL_SDG_DEBUG(std::cout << "debug impl found f0_on "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl found f0_on "
           << std::endl;);
       } else if (os2 == ON_POSITIVE_SIDE) {
         CGAL_assertion(! is_set_f0_op);
         CGAL_assertion_code( is_set_f0_op = true ) ;
         f0_op = ff1;
-        CGAL_SDG_DEBUG(std::cout << "debug impl found f0_op "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl found f0_op "
           << std::endl;);
       }
     }
@@ -271,7 +271,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
       found_f1 = true;
       count_nop_zeros = count_zeros;
       count_zeros = 0;
-      CGAL_SDG_DEBUG(std::cout << "debug impl found_f1 set to true "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl found_f1 set to true "
           << "with os1=" << os1 << std::endl;);
 #ifndef CGAL_NO_ASSERTIONS
       if (os1 == ON_ORIENTED_BOUNDARY) {
@@ -293,7 +293,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
       found_f2 = true;
       count_pon_zeros = count_zeros;
       count_zeros = 0;
-      CGAL_SDG_DEBUG(std::cout << "debug impl found_f2 set to true "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl found_f2 set to true "
           << "with os1=" << os1 << std::endl;);
 #ifndef CGAL_NO_ASSERTIONS
       if (os1 == ON_ORIENTED_BOUNDARY) {
@@ -313,18 +313,18 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
         CGAL_assertion(! is_set_f0_no);
         CGAL_assertion_code( is_set_f0_no = true );
         f0_no = ff2;
-        CGAL_SDG_DEBUG(std::cout << "debug impl found f0_no "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl found f0_no "
           << std::endl;);
       } else if (os1 == ON_POSITIVE_SIDE) {
         CGAL_assertion(! is_set_f0_po);
         CGAL_assertion_code( is_set_f0_po = true );
         f0_po = ff2;
-        CGAL_SDG_DEBUG(std::cout << "debug impl found f0_po "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl found f0_po "
           << std::endl;);
       }
     }
 
-    CGAL_SDG_DEBUG(std::cout << "debug impl end (found_f1 found_f2)= "
+    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug impl end (found_f1 found_f2)= "
                    << found_f1 << " " << found_f2 << std::endl;);
 
     if ( found_f1 && found_f2 && (!os0_fc_start) ) { break; }
@@ -332,7 +332,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
     ++fc1, ++fc2;
   } while ( fc_start != fc1 );
 
-  CGAL_SDG_DEBUG(std::cout << "debug after loop count_zeros="
+  CGAL_SDG_DEBUG(Rcpp::Rcout << "debug after loop count_zeros="
       << count_zeros << std::endl;);
 
 #ifndef CGAL_NO_ASSERTIONS
@@ -364,8 +364,8 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
     }
   }
 #ifdef CGAL_SDG_VERBOSE
-  std::cout << "debug count_nop_zeros=" << count_nop_zeros << std::endl;
-  std::cout << "debug count_pon_zeros=" << count_pon_zeros << std::endl;
+  Rcpp::Rcout << "debug count_nop_zeros=" << count_nop_zeros << std::endl;
+  Rcpp::Rcout << "debug count_pon_zeros=" << count_pon_zeros << std::endl;
 #endif
 
   Oriented_side os_f0_no(ON_ORIENTED_BOUNDARY);
@@ -380,7 +380,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
     if (os_f0_op == ON_NEGATIVE_SIDE) {
       // do nothing
     } else if (os_f0_no == ON_POSITIVE_SIDE) {
-      CGAL_SDG_DEBUG(std::cerr << "debug f1 updated"
+      CGAL_SDG_DEBUG(Rcpp::Rcerr << "debug f1 updated"
           << std::endl;);
       f1 = f0_no;
     } else {
@@ -388,7 +388,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
     }
   }
 #ifdef CGAL_SDG_VERBOSE
-  std::cout << "debug os_f0_no=" << os_f0_no
+  Rcpp::Rcout << "debug os_f0_no=" << os_f0_no
     << " os_f0_op=" << os_f0_op
     << " connect_all_nop=" << connect_all_nop << std::endl;
 #endif
@@ -405,7 +405,7 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
     if (os_f0_on == ON_POSITIVE_SIDE) {
       // do nothing
     } else if (os_f0_po == ON_NEGATIVE_SIDE) {
-      CGAL_SDG_DEBUG(std::cerr << "debug f2 updated"
+      CGAL_SDG_DEBUG(Rcpp::Rcerr << "debug f2 updated"
           << std::endl;);
       f2 = f0_po;
     } else {
@@ -413,34 +413,34 @@ find_faces_to_split(const Vertex_handle& v, const Site_2& t,
     }
   }
 #ifdef CGAL_SDG_VERBOSE
-  std::cout << "debug os_f0_po=" << os_f0_po
+  Rcpp::Rcout << "debug os_f0_po=" << os_f0_po
     << " os_f0_on=" << os_f0_on
     << " connect_all_pon=" << connect_all_pon << std::endl;
 #endif
 
 #ifdef CGAL_SDG_VERBOSE
-  std::cout << "debug find_faces_to_split results" << std::endl;
+  Rcpp::Rcout << "debug find_faces_to_split results" << std::endl;
   face_output("debug f1=[", f1, "]\n");
   face_output("debug f2=[", f2, "]\n");
   if (is_nop) {
     face_output("debug f0_no=[", f0_no, "]\n");
     face_output("debug f0_op=[", f0_op, "]\n");
-    std::cout << "debug f0_no, f0_op "
+    Rcpp::Rcout << "debug f0_no, f0_op "
       << ((f0_no == f0_op)? "equal" : "not equal") << std::endl;
   } else {
-    std::cout << "debug f0_no=UNSET" << std::endl;
-    std::cout << "debug f0_op=UNSET" << std::endl;
-    std::cout << "debug f0_no, f0_op UNSET" << std::endl;
+    Rcpp::Rcout << "debug f0_no=UNSET" << std::endl;
+    Rcpp::Rcout << "debug f0_op=UNSET" << std::endl;
+    Rcpp::Rcout << "debug f0_no, f0_op UNSET" << std::endl;
   }
   if (is_pon) {
     face_output("debug f0_po=[", f0_po, "]\n");
     face_output("debug f0_on=[", f0_on, "]\n");
-    std::cout << "debug f0_po, f0_on "
+    Rcpp::Rcout << "debug f0_po, f0_on "
       << ((f0_po == f0_on)? "equal" : "not equal") << std::endl;
   } else {
-    std::cout << "debug f0_po=UNSET" << std::endl;
-    std::cout << "debug f0_on=UNSET" << std::endl;
-    std::cout << "debug f0_po, f0_on UNSET" << std::endl;
+    Rcpp::Rcout << "debug f0_po=UNSET" << std::endl;
+    Rcpp::Rcout << "debug f0_on=UNSET" << std::endl;
+    Rcpp::Rcout << "debug f0_po, f0_on UNSET" << std::endl;
   }
 #endif
 
@@ -494,7 +494,7 @@ insert_exact_point_on_segment(const Storage_site_2& ss, const Site_2& t,
   Face_pair fpair = find_faces_to_split(v, t, flips_nop, flips_pon);
 
 #ifdef CGAL_SDG_VERBOSE
-  std::cout << "debug ins exact flips_nop=" << flips_nop
+  Rcpp::Rcout << "debug ins exact flips_nop=" << flips_nop
     << " flips_pon=" << flips_pon
     << std::endl;
 #endif
@@ -534,9 +534,9 @@ insert_exact_point_on_segment(const Storage_site_2& ss, const Site_2& t,
   if (flips_nop > 0) {
     CGAL_assertion( f_i != -1 );
 #ifdef CGAL_SDG_VERBOSE
-    std::cout << "debug flip_nop>0 otherf=";
+    Rcpp::Rcout << "debug flip_nop>0 otherf=";
     face_output("[", otherf, "]");
-    std::cout << " at f_i=" << f_i << std::endl;
+    Rcpp::Rcout << " at f_i=" << f_i << std::endl;
 #endif
     unsigned int remaining_nop = flips_nop;
     Face_handle next_face = otherf;
@@ -549,9 +549,9 @@ insert_exact_point_on_segment(const Storage_site_2& ss, const Site_2& t,
         next_i = this->_tds.mirror_index(current_face, ccw(current_i));
       }
 #ifdef CGAL_SDG_VERBOSE
-      std::cout << "debug remaining_nop=" << remaining_nop;
+      Rcpp::Rcout << "debug remaining_nop=" << remaining_nop;
       face_output(" flip curf=[", current_face, "]");
-      std::cout << " at f_i=" << current_i << std::endl;
+      Rcpp::Rcout << " at f_i=" << current_i << std::endl;
 #endif
       this->_tds.flip(current_face, current_i);
       --remaining_nop;
@@ -561,9 +561,9 @@ insert_exact_point_on_segment(const Storage_site_2& ss, const Site_2& t,
   if (flips_pon > 0) {
     CGAL_assertion( g_i != -1 );
 #ifdef CGAL_SDG_VERBOSE
-    std::cout << "debug flip otherg=";
+    Rcpp::Rcout << "debug flip otherg=";
     face_output("[", otherg, "]");
-    std::cout << " at g_i=" << g_i << std::endl;
+    Rcpp::Rcout << " at g_i=" << g_i << std::endl;
 #endif
     unsigned int remaining_pon = flips_pon;
     Face_handle next_face = otherg;
@@ -576,9 +576,9 @@ insert_exact_point_on_segment(const Storage_site_2& ss, const Site_2& t,
         next_i = this->_tds.mirror_index(current_face, ccw(current_i));
       }
 #ifdef CGAL_SDG_VERBOSE
-      std::cout << "debug remaining_pon=" << remaining_pon;
+      Rcpp::Rcout << "debug remaining_pon=" << remaining_pon;
       face_output(" flip curg=[", current_face, "]");
-      std::cout << " at g_i=" << current_i << std::endl;
+      Rcpp::Rcout << " at g_i=" << current_i << std::endl;
 #endif
       this->_tds.flip(current_face, current_i);
       --remaining_pon;
@@ -601,7 +601,7 @@ insert_exact_point_on_segment(const Storage_site_2& ss, const Site_2& t,
       n_faces++;
     } while ( fc != fc_start );
 
-    CGAL_SDG_DEBUG( std::cout
+    CGAL_SDG_DEBUG( Rcpp::Rcout
         << "debug: impl insert_exact_point_on_segment: n_faces="
         << n_faces << std::endl; );
     CGAL_assertion( n_faces == 4 + flips_nop + flips_pon );
@@ -630,13 +630,13 @@ insert_point_on_segment(const Storage_site_2& ss, const Site_2& ,
 
   #ifdef CGAL_SDG_VERBOSE
   Site_2 sitev = ssitev.site();
-  std::cout << "debug insert_point_on_segment intsec="
+  Rcpp::Rcout << "debug insert_point_on_segment intsec="
     << ssx.site() << " v=" << sitev << std::endl ;
   #endif
   Face_pair fpair = find_faces_to_split(v, ssx.site(), flips_nop, flips_pon);
 
 #ifdef CGAL_SDG_VERBOSE
-  std::cout << "debug ins flips_nop=" << flips_nop
+  Rcpp::Rcout << "debug ins flips_nop=" << flips_nop
     << " flips_pon=" << flips_pon
     << std::endl;
 #endif
@@ -680,9 +680,9 @@ insert_point_on_segment(const Storage_site_2& ss, const Site_2& ,
   if (flips_nop > 0) {
     CGAL_assertion( f_i != -1 );
 #ifdef CGAL_SDG_VERBOSE
-    std::cout << "debug flip_nop>0 otherf=";
+    Rcpp::Rcout << "debug flip_nop>0 otherf=";
     face_output("[", otherf, "]");
-    std::cout << " at f_i=" << f_i << std::endl;
+    Rcpp::Rcout << " at f_i=" << f_i << std::endl;
 #endif
     unsigned int remaining_nop = flips_nop;
     Face_handle next_face = otherf;
@@ -695,9 +695,9 @@ insert_point_on_segment(const Storage_site_2& ss, const Site_2& ,
         next_i = this->_tds.mirror_index(current_face, ccw(current_i));
       }
 #ifdef CGAL_SDG_VERBOSE
-      std::cout << "debug remaining_nop=" << remaining_nop;
+      Rcpp::Rcout << "debug remaining_nop=" << remaining_nop;
       face_output(" flip curf=[", current_face, "]");
-      std::cout << " at f_i=" << current_i << std::endl;
+      Rcpp::Rcout << " at f_i=" << current_i << std::endl;
 #endif
       this->_tds.flip(current_face, current_i);
       --remaining_nop;
@@ -707,9 +707,9 @@ insert_point_on_segment(const Storage_site_2& ss, const Site_2& ,
   if (flips_pon > 0) {
     CGAL_assertion( g_i != -1 );
 #ifdef CGAL_SDG_VERBOSE
-    std::cout << "debug flip otherg=";
+    Rcpp::Rcout << "debug flip otherg=";
     face_output("[", otherg, "]");
-    std::cout << " at g_i=" << g_i << std::endl;
+    Rcpp::Rcout << " at g_i=" << g_i << std::endl;
 #endif
     unsigned int remaining_pon = flips_pon;
     Face_handle next_face = otherg;
@@ -722,9 +722,9 @@ insert_point_on_segment(const Storage_site_2& ss, const Site_2& ,
         next_i = this->_tds.mirror_index(current_face, ccw(current_i));
       }
 #ifdef CGAL_SDG_VERBOSE
-      std::cout << "debug remaining_pon=" << remaining_pon;
+      Rcpp::Rcout << "debug remaining_pon=" << remaining_pon;
       face_output(" flip curg=[", current_face, "]");
-      std::cout << " at g_i=" << current_i << std::endl;
+      Rcpp::Rcout << " at g_i=" << current_i << std::endl;
 #endif
       this->_tds.flip(current_face, current_i);
       --remaining_pon;
@@ -745,7 +745,7 @@ insert_point_on_segment(const Storage_site_2& ss, const Site_2& ,
       n_faces++;
     } while ( fc != fc_start );
 
-    CGAL_SDG_DEBUG( std::cout
+    CGAL_SDG_DEBUG( Rcpp::Rcout
         << "debug: impl insert_point_on_segment: n_faces="
         << n_faces << std::endl; );
     CGAL_assertion( n_faces == 4 + flips_nop + flips_pon );

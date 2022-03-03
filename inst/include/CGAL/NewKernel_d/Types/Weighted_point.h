@@ -11,6 +11,7 @@
 
 #ifndef CGAL_KD_TYPE_WP_H
 #define CGAL_KD_TYPE_WP_H
+#include <Rcpp.h>
 #include <CGAL/NewKernel_d/store_kernel.h>
 #include <CGAL/boost/iterator/counting_iterator.hpp>
 namespace CGAL {
@@ -203,9 +204,9 @@ template <class R_> struct Power_center : Store_kernel<R_> {
       }
       CGAL_assertion (i == d);
       Vec res = typename CVec::Dimension()(d);;
-      //std::cout << "Mat: " << m << "\n Vec: " << one << std::endl;
+      //Rcpp::Rcout << "Mat: " << m << "\n Vec: " << one << std::endl;
       LA::solve(res, std::move(m), std::move(b));
-      //std::cout << "Sol: " << res << std::endl;
+      //Rcpp::Rcout << "Sol: " << res << std::endl;
       Point center = cp(d,LA::vector_begin(res),LA::vector_end(res));
       FT const& r2 = pdp (wp0, center);
       return cwp(std::move(center), r2);

@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_COPLANAR_SIDE_OF_BOUNDED_CIRCLE_3_H
 #define CGAL_INTERNAL_STATIC_FILTERS_COPLANAR_SIDE_OF_BOUNDED_CIRCLE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/Simple_cartesian.h>
 #include <CGAL/Filtered_kernel.h>
 #include <CGAL/MP_Float.h>
@@ -39,7 +40,7 @@ class Side_of_bounded_circle_3
                               t1, t1, t1, sq,
                               n1, n1, n1, sq_n1); // Full det
     double err = det.error();
-    std::cerr << "*** epsilon for In_circle_3 = " << err << std::endl;
+    Rcpp::Rcerr << "*** epsilon for In_circle_3 = " << err << std::endl;
     return err;
   }
 

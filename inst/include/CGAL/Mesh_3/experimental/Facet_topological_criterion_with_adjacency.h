@@ -12,6 +12,7 @@
 #ifndef CGAL_MESH_3_FACET_TOPOLOGICAL_CRITERION_WITH_ADJACENCY_H
 #define CGAL_MESH_3_FACET_TOPOLOGICAL_CRITERION_WITH_ADJACENCY_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Mesh_3/mesh_standard_criteria.h>
@@ -89,7 +90,7 @@ protected:
           domain->get_corner_incidences(corner_id, std::back_inserter(set));
           if(std::find(set.begin(), set.end(), patch_index) == set.end()) {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-            std::cerr << "Bad facet "
+            Rcpp::Rcerr << "Bad facet "
                          "(Facet_topological_criterion_with_adjacency: corner #"
                       << corner_id << ", point " << v->point()
                       << ", is not incident to patch #" << patch_index << ")"
@@ -108,7 +109,7 @@ protected:
           domain->get_incidences(curve_id, std::back_inserter(set));
           if(std::find(set.begin(), set.end(), patch_index) == set.end()) {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-            std::cerr << "Bad facet "
+            Rcpp::Rcerr << "Bad facet "
                          "(Facet_topological_criterion_with_adjacency: curve #"
                       << curve_id << ", at point " << v->point()
                       << ", is not incident to patch #" << patch_index << ")"
@@ -121,7 +122,7 @@ protected:
       case 2:
         if(domain->surface_patch_index(v->index()) != patch_index) {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-          std::cerr << "Bad facet (Facet_topological_criterion_with_adjacency: "
+          Rcpp::Rcerr << "Bad facet (Facet_topological_criterion_with_adjacency: "
                        "vertex at point "
                     << v->point() << " is not on patch #" << patch_index << ")"
                     << std::endl;
@@ -136,7 +137,7 @@ protected:
     }
     if(nb_vertices_on_curves == 3) {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      std::cerr << "Bad facet (Facet_topological_criterion_with_adjacency: "
+      Rcpp::Rcerr << "Bad facet (Facet_topological_criterion_with_adjacency: "
                    "three points on a curve)\n";
 #endif
       return Is_bad(Quality(1)); // bad!

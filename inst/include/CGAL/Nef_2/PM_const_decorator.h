@@ -13,6 +13,7 @@
 #ifndef CGAL_PM_CONST_DECORATOR_H
 #define CGAL_PM_CONST_DECORATOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 
@@ -379,7 +380,7 @@ Size_type number_of_face_cycles() const;
 Size_type number_of_connected_components() const;
 /*{\Mop calculates the number of connected components of |P|.}*/
 
-void print_statistics(std::ostream& os = std::cout) const
+void print_statistics(std::ostream& os = Rcpp::Rcout) const
 /*{\Mop print the statistics of |P|: the number of vertices, edges, and
    faces.}*/
 {

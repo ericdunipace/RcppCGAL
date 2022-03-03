@@ -13,6 +13,7 @@
 #ifndef CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_H
 #define CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -163,7 +164,7 @@ public:
     auto it = x_objects.begin();
     const auto* xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    std::cout << "1.a. insert_in_face_interior(" << *xc << ")" << std::endl;
+    Rcpp::Rcout << "1.a. insert_in_face_interior(" << *xc << ")" << std::endl;
 #endif
     Halfedge_handle he = m_sgm.insert_in_face_interior(*xc, m_sgm.faces_begin());
     if (! xc->is_directed_right()) he = he->twin();
@@ -174,7 +175,7 @@ public:
 
     xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    std::cout << "1.b. insert_from_vertex(" << *xc << ")" << std::endl;
+    Rcpp::Rcout << "1.b. insert_from_vertex(" << *xc << ")" << std::endl;
 #endif
     *oi++ = (xc->is_directed_right()) ?
       m_sgm.insert_from_left_vertex(*xc, he->target()) :
@@ -204,7 +205,7 @@ public:
     auto it = x_objects.begin();
     const auto* xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    std::cout << "2.a. insert_from_vertex(" << *xc << ", "
+    Rcpp::Rcout << "2.a. insert_from_vertex(" << *xc << ", "
               << vertex1->point() << ")" << std::endl;
 #endif
 
@@ -218,7 +219,7 @@ public:
 
     xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    std::cout << "2.b. insert_from_vertex(" << *xc << ")" << std::endl;
+    Rcpp::Rcout << "2.b. insert_from_vertex(" << *xc << ")" << std::endl;
 #endif
     *oi++ = (xc->is_directed_right()) ?
       m_sgm.insert_from_left_vertex(*xc, he->target()) :
@@ -249,7 +250,7 @@ public:
     if (x_objects.size() == 1) {
       const auto* xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-      std::cout << "3. insert_from_vertex(" << *xc << ")" << std::endl;
+      Rcpp::Rcout << "3. insert_from_vertex(" << *xc << ")" << std::endl;
 #endif
       Halfedge_handle he = (xc->is_directed_right()) ?
         m_sgm.insert_from_right_vertex(*xc, vertex2) :
@@ -262,14 +263,14 @@ public:
     const X_monotone_curve_2* xc2 = boost::get<X_monotone_curve_2>(&(*it));
 
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    std::cout << "3.a. insert_from_vertex(" << *xc2 << ")" << std::endl;
+    Rcpp::Rcout << "3.a. insert_from_vertex(" << *xc2 << ")" << std::endl;
 #endif
     Halfedge_handle he2 = (xc2->is_directed_right()) ?
       m_sgm.insert_from_right_vertex(*xc2, vertex2) :
       m_sgm.insert_from_left_vertex(*xc2, vertex2);
     he2 = he2->twin();
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    std::cout << "3.b. insert_from_vertex(" << *xc1 << ")" << std::endl;
+    Rcpp::Rcout << "3.b. insert_from_vertex(" << *xc1 << ")" << std::endl;
 #endif
     Halfedge_handle he1 = (xc1->is_directed_right()) ?
       m_sgm.insert_from_right_vertex(*xc1, he2->source()) :
@@ -302,7 +303,7 @@ public:
     if (x_objects.size() == 1) {
       const auto* xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-      std::cout << "4. insert_at_vertices(" << *xc << ")" << std::endl;
+      Rcpp::Rcout << "4. insert_at_vertices(" << *xc << ")" << std::endl;
 #endif
       *oi++ = m_sgm.insert_at_vertices(*xc, vertex1, vertex2);
       return oi;
@@ -312,7 +313,7 @@ public:
     const X_monotone_curve_2 * xc2 = boost::get<X_monotone_curve_2>(&(*it));
 
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    std::cout << "4.a. insert_from_vertex(" << *xc1
+    Rcpp::Rcout << "4.a. insert_from_vertex(" << *xc1
               << "," << vertex1->point() << ")" << std::endl;
 #endif
     Halfedge_handle he = (xc1->is_directed_right()) ?
@@ -320,7 +321,7 @@ public:
       m_sgm.insert_from_right_vertex(*xc1, vertex1);
     *oi++ = he;
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    std::cout << "4.b. insert_at_vertices(" << *xc2 << ")" << std::endl;
+    Rcpp::Rcout << "4.b. insert_at_vertices(" << *xc2 << ")" << std::endl;
 #endif
     *oi++ = m_sgm.insert_at_vertices(*xc2, he->target(), vertex2);
     return oi;
@@ -397,7 +398,7 @@ public:
   /*! Print statistics */
   void print_stat()
   {
-    std::cout << "No. vertices: " << this->number_of_vertices()
+    Rcpp::Rcout << "No. vertices: " << this->number_of_vertices()
               << ",  no. halfedges: " << this->number_of_halfedges()
               << ",  no. faces: " << this->number_of_faces()
               << std::endl;

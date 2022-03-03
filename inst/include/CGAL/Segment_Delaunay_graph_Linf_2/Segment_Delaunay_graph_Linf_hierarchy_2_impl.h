@@ -104,7 +104,7 @@ Segment_Delaunay_graph_Linf_hierarchy_2<Gt,ST,STag,D_S,LTag>::
 insert_point(const Point_2& p, const Storage_site_2& ss, int level,
              Vertex_handle* vertices)
 {
-  CGAL_SDG_DEBUG(std::cout << "debug hier insert_point " << p << " at level "
+  CGAL_SDG_DEBUG(Rcpp::Rcout << "debug hier insert_point " << p << " at level "
                  << level << std::endl;);
 
   CGAL_precondition( level != UNDEFINED_LEVEL );
@@ -130,7 +130,7 @@ insert_point(const Point_2& p, const Storage_site_2& ss, int level,
                     at_res == AT2::IDENTICAL );
 
     if ( vnear[0]->is_point() ) {
-      CGAL_SDG_DEBUG(std::cout << "debug hier insert_point nearest is point"
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug hier insert_point nearest is point"
                      << std::endl;);
       if ( at_res == AT2::IDENTICAL ) {
         vertex = vnear[0];
@@ -313,7 +313,7 @@ insert_segment(const Point_2& p0, const Point_2& p1,
                const Storage_site_2& ss, int level)
 {
 
-  CGAL_SDG_DEBUG(std::cout << "debug hier insert_segment "
+  CGAL_SDG_DEBUG(Rcpp::Rcout << "debug hier insert_segment "
                  << p0 << ' ' << p1 << std::endl;);
 
   // the tag is true so we DO insert segments in hierarchy
@@ -384,7 +384,7 @@ insert_segment_interior(const Site_2& t, const Storage_site_2& ss,
   Intersections_tag          itag;
   Segments_in_hierarchy_tag  stag;
 
-  CGAL_SDG_DEBUG(std::cout << "debug insert_segment_interior t=" << t
+  CGAL_SDG_DEBUG(Rcpp::Rcout << "debug insert_segment_interior t=" << t
                  << " at level " << level << std::endl;);
 
   // find the first conflict
@@ -411,7 +411,7 @@ insert_segment_interior(const Site_2& t, const Storage_site_2& ss,
         merge_info(vv, ss);
         return vv;
       } else if ( at_res == AT2::CROSSING ) {
-        CGAL_SDG_DEBUG(std::cout << "debug insert_segment_interior crossing "
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug insert_segment_interior crossing "
                        << t << " and " << *vv << std::endl;);
         return insert_intersecting_segment_with_tag(ss, t, vv, level,
                                                     itag, stag);
@@ -449,7 +449,7 @@ insert_segment_interior(const Site_2& t, const Storage_site_2& ss,
 
 
 
-  CGAL_SDG_DEBUG(std::cout << "debug insert_segment_interior t=" << t
+  CGAL_SDG_DEBUG(Rcpp::Rcout << "debug insert_segment_interior t=" << t
                  << " start looking for vert cf " << std::endl;);
 
   // first look for conflict with vertex
@@ -479,26 +479,26 @@ insert_segment_interior(const Site_2& t, const Storage_site_2& ss,
 
 #ifdef CGAL_SDG_VERBOSE
   // debug
-  std::cout << "debug hier insert_segment_interior t="
+  Rcpp::Rcout << "debug hier insert_segment_interior t="
     << t << " with "
     << (is_infinite(start_f)? "infinite" : "finite")
     << " face [" ;
   if (is_infinite(start_f->vertex(0))) {
-    std::cout << " infv";
+    Rcpp::Rcout << " infv";
   } else {
-    std::cout << ' ' << start_f->vertex(0)->site();
+    Rcpp::Rcout << ' ' << start_f->vertex(0)->site();
   }
   if (is_infinite(start_f->vertex(1))) {
-    std::cout << " infv";
+    Rcpp::Rcout << " infv";
   } else {
-    std::cout << ' ' << start_f->vertex(1)->site();
+    Rcpp::Rcout << ' ' << start_f->vertex(1)->site();
   }
   if (is_infinite(start_f->vertex(2))) {
-    std::cout << " infv";
+    Rcpp::Rcout << " infv";
   } else {
-    std::cout << ' ' << start_f->vertex(2)->site();
+    Rcpp::Rcout << ' ' << start_f->vertex(2)->site();
   }
-  std::cout << "] has sign s=" << s << std::endl;
+  Rcpp::Rcout << "] has sign s=" << s << std::endl;
 
 #endif
 
@@ -1002,33 +1002,34 @@ is_valid(bool verbose, int level) const
 
 #define DEBUGVALIDHIER true
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 //#undef DEBUGVALIDHIER
 
 #ifdef DEBUGVALIDHIER
-  std::cout << "debug hierarchy is_valid entering"
+  Rcpp::Rcout << "debug hierarchy is_valid entering"
     << " level=" << level << std::endl;
 #endif
 
   //verify correctness of triangulation at all levels
   for(unsigned int i = 0; i < sdg_hierarchy_2__maxlevel; ++i) {
 #ifdef DEBUGVALIDHIER
-    std::cout << "debug hierarchy is_valid level " << i << std::endl;
+    Rcpp::Rcout << "debug hierarchy is_valid level " << i << std::endl;
 #endif
     if ( verbose ) {
-      std::cerr << "Level " << i << ": " << std::flush;
+      Rcpp::Rcerr << "Level " << i << ": " << std::flush;
     }
     bool is_valid_level = hierarchy[i]->is_valid(verbose, level);
 
 #ifdef DEBUGVALIDHIER
-    std::cout << "debug level=" << i
+    Rcpp::Rcout << "debug level=" << i
       << " validity=" << is_valid_level << std::endl;
 #endif
 
     result = result && is_valid_level;
     if ( verbose ) {
-      std::cerr << std::endl;
+      Rcpp::Rcerr << std::endl;
     }
   }
   //verify that lower level has no down pointers
@@ -1046,7 +1047,7 @@ is_valid(bool verbose, int level) const
     }
   }
 #ifdef DEBUGVALIDHIER
-  std::cout << "debug hierarchy is_valid returns " << result << std::endl;
+  Rcpp::Rcout << "debug hierarchy is_valid returns " << result << std::endl;
 #endif
   return result;
 }
@@ -1063,15 +1064,15 @@ void
 Segment_Delaunay_graph_Linf_hierarchy_2<Gt,ST,STag,D_S,LTag>::
 print_error_message() const
 {
-  std::cerr << std::endl;
-  std::cerr << "WARNING:" << std::endl;
-  std::cerr << "A segment-segment intersection was found."
+  Rcpp::Rcerr << std::endl;
+  Rcpp::Rcerr << "WARNING:" << std::endl;
+  Rcpp::Rcerr << "A segment-segment intersection was found."
             << std::endl;
-  std::cerr << "The Segment_Delaunay_graph_Linf_hierarchy_2 class is not"
+  Rcpp::Rcerr << "The Segment_Delaunay_graph_Linf_hierarchy_2 class is not"
             << " configured to handle this situation." << std::endl;
-  std::cerr << "Please look at the documentation on how to handle"
+  Rcpp::Rcerr << "Please look at the documentation on how to handle"
             << " this behavior." << std::endl;
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
 }
 
 //---------------------------------------------------------------------------

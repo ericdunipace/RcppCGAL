@@ -12,6 +12,7 @@
 #ifndef CGAL_LINEAR_CELL_COMPLEX_BASE_H
 #define CGAL_LINEAR_CELL_COMPLEX_BASE_H 1
 
+#include <Rcpp.h>
 #include <CGAL/Linear_cell_complex_fwd.h>
 #include <CGAL/Combinatorial_map_functors.h>
 #include <CGAL/Combinatorial_map/internal/Combinatorial_map_internal_functors.h>
@@ -316,7 +317,7 @@ namespace CGAL {
       {
         if ( vertex_attribute(it)==null_handle )
         {
-          std::cerr << "Map not valid: dart "<<&(*it)
+          Rcpp::Rcerr << "Map not valid: dart "<<&(*it)
                     <<" does not have a vertex."<< std::endl;
           valid = false;
         }

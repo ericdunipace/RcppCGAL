@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_SMOOTH_VERTICES_H
 #define CGAL_INTERNAL_SMOOTH_VERTICES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <CGAL/Vector_3.h>
@@ -314,7 +315,7 @@ private:
       fmls.fastProjectionCPU(point, result, res_normal);
 
       if (std::isnan(result[0]) || std::isnan(result[1]) || std::isnan(result[2])) {
-        std::cout << "MLS error detected si " //<< si
+        Rcpp::Rcout << "MLS error detected si " //<< si
                   << "\t(size : "       << fmls.getPNSize() << ")"
                   << "\t(point = "      << point      << " )" << std::endl;
         return {};
@@ -412,8 +413,8 @@ public:
 #endif
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-    std::cout << "Smooth vertices...";
-    std::cout.flush();
+    Rcpp::Rcout << "Smooth vertices...";
+    Rcpp::Rcout.flush();
 #endif
     std::size_t nb_done_3d = 0;
     std::size_t nb_done_2d = 0;
@@ -727,7 +728,7 @@ public:
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
     std::size_t nb_done = nb_done_3d + nb_done_2d + nb_done_1d;
-    std::cout << " done ("
+    Rcpp::Rcout << " done ("
       << nb_done_3d << "/" << nb_done_2d << "/" << nb_done_1d << " vertices smoothed,"
       << " average move = " << (total_move / nb_done)
       << ")." << std::endl;

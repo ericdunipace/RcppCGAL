@@ -12,6 +12,7 @@
 #ifndef CGAL_TRIANGULATION_H
 #define CGAL_TRIANGULATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation.h>
 
 #include <CGAL/disable_warnings.h>
@@ -762,16 +763,16 @@ protected:
 
   void display_all_full_cells__debugging() const
   {
-    std::cerr << "ALL FULL CELLS:" << std::endl;
+    Rcpp::Rcerr << "ALL FULL CELLS:" << std::endl;
     for (Full_cell_const_iterator cit = full_cells_begin() ;
           cit != full_cells_end() ; ++cit )
     {
-      std::cerr << std::hex << &*cit << ": ";
+      Rcpp::Rcerr << std::hex << &*cit << ": ";
       for (int jj = 0 ; jj <= current_dimension() ; ++jj)
-        std::cerr << (is_infinite(cit->vertex(jj)) ? 0xFFFFFFFF : (unsigned int)&*cit->vertex(jj)) << " - ";
-      std::cerr << std::dec << std::endl;
+        Rcpp::Rcerr << (is_infinite(cit->vertex(jj)) ? 0xFFFFFFFF : (unsigned int)&*cit->vertex(jj)) << " - ";
+      Rcpp::Rcerr << std::dec << std::endl;
     }
-    std::cerr << std::endl;
+    Rcpp::Rcerr << std::endl;
   }
 
 

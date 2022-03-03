@@ -12,6 +12,7 @@
 #ifndef CGAL_PM_POINT_LOCATOR_H
 #define CGAL_PM_POINT_LOCATOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 
@@ -737,8 +738,8 @@ public:
     Segment seg;
     bool found = false;
     CGAL_For_all(circ, end) {
-      //        std::cerr << s << std::endl;
-      //        std::cerr << point(source(circ)) << "->" << point(target(circ)) << std::endl;
+      //        Rcpp::Rcerr << s << std::endl;
+      //        Rcpp::Rcerr << point(source(circ)) << "->" << point(target(circ)) << std::endl;
       Object o = intersection(s, Segment(point(source(circ)),
                                          point(target(circ))));
 

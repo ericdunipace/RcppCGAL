@@ -19,6 +19,7 @@
 #ifndef CGAL_MESH_3_MESH_STANDARD_FACET_CRITERIA_H
 #define CGAL_MESH_3_MESH_STANDARD_FACET_CRITERIA_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -136,7 +137,7 @@ protected:
     if ( aspect_ratio < B_ )
     {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      std::cerr << "Bad facet (angle criterion): aspect_ratio[" << aspect_ratio
+      Rcpp::Rcerr << "Bad facet (angle criterion): aspect_ratio[" << aspect_ratio
                 << "] bound[" << B_ << "]" << std::endl;
 #endif
       return Is_bad(Quality(aspect_ratio));
@@ -212,7 +213,7 @@ protected:
     if ( sq_dist > B_ )
     {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      std::cerr << "Bad facet (curvature size): sq_dist[" << sq_dist
+      Rcpp::Rcerr << "Bad facet (curvature size): sq_dist[" << sq_dist
                 << "] bound[" << B_ << "]\n";
 #endif
       return Is_bad(Quality(B_/sq_dist));
@@ -287,7 +288,7 @@ protected:
     if ( sq_dist > sq_bound )
     {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      std::cerr << "Bad facet (curvature size): sq_dist[" << sq_dist
+      Rcpp::Rcerr << "Bad facet (curvature size): sq_dist[" << sq_dist
       << "] bound[" << sq_bound << "]\n";
 #endif
       return Is_bad(Quality(sq_bound/sq_dist));
@@ -364,7 +365,7 @@ protected:
     if ( sq_radius > sq_bound )
     {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      std::cerr << "Bad facet (uniform size): sq_radius[" << sq_radius
+      Rcpp::Rcerr << "Bad facet (uniform size): sq_radius[" << sq_radius
       << "] bound[" << sq_bound << "]\n";
 #endif
       return Is_bad(Quality(sq_bound/sq_radius));
@@ -432,7 +433,7 @@ protected:
     if ( sq_radius > B_ )
     {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      std::cerr << "Bad facet (uniform size): sq_radius[" << sq_radius
+      Rcpp::Rcerr << "Bad facet (uniform size): sq_radius[" << sq_radius
                 << "] bound[" << B_ << "]\n";
 #endif
       return Is_bad(Quality(B_/sq_radius));
@@ -496,7 +497,7 @@ protected:
          (v3->in_dimension() > 2) )
     {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      std::cerr << "Bad facet (on surface criterion)" << std::endl;
+      Rcpp::Rcerr << "Bad facet (on surface criterion)" << std::endl;
 #endif
       return Is_bad(Quality(1));
     }
@@ -566,7 +567,7 @@ protected:
         if ( !(v2->index() == index) )
         {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-          std::cerr << "Bad facet (on same surface criterion: "
+          Rcpp::Rcerr << "Bad facet (on same surface criterion: "
                     << v2->index() << " != " << index << ")" << std::endl;
 #endif
           return Is_bad(Quality(1));
@@ -584,7 +585,7 @@ protected:
       if ( is_index_initialized && !(v3->index() == index) )
       {
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-          std::cerr << "Bad facet (on same surface criterion: "
+          Rcpp::Rcerr << "Bad facet (on same surface criterion: "
                     << v3->index() << " != " << index << ")" << std::endl;
 #endif
         return Is_bad(Quality(1));

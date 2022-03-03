@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_ORIENTATION_2_H
 #define CGAL_INTERNAL_STATIC_FILTERS_ORIENTATION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/Profile_counter.h>
 #include <CGAL/determinant.h>
 #include <CGAL/Filtered_kernel/internal/Static_filters/Static_filter_error.h>
@@ -100,7 +101,7 @@ public:
                               t1, t1); // Full det
     double err = det.error();
     err += err * 2 * F::ulp(); // Correction due to "epsilon * maxx * maxy".
-    std::cerr << "*** epsilon for Orientation_2 = " << err << std::endl;
+    Rcpp::Rcerr << "*** epsilon for Orientation_2 = " << err << std::endl;
     return err;
   }
 };

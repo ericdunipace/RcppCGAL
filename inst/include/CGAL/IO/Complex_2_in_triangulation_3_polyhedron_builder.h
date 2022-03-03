@@ -14,6 +14,7 @@
 #ifndef CGAL_IO_COMPLEX_2_IN_TRIANGULATION_3_POLYHEDRON_BUILDER_H
 #define CGAL_IO_COMPLEX_2_IN_TRIANGULATION_3_POLYHEDRON_BUILDER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -165,8 +166,8 @@ public:
       //             int indices[3];
       //             int index = 0;
       //             for (int i=0; i<3; i++)
-      //               std::cerr << ( indices[index++] = V[(*fit).first->vertex(tr.vertex_triple_index(fit->second, i))] ) << ", ";
-      //             std::cerr << "\n";
+      //               Rcpp::Rcerr << ( indices[index++] = V[(*fit).first->vertex(tr.vertex_triple_index(fit->second, i))] ) << ", ";
+      //             Rcpp::Rcerr << "\n";
       //             if( builder.test_facet(indices+0, indices+3) )
       //               builder.add_facet(indices+0, indices+3);
       //             else

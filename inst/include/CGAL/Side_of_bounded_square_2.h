@@ -18,6 +18,7 @@
 #ifndef CGAL_SIDE_OF_BOUNDED_SQUARE_2_H
 #define CGAL_SIDE_OF_BOUNDED_SQUARE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -153,7 +154,7 @@ namespace CGAL {
           (min_p == &p)? &pt_p : (min_p == &q)? &pt_q : &pt_r;
         Point_2 const * pt_max_p =
           (max_p == &p)? &pt_p : (max_p == &q)? &pt_q : &pt_r;
-        CGAL_SDG_DEBUG(std::cout << "debug minmax cmppq=" << cmppq
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug minmax cmppq=" << cmppq
             << " cmppr=" << cmppr << " cmpqr=" << cmpqr << std::endl; );
         return std::make_tuple(
             min_p, max_p, samepq, samepr, sameqr, pt_min_p, pt_max_p);
@@ -195,9 +196,9 @@ namespace CGAL {
       inline Bounded_side predicate(const Point_2 &p, const Point_2 &q,
                   const Point_2 &r, const Point_2 &t) const
       {
-        CGAL_SDG_DEBUG(std::cout
+        CGAL_SDG_DEBUG(Rcpp::Rcout
             << "debug Side_of_bounded_square_2 entering" << std::endl;);
-        CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs (pqrt)= (" << p
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs (pqrt)= (" << p
             << ") (" << q << ") (" << r << ") (" << t << ")" << std::endl;);
 
         CGAL_assertion(orientation_Linf(p,q,r) != DEGENERATE);
@@ -224,7 +225,7 @@ namespace CGAL {
         CGAL_assertion(bot_p != nullptr);
         CGAL_assertion(top_p != nullptr);
 
-        CGAL_SDG_DEBUG(std::cout << "debug bs before mirror"
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bs before mirror"
             << "  lft=" << *lft_p << "  rgt=" << *rgt_p
             << "  bot=" << *bot_p << "  top=" << *top_p
             << std::endl; );
@@ -259,7 +260,7 @@ namespace CGAL {
               s2 = &ry;
               dx = &py;
             }
-            CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs two same x"
+            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs two same x"
                 << std::endl;);
             if ( (bot_p == dx) || (top_p == dx) ) {
               CGAL_assertion (
@@ -300,7 +301,7 @@ namespace CGAL {
               dy = &px;
             }
             CGAL_assertion( dy != nullptr );
-            CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs two same y"
+            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs two same y"
                 << std::endl;);
             if ( (lft_p == dy) || (rgt_p == dy) ) {
               CGAL_assertion (
@@ -328,7 +329,7 @@ namespace CGAL {
 
         const FT two(2);
 
-        CGAL_SDG_DEBUG( std::cout << "debug bs after mirror"
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug bs after mirror"
             << "  lft=" << *lft_p << "  rgt=" << *rgt_p
             << "  bot=" << *bot_p << "  top=" << *top_p
             << std::endl ; );
@@ -351,7 +352,7 @@ namespace CGAL {
           //need to find the movable side of rectangle
           if (exist_two_with_same_x) {
             // expand rectangle both downwards and upwards
-            CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs move both sides"
+            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs move both sides"
                 << std::endl;);
             fix1 = (*bot_p + *top_p - *rgt_p + *lft_p)/two;
             is_bot_input = false;
@@ -392,17 +393,17 @@ namespace CGAL {
           CGAL_assertion( cmpsides == SMALLER );
           if (exist_two_with_same_y) {
             // change both sides
-            CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs move both sides"
+            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs move both sides"
                 << std::endl;);
 
             fix1 = (*lft_p + *rgt_p + *top_p - *bot_p)/two;
             is_rgt_input = false;
-            CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs fatten fix1="
+            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs fatten fix1="
                 << fix1 << std::endl;);
 
             fix2 = (*lft_p + *rgt_p - *top_p + *bot_p)/two;
             is_lft_input = false;
-            CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs fatten fix2="
+            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs fatten fix2="
                 << fix2 << std::endl;);
 
             // update right and left
@@ -435,7 +436,7 @@ namespace CGAL {
           } // end of not exist_two_with_same_y case
         } // end of cmpsides == SMALLER case
 
-        CGAL_SDG_DEBUG( std::cout << "debug bs after side fixing "
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug bs after side fixing "
             << "lft=" << *lft_p
             << "  rgt=" << *rgt_p << "  bot=" << *bot_p << " "
             << "top=" << *top_p << std::endl ; );
@@ -465,11 +466,11 @@ namespace CGAL {
         if (count_eq == 0) {
           CGAL_assertion( cxmint == SMALLER && cxtmax == SMALLER &&
                           cymint == SMALLER && cytmax == SMALLER );
-          CGAL_SDG_DEBUG(std::cout
+          CGAL_SDG_DEBUG(Rcpp::Rcout
               << "debug Side_of_bs return ON_BOUNDED_SIDE" << std::endl;);
           return ON_BOUNDED_SIDE;
         } else {
-          CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs on boundary, "
+          CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs on boundary, "
               << "left=" << cxmint << " right=" << cxtmax
               << " bot=" << cymint << " top  =" << cytmax
               << std::endl; );
@@ -492,7 +493,7 @@ namespace CGAL {
           const bool at_lft = std::get<2>(tup);
           if (is_lft_input && at_lft) {
             CGAL_assertion(cxmint == EQUAL);
-            CGAL_SDG_DEBUG(std::cout
+            CGAL_SDG_DEBUG(Rcpp::Rcout
                 << "debug Side_of_bs t on lft input" << std::endl;);
             const FT lfty = (lft_p == &px) ? py : (lft_p == &qx) ? qy : ry;
             const Comparison_result test =
@@ -506,7 +507,7 @@ namespace CGAL {
           const bool at_rgt = std::get<0>(tup);
           if (is_rgt_input && at_rgt) {
             CGAL_assertion(cxtmax == EQUAL);
-            CGAL_SDG_DEBUG(std::cout
+            CGAL_SDG_DEBUG(Rcpp::Rcout
                 << "debug Side_of_bs t on rgt input" << std::endl;);
             const FT rgty = (rgt_p == &px) ? py : (rgt_p == &qx) ? qy : ry;
             const Comparison_result test =
@@ -520,7 +521,7 @@ namespace CGAL {
           const bool at_bot = std::get<3>(tup);
           if (is_bot_input && at_bot) {
             CGAL_assertion(cymint == EQUAL);
-            CGAL_SDG_DEBUG(std::cout
+            CGAL_SDG_DEBUG(Rcpp::Rcout
                 << "debug Side_of_bs t on bot input" << std::endl;);
             const FT botx = (bot_p == &py) ? px : (bot_p == &qy) ? qx : rx;
             const Comparison_result test =
@@ -534,7 +535,7 @@ namespace CGAL {
           const bool at_top = std::get<1>(tup);
           if (is_top_input && at_top) {
             CGAL_assertion(cytmax == EQUAL);
-            CGAL_SDG_DEBUG(std::cout
+            CGAL_SDG_DEBUG(Rcpp::Rcout
                 << "debug Side_of_bs t on top input" << std::endl;);
             const FT topx = (top_p == &py) ? px : (top_p == &qy) ? qx : rx;
             const Comparison_result test =
@@ -545,7 +546,7 @@ namespace CGAL {
             }
           }
 
-          CGAL_SDG_DEBUG(std::cout
+          CGAL_SDG_DEBUG(Rcpp::Rcout
               << "debug Side_of_bs return ON_BOUNDARY" << std::endl;);
           return ON_BOUNDARY;
         }
@@ -555,7 +556,7 @@ namespace CGAL {
           const FT& A, const FT& B, const FT&C, const FT& D) const
       {
         const FT two(2);
-        CGAL_SDG_DEBUG( std::cout << "debug bs test1d entering with ABCD "
+        CGAL_SDG_DEBUG( Rcpp::Rcout << "debug bs test1d entering with ABCD "
             << A << " " << B << " " << C << " " << D << std::endl; );
         return CGAL::compare(CGAL::abs(A+B-two*D), CGAL::abs(A+B-two*C));
       }

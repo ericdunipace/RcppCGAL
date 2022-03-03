@@ -14,6 +14,7 @@
 #ifndef CGAL_COMBINATORIAL_MAP_SAVE_LOAD_H
 #define CGAL_COMBINATORIAL_MAP_SAVE_LOAD_H
 
+#include <Rcpp.h>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/lexical_cast.hpp>
@@ -535,10 +536,10 @@ namespace CGAL {
             std::string ptype_map= std::string
               (typeid(typename CMap::template Attribute_type<i>::type::Point).name());
 
-                //  std::cout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
+                //  Rcpp::Rcout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
                 /* if(type!=type_map && ptype!=ptype_map)
                 {
-                  //  std::cout<<"Not loaded."<<std::endl;
+                  //  Rcpp::Rcout<<"Not loaded."<<std::endl;
                   return;
                   }*/
 
@@ -606,10 +607,10 @@ namespace CGAL {
             std::string ptype =  v0.second.get<std::string>("type_point");
             std::string type_map= typeid
               (typename CMap::template Attribute_type<i>::type::Point).name();
-                //  std::cout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
+                //  Rcpp::Rcout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
                 /*                if(ptype!=type_map)
                 {
-                  //  std::cout<<"Not loaded."<<std::endl;
+                  //  Rcpp::Rcout<<"Not loaded."<<std::endl;
                   return;
                   }*/
 
@@ -667,10 +668,10 @@ namespace CGAL {
             std::string ptype =  v0.second.get<std::string>("type");
             std::string type_map= typeid
               (typename CMap::template Attribute_type<i>::type::Info).name();
-                //  std::cout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
+                //  Rcpp::Rcout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
                 /*      if(ptype!=type_map)
                 {
-                  //  std::cout<<"Not loaded."<<std::endl;
+                  //  Rcpp::Rcout<<"Not loaded."<<std::endl;
                   return;
                   } */
 

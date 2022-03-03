@@ -13,6 +13,7 @@
 #ifndef CGAL_SURFACE_SWEEP_2_DEBUG_H
 #define CGAL_SURFACE_SWEEP_2_DEBUG_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 #include <CGAL/No_intersection_surface_sweep_2.h>
@@ -30,8 +31,8 @@ void No_intersection_surface_sweep_2<Vis>::print_text(const char* text,
                                                       bool do_eol)
 {
   if (m_need_indent)
-    for (uint8_t i = m_indent_size; i != 0; --i) std::cout << " ";
-  std::cout << text;
+    for (uint8_t i = m_indent_size; i != 0; --i) Rcpp::Rcout << " ";
+  Rcpp::Rcout << text;
   m_need_indent = false;
   if (do_eol) print_eol();
 }
@@ -39,7 +40,7 @@ void No_intersection_surface_sweep_2<Vis>::print_text(const char* text,
 template <typename Vis>
 void No_intersection_surface_sweep_2<Vis>::print_eol()
 {
-  std::cout << std::endl;
+  Rcpp::Rcout << std::endl;
   m_need_indent = true;
 }
 
@@ -75,7 +76,7 @@ template <typename Vis>
 void No_intersection_surface_sweep_2<Vis>::print_curve(const Subcurve* sc)
 {
   if (m_need_indent)
-    for (uint8_t i = m_indent_size; i != 0; --i) std::cout << " ";
+    for (uint8_t i = m_indent_size; i != 0; --i) Rcpp::Rcout << " ";
   sc->Print();
   m_need_indent = false;
 }
@@ -89,7 +90,7 @@ void No_intersection_surface_sweep_2<Vis>::PrintEventQueue()
     Event* e = *iter++;
     e->Print();
   }
-  CGAL_SS_DEBUG(std::cout << "--------------------------------" << std::endl;)
+  CGAL_SS_DEBUG(Rcpp::Rcout << "--------------------------------" << std::endl;)
 }
 
 template <typename Vis>
@@ -109,7 +110,7 @@ void No_intersection_surface_sweep_2<Vis>::PrintStatusLine()
   }
   print_text("Status line: ");
   if (m_currentEvent->is_closed())
-    std::cout << "(" << m_currentEvent->point() << ")";
+    Rcpp::Rcout << "(" << m_currentEvent->point() << ")";
   else {
     Arr_parameter_space x = m_currentEvent->parameter_space_in_x();
     Arr_parameter_space y = m_currentEvent->parameter_space_in_y();
@@ -132,20 +133,20 @@ template <typename Vis>
 void No_intersection_surface_sweep_2<Vis>::
 PrintOpenBoundaryType(Arr_parameter_space ps_x, Arr_parameter_space ps_y)
 {
-  std::cout << "[" << ps_x << "," << ps_y << "]";
+  Rcpp::Rcout << "[" << ps_x << "," << ps_y << "]";
 }
 
 template <typename Vis>
 void No_intersection_surface_sweep_2<Vis>::PrintEvent(const Event* e)
 {
-  if (e->is_closed()) std::cout << e->point();
+  if (e->is_closed()) Rcpp::Rcout << e->point();
   else {
     Arr_parameter_space x = e->parameter_space_in_x();
     Arr_parameter_space y = e->parameter_space_in_y();
     PrintOpenBoundaryType(x, y);
     if (! e->is_isolated()) {
       Arr_curve_end ce;
-      std::cout << " with open curve: " << e->boundary_touching_curve(ce)
+      Rcpp::Rcout << " with open curve: " << e->boundary_touching_curve(ce)
                 << " at " << ce;
     }
   }

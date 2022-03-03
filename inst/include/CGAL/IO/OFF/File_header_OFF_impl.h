@@ -20,6 +20,7 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/IO/binary_file_io.h>
 #include <CGAL/IO/OFF/File_header_OFF.h>
@@ -268,8 +269,8 @@ std::istream& operator>>( std::istream& in, File_header_OFF& h) {
                || (keyword[1] >= 0 && std::isdigit(keyword[1]))) {
       in.clear( std::ios::badbit);
       if ( h.verbose()) {
-          std::cerr << " " << std::endl;
-          std::cerr << "error: File_header_OFF: "
+          Rcpp::Rcerr << " " << std::endl;
+          Rcpp::Rcerr << "error: File_header_OFF: "
                         "Missing header."
                     << std::endl;
       }
@@ -306,8 +307,8 @@ std::istream& operator>>( std::istream& in, File_header_OFF& h) {
                           || keyword[j+3] != 'L') {
                 in.clear( std::ios::badbit);
                 if ( h.verbose()) {
-                    std::cerr << " " << std::endl;
-                    std::cerr << "error: File_header_OFF: "
+                    Rcpp::Rcerr << " " << std::endl;
+                    Rcpp::Rcerr << "error: File_header_OFF: "
                                   "wrong format: neither OFF nor SKEL."
                               << std::endl;
                 }
@@ -336,8 +337,8 @@ std::istream& operator>>( std::istream& in, File_header_OFF& h) {
             } else {
                 in.clear( std::ios::badbit);
                 if ( h.verbose()) {
-                    std::cerr << " " << std::endl;
-                    std::cerr << "error: File_header_OFF(): "
+                    Rcpp::Rcerr << " " << std::endl;
+                    Rcpp::Rcerr << "error: File_header_OFF(): "
                                  "wrong format: neither OFF nor SKEL."
                               << std::endl;
                 }
@@ -363,8 +364,8 @@ std::istream& operator>>( std::istream& in, File_header_OFF& h) {
         if (b<0){
           in.clear( std::ios::badbit );
           if ( h.verbose()) {
-              std::cerr << " " << std::endl;
-              std::cerr << "error: File_header_OFF(): File contains < 0 facets."
+              Rcpp::Rcerr << " " << std::endl;
+              Rcpp::Rcerr << "error: File_header_OFF(): File contains < 0 facets."
                         << std::endl;
           }
           return in;
@@ -382,8 +383,8 @@ std::istream& operator>>( std::istream& in, File_header_OFF& h) {
         if (n < 0){
           in.clear( std::ios::badbit );
           if ( h.verbose()) {
-              std::cerr << " " << std::endl;
-              std::cerr << "error: File_header_OFF(): File contains < 0 facets."
+              Rcpp::Rcerr << " " << std::endl;
+              Rcpp::Rcerr << "error: File_header_OFF(): File contains < 0 facets."
                         << std::endl;
           }
           return in;

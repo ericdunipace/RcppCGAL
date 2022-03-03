@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_FAIR_POLYHEDRON_3_H
 #define CGAL_POLYGON_MESH_PROCESSING_FAIR_POLYHEDRON_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 
@@ -153,7 +154,7 @@ public:
       compute_row(vd, v_id, A, Bx[v_id], By[v_id], Bz[v_id], 1, vertex_id_map, depth);
     }
     #ifdef CGAL_PMP_FAIR_DEBUG
-    std::cerr << "**Timer** System construction: " << timer.time() << std::endl; timer.reset();
+    Rcpp::Rcerr << "**Timer** System construction: " << timer.time() << std::endl; timer.reset();
     #endif
 
     // factorize
@@ -164,7 +165,7 @@ public:
       return false;
     }
     #ifdef CGAL_PMP_FAIR_DEBUG
-    std::cerr << "**Timer** System factorization: " << timer.time() << std::endl; timer.reset();
+    Rcpp::Rcerr << "**Timer** System factorization: " << timer.time() << std::endl; timer.reset();
     #endif
 
     // solve
@@ -174,7 +175,7 @@ public:
       return false;
     }
     #ifdef CGAL_PMP_FAIR_DEBUG
-    std::cerr << "**Timer** System solver: " << timer.time() << std::endl; timer.reset();
+    Rcpp::Rcerr << "**Timer** System solver: " << timer.time() << std::endl; timer.reset();
     #endif
 
 

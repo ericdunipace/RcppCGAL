@@ -12,6 +12,7 @@
 #ifndef CGAL_BOOST_GRAPH_HELPERS_H
 #define CGAL_BOOST_GRAPH_HELPERS_H
 
+#include <Rcpp.h>
 #include <CGAL/boost/graph/iterator.h>
 #include <CGAL/boost/graph/properties.h>
 #include <CGAL/boost/graph/internal/Has_member_clear.h>
@@ -288,13 +289,13 @@ bool is_valid_halfedge_descriptor( typename boost::graph_traits<FaceGraph>::half
   halfedge_descriptor done(h);
   do{
     if(face(h,g) != f){
-      std::cerr << "halfedge " << h << " is invalid\n";
+      Rcpp::Rcerr << "halfedge " << h << " is invalid\n";
       return false;
     }
     halfedge_descriptor hn = h;
     hn = next(h,g);
     if(prev(hn,g) != h){
-      std::cerr << "halfedge " << h << " is invalid\n";
+      Rcpp::Rcerr << "halfedge " << h << " is invalid\n";
       return false;
     }
     h = hn;
@@ -312,7 +313,7 @@ bool is_valid_vertex_descriptor( typename boost::graph_traits<FaceGraph>::vertex
   }
   do{
     if(target(h,g) != v){
-      std::cerr << "vertex " << v << " is invalid\n";
+      Rcpp::Rcerr << "vertex " << v << " is invalid\n";
       return false;
     }
     h = opposite(next(h,g),g);
@@ -327,7 +328,7 @@ bool is_valid_face_descriptor( typename boost::graph_traits<FaceGraph>::face_des
 
   halfedge_descriptor h = halfedge(f,g);
   if(face(h,g) != f){
-    std::cerr << "face " << f << " is invalid\n";
+    Rcpp::Rcerr << "face " << f << " is invalid\n";
     return false;
   }
   return true;

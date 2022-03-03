@@ -13,6 +13,7 @@
 #ifndef CGAL_RATIONAL_FUNCTION_CANONICALIZED_PAIR_H
 #define CGAL_RATIONAL_FUNCTION_CANONICALIZED_PAIR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -133,9 +134,9 @@ public:
         (it_g_pole != _g.poles().end()) ||
         (it_r_root != _roots.end()))
     {
-      //std::cout << "_f._poles.size() " << _f._poles.size() <<std::endl;
-      //std::cout << "_g._poles.size() " << _g._poles.size()<< std::endl;
-      //std::cout << "_roots.size()    " << _roots.size() << std::endl;
+      //Rcpp::Rcout << "_f._poles.size() " << _f._poles.size() <<std::endl;
+      //Rcpp::Rcout << "_g._poles.size() " << _g._poles.size()<< std::endl;
+      //Rcpp::Rcout << "_roots.size()    " << _roots.size() << std::endl;
       //if current event is only a pole of f
       if ((it_f_pole != _f.poles().end())         &&
           ((it_g_pole == _g.poles().end()) || (*it_f_pole < *it_g_pole)) &&
@@ -199,8 +200,8 @@ public:
         CGAL_postcondition_msg(false,"invalid case in computing _is_above");
       }
     }
-    //std::cout << "_is_above.size()            " << _is_above.size() <<std::endl;
-    //std::cout << " _event_roots.size() + 1    " <<  _event_roots.size() + 1 << std::endl;
+    //Rcpp::Rcout << "_is_above.size()            " << _is_above.size() <<std::endl;
+    //Rcpp::Rcout << " _event_roots.size() + 1    " <<  _event_roots.size() + 1 << std::endl;
     CGAL_postcondition(_is_above.size() == _event_roots.size() + 1);
     //check for validity using explicit computation
     CGAL_postcondition_code(std::vector<bool> tmp_is_above =

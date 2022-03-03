@@ -13,6 +13,7 @@
 #ifndef CGAL_APPROX_MIN_ELL_D_DEBUG_H
 #define CGAL_APPROX_MIN_ELL_D_DEBUG_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -32,33 +33,33 @@ namespace CGAL {
     template<typename Iterator>
     void print_matrix(int d, const char *name, Iterator A)
     {
-      std::cout << name << ":= Matrix([\n";
+      Rcpp::Rcout << name << ":= Matrix([\n";
       for (int i=0; i<d; ++i) {
-        std::cout << "  [ ";
+        Rcpp::Rcout << "  [ ";
         for (int j=0; j<d; ++j) {
-          std::cout << std::setprecision(30) << A[i+j*d];
+          Rcpp::Rcout << std::setprecision(30) << A[i+j*d];
           if (j<d-1)
-            std::cout << ", ";
+            Rcpp::Rcout << ", ";
         }
-        std::cout << " ]";
+        Rcpp::Rcout << " ]";
         if (i<d-1)
-          std::cout << ",";
-        std::cout << "\n";
+          Rcpp::Rcout << ",";
+        Rcpp::Rcout << "\n";
       }
-      std::cout << "]);\n";
+      Rcpp::Rcout << "]);\n";
     }
 
     // For debugging only:
     template<typename Iterator>
     void print_vector(int d, const char *name, Iterator v)
     {
-      std::cout << name << ":= Vector([\n";
+      Rcpp::Rcout << name << ":= Vector([\n";
       for (int j=0; j<d; ++j) {
-        std::cout << std::setprecision(30) << v[j];
+        Rcpp::Rcout << std::setprecision(30) << v[j];
         if (j<d-1)
-          std::cout << ", ";
+          Rcpp::Rcout << ", ";
       }
-      std::cout << "]);\n";
+      Rcpp::Rcout << "]);\n";
     }
 
     #ifdef CGAL_APPEL_LOG_MODE
@@ -290,7 +291,7 @@ namespace CGAL {
         using std::endl;
         std::ofstream f(filename.c_str());
         if (!f)
-          std::cerr << "Couldn't open file " << filename << "." << endl;
+          Rcpp::Rcerr << "Couldn't open file " << filename << "." << endl;
 
         // write header:
         const double margin = 10.0;

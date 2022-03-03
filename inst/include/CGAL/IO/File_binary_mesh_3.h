@@ -13,6 +13,7 @@
 #ifndef CGAL_IO_FILE_BINARY_MESH_3_H
 #define CGAL_IO_FILE_BINARY_MESH_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 
@@ -65,7 +66,7 @@ bool load_binary_file(std::istream& is, C3T3& c3t3)
       s.resize(s.size() - 1);
     }
     if(s != std::string(" ") + CGAL::Get_io_signature<C3T3>()()) {
-      std::cerr << "load_binary_file:"
+      Rcpp::Rcerr << "load_binary_file:"
                 << "\n  expected format: " << CGAL::Get_io_signature<C3T3>()()
                 << "\n       got format:" << s << std::endl;
       return false;

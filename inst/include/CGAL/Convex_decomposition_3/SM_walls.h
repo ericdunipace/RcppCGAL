@@ -12,6 +12,7 @@
 #ifndef CGAL_CD3_SM_WALLS_H
 #define CGAL_CD3_SM_WALLS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 
@@ -67,7 +68,7 @@ class SM_walls : SM_decorator<SMap> {
  public:
   SM_walls(Sphere_map* M) : Base(M) {
 //   SM_decorator SD(sphere_map());
-//   SM_io_parser<SM_decorator>::dump(SD,std::cerr);
+//   SM_io_parser<SM_decorator>::dump(SD,Rcpp::Rcerr);
   }
 
   SHalfedge_handle find_cap(SVertex_handle sv, Sphere_point sp, Sphere_circle c) {
@@ -130,7 +131,7 @@ class SM_walls : SM_decorator<SMap> {
               << ", " << CGAL::to_double(sv->point().z()) );
 
     //    SM_decorator SD(sphere_map());
-    //    SM_io_parser<SM_decorator>::dump(SD,std::cerr);
+    //    SM_io_parser<SM_decorator>::dump(SD,Rcpp::Rcerr);
 
     CGAL_assertion(se->circle().has_on(sv->point()));
 
@@ -309,7 +310,7 @@ class SM_walls : SM_decorator<SMap> {
     SM_point_locator P(this->sphere_map());
 
     //    SM_decorator SD(this->sphere_map());
-    //    SM_io_parser<SM_decorator>::dump(SD,std::cerr);
+    //    SM_io_parser<SM_decorator>::dump(SD,Rcpp::Rcerr);
 
     Object_handle o = P.locate(sp);
 
@@ -321,7 +322,7 @@ class SM_walls : SM_decorator<SMap> {
     CGAL_NEF_TRACEN( "add_svertex_into_object " << sp );
 
     //    SM_decorator SD(this->sphere_map());
-    //    SM_io_parser<SM_decorator>::dump(SD,std::cerr);
+    //    SM_io_parser<SM_decorator>::dump(SD,Rcpp::Rcerr);
 
     SVertex_handle sv;
     SFace_handle sf;
@@ -490,15 +491,15 @@ class SM_walls : SM_decorator<SMap> {
        same_sface =
          cap1->incident_sface() == cap2->incident_sface();
 
-      std::cerr << "cap1 " << cap1->source()->point()
+      Rcpp::Rcerr << "cap1 " << cap1->source()->point()
                  << "->" << cap1->twin()->source()->point() << std::endl;
-       std::cerr << "cap2 " << cap2->source()->point()
+       Rcpp::Rcerr << "cap2 " << cap2->source()->point()
                  << "->" << cap2->twin()->source()->point() << std::endl;
 
        if(same_sface) {
          SHalfedge_around_sface_circulator sfc(cap1), send(sfc);
          CGAL_For_all(sfc,send) {
-           std::cerr << "check " << sfc->source()->point()
+           Rcpp::Rcerr << "check " << sfc->source()->point()
                      << "->" << sfc->twin()->source()->point() << std::endl;
            if(is_sm_boundary_object(sfc))
              entry = sfc;
@@ -546,7 +547,7 @@ class SM_walls : SM_decorator<SMap> {
     se_new->twin()->circle() = c.opposite();
 
     //    SM_decorator SD(this->sphere_map());
-    //    SM_io_parser<SM_decorator>::dump(SD,std::cerr);
+    //    SM_io_parser<SM_decorator>::dump(SD,Rcpp::Rcerr);
 
     if(split_sface) {
       if(cap1->incident_sface() == cap2->incident_sface()) {
@@ -575,7 +576,7 @@ class SM_walls : SM_decorator<SMap> {
     }
 
     //    SM_decorator SD1(this->sphere_map());
-    //    SM_io_parser<SM_decorator>::dump(SD1,std::cerr);
+    //    SM_io_parser<SM_decorator>::dump(SD1,Rcpp::Rcerr);
 
     // TODO: handle inner face cycles
   }

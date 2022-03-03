@@ -13,6 +13,7 @@
 #ifndef CGAL_SPHERE_GEOMETRY_OGL_H
 #define CGAL_SPHERE_GEOMETRY_OGL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 
@@ -271,7 +272,7 @@ public:
   }
 
   virtual void print() const
-  { std::cerr << "point " << p_; }
+  { Rcpp::Rcerr << "point " << p_; }
 
 };
 
@@ -326,7 +327,7 @@ public:
   }
 
   virtual void print() const
-  { std::cerr << "segment " << s_; }
+  { Rcpp::Rcerr << "segment " << s_; }
 
 };
 
@@ -370,7 +371,7 @@ public:
   }
 
   virtual void print() const
-  { std::cerr << "circle " << s_; }
+  { Rcpp::Rcerr << "circle " << s_; }
 
 };
 
@@ -428,7 +429,7 @@ public:
   }
 
   virtual void print() const
-  { std::cerr << "triangle " << t_; }
+  { Rcpp::Rcerr << "triangle " << t_; }
 
 };
 
@@ -491,15 +492,15 @@ void copy_list(const Unit_sphere& S)
 }
 
 void print() const
-{ std::cerr << "Dumping Unit_sphere:\n";
+{ Rcpp::Rcerr << "Dumping Unit_sphere:\n";
   for (Object_const_iterator it = objects_.begin();
        it != objects_.end(); ++it)
      (*it)->print();
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
   for (Object_const_iterator it = triangles_.begin();
        it != triangles_.end(); ++it)
      (*it)->print();
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
 }
 
 Unit_sphere(const Unit_sphere& S) : OGL_base_object(), switches(2)

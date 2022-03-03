@@ -13,6 +13,7 @@
 #ifndef CGAL_QT_SEGMENT_DELAUNAY_GRAPH_GRAPHICS_ITEM_H
 #define CGAL_QT_SEGMENT_DELAUNAY_GRAPH_GRAPHICS_ITEM_H
 
+#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 
@@ -120,11 +121,11 @@ SegmentDelaunayGraphGraphicsItem<T>::drawDualEdge(QPainter * /*painter*/, typena
 
     Object o = t->primal(e);
 
-    if (CGAL::assign(l, o)) { /* m_painter->setPen(::Qt::cyan); std::cerr << "line " << std::endl; */ painterostream << l; }
-    else if (CGAL::assign(s, o)) { /* m_painter->setPen(::Qt::magenta); std::cerr << "segment " << std::endl; */ painterostream << s;}
-    else if (CGAL::assign(r, o))  { /* m_painter->setPen(::Qt::darkMagenta);  std::cerr << "ray " << r << std::endl;  */ painterostream << r; }
-    else if (CGAL::assign(ps, o)) { /* std::cerr << "ps  " << std::endl; */ painterostream << ps;}
-    else { std::cerr << "unknown" << std::endl; }
+    if (CGAL::assign(l, o)) { /* m_painter->setPen(::Qt::cyan); Rcpp::Rcerr << "line " << std::endl; */ painterostream << l; }
+    else if (CGAL::assign(s, o)) { /* m_painter->setPen(::Qt::magenta); Rcpp::Rcerr << "segment " << std::endl; */ painterostream << s;}
+    else if (CGAL::assign(r, o))  { /* m_painter->setPen(::Qt::darkMagenta);  Rcpp::Rcerr << "ray " << r << std::endl;  */ painterostream << r; }
+    else if (CGAL::assign(ps, o)) { /* Rcpp::Rcerr << "ps  " << std::endl; */ painterostream << ps;}
+    else { Rcpp::Rcerr << "unknown" << std::endl; }
 
     /* m_painter->setPen(::Qt::black); */
 
@@ -266,7 +267,7 @@ SegmentDelaunayGraphGraphicsItem<T>::paint(QPainter *painter,
 
     drawAll(painter, option);
     //  } else {
-    //    std::cerr << "else" << std::endl;
+    //    Rcpp::Rcerr << "else" << std::endl;
     //  }
 }
 

@@ -13,6 +13,7 @@
 #ifndef CGAL_KD_TREE_NODE_H
 #define CGAL_KD_TREE_NODE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Spatial_searching.h>
 
 
@@ -151,7 +152,7 @@ namespace CGAL {
     indent(int d) const
     {
       for(int i = 0; i < d; i++){
-        std::cout << " ";
+        Rcpp::Rcout << " ";
       }
     }
 
@@ -163,21 +164,21 @@ namespace CGAL {
         Leaf_node_const_handle node =
           static_cast<Leaf_node_const_handle>(this);
         indent(d);
-        std::cout << "leaf" << std::endl;
+        Rcpp::Rcout << "leaf" << std::endl;
         if (node->size()>0)
           for (iterator i=node->begin(); i != node->end(); i++)
-          {indent(d);std::cout << *i << std::endl;}
+          {indent(d);Rcpp::Rcout << *i << std::endl;}
       }
       else {
         Internal_node_const_handle node =
           static_cast<Internal_node_const_handle>(this);
         indent(d);
-        std::cout << "lower tree" << std::endl;
+        Rcpp::Rcout << "lower tree" << std::endl;
         node->lower()->print(d+1);
         indent(d);
-        std::cout << "separator: dim = " << node->cutting_dimension() << "  val = " << node->cutting_value() << std::endl;
+        Rcpp::Rcout << "separator: dim = " << node->cutting_dimension() << "  val = " << node->cutting_value() << std::endl;
         indent(d);
-        std::cout << "upper tree" << std::endl;
+        Rcpp::Rcout << "upper tree" << std::endl;
         node->upper()->print(d+1);
       }
     }

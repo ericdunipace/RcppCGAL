@@ -15,6 +15,7 @@
 #ifndef CGAL_IO_READ_POLYGON_SOUP_H
 #define CGAL_IO_READ_POLYGON_SOUP_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/3MF.h>
 #include <CGAL/IO/OBJ.h>
 #include <CGAL/IO/OFF.h>
@@ -85,7 +86,7 @@ bool read_polygon_soup(const std::string& fname,
   if(ext == std::string())
   {
     if(verbose)
-      std::cerr << "Error: cannot read from file without extension" << std::endl;
+      Rcpp::Rcerr << "Error: cannot read from file without extension" << std::endl;
     return false;
   }
 
@@ -106,7 +107,7 @@ bool read_polygon_soup(const std::string& fname,
 
   if(verbose)
   {
-    std::cerr << "Error: unknown input file extension: " << ext << "\n"
+    Rcpp::Rcerr << "Error: unknown input file extension: " << ext << "\n"
               << "Please refer to the documentation for the list of supported file formats" << std::endl;
   }
 
@@ -175,7 +176,7 @@ bool write_polygon_soup(const std::string& fname,
   if(ext == std::string())
   {
     if(verbose)
-      std::cerr << "Error: trying to output to file without extension" << std::endl;
+      Rcpp::Rcerr << "Error: trying to output to file without extension" << std::endl;
     return false;
   }
 
@@ -200,7 +201,7 @@ bool write_polygon_soup(const std::string& fname,
 
   if(verbose)
   {
-    std::cerr << "Error: unknown output file extension: " << ext << "\n"
+    Rcpp::Rcerr << "Error: unknown output file extension: " << ext << "\n"
               << "Please refer to the documentation for the list of supported file formats" << std::endl;
   }
 

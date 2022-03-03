@@ -13,6 +13,7 @@
 #ifndef CGAL_WIDTH_ASSERTIONS_H
 #define CGAL_WIDTH_ASSERTIONS_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Polytope_distance_d.h>
 
 #ifdef SIMPLIFY
@@ -88,16 +89,16 @@
  #include<iostream>
 
  #define DEBUGENDL(doit,msg,var)\
- if(doit!=0) std::cout << msg << " " << var << std::endl;
+ if(doit!=0) Rcpp::Rcout << msg << " " << var << std::endl;
 
  #define DEBUGPRINT(doit,msg,var)\
- if(doit!=0) std::cout << msg << " " << var;
+ if(doit!=0) Rcpp::Rcout << msg << " " << var;
 
  #define DEBUGMSG(doit,msg)\
- if(doit!=0) std::cout << msg << std::endl;
+ if(doit!=0) Rcpp::Rcout << msg << std::endl;
 
  #define INFOMSG(doit,msg)\
- if(doit!=0) std::cerr<<msg<<std::endl;
+ if(doit!=0) Rcpp::Rcerr<<msg<<std::endl;
 
 #else
  #define DEBUGENDL(doit,msg,var)

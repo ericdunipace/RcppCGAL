@@ -13,6 +13,7 @@
 #ifndef CGAL_COMPLEX_2_IN_TRIANGULATION_3_H
 #define CGAL_COMPLEX_2_IN_TRIANGULATION_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -725,7 +726,7 @@ public:
     if(number_of_facets() != nb)
     {
       if(verbose) {
-        std::cerr << boost::format("C2t3: Invalid number of facet: %1% (should be %2%)!\n")
+        Rcpp::Rcerr << boost::format("C2t3: Invalid number of facet: %1% (should be %2%)!\n")
           % number_of_facets() % nb;
       }
       return false;
@@ -739,7 +740,7 @@ public:
       if(!f.first->is_facet_on_surface(f.second))
       {
         if(verbose) {
-          std::cerr <<
+          Rcpp::Rcerr <<
             boost::format("C2t3: facet (%1%, %2%) is marked on surface"
                           "will its mirror facet (%3, %4) is not!\n")
             % &*it->first % it->second

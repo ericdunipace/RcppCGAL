@@ -13,6 +13,7 @@
 #define CGAL_IO_READ_3MF_H
 
 
+#include <Rcpp.h>
 #include <CGAL/IO/Color.h>
 
 #include <CGAL/Kernel_traits.h>
@@ -71,7 +72,7 @@ bool extract_soups (NMR::PLib3MFModelMeshObject *pMeshObject,
   hResult = NMR::lib3mf_object_getnameutf8(pMeshObject, NULL, 0, &nNeededChars);
   if(hResult != LIB3MF_OK)
   {
-    std::cerr<<"Error during name extraction.";
+    Rcpp::Rcerr<<"Error during name extraction.";
     return false;
   }
 
@@ -100,9 +101,9 @@ bool extract_soups (NMR::PLib3MFModelMeshObject *pMeshObject,
   {
     DWORD nErrorMessage;
     LPCSTR pszErrorMessage;
-    std::cerr << "could not create property handler: " << std::hex << hResult << std::endl;
+    Rcpp::Rcerr << "could not create property handler: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(pMeshObject, &nErrorMessage, &pszErrorMessage);
-    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(pMeshObject);
     return false;
   }

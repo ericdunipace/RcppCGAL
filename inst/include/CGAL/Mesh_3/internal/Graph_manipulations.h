@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_MESH_3_INTERNAL_GRAPH_MANIPULATIONS
 #define CGAL_INTERNAL_MESH_3_INTERNAL_GRAPH_MANIPULATIONS
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -84,7 +85,7 @@ struct Graph_manipulations
                           bool a_on_edge, bool b_on_edge)
   {
 #ifdef CGAL_MESH_3_DEBUG_GRAPH_MANIPULATION
-    std::cerr << "split(" << a << ", " << b << ", "
+    Rcpp::Rcerr << "split(" << a << ", " << b << ", "
               << std::boolalpha << a_is_outside << ", "
               <<  std::boolalpha << b_is_outside << ")\n";
 #endif // CGAL_MESH_3_DEBUG_GRAPH_MANIPULATION
@@ -107,20 +108,20 @@ struct Graph_manipulations
         if(!a_is_outside) try_add_edge(va, vmid);
         if(!b_is_outside) try_add_edge(vb, vmid);
 #ifdef CGAL_MESH_3_DEBUG_GRAPH_MANIPULATION
-        std::cerr << " --> vmid = " << vmid << "\n";
+        Rcpp::Rcerr << " --> vmid = " << vmid << "\n";
 #endif // CGAL_MESH_3_DEBUG_GRAPH_MANIPULATION
         return vmid;
       }
     }
 #ifdef CGAL_MESH_3_DEBUG_GRAPH_MANIPULATION
-    std::cerr << " --> vmid = " << vmid << "\n";
+    Rcpp::Rcerr << " --> vmid = " << vmid << "\n";
 #endif // CGAL_MESH_3_DEBUG_GRAPH_MANIPULATION
     return vmid;
   }
 
   bool try_add_edge(vertex_descriptor v1, vertex_descriptor v2) {
 #ifdef CGAL_MESH_3_DEBUG_GRAPH_MANIPULATION
-    std::cerr << "try_add_edge(" << v1 << " (" << g[v1].point
+    Rcpp::Rcerr << "try_add_edge(" << v1 << " (" << g[v1].point
               << ", " << std::boolalpha << g[v1].force_terminal
               << "), " << v2 << " (" << g[v2].point
               << ", " << std::boolalpha << g[v2].force_terminal

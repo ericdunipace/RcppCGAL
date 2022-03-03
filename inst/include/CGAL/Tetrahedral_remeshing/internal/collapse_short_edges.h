@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_COLLAPSE_SHORT_EDGES_H
 #define CGAL_INTERNAL_COLLAPSE_SHORT_EDGES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <boost/bimap.hpp>
@@ -133,7 +134,7 @@ public:
     }
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
     else
-      std::cout << "Warning : CollapseTriangulation is not valid!" << std::endl;
+      Rcpp::Rcout << "Warning : CollapseTriangulation is not valid!" << std::endl;
 #endif
   }
 
@@ -142,7 +143,7 @@ public:
     if (not_an_edge)
     {
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-      std::cout << "CollapseTriangulation::Not an edge..." << std::endl;
+      Rcpp::Rcout << "CollapseTriangulation::Not an edge..." << std::endl;
 #endif
       return E_PROBLEM;
     }
@@ -251,7 +252,7 @@ public:
       }
 
       if (!v0_updated){
-        std::cout << "CollapseTriangulation::PB i cell not valid!!!" << std::endl;
+        Rcpp::Rcout << "CollapseTriangulation::PB i cell not valid!!!" << std::endl;
         return V_PROBLEM;
       }
       triangulation.tds().delete_vertex(vh1);
@@ -372,7 +373,7 @@ Collapse_type get_collapse_type(const typename C3t3::Edge& edge,
 //    }
 //  }
 
-//  //std::cerr << "ERROR : get_edge_type did not return anything valid!" << std::endl;
+//  //Rcpp::Rcerr << "ERROR : get_edge_type did not return anything valid!" << std::endl;
 //  return NO_COLLAPSE;
 //}
 
@@ -633,19 +634,19 @@ bool collapse_preserves_surface_star(const typename C3t3::Edge& edge,
 
 //    if (dot * dotref < 0)
 //    {
-//      std::cout << "collapse edge : " << std::endl;
-//      std::cout << point(v0->point()) << " " << point(v1->point()) << std::endl;
-//      std::cout << "facet : " << std::endl;
-//      std::cout << pts[0] << " " << pts[1] << " " << pts[2] << std::endl;
+//      Rcpp::Rcout << "collapse edge : " << std::endl;
+//      Rcpp::Rcout << point(v0->point()) << " " << point(v1->point()) << std::endl;
+//      Rcpp::Rcout << "facet : " << std::endl;
+//      Rcpp::Rcout << pts[0] << " " << pts[1] << " " << pts[2] << std::endl;
 //
 //      Point_3 c = CGAL::centroid(pts[0], pts[1], pts[2]);
-//      std::cout << "n_before_collapse ";
-//      std::cout << c << " " << (c + n_before_collapse) << std::endl;
-//      std::cout << "n_after_collapse  ";
-//      std::cout << c << " " << (c + n_after_collapse) << std::endl;
-//      std::cout << "reference_normal  ";
-//      std::cout << reference_c << " " << (reference_c + reference_normal) << std::endl;
-//      std::cout << std::endl;
+//      Rcpp::Rcout << "n_before_collapse ";
+//      Rcpp::Rcout << c << " " << (c + n_before_collapse) << std::endl;
+//      Rcpp::Rcout << "n_after_collapse  ";
+//      Rcpp::Rcout << c << " " << (c + n_after_collapse) << std::endl;
+//      Rcpp::Rcout << "reference_normal  ";
+//      Rcpp::Rcout << reference_c << " " << (reference_c + reference_normal) << std::endl;
+//      Rcpp::Rcout << std::endl;
 //    }
 //    if (dotref < 0 || dot < 0)
 //      return false;
@@ -827,7 +828,7 @@ collapse(const typename C3t3::Cell_handle ch,
     if (tr.is_infinite(n0_ch->vertex(ch_id_in_n0))
       && tr.is_infinite(n1_ch->vertex(ch_id_in_n1)))
     {
-      std::cout << "Collapse infinite issue!" << std::endl;
+      Rcpp::Rcout << "Collapse infinite issue!" << std::endl;
       return Vertex_handle();
     }
     cells_to_remove.push_back(c);
@@ -904,7 +905,7 @@ collapse(const typename C3t3::Cell_handle ch,
   }
 
   if (!v0_updated)
-    std::cout << "PB i cell not valid!!!" << std::endl;
+    Rcpp::Rcout << "PB i cell not valid!!!" << std::endl;
 
   // Delete vertex
   c3t3.triangulation().tds().delete_vertex(vh1);
@@ -919,7 +920,7 @@ collapse(const typename C3t3::Cell_handle ch,
   }
 
   if (!valid){
-    std::cout << "Global triangulation collapse bug!!" << std::endl;
+    Rcpp::Rcout << "Global triangulation collapse bug!!" << std::endl;
     return Vertex_handle();
   }
 
@@ -1162,10 +1163,10 @@ bool can_be_collapsed(const typename C3T3::Edge& e,
 #ifdef CGAL_TETRAHEDRAL_REMESHING_DEBUG
     if (!is_internal(e, c3t3, cell_selector))
     {
-      std::cerr << "e is not inside!?" << std::endl;
+      Rcpp::Rcerr << "e is not inside!?" << std::endl;
       typename C3T3::Vertex_handle v1 = e.first->vertex(e.second);
       typename C3T3::Vertex_handle v2 = e.first->vertex(e.third);
-      std::cerr << v1->point() << " " << v2->point() << std::endl;
+      Rcpp::Rcerr << v1->point() << " " << v2->point() << std::endl;
     }
 #endif
 
@@ -1204,8 +1205,8 @@ void collapse_short_edges(C3T3& c3t3,
     = tr.geom_traits().compute_squared_length_3_object();
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  std::cout << "Collapse short edges (" << low << ", " << high << ")...";
-  std::cout.flush();
+  Rcpp::Rcout << "Collapse short edges (" << low << ", " << high << ")...";
+  Rcpp::Rcout.flush();
   std::size_t nb_collapses = 0;
 #endif
   const FT sq_low = low*low;
@@ -1240,10 +1241,10 @@ void collapse_short_edges(C3T3& c3t3,
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE_PROGRESS
     FT sqlen = eit->first;
-    std::cout << "\rCollapse... (" << short_edges.left.size() << " short edges, ";
-    std::cout << std::sqrt(sqlen) << ", ";
-    std::cout << nb_collapses << " collapses)";
-    std::cout.flush();
+    Rcpp::Rcout << "\rCollapse... (" << short_edges.left.size() << " short edges, ";
+    Rcpp::Rcout << std::sqrt(sqlen) << ", ";
+    Rcpp::Rcout << nb_collapses << " collapses)";
+    Rcpp::Rcout.flush();
 #endif
     Cell_handle cell;
     int i1, i2;
@@ -1305,7 +1306,7 @@ void collapse_short_edges(C3T3& c3t3,
 #endif
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  std::cout << " done (" << nb_collapses << " collapses)." << std::endl;
+  Rcpp::Rcout << " done (" << nb_collapses << " collapses)." << std::endl;
 #endif
 }
 }

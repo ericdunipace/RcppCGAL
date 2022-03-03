@@ -12,6 +12,7 @@
 #ifndef CGAL_POINTMATCHER_COMPUTE_REGISTRATION_TRANSFORMATION_H
 #define CGAL_POINTMATCHER_COMPUTE_REGISTRATION_TRANSFORMATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #if defined(CGAL_LINKED_WITH_POINTMATCHER) || defined(DOXYGEN_RUNNING)
@@ -62,8 +63,8 @@ struct ICP_config {
 namespace internal {
 
 void dump_invalid_point_matcher_config_exception_msg(const PointMatcherSupport::InvalidElement& err) {
-  std::cerr << "ERROR Invalid configuration for PM::ICP, omitting configuration: " << std::endl;
-        std::cerr << "   " << err.what() << std::endl;
+  Rcpp::Rcerr << "ERROR Invalid configuration for PM::ICP, omitting configuration: " << std::endl;
+        Rcpp::Rcerr << "   " << err.what() << std::endl;
 }
 
 template<typename Scalar, typename NamedParameters1, typename NamedParameters2>
@@ -339,8 +340,8 @@ compute_registration_transformation(const PointRange1& range1, const PointRange2
         }
         catch (typename PM::ConvergenceError& error)
         {
-                std::cerr << "ERROR CGAL::pointmatcher registration (PM::ICP) failed to converge: " << std::endl;
-                std::cerr << "   " << error.what() << std::endl;
+                Rcpp::Rcerr << "ERROR CGAL::pointmatcher registration (PM::ICP) failed to converge: " << std::endl;
+                Rcpp::Rcerr << "   " << error.what() << std::endl;
     converged = false;
         }
 
@@ -354,12 +355,12 @@ compute_registration_transformation(const PointRange1& range1, const PointRange2
      pm_transform_params(2,0), pm_transform_params(2,1), pm_transform_params(2,2), pm_transform_params(2,3));
 
 #ifdef CGAL_POINTMATCHER_VERBOSE
-  std::cerr << "Transformation matrix: " << std::endl;
+  Rcpp::Rcerr << "Transformation matrix: " << std::endl;
   for (std::size_t i = 0; i < 4; ++ i)
   {
     for (std::size_t j = 0; j < 4; ++ j)
-      std::cerr << cgal_transform.coeff(i,j) << " ";
-    std::cerr << std::endl;
+      Rcpp::Rcerr << cgal_transform.coeff(i,j) << " ";
+    Rcpp::Rcerr << std::endl;
   }
 #endif
 
@@ -580,7 +581,7 @@ compute_registration_transformation(const PointRange1& range1, const PointRange2
    to `point_set_2` to make it registered w.r.t. `point_set_1` and the
    boolean value indicating if the registration converged. The second
    of the pair is `true` if converged, `false` otherwise. A log why it failed to
-   converge is written to `std::cerr` if the registration cannot converge.
+   converge is written to `Rcpp::Rcerr` if the registration cannot converge.
 */
 template <class PointRange1, class PointRange2,
           class NamedParameters1, class NamedParameters2>

@@ -13,6 +13,7 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_BOX_ORIENTED_BOUNDING_BOX_H
 #define CGAL_OPTIMAL_BOUNDING_BOX_ORIENTED_BOUNDING_BOX_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/Optimal_bounding_box/internal/evolution.h>
@@ -102,7 +103,7 @@ void construct_oriented_bounding_box(const PointRange& points,
   {
     obb_points[i] = inverse_transformation.transform(obb_points[i]);
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG
-    std::cout << "  OBB[" << i << "] = " << obb_points[i] << std::endl;
+    Rcpp::Rcout << "  OBB[" << i << "] = " << obb_points[i] << std::endl;
 #endif
   }
 }
@@ -132,14 +133,14 @@ void compute_best_transformation(const PointRange& points,
   search_solution.evolve(max_generations, population_size, nelder_mead_iterations);
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_BENCHMARKS
-  std::cout << "evolve: " << timer.time() << std::endl;
+  Rcpp::Rcout << "evolve: " << timer.time() << std::endl;
   timer.reset();
 #endif
 
   const Matrix& rot = search_solution.get_best_vertex().matrix();
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_BENCHMARKS
-  std::cout << "get best: " << timer.time() << std::endl;
+  Rcpp::Rcout << "get best: " << timer.time() << std::endl;
 #endif
 
   transformation = Aff_transformation_3(rot(0, 0), rot(0, 1), rot(0, 2),
@@ -222,11 +223,11 @@ void construct_oriented_bounding_box(const PointRange& points,
     extreme_points_3(points, std::back_inserter(ch_points), CH_traits);
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_BENCHMARKS
-    std::cout << "CH time: " << timer.time() << std::endl;
+    Rcpp::Rcout << "CH time: " << timer.time() << std::endl;
 #endif
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG
-    std::cout << ch_points.size() << " points on the convex hull" << std::endl;
+    Rcpp::Rcout << ch_points.size() << " points on the convex hull" << std::endl;
 #endif
 
     return construct_oriented_bounding_box(ch_points, output, rng, traits);
@@ -358,13 +359,13 @@ void oriented_bounding_box(const PointRange& points,
   CGAL::Random& rng = (seed == unsigned(-1)) ? CGAL::get_default_random() : fixed_seed_rng;
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG
-  std::cout << "Random seed: " << rng.get_seed() << std::endl;
+  Rcpp::Rcout << "Random seed: " << rng.get_seed() << std::endl;
 #endif
 
   // @todo handle those cases (or call min_rectangle_2 with a projection)
   if(points.size() <= 3)
   {
-    std::cerr << "The oriented bounding box cannot (yet) be computed for a mesh with fewer than 4 vertices!\n";
+    Rcpp::Rcerr << "The oriented bounding box cannot (yet) be computed for a mesh with fewer than 4 vertices!\n";
     return;
   }
 

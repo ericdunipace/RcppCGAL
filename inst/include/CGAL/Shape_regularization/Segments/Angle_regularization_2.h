@@ -14,6 +14,7 @@
 #ifndef CGAL_SHAPE_REGULARIZATION_ANGLE_REGULARIZATION_2_H
 #define CGAL_SHAPE_REGULARIZATION_ANGLE_REGULARIZATION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Shape_regularization.h>
 
 // Boost includes.
@@ -130,8 +131,8 @@ namespace Segments {
 
       m_max_angle = max_angle;
       if (m_max_angle < FT(0) || m_max_angle > FT(90)) {
-        std::cerr << "WARNING: The maximum angle bound has to be within [0, 90]! ";
-        std::cerr << " Setting to the default value: 25 degrees." << std::endl;
+        Rcpp::Rcerr << "WARNING: The maximum angle bound has to be within [0, 90]! ";
+        Rcpp::Rcerr << " Setting to the default value: 25 degrees." << std::endl;
         m_max_angle = FT(25);
       }
       clear();

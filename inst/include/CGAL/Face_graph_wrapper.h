@@ -12,6 +12,7 @@
 #ifndef CGAL_FACE_GRAPH_WRAPPER_H
 #define CGAL_FACE_GRAPH_WRAPPER_H 1
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Surface_mesh_topology/internal/Functors_for_face_graph_wrapper.h>
@@ -227,9 +228,9 @@ public:
     initialize_marks();
     if (mnb_used_marks==NB_MARKS)
     {
-      std::cerr << "Not enough Boolean marks: "
+      Rcpp::Rcerr << "Not enough Boolean marks: "
         "increase NB_MARKS in item class." << std::endl;
-      std::cerr << "  (exception launched)" << std::endl;
+      Rcpp::Rcerr << "  (exception launched)" << std::endl;
       throw Exception_no_more_available_mark();
     }
 

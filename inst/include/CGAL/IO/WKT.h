@@ -15,6 +15,7 @@
 #ifndef CGAL_IO_WKT_H
 #define CGAL_IO_WKT_H
 
+#include <Rcpp.h>
 #include <CGAL/Point_2.h>
 #include <CGAL/Point_3.h>
 #include <CGAL/Polygon_2.h>
@@ -93,7 +94,7 @@ bool read_point_WKT(std::istream& in,
       }
       catch(...)
       {
-        std::cerr << "error." << std::endl;
+        Rcpp::Rcerr << "error." << std::endl;
         return false;
       }
 
@@ -139,7 +140,7 @@ bool read_multi_point_WKT(std::istream& in,
       try{
         boost::geometry::read_wkt(line, gc);
       } catch(...){
-        std::cerr << "error." << std::endl;
+        Rcpp::Rcerr << "error." << std::endl;
         return false;
       }
       break;
@@ -185,7 +186,7 @@ bool read_linestring_WKT(std::istream& in,
       try{
         boost::geometry::read_wkt(line, gc);
       } catch(...){
-        std::cerr << "error." << std::endl;
+        Rcpp::Rcerr << "error." << std::endl;
         return false;
       }
       break;
@@ -236,7 +237,7 @@ bool read_multi_linestring_WKT(std::istream& in,
       }
       catch(...)
       {
-        std::cerr << "error." << std::endl;
+        Rcpp::Rcerr << "error." << std::endl;
         return false;
       }
 

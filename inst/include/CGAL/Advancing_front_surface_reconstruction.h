@@ -12,6 +12,7 @@
 #ifndef CGAL_ADVANCING_FRONT_SURFACE_RECONSTRUCTION_H
 #define CGAL_ADVANCING_FRONT_SURFACE_RECONSTRUCTION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Advancing_front_surface_reconstruction.h>
 
 #include <CGAL/disable_warnings.h>
@@ -739,11 +740,11 @@ namespace CGAL {
       ~Advancing_front_surface_reconstruction()
       {
 
-      std::cerr << "postprocessing" << postprocess_timer.time() << std::endl;
-      std::cerr << "extend        " << extend_timer.time() << std::endl;
-      std::cerr << "extend2       " << extend2_timer.time() << std::endl;
-      std::cerr << "init          " << postprocess_timer.time() << std::endl;
-      std::cerr << "#outliers     " << number_of_outliers() << std::endl;
+      Rcpp::Rcerr << "postprocessing" << postprocess_timer.time() << std::endl;
+      Rcpp::Rcerr << "extend        " << extend_timer.time() << std::endl;
+      Rcpp::Rcerr << "extend2       " << extend2_timer.time() << std::endl;
+      Rcpp::Rcerr << "init          " << postprocess_timer.time() << std::endl;
+      Rcpp::Rcerr << "#outliers     " << number_of_outliers() << std::endl;
       }
     */
 
@@ -799,7 +800,7 @@ namespace CGAL {
 
           if ( (re_init = init(re_init)) )
             {
-              //std::cerr << "Growing connected component " << _number_of_connected_components << std::endl;
+              //Rcpp::Rcerr << "Growing connected component " << _number_of_connected_components << std::endl;
               extend_timer.start();
               extend();
               extend_timer.stop();
@@ -1753,7 +1754,7 @@ namespace CGAL {
       Edge_like ordered_key(v1,v2);
 
       if (!is_border_elt(ordered_key, result12))
-        std::cerr << "+++probleme coherence bord <validate>" << std::endl;
+        Rcpp::Rcerr << "+++probleme coherence bord <validate>" << std::endl;
 
       bool is_border_el1 = is_border_elt(ordered_el1, result1),
         is_border_el2 = is_border_elt(ordered_el2, result2);
@@ -1931,7 +1932,7 @@ namespace CGAL {
                           {
                             Validation_case res = validate(ear1, e1.first);
                             if (!((res == EAR_CASE)||(res == FINAL_CASE)))
-                              std::cerr << "+++probleme de recollement : cas "
+                              Rcpp::Rcerr << "+++probleme de recollement : cas "
                                         << res << std::endl;
                             e2 = compute_value(edge_Ifacet_2);
 
@@ -1948,7 +1949,7 @@ namespace CGAL {
                           {
                             Validation_case res = validate(ear2, e2.first);
                             if (!((res == EAR_CASE)||(res == FINAL_CASE)))
-                              std::cerr << "+++probleme de recollement : cas "
+                              Rcpp::Rcerr << "+++probleme de recollement : cas "
                                         << res << std::endl;
                             e1 = compute_value(edge_Ifacet_1);
 
@@ -1969,14 +1970,14 @@ namespace CGAL {
                           {
                             Validation_case res = validate(ear1, e1.first);
                             if (!((res == EAR_CASE)||(res == FINAL_CASE)))
-                              std::cerr << "+++probleme de recollement : cas "
+                              Rcpp::Rcerr << "+++probleme de recollement : cas "
                                         << res << std::endl;
                           }
                         if (ear2_valid)
                           {
                             Validation_case res = validate(ear2, e2.first);
                             if (!((res == EAR_CASE)||(res == FINAL_CASE)))
-                              std::cerr << "+++probleme de recollement : cas "
+                              Rcpp::Rcerr << "+++probleme de recollement : cas "
                                         << res << std::endl;
                           }
                         // on met a jour la PQ s'il y a lieu... mais surtout pas
@@ -2118,7 +2119,7 @@ namespace CGAL {
 
 #ifdef VERBOSE
       if ((min_K < infinity())&&(!_ordered_border.empty())) {
-        std::cout << "   [ next K required = " << min_K << " ]" << std::endl;
+        Rcpp::Rcout << "   [ next K required = " << min_K << " ]" << std::endl;
       }
 #endif // VERBOSE
     }
@@ -2215,7 +2216,7 @@ namespace CGAL {
         }
       while(circ.first.first != c);
       // si on passe par la, alors y a eu un probleme....
-      std::cerr << "+++probleme dans la MAJ avant remove..." << std::endl;
+      Rcpp::Rcerr << "+++probleme dans la MAJ avant remove..." << std::endl;
       return Facet(c, start.second);
     }
 
@@ -2460,7 +2461,7 @@ namespace CGAL {
           }
 #ifdef VERBOSE
           if(L_v.size() > 0){
-            std::cout << "   " << L_v.size() << " non regular points." << std::endl;
+            Rcpp::Rcout << "   " << L_v.size() << " non regular points." << std::endl;
           }
 #endif // VERBOSE
           re_compute_values();

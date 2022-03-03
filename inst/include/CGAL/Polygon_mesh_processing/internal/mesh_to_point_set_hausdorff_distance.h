@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_TO_POINT_SET_HAUSDORFF_DISTANCE_H
 #define CGAL_MESH_TO_POINT_SET_HAUSDORFF_DISTANCE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/distance.h>
 
 
@@ -144,7 +145,7 @@ public:
   #ifdef CGAL_MTPS_HD_DEBUG
   void print () const
   {
-    std::cerr << "[Refinement triangle]" << std::endl
+    Rcpp::Rcerr << "[Refinement triangle]" << std::endl
               << "   Bounds: " << m_lower_bound << " to "
               << m_upper_bound << std::endl
               << " * " << m_point[0]() << std::endl

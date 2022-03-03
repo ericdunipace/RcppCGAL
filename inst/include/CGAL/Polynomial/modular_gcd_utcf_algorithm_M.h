@@ -20,6 +20,7 @@
 #ifndef CGAL_POLYNOMIAL_MODULAR_GCD_UTCF_ALGORITHM_M_H
 #define CGAL_POLYNOMIAL_MODULAR_GCD_UTCF_ALGORITHM_M_H 1
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Residue.h>
 #include <CGAL/Polynomial/modular_gcd.h>
@@ -53,7 +54,7 @@ Polynomial<NT> modular_gcd_utcf_algorithm_M(
   // Enforce IEEE double precision and to nearest before using modular arithmetic
   CGAL::Protect_FPU_rounding<true> pfr(CGAL_FE_TONEAREST);
 
-//    std::cout << "start modular_gcd_utcf_algorithm_M " << std::endl;
+//    Rcpp::Rcout << "start modular_gcd_utcf_algorithm_M " << std::endl;
 #ifdef CGAL_MODULAR_GCD_TIMER
     timer_init.start();
 #endif
@@ -76,7 +77,7 @@ Polynomial<NT> modular_gcd_utcf_algorithm_M(
             return Poly(1);// TODO: return 0 for CGAL
         }
         else{
-            //      std::cout<<"\nFF1 is zero"<<std::endl;
+            //      Rcpp::Rcout<<"\nFF1 is zero"<<std::endl;
 
             return CGAL::canonicalize(FF2);
         }
@@ -97,7 +98,7 @@ Polynomial<NT> modular_gcd_utcf_algorithm_M(
     Scalar f2 = scalar_factor(F2.lcoeff());  // ilcoeff(F2)
     Scalar g_ = scalar_factor(f1,f2);
 
-    //std::cout <<" g_   : "<< g_ << std::endl;
+    //Rcpp::Rcout <<" g_   : "<< g_ << std::endl;
 
     bool solved = false;
     int prime_index = -1;
@@ -124,7 +125,7 @@ Polynomial<NT> modular_gcd_utcf_algorithm_M(
                 int current_prime = -1;
                 prime_index++;
                 if(prime_index >= 2000){
-                    std::cerr<<"primes in the array exhausted"<<std::endl;
+                    Rcpp::Rcerr<<"primes in the array exhausted"<<std::endl;
                     current_prime = internal::get_next_lower_prime(current_prime);
                 }
                 else{
@@ -170,7 +171,7 @@ Polynomial<NT> modular_gcd_utcf_algorithm_M(
         while( mG_.degree() > degree_e);
 
         if( mG_.degree() < degree_e ){
-            if( n != 0 ) std::cout << "UNLUCKY PRIME !!"<< std::endl;
+            if( n != 0 ) Rcpp::Rcout << "UNLUCKY PRIME !!"<< std::endl;
 
             // restart chinese remainder
             // ignore previous unlucky primes
@@ -184,7 +185,7 @@ Polynomial<NT> modular_gcd_utcf_algorithm_M(
         // --------------------------------------
         // try chinese remainder
 
-//        std::cout <<" chinese remainder round :" << n << std::endl;
+//        Rcpp::Rcout <<" chinese remainder round :" << n << std::endl;
         typename CGAL::Modular_traits<Poly>::Modular_image_representative inv_map;
         if(n == 1){
             // init chinese remainder
@@ -242,7 +243,7 @@ Polynomial<NT> modular_gcd_utcf_algorithm_M(
 #ifdef CGAL_MODULAR_GCD_TIMER
                 timer_division.stop();
 #endif
-//                std::cout << "number of primes used : "<< n << std::endl;
+//                Rcpp::Rcout << "number of primes used : "<< n << std::endl;
             } // end while
 
         }catch(...){}

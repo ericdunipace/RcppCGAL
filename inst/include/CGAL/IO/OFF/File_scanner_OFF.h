@@ -17,6 +17,7 @@
 #ifndef CGAL_IO_OFF_FILE_SCANNER_OFF_H
 #define CGAL_IO_OFF_FILE_SCANNER_OFF_H
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #include <CGAL/IO/binary_file_io.h>
@@ -117,7 +118,7 @@ public:
       {
         m_in.clear(std::ios::badbit);
         if(verbose())
-          std::cerr<<"error while reading vertex."<<std::endl;
+          Rcpp::Rcerr<<"error while reading vertex."<<std::endl;
         return;
       }
       x = entries[0];
@@ -128,7 +129,7 @@ public:
         if(entries.size() < 4){
           m_in.clear(std::ios::badbit);
           if(verbose())
-            std::cerr<<"error while reading vertex."<<std::endl;
+            Rcpp::Rcerr<<"error while reading vertex."<<std::endl;
           return;
         }
         w = entries[3];
@@ -217,7 +218,7 @@ public:
           {
             m_in.clear(std::ios::badbit);
             if(verbose())
-              std::cerr<<"error while reading texture."<<std::endl;
+              Rcpp::Rcerr<<"error while reading texture."<<std::endl;
             return;
           }
           w = entries[first_texture_index + 2];
@@ -304,7 +305,7 @@ public:
         {
           m_in.clear(std::ios::badbit);
           if(verbose())
-            std::cerr<<"error while reading normal."<<std::endl;
+            Rcpp::Rcerr<<"error while reading normal."<<std::endl;
           return;
         }
         x = entries[first_normal_index];
@@ -316,7 +317,7 @@ public:
           if(entries.size() <= first_normal_index + 3){
             m_in.clear(std::ios::badbit);
             if(verbose())
-              std::cerr<<"error while reading normal."<<std::endl;
+              Rcpp::Rcerr<<"error while reading normal."<<std::endl;
             return;
           }
           w = entries[first_normal_index + 3];
@@ -660,9 +661,9 @@ public:
           m_in.clear(std::ios::badbit);
           if(verbose())
           {
-            std::cerr << " " << std::endl;
-            std::cerr << "File_scanner_OFF::" << std::endl;
-            std::cerr << "skip_to_next_vertex(): input error: bad "
+            Rcpp::Rcerr << " " << std::endl;
+            Rcpp::Rcerr << "File_scanner_OFF::" << std::endl;
+            Rcpp::Rcerr << "skip_to_next_vertex(): input error: bad "
                          " number of color indices at vertex "
                       << current_vertex << "." << std::endl;
           }
@@ -741,7 +742,7 @@ public:
       {
         m_in.clear(std::ios::badbit);
         if(verbose())
-          std::cerr<<"error while reading facet. Missing index."<<std::endl;
+          Rcpp::Rcerr<<"error while reading facet. Missing index."<<std::endl;
         index=0;
         return;
       }
@@ -752,9 +753,9 @@ public:
     {
       if(verbose())
       {
-        std::cerr << " " << std::endl;
-        std::cerr << "File_scanner_OFF::" << std::endl;
-        std::cerr << "scan_facet_vertex_index(): input error:  "
+        Rcpp::Rcerr << " " << std::endl;
+        Rcpp::Rcerr << "File_scanner_OFF::" << std::endl;
+        Rcpp::Rcerr << "scan_facet_vertex_index(): input error:  "
                      "cannot read OFF file beyond facet "
                   << current_facet << "." << std::endl;
       }
@@ -771,9 +772,9 @@ public:
       m_in.clear(std::ios::failbit);
       if(verbose())
       {
-        std::cerr << " " << std::endl;
-        std::cerr << "File_scanner_OFF::" << std::endl;
-        std::cerr << "scan_facet_vertex_index(): input error: "
+        Rcpp::Rcerr << " " << std::endl;
+        Rcpp::Rcerr << "File_scanner_OFF::" << std::endl;
+        Rcpp::Rcerr << "scan_facet_vertex_index(): input error: "
                      "facet " << current_facet << ": vertex index "
                   << index + index_offset() << ": is out of range."
                   << std::endl;
@@ -796,9 +797,9 @@ public:
         m_in.clear(std::ios::badbit);
         if(verbose())
         {
-          std::cerr << " " << std::endl;
-          std::cerr << "File_scanner_OFF::" << std::endl;
-          std::cerr << "skip_to_next_facet(): input error: bad "
+          Rcpp::Rcerr << " " << std::endl;
+          Rcpp::Rcerr << "File_scanner_OFF::" << std::endl;
+          Rcpp::Rcerr << "skip_to_next_facet(): input error: bad "
                        "number of color indices at vertex "
                     << current_facet << "." << std::endl;
         }

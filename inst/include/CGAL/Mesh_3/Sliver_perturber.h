@@ -17,6 +17,7 @@
 #ifndef CGAL_MESH_3_SLIVER_PERTURBER_H
 #define CGAL_MESH_3_SLIVER_PERTURBER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -793,11 +794,11 @@ operator()(Visitor visitor)
 
 #if defined(CGAL_MESH_3_PERTURBER_VERBOSE) \
  || defined(CGAL_MESH_3_PROFILING)
-  std::cerr << "Running sliver perturbation..." << std::endl;
+  Rcpp::Rcerr << "Running sliver perturbation..." << std::endl;
 #endif
 
 #ifdef CGAL_MESH_3_PERTURBER_LOW_VERBOSITY
-  std::cerr << "Legend of the following line: "
+  Rcpp::Rcerr << "Legend of the following line: "
             << "(#vertices in pqueue, #iterations, #fails)" << std::endl;
 #endif
 
@@ -831,14 +832,14 @@ operator()(Visitor visitor)
                                // after this perturbation
 
 #ifdef CGAL_MESH_3_PERTURBER_VERBOSE
-  std::cerr << std::endl
+  Rcpp::Rcerr << std::endl
             << "Total perturbation time: " << running_time_.time() << "s";
-  std::cerr << std::endl << "Perturbation statistics:" << std::endl;
+  Rcpp::Rcerr << std::endl << "Perturbation statistics:" << std::endl;
   print_final_perturbations_statistics();
 #endif
 
 #ifdef CGAL_MESH_3_PROFILING
-  std::cerr << std::endl << "Total perturbation 'wall-clock' time: "
+  Rcpp::Rcerr << std::endl << "Total perturbation 'wall-clock' time: "
             << perturbation_time << "s" << std::endl;
 #endif
 
@@ -846,20 +847,20 @@ operator()(Visitor visitor)
 
   if ( is_time_limit_reached() ) {
 #if defined(CGAL_MESH_3_PERTURBER_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    std::cerr << "Perturbation return code: TIME_LIMIT_REACHED\n\n";
+    Rcpp::Rcerr << "Perturbation return code: TIME_LIMIT_REACHED\n\n";
 #endif // CGAL_MESH_3_PERTURBER_VERBOSE
     ret = TIME_LIMIT_REACHED;
   }
   else if ( !perturbation_ok ) {
 #if defined(CGAL_MESH_3_PERTURBER_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    std::cerr << "Perturbation return code: CANT_IMPROVE_ANYMORE\n\n";
+    Rcpp::Rcerr << "Perturbation return code: CANT_IMPROVE_ANYMORE\n\n";
 #endif // CGAL_MESH_3_PERTURBER_VERBOSE
     ret = CANT_IMPROVE_ANYMORE;
   }
   else
   {
 #if defined(CGAL_MESH_3_PERTURBER_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    std::cerr << "Perturbation return code: BOUND_REACHED\n\n";
+    Rcpp::Rcerr << "Perturbation return code: BOUND_REACHED\n\n";
 #endif // CGAL_MESH_3_PERTURBER_VERBOSE
     ret = BOUND_REACHED;
   }
@@ -913,17 +914,17 @@ perturb(const FT& sliver_bound, PQueue& pqueue, Visitor& visitor) const
 #ifdef CGAL_MESH_3_PERTURBER_HIGH_VERBOSITY
   CGAL::Real_timer timer;
   timer.start();
-  std::streamsize prec = std::cerr.precision(4);
-  std::cerr << "Perturb sliver vertices (bound: " << sliver_bound
+  std::streamsize prec = Rcpp::Rcerr.precision(4);
+  Rcpp::Rcerr << "Perturb sliver vertices (bound: " << sliver_bound
             << ") ..." << std::endl;
-  std::cerr.precision(prec);
+  Rcpp::Rcerr.precision(prec);
 #endif
 
   // build priority queue
   int pqueue_size = build_priority_queue(sliver_bound, pqueue);
 
 #ifdef CGAL_MESH_3_PERTURBER_HIGH_VERBOSITY
-  std::cerr << "Legend of the following line: "
+  Rcpp::Rcerr << "Legend of the following line: "
             << "(#vertices in pqueue, #iterations, #fails)" << std::endl;
 
   // Store construction time
@@ -953,14 +954,14 @@ perturb(const FT& sliver_bound, PQueue& pqueue, Visitor& visitor) const
     this->wait_for_all();
 
 # if defined(CGAL_MESH_3_PERTURBER_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    std::cerr << " Flushing";
+    Rcpp::Rcerr << " Flushing";
 # endif
     bool keep_flushing = true;
     while (keep_flushing)
     {
       keep_flushing = this->flush_work_buffers();
 # if defined(CGAL_MESH_3_PERTURBER_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-      std::cerr << ".";
+      Rcpp::Rcerr << ".";
 # endif
     }
 
@@ -1050,7 +1051,7 @@ perturb(const FT& sliver_bound, PQueue& pqueue, Visitor& visitor) const
 
 # ifdef CGAL_MESH_3_PERTURBER_HIGH_VERBOSITY
       ++iteration_nb;
-      std::cerr << boost::format("\r             \r"
+      Rcpp::Rcerr << boost::format("\r             \r"
                                  "(%1%,%2%,%4%) (%|3$.1f| iteration/s)")
       % pqueue_size
       % iteration_nb
@@ -1060,7 +1061,7 @@ perturb(const FT& sliver_bound, PQueue& pqueue, Visitor& visitor) const
 
 # ifdef CGAL_MESH_3_PERTURBER_LOW_VERBOSITY
       ++iteration_nb;
-      std::cerr << boost::format("\r             \r"
+      Rcpp::Rcerr << boost::format("\r             \r"
                                  "bound %5%: (%1%,%2%,%4%) (%|3$.1f| iteration/s)")
       % pqueue_size
       % iteration_nb
@@ -1072,9 +1073,9 @@ perturb(const FT& sliver_bound, PQueue& pqueue, Visitor& visitor) const
   }
 
 #ifdef CGAL_MESH_3_PERTURBER_HIGH_VERBOSITY
-  std::cerr << std::endl;
+  Rcpp::Rcerr << std::endl;
   print_perturbations_statistics();
-  std::cerr << "Step perturbation time: " << timer.time() + construction_time
+  Rcpp::Rcerr << "Step perturbation time: " << timer.time() + construction_time
             << "s" << std::endl << std::endl;
 #endif
 
@@ -1099,7 +1100,7 @@ build_priority_queue(const FT& sliver_bound, PQueue& pqueue) const
 #ifdef CGAL_MESH_3_PERTURBER_HIGH_VERBOSITY
   CGAL::Real_timer timer;
   timer.start();
-  std::cerr << "Build pqueue...";
+  Rcpp::Rcerr << "Build pqueue...";
 #endif
 
   int pqueue_size = 0;
@@ -1142,7 +1143,7 @@ build_priority_queue(const FT& sliver_bound, PQueue& pqueue) const
     pqueue_size += update_priority_queue(vit->second, pqueue);
 
 #ifdef CGAL_MESH_3_PERTURBER_HIGH_VERBOSITY
-  std::cerr << "done (" << pqueue_size << " vertices inserted in "
+  Rcpp::Rcerr << "done (" << pqueue_size << " vertices inserted in "
             << timer.time() << "s)\n";
 #endif
 
@@ -1161,7 +1162,7 @@ build_priority_queue(const FT& sliver_bound, PQueue& pqueue) const
 #ifdef CGAL_MESH_3_PERTURBER_HIGH_VERBOSITY
   CGAL::Real_timer timer;
   timer.start();
-  std::cerr << "Build pqueue...";
+  Rcpp::Rcerr << "Build pqueue...";
 #endif
 
   int pqueue_size = 0;
@@ -1175,7 +1176,7 @@ build_priority_queue(const FT& sliver_bound, PQueue& pqueue) const
   }
 
 #ifdef CGAL_MESH_3_PERTURBER_HIGH_VERBOSITY
-  std::cerr << "done (" << pqueue_size << " vertices inserted in "
+  Rcpp::Rcerr << "done (" << pqueue_size << " vertices inserted in "
             << timer.time() << "s)\n";
 #endif
 
@@ -1556,7 +1557,7 @@ print_perturbations_statistics() const
 
   if ( 0 == total_perturbation_nb )
   {
-    std::cerr << "No perturbation done at this step" << std::endl;
+    Rcpp::Rcerr << "No perturbation done at this step" << std::endl;
     return;
   }
 
@@ -1564,7 +1565,7 @@ print_perturbations_statistics() const
        it != perturbation_vector_.end() ;
        ++it )
   {
-    std::cerr << it->perturbation_name() << ": "
+    Rcpp::Rcerr << it->perturbation_name() << ": "
               << (double)it->counter() / (double)total_perturbation_nb * 100.
               << "% (" << it->counter() << " in " << it->time() << "s)"
               << std::endl;
@@ -1587,7 +1588,7 @@ print_final_perturbations_statistics() const
 
   if ( 0 == total_perturbation_nb )
   {
-    std::cerr << "No perturbation done" << std::endl;
+    Rcpp::Rcerr << "No perturbation done" << std::endl;
     return;
   }
 
@@ -1595,7 +1596,7 @@ print_final_perturbations_statistics() const
        it != perturbation_vector_.end() ;
        ++it )
   {
-    std::cerr << it->perturbation_name() << ": "
+    Rcpp::Rcerr << it->perturbation_name() << ": "
               << (double)it->total_counter() / (double)total_perturbation_nb * 100.
               << "% (" << it->total_counter() << " in " << it->total_time() << "ms)"
               << std::endl;

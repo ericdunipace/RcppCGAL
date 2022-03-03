@@ -78,8 +78,8 @@ operator >> ( std::istream& is, CGAL::Optimisation_ellipse_2<K_>& e)
     switch ( CGAL::IO::get_mode( is)) {
 
       case CGAL::IO::PRETTY:
-        std::cerr << std::endl;
-        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
+        Rcpp::Rcerr << std::endl;
+        Rcpp::Rcerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
 
       case CGAL::IO::ASCII:

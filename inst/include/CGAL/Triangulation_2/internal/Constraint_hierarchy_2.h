@@ -13,6 +13,7 @@
 #ifndef CGAL_CONSTRAINT_HIERARCHY_2_H
 #define CGAL_CONSTRAINT_HIERARCHY_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_2.h>
 
 
@@ -727,7 +728,7 @@ print() const
 //  typename std::map<T,int>::iterator vnit = vertex_num.begin();
 //  for(; vnit != vertex_num.end(); vnit++) {
 //    vnit->second = ++num;
-//    std::cerr << "vertex num " << num  << " " << vnit->first->point()
+//    Rcpp::Rcerr << "vertex num " << num  << " " << vnit->first->point()
 //              << std::endl;
 //  }
 
@@ -735,32 +736,32 @@ print() const
   H_sc_iterator scit=sc_begin();
 
   for(; cit != c_end();  cit++){
-    std::cout << std::endl ;
-    std::cout << "constraint " ;
-    std::cout << vertex_num[cit->first.first]  << " "
+    Rcpp::Rcout << std::endl ;
+    Rcpp::Rcout << "constraint " ;
+    Rcpp::Rcout << vertex_num[cit->first.first]  << " "
               <<  vertex_num[cit->first.second];
-    std::cout << "  subconstraints " ;
+    Rcpp::Rcout << "  subconstraints " ;
     H_vertex_it vit = cit->second->begin();
     for(; vit != cit->second->end(); vit++){
-      std::cout << vertex_num[*vit]  <<" ";
+      Rcpp::Rcout << vertex_num[*vit]  <<" ";
     }
   }
-  std::cout << std::endl ;
+  Rcpp::Rcout << std::endl ;
   for(;scit != sc_end(); scit++){
-    std::cout << "subconstraint " ;
-    std::cout << vertex_num[scit->first.first] << " "
+    Rcpp::Rcout << "subconstraint " ;
+    Rcpp::Rcout << vertex_num[scit->first.first] << " "
               << vertex_num[scit->first.second];
     H_constraint_list  hcl;
     enclosing_constraints( scit->first.first, scit->first.second,
                            hcl);
     H_constraint_it hcit=hcl.begin();
-    std::cout << "  enclosing " ;
+    Rcpp::Rcout << "  enclosing " ;
     for(; hcit != hcl.end(); hcit++) {
-      std::cout << vertex_num[hcit->first] <<" "
+      Rcpp::Rcout << vertex_num[hcit->first] <<" "
                 << vertex_num[hcit->second] ;
-      std::cout <<  "   " ;
+      Rcpp::Rcout <<  "   " ;
     }
-    std::cout << std::endl ;
+    Rcpp::Rcout << std::endl ;
   }
   return;
 }

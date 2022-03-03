@@ -17,6 +17,7 @@
 #ifndef CGAL_HOMOGENEOUS_FUNCTION_OBJECTS_H
 #define CGAL_HOMOGENEOUS_FUNCTION_OBJECTS_H
 
+#include <Rcpp.h>
 #include <CGAL/Kernel/function_objects.h>
 #include <CGAL/Cartesian/function_objects.h>
 #include <CGAL/Kernel/Return_base_tag.h>
@@ -547,7 +548,7 @@ namespace HomogeneousKernelFunctors {
 
         if ( !(CGAL_NTS sign(det) == CGAL_NTS sign(det_old)) )
         {
-        std::cerr << "det: " << det << " det_old: " << det_old << flush;
+        Rcpp::Rcerr << "det: " << det << " det_old: " << det_old << flush;
         }
       */
 

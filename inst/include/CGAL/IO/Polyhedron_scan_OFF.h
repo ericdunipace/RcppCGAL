@@ -13,6 +13,7 @@
 #ifndef CGAL_IO_POLYHEDRON_SCAN_OFF_H
 #define CGAL_IO_POLYHEDRON_SCAN_OFF_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polyhedron.h>
 
 #include <CGAL/Polyhedron_3.h>
@@ -61,9 +62,9 @@ void Polyhedron_scan_OFF<HDS>:: operator()(HDS& target)
   {
     if(scanner.verbose())
     {
-      std::cerr << " " << std::endl;
-      std::cerr << "Polyhedron_scan_OFF<HDS>::" << std::endl;
-      std::cerr << "operator(): input error: file format is not in "
+      Rcpp::Rcerr << " " << std::endl;
+      Rcpp::Rcerr << "Polyhedron_scan_OFF<HDS>::" << std::endl;
+      Rcpp::Rcerr << "operator(): input error: file format is not in "
                    "OFF." << std::endl;
     }
     m_in.clear( std::ios::badbit);
@@ -111,9 +112,9 @@ void Polyhedron_scan_OFF<HDS>:: operator()(HDS& target)
     {
       if(scanner.verbose())
       {
-        std::cerr << " " << std::endl;
-        std::cerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
-        std::cerr << "operator()(): input error: facet " << i
+        Rcpp::Rcerr << " " << std::endl;
+        Rcpp::Rcerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
+        Rcpp::Rcerr << "operator()(): input error: facet " << i
                   << " has fewer than 3 vertices." << std::endl;
       }
 
@@ -146,9 +147,9 @@ void Polyhedron_scan_OFF<HDS>:: operator()(HDS& target)
     if(! B.remove_unconnected_vertices())
     {
       if(scanner.verbose()) {
-        std::cerr << " " << std::endl;
-        std::cerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
-        std::cerr << "operator()(): input error: cannot "
+        Rcpp::Rcerr << " " << std::endl;
+        Rcpp::Rcerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
+        Rcpp::Rcerr << "operator()(): input error: cannot "
                      "successfully remove isolated vertices."
                   << std::endl;
       }

@@ -15,6 +15,7 @@
 #ifndef CGAL_IO_STL_H
 #define CGAL_IO_STL_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/STL/STL_reader.h>
 #include <CGAL/IO/helpers.h>
 
@@ -89,7 +90,7 @@ bool read_STL(std::istream& is,
   if(!is.good())
   {
     if(verbose)
-      std::cerr << "File doesn't exist." << std::endl;
+      Rcpp::Rcerr << "File doesn't exist." << std::endl;
     return false;
   }
 

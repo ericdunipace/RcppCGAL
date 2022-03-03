@@ -13,6 +13,7 @@
 #ifndef CGAL_NATURAL_NEIGHBORS_3_H
 #define CGAL_NATURAL_NEIGHBORS_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Interpolation.h>
 
 #include <CGAL/tags.h>
@@ -321,7 +322,7 @@ bool is_correct_natural_neighborhood(const Dt& /*dt*/,
   }
   //!!!! to be replaced by a linear combination of points as soon
   // as it is available in the kernel.
-  std::cout << sum_x/norm_coeff << " "
+  Rcpp::Rcout << sum_x/norm_coeff << " "
             << sum_y/norm_coeff << " "
             << sum_z/norm_coeff << std::endl;
   return ((sum_x == norm_coeff*Q.x()) && (sum_y == norm_coeff*Q.y())

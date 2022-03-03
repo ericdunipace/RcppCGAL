@@ -14,6 +14,7 @@
 #ifndef CGAL_MESH_2_CLUSTERS_H
 #define CGAL_MESH_2_CLUSTERS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 
@@ -350,7 +351,7 @@ update_cluster(Cluster& c, iterator it, Vertex_handle va,
                               c.smallest_angle.second->point())/FT(4);
   cluster_map.insert(Cluster_map_value_type(va,c));
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-  std::cerr << "Cluster at " << va->point() << " is updated.  "
+  Rcpp::Rcerr << "Cluster at " << va->point() << " is updated.  "
             << "\n  vm: " << vm->point()
             << "\n  reduction: " << reduction
             << "\n  min_sq_len: " << c.minimum_squared_length

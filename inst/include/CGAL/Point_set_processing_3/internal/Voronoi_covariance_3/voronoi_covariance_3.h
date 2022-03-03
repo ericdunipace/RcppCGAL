@@ -13,6 +13,7 @@
 #ifndef CGAL_INTERNAL_VCM_VORONOI_COVARIANCE_3_HPP
 #define CGAL_INTERNAL_VCM_VORONOI_COVARIANCE_3_HPP
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 
@@ -115,7 +116,7 @@ namespace CGAL {
                                                      const Point &c)
                             {
                                 const double  vol = CGAL::volume(a, b, c, Point(CGAL::ORIGIN));
-                                //std::cerr << "vol = " << vol << "\n";
+                                //Rcpp::Rcerr << "vol = " << vol << "\n";
                                 _result += vol;
                             }
 

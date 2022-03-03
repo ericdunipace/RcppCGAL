@@ -17,6 +17,7 @@
 #if defined(CGAL_USE_OSQP) || defined(DOXYGEN_RUNNING)
 
 // STL includes.
+#include <Rcpp.h>
 #include <tuple>
 #include <vector>
 #include <utility>
@@ -184,8 +185,8 @@ public:
   {
     if(verbose)
     {
-      std::cout << "num variables = " << n << std::endl;
-      std::cout << "num constraints = " << m << std::endl;
+      Rcpp::Rcout << "num variables = " << n << std::endl;
+      Rcpp::Rcout << "num constraints = " << m << std::endl;
     }
     CGAL_precondition(n >= 1); // m >= 0
 
@@ -197,14 +198,14 @@ public:
     auto P_i = std::make_unique<c_int[]>(P_nnz);
     auto P_p = std::make_unique<c_int[]>(n + 1);
     set_matrix_from_triplets("P", P_vec, P_x.get(), P_i.get(), P_p.get());
-    if(verbose) std::cout << "P_nnz: " << P_nnz << std::endl;
+    if(verbose) Rcpp::Rcout << "P_nnz: " << P_nnz << std::endl;
 
     const c_int A_nnz = static_cast<c_int>(A_vec.size());
     auto A_x = std::make_unique<c_float[]>(A_nnz);
     auto A_i = std::make_unique<c_int[]>(A_nnz);
     auto A_p = std::make_unique<c_int[]>(n + 1);
     set_matrix_from_triplets("A", A_vec, A_x.get(), A_i.get(), A_p.get());
-    if(verbose) std::cout << "A_nnz: " << A_nnz << std::endl;
+    if(verbose) Rcpp::Rcout << "A_nnz: " << A_nnz << std::endl;
 
     const c_int q_size = static_cast<c_int>(q_vec.size());
     const c_int l_size = static_cast<c_int>(l_vec.size());
@@ -254,8 +255,8 @@ public:
     }
     catch(std::exception& e)
     {
-      std::cerr << "ERROR: OSQP solver has thrown an exception!" << std::endl;
-      std::cerr << e.what() << std::endl;
+      Rcpp::Rcerr << "ERROR: OSQP solver has thrown an exception!" << std::endl;
+      Rcpp::Rcerr << e.what() << std::endl;
     }
     const bool success = (exitflag == 0);
 
@@ -325,20 +326,20 @@ private:
       last = tmp;
     }
 
-    // std::cout << name + "_x: ";
+    // Rcpp::Rcout << name + "_x: ";
     // for(std::size_t i=0; i<nnz; ++i)
-    //   std::cout << M_x[i] << " ";
-    // std::cout << std::endl;
+    //   Rcpp::Rcout << M_x[i] << " ";
+    // Rcpp::Rcout << std::endl;
 
-    // std::cout << name + "_i: ";
+    // Rcpp::Rcout << name + "_i: ";
     // for(std::size_t i=0; i<nnz; ++i)
-    //   std::cout << M_i[i] << " ";
-    // std::cout << std::endl;
+    //   Rcpp::Rcout << M_i[i] << " ";
+    // Rcpp::Rcout << std::endl;
 
-    // std::cout << name + "_p: ";
+    // Rcpp::Rcout << name + "_p: ";
     // for(std::size_t i=0; i<(n+1); ++i)
-    //   std::cout << M_p[i] << " ";
-    // std::cout << std::endl;
+    //   Rcpp::Rcout << M_p[i] << " ";
+    // Rcpp::Rcout << std::endl;
   }
 
   void set_qlu_data(c_float *q_x,
@@ -356,20 +357,20 @@ private:
       u_x[i] = c_float(CGAL::to_double(u_vec[i]));
     }
 
-    // std::cout << "q_x: ";
+    // Rcpp::Rcout << "q_x: ";
     // for(std::size_t i=0; i<n; ++i)
-    //   std::cout << q_x[i] << " ";
-    // std::cout << std::endl;
+    //   Rcpp::Rcout << q_x[i] << " ";
+    // Rcpp::Rcout << std::endl;
 
-    // std::cout << "l_x: ";
+    // Rcpp::Rcout << "l_x: ";
     // for(std::size_t i=0; i<m; ++i)
-    //   std::cout << l_x[i] << " ";
-    // std::cout << std::endl;
+    //   Rcpp::Rcout << l_x[i] << " ";
+    // Rcpp::Rcout << std::endl;
 
-    // std::cout << "u_x: ";
+    // Rcpp::Rcout << "u_x: ";
     // for(std::size_t i=0; i<m; ++i)
-    //   std::cout << u_x[i] << " ";
-    // std::cout << std::endl;
+    //   Rcpp::Rcout << u_x[i] << " ";
+    // Rcpp::Rcout << std::endl;
   }
 };
 

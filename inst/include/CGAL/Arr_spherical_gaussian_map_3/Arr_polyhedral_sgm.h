@@ -13,6 +13,7 @@
 #ifndef CGAL_ARR_POLYHEDRAL_SGM_H
 #define CGAL_ARR_POLYHEDRAL_SGM_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -412,7 +413,7 @@ private:
         m_trg_vertex = next_hec->opposite()->vertex();
 
 #if 0
-        std::cout << "process_vertex trg: "
+        Rcpp::Rcout << "process_vertex trg: "
                   << static_cast<float>(todouble(m_trg_vertex->point().x()))
                   << ","
                   << static_cast<float>(todouble(m_trg_vertex->point().y()))
@@ -534,7 +535,7 @@ public:
   {
 #if 0
     std::copy(polyhedron.points_begin(), polyhedron.points_end(),
-              std::ostream_iterator<Point_3>(std::cout, "\n"));
+              std::ostream_iterator<Point_3>(Rcpp::Rcout, "\n"));
 #endif
 
     m_visitor = visitor;
@@ -570,7 +571,7 @@ public:
 
 #if 0
     std::copy(polyhedron.points_begin(), polyhedron.points_end(),
-              std::ostream_iterator<Point_3>(std::cout, "\n"));
+              std::ostream_iterator<Point_3>(Rcpp::Rcout, "\n"));
 #endif
 
 #if 0
@@ -788,7 +789,7 @@ public:
   {
     typename Base::Face_const_iterator vit;
     for (vit = this->faces_begin(); vit != this->faces_end(); ++vit)
-      std::cout << "vertex of polyhedron = " << vit->point() << std::endl;
+      Rcpp::Rcout << "vertex of polyhedron = " << vit->point() << std::endl;
   }
 
   /*! Print statistics */
@@ -796,7 +797,7 @@ public:
   {
     Base::print_stat();
 
-    std::cout << "Polyhedron"
+    Rcpp::Rcout << "Polyhedron"
               << ", no. facets: " << number_of_facets()
               << ", no. edges: " << number_of_edges()
               << ", no. vertices: " << number_of_vertices()

@@ -11,6 +11,7 @@
 #ifndef CGAL_MIXED_INTEGER_PROGRAM_TRAITS_H
 #define CGAL_MIXED_INTEGER_PROGRAM_TRAITS_H
 
+#include <Rcpp.h>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -475,7 +476,7 @@ namespace CGAL {
                 if (pos != coefficients_.end())
                         return pos->second;
                 else {
-                        std::cerr << "linear expression does not own variable " << var->name() << " (" << var->index() << ")" << std::endl;
+                        Rcpp::Rcerr << "linear expression does not own variable " << var->name() << " (" << var->index() << ")" << std::endl;
                         return 0.0;
                 }
         }
@@ -632,7 +633,7 @@ namespace CGAL {
         template<typename FT>
         const typename Mixed_integer_program_traits<FT>::Linear_objective * Mixed_integer_program_traits<FT>::objective() const {
                 if (!objective_)
-                        std::cerr << "please call \'create_objective()\' to create an objective first" << std::endl;
+                        Rcpp::Rcerr << "please call \'create_objective()\' to create an objective first" << std::endl;
 
                 return objective_;
         }
@@ -640,7 +641,7 @@ namespace CGAL {
         template<typename FT>
         typename Mixed_integer_program_traits<FT>::Linear_objective * Mixed_integer_program_traits<FT>::objective() {
                 if (!objective_)
-                        std::cerr << "please call \'create_objective()\' to create an objective first" << std::endl;
+                        Rcpp::Rcerr << "please call \'create_objective()\' to create an objective first" << std::endl;
 
                 return objective_;
         }

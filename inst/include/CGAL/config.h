@@ -44,6 +44,7 @@
 #ifdef CGAL_INCLUDE_WINDOWS_DOT_H
 // Mimic users including this file which defines min max macros
 // and other names leading to name clashes
+#include <Rcpp.h>
 #include <windows.h>
 #endif
 
@@ -588,7 +589,7 @@ inline std::string data_file_path(const std::string& filename)
  std::ifstream f(res);
  if (!f)
  {
-   std::cerr<<"[WARNING] file "<<res<<" does not exist or cannot be read "
+   Rcpp::Rcerr<<"[WARNING] file "<<res<<" does not exist or cannot be read "
             <<"(CGAL_DATA_DIR='"<<cgal_dir_string<<"')."<<std::endl;
  }
 

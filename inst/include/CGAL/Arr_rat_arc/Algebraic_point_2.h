@@ -13,6 +13,7 @@
 #ifndef CGAL_ALBERAIC_POINT_D_1_H
 #define CGAL_ALBERAIC_POINT_D_1_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -249,7 +250,7 @@ public:
       break;
 
      case ::CGAL::IO::BINARY:
-      std::cerr << "BINARY format not yet implemented" << std::endl;
+      Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
       break;
 
      default:

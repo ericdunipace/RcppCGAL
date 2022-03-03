@@ -15,6 +15,7 @@
 #ifndef CGAL_SURFACE_SWEEP_2_EVENT_COMPARER_H
 #define CGAL_SURFACE_SWEEP_2_EVENT_COMPARER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file
@@ -79,14 +80,14 @@ public:
     Arr_parameter_space ps_x2 = e2->parameter_space_in_x();
     Arr_parameter_space ps_y2 = e2->parameter_space_in_y();
 #if 0
-    CGAL::set_pretty_mode(std::cout);
-    std::cout << "\n FUNCTOR e1-e2" << std::endl;
-    std::cout << "e1: " << e1 << std::endl;
-    std::cout << "ps_x1: " << ps_x1 << std::endl;
-    std::cout << "ps_y1: " << ps_y1 << std::endl;
-    std::cout << "e2: " << e2 << std::endl;
-    std::cout << "ps_x2: " << ps_x2 << std::endl;
-    std::cout << "ps_y2: " << ps_y2 << std::endl;
+    CGAL::set_pretty_mode(Rcpp::Rcout);
+    Rcpp::Rcout << "\n FUNCTOR e1-e2" << std::endl;
+    Rcpp::Rcout << "e1: " << e1 << std::endl;
+    Rcpp::Rcout << "ps_x1: " << ps_x1 << std::endl;
+    Rcpp::Rcout << "ps_y1: " << ps_y1 << std::endl;
+    Rcpp::Rcout << "e2: " << e2 << std::endl;
+    Rcpp::Rcout << "ps_x2: " << ps_x2 << std::endl;
+    Rcpp::Rcout << "ps_y2: " << ps_y2 << std::endl;
 #endif
 
     const bool is_isolated1 = e1->is_isolated();
@@ -132,14 +133,14 @@ public:
     Arr_parameter_space ps_x2 = e2->parameter_space_in_x();
     Arr_parameter_space ps_y2 = e2->parameter_space_in_y();
 #if 0
-    CGAL::set_pretty_mode(std::cout);
-    std::cout << "\n FUNCTOR p1-e2" << std::endl;
-    std::cout << "pt1: " << pt1 << std::endl;
-    std::cout << "ps_x1: " << ps_x1 << std::endl;
-    std::cout << "ps_y1: " << ps_y1 << std::endl;
-    std::cout << "e2: " << e2 << std::endl;
-    std::cout << "ps_x2: " << ps_x2 << std::endl;
-    std::cout << "ps_y2: " << ps_y2 << std::endl;
+    CGAL::set_pretty_mode(Rcpp::Rcout);
+    Rcpp::Rcout << "\n FUNCTOR p1-e2" << std::endl;
+    Rcpp::Rcout << "pt1: " << pt1 << std::endl;
+    Rcpp::Rcout << "ps_x1: " << ps_x1 << std::endl;
+    Rcpp::Rcout << "ps_y1: " << ps_y1 << std::endl;
+    Rcpp::Rcout << "e2: " << e2 << std::endl;
+    Rcpp::Rcout << "ps_x2: " << ps_x2 << std::endl;
+    Rcpp::Rcout << "ps_y2: " << ps_y2 << std::endl;
 #endif
 
     const bool is_isolated2 = e2->is_isolated();
@@ -171,14 +172,14 @@ public:
     Arr_parameter_space ps_x2 = e2->parameter_space_in_x();
     Arr_parameter_space ps_y2 = e2->parameter_space_in_y();
 #if 0
-    CGAL::set_pretty_mode(std::cout);
-    std::cout << "\n FUNCTOR cv1-e2" << std::endl;
-    std::cout << "cv1: " << cv1 << ", " << ind1 << std::endl;
-    std::cout << "ps_x1: " << ps_x1 << std::endl;
-    std::cout << "ps_y1: " << ps_y1 << std::endl;
-    std::cout << "e2: " << e2 << std::endl;
-    std::cout << "ps_x2: " << ps_x2 << std::endl;
-    std::cout << "ps_y2: " << ps_y2 << std::endl;
+    CGAL::set_pretty_mode(Rcpp::Rcout);
+    Rcpp::Rcout << "\n FUNCTOR cv1-e2" << std::endl;
+    Rcpp::Rcout << "cv1: " << cv1 << ", " << ind1 << std::endl;
+    Rcpp::Rcout << "ps_x1: " << ps_x1 << std::endl;
+    Rcpp::Rcout << "ps_y1: " << ps_y1 << std::endl;
+    Rcpp::Rcout << "e2: " << e2 << std::endl;
+    Rcpp::Rcout << "ps_x2: " << ps_x2 << std::endl;
+    Rcpp::Rcout << "ps_y2: " << ps_y2 << std::endl;
 #endif
 
     const bool is_isolated2 = e2->is_isolated();
@@ -256,20 +257,20 @@ private:
     // 1T2L, 1T2R
     // 1R2L, 1R2B, 1R2I, 1R2T
     if (ps_x1 == ARR_LEFT_BOUNDARY) {
-      //std::cout << "res4 SMALLER" << std::endl;
+      //Rcpp::Rcout << "res4 SMALLER" << std::endl;
       return SMALLER;
     }
     if (ps_x1 == ARR_RIGHT_BOUNDARY) {
-      //std::cout << "res5 LARGER" << std::endl;
+      //Rcpp::Rcout << "res5 LARGER" << std::endl;
       return LARGER;
     }
     // ps_x1 == ARR_INTERIOR != ps_x2
     if (ps_x2 == ARR_LEFT_BOUNDARY) {
-      //std::cout << "res6 LARGER" << std::endl;
+      //Rcpp::Rcout << "res6 LARGER" << std::endl;
       return LARGER;
     }
     if (ps_x2 == ARR_RIGHT_BOUNDARY) {
-      //std::cout << "res7 SMALLER" << std::endl;
+      //Rcpp::Rcout << "res7 SMALLER" << std::endl;
       return SMALLER;
     }
 
@@ -281,23 +282,23 @@ private:
 
     // else same x, compare y
     if (ps_y1 == ps_y2) {
-      //std::cout << "res8 EQUAL" << std::endl;
+      //Rcpp::Rcout << "res8 EQUAL" << std::endl;
       return EQUAL;
     }
     if (ps_y1 == ARR_BOTTOM_BOUNDARY) {
-      //std::cout << "res9 SMALLER" << std::endl;
+      //Rcpp::Rcout << "res9 SMALLER" << std::endl;
       return SMALLER;
     }
     if (ps_y1 == ARR_TOP_BOUNDARY) {
-      //std::cout << "res10 LARGER" << std::endl;
+      //Rcpp::Rcout << "res10 LARGER" << std::endl;
       return LARGER;
     }
     if (ps_y2 == ARR_BOTTOM_BOUNDARY) {
-      //std::cout << "res11 LARGER" << std::endl;
+      //Rcpp::Rcout << "res11 LARGER" << std::endl;
       return LARGER;
     }
     if (ps_y2 == ARR_TOP_BOUNDARY) {
-      //std::cout << "res12 SMALLER" << std::endl;
+      //Rcpp::Rcout << "res12 SMALLER" << std::endl;
       return SMALLER;
     }
     CGAL_error(); return EQUAL; /* should not reach here */
@@ -321,14 +322,14 @@ private:
                   Arr_parameter_space ps_x2,
                   Arr_parameter_space ps_y2) const {
 #if 0
-    CGAL::set_pretty_mode(std::cout);
-    std::cout << std::endl << "FUNCTOR pt-pt" << std::endl;
-    std::cout << "pt1  : " << pt1 << std::endl;
-    std::cout << "ps_x1: " << ps_x1 << std::endl;
-    std::cout << "ps_y1: " << ps_y1 << std::endl;
-    std::cout << "pt2  : " << pt2 << std::endl;
-    std::cout << "ps_x2: " << ps_x2 << std::endl;
-    std::cout << "ps_y2: " << ps_y2 << std::endl;
+    CGAL::set_pretty_mode(Rcpp::Rcout);
+    Rcpp::Rcout << std::endl << "FUNCTOR pt-pt" << std::endl;
+    Rcpp::Rcout << "pt1  : " << pt1 << std::endl;
+    Rcpp::Rcout << "ps_x1: " << ps_x1 << std::endl;
+    Rcpp::Rcout << "ps_y1: " << ps_y1 << std::endl;
+    Rcpp::Rcout << "pt2  : " << pt2 << std::endl;
+    Rcpp::Rcout << "ps_x2: " << ps_x2 << std::endl;
+    Rcpp::Rcout << "ps_y2: " << ps_y2 << std::endl;
 #endif
 
     if (ps_x1 == ps_x2) {
@@ -337,21 +338,21 @@ private:
         // 1L2L, 1R2R
         // e2->point() is accessible, as pt is a point on the SAME left/right side
         Comparison_result res = m_traits->compare_y_on_boundary_2_object()(pt1, pt2);
-        //std::cout << "res1 " << res << std::endl;
+        //Rcpp::Rcout << "res1 " << res << std::endl;
         return res;
       }
       // else both are x-interior
       if ((ps_y1 == ARR_INTERIOR) && (ps_y2 == ARR_INTERIOR)) {
         // both are y-interior, too 1I2I:
         Comparison_result res = m_traits->compare_xy_2_object()(pt1, pt2);
-        // std::cout << "res2 " << res << std::endl;
+        // Rcpp::Rcout << "res2 " << res << std::endl;
         return res;
       }
       else {
         // at least one of pt1 or pt22 lies on a boundary
         Comparison_result res = m_traits->compare_x_on_boundary_2_object()(pt1, pt2);
         if (res != EQUAL) {
-          //std::cout << "res3 " << res << std::endl;
+          //Rcpp::Rcout << "res3 " << res << std::endl;
           return res;
         }
       }
@@ -382,14 +383,14 @@ private:
                            Arr_parameter_space ps_y2) const {
 
 #if 0
-    CGAL::set_pretty_mode(std::cout);
-    std::cout << std::endl << "FUNCTOR pt1-cv2" << std::endl;
-    std::cout << "pt1  : " << pt1 << std::endl;
-    std::cout << "ps_x1: " << ps_x1 << std::endl;
-    std::cout << "ps_y1: " << ps_y1 << std::endl;
-    std::cout << "cv2 " << (m_traits->is_vertical_2_object()(cv2) ? "|" :  " ") << ": " << cv2 << ", " << ind2 << std::endl;
-    std::cout << "ps_x2: " << ps_x2 << std::endl;
-    std::cout << "ps_y2: " << ps_y2 << std::endl;
+    CGAL::set_pretty_mode(Rcpp::Rcout);
+    Rcpp::Rcout << std::endl << "FUNCTOR pt1-cv2" << std::endl;
+    Rcpp::Rcout << "pt1  : " << pt1 << std::endl;
+    Rcpp::Rcout << "ps_x1: " << ps_x1 << std::endl;
+    Rcpp::Rcout << "ps_y1: " << ps_y1 << std::endl;
+    Rcpp::Rcout << "cv2 " << (m_traits->is_vertical_2_object()(cv2) ? "|" :  " ") << ": " << cv2 << ", " << ind2 << std::endl;
+    Rcpp::Rcout << "ps_x2: " << ps_x2 << std::endl;
+    Rcpp::Rcout << "ps_y2: " << ps_y2 << std::endl;
 #endif
 
     if (ps_x1 == ps_x2) {
@@ -402,7 +403,7 @@ private:
           m_traits->construct_vertex_at_curve_end_2_object()(cv2, ind2);
         Comparison_result res =
           m_traits->compare_y_on_boundary_2_object() (pt1, pt2);
-        //std::cout << "res1 " << res << std::endl;
+        //Rcpp::Rcout << "res1 " << res << std::endl;
         return res;
       }
       // else both are x-interior
@@ -412,14 +413,14 @@ private:
         const Point_2& pt2 =
           m_traits->construct_vertex_at_curve_end_2_object()(cv2, ind2);
         Comparison_result res = m_traits->compare_xy_2_object()(pt1, pt2);
-        //std::cout << "res2 " << res << std::endl;
+        //Rcpp::Rcout << "res2 " << res << std::endl;
         return res;
       }
       // at least one of pt1 or cv2 lies on a boundary
       Comparison_result res =
         m_traits->compare_x_point_curve_end_2_object()(pt1, cv2, ind2);
       if (res != EQUAL) {
-        //std::cout << "res3 " << res << std::endl;
+        //Rcpp::Rcout << "res3 " << res << std::endl;
         return res;
       }
     }
@@ -450,14 +451,14 @@ private:
                       Arr_parameter_space ps_y2) const
   {
 #if 0
-    CGAL::set_pretty_mode(std::cout);
-    std::cout << std::endl << "FUNCTOR cv1-cv2"<< std::endl;
-    std::cout << "cv1 " << (m_traits->is_vertical_2_object()(cv1) ? "|" :  " ") << ": " << cv1 << ", " << ind1 << std::endl;
-    std::cout << "ps_x1: " << ps_x1 << std::endl;
-    std::cout << "ps_y1: " << ps_y1 << std::endl;
-    std::cout << "cv2 " << (m_traits->is_vertical_2_object()(cv2) ? "|" :  " ") << ": " << cv2 << ", " << ind2 << std::endl;
-    std::cout << "ps_x2: " << ps_x2 << std::endl;
-    std::cout << "ps_y2: " << ps_y2 << std::endl;
+    CGAL::set_pretty_mode(Rcpp::Rcout);
+    Rcpp::Rcout << std::endl << "FUNCTOR cv1-cv2"<< std::endl;
+    Rcpp::Rcout << "cv1 " << (m_traits->is_vertical_2_object()(cv1) ? "|" :  " ") << ": " << cv1 << ", " << ind1 << std::endl;
+    Rcpp::Rcout << "ps_x1: " << ps_x1 << std::endl;
+    Rcpp::Rcout << "ps_y1: " << ps_y1 << std::endl;
+    Rcpp::Rcout << "cv2 " << (m_traits->is_vertical_2_object()(cv2) ? "|" :  " ") << ": " << cv2 << ", " << ind2 << std::endl;
+    Rcpp::Rcout << "ps_x2: " << ps_x2 << std::endl;
+    Rcpp::Rcout << "ps_y2: " << ps_y2 << std::endl;
 #endif
 
     if (ps_x1 == ps_x2) {
@@ -473,13 +474,13 @@ private:
           const Point_2& pt1 = ctr(cv1, ind1);
           const Point_2& pt2 = ctr(cv2, ind2);
           Comparison_result res = cmp(pt1, pt2);
-          // std::cout << "res1V: " << res << std::endl;
+          // Rcpp::Rcout << "res1V: " << res << std::endl;
           return res;
         }
         CGAL_assertion(ind1 == ind2);
         auto cmp = m_traits->compare_y_curve_ends_2_object();
         Comparison_result res = cmp(cv1, cv2, ind1);
-        //std::cout << "res1 " << res << std::endl;
+        //Rcpp::Rcout << "res1 " << res << std::endl;
         return res;
       }
       // else both are x-interior
@@ -489,15 +490,15 @@ private:
         const Point_2& pt1 = ctr(cv1, ind1);
         const Point_2& pt2 = ctr(cv2, ind2);
         Comparison_result res = m_traits->compare_xy_2_object()(pt1, pt2);
-        //std::cout << "res2 " << res << std::endl;
+        //Rcpp::Rcout << "res2 " << res << std::endl;
         return res;
       }
       // at least one of pt1 or cv2 lies on a boundary
       auto cmp = m_traits->compare_x_curve_ends_2_object();
       Comparison_result res = cmp(cv1, ind1, cv2, ind2);
-      //std::cout << "res3 " << res << std::endl;
+      //Rcpp::Rcout << "res3 " << res << std::endl;
       if (res != EQUAL) {
-        //std::cout << "res3 " << res << std::endl;
+        //Rcpp::Rcout << "res3 " << res << std::endl;
         return res;
       }
     }

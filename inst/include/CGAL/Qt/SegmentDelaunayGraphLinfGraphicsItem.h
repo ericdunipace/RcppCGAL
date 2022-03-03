@@ -14,6 +14,7 @@
 #ifndef CGAL_QT_SEGMENT_DELAUNAY_GRAPH_LINF_GRAPHICS_ITEM_H
 #define CGAL_QT_SEGMENT_DELAUNAY_GRAPH_LINF_GRAPHICS_ITEM_H
 
+#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 
@@ -122,44 +123,44 @@ SegmentDelaunayGraphLinfGraphicsItem<T>::drawDualEdge(QPainter * /*painter*/, ty
 //  CGAL::Polychainray_2<Kern>          pcr;
 //  CGAL::Polychainsegment_2<Kern>      pcs;
 
-//  std::cout << "debug drawDE pcl type= "
+//  Rcpp::Rcout << "debug drawDE pcl type= "
 //            << typeid(pcl).name() << std::endl;
-//  std::cout << "debug drawDE pcr type= "
+//  Rcpp::Rcout << "debug drawDE pcr type= "
 //            << typeid(pcr).name() << std::endl;
-//  std::cout << "debug drawDE pcs type= "
+//  Rcpp::Rcout << "debug drawDE pcs type= "
 //            << typeid(pcs).name() << std::endl;
 
   Object o = t->primal(e);
 
-  //std::cout << "debug drawDE trying to assign object at "
+  //Rcpp::Rcout << "debug drawDE trying to assign object at "
   //          << &o << std::endl;
 
   if (CGAL::assign(pcl, o)) {
     /* m_painter->setPen(::Qt::cyan);
-       std::cerr << "line " << std::endl; */
-//    std::cout << "debug drawDE pcl-assigned object at "
+       Rcpp::Rcerr << "line " << std::endl; */
+//    Rcpp::Rcout << "debug drawDE pcl-assigned object at "
 //              << &o << std::endl;
     //painterostream << pcl;
     pcl.draw(painterostream);
   }
   else if (CGAL::assign(pcr, o)) {
     /* m_painter->setPen(::Qt::magenta);
-       std::cerr << "segment " << std::endl; */
-//    std::cout << "debug drawDE pcr-assigned object at "
+       Rcpp::Rcerr << "segment " << std::endl; */
+//    Rcpp::Rcout << "debug drawDE pcr-assigned object at "
 //              << &o << std::endl;
     //painterostream << pcr;
     pcr.draw(painterostream);
   }
   else if (CGAL::assign(pcs, o))  {
     /* m_painter->setPen(::Qt::darkMagenta);
-       std::cerr << "ray " << r << std::endl;  */
-//    std::cout << "debug drawDE pcs-assigned object at "
+       Rcpp::Rcerr << "ray " << r << std::endl;  */
+//    Rcpp::Rcout << "debug drawDE pcs-assigned object at "
 //              << &o << std::endl;
     //painterostream << pcs;
     pcs.draw(painterostream);
   }
   else {
-    std::cerr << "error: drawDualEdge unknown curve" << std::endl;
+    Rcpp::Rcerr << "error: drawDualEdge unknown curve" << std::endl;
   }
 
   /* m_painter->setPen(::Qt::black); */
@@ -301,7 +302,7 @@ SegmentDelaunayGraphLinfGraphicsItem<T>::paint(QPainter *painter,
 
     drawAll(painter, option);
     //  } else {
-    //    std::cerr << "else" << std::endl;
+    //    Rcpp::Rcerr << "else" << std::endl;
     //  }
 }
 

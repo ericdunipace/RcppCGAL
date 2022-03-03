@@ -13,6 +13,7 @@
 #ifndef CGAL_EDGE_EDGE_OVERLAY_H
 #define CGAL_EDGE_EDGE_OVERLAY_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -751,7 +752,7 @@ public:
       ++curr;
       while(curr != scb[0]) {
         se_prev = D.new_shalfedge_pair(se_prev, se_prev->twin(), 1, -1);
-        //        SM_io_parser<SM_decorator>::dump(D, std::cerr);
+        //        SM_io_parser<SM_decorator>::dump(D, Rcpp::Rcerr);
         se_prev->circle() = curr->circle();
         se_prev->twin()->circle() = curr->twin()->circle();
         se_prev->mark() = se_prev->twin()->mark() =
@@ -765,7 +766,7 @@ public:
       seb[1]->twin()->incident_sface()->mark() =
         BOP(outer_sf, scb[0]->twin()->incident_sface()->mark(), inv);
       D.link_as_face_cycle(se_prev, seb[1]->twin()->incident_sface());
-      //      SM_io_parser<SM_decorator>::dump(D, std::cerr);
+      //      SM_io_parser<SM_decorator>::dump(D, Rcpp::Rcerr);
 
     } else if(empty_c[0] && !empty_e[0]) {
 
@@ -980,7 +981,7 @@ public:
       ++curr;
       while(curr != scb[1]) {
         se_prev = D.new_shalfedge_pair(se_prev, se_prev->twin(), 1, -1);
-        //        SM_io_parser<SM_decorator>::dump(D, std::cerr);
+        //        SM_io_parser<SM_decorator>::dump(D, Rcpp::Rcerr);
         se_prev->circle() = curr->circle();
         se_prev->twin()->circle() = curr->twin()->circle();
         se_prev->mark() = se_prev->twin()->mark() =
@@ -1016,7 +1017,7 @@ public:
     //    else
     //      CGAL_assertion_msg(false, "not implemented, yet");
 
-//    SM_io_parser<SM_decorator>::dump(D, std::cerr);
+//    SM_io_parser<SM_decorator>::dump(D, Rcpp::Rcerr);
 
     return D.sphere_map();
   }

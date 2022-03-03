@@ -12,6 +12,7 @@
 #ifndef CGAL_AFSR_WRITE_TRIPLE_INDICES_H
 #define CGAL_AFSR_WRITE_TRIPLE_INDICES_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Advancing_front_surface_reconstruction.h>
 
 
@@ -33,7 +34,7 @@ namespace CGAL {
     typedef typename TDS_2::Face_iterator Face_iterator;
 
     if(S.triangulation_3().dimension() < 3){
-      std::cerr << "not 3D\n";
+      Rcpp::Rcerr << "not 3D\n";
       return out;
     }
     const TDS_2& tds = S.triangulation_data_structure_2();

@@ -13,6 +13,7 @@
 #ifndef CGAL_MESH_3_GENERATE_LABEL_WEIGHTS_H
 #define CGAL_MESH_3_GENERATE_LABEL_WEIGHTS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Image_3.h>
@@ -166,7 +167,7 @@ CGAL::Image_3 generate_label_weights_with_known_word_type(const CGAL::Image_3& i
   for (Image_word_type label : labels)
   {
 #ifdef CGAL_MESH_3_WEIGHTED_IMAGES_DEBUG
-    std::cout << "\nLABEL = " << label << std::endl;
+    Rcpp::Rcout << "\nLABEL = " << label << std::endl;
 #endif
 
     //compute "indicator image" for "label"
@@ -199,8 +200,8 @@ CGAL::Image_3 generate_label_weights_with_known_word_type(const CGAL::Image_3& i
     id++;
 
 #ifdef CGAL_MESH_3_WEIGHTED_IMAGES_DEBUG
-    std::cout << "AFTER MAX (label = " << label << ") : " <<  std::endl;
-    std::cout << "\tnon zero in max ("
+    Rcpp::Rcout << "AFTER MAX (label = " << label << ") : " <<  std::endl;
+    Rcpp::Rcout << "\tnon zero in max ("
       << label << ")\t= " << internal::count_non_white_pixels(blured_max.GetPointer()) << std::endl;
 #endif
   }
@@ -213,11 +214,11 @@ CGAL::Image_3 generate_label_weights_with_known_word_type(const CGAL::Image_3& i
   CGAL::Image_3 weights_img(weights);
 
 #ifdef CGAL_MESH_3_WEIGHTED_IMAGES_DEBUG
-  std::cout << "non white in image \t= "
+  Rcpp::Rcout << "non white in image \t= "
     << internal::count_non_white_pixels<Image_word_type>(image) << std::endl;
-  std::cout << "non white in weights \t= "
+  Rcpp::Rcout << "non white in weights \t= "
     << internal::count_non_white_pixels<Weights_type>(weights_img) << std::endl;
-  std::cout << "non white in itkWeights \t= "
+  Rcpp::Rcout << "non white in itkWeights \t= "
     << internal::count_non_white_pixels<Weights_type>(blured_max.GetPointer()) << std::endl;
   _writeImage(weights, "weights-image.inr.gz");
 #endif

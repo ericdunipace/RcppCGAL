@@ -12,6 +12,7 @@
 #ifndef CGAL_MESH_3_GRAY_LEVEL_IMAGE_3_H
 #define CGAL_MESH_3_GRAY_LEVEL_IMAGE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 
@@ -52,14 +53,14 @@ public:
       value_outside(value_outside)
   {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_GRAY_LEVEL_IMAGE_3_CONSTRUCTOR
-    std::cerr <<
+    Rcpp::Rcerr <<
       ::boost::format("Constructing a Gray_level_image_3(\"%1%\")... ") % file;
 #endif
     Image_3::read(file);
 #ifdef CGAL_SURFACE_MESHER_DEBUG_GRAY_LEVEL_IMAGE_3_CONSTRUCTOR
     if( image_ptr.get() != 0 )
     {
-      std::cerr << ::boost::format(" = %1%\n") % image_ptr.get();
+      Rcpp::Rcerr << ::boost::format(" = %1%\n") % image_ptr.get();
     }
 #endif
   }
@@ -67,7 +68,7 @@ public:
   ~Gray_level_image_3()
   {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_GRAY_LEVEL_IMAGE_3_CONSTRUCTOR
-      std::cerr << ::boost::format("~Gray_level_image_3() image=%1%\n") % image;
+      Rcpp::Rcerr << ::boost::format("~Gray_level_image_3() image=%1%\n") % image;
 #endif
   }
 

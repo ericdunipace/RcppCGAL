@@ -14,6 +14,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_CURVATURE_FLOW_IMPL_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_CURVATURE_FLOW_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/Polygon_mesh_processing/measure.h>
@@ -132,7 +133,7 @@ public:
     if(!solver.factor(A, D))
     {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-      std::cerr << "Could not factorize linear system with preconditioner." << std::endl;
+      Rcpp::Rcerr << "Could not factorize linear system with preconditioner." << std::endl;
 #endif
       return false;
     }
@@ -142,7 +143,7 @@ public:
        !solver.linear_solver(bz, Xz))
     {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-      std::cerr << "Could not solve linear system." << std::endl;
+      Rcpp::Rcerr << "Could not solve linear system." << std::endl;
 #endif
       return false;
     }

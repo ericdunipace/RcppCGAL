@@ -17,6 +17,7 @@
 #ifndef CGAL_VECTOR___H
 #define CGAL_VECTOR___H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/memory.h>
 #include <CGAL/Kernel_d/debug.h>
@@ -444,7 +445,7 @@ std::istream& operator>>(std::istream& is, Vector_<NT_,AL_>& v)
       }
       break;
     default:
-      std::cerr<<"\nStream must be in ASCII or binary mode"<<std::endl;
+      Rcpp::Rcerr<<"\nStream must be in ASCII or binary mode"<<std::endl;
       break;
   }
   return is;

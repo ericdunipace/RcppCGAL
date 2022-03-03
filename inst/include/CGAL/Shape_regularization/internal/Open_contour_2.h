@@ -14,6 +14,7 @@
 #ifndef CGAL_SHAPE_REGULARIZATION_OPEN_CONTOUR_2_H
 #define CGAL_SHAPE_REGULARIZATION_OPEN_CONTOUR_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Shape_regularization.h>
 
 // Internal includes.
@@ -113,7 +114,7 @@ namespace internal {
       std::vector<Segment_2> segments;
       m_base.create_unique_segments(m_max_offset_2, wraps, segments);
       if (verbose()) {
-        std::cout <<
+        Rcpp::Rcout <<
           "* number of segments (merging) = " << segments.size() << std::endl;
       }
       if (wraps.size() < 1) return false;
@@ -121,7 +122,7 @@ namespace internal {
       // Add orthogonal segments.
       create_orthogonal_segments(segments, wraps);
       if (verbose()) {
-        std::cout <<
+        Rcpp::Rcout <<
           "* number of segments (orthogonal) = " << wraps.size() << std::endl;
       }
       if (wraps.size() < 1) return false;
@@ -242,7 +243,7 @@ namespace internal {
       CGAL_assertion(after <= before);
 
       if (verbose()) {
-        std::cout <<
+        Rcpp::Rcout <<
           "* segments before/after = " << before << "/" << after << std::endl;
       }
     }

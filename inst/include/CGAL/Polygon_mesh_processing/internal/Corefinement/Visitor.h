@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_COREFINEMENT_VISITOR_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_COREFINEMENT_VISITOR_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/corefinement.h>
 
 #include <CGAL/disable_warnings.h>
@@ -624,7 +625,7 @@ public:
 
 //    user_visitor.new_node_added_triple_face(node_id, f1, f2, f3, tm); // NODE_VISITOR_TAG
 #ifdef CGAL_DEBUG_AUTOREFINEMENT
-    std::cout << "adding node " << node_id << " " << f1 << " " << f2 << " " << f3 << "\n";
+    Rcpp::Rcout << "adding node " << node_id << " " << f1 << " " << f2 << " " << f3 << "\n";
 #endif
     TriangleMesh* tm_ptr = const_cast<TriangleMesh*>(&tm);
     on_face[tm_ptr][f1].push_back(node_id);
@@ -909,7 +910,7 @@ public:
       }
       #ifdef CGAL_COREFINEMENT_DEBUG
       else
-        std::cout << "X0: Found an isolated point" << std::endl;
+        Rcpp::Rcout << "X0: Found an isolated point" << std::endl;
       #endif
       insert_constrained_edges_coplanar_case(id,cdt,id_to_CDT_vh);
     }
@@ -1383,7 +1384,7 @@ public:
         #ifdef CGAL_COREFINEMENT_DEBUG
         else
         {
-          std::cout << "X1: Found an isolated point" << std::endl;
+          Rcpp::Rcout << "X1: Found an isolated point" << std::endl;
         }
         #endif
       }

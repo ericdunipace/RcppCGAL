@@ -12,6 +12,7 @@
 #ifndef CGAL_INTERNAL_COMBINATORIAL_MAP_UTILITY_H
 #define CGAL_INTERNAL_COMBINATORIAL_MAP_UTILITY_H 1
 
+#include <Rcpp.h>
 #include <CGAL/tuple.h>
 #include <CGAL/Compact_container.h>
 #include <CGAL/Concurrent_compact_container.h>
@@ -247,7 +248,7 @@ namespace CGAL
     //
     // struct Functor{
     //   template <int n>
-    //   static void run(){std::cout << n << std::endl;}
+    //   static void run(){Rcpp::Rcout << n << std::endl;}
     // };
     //
     // Foreach_static<Functor,5>::run();

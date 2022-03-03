@@ -14,6 +14,7 @@
 //
 // Author(s)     : Wieger Wesselink <wieger@cs.ruu.nl>
 
+#include <Rcpp.h>
 #include <CGAL/algorithm.h>
 #include <CGAL/assertions.h>
 #include <CGAL/determinant.h>
@@ -287,14 +288,14 @@ bool is_convex_2(ForwardIterator first,
 
     if (NumOrderChanges > 2) {
 #ifdef CGAL_POLYGON_DEBUG
-std::cout << "too many order changes: not convex!" << std::endl;
+Rcpp::Rcout << "too many order changes: not convex!" << std::endl;
 #endif
       return false;
     }
 
     if (HasClockwiseTriples && HasCounterClockwiseTriples) {
 #ifdef CGAL_POLYGON_DEBUG
-std::cout << "polygon not locally convex!" << std::endl;
+Rcpp::Rcout << "polygon not locally convex!" << std::endl;
 #endif
       return false;
     }

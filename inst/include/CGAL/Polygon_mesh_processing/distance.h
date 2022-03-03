@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_DISTANCE_H
 #define CGAL_POLYGON_MESH_PROCESSING_DISTANCE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/distance.h>
 
 #include <CGAL/Polygon_mesh_processing/internal/mesh_to_point_set_hausdorff_distance.h>
@@ -1037,7 +1038,7 @@ double approximate_Hausdorff_distance(
   std::vector<Point_3> sample_points
     (boost::begin(original_sample_points), boost::end(original_sample_points) );
   #ifdef CGAL_HAUSDORFF_DEBUG
-  std::cout << "Nb sample points " << sample_points.size() << "\n";
+  Rcpp::Rcout << "Nb sample points " << sample_points.size() << "\n";
   #endif
 
   spatial_sort(sample_points.begin(), sample_points.end());
@@ -1366,8 +1367,8 @@ std::pair<typename Kernel::FT, bool> preprocess_bounded_error_Hausdorff_impl(
   using Timer = CGAL::Real_timer;
   Timer timer;
   timer.start();
-  std::cout << "* preprocessing begin ...." << std::endl;
-  std::cout.precision(17);
+  Rcpp::Rcout << "* preprocessing begin ...." << std::endl;
+  Rcpp::Rcout.precision(17);
   #endif
 
   // Compute the max value that is used as infinity value for the given meshes.
@@ -1399,9 +1400,9 @@ std::pair<typename Kernel::FT, bool> preprocess_bounded_error_Hausdorff_impl(
       std::back_inserter(tm1_only), std::back_inserter(tm2_only), np1, np2);
 
     #ifdef CGAL_HAUSDORFF_DEBUG
-    std::cout << "-   common: " <<   common.size() << std::endl;
-    std::cout << "- tm1 only: " << tm1_only.size() << std::endl;
-    std::cout << "- tm2 only: " << tm2_only.size() << std::endl;
+    Rcpp::Rcout << "-   common: " <<   common.size() << std::endl;
+    Rcpp::Rcout << "- tm1 only: " << tm1_only.size() << std::endl;
+    Rcpp::Rcout << "- tm2 only: " << tm2_only.size() << std::endl;
     #endif
 
     if (is_one_sided_distance) { // one-sided distance
@@ -1446,8 +1447,8 @@ std::pair<typename Kernel::FT, bool> preprocess_bounded_error_Hausdorff_impl(
 
   #ifdef CGAL_HAUSDORFF_DEBUG
   timer.stop();
-  std::cout << "* .... end preprocessing" << std::endl;
-  std::cout << "* preprocessing time (sec.): " << timer.time() << std::endl;
+  Rcpp::Rcout << "* .... end preprocessing" << std::endl;
+  Rcpp::Rcout << "* preprocessing time (sec.): " << timer.time() << std::endl;
   #endif
   return std::make_pair(infinity_value, rebuild);
 }
@@ -1500,8 +1501,8 @@ double bounded_error_Hausdorff_impl(
   using Timer = CGAL::Real_timer;
   Timer timer;
   timer.start();
-  std::cout << "- applying culling" << std::endl;
-  std::cout.precision(17);
+  Rcpp::Rcout << "- applying culling" << std::endl;
+  Rcpp::Rcout.precision(17);
   #endif
 
   // Build traversal traits for tm1_tree.
@@ -1518,14 +1519,14 @@ double bounded_error_Hausdorff_impl(
   auto global_bounds = traversal_traits_tm1.get_global_bounds();
 
   #ifdef CGAL_HAUSDORFF_DEBUG
-  std::cout << "- number of candidate triangles: " << candidate_triangles.size() << std::endl;
+  Rcpp::Rcout << "- number of candidate triangles: " << candidate_triangles.size() << std::endl;
   const FT culling_rate = FT(100) - (FT(candidate_triangles.size()) / FT(tm1_tree.size()) * FT(100));
-  std::cout << "- culling rate: " << culling_rate << "%" << std::endl;
+  Rcpp::Rcout << "- culling rate: " << culling_rate << "%" << std::endl;
   #endif
 
   #ifdef CGAL_HAUSDORFF_DEBUG
   timer.stop();
-  std::cout << "* culling (sec.): " << timer.time() << std::endl;
+  Rcpp::Rcout << "* culling (sec.): " << timer.time() << std::endl;
   #endif
 
   CGAL_assertion(global_bounds.lower >= FT(0));
@@ -1544,7 +1545,7 @@ double bounded_error_Hausdorff_impl(
   #ifdef CGAL_HAUSDORFF_DEBUG
   timer.reset();
   timer.start();
-  std::cout << "- applying subdivision" << std::endl;
+  Rcpp::Rcout << "- applying subdivision" << std::endl;
   #endif
 
   // See Section 5.1 in the paper.
@@ -1675,7 +1676,7 @@ double bounded_error_Hausdorff_impl(
 
   #ifdef CGAL_HAUSDORFF_DEBUG
   timer.stop();
-  std::cout << "* subdivision (sec.): " << timer.time() << std::endl;
+  Rcpp::Rcout << "* subdivision (sec.): " << timer.time() << std::endl;
   #endif
 
   // Compute linear interpolation between the found lower and upper bounds.
@@ -1750,7 +1751,7 @@ struct Bounded_error_preprocessing {
     Timer timer;
     timer.reset();
     timer.start();
-    std::cout.precision(17);
+    Rcpp::Rcout.precision(17);
     #endif
 
     for (std::size_t i = range.begin(); i != range.end(); ++i) {
@@ -1769,7 +1770,7 @@ struct Bounded_error_preprocessing {
 
     #ifdef CGAL_HAUSDORFF_DEBUG
     timer.stop();
-    std::cout << "* time operator() preprocessing (sec.): " << timer.time() << std::endl;
+    Rcpp::Rcout << "* time operator() preprocessing (sec.): " << timer.time() << std::endl;
     #endif
   }
 
@@ -1825,7 +1826,7 @@ struct Bounded_error_distance_computation {
     Timer timer;
     timer.reset();
     timer.start();
-    std::cout.precision(17);
+    Rcpp::Rcout.precision(17);
     #endif
 
     double hdist = -1.0;
@@ -1848,7 +1849,7 @@ struct Bounded_error_distance_computation {
 
     #ifdef CGAL_HAUSDORFF_DEBUG
     timer.stop();
-    std::cout << "* time operator() computation (sec.): " << timer.time() << std::endl;
+    Rcpp::Rcout << "* time operator() computation (sec.): " << timer.time() << std::endl;
     #endif
   }
 
@@ -1925,7 +1926,7 @@ double bounded_error_one_sided_Hausdorff_impl(
   #ifdef CGAL_HAUSDORFF_DEBUG
   using Timer = CGAL::Real_timer;
   Timer timer;
-  std::cout.precision(17);
+  Rcpp::Rcout.precision(17);
   #endif
 
   TM1_tree tm1_tree;
@@ -1937,7 +1938,7 @@ double bounded_error_one_sided_Hausdorff_impl(
   const int nb_cores = 4;
   const std::size_t min_nb_faces_to_split = 100; // TODO: increase this number?
   #ifdef CGAL_HAUSDORFF_DEBUG
-  std::cout << "* num cores: " << nb_cores << std::endl;
+  Rcpp::Rcout << "* num cores: " << nb_cores << std::endl;
   #endif
 
   if (
@@ -1960,7 +1961,7 @@ double bounded_error_one_sided_Hausdorff_impl(
     #ifdef CGAL_HAUSDORFF_DEBUG
     timer.stop();
     const double time0 = timer.time();
-    std::cout << "- computing infinity (sec.): " << time0 << std::endl;
+    Rcpp::Rcout << "- computing infinity (sec.): " << time0 << std::endl;
     #endif
 
     // (1) -- Create partition of tm1.
@@ -1976,7 +1977,7 @@ double bounded_error_one_sided_Hausdorff_impl(
     #ifdef CGAL_HAUSDORFF_DEBUG
     timer.stop();
     const double time1 = timer.time();
-    std::cout << "- computing partition time (sec.): " << time1 << std::endl;
+    Rcpp::Rcout << "- computing partition time (sec.): " << time1 << std::endl;
     #endif
 
     // (2) -- Create a filtered face graph for each part.
@@ -1990,14 +1991,14 @@ double bounded_error_one_sided_Hausdorff_impl(
       // TODO: why is it triggered sometimes?
       // CGAL_assertion(tm1_parts.back().is_selection_valid());
       #ifdef CGAL_HAUSDORFF_DEBUG
-      std::cout << "- part " << i << " size: " << tm1_parts.back().number_of_faces() << std::endl;
+      Rcpp::Rcout << "- part " << i << " size: " << tm1_parts.back().number_of_faces() << std::endl;
       #endif
     }
     CGAL_assertion(tm1_parts.size() == nb_cores);
     #ifdef CGAL_HAUSDORFF_DEBUG
     timer.stop();
     const double time2 = timer.time();
-    std::cout << "- creating graphs time (sec.): " << time2 << std::endl;
+    Rcpp::Rcout << "- creating graphs time (sec.): " << time2 << std::endl;
     #endif
 
     // (3) -- Preprocess all input data.
@@ -2017,12 +2018,12 @@ double bounded_error_one_sided_Hausdorff_impl(
     #ifdef CGAL_HAUSDORFF_DEBUG
     timer.stop();
     const double time3 = timer.time();
-    std::cout << "- creating trees time (sec.) " << time3 << std::endl;
+    Rcpp::Rcout << "- creating trees time (sec.) " << time3 << std::endl;
     #endif
 
     // Final timing.
     #ifdef CGAL_HAUSDORFF_DEBUG
-    std::cout << "* preprocessing parallel time (sec.) " <<
+    Rcpp::Rcout << "* preprocessing parallel time (sec.) " <<
       time0 + time1 + time2 + time3 << std::endl;
     #endif
 
@@ -2032,7 +2033,7 @@ double bounded_error_one_sided_Hausdorff_impl(
     #ifdef CGAL_HAUSDORFF_DEBUG
     timer.reset();
     timer.start();
-    std::cout << "* preprocessing sequential version " << std::endl;
+    Rcpp::Rcout << "* preprocessing sequential version " << std::endl;
     #endif
     bool rebuild = false;
     std::vector<Face_handle_1> tm1_only;
@@ -2049,16 +2050,16 @@ double bounded_error_one_sided_Hausdorff_impl(
     }
     #ifdef CGAL_HAUSDORFF_DEBUG
     timer.stop();
-    std::cout << "* preprocessing sequential time (sec.) " << timer.time() << std::endl;
+    Rcpp::Rcout << "* preprocessing sequential time (sec.) " << timer.time() << std::endl;
     #endif
   }
 
   #ifdef CGAL_HAUSDORFF_DEBUG
-  std::cout << "* infinity_value: " << infinity_value << std::endl;
+  Rcpp::Rcout << "* infinity_value: " << infinity_value << std::endl;
   #endif
   if (infinity_value < FT(0)) {
     #ifdef CGAL_HAUSDORFF_DEBUG
-    std::cout << "* culling rate: 100%" << std::endl;
+    Rcpp::Rcout << "* culling rate: 100%" << std::endl;
     #endif
     const auto face1 = *(faces(tm1).begin());
     const auto face2 = *(faces(tm2).begin());
@@ -2082,7 +2083,7 @@ double bounded_error_one_sided_Hausdorff_impl(
     nb_cores > 1 && faces(tm1).size() >= min_nb_faces_to_split) {
 
     #ifdef CGAL_HAUSDORFF_DEBUG
-    std::cout << "* executing parallel version " << std::endl;
+    Rcpp::Rcout << "* executing parallel version " << std::endl;
     #endif
     Bounded_error_distance_computation<TMF, TM2, VPM1, VPM2, TMF_tree, TM2_tree, Kernel> bedc(
       tm1_parts, tm2, error_bound, vpm1, vpm2,
@@ -2094,7 +2095,7 @@ double bounded_error_one_sided_Hausdorff_impl(
   #endif // defined(CGAL_LINKED_WITH_TBB) && defined(CGAL_METIS_ENABLED)
   {
     #ifdef CGAL_HAUSDORFF_DEBUG
-    std::cout << "* executing sequential version " << std::endl;
+    Rcpp::Rcout << "* executing sequential version " << std::endl;
     #endif
     hdist = bounded_error_Hausdorff_impl<Kernel>(
       tm1, tm2, error_bound, vpm1, vpm2,
@@ -2104,7 +2105,7 @@ double bounded_error_one_sided_Hausdorff_impl(
 
   #ifdef CGAL_HAUSDORFF_DEBUG
   timer.stop();
-  std::cout << "* computation time (sec.) " << timer.time() << std::endl;
+  Rcpp::Rcout << "* computation time (sec.) " << timer.time() << std::endl;
   #endif
 
   CGAL_assertion(hdist >= 0.0);
@@ -2172,8 +2173,8 @@ double bounded_error_symmetric_Hausdorff_impl(
 
   if (infinity_value < FT(0)) {
     #ifdef CGAL_HAUSDORFF_DEBUG
-    std::cout.precision(17);
-    std::cout << "* culling rate: 100%" << std::endl;
+    Rcpp::Rcout.precision(17);
+    Rcpp::Rcout << "* culling rate: 100%" << std::endl;
     #endif
     const auto face1 = *(faces(tm1).begin());
     const auto face2 = *(faces(tm2).begin());
@@ -2600,9 +2601,9 @@ bool is_Hausdorff_distance_larger(
   CGAL_assertion(hdist >= 0.0);
 
   #ifdef CGAL_HAUSDORFF_DEBUG
-  std::cout.precision(17);
-  std::cout << "- fin distance: " << hdist << std::endl;
-  std::cout << "- max distance: " << distance_bound << std::endl;
+  Rcpp::Rcout.precision(17);
+  Rcpp::Rcout << "- fin distance: " << hdist << std::endl;
+  Rcpp::Rcout << "- max distance: " << distance_bound << std::endl;
   #endif
   return hdist > distance_bound;
 }

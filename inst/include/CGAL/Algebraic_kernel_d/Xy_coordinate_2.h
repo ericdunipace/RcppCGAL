@@ -16,6 +16,7 @@
 #ifndef CGAL_ALGEBRAIC_CURVE_KERNEL_XY_COORDINATE_2_H
 #define CGAL_ALGEBRAIC_CURVE_KERNEL_XY_COORDINATE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <boost/numeric/interval.hpp>
 
@@ -683,7 +684,7 @@ std::ostream& operator<< (std::ostream& os,
     break;
   }
   case ::CGAL::IO::BINARY:
-    std::cerr << "BINARY format not yet implemented" << std::endl;
+    Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
     break;
   default:
     // ASCII

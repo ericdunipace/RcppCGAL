@@ -13,6 +13,7 @@
 #ifndef CGAL_LEDA_SPHERE_MAP_H
 #define CGAL_LEDA_SPHERE_MAP_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 
@@ -133,11 +134,11 @@ typedef CGAL::generic_sweep<NHS_traits> Negative_halfsphere_sweep;
   typedef typename PHS_traits::INPUT Input_range;
   Positive_halfsphere_sweep SP(Input_range(Lp.begin(),Lp.end()),O);
   SP.sweep();
-  CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(std::cerr),""));
+  CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(Rcpp::Rcerr),""));
   v1=G.first_node(); v2=G.last_node();
   Negative_halfsphere_sweep SM(Input_range(Lm.begin(),Lm.end()),O);
   SM.sweep();
-  CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(std::cerr),""));
+  CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(Rcpp::Rcerr),""));
   v2 = G.succ_node(v2);
   // now two CCs of sphere graph calculated
   // v1 = first node of CC in positive xy-sphere

@@ -14,6 +14,7 @@
 #ifndef CGAL_SHAPE_REGULARIZATION_OFFSET_REGULARIZATION_2_H
 #define CGAL_SHAPE_REGULARIZATION_OFFSET_REGULARIZATION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Shape_regularization.h>
 
 // Boost includes.
@@ -134,8 +135,8 @@ namespace Segments {
 
       m_max_offset = max_offset;
       if (m_max_offset < FT(0)) {
-        std::cerr << "WARNING: The maximum offset bound has to be within [0, +inf)! ";
-        std::cerr << " Setting to the default value: 0.5." << std::endl;
+        Rcpp::Rcerr << "WARNING: The maximum offset bound has to be within [0, +inf)! ";
+        Rcpp::Rcerr << " Setting to the default value: 0.5." << std::endl;
         m_max_offset = FT(1) / FT(2);
       }
       clear();

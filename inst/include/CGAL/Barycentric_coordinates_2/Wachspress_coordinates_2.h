@@ -14,6 +14,7 @@
 #ifndef CGAL_BARYCENTRIC_WACHSPRESS_COORDINATES_2_H
 #define CGAL_BARYCENTRIC_WACHSPRESS_COORDINATES_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Barycentric_coordinates_2.h>
 
 // Internal includes.
@@ -227,8 +228,8 @@ namespace Barycentric_coordinates {
           if (normalize) {
             return max_precision_coordinates(query, output);
           } else {
-            std::cerr << "WARNING: you can't use the precise version of unnormalized weights! ";
-            std::cerr << "They are not valid weights!" << std::endl;
+            Rcpp::Rcerr << "WARNING: you can't use the precise version of unnormalized weights! ";
+            Rcpp::Rcerr << "They are not valid weights!" << std::endl;
             internal::get_default(m_polygon.size(), output);
             return output;
           }
@@ -240,14 +241,14 @@ namespace Barycentric_coordinates {
             return output;
           }
           if (edge_case == internal::Edge_case::EXTERIOR) {
-            std::cerr << std::endl <<
+            Rcpp::Rcerr << std::endl <<
             "WARNING: query does not belong to the polygon!" << std::endl;
           }
           if (normalize) {
             return max_precision_coordinates(query, output);
           } else {
-            std::cerr << "WARNING: you can't use the precise version of unnormalized weights! ";
-            std::cerr << "They are not valid weights!" << std::endl;
+            Rcpp::Rcerr << "WARNING: you can't use the precise version of unnormalized weights! ";
+            Rcpp::Rcerr << "They are not valid weights!" << std::endl;
             internal::get_default(m_polygon.size(), output);
             return output;
           }
@@ -263,7 +264,7 @@ namespace Barycentric_coordinates {
             return output;
           }
           if (edge_case == internal::Edge_case::EXTERIOR) {
-            std::cerr << std::endl <<
+            Rcpp::Rcerr << std::endl <<
             "WARNING: query does not belong to the polygon!" << std::endl;
           }
           return m_wachspress_weights_2(query, output, normalize);

@@ -13,6 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_COREFINEMENT_INTERSECTION_IMPL_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_COREFINEMENT_INTERSECTION_IMPL_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/corefinement.h>
 
 
@@ -1295,7 +1296,7 @@ class Intersection_of_triangle_meshes
                                      tm, vpm);
                   Node_id node_id=++current_node;
 #ifdef CGAL_DEBUG_AUTOREFINEMENT
-                  std::cerr << "New triple node " << node_id << "\n";
+                  Rcpp::Rcerr << "New triple node " << node_id << "\n";
 #endif
                   visitor.new_node_added_triple_face(node_id, f1, f2, f3, tm);
 
@@ -1311,7 +1312,7 @@ class Intersection_of_triangle_meshes
     }
 
 #ifdef CGAL_DEBUG_AUTOREFINEMENT
-    std::cout << "\nAt the end of new node creation, current_node is " << current_node << "\n\n";
+    Rcpp::Rcout << "\nAt the end of new node creation, current_node is " << current_node << "\n\n";
 #endif
     typedef std::pair<Node_id_set* const, std::vector<std::pair<std::array<std::size_t,2>, Node_id> > > Node_id_set_and_nodes;
     for(Node_id_set_and_nodes& n_id_and_new_nodes : map_to_process)
@@ -1353,13 +1354,13 @@ class Intersection_of_triangle_meshes
         Node_id prev = n1;
         new_nodes.push_back(n2); // add last node id to avoid having another case after the loop
   #ifdef CGAL_DEBUG_AUTOREFINEMENT
-        std::cout << n1 << " -> " << n2 << "\n";
+        Rcpp::Rcout << n1 << " -> " << n2 << "\n";
   #endif
         for(Node_id id : new_nodes)
         {
           nids.coplanar_segments.push_back( {prev, id} );
   #ifdef CGAL_DEBUG_AUTOREFINEMENT
-          std::cerr <<"  adding " << prev << " " << id << " into "
+          Rcpp::Rcerr <<"  adding " << prev << " " << id << " into "
                     << n1 << " and " << n2 <<  "\n";
   #endif
           prev=id;

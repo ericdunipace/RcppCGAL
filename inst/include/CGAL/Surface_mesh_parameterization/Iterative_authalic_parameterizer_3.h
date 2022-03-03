@@ -19,6 +19,7 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_ITERATIVE_AUTHALIC_PARAMETERIZER_3_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_ITERATIVE_AUTHALIC_PARAMETERIZER_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/Surface_mesh_parameterization/internal/Bool_property_map.h>
@@ -246,7 +247,7 @@ public:
                     const Matrix& A,
                     const std::string name)
   {
-    std::cout << "Matrix " << name << "(" << A.row_dimension() << "x" << A.column_dimension() << ")" << std::endl;
+    Rcpp::Rcout << "Matrix " << name << "(" << A.row_dimension() << "x" << A.column_dimension() << ")" << std::endl;
 
     Matrix A1(A.row_dimension(), A.column_dimension());
     int r=0, c=0;
@@ -267,8 +268,8 @@ public:
     for(int r=0; r<A.row_dimension(); ++r)
     {
       for(int c=0; c<A.column_dimension(); ++c)
-        std::cout << std::setw(10) << A1.get_coef(r, c) << "\t" << std::flush;
-      std::cout << std::endl;
+        Rcpp::Rcout << std::setw(10) << A1.get_coef(r, c) << "\t" << std::flush;
+      Rcpp::Rcout << std::endl;
     }
   }
 
@@ -278,7 +279,7 @@ public:
                     const Vector& A,
                     const std::string name)
   {
-    std::cout << "Vector " << name << "(" << A.size() << ")" << std::endl;
+    Rcpp::Rcout << "Vector " << name << "(" << A.size() << ")" << std::endl;
     Vector A1(A.size());
     int r = 0;
     for(vertex_descriptor v1 : vertices)
@@ -289,17 +290,17 @@ public:
     }
 
     for(int r=0; r<A.size(); ++r)
-      std::cout << A1(r) << std::endl;
+      Rcpp::Rcout << A1(r) << std::endl;
   }
 
   void print(Matrix& A, Vector& Xu, Vector& Bu)
   {
-    std::cout << "Matrix " << "(" << A.row_dimension() << "x" << A.column_dimension() << ")" << std::endl;
+    Rcpp::Rcout << "Matrix " << "(" << A.row_dimension() << "x" << A.column_dimension() << ")" << std::endl;
     for(int r=0; r<A.row_dimension(); ++r)
     {
       for(int c=0; c<A.column_dimension(); ++c)
-        std::cout << std::setw(10) << A.get_coef(r, c) << "\t" << std::flush;
-      std::cout << "\t\t"  << Xu(r) << "\t\t" << Bu(r) << std::endl;
+        Rcpp::Rcout << std::setw(10) << A.get_coef(r, c) << "\t" << std::flush;
+      Rcpp::Rcout << "\t\t"  << Xu(r) << "\t\t" << Bu(r) << std::endl;
     }
   }
 
@@ -353,7 +354,7 @@ private:
     for(vertex_descriptor v : vertices)
     {
       put(m_vertex_L2_map, v, compute_vertex_L2(tmesh, v));
-//      std::cout << "Vertex L2: " << v << " = " << compute_vertex_L2(tmesh, v) << std::endl;
+//      Rcpp::Rcout << "Vertex L2: " << v << " = " << compute_vertex_L2(tmesh, v) << std::endl;
     }
   }
 
@@ -447,7 +448,7 @@ private:
     for(face_descriptor f : face_range)
     {
       put(m_face_L2_map, f, compute_face_L2(f, tmesh, uvmap, ppmap));
-//      std::cout << "Face L2: " << f << " = " << compute_face_L2(f, tmesh, uvmap, ppmap) << std::endl;
+//      Rcpp::Rcout << "Face L2: " << f << " = " << compute_face_L2(f, tmesh, uvmap, ppmap) << std::endl;
     }
   }
 
@@ -538,7 +539,7 @@ private:
 
     if(neighborsCounter == 2 && is_border(v, tmesh))
     {
-      std::cout << "Encountered inner border with valency-2 vertex (" << v << "), "
+      Rcpp::Rcout << "Encountered inner border with valency-2 vertex (" << v << "), "
                 << "initializing with Tutte weights, this can affect optimization" << std::endl;
 
       // Tutte weights
@@ -685,7 +686,7 @@ private:
     else if(neighborsCounter == 2 && is_border(v, tmesh))
     {
       use_uniform_weights = true;
-      std::cerr << "Encountered inner border with valency-2 vertex (" << get(vimap, v) << ") "
+      Rcpp::Rcerr << "Encountered inner border with valency-2 vertex (" << get(vimap, v) << ") "
                 << "initializing with uniform weights, this can affect optimization" << std::endl;
     }
 
@@ -701,7 +702,7 @@ private:
 
       // Get j index
       const int j = get(vimap, *vj);
-//      std::cout << "W[" << i << ", " << j << "] = " << w_ij << std::endl;
+//      Rcpp::Rcout << "W[" << i << ", " << j << "] = " << w_ij << std::endl;
 
       // Set w_ij in matrix
       A.set_coef(i, j, w_ij, true /*new*/);
@@ -915,7 +916,7 @@ public:
     NT area_3D = initialize_faces_areas(cc_faces, tmesh);
 
     if(DEBUG_L0)
-      std::cout << std::endl;
+      Rcpp::Rcout << std::endl;
 
     unsigned int last_best_i = 0;
     NT gamma = 1; // @todo what value should that be
@@ -926,7 +927,7 @@ public:
     while(i < iterations)
     {
       if(DEBUG_L0)
-        std::cout << "Iteration " << i << ", gamma = " << gamma << std::flush;
+        Rcpp::Rcout << "Iteration " << i << ", gamma = " << gamma << std::flush;
 
       // update weights for inner vertices
       for(vertex_descriptor v : cc_vertices)
@@ -965,7 +966,7 @@ public:
          !get_linear_algebra_traits().linear_solver(A, Bv, Xv, Dv))
       {
         if(DEBUG_L0)
-          std::cout << " Linear solver failure #" << m_linear_solver_failures << std::endl;
+          Rcpp::Rcout << " Linear solver failure #" << m_linear_solver_failures << std::endl;
 
         status = ERROR_CANNOT_SOLVE_LINEAR_SYSTEM;
       }
@@ -995,7 +996,7 @@ public:
       CGAL_postcondition(Dv == NT(1));
 
 //      for(std::size_t i=0; i<nv; ++i)
-//        std::cout << "Sol[" << i << "] = " << Xu[i] << " " << Xv[i] << std::endl;
+//        Rcpp::Rcout << "Sol[" << i << "] = " << Xu[i] << " " << Xv[i] << std::endl;
 
       // Copy A to A_prev, it is a computationally inefficient task but neccesary
       copy_sparse_matrix(A, A_prev, tmesh, cc_vertices, vimap);
@@ -1026,7 +1027,7 @@ public:
       err[i] = compute_area_distortion(cc_faces, area_3D, tmesh, uvmap);
 
       if(DEBUG_L0)
-        std::cout << " err " << err[i] << std::flush;
+        Rcpp::Rcout << " err " << err[i] << std::flush;
 
       if(err[i] <= err[last_best_i])
       {
@@ -1036,7 +1037,7 @@ public:
         is_changed = false;
 
         if(DEBUG_L0)
-          std::cout << " *****" << std::flush;
+          Rcpp::Rcout << " *****" << std::flush;
       }
       else if(err[i] > 100) // @fixme is that reasonnable
       {
@@ -1052,7 +1053,7 @@ public:
       }
 
       ++i;
-      std::cout << std::endl;
+      Rcpp::Rcout << std::endl;
     }
 
     // Check postconditions

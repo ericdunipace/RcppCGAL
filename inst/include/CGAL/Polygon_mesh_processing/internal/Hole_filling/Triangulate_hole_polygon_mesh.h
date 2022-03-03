@@ -13,6 +13,7 @@
 #ifndef CGAL_HOLE_FILLING_TRIANGULATE_HOLE_POLYHEDRON_3_H
 #define CGAL_HOLE_FILLING_TRIANGULATE_HOLE_POLYHEDRON_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 
@@ -124,7 +125,7 @@ triangulate_hole_polygon_mesh(PolygonMesh& pmesh,
       #ifndef CGAL_TEST_SUITE
       CGAL_warning_msg(false, "Returning no output. Non-manifold vertex is found on boundary!");
       #else
-      std::cerr << "W: Returning no output. Non-manifold vertex is found on boundary!\n";
+      Rcpp::Rcerr << "W: Returning no output. Non-manifold vertex is found on boundary!\n";
       #endif
       return std::make_pair(out,
                             CGAL::internal::Weight_min_max_dihedral_and_area::NOT_VALID());
@@ -191,7 +192,7 @@ triangulate_hole_polygon_mesh(PolygonMesh& pmesh,
   ;
 
   #ifdef CGAL_PMP_HOLE_FILLING_DEBUG
-  std::cerr << "Hole filling: " << timer.time() << " sc." << std::endl; timer.reset();
+  Rcpp::Rcerr << "Hole filling: " << timer.time() << " sc." << std::endl; timer.reset();
   #endif
   return std::make_pair(tracer.out, weight);
 }

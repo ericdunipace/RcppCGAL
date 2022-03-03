@@ -13,6 +13,7 @@
 #ifndef CGAL_VBO_BUFFER_FILLER_H
 #define CGAL_VBO_BUFFER_FILLER_H
 
+#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #include <CGAL/Projection_traits_3.h>
@@ -406,7 +407,7 @@ public:
 
     if (m_points_of_face.size()<3)
     {
-      /* std::cerr<<"PB: you try to triangulate a face with "<<m_points_of_face.size()<<" vertices."
+      /* Rcpp::Rcerr<<"PB: you try to triangulate a face with "<<m_points_of_face.size()<<" vertices."
                <<std::endl; */
 
       m_face_started=false;
@@ -419,7 +420,7 @@ public:
     if (m_indices_of_points_of_face.size()>0 &&
         m_indices_of_points_of_face.size()!=m_points_of_face.size())
     {
-      std::cerr<<"PB: you mixed some add_point_in_face(...) and some add_indexed_point_in_face(...)"
+      Rcpp::Rcerr<<"PB: you mixed some add_point_in_face(...) and some add_indexed_point_in_face(...)"
                <<" for a same face. Indices for this face are ignored."<<std::endl;
       m_indices_of_points_of_face.clear();
     }
@@ -427,7 +428,7 @@ public:
     if (m_vertex_normals_for_face.size()>0 &&
         m_vertex_normals_for_face.size()!=m_points_of_face.size())
     {
-      std::cerr<<"PB: you only gave some vertex normals (and not all) for a same face. "
+      Rcpp::Rcerr<<"PB: you only gave some vertex normals (and not all) for a same face. "
                <<"All vertex normal are ignored and thus it is not possible to use Gouraud "
                <<"shading for this face."
                <<std::endl;
@@ -542,7 +543,7 @@ protected:
   {
     if (is_a_face_started())
     {
-      std::cerr<<"You cannot start a new face before to finish the previous one."<<std::endl;
+      Rcpp::Rcerr<<"You cannot start a new face before to finish the previous one."<<std::endl;
       return;
     }
 
@@ -825,7 +826,7 @@ protected:
     }
     catch(...)
     { // Triangulation crash: the face is not filled
-      std::cerr<<"Catch: face not filled."<<std::endl;
+      Rcpp::Rcerr<<"Catch: face not filled."<<std::endl;
     }
   }
 

@@ -18,6 +18,7 @@
 #ifndef CGAL_MESH_3_MESH_STANDARD_CELL_CRITERIA_H
 #define CGAL_MESH_3_MESH_STANDARD_CELL_CRITERIA_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -104,7 +105,7 @@ protected:
     if ( size > min_sq_length*sq_radius_edge_bound_  )
     {
 #ifdef CGAL_MESH_3_DEBUG_CELL_CRITERIA
-      std::cerr << "bad cell " << (void*)(ch.operator->()) << " (radius-edge bound): radius-edge["
+      Rcpp::Rcerr << "bad cell " << (void*)(ch.operator->()) << " (radius-edge bound): radius-edge["
                 << size/min_sq_length << "] bound[" << sq_radius_edge_bound_
                 << "]\n" ;
 #endif
@@ -185,7 +186,7 @@ protected:
     if ( size > sq_radius_bound_ )
     {
 #ifdef CGAL_MESH_3_DEBUG_CELL_CRITERIA
-      std::cerr << "bad cell " << (void*)(ch.operator->()) << " (radius bound): size[" << size
+      Rcpp::Rcerr << "bad cell " << (void*)(ch.operator->()) << " (radius bound): size[" << size
                 << "] bound[" << sq_radius_bound_ << "]\n" ;
 #endif
       return Is_bad(Quality(sq_radius_bound_/size));
@@ -262,7 +263,7 @@ protected:
     if ( size > sq_bound )
     {
 #ifdef CGAL_MESH_3_DEBUG_CELL_CRITERIA
-      std::cerr << "bad cell " << (void*)(ch.operator->()) << " (radius bound): size[" << size
+      Rcpp::Rcerr << "bad cell " << (void*)(ch.operator->()) << " (radius bound): size[" << size
       << "] bound[" << sq_bound << "]\n" ;
 #endif
       return Is_bad(Quality(sq_bound/size));

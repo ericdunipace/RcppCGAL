@@ -18,6 +18,7 @@
 #ifndef CGAL_CONSTRUCT_YAO_GRAPH_2_H
 #define CGAL_CONSTRUCT_YAO_GRAPH_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 
@@ -94,7 +95,7 @@ public:
 
     {
         if (k<2) {
-            std::cout << "The number of cones must be larger than 1!" << std::endl;
+            Rcpp::Rcout << "The number of cones must be larger than 1!" << std::endl;
             CGAL_assertion(false);
         }
 

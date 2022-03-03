@@ -11,6 +11,7 @@
 #ifndef CGAL_RS_RS3_REFINER_1_H
 #define CGAL_RS_RS3_REFINER_1_H
 
+#include <Rcpp.h>
 #include <CGAL/Polynomial_traits_d.h>
 #include "rs2_calls.h"
 #include <rs3_fncts.h>
@@ -55,7 +56,7 @@ operator()
         CGAL::Sign sl=signof(left);
         CGAL_precondition(sl!=signof(right)||(left==right&&sl==ZERO));
 #endif
-        //std::cout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
+        //Rcpp::Rcout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
         int deg=Degree()(pol);
         mpz_t* coefficients=(mpz_t*)malloc((deg+1)*sizeof(mpz_t));
         __mpfi_struct interval;
@@ -93,7 +94,7 @@ operator()
                              mpfr_get_prec(&interval.right),
                              mpfr_custom_get_mantissa(&interval.right));
         CGAL_postcondition(left<=right);
-        //std::cout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
+        //Rcpp::Rcout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
         return;
 }
 
@@ -111,7 +112,7 @@ operator()
         typedef CGAL::RS_AK1::Signat_1<ZPolynomial,Gmpfr>
                                                         Signat;
 #endif
-        //std::cout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
+        //Rcpp::Rcout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
         // Construct a Gmpz polynomial from the original Gmpq polynomial.
         Polynomial<Gmpz> zpol=CGAL::RS_AK1::Polynomial_converter_1<
                                         CGAL::Polynomial<Gmpq>,
@@ -159,7 +160,7 @@ operator()
                              mpfr_get_prec(&interval.right),
                              mpfr_custom_get_mantissa(&interval.right));
         CGAL_postcondition(left<=right);
-        //std::cout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
+        //Rcpp::Rcout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
         return;
 }
 

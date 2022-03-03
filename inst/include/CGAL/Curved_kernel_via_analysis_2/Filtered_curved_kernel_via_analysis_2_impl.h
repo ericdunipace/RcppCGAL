@@ -22,6 +22,7 @@
  * and where some operations are filtered.
  */
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_impl.h>
 #include <CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_functors.h>
@@ -33,7 +34,7 @@ namespace CGAL {
 #ifndef CKvA_CERR
 //#define FCKvA_DEBUG_PRINT_CERR
 #ifdef FCKvA_DEBUG_PRINT_CERR
-#define CKvA_CERR(x) std::cout << x
+#define CKvA_CERR(x) Rcpp::Rcout << x
 #else
 #define CKvA_CERR(x) static_cast<void>(0)
 #endif

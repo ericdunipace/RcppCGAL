@@ -14,6 +14,7 @@
 #ifndef CGAL_BARYCENTRIC_MEAN_VALUE_COORDINATES_2_H
 #define CGAL_BARYCENTRIC_MEAN_VALUE_COORDINATES_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Barycentric_coordinates_2.h>
 
 // Internal includes.
@@ -250,8 +251,8 @@ namespace Barycentric_coordinates {
           if (normalize) {
             return max_precision_coordinates(query, output);
           } else {
-            std::cerr << "WARNING: you can't use the precise version of unnormalized weights! ";
-            std::cerr << "They are not valid weights!" << std::endl;
+            Rcpp::Rcerr << "WARNING: you can't use the precise version of unnormalized weights! ";
+            Rcpp::Rcerr << "They are not valid weights!" << std::endl;
             internal::get_default(m_polygon.size(), output);
             return output;
           }
@@ -265,8 +266,8 @@ namespace Barycentric_coordinates {
           if (normalize) {
             return max_precision_coordinates(query, output);
           } else {
-            std::cerr << "WARNING: you can't use the precise version of unnormalized weights! ";
-            std::cerr << "They are not valid weights!" << std::endl;
+            Rcpp::Rcerr << "WARNING: you can't use the precise version of unnormalized weights! ";
+            Rcpp::Rcerr << "They are not valid weights!" << std::endl;
             internal::get_default(m_polygon.size(), output);
             return output;
           }

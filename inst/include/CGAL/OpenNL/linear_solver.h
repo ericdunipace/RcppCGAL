@@ -31,6 +31,7 @@
 #ifndef __OPENNL_LINEAR_SOLVER__
 #define __OPENNL_LINEAR_SOLVER__
 
+#include <Rcpp.h>
 #include <CGAL/OpenNL/conjugate_gradient.h>
 #include <CGAL/OpenNL/bicgstab.h>
 #include <CGAL/OpenNL/preconditioner.h>
@@ -99,7 +100,7 @@ public:
 
         // On error, solve using BICGSTAB solver without preconditioner
 #ifdef DEBUG_TRACE
-        std::cerr << "  Failure of BICGSTAB solver with Jacobi preconditioner. "
+        Rcpp::Rcerr << "  Failure of BICGSTAB solver with Jacobi preconditioner. "
                   << "Trying BICGSTAB." << std::endl;
 #endif
         Solver solver ;
@@ -160,7 +161,7 @@ public:
 
         // On error, solve using Conjugate Gradient solver without preconditioner
 #ifdef DEBUG_TRACE
-        std::cerr << "  Failure of Conjugate Gradient solver with Jacobi preconditioner. "
+        Rcpp::Rcerr << "  Failure of Conjugate Gradient solver with Jacobi preconditioner. "
                   << "Trying Conjugate Gradient." << std::endl;
 #endif
         Solver solver ;

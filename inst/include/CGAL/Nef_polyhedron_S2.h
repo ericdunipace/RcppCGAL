@@ -14,6 +14,7 @@
 #ifndef CGAL_NEF_POLYHEDRON_S2_H
 #define CGAL_NEF_POLYHEDRON_S2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -715,7 +716,7 @@ std::istream& operator>>
   I.read();
   /*
   else {
-    std::cerr << "Nef_polyhedron_S2 input corrupted." << std::endl;
+    Rcpp::Rcerr << "Nef_polyhedron_S2 input corrupted." << std::endl;
     NP = Nef_polyhedron_S2<Kernel,Items,Mark,Sphere_map>();
   }
   */

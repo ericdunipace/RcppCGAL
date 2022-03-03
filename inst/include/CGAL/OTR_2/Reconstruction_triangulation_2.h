@@ -12,6 +12,7 @@
 #ifndef CGAL_RECONSTRUCTION_TRIANGULATION_2_H
 #define CGAL_RECONSTRUCTION_TRIANGULATION_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Optimal_transportation_reconstruction_2.h>
 
 
@@ -607,7 +608,7 @@ public:
     Face_handle face = Base::locate(point);
 
     if (face == Face_handle() || Base::is_infinite(face)) {
-      //std::cout << "free bird" << std::endl;
+      //Rcpp::Rcout << "free bird" << std::endl;
       return false;
     }
 
@@ -635,7 +636,7 @@ public:
     }
 
     if (nearest_face == Face_handle()) {
-      //std::cout << "free bird" << std::endl;
+      //Rcpp::Rcout << "free bird" << std::endl;
       return false;
     }
 
@@ -690,7 +691,7 @@ public:
 
   void assign_sample_to_vertex(Sample_* sample, Vertex_handle vertex) const {
     /*if (vertex->sample()) {
-      std::cout << "assign to vertex: vertex already has sample"
+      Rcpp::Rcout << "assign to vertex: vertex already has sample"
           << std::endl;
     }*/
 
@@ -960,7 +961,7 @@ public:
   // (a,c,i) + (c,a,j)
   void collapse_cyclic_edge(const Edge& bc, int verbose = 0) {
     if (verbose > 1)
-      std::cout << "collapse_cyclic_edge ... ";
+      Rcpp::Rcout << "collapse_cyclic_edge ... ";
 
     Edge cb = twin_edge(bc);
     Face_handle abc = bc.first;
@@ -983,14 +984,14 @@ public:
     this->delete_vertex(b);
 
     if (verbose > 1)
-      std::cout << "done" << std::endl;
+      Rcpp::Rcout << "done" << std::endl;
   }
 
   void print_edge(Rec_edge_2 edge) const {
     int i = ((edge).edge()).second;
     Point a = ((edge).edge()).first->vertex((i+1)%3)->point();
     Point b = ((edge).edge()).first->vertex((i+2)%3)->point();
-    std::cout <<"( " << (edge).priority()  <<  ") ( " << a << " , " << b << " )" << std::endl;
+    Rcpp::Rcout <<"( " << (edge).priority()  <<  ") ( " << a << " , " << b << " )" << std::endl;
   }
 
   bool is_p_infinity(const std::pair<bool,boost::optional<FT> >& p) const
@@ -1061,7 +1062,7 @@ public:
       if ( is_m_infinity(Dac) && is_m_infinity(Dbd) )
       {
         if (verbose > 1)
-          std::cerr << "--- No flips available ---"  << std::endl;
+          Rcpp::Rcerr << "--- No flips available ---"  << std::endl;
         return false;
       }
 
@@ -1083,15 +1084,15 @@ public:
       if (value + CGAL_EPS < Dbc)
       {
                         /*
-        std::cerr.precision(10);
-        std::cerr << "--- Flip makes kernel worse ---" << std::endl;
-        std::cerr << Dac << " or " << Dbd << " vs " << Dbc << std::endl;
-        std::cerr << "a: " << a->point() << std::endl;
-        std::cerr << "b: " << b->point() << std::endl;
-        std::cerr << "c: " << c->point() << std::endl;
-        std::cerr << "d: " << d->point() << std::endl;
-        std::cerr << "t: " << target->point() << std::endl;
-        std::cerr << "diff = " << Dbc - (std::max)(Dac, Dbd) << std::endl;
+        Rcpp::Rcerr.precision(10);
+        Rcpp::Rcerr << "--- Flip makes kernel worse ---" << std::endl;
+        Rcpp::Rcerr << Dac << " or " << Dbd << " vs " << Dbc << std::endl;
+        Rcpp::Rcerr << "a: " << a->point() << std::endl;
+        Rcpp::Rcerr << "b: " << b->point() << std::endl;
+        Rcpp::Rcerr << "c: " << c->point() << std::endl;
+        Rcpp::Rcerr << "d: " << d->point() << std::endl;
+        Rcpp::Rcerr << "t: " << target->point() << std::endl;
+        Rcpp::Rcerr << "diff = " << Dbc - (std::max)(Dac, Dbd) << std::endl;
                                 */
         return false;
       }
@@ -1120,7 +1121,7 @@ public:
     }
 
     if (verbose > 1)
-      std::cerr  << "Nb flips: "  << nb_flips << std::endl;
+      Rcpp::Rcerr  << "Nb flips: "  << nb_flips << std::endl;
 
     return true;
   }

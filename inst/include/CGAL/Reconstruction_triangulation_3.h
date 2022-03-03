@@ -14,6 +14,7 @@
 #ifndef CGAL_IMPLICIT_FCT_DELAUNAY_TRIANGULATION_H
 #define CGAL_IMPLICIT_FCT_DELAUNAY_TRIANGULATION_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -370,7 +371,7 @@ public:
     Visitor visitor)
   {
     if(! points.empty()){
-      std::cerr << "WARNING: not all points inserted yet" << std::endl;
+      Rcpp::Rcerr << "WARNING: not all points inserted yet" << std::endl;
     }
     // Convert input points to Point_with_normal_3
     //std::vector<Point_with_normal> points;

@@ -14,6 +14,7 @@
 #ifndef CGAL_IO_FILE_MEDIT_H
 #define CGAL_IO_FILE_MEDIT_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Mesh_3/config.h>
@@ -93,17 +94,17 @@ public:
     }
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-    std::cerr << "Nb of subdomains: " << subdomain_map_.size() << "\n";
-    std::cerr << "Subdomain mapping:\n\t" ;
+    Rcpp::Rcerr << "Nb of subdomains: " << subdomain_map_.size() << "\n";
+    Rcpp::Rcerr << "Subdomain mapping:\n\t" ;
 
     typedef typename Subdomain_map::iterator Subdomain_map_iterator;
     for ( Subdomain_map_iterator sub_it = subdomain_map_.begin() ;
           sub_it != subdomain_map_.end() ;
           ++sub_it )
     {
-      std::cerr << "[" << (*sub_it).first << ":" << (*sub_it).second << "] ";
+      Rcpp::Rcerr << "[" << (*sub_it).first << ":" << (*sub_it).second << "] ";
     }
-    std::cerr << "\n";
+    Rcpp::Rcerr << "\n";
 #endif
   }
 
@@ -254,18 +255,18 @@ public:
     }
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-    std::cerr << "Nb of surface patches: " << surface_map_.size() << "\n";
-    std::cerr << "Surface mapping:\n\t" ;
+    Rcpp::Rcerr << "Nb of surface patches: " << surface_map_.size() << "\n";
+    Rcpp::Rcerr << "Surface mapping:\n\t" ;
 
     typedef typename Surface_map::iterator Surface_map_iterator;
     for ( Surface_map_iterator surf_it = surface_map_.begin() ;
          surf_it != surface_map_.end() ;
          ++surf_it )
     {
-      std::cerr << "[" << (*surf_it).first
+      Rcpp::Rcerr << "[" << (*surf_it).first
       << ":" << (*surf_it).second << "] ";
     }
-    std::cerr << "\n";
+    Rcpp::Rcerr << "\n";
 #endif
   }
 
@@ -706,7 +707,7 @@ output_to_medit(std::ostream& os,
                 const C3T3& c3t3)
 {
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  std::cerr << "Output to medit:\n";
+  Rcpp::Rcerr << "Output to medit:\n";
 #endif
 
   typedef Medit_pmap_generator<C3T3,rebind,no_patch> Generator;
@@ -729,7 +730,7 @@ output_to_medit(std::ostream& os,
                   Generator().print_twice());
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  std::cerr << "done.\n";
+  Rcpp::Rcerr << "done.\n";
 #endif
 }
 

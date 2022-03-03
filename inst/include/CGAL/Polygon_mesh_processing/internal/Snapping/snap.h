@@ -14,6 +14,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_SNAPPING_SNAP_H
 #define CGAL_POLYGON_MESH_PROCESSING_SNAPPING_SNAP_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
@@ -166,7 +167,7 @@ void simplify_range(HalfedgeRange& halfedge_range,
   }
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << "collapsed " << collapsed_n << " edges" << std::endl;
+  Rcpp::Rcout << "collapsed " << collapsed_n << " edges" << std::endl;
 #endif
 
   std::vector<halfedge_descriptor> new_range;
@@ -263,10 +264,10 @@ class Projection_traits
                                    const FT scalar_product)
   {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "is_better_than_current_best()" << std::endl;
-    std::cout << "sq_dist: " << sq_dist << std::endl;
-    std::cout << "m_sq_adist: " << m_sq_adist << std::endl;
-    std::cout << "scalar products: " << scalar_product << " " << m_sp_with_closest_edge << std::endl;
+    Rcpp::Rcout << "is_better_than_current_best()" << std::endl;
+    Rcpp::Rcout << "sq_dist: " << sq_dist << std::endl;
+    Rcpp::Rcout << "m_sq_adist: " << m_sq_adist << std::endl;
+    Rcpp::Rcout << "scalar products: " << scalar_product << " " << m_sp_with_closest_edge << std::endl;
 #endif
 
     // Automatically accept much closer tentative targets; automatically reject much farther tentative targets
@@ -317,9 +318,9 @@ public:
   void intersection(const Point& query, const Primitive& primitive)
   {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "~~~~ intersection with primitive: " << primitive.id() << std::endl;
-    std::cout << get(m_vpm_T, source(primitive.id(), m_tm_T)) << std::endl;
-    std::cout << get(m_vpm_T, target(primitive.id(), m_tm_T)) << std::endl;
+    Rcpp::Rcout << "~~~~ intersection with primitive: " << primitive.id() << std::endl;
+    Rcpp::Rcout << get(m_vpm_T, source(primitive.id(), m_tm_T)) << std::endl;
+    Rcpp::Rcout << get(m_vpm_T, target(primitive.id(), m_tm_T)) << std::endl;
 #endif
 
     halfedge_descriptor h = halfedge(primitive.id(), m_tm_T);
@@ -327,7 +328,7 @@ public:
       h = opposite(h, m_tm_T);
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-      std::cout << "patches: " << get(m_face_patch_map_T, face(h, m_tm_T)) << " " << m_patch_id << std::endl;
+      Rcpp::Rcout << "patches: " << get(m_face_patch_map_T, face(h, m_tm_T)) << " " << m_patch_id << std::endl;
 #endif
 
     if(get(m_face_patch_map_T, face(h, m_tm_T)) != m_patch_id)
@@ -342,7 +343,7 @@ public:
       if(!m_is_same_mesh)
       {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-        std::cout << "This vertex is stuck because it is equal to a vertex on the target mesh" << std::endl;
+        Rcpp::Rcout << "This vertex is stuck because it is equal to a vertex on the target mesh" << std::endl;
 #endif
         m_closest_point_initialized = false;
         m_continue = false;
@@ -365,7 +366,7 @@ public:
       CGAL::internal::Primitive_helper<AABBTraits>::get_datum(primitive, m_traits), query);
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "closest point to primitive: " << new_closest_point << std::endl;
+    Rcpp::Rcout << "closest point to primitive: " << new_closest_point << std::endl;
 #endif
 
     const FT sq_ad_to_tentative_closest_pt = squared_anisotropic_distance(query, new_closest_point);
@@ -379,7 +380,7 @@ public:
        is_better_than_current_best(sq_ad_to_tentative_closest_pt, sp_with_tentative))
     {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-      std::cout << "is better!" << std::endl;
+      Rcpp::Rcout << "is better!" << std::endl;
 #endif
 
       m_closest_point_initialized = true;
@@ -503,7 +504,7 @@ void find_splittable_edge(const VertexWithTolerance& vertex_with_tolerance,
   const std::size_t patch_id = get(vertex_patch_map_S, v);
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-  std::cout << "--------------------------- Query: " << v << " (" << query << ")" << std::endl;
+  Rcpp::Rcout << "--------------------------- Query: " << v << " (" << query << ")" << std::endl;
 #endif
 
   visitor.on_vertex_edge_inquiry(v, tm_S);
@@ -515,7 +516,7 @@ void find_splittable_edge(const VertexWithTolerance& vertex_with_tolerance,
   if(!traversal_traits.closest_point_initialized())
   {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-  std::cout << "Couldn't find any single projection point" << std::endl;
+  Rcpp::Rcout << "Couldn't find any single projection point" << std::endl;
 #endif
     return;
   }
@@ -532,7 +533,7 @@ void find_splittable_edge(const VertexWithTolerance& vertex_with_tolerance,
                                            sq_tolerance) != LARGER;
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-  std::cout << "  Closest point: (" << closest_p << ")" << std::endl
+  Rcpp::Rcout << "  Closest point: (" << closest_p << ")" << std::endl
             << "  on edge: " << traversal_traits.closest_primitive_id()
             << "  at sq distance " << gt.compute_squared_distance_3_object()(query, closest_p)
             << " with squared tolerance: " << sq_tolerance
@@ -623,7 +624,7 @@ std::size_t split_edges(EdgesToSplitContainer& edges_to_split,
                         const bool is_source_mesh_fixed) // when snapping is B --> A and the mesh B is fixed
 {
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << "split " << edges_to_split.size() << " edges" << std::endl;
+  Rcpp::Rcout << "split " << edges_to_split.size() << " edges" << std::endl;
 #endif
 
   typedef typename boost::graph_traits<TriangleMesh>::vertex_descriptor           vertex_descriptor;
@@ -656,7 +657,7 @@ std::size_t split_edges(EdgesToSplitContainer& edges_to_split,
     if(splitters.size() > 1)
     {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-      std::cout << " _______ Multiple splitting points on the same halfedge" << std::endl;
+      Rcpp::Rcout << " _______ Multiple splitting points on the same halfedge" << std::endl;
 #endif
 
       const Point_ref hsp = get(vpm_T, source(h_to_split, tm_T));
@@ -690,11 +691,11 @@ std::size_t split_edges(EdgesToSplitContainer& edges_to_split,
         do_split = false;
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-      std::cout << " -.-.-. Splitting " << edge(h_to_split, tm_T) << " |||| "
+      Rcpp::Rcout << " -.-.-. Splitting " << edge(h_to_split, tm_T) << " |||| "
                 << " Vs " << source(h_to_split, tm_T) << " (" << tm_T.point(source(h_to_split, tm_T)) << ")"
                 << " --- Vt " << target(h_to_split, tm_T) << " (" << tm_T.point(target(h_to_split, tm_T)) << ")" << std::endl;
-      std::cout << "With point: " << vnp.second << std::endl;
-      std::cout << "Actually split? " << do_split << std::endl;
+      Rcpp::Rcout << "With point: " << vnp.second << std::endl;
+      Rcpp::Rcout << "Actually split? " << do_split << std::endl;
 #endif
 
       // Split and update positions
@@ -755,8 +756,8 @@ std::size_t split_edges(EdgesToSplitContainer& edges_to_split,
       const bool is_visible = (!left_of_left && !right_of_right);
 
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-      std::cout << "Left/Right: " << left_of_left << " " << right_of_right << std::endl;
-      std::cout << "visible from " << opp << " ? " << is_visible << std::endl;
+      Rcpp::Rcout << "Left/Right: " << left_of_left << " " << right_of_right << std::endl;
+      Rcpp::Rcout << "visible from " << opp << " ? " << is_visible << std::endl;
 #endif
 
       // h_to_split is equal to 'next(res)' after splitting
@@ -781,7 +782,7 @@ std::size_t split_edges(EdgesToSplitContainer& edges_to_split,
 
 #ifdef CGAL_PMP_SNAPPING_PRINT_RUNTIME
   timer.stop();
-  std::cout << "time for actual snapping (vertex-edge) " << timer.time() << " s." << std::endl;
+  Rcpp::Rcout << "time for actual snapping (vertex-edge) " << timer.time() << " s." << std::endl;
 #endif
 
   return snapped_n;
@@ -843,7 +844,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
   const GT gt = choose_parameter<GT>(get_parameter(snp, internal_np::geom_traits));
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << "Gather unique points in source range..." << std::endl;
+  Rcpp::Rcout << "Gather unique points in source range..." << std::endl;
 #endif
 
   typedef std::pair<halfedge_descriptor, FT>                                      Vertex_with_tolerance;
@@ -878,7 +879,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
       is_insert_successful.first->second = (std::min)(is_insert_successful.first->second, tolerance);
 
     #ifdef CGAL_PMP_SNAP_DEBUG_PP
-    std::cout << "Non-conformal query: " << v << " (" << get(vpm_S, v) << "), tolerance: " << tolerance << std::endl;
+    Rcpp::Rcout << "Non-conformal query: " << v << " (" << get(vpm_S, v) << "), tolerance: " << tolerance << std::endl;
 #endif
   }
 
@@ -896,7 +897,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
     if(get(locked_halfedges_T, h))
     {
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-      std::cout << edge(h, tm_T) << " is locked and not a valid target" << std::endl;
+      Rcpp::Rcout << edge(h, tm_T) << " is locked and not a valid target" << std::endl;
 #endif
       continue;
     }
@@ -906,7 +907,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
 
   // Now, check which edges of the target range ought to be split by source vertices
 #ifdef CGAL_PMP_SNAP_DEBUG_PP
-  std::cout << "Collect edges to split with " << vertices_to_snap.size() << " vertices" << std::endl;
+  Rcpp::Rcout << "Collect edges to split with " << vertices_to_snap.size() << " vertices" << std::endl;
 #endif
 
 #ifdef CGAL_PMP_SNAPPING_PRINT_RUNTIME
@@ -921,7 +922,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
   if(std::is_convertible<ConcurrencyTag, Parallel_tag>::value)
   {
 #ifdef CGAL_PMP_SNAP_DEBUG
-    std::cout << "Parallel find splittable edges!" << std::endl;
+    Rcpp::Rcout << "Parallel find splittable edges!" << std::endl;
 #endif
 
     typedef tbb::concurrent_hash_map<halfedge_descriptor,
@@ -951,7 +952,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
       const std::string tn2(typeid(const CGAL::internal::Throw_at_output_exception&).name());
       if(tn1 != tn2)
       {
-        std::cerr << "Unexpected throw: " << tn1 << std::endl;
+        Rcpp::Rcerr << "Unexpected throw: " << tn1 << std::endl;
         throw;
       }
 
@@ -961,7 +962,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
 
 #ifdef CGAL_PMP_SNAPPING_PRINT_RUNTIME
     timer.stop();
-    std::cout << "time for find split edges (parallel): " << timer.time() << std::endl;
+    Rcpp::Rcout << "time for find split edges (parallel): " << timer.time() << std::endl;
 #endif
 
     return split_edges(edges_to_split, tm_S, vpm_S, tm_T, vpm_T, gt, visitor, is_source_mesh_fixed);
@@ -970,7 +971,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
 #endif // CGAL_LINKED_WITH_TBB
   {
 #ifdef CGAL_PMP_SNAP_DEBUG
-    std::cout << "Sequential find splittable edges!" << std::endl;
+    Rcpp::Rcout << "Sequential find splittable edges!" << std::endl;
 #endif
 
     std::map<halfedge_descriptor, Vertices_with_new_position> edges_to_split;
@@ -992,7 +993,7 @@ std::size_t snap_non_conformal_one_way(const HalfedgeRange& halfedge_range_S,
 
 #ifdef CGAL_PMP_SNAPPING_PRINT_RUNTIME
     timer.stop();
-    std::cout << "time for find split edges (sequential): " << timer.time() << std::endl;
+    Rcpp::Rcout << "time for find split edges (sequential): " << timer.time() << std::endl;
 #endif
 
     return split_edges(edges_to_split, tm_S, vpm_S, tm_T, vpm_T, gt, visitor, is_source_mesh_fixed);
@@ -1064,8 +1065,8 @@ std::size_t snap_non_conformal(HalfedgeRange& halfedge_range_A,
                                const NamedParameters_B& np_B)
 {
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout.precision(17);
-  std::cerr.precision(17);
+  Rcpp::Rcout.precision(17);
+  Rcpp::Rcerr.precision(17);
 #endif
 
   typedef typename boost::graph_traits<TriangleMesh>::vertex_descriptor           vertex_descriptor;
@@ -1136,7 +1137,7 @@ std::size_t snap_non_conformal(HalfedgeRange& halfedge_range_A,
   }
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << "Non-conformal snapping... Range sizes: "
+  Rcpp::Rcout << "Non-conformal snapping... Range sizes: "
             << std::distance(halfedge_range_A.begin(), halfedge_range_A.end()) << " and "
             << std::distance(halfedge_range_B.begin(), halfedge_range_B.end()) << std::endl;
 #endif
@@ -1158,7 +1159,7 @@ std::size_t snap_non_conformal(HalfedgeRange& halfedge_range_A,
     return 0;
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << "Simplify ranges (" << simplify_first_mesh << " " << simplify_second_mesh << ")..." << std::endl;
+  Rcpp::Rcout << "Simplify ranges (" << simplify_first_mesh << " " << simplify_second_mesh << ")..." << std::endl;
 #endif
 
   if(simplify_first_mesh)
@@ -1241,7 +1242,7 @@ std::size_t snap_non_conformal(HalfedgeRange& halfedge_range_A,
     return snapped_n;
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-  std::cout << " ///////////// Two one-way vertex-edge snapping (A --> B) " << std::endl;
+  Rcpp::Rcout << " ///////////// Two one-way vertex-edge snapping (A --> B) " << std::endl;
 #endif
 
   visitor.start_first_vertex_edge_phase();
@@ -1264,7 +1265,7 @@ std::size_t snap_non_conformal(HalfedgeRange& halfedge_range_A,
       return snapped_n;
 
 #ifdef CGAL_PMP_SNAP_DEBUG
-    std::cout << " ///////////// Two one-way vertex-edge snapping (B --> A) " << std::endl;
+    Rcpp::Rcout << " ///////////// Two one-way vertex-edge snapping (B --> A) " << std::endl;
 #endif
 
     visitor.start_second_vertex_edge_phase();

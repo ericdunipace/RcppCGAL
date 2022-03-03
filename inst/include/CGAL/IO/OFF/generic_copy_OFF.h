@@ -17,6 +17,7 @@
 #ifndef CGAL_IO_OFF_GENERIC_COPY_OFF_H
 #define CGAL_IO_OFF_GENERIC_COPY_OFF_H
 
+#include <Rcpp.h>
 #include <CGAL/IO/OFF/File_header_OFF.h>
 #include <CGAL/IO/OFF/File_scanner_OFF.h>
 
@@ -39,8 +40,8 @@ generic_copy_OFF(File_scanner_OFF& scanner,
   {
     if(scanner.verbose())
     {
-      std::cerr << " " << std::endl;
-      std::cerr << "generic_copy_OFF(): "
+      Rcpp::Rcerr << " " << std::endl;
+      Rcpp::Rcerr << "generic_copy_OFF(): "
                    "input error: file format is not in OFF."
                 << std::endl;
     }

@@ -15,6 +15,7 @@
 #ifndef CGAL_TD_DAG_NODE_H
 #define CGAL_TD_DAG_NODE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -422,7 +423,7 @@ public:
   {
     if (!is_null())
     {
-      std::cout << operator*() << '\t';
+      Rcpp::Rcout << operator*() << '\t';
       left_child().preorder();
       right_child().preorder();
     }
@@ -433,7 +434,7 @@ public:
     if (!is_null())
     {
       left_child().inorder();
-      std::cout << operator*() << '\t';
+      Rcpp::Rcout << operator*() << '\t';
       right_child().inorder();
     }
   }
@@ -444,7 +445,7 @@ public:
     {
       left_child().postorder();
       right_child().postorder();
-      std::cout << operator*() << '\t';
+      Rcpp::Rcout << operator*() << '\t';
     }
   }
 
@@ -496,10 +497,10 @@ protected:
   {
     if (is_null())
       return 0;
-   //std::cout << curr_rec_depth << "," << std::flush;
+   //Rcpp::Rcout << curr_rec_depth << "," << std::flush;
     if ( curr_rec_depth > rec_bound + 30)
     {
-      std::cout << "passed " << rec_bound + 30 << ", stopping\n";
+      Rcpp::Rcout << "passed " << rec_bound + 30 << ", stopping\n";
       return 0;
     }
     return 1 + (std::max)(left_child().recursive_check(curr_rec_depth + 1, rec_bound),

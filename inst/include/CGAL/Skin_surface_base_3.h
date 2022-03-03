@@ -13,6 +13,7 @@
 #ifndef CGAL_SKIN_SURFACE_BASE_3_H
 #define CGAL_SKIN_SURFACE_BASE_3_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
@@ -210,9 +211,9 @@ Skin_surface_base_3(WP_iterator begin, WP_iterator end, FT shrink_,
   construct_bounding_box();
 
   if (verbose) {
-    std::cerr << "Triangulation ready" << std::endl;
-    std::cerr << "Vertices: " << regular().number_of_vertices() << std::endl;
-    std::cerr << "Cells:    " << regular().number_of_cells() << std::endl;
+    Rcpp::Rcerr << "Triangulation ready" << std::endl;
+    Rcpp::Rcerr << "Vertices: " << regular().number_of_vertices() << std::endl;
+    Rcpp::Rcerr << "Cells:    " << regular().number_of_cells() << std::endl;
   }
 }
 
@@ -728,7 +729,7 @@ locate_in_tmc(const Bare_point &p0, TMC_Cell_handle start) const
       continue;
     }
     if ( next->has_vertex(_tmc.infinite_vertex()) ) {
-      std::cout << "We are outside the convex hull." << std::endl;
+      Rcpp::Rcout << "We are outside the convex hull." << std::endl;
       return next;
     }
     previous = c;

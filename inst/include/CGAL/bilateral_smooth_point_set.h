@@ -12,6 +12,7 @@
 #ifndef CGAL_BILATERAL_SMOOTH_POINT_SET_H
 #define CGAL_BILATERAL_SMOOTH_POINT_SET_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -300,7 +301,7 @@ bilateral_smooth_point_set(
   std::size_t nb_points = points.size();
 
 #ifdef CGAL_PSP3_VERBOSE
-   std::cout << "Initialization and compute max spacing: " << std::endl;
+   Rcpp::Rcout << "Initialization and compute max spacing: " << std::endl;
 #endif
    // initiate a KD-tree search for points
    Neighbor_query neighbor_query (points, point_map);
@@ -326,10 +327,10 @@ bilateral_smooth_point_set(
 
 #ifdef CGAL_PSP3_VERBOSE
    CGAL::Memory_sizer::size_type memory = CGAL::Memory_sizer().virtual_size();
-   std::cout << "done: " << task_timer.time() << " seconds, "
+   Rcpp::Rcout << "done: " << task_timer.time() << " seconds, "
              << (memory>>20) << " Mb allocated" << std::endl;
 
-   std::cout << "Compute all neighbors: " << std::endl;
+   Rcpp::Rcout << "Compute all neighbors: " << std::endl;
    task_timer.reset();
    task_timer.start();
 #endif
@@ -372,10 +373,10 @@ bilateral_smooth_point_set(
 #ifdef CGAL_PSP3_VERBOSE
    task_timer.stop();
    memory = CGAL::Memory_sizer().virtual_size();
-   std::cout << "done: " << task_timer.time() << " seconds, "
+   Rcpp::Rcout << "done: " << task_timer.time() << " seconds, "
              << (memory>>20) << " Mb allocated" << std::endl;
 
-   std::cout << "Compute update points and normals: " << std::endl;
+   Rcpp::Rcout << "Compute update points and normals: " << std::endl;
    task_timer.reset();
    task_timer.start();
 #endif
@@ -422,7 +423,7 @@ bilateral_smooth_point_set(
 #ifdef CGAL_PSP3_VERBOSE
    task_timer.stop();
    memory = CGAL::Memory_sizer().virtual_size();
-   std::cout << "done: " << task_timer.time() << " seconds, "
+   Rcpp::Rcout << "done: " << task_timer.time() << " seconds, "
              << (memory>>20) << " Mb allocated" << std::endl;
 #endif
    // save results

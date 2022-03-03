@@ -14,6 +14,7 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_PERIODIC_2_SIDE_OF_ORIENTED_CIRCLE_2_H
 #define CGAL_INTERNAL_STATIC_FILTERS_PERIODIC_2_SIDE_OF_ORIENTED_CIRCLE_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Periodic_2_triangulation_2.h>
 
 #include <CGAL/Filtered_kernel/internal/Static_filters/tools.h>
@@ -228,7 +229,7 @@ public:
     double err = det.error();
     err += err * 3 * F::ulp(); // Correction due to "eps * maxx * ...".
 
-    std::cerr << "*** epsilon for Periodic_2_side_of_oriented_circle_2 = "
+    Rcpp::Rcerr << "*** epsilon for Periodic_2_side_of_oriented_circle_2 = "
               << err << std::endl;
     return err;
   }

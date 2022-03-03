@@ -14,6 +14,7 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_INFINITE_EDGE_INTERIOR_CONFLICT_C2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_INFINITE_EDGE_INTERIOR_CONFLICT_C2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -81,7 +82,7 @@ public:
   {
 
     CGAL_SDG_DEBUG(
-        std::cout << "debug infinite-edge-int-cf entering (q,s,r,t,sgn)= "
+        Rcpp::Rcout << "debug infinite-edge-int-cf entering (q,s,r,t,sgn)= "
         << q << ' ' << s << ' ' << r << ' ' << t
         << ' ' << sgn << std::endl;);
 
@@ -92,13 +93,13 @@ public:
     if ( t.is_segment() ) {
       if (q.is_point() && s.is_point() && r.is_point()) {
         if (sgn == NEGATIVE) {
-          CGAL_SDG_DEBUG(std::cout << "debug return tocheck" << std::endl;);
+          CGAL_SDG_DEBUG(Rcpp::Rcout << "debug return tocheck" << std::endl;);
           if (same_points(q, t.source_site()) ||
               same_points(q, t.target_site())   ) {
             // this works because endpoints of a segment are
             // inserted before its interior
             CGAL_SDG_DEBUG(
-                std::cout
+                Rcpp::Rcout
                 << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
                 << q << ' ' << s << ' ' << r << ' ' << t
                 << ' ' << sgn << " returns "
@@ -127,7 +128,7 @@ public:
               if ((oss == ON_NEGATIVE_SIDE) &&
                   (osr == ON_POSITIVE_SIDE)    ) {
                 CGAL_SDG_DEBUG(
-                    std::cout
+                    Rcpp::Rcout
                     << "debug infinite-edge-int-cf tocheck (q,s,r,t,sgn)= "
                     << q << ' ' << s << ' ' << r << ' ' << t
                     << ' ' << sgn << " returns "
@@ -137,7 +138,7 @@ public:
             } // case where t is neither horizontal nor vertical
 
             CGAL_SDG_DEBUG(
-                std::cout
+                Rcpp::Rcout
                 << "debug infinite-edge-int-cf tocheck (q,s,r,t,sgn)= "
                 << q << ' ' << s << ' ' << r << ' ' << t
                 << ' ' << sgn << " returns "
@@ -147,11 +148,11 @@ public:
         }
       } // end of case where q, s, r are all points
 
-      CGAL_SDG_DEBUG(std::cout
+      CGAL_SDG_DEBUG(Rcpp::Rcout
           << "debug tocheck q,s,r not all points" << std::endl;);
 
       if (sgn == NEGATIVE) {
-        CGAL_SDG_DEBUG(std::cout
+        CGAL_SDG_DEBUG(Rcpp::Rcout
             << "debug not all pts return true tocheck" << std::endl;);
 
         if (q.is_point()) {
@@ -175,7 +176,7 @@ public:
                 (is_q_rsrc || is_q_rtrg)    );
 
             CGAL_SDG_DEBUG(
-                std::cout
+                Rcpp::Rcout
                 << "debug infinite-edge-int-cf tocheck com (q,s,r,t,sgn)= "
                 << q << ' ' << s << ' ' << r << ' ' << t
                 << ' ' << sgn << " returns "
@@ -241,7 +242,7 @@ public:
             if ((oss == ON_NEGATIVE_SIDE) &&
                 (osr == ON_POSITIVE_SIDE)    ) {
               CGAL_SDG_DEBUG(
-                  std::cout
+                  Rcpp::Rcout
                   << "debug infinite-edge-int-cf tocheck (q,s,r,t,sgn)= "
                   << q << ' ' << s << ' ' << r << ' ' << t
                   << ' ' << sgn << " returns "
@@ -257,7 +258,7 @@ public:
           // philaris: tocheck more
 
           CGAL_SDG_DEBUG(
-              std::cout
+              Rcpp::Rcout
               << "debug infinite-edge-int-cf tocheck (q,s,r,t,sgn)= "
               << q << ' ' << s << ' ' << r << ' ' << t
               << ' ' << sgn << " returns "
@@ -268,7 +269,7 @@ public:
         }
 
         CGAL_SDG_DEBUG(
-            std::cout
+            Rcpp::Rcout
             << "debug infinite-edge-int-cf tocheck (q,s,r,t,sgn)= "
             << q << ' ' << s << ' ' << r << ' ' << t
             << ' ' << sgn << " returns "
@@ -279,7 +280,7 @@ public:
 
       // philaris: tocheck
       CGAL_SDG_DEBUG(
-          std::cout
+          Rcpp::Rcout
           << "debug infinite-edge-int-cf tocheck (q,s,r,t,sgn)= "
           << q << ' ' << s << ' ' << r << ' ' << t
           << ' ' << sgn << " returns "
@@ -302,7 +303,7 @@ public:
       {
         // in this case r and s must be endpoints of q
         CGAL_SDG_DEBUG(
-            std::cout
+            Rcpp::Rcout
             << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
             << q << ' ' << s << ' ' << r << ' ' << t
             << ' ' << sgn << " returns "
@@ -313,7 +314,7 @@ public:
       {
         if (sgn == NEGATIVE) {
           CGAL_SDG_DEBUG(
-              std::cout
+              Rcpp::Rcout
               << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
               << q << ' ' << s << ' ' << r << ' ' << t
               << ' ' << sgn << " returns "
@@ -365,7 +366,7 @@ public:
 
         if (! is_conflicting_side_of_q) {
           CGAL_SDG_DEBUG(
-              std::cout
+              Rcpp::Rcout
               << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
               << q << ' ' << s << ' ' << r << ' ' << t
               << ' ' << sgn << " returns "
@@ -375,7 +376,7 @@ public:
 
         // here is_conflicting_side_of_q is true;
 
-        CGAL_SDG_DEBUG(std::cout <<
+        CGAL_SDG_DEBUG(Rcpp::Rcout <<
             "debug infcf is_cf_side_of_q" << std::endl;);
 
         // compute infinite square such that:
@@ -406,7 +407,7 @@ public:
         if ((sidelrt == ON_NEGATIVE_SIDE) ||
             (sidelst == ON_NEGATIVE_SIDE)   ) {
           CGAL_SDG_DEBUG(
-              std::cout
+              Rcpp::Rcout
               << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
               << q << ' ' << s << ' ' << r << ' ' << t
               << ' ' << sgn << " returns "
@@ -416,7 +417,7 @@ public:
           // both sidelrt and sidelst are non-negative
           if (sidelrt == ON_ORIENTED_BOUNDARY) {
             CGAL_SDG_DEBUG(
-                std::cout
+                Rcpp::Rcout
                 << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
                 << q << ' ' << s << ' ' << r << ' ' << t
                 << ' ' << sgn << " returns "
@@ -424,7 +425,7 @@ public:
             return false;
           } else if (sidelst == ON_ORIENTED_BOUNDARY) {
             CGAL_SDG_DEBUG(
-                std::cout
+                Rcpp::Rcout
                 << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
                 << q << ' ' << s << ' ' << r << ' ' << t
                 << ' ' << sgn << " returns "
@@ -432,7 +433,7 @@ public:
             return false;
           } else {
             CGAL_SDG_DEBUG(
-                std::cout
+                Rcpp::Rcout
                 << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
                 << q << ' ' << s << ' ' << r << ' ' << t
                 << ' ' << sgn << " returns "
@@ -453,7 +454,7 @@ public:
       //    product...
       // philaris: adaptation to Linf
 
-      CGAL_SDG_DEBUG(std::cout <<
+      CGAL_SDG_DEBUG(Rcpp::Rcout <<
           "debug infcf s=r and is point" << std::endl;);
 
       Comparison_result cmpxst = cmpx(s.point(), t.point());
@@ -467,7 +468,7 @@ public:
       CGAL_assertion( sgn1 != ZERO );
 
       CGAL_SDG_DEBUG(
-          std::cout
+          Rcpp::Rcout
           << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
           << q << ' ' << s << ' ' << r << ' ' << t
           << ' ' << sgn << " returns "
@@ -478,7 +479,7 @@ public:
     // still here, both q and t are points
 
     if ( s.is_segment() && r.is_segment() && same_segments(s, r) ) {
-      CGAL_SDG_DEBUG(std::cout <<
+      CGAL_SDG_DEBUG(Rcpp::Rcout <<
           "debug infcf s=r and is segment" << std::endl;);
 
       if ( same_points(q, s.source_site()) ||
@@ -506,7 +507,7 @@ public:
         CGAL_assertion( sgn1 != ZERO );
 
         CGAL_SDG_DEBUG(
-            std::cout
+            Rcpp::Rcout
             << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
             << q << ' ' << s << ' ' << r << ' ' << t
             << ' ' << sgn << " returns "
@@ -560,7 +561,7 @@ public:
         Oriented_side osl2 =
           oriented_side_of_line(l2, t.point());
 
-        CGAL_SDG_DEBUG(std::cout << "debug iecf osl1=" << osl1
+        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug iecf osl1=" << osl1
           << " osl2=" << osl2 << std::endl;);
 
         Boolean retval =
@@ -570,7 +571,7 @@ public:
            ON_NEGATIVE_SIDE)     ;
 
         CGAL_SDG_DEBUG(
-            std::cout
+            Rcpp::Rcout
             << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
             << q << ' ' << s << ' ' << r << ' ' << t
             << ' ' << sgn << " returns "
@@ -590,9 +591,9 @@ public:
     // here q is a point and s is different from r
 
     if (sgn == NEGATIVE) {
-      CGAL_SDG_DEBUG(std::cout <<
+      CGAL_SDG_DEBUG(Rcpp::Rcout <<
           "debug infinite-edge-int-cf special NEG" << std::endl;);
-      CGAL_SDG_DEBUG(std::cout << "debug infcf special (q,s,r,t,sgn)= "
+      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug infcf special (q,s,r,t,sgn)= "
         << q << ' ' << s << ' ' << r << ' ' << t
         << ' ' << sgn << std::endl;);
 
@@ -603,7 +604,7 @@ public:
                 q.point(), r.point(), t.point()) == ON_BOUNDED_SIDE))
         {
           CGAL_SDG_DEBUG(
-              std::cout
+              Rcpp::Rcout
               << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
               << q << ' ' << s << ' ' << r << ' ' << t
               << ' ' << sgn << " returns "
@@ -613,7 +614,7 @@ public:
         }
       } else {
         CGAL_SDG_DEBUG(
-            std::cout
+            Rcpp::Rcout
             << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
             << q << ' ' << s << ' ' << r << ' ' << t
             << ' ' << sgn << " returns "
@@ -622,7 +623,7 @@ public:
       }
     } else if (sgn == POSITIVE) {
       CGAL_SDG_DEBUG(
-          std::cout << "debug infinite-edge-int-cf special POS"
+          Rcpp::Rcout << "debug infinite-edge-int-cf special POS"
           << std::endl;);
       if (s.is_point() && r.is_point()) {
         if ((bounded_side_of_bbox(
@@ -633,7 +634,7 @@ public:
                  ON_BOUNDED_SIDE))
         {
           CGAL_SDG_DEBUG(
-              std::cout
+              Rcpp::Rcout
               << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
               << q << ' ' << s << ' ' << r << ' ' << t
               << ' ' << sgn << " returns "
@@ -682,7 +683,7 @@ public:
         CGAL_assertion(bside != ON_BOUNDARY);
 
         CGAL_SDG_DEBUG(
-            std::cout
+            Rcpp::Rcout
             << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
             << q << ' ' << s << ' ' << r << ' ' << t
             << ' ' << sgn << " returns "
@@ -692,7 +693,7 @@ public:
       } else {
         // here one of s, r is point and the other is a segment
         CGAL_SDG_DEBUG(
-            std::cout
+            Rcpp::Rcout
             << "debug infinite-edge-int-cf with (q,s,r,t,sgn) "
             << q << ' ' << s << ' ' << r << ' ' << t
             << ' ' << sgn << " tocheck one seg one pnt in s, r"
@@ -702,7 +703,7 @@ public:
     // here it might be sgn == ZERO
 
     CGAL_SDG_DEBUG(
-        std::cout
+        Rcpp::Rcout
         << "debug infinite-edge-int-cf with (q,s,r,t,sgn)= "
         << q << ' ' << s << ' ' << r << ' ' << t
         << ' ' << sgn << " returns "

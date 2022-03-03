@@ -14,6 +14,7 @@
 #ifndef CGAL_BARYCENTRIC_DELAUNAY_DOMAIN_2_H
 #define CGAL_BARYCENTRIC_DELAUNAY_DOMAIN_2_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Barycentric_coordinates_2.h>
 
 // CGAL includes.
@@ -559,7 +560,7 @@ namespace Barycentric_coordinates {
       std::ofstream file(
         file_path.c_str(), std::ios_base::out);
       if (!file) {
-        std::cerr << std::endl <<
+        Rcpp::Rcerr << std::endl <<
           "ERROR: error saving file " << file_path
         << "!" << std::endl << std::endl;
       }

@@ -12,6 +12,7 @@
 #ifndef CGAL_FILTERED_EXTENDED_HOMOGENEOUS_H
 #define CGAL_FILTERED_EXTENDED_HOMOGENEOUS_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -33,10 +34,10 @@
 #ifdef  KERNEL_CHECK
 #include <CGAL/Extended_homogeneous.h>
 #define CHECK(c1,c2) CGAL_assertion((c1) == (c2));
-#define PRINT_CHECK_ENABLED std::cout << "kernel check enabled!\n"
+#define PRINT_CHECK_ENABLED Rcpp::Rcout << "kernel check enabled!\n"
 #else
 #define CHECK(c1,c2)
-#define PRINT_CHECK_ENABLED std::cout << "no kernel check!\n"
+#define PRINT_CHECK_ENABLED Rcpp::Rcout << "no kernel check!\n"
 #endif
 
 #ifdef KERNEL_ANALYSIS
@@ -45,7 +46,7 @@
 #define INCTOTAL(c) c##_total++
 #define INCEXCEPTION(c) c##_exception++
 #define PRINT_STATISTICS(c) \
-std::cout << #c##" " << c##_exception << "/" << c##_total << std::endl
+Rcpp::Rcout << #c##" " << c##_exception << "/" << c##_total << std::endl
 #else
 #define DEFCOUNTER(c)
 #define INCTOTAL(c)
@@ -1336,8 +1337,8 @@ bool strictly_ordered_ccw(const Direction_2& d1,
 
 void print_statistics() const
 {
-  std::cout << "Statistics of filtered kernel:\n";
-  std::cout << "total failed double filter stages = (now needs CGAL_PROFILE)\n";
+  Rcpp::Rcout << "Statistics of filtered kernel:\n";
+  Rcpp::Rcout << "total failed double filter stages = (now needs CGAL_PROFILE)\n";
   PRINT_CHECK_ENABLED;
   PRINT_STATISTICS(or2);
   PRINT_STATISTICS(or1);

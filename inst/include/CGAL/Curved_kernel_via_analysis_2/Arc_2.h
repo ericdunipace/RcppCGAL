@@ -18,6 +18,7 @@
  * can be analyzed.
  */
 
+#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/Handle_with_policy.h>
 
@@ -46,7 +47,7 @@ namespace internal {
 #ifndef CKvA_CERR
 //#define CKvA_DEBUG_PRINT_CERR
 #ifdef CKvA_DEBUG_PRINT_CERR
-#define CKvA_CERR(x) std::cerr << x
+#define CKvA_CERR(x) Rcpp::Rcerr << x
 #else
 #define CKvA_CERR(x) static_cast<void>(0)
 #endif
@@ -3182,7 +3183,7 @@ public:
             break;
 
         case ::CGAL::IO::BINARY:
-          std::cerr << "BINARY format not yet implemented" << std::endl;
+          Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
         break;
         default:
           // ASCII

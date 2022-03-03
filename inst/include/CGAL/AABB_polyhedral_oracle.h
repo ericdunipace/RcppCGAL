@@ -14,6 +14,7 @@
 #ifndef CGAL_AABB_POLYHEDRAL_ORACLE_H
 #define CGAL_AABB_POLYHEDRAL_ORACLE_H
 
+#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 
@@ -139,7 +140,7 @@ namespace CGAL {
         OutputIteratorPoints out,
         int /* n */) const
       {
-        // std::cout << "AABB_polyhedral_oracle: empty initial point set" << std::endl;
+        // Rcpp::Rcout << "AABB_polyhedral_oracle: empty initial point set" << std::endl;
         return out;
       }
     };

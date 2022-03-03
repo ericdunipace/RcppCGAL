@@ -17,6 +17,7 @@
 #define CGAL_DEPRECATED_HEADER "<CGAL/Weights/internal/pmp_weights_deprecated.h>"
 #define CGAL_DEPRECATED_MESSAGE_DETAILS \
   "This part of the package is deprecated since the version 5.4 of CGAL!"
+#include <Rcpp.h>
 #include <CGAL/Installation/internal/deprecation_warning.h>
 
 // README:
@@ -814,7 +815,7 @@ public:
   double operator()(halfedge_descriptor he) {
 
     const double weight = primary(he);
-    // if (weight < 0.0) { std::cout << "Negative weight!" << std::endl; }
+    // if (weight < 0.0) { Rcpp::Rcout << "Negative weight!" << std::endl; }
     return (weight >= 0.0) ? weight : secondary(he);
   }
 };

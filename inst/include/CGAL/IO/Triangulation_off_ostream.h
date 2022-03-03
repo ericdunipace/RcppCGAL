@@ -13,6 +13,7 @@
 #ifndef CGAL_TRIANGULATION_IO_H
 #define CGAL_TRIANGULATION_IO_H
 
+#include <Rcpp.h>
 #include <CGAL/Epick_d.h>
 #include <CGAL/Triangulation.h>
 #include <sstream>
@@ -125,7 +126,7 @@ export_triangulation_to_off(std::ostream & os,
 
   if (tr.maximal_dimension() < 2 || tr.maximal_dimension() > 3)
   {
-    std::cerr << "Warning: export_tds_to_off => dimension should be 2 or 3.";
+    Rcpp::Rcerr << "Warning: export_tds_to_off => dimension should be 2 or 3.";
     os << "Warning: export_tds_to_off => dimension should be 2 or 3.";
     return os;
   }
