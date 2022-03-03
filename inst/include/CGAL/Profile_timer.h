@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Profiling_tools/include/CGAL/Profile_timer.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Profiling_tools/include/CGAL/Profile_timer.h $
 // $Id: Profile_timer.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -26,7 +26,6 @@
 // - parallel versions : per-thread and summing on all threads.
 // - Timer vs Real_timer ?
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <iostream>
 #include <iomanip>
@@ -52,7 +51,7 @@ struct Profile_timer
 
     ~Profile_timer()
     {
-        Rcpp::Rcerr << "[CGAL::Profile_timer] "
+        std::cerr << "[CGAL::Profile_timer] "
                   << std::setw(10) << t << " " << s << std::endl;
     }
 

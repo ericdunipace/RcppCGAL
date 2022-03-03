@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/fitness_function.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/fitness_function.h $
 // $Id: fitness_function.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_FITNESS_FUNCTION_H
 #define CGAL_OPTIMAL_BOUNDING_FITNESS_FUNCTION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/assertions.h>
@@ -90,7 +89,7 @@ compute_fitness_if_smaller(const typename Traits::Matrix& R, // rotation matrix
   const std::size_t mpn = (std::max)(pn / 10, std::size_t(1000));
   std::size_t next_check = mpn; // to avoid a costly modulo
 
-//  Rcpp::Rcout << "pn, mpn, next_check: " << pn << " " << mpn << std::endl;
+//  std::cout << "pn, mpn, next_check: " << pn << " " << mpn << std::endl;
 
   std::size_t i = 0;
   for(const Point& pt : points)

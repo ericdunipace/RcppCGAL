@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Square_border_parameterizer_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Square_border_parameterizer_3.h $
 // $Id: Square_border_parameterizer_3.h 50c870e 2020-07-21T17:12:19+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_SQUARE_BORDER_PARAMETERIZER_3_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_SQUARE_BORDER_PARAMETERIZER_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/disable_warnings.h>
@@ -312,8 +311,8 @@ public:
       }
 
       if(v_counter != 4) {
-        Rcpp::Rcerr << "Error: Fixed vertices must belong to the same border";
-        Rcpp::Rcerr << " (defined by 'bhd')." << std::endl;
+        std::cerr << "Error: Fixed vertices must belong to the same border";
+        std::cerr << " (defined by 'bhd')." << std::endl;
         return ERROR_NON_CONVEX_BORDER;
       }
     }

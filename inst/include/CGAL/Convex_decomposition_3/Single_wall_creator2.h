@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Single_wall_creator2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Single_wall_creator2.h $
 // $Id: Single_wall_creator2.h 30e536b 2021-03-01T08:06:48+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_CD3_SINGLE_WALL_CREATOR2_H
 #define CGAL_CD3_SINGLE_WALL_CREATOR2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 
@@ -86,12 +85,12 @@ class Single_wall_creator2 : public Modifier_base<typename Nef_::SNC_and_PL> {
                    ein->twin()->point() == Sphere_point(1,0,0));
     Sphere_circle c(ein->point(), spin);
     c=normalized(c);
-    //    Rcpp::Rcerr << "need_to_create_wall " << ein->point() << ", " << spin << std::endl;
-    //    Rcpp::Rcerr << "need_to_create_wall " << c << std::endl;
+    //    std::cerr << "need_to_create_wall " << ein->point() << ", " << spin << std::endl;
+    //    std::cerr << "need_to_create_wall " << c << std::endl;
 
     SHalfedge_around_svertex_circulator svc(ein->out_sedge()), send(svc);
     CGAL_For_all(svc,send) {
-      //      Rcpp::Rcerr << "check circles " << svc->circle() << std::endl;
+      //      std::cerr << "check circles " << svc->circle() << std::endl;
       if(normalized(svc->circle()) == c &&
          !Sphere_segment(svc->source()->point(),
                          svc->twin()->source()->point(), c).is_long())

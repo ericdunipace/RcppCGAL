@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Ray_2.h $
-// $Id: Ray_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Ray_2.h $
+// $Id: Ray_2.h 8fa0f55 2021-05-27T10:27:38+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -66,6 +66,9 @@ public:
 
   Ray_2(const RRay_2& r)
     : RRay_2(r) {}
+
+  Ray_2(RRay_2&& r)
+    : RRay_2(std::move(r)) {}
 
   Ray_2(const Point_2 &sp, const Point_2 &secondp)
     : RRay_2(typename R::Construct_ray_2()(Return_base_tag(), sp, secondp)) {}

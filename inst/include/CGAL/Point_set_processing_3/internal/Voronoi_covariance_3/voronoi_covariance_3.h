@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/Point_set_processing_3/internal/Voronoi_covariance_3/voronoi_covariance_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/Point_set_processing_3/internal/Voronoi_covariance_3/voronoi_covariance_3.h $
 // $Id: voronoi_covariance_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_INTERNAL_VCM_VORONOI_COVARIANCE_3_HPP
 #define CGAL_INTERNAL_VCM_VORONOI_COVARIANCE_3_HPP
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 
@@ -116,7 +115,7 @@ namespace CGAL {
                                                      const Point &c)
                             {
                                 const double  vol = CGAL::volume(a, b, c, Point(CGAL::ORIGIN));
-                                //Rcpp::Rcerr << "vol = " << vol << "\n";
+                                //std::cerr << "vol = " << vol << "\n";
                                 _result += vol;
                             }
 

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm_overlay.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm_overlay.h $
 // $Id: Arr_polyhedral_sgm_overlay.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_H
 #define CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -53,27 +52,27 @@ public:
     Point_3 p = p2 + v1;
     f->set_point(p);
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_face(f1, f2) "
+    std::cout << "create_face(f1, f2) "
               << p
               << std::endl;
-    Rcpp::Rcout << "  Outer CCB:" << std::endl;
+    std::cout << "  Outer CCB:" << std::endl;
     typename Sgm::Outer_ccb_iterator oit;
     for (oit = f->outer_ccbs_begin(); oit != f->outer_ccbs_end(); ++oit) {
       typename Sgm::Halfedge_iterator first = *oit;
       typename Sgm::Halfedge_iterator curr = first;
       do {
-        Rcpp::Rcout << "  " << curr->curve() << std::endl;
+        std::cout << "  " << curr->curve() << std::endl;
         curr = curr->next();
       } while (curr != first);
     }
 
-    Rcpp::Rcout << "  Inner CCB:" << std::endl;
+    std::cout << "  Inner CCB:" << std::endl;
     typename Sgm::Inner_ccb_iterator iit;
     for (iit = f->inner_ccbs_begin(); iit != f->inner_ccbs_end(); ++iit) {
       typename Sgm::Halfedge_iterator first = *iit;
       typename Sgm::Halfedge_iterator curr = first;
       do {
-        Rcpp::Rcout << "  " << curr->curve() << std::endl;
+        std::cout << "  " << curr->curve() << std::endl;
         curr = curr->next();
       } while (curr != first);
     }
@@ -85,7 +84,7 @@ public:
                      Vertex_handle v)
   {
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_vertex(h1, h2)"
+    std::cout << "create_vertex(h1, h2)"
               << " " << v->point()
               << std::endl;
 #else
@@ -98,7 +97,7 @@ public:
                      Vertex_handle v)
   {
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_vertex(v1, v2)"
+    std::cout << "create_vertex(v1, v2)"
               << " " << v->point()
               << std::endl;
 #else
@@ -111,7 +110,7 @@ public:
                      Vertex_handle v)
   {
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_vertex(v1, h2)"
+    std::cout << "create_vertex(v1, h2)"
               << " " << v->point()
               << std::endl;
 #else
@@ -124,7 +123,7 @@ public:
                      Vertex_handle v)
   {
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_vertex(h1, v2)"
+    std::cout << "create_vertex(h1, v2)"
               << " " << v->point()
               << std::endl;
 #else
@@ -137,7 +136,7 @@ public:
                      Vertex_handle v)
   {
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_vertex(f1, v2)"
+    std::cout << "create_vertex(f1, v2)"
               << " " << v->point()
               << std::endl;
 #else
@@ -150,7 +149,7 @@ public:
                      Vertex_handle v)
   {
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_vertex(v1, f2)"
+    std::cout << "create_vertex(v1, f2)"
               << " " << v->point()
               << std::endl;
 #else
@@ -167,7 +166,7 @@ public:
     h->twin()->add_arr(0);
     h->twin()->add_arr(1);
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_edge(h1, h2)"
+    std::cout << "create_edge(h1, h2)"
               << " " << h->curve()
               << std::endl;
 #endif
@@ -180,7 +179,7 @@ public:
     h->add_arr(0);
     h->twin()->add_arr(0);
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_edge(h1, f2)"
+    std::cout << "create_edge(h1, f2)"
               << " " << h->curve()
               << std::endl;
 #endif
@@ -193,7 +192,7 @@ public:
     h->add_arr(1);
     h->twin()->add_arr(1);
 #ifdef CGAL_ARR_POLYHEDRAL_SGM_OVERLAY_DEBUG
-    Rcpp::Rcout << "create_edge(f1, h2)"
+    std::cout << "create_edge(f1, h2)"
               << " " << h->curve()
               << std::endl;
 #endif

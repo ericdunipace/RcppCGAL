@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_triangles_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_triangles_2.h $
 // $Id: linear_least_squares_fitting_triangles_2.h fe3da4c 2021-04-14T09:45:06+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_LINEAR_LEAST_SQUARES_FITTING_TRIANGLES_2_H
 #define CGAL_LINEAR_LEAST_SQUARES_FITTING_TRIANGLES_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Principal_component_analysis.h>
 
 
@@ -117,7 +116,7 @@ linear_least_squares_fitting_2(InputIterator first,
   covariance[1] += -mass * (c.x() * c.y());
   covariance[2] += -mass * (c.y() * c.y());
 
-  //  Rcpp::Rcout<<"cov: "<<covariance[0]*covariance[2]<<" =? "<<covariance[1]*covariance[1]<<std::endl;
+  //  std::cout<<"cov: "<<covariance[0]*covariance[2]<<" =? "<<covariance[1]*covariance[1]<<std::endl;
 
   // solve for eigenvalues and eigenvectors.
   // eigen values are sorted in ascending order,

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Single_wall_creator.h $
-// $Id: Single_wall_creator.h 30e536b 2021-03-01T08:06:48+00:00 Giles Bathgate
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Single_wall_creator.h $
+// $Id: Single_wall_creator.h 6831403 2021-09-29T11:47:08+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_CD3_SINGLE_WALL_CREATOR_H
 #define CGAL_CD3_SINGLE_WALL_CREATOR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 
@@ -75,7 +74,7 @@ class Single_wall_creator : public Modifier_base<typename Nef_::SNC_and_PL> {
 
  public:
   Single_wall_creator(SVertex_handle e, Vector_3 d)
-    : ein(e), dir(d)
+    : ein(e), dir(d), sncp(nullptr), pl(nullptr)
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
     , index1(0), index2(0)
 #endif
@@ -162,11 +161,11 @@ class Single_wall_creator : public Modifier_base<typename Nef_::SNC_and_PL> {
     /*
     Sphere_segment test_seg(estart->point(), lateral_svertex->point(), c);
     if(lateral_svertex->point() != Sphere_point(1,0,0)) {
-      //      Rcpp::Rcerr << lateral_svertex->point() << std::endl;
+      //      std::cerr << lateral_svertex->point() << std::endl;
       CGAL_assertion(!test_seg.has_on(Sphere_point(1,0,0)));
     }
     if(lateral_svertex->point() != Sphere_point(-1,0,0)) {
-      //      Rcpp::Rcerr << lateral_svertex->point() << std::endl;
+      //      std::cerr << lateral_svertex->point() << std::endl;
       CGAL_assertion(!test_seg.has_on(Sphere_point(-1,0,0)));
     }
     */
@@ -329,7 +328,7 @@ class Single_wall_creator : public Modifier_base<typename Nef_::SNC_and_PL> {
     sncp = sncpl.sncp;
     pl = sncpl.pl;
 
-    //    SNC_io_parser<SNC_structure> O0(Rcpp::Rcerr,*sncp);
+    //    SNC_io_parser<SNC_structure> O0(std::cerr,*sncp);
     //    O0.print();
 
     //    CGAL_NEF_SETDTHREAD(229*227);

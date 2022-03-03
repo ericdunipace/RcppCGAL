@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_S2/include/CGAL/Nef_S2/Sphere_geometry_OGL.h $
-// $Id: Sphere_geometry_OGL.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_S2/include/CGAL/Nef_S2/Sphere_geometry_OGL.h $
+// $Id: Sphere_geometry_OGL.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SPHERE_GEOMETRY_OGL_H
 #define CGAL_SPHERE_GEOMETRY_OGL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 
@@ -201,7 +200,7 @@ class Approximator {
       else                       i=0;
     }
     // now i references the side of maximal angle
-    if ( angle[i] < refinement_angle ) // refinement threshhold
+    if ( angle[i] < refinement_angle ) // refinement threshold
       { T.push_back(t); return; }
     VVector v;
     switch (i) {
@@ -272,7 +271,7 @@ public:
   }
 
   virtual void print() const
-  { Rcpp::Rcerr << "point " << p_; }
+  { std::cerr << "point " << p_; }
 
 };
 
@@ -327,7 +326,7 @@ public:
   }
 
   virtual void print() const
-  { Rcpp::Rcerr << "segment " << s_; }
+  { std::cerr << "segment " << s_; }
 
 };
 
@@ -371,7 +370,7 @@ public:
   }
 
   virtual void print() const
-  { Rcpp::Rcerr << "circle " << s_; }
+  { std::cerr << "circle " << s_; }
 
 };
 
@@ -429,7 +428,7 @@ public:
   }
 
   virtual void print() const
-  { Rcpp::Rcerr << "triangle " << t_; }
+  { std::cerr << "triangle " << t_; }
 
 };
 
@@ -492,15 +491,15 @@ void copy_list(const Unit_sphere& S)
 }
 
 void print() const
-{ Rcpp::Rcerr << "Dumping Unit_sphere:\n";
+{ std::cerr << "Dumping Unit_sphere:\n";
   for (Object_const_iterator it = objects_.begin();
        it != objects_.end(); ++it)
      (*it)->print();
-  Rcpp::Rcerr << std::endl;
+  std::cerr << std::endl;
   for (Object_const_iterator it = triangles_.begin();
        it != triangles_.end(); ++it)
      (*it)->print();
-  Rcpp::Rcerr << std::endl;
+  std::cerr << std::endl;
 }
 
 Unit_sphere(const Unit_sphere& S) : OGL_base_object(), switches(2)

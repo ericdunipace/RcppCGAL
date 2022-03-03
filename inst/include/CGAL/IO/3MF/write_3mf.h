@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/3MF/write_3mf.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/3MF/write_3mf.h $
 // $Id: write_3mf.h 1f45360 2021-01-26T09:05:24+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 
 #ifdef CGAL_LINKED_WITH_3MF
 
-#include <Rcpp.h>
 #include <CGAL/IO/Color.h>
 
 #include <CGAL/boost/graph/iterator.h>
@@ -78,9 +77,9 @@ bool add_build_item(NMR::PLib3MFModel * pModel,
 
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not create build item: " << std::hex << hResult << std::endl;
+    std::cerr << "could not create build item: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(pModel, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(pMeshObject);
     NMR::lib3mf_release(pModel);
     return false;
@@ -106,9 +105,9 @@ bool export_model_to_file(const std::string& file_name,
 
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not create model reader: " << std::hex << hResult << std::endl;
+    std::cerr << "could not create model reader: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(pModel, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(pModel);
     return false;
   }
@@ -116,9 +115,9 @@ bool export_model_to_file(const std::string& file_name,
   // Export Model into File
   hResult = NMR::lib3mf_writer_writetofileutf8(p3MFWriter, file_name.c_str());
   if(hResult != LIB3MF_OK) {
-    Rcpp::Rcerr << "could not write file: " << std::hex << hResult << std::endl;
+    std::cerr << "could not write file: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(p3MFWriter, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(pModel);
     NMR::lib3mf_release(p3MFWriter);
     return false;
@@ -149,9 +148,9 @@ bool write_mesh_to_model(const PointRange& points,
   hResult = NMR::lib3mf_model_addmeshobject(pModel, pMeshObject);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not add mesh object: " << std::hex << hResult << std::endl;
+    std::cerr << "could not add mesh object: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(pModel, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(pModel);
     return false;
   }
@@ -167,9 +166,9 @@ bool write_mesh_to_model(const PointRange& points,
                                                pTriangles.size());
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not set mesh geometry: " << std::hex << hResult << std::endl;
+    std::cerr << "could not set mesh geometry: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(*pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage
+    std::cerr << "error #" << std::hex << nErrorMessage
               << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(*pMeshObject);
     NMR::lib3mf_release(pModel);
@@ -181,9 +180,9 @@ bool write_mesh_to_model(const PointRange& points,
   hResult = NMR::lib3mf_meshobject_createpropertyhandler(*pMeshObject, &pPropertyHandler);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not create property handler: " << std::hex << hResult << std::endl;
+    std::cerr << "could not create property handler: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(*pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(*pMeshObject);
     NMR::lib3mf_release(pModel);
     return false;
@@ -205,9 +204,9 @@ bool write_mesh_to_model(const PointRange& points,
   hResult = NMR::lib3mf_object_createdefaultpropertyhandler(*pMeshObject, &pDefaultPropertyHandler);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr<< "could not create default property handler: " << std::hex << hResult << std::endl;
+    std::cerr<< "could not create default property handler: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(*pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr<< "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr<< "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(*pMeshObject);
     NMR::lib3mf_release(pModel);
     return false;
@@ -223,9 +222,9 @@ bool write_mesh_to_model(const PointRange& points,
   hResult = NMR::lib3mf_object_setnameutf8(*pMeshObject, name.c_str());
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not set object name: " << std::hex << hResult << std::endl;
+    std::cerr << "could not set object name: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(*pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(*pMeshObject);
     NMR::lib3mf_release(pModel);
     return false;
@@ -254,9 +253,9 @@ bool write_points(const PointRange& points,
   hResult = NMR::lib3mf_model_addmeshobject(pModel, pMeshObject);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not add mesh object: " << std::hex << hResult << std::endl;
+    std::cerr << "could not add mesh object: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(pModel, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(pModel);
     return false;
   }
@@ -273,9 +272,9 @@ bool write_points(const PointRange& points,
                                                pVertices.size(), &dummy_triangle, 1);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not set mesh geometry: " << std::hex << hResult << std::endl;
+    std::cerr << "could not set mesh geometry: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(*pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(*pMeshObject);
     NMR::lib3mf_release(pModel);
     return false;
@@ -286,9 +285,9 @@ bool write_points(const PointRange& points,
   hResult = NMR::lib3mf_meshobject_createpropertyhandler(*pMeshObject, &pPropertyHandler);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not create property handler: " << std::hex << hResult << std::endl;
+    std::cerr << "could not create property handler: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(*pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(*pMeshObject);
     NMR::lib3mf_release(pModel);
     return false;
@@ -307,9 +306,9 @@ bool write_points(const PointRange& points,
   hResult = NMR::lib3mf_object_createdefaultpropertyhandler(*pMeshObject, &pDefaultPropertyHandler);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr<< "could not create default property handler: " << std::hex << hResult << std::endl;
+    std::cerr<< "could not create default property handler: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(*pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr<< "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr<< "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(*pMeshObject);
     NMR::lib3mf_release(pModel);
     return false;
@@ -326,9 +325,9 @@ bool write_points(const PointRange& points,
   hResult = NMR::lib3mf_object_setnameutf8(*pMeshObject, name.c_str());
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not set object name: " << std::hex << hResult << std::endl;
+    std::cerr << "could not set object name: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(*pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(*pMeshObject);
     NMR::lib3mf_release(pModel);
     return false;

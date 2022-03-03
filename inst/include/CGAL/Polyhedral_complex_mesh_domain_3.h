@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Polyhedral_complex_mesh_domain_3.h $
-// $Id: Polyhedral_complex_mesh_domain_3.h d1e1846 2020-12-22T16:55:25+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Polyhedral_complex_mesh_domain_3.h $
+// $Id: Polyhedral_complex_mesh_domain_3.h e6bacfb 2021-11-12T10:44:41+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_POLYHEDRAL_COMPLEX_MESH_DOMAIN_3_H
 #define CGAL_POLYHEDRAL_COMPLEX_MESH_DOMAIN_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -27,7 +26,7 @@
 #include <CGAL/Mesh_3/Polyline_with_context.h>
 
 #include <CGAL/Polyhedron_3.h>
-#include <CGAL/internal/Mesh_3/helpers.h>
+#include <CGAL/Mesh_3/internal/helpers.h>
 
 #include <CGAL/enum.h>
 #include <CGAL/boost/graph/helpers.h>
@@ -101,12 +100,12 @@ with a model of the concept `IntersectionGeometricTraits_3`.
 \sa `CGAL::Mesh_polyhedron_3<IGT_>`
 */
 template < class IGT_,
-           class Polyhedron = typename Mesh_polyhedron_3<IGT_>::type,
+           class Polyhedron_ = typename Mesh_polyhedron_3<IGT_>::type,
            class TriangleAccessor=CGAL::Default
            >
 class Polyhedral_complex_mesh_domain_3
   : public Mesh_domain_with_polyline_features_3<
-      Polyhedral_mesh_domain_3< Polyhedron,
+      Polyhedral_mesh_domain_3< Polyhedron_,
                                 IGT_,
                                 CGAL::Default,
                                 int,   //Use_patch_id_tag
@@ -114,6 +113,7 @@ class Polyhedral_complex_mesh_domain_3
 {
 public:
   /// The base class
+  typedef Polyhedron_ Polyhedron;
   typedef Mesh_domain_with_polyline_features_3<
     Polyhedral_mesh_domain_3<
       Polyhedron, IGT_, CGAL::Default,
@@ -124,21 +124,6 @@ private:
   typedef Polyhedral_mesh_domain_3<Polyhedron, IGT_, CGAL::Default,
                                    int, Tag_true >       BaseBase;
   typedef Polyhedral_complex_mesh_domain_3<IGT_, Polyhedron>  Self;
-
-protected:
-  typedef typename Base::Surface_patch_index Patch_id;
-  typedef typename boost::property_map<Polyhedron,
-                                       CGAL::vertex_incident_patches_t<Patch_id>
-                                       >::type VIPMap;
-  typedef typename boost::property_traits<VIPMap>::value_type Set_of_indices;
-
-  typedef boost::adjacency_list<
-    boost::setS, // this avoids parallel edges
-    boost::vecS,
-    boost::undirectedS,
-    typename IGT::Point_3,
-    Set_of_indices> Featured_edges_copy_graph;
-
   /// @endcond
 
 public:
@@ -168,6 +153,7 @@ public:
   typedef typename Base::AABB_tree            AABB_tree;
   typedef typename Base::AABB_primitive       AABB_primitive;
   typedef typename Base::AABB_primitive_id    AABB_primitive_id;
+  typedef typename Base::Surface_patch_index  Patch_id;
   // Backward compatibility
 #ifndef CGAL_MESH_3_NO_DEPRECATED_SURFACE_INDEX
   typedef Surface_patch_index                 Surface_index;
@@ -181,8 +167,23 @@ public:
   typedef std::vector<Point_3> Bare_polyline;
   typedef Mesh_3::Polyline_with_context<Surface_patch_index, Curve_index,
                                         Bare_polyline > Polyline_with_context;
+
+protected:
+  typedef typename boost::property_map<Polyhedron,
+    CGAL::vertex_incident_patches_t<Patch_id>
+  >::type VIPMap;
+  typedef typename boost::property_traits<VIPMap>::value_type Set_of_indices;
+
+  typedef boost::adjacency_list<
+    boost::setS, // this avoids parallel edges
+    boost::vecS,
+    boost::undirectedS,
+    typename IGT::Point_3,
+    Set_of_indices> Featured_edges_copy_graph;
+
   /// @endcond
 
+public:
   /// Constructor
   /*! Constructs a domain defined by a set of polyhedral surfaces,
   describing a polyhedral complex.
@@ -370,8 +371,8 @@ public:
   template <typename C3t3>
   void add_vertices_to_c3t3_on_patch_without_feature_edges(C3t3& c3t3) const {
 #ifdef CGAL_MESH_3_VERBOSE
-    Rcpp::Rcout << "add_vertices_to_c3t3_on_patch_without_feature_edges...";
-    Rcpp::Rcout.flush();
+    std::cout << "add_vertices_to_c3t3_on_patch_without_feature_edges...";
+    std::cout.flush();
 #endif
     CGAL::Random random(0);
 
@@ -508,8 +509,8 @@ public:
       }
     }
 #ifdef CGAL_MESH_3_VERBOSE
-    Rcpp::Rcout << "\badd_vertices_to_c3t3_on_patch_without_feature_edges done.";
-    Rcpp::Rcout << std::endl;
+    std::cout << "\badd_vertices_to_c3t3_on_patch_without_feature_edges done.";
+    std::cout << std::endl;
 #endif
   }
 
@@ -584,10 +585,10 @@ public:
         //   if(opt != opt2) {
         //     if(!opt  && *opt2 == 0) continue;
         //     if(!opt2 && *opt  == 0) continue;
-        //     Rcpp::Rcerr << "Not the same result for:\n  "
+        //     std::cerr << "Not the same result for:\n  "
         //               << ray_shot
         //               << "\n  " << ray_shot2 << std::endl;
-        //     Rcpp::stop("Error");
+        //     abort();
         //   }
         // }
         if(!opt)
@@ -754,9 +755,9 @@ detect_features(FT angle_in_degree,
 
 #ifdef CGAL_MESH_3_VERBOSE
     std::size_t poly_id = &p-&poly[0];
-    Rcpp::Rcerr << "Polyhedron #" << poly_id << " :\n";
-    Rcpp::Rcerr << "  material #" << patch_indices[poly_id].first << "\n";
-    Rcpp::Rcerr << "  material #" << patch_indices[poly_id].second << "\n";
+    std::cerr << "Polyhedron #" << poly_id << " :\n";
+    std::cerr << "  material #" << patch_indices[poly_id].first << "\n";
+    std::cerr << "  material #" << patch_indices[poly_id].second << "\n";
 #endif // CGAL_MESH_3_VERBOSE
 
     // Get sharp features
@@ -779,7 +780,7 @@ detect_features(FT angle_in_degree,
   this->patch_id_to_polyhedron_id.resize(nb_of_patch_plus_one);
   this->patch_has_featured_edges.resize(nb_of_patch_plus_one);
 #ifdef CGAL_MESH_3_VERBOSE
-  Rcpp::Rcerr << "Number of patches: " << (nb_of_patch_plus_one - 1) << std::endl;
+  std::cerr << "Number of patches: " << (nb_of_patch_plus_one - 1) << std::endl;
 #endif
   for(Polyhedron_type& p : poly)
   {
@@ -877,7 +878,7 @@ merge_duplicated_points(const PointSet& duplicated_points)
     }
     const Patch_iterator range_end = it;
 #if CGAL_MESH_3_VERBOSE > 10
-    Rcpp::Rcerr << "Point " << range_begin->first.first << " is duplicated, in "
+    std::cerr << "Point " << range_begin->first.first << " is duplicated, in "
               << "the following patches:\n";
 #endif // CGAL_MESH_3_VERBOSE
     typename Union_find_t::handle first_handle =
@@ -886,7 +887,7 @@ merge_duplicated_points(const PointSet& duplicated_points)
     for (it = boost::next(range_begin); it != range_end; ++it)
     {
 #if CGAL_MESH_3_VERBOSE > 10
-      Rcpp::Rcerr << " - #" << it->second << "\n";
+      std::cerr << " - #" << it->second << "\n";
 #endif // CGAL_MESH_3_VERBOSE
       union_find.unify_sets(first_handle,
                             handles[it->second]);
@@ -1006,7 +1007,7 @@ reindex_patches(const std::vector<Surf_p_index>& map)
 #if CGAL_MESH_3_VERBOSE > 10
   for(Surf_p_index i = 0, end = Surf_p_index(map.size()); i < end; ++i) {
     if(i != map[i])
-      Rcpp::Rcerr << "patch #" << i << " is reindexed to " << map[i] << "\n";
+      std::cerr << "patch #" << i << " is reindexed to " << map[i] << "\n";
   }
 #endif // CGAL_MESH_3_VERBOSE
   typedef typename boost::graph_traits<Polyhedron_type>::face_descriptor
@@ -1023,7 +1024,7 @@ reindex_patches(const std::vector<Surf_p_index>& map)
       put(face_pid_pmap, fd, new_id);
 #if CGAL_MESH_3_VERBOSE > 11
       if(id != new_id) {
-        Rcpp::Rcerr << "On polyhedron #" << i << ", patch #" << id
+        std::cerr << "On polyhedron #" << i << ", patch #" << id
                   << " turned into patch #" << new_id << "\n";
       }
 #endif // CGAL_MESH_3_VERBOSE

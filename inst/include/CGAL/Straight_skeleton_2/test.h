@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/test.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/test.h $
 // $Id: test.h 655d427 2020-09-11T15:00:12+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -11,7 +11,6 @@
 #ifndef CGAL_STRAIGHT_SKELETON_TEST_H
 #define CGAL_STRAIGHT_SKELETON_TEST_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Straight_skeleton_2.h>
 
 #include <CGAL/number_utils.h>
@@ -33,8 +32,8 @@
 #  define CGAL_stskel_intrinsic_test_assertion(EX)          ((EX)?(static_cast<void>(0)): ::CGAL::assertion_fail( # EX , __FILE__, __LINE__, 0))
 #  define CGAL_stskel_intrinsic_test_assertion_msg(EX,MSG)  ((EX)?(static_cast<void>(0)): ::CGAL::assertion_fail( # EX , __FILE__, __LINE__, MSG))
 #  define CGAL_stskel_intrinsic_test_assertion_code(CODE)   CODE
-#  define CGAL_stskel_intrinsic_test_trace(m)               Rcpp::Rcerr << m << std::endl
-#  define CGAL_stskel_intrinsic_test_trace_if(EX,m)         if ( (EX) ) { Rcpp::Rcerr << m << std::endl ; }
+#  define CGAL_stskel_intrinsic_test_trace(m)               std::cerr << m << std::endl
+#  define CGAL_stskel_intrinsic_test_trace_if(EX,m)         if ( (EX) ) { std::cerr << m << std::endl ; }
 #else
 #  define CGAL_stskel_intrinsic_test_assertion(EX)         (static_cast<void>(0))
 #  define CGAL_stskel_intrinsic_test_assertion_msg(EX,MSG) (static_cast<void>(0))

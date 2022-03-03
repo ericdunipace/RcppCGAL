@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org);
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/GOCAD.h $
-// $Id: GOCAD.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/GOCAD.h $
+// $Id: GOCAD.h e481ec1 2022-01-03T16:25:59+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -13,7 +13,6 @@
 #ifndef CGAL_IO_GOCAD_H
 #define CGAL_IO_GOCAD_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/helpers.h>
 #include <CGAL/IO/io.h>
 
@@ -56,7 +55,7 @@ bool read_GOCAD(std::istream& is,
   if(!is)
   {
     if(verbose)
-      Rcpp::Rcerr<<"File doesn't exist."<<std::endl;
+      std::cerr<<"File doesn't exist."<<std::endl;
     return false;
   }
 
@@ -114,7 +113,7 @@ bool read_GOCAD(std::istream& is,
       if(!(iss >> s >> i >> p))
       {
         if(verbose)
-          Rcpp::Rcerr << "error while reading vertex." << std::endl;
+          std::cerr << "error while reading vertex." << std::endl;
         return false;
       }
 
@@ -136,7 +135,7 @@ bool read_GOCAD(std::istream& is,
       if(!(iss >> i >> j >> k))
       {
         if(verbose)
-          Rcpp::Rcerr << "error while reading triangle." << std::endl;
+          std::cerr << "error while reading triangle." << std::endl;
         return false;
       }
 
@@ -157,6 +156,7 @@ bool read_GOCAD(std::istream& is,
     is.clear(std::ios::goodbit);
   return end_read && nb_gocad == nb_end && !is.bad();
 }
+/// \endcond
 
 /*!
  * \ingroup PkgStreamSupportIoFuncsGOCAD
@@ -357,7 +357,7 @@ bool write_GOCAD(std::ostream& os,
  *   \cgalParamNBegin{stream_precision}
  *     \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
  *     \cgalParamType{int}
- *     \cgalParamDefault{`the precision of the stream `os``}
+ *     \cgalParamDefault{the precision of the stream `os`}
  *   \cgalParamNEnd
  * \cgalNamedParamsEnd
  *

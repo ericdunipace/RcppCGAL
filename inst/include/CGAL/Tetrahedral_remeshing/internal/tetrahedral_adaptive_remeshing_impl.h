@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/tetrahedral_adaptive_remeshing_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/tetrahedral_adaptive_remeshing_impl.h $
 // $Id: tetrahedral_adaptive_remeshing_impl.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef TETRAHEDRAL_REMESHING_IMPL_H
 #define TETRAHEDRAL_REMESHING_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE_PROGRESS
@@ -282,7 +281,7 @@ public:
       if (sqlen < sqmin || sqlen > sqmax)
         return false;
     }
-    Rcpp::Rcout << "Resolution reached" << std::endl;
+    std::cout << "Resolution reached" << std::endl;
     return true;
   }
 
@@ -293,8 +292,8 @@ public:
       return 0;
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-    Rcpp::Rcout << "Postprocess...";
-    Rcpp::Rcout.flush();
+    std::cout << "Postprocess...";
+    std::cout.flush();
 #endif
 
     std::size_t nb_slivers_peel = 0;
@@ -318,8 +317,8 @@ public:
     }
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-    Rcpp::Rcout << "Min dihedral angle : " << mindh << std::endl;
-    Rcpp::Rcout << "Peelable cells : " << peelable_cells.size() << std::endl;
+    std::cout << "Min dihedral angle : " << mindh << std::endl;
+    std::cout << "Peelable cells : " << peelable_cells.size() << std::endl;
 #endif
 
     for (auto c_i : peelable_cells)
@@ -376,7 +375,7 @@ public:
         mindh = (std::min)(dh, mindh);
       }
     }
-    Rcpp::Rcout << "Peeling done (removed " << nb_slivers_peel << " slivers, "
+    std::cout << "Peeling done (removed " << nb_slivers_peel << " slivers, "
       << "min dihedral angle = " << mindh << ")." << std::endl;
 
 #endif
@@ -528,11 +527,11 @@ private:
       set_index(v, m_c3t3);
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_DEBUG
-    Rcpp::Rcout << "C3t3 ready :" << std::endl;
-    Rcpp::Rcout << "\t cells    = " << nbc << std::endl;
-    Rcpp::Rcout << "\t facets   = " << nbf << std::endl;
-    Rcpp::Rcout << "\t edges    = " << nbe << std::endl;
-    Rcpp::Rcout << "\t vertices = " << nbv << std::endl;
+    std::cout << "C3t3 ready :" << std::endl;
+    std::cout << "\t cells    = " << nbc << std::endl;
+    std::cout << "\t facets   = " << nbf << std::endl;
+    std::cout << "\t edges    = " << nbe << std::endl;
+    std::cout << "\t vertices = " << nbv << std::endl;
 
     CGAL::Tetrahedral_remeshing::debug::dump_vertices_by_dimension(
       m_c3t3.triangulation(), "c3t3_vertices_");
@@ -596,7 +595,7 @@ public:
     {
       ++it_nb;
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-      Rcpp::Rcout << "# Iteration " << it_nb << " #" << std::endl;
+      std::cout << "# Iteration " << it_nb << " #" << std::endl;
 #endif
       if (!resolution_reached())
       {
@@ -607,7 +606,7 @@ public:
       smooth();
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-      Rcpp::Rcout << "# Iteration " << it_nb << " done : "
+      std::cout << "# Iteration " << it_nb << " done : "
                 << tr().number_of_vertices()
                 << " vertices #" << std::endl;
 #endif
@@ -630,7 +629,7 @@ public:
       smooth();
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-      Rcpp::Rcout << "# Iteration " << it_nb << " (flip and smooth only) done : "
+      std::cout << "# Iteration " << it_nb << " (flip and smooth only) done : "
                 << tr().number_of_vertices()
                 << " vertices #" << std::endl;
 #endif

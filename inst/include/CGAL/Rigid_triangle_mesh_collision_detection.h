@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Rigid_triangle_mesh_collision_detection.h $
-// $Id: Rigid_triangle_mesh_collision_detection.h 564e4a1 2021-02-08T10:24:40+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Rigid_triangle_mesh_collision_detection.h $
+// $Id: Rigid_triangle_mesh_collision_detection.h 4afc249 2021-09-09T15:58:00+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -246,11 +246,7 @@ public:
   {
     // handle vpm
     typedef typename CGAL::GetVertexPointMap<TriangleMesh, NamedParameters>::const_type Local_vpm;
-    CGAL_USE_TYPE(Local_vpm);
-
-    CGAL_assertion_code(
-      static const bool same_vpm = (boost::is_same<Local_vpm,Vpm>::value); )
-    CGAL_static_assertion(same_vpm);
+    CGAL_static_assertion( (boost::is_same<Local_vpm,Vpm>::value) );
 
     Vpm vpm =
       parameters::choose_parameter(parameters::get_parameter(np, internal_np::vertex_point),
@@ -562,11 +558,7 @@ public:
         parameters::get_parameter(np, internal_np::apply_per_connected_component), true);
 
     typedef typename CGAL::GetVertexPointMap<TriangleMesh, NamedParameters>::const_type Local_vpm;
-    CGAL_USE_TYPE(Local_vpm);
-
-    CGAL_assertion_code(
-      static const bool same_vpm = (boost::is_same<Local_vpm,Vpm>::value); )
-    CGAL_static_assertion(same_vpm);
+    CGAL_static_assertion((boost::is_same<Local_vpm,Vpm>::value));
 
     Vpm vpm =
       parameters::choose_parameter(parameters::get_parameter(np, internal_np::vertex_point),

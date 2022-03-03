@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Trapezoidal_decomposition_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Trapezoidal_decomposition_2.h $
 // $Id: Trapezoidal_decomposition_2.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_TRAPEZOIDAL_DECOMPOSITION_2_H
 #define CGAL_TRAPEZOIDAL_DECOMPOSITION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -1545,7 +1544,7 @@ public:
         if (do_rebuild && not_within_limits())
         {
 #ifdef CGAL_TD_DEBUG
-          Rcpp::Rcout << "starting over after " << number_of_curves() << std::flush;
+          std::cout << "starting over after " << number_of_curves() << std::flush;
 #endif
           start_over = true;
           clear();
@@ -1847,7 +1846,7 @@ public:
   }
   //void debug() const
   //{
-  //  Rcpp::Rcout << "\nTrapezoidal_decomposition_2<Traits>::debug()\n" << *this
+  //  std::cout << "\nTrapezoidal_decomposition_2<Traits>::debug()\n" << *this
   //            << std::endl;
   //  Td_map_item x;
   //  x.debug(); //MICHAL: will not work!
@@ -1865,7 +1864,7 @@ public:
   Self& rebuild()
   {
 #ifdef CGAL_TD_DEBUG
-    Rcpp::Rcout << "\nrebuild!  " << m_number_of_curves << std::endl
+    std::cout << "\nrebuild!  " << m_number_of_curves << std::endl
               << std::flush;
 #endif
 
@@ -1898,8 +1897,8 @@ public:
     CGAL_assertion(is_valid());
     unsigned long sz = number_of_curves();
     if (sz != rep) {
-      Rcpp::Rcerr << "\nnumber_of_curves()=" << sz;
-      Rcpp::Rcerr << "\nrepresentatives.size()=" << rep;
+      std::cerr << "\nnumber_of_curves()=" << sz;
+      std::cerr << "\nrepresentatives.size()=" << rep;
       CGAL_assertion(number_of_curves() == rep);
     }
 #endif
@@ -1957,8 +1956,8 @@ public:
 
     unsigned long rep = representatives.size();
     if (sz > rep) {
-      Rcpp::Rcerr << "\nnumber_of_curves()=" << sz;
-      Rcpp::Rcerr << "\nrepresentatives.size()=" << rep;
+      std::cerr << "\nnumber_of_curves()=" << sz;
+      std::cerr << "\nrepresentatives.size()=" << rep;
       CGAL_assertion(number_of_curves()<=representatives.size());
     }
 #endif
@@ -2020,7 +2019,7 @@ public:
              #ifndef __GNUC__
     */
 #ifdef CGAL_TD_REBUILD_DEBUG
-    Rcpp::Rcout << "\n|heavy!" << std::flush;
+    std::cout << "\n|heavy!" << std::flush;
 #endif
 
     return not_within_limits();
@@ -2246,7 +2245,7 @@ private:
 #endif
 
   void print_cv_data(const X_monotone_curve_2& cv,
-                     std::ostream& out = Rcpp::Rcout) const
+                     std::ostream& out = std::cout) const
   {
     out << "min end: " << std::endl;
     print_ce_data(cv, ARR_MIN_END, out);
@@ -2255,14 +2254,14 @@ private:
     out << std::endl << std::endl ;
   }
 
-  void print_point_data(const Point& p, std::ostream& out = Rcpp::Rcout) const
+  void print_point_data(const Point& p, std::ostream& out = std::cout) const
   {
     out << "x: " << CGAL::to_double(p.x()) << ", y: "
         << CGAL::to_double(p.y()) << std::endl;
   }
 
   void print_ce_data(const X_monotone_curve_2& cv, Arr_curve_end ce,
-                     std::ostream& out = Rcpp::Rcout) const
+                     std::ostream& out = std::cout) const
   {
     Arr_parameter_space ps_x = traits->parameter_space_in_x_2_object()(cv, ce);
     Arr_parameter_space ps_y = traits->parameter_space_in_y_2_object()(cv, ce);
@@ -2315,17 +2314,17 @@ private:
   void print_dag_addresses(const Dag_node& curr) const
   {
 
-    Rcpp::Rcout << "----------------- DAG ----------------" <<std::endl
+    std::cout << "----------------- DAG ----------------" <<std::endl
               << "--------------------------------------" <<std::endl;
 
     print_dag_addresses_rec(curr, 0);
-    Rcpp::Rcout << "----------------- END OF DAG ----------------" <<std::endl
+    std::cout << "----------------- END OF DAG ----------------" <<std::endl
               << "---------------------------------------------" <<std::endl;
 
   }
 
   void print_dag_addresses_rec(const Dag_node& curr ,int level,
-                               std::ostream& out = Rcpp::Rcout) const
+                               std::ostream& out = std::cout) const
   {
 
     out << "------ level " << level << ", depth " << curr.depth()

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Poisson_surface_reconstruction_3/include/CGAL/Mesh_3/Poisson_refine_cells_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Poisson_surface_reconstruction_3/include/CGAL/Mesh_3/Poisson_refine_cells_3.h $
 // $Id: Poisson_refine_cells_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_3_POISSON_REFINE_CELLS_3_H
 #define CGAL_MESH_3_POISSON_REFINE_CELLS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 
@@ -116,14 +115,14 @@ public:
   Point refinement_point_impl(const Cell_handle& c) const
   {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "point from volume mesher: ";
+    std::cerr << "point from volume mesher: ";
 #endif
     // Use tr.dual(), which is optimized, when the cell base class has
     // circumcenter().
     const Point result = triangulation_ref_impl().dual(c);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
 #  ifdef CGAL_MESH_3_DIRTY_DEBUG_SPHERES
-    Rcpp::Rcerr << " \t\tdistance: "
+    std::cerr << " \t\tdistance: "
               << CGAL::sqrt(CGAL::squared_distance(result,
                          typename Tr::Geom_traits::Point_3(CGAL::ORIGIN)));
 #  endif
@@ -135,7 +134,7 @@ public:
 #if CGAL_MESH_3_DEBUG_BEFORE_CONFLICTS
   void before_conflicts_impl(const Cell_handle&, const Point& p)
   {
-    Rcpp::Rcerr << "Poisson_refine_tets: before conflicts of " << p;
+    std::cerr << "Poisson_refine_tets: before conflicts of " << p;
   }
 #else
   void before_conflicts_impl(const Cell_handle&, const Point&)
@@ -147,7 +146,7 @@ public:
                                const Zone& )
   {
 #if CGAL_MESH_3_DEBUG_AFTER_NO_INSERTION
-    Rcpp::Rcerr << "  REJECTED!" << std::endl;
+    std::cerr << "  REJECTED!" << std::endl;
 #endif
   }
 }; // end Poisson_refine_tets_base
@@ -196,7 +195,7 @@ public:
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
     // Check if triangulation's geometric traits provides a robust circumcenter computation
     if (triangulation_ref_impl().side_of_sphere(c, p, true) != ON_BOUNDED_SIDE)
-      Rcpp::Rcerr << "Poisson_refine_tets_with_oracle_base::conflicts_zone_impl: ERROR: circumcenter out of sphere!\n";
+      std::cerr << "Poisson_refine_tets_with_oracle_base::conflicts_zone_impl: ERROR: circumcenter out of sphere!\n";
 #endif
 
     zone.cell = c;
@@ -228,7 +227,7 @@ public:
   {
     CGAL_MESHES_OUTPUT_STREAM << "*";
 #if CGAL_MESH_3_DEBUG_AFTER_INSERTION
-    Rcpp::Rcerr << "  INSERTED." << std::endl;
+    std::cerr << "  INSERTED." << std::endl;
 #endif
     update_star(v);
   }

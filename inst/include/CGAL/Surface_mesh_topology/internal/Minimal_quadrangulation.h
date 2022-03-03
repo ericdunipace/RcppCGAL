@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Minimal_quadrangulation.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Minimal_quadrangulation.h $
 // $Id: Minimal_quadrangulation.h 93c2d79 2021-02-26T18:14:26+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -18,7 +18,6 @@
 // #define CGAL_PWRLE_TURN_V2  // Compute turns by using an id of darts, given by an hash-table (built and given by Minimal_quadrangulation)
 #define CGAL_PWRLE_TURN_V3  // Compute turns by using an id of darts, associated in Info of Darts (build by Minimal_quadrangulation)
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Face_graph_wrapper.h>
@@ -147,7 +146,7 @@ public:
   {
     if (!get_original_map().is_without_boundary(1))
     {
-      Rcpp::Rcerr<<"ERROR: the given amap has 1-boundaries; "
+      std::cerr<<"ERROR: the given amap has 1-boundaries; "
                <<"such a surface is not possible to process here."
                <<std::endl;
       return;
@@ -177,16 +176,16 @@ public:
     if (display_time)
     {
       t2.stop();
-      Rcpp::Rcout<<"[TIME] Simplification in one vertex: "
+      std::cout<<"[TIME] Simplification in one vertex: "
                <<t2.time()<<" seconds"<<std::endl;
 
       t2.reset(); t2.start();
     }
 
 #ifdef CGAL_TRACE_CMAP_TOOLS
-    Rcpp::Rcout<<"Creation of reduced map with non loops contracted: ";
-    get_local_map().display_characteristics(Rcpp::Rcout);
-    Rcpp::Rcout<<", valid="<<get_local_map().is_valid()<<std::endl;
+    std::cout<<"Creation of reduced map with non loops contracted: ";
+    get_local_map().display_characteristics(std::cout);
+    std::cout<<", valid="<<get_local_map().is_valid()<<std::endl;
 #endif
 
     // 2) We simplify m_local_map in a surface with only one face
@@ -199,15 +198,15 @@ public:
     if (display_time)
     {
       t2.stop();
-      Rcpp::Rcout<<"[TIME] Simplification in one face: "
+      std::cout<<"[TIME] Simplification in one face: "
                <<t2.time()<<" seconds"<<std::endl;
       t2.reset(); t2.start();
     }
 
 #ifdef CGAL_TRACE_CMAP_TOOLS
-    Rcpp::Rcout<<"All faces merges: ";
-    get_local_map().display_characteristics(Rcpp::Rcout);
-    Rcpp::Rcout<<", valid="<<get_local_map().is_valid()<<std::endl;
+    std::cout<<"All faces merges: ";
+    get_local_map().display_characteristics(std::cout);
+    std::cout<<", valid="<<get_local_map().is_valid()<<std::endl;
 #endif
 
     if (!get_local_map().is_empty()) // is_empty if the surface is a sphere
@@ -220,7 +219,7 @@ public:
         if (display_time)
         {
           t2.stop();
-          Rcpp::Rcout<<"[TIME] Face quadrangulation: "
+          std::cout<<"[TIME] Face quadrangulation: "
                   <<t2.time()<<" seconds"<<std::endl;
           t2.reset(); t2.start();
         }
@@ -235,11 +234,11 @@ public:
     }
 
 #ifdef CGAL_TRACE_CMAP_TOOLS
-    Rcpp::Rcout<<"After quadrangulation: ";
-    get_local_map().display_characteristics(Rcpp::Rcout);
-    Rcpp::Rcout<<", valid="<<get_local_map().is_valid()<<std::endl;
+    std::cout<<"After quadrangulation: ";
+    get_local_map().display_characteristics(std::cout);
+    std::cout<<", valid="<<get_local_map().is_valid()<<std::endl;
 
-    Rcpp::Rcout<<"Paths are all valid ? "<<(are_paths_valid()?"YES":"NO")
+    std::cout<<"Paths are all valid ? "<<(are_paths_valid()?"YES":"NO")
              <<std::endl;
     auto marktemp=get_local_map().get_new_mark();
     Dart_handle dh2=nullptr;
@@ -248,17 +247,17 @@ public:
     {
       if (!get_local_map().is_marked(it, marktemp))
       {
-        Rcpp::Rcout<<"Degree="<<CGAL::template
+        std::cout<<"Degree="<<CGAL::template
                    degree<Local_map, 0>(get_local_map(), it)
             <<std::endl;
-        Rcpp::Rcout<<"Co-degree="<<CGAL::template
+        std::cout<<"Co-degree="<<CGAL::template
                    codegree<Local_map, 2>(get_local_map(), it)
             <<std::endl;
         dh2=it;
         do
         {
           get_local_map().mark(dh2, marktemp);
-          Rcpp::Rcout<<get_local_map().darts().index(dh2)<<"   "
+          std::cout<<get_local_map().darts().index(dh2)<<"   "
                    <<get_local_map().darts().
                      index(get_local_map().template beta<0>(dh2))
                    <<std::endl;
@@ -268,13 +267,13 @@ public:
       }
     }
     get_local_map().free_mark(marktemp);
-    get_local_map().display_darts(Rcpp::Rcout);
+    get_local_map().display_darts(std::cout);
 #endif
 
     if (display_time)
     {
       t.stop();
-      Rcpp::Rcout<<"[TIME] Total time for computation of reduced map: "
+      std::cout<<"[TIME] Total time for computation of reduced map: "
                <<t.time()<<" seconds"<<std::endl;
     }
 
@@ -300,7 +299,7 @@ public:
     {
       if (is_verbose)
       {
-        Rcpp::Rcerr<<"Error: is_contractible requires a closed path."<<std::endl;
+        std::cerr<<"Error: is_contractible requires a closed path."<<std::endl;
       }
       return false;
     }
@@ -334,7 +333,7 @@ public:
     if (display_time)
     {
       t.stop();
-      Rcpp::Rcout<<"[TIME] is_contractible: "<<t.time()<<" seconds"
+      std::cout<<"[TIME] is_contractible: "<<t.time()<<" seconds"
                <<std::endl;
     }
 
@@ -353,7 +352,7 @@ public:
     {
       if (is_verbose)
       {
-        Rcpp::Rcerr<<"Error: are_freely_homotopic requires two closed paths."
+        std::cerr<<"Error: are_freely_homotopic requires two closed paths."
                  <<std::endl;
       }
       return false;
@@ -391,7 +390,7 @@ public:
       res=(pt1==pt2); // Do here to be counted in the computation time
 
 #ifdef CGAL_TRACE_PATH_TESTS
-      Rcpp::Rcout<<"Length of reduced paths: "<<pt1.length()<<" and "
+      std::cout<<"Length of reduced paths: "<<pt1.length()<<" and "
                <<pt2.length()<<std::endl;
 #endif
     }
@@ -399,7 +398,7 @@ public:
     if (display_time)
     {
       t.stop();
-      Rcpp::Rcout<<"[TIME] are_freely_homotopic: "<<t.time()<<" seconds"<<std::endl;
+      std::cout<<"[TIME] are_freely_homotopic: "<<t.time()<<" seconds"<<std::endl;
     }
 
     return res;
@@ -422,7 +421,7 @@ public:
     {
       if (is_verbose)
       {
-        Rcpp::Rcerr<<"Error: are_base_point_homotopic requires two paths that"
+        std::cerr<<"Error: are_base_point_homotopic requires two paths that"
                  <<" share the same vertices as extremities."<<std::endl;
       }
       return false;
@@ -444,7 +443,7 @@ public:
     if (display_time)
     {
       t.stop();
-      Rcpp::Rcout<<"[TIME] are_base_point_homotopic: "<<t.time()<<" seconds."
+      std::cout<<"[TIME] are_base_point_homotopic: "<<t.time()<<" seconds."
                <<std::endl;
     }
 
@@ -545,7 +544,7 @@ public:
     {
       if (is_verbose)
       {
-        Rcpp::Rcerr<<"Error: is_homotopic_to_simple_cycle requires a closed path."<<std::endl;
+        std::cerr<<"Error: is_homotopic_to_simple_cycle requires a closed path."<<std::endl;
       }
       return true;
     }
@@ -603,7 +602,7 @@ public:
     if (display_time)
     {
       t.stop();
-      Rcpp::Rcout<<"[TIME] is_homotopic_to_simple_cycle: "<<t.time()<<" seconds"
+      std::cout<<"[TIME] is_homotopic_to_simple_cycle: "<<t.time()<<" seconds"
                <<std::endl;
     }
 
@@ -929,7 +928,7 @@ protected:
   void update_length_two_paths_before_edge_removals(size_type toremove,
                                                     Copy_to_origin& copy_to_origin)
   {
-    // Rcpp::Rcout<<"************************************************"<<std::endl;
+    // std::cout<<"************************************************"<<std::endl;
     Dart_handle initdart, curdart;
     Original_dart_const_handle d1, d2;
     for (typename Local_map::Dart_range::iterator
@@ -1320,7 +1319,7 @@ protected:
     // this is for the turn V3
     return get_local_map().info(dh);
 #endif // CGAL_PWRLE_TURN_V2
-    Rcpp::Rcerr<<"Error: impossible to get dart id without method V2 or V3."<<std::endl;
+    std::cerr<<"Error: impossible to get dart id without method V2 or V3."<<std::endl;
     return (std::numeric_limits<std::size_t>::max)();
   }
 
@@ -1555,7 +1554,7 @@ protected:
         if (!get_local_map().template is_whole_cell_marked<2>
             (it, m_mark_perforated))
         {
-          Rcpp::Rcout<<"[ERROR] perforated_faces_correctly_marked: it is marked, "
+          std::cout<<"[ERROR] perforated_faces_correctly_marked: it is marked, "
                      <<"but its face is not fully marked."<<std::endl;
           return false;
         }
@@ -1565,7 +1564,7 @@ protected:
         if (!get_local_map().template is_whole_cell_unmarked<2>
             (it, m_mark_perforated))
         {
-          Rcpp::Rcout<<"[ERROR] perforated_faces_correctly_marked: it is not marked, "
+          std::cout<<"[ERROR] perforated_faces_correctly_marked: it is not marked, "
                      <<"but its face is not fully unmarked."<<std::endl;
           return false;
         }
@@ -1595,7 +1594,7 @@ protected:
       {
         if (!is_edge_has_path(it))
         {
-          Rcpp::Rcout<<"ERROR: an edge that is not contracted "
+          std::cout<<"ERROR: an edge that is not contracted "
                    <<"has no associated path."
                    <<"BTW is_marked(it)="
                    <<get_original_map().is_marked(it, m_mark_T)<<std::endl;
@@ -1606,7 +1605,7 @@ protected:
       {
         if (is_edge_has_path(it))
         {
-          Rcpp::Rcout<<"ERROR: an edge that is contracted"
+          std::cout<<"ERROR: an edge that is contracted"
                    <<" has an associated path."
                    <<"BTW is_marked(it)="
                    <<get_original_map().is_marked(it, m_mark_T)<<std::endl;
@@ -1620,13 +1619,13 @@ protected:
     {
       if (get_local_map().is_free(it, 1))
       {
-        Rcpp::Rcout<<"ERROR: a dart of the quandrangulated map is 1-free"
+        std::cout<<"ERROR: a dart of the quandrangulated map is 1-free"
                  <<std::endl;
         res=false;
       }
       if (get_local_map().is_free(it, 2))
       {
-        Rcpp::Rcout<<"ERROR: a dart of the quandrangulated map is 2-free"
+        std::cout<<"ERROR: a dart of the quandrangulated map is 2-free"
                  <<std::endl;
         res=false;
       }
@@ -1636,13 +1635,13 @@ protected:
     {
       if (!get_local_map().is_dart_used(it->second.first))
       {
-        Rcpp::Rcout<<"ERROR: first dart in m_paths does not exist anymore in m_local_map."
+        std::cout<<"ERROR: first dart in m_paths does not exist anymore in m_local_map."
                  <<std::endl;
         res=false;
       }
       else if (!get_local_map().darts().owns(it->second.first))
       {
-        Rcpp::Rcout<<"ERROR: first dart in m_paths does not belong to m_local_map."
+        std::cout<<"ERROR: first dart in m_paths does not belong to m_local_map."
                  <<std::endl;
         res=false;
       }
@@ -1651,13 +1650,13 @@ protected:
       {
         if (!get_local_map().is_dart_used(it->second.second))
         {
-          Rcpp::Rcout<<"ERROR: second dart in m_paths does not exist anymore in m_local_map."
+          std::cout<<"ERROR: second dart in m_paths does not exist anymore in m_local_map."
                   <<std::endl;
           res=false;
         }
         else if (!get_local_map().darts().owns(it->second.second))
         {
-          Rcpp::Rcout<<"ERROR: second dart in m_paths does not belong to m_local_map."
+          std::cout<<"ERROR: second dart in m_paths does not belong to m_local_map."
                   <<std::endl;
           res=false;
         }
@@ -1665,7 +1664,7 @@ protected:
 
       if (it->second.first==it->second.second)
       {
-        Rcpp::Rcout<<"ERROR: two darts in the same pair are equal."
+        std::cout<<"ERROR: two darts in the same pair are equal."
                  <<std::endl;
         res=false;
       }
@@ -1679,7 +1678,7 @@ protected:
         Dart_const_handle d1=get_first_dart_of_the_path(it);
         if (d1==nullptr)
         {
-          Rcpp::Rcout<<"ERROR: an edge is associated with a null dart in m_paths"
+          std::cout<<"ERROR: an edge is associated with a null dart in m_paths"
                    <<" for its first dart."<<std::endl;
           res=false;
         }
@@ -1688,7 +1687,7 @@ protected:
           Dart_const_handle d2=get_second_dart_of_the_path(it);
           if (d2==nullptr)
           {
-            Rcpp::Rcout<<"ERROR: an edge is associated with a null dart in m_paths"
+            std::cout<<"ERROR: an edge is associated with a null dart in m_paths"
                      <<" for its second dart."<<std::endl;
             res=false;
           }
@@ -1699,7 +1698,7 @@ protected:
             if (!CGAL::belong_to_same_cell<Local_map,0>
                 (get_local_map(), dd1, d2))
             {
-              Rcpp::Rcout<<"ERROR: the two darts in a path are not consecutive."
+              std::cout<<"ERROR: the two darts in a path are not consecutive."
                       <<std::endl;
               res=false;
             }

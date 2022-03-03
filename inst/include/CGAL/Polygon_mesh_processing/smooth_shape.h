@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/smooth_shape.h $
-// $Id: smooth_shape.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/smooth_shape.h $
+// $Id: smooth_shape.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_SMOOTH_SHAPE_H
 #define CGAL_POLYGON_MESH_PROCESSING_SMOOTH_SHAPE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #if defined(CGAL_EIGEN3_ENABLED)
@@ -54,7 +53,7 @@ namespace Polygon_mesh_processing {
 * @param tmesh a polygon mesh with triangulated surface patches to be smoothed.
 * @param faces the range of triangular faces defining one or several surface patches to be smoothed.
 * @param time a time step that corresponds to the speed by which the surface is smoothed.
-*        A larger time step results in faster convergence but details may be distorted to have a larger extent
+*        A larger time step results in faster convergence but details may be distorted to a larger extent
 *        compared to more iterations with a smaller step. Typical values scale in the interval (1e-6, 1].
 * @param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
 *
@@ -174,7 +173,7 @@ void smooth_shape(const FaceRange& faces,
   for(unsigned int iter=0; iter<nb_iterations; ++iter)
   {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << "iteration #" << iter << std::endl;
+    std::cout << "iteration #" << iter << std::endl;
 #endif
 
     smoother.setup_system(A, bx, by, bz, stiffness, time);
@@ -186,7 +185,7 @@ void smooth_shape(const FaceRange& faces,
     else
     {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-      Rcpp::Rcerr << "Failed to solve system!" << std::endl;
+      std::cerr << "Failed to solve system!" << std::endl;
 #endif
       break;
     }

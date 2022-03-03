@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Segment_3.h $
-// $Id: Segment_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Segment_3.h $
+// $Id: Segment_3.h 8fa0f55 2021-05-27T10:27:38+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -64,6 +64,9 @@ public:
 
   Segment_3(const Rep& s)
       : Rep(s) {}
+
+  Segment_3(Rep&& s)
+      : Rep(std::move(s)) {}
 
   Segment_3(const Point_3& sp, const Point_3& ep)
     : Rep(typename R::Construct_segment_3()(Return_base_tag(), sp, ep)) {}

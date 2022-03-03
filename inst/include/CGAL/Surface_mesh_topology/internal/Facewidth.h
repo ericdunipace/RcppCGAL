@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Facewidth.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Facewidth.h $
 // $Id: Facewidth.h a09b8b1 2020-04-21T08:49:10+02:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_FACEWIDTH_H
 #define CGAL_FACEWIDTH_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Path_on_surface.h>
@@ -109,7 +108,7 @@ public:
     if (display_time)
     {
       t.stop();
-      Rcpp::Rcout<<"[TIME] Facewidth constructor: "<<t.time()<<" seconds."<<std::endl;
+      std::cout<<"[TIME] Facewidth constructor: "<<t.time()<<" seconds."<<std::endl;
     }
   }
 
@@ -136,7 +135,7 @@ public:
     if (display_time)
     {
       t.stop();
-      Rcpp::Rcout<<"[TIME] compute_face_width: "<<t.time()<<" seconds."<<std::endl;
+      std::cout<<"[TIME] compute_face_width: "<<t.time()<<" seconds."<<std::endl;
     }
 
     return cycle;

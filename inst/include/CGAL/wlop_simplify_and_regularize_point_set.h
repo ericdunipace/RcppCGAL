@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/wlop_simplify_and_regularize_point_set.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/wlop_simplify_and_regularize_point_set.h $
 // $Id: wlop_simplify_and_regularize_point_set.h 2a54687 2021-06-04T13:52:14+02:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_wlop_simplify_and_regularize_point_set_H
 #define CGAL_wlop_simplify_and_regularize_point_set_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -502,8 +501,8 @@ wlop_simplify_and_regularize_point_set(
     radius = average_spacing * 8.0;
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcout << "The estimated radius size is: " << radius << std::endl;
-    Rcpp::Rcout << "Be careful! Using this radius estimation may not be able to have good performance/result for different input" << std::endl;
+    std::cout << "The estimated radius size is: " << radius << std::endl;
+    std::cout << "Be careful! Using this radius estimation may not be able to have good performance/result for different input" << std::endl;
 #endif
   }
 

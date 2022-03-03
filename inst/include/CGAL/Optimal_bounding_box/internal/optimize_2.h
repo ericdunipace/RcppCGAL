@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/optimize_2.h $
-// $Id: optimize_2.h 6fe47ed 2020-05-06T12:10:48+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/optimize_2.h $
+// $Id: optimize_2.h 93ee230 2021-08-23T22:25:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -12,13 +12,12 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_BOX_INTERNAL_OPTIMIZE_2_H
 #define CGAL_OPTIMAL_BOUNDING_BOX_INTERNAL_OPTIMIZE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
+#include <CGAL/assertions.h>
 #include <CGAL/ch_akl_toussaint.h>
 #include <CGAL/min_quadrilateral_2.h>
 #include <CGAL/Polygon_2.h>
-#include <CGAL/number_type_config.h>
 
 #include <iostream>
 #include <iterator>
@@ -168,9 +167,9 @@ void optimize_along_OBB_axes(typename Traits::Matrix& rot,
   typename std::iterator_traits<decltype(it)>::difference_type d = std::distance(volumes.begin(), it);
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG_PP
-  Rcpp::Rcout << "volumes: " << volumes[0] << " " << volumes[1] << " " << volumes[2] << std::endl;
-  Rcpp::Rcout << "angles: " << angles[0] << " " << angles[1] << " " << angles[2] << std::endl;
-  Rcpp::Rcout << "min at " << d << std::endl;
+  std::cout << "volumes: " << volumes[0] << " " << volumes[1] << " " << volumes[2] << std::endl;
+  std::cout << "angles: " << angles[0] << " " << angles[1] << " " << angles[2] << std::endl;
+  std::cout << "min at " << d << std::endl;
 #endif
 
   if(d == 0) // Along_Z

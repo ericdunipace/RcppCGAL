@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Filtered_curved_kernel_via_analysis_2_impl.h $
-// $Id: Filtered_curved_kernel_via_analysis_2_impl.h 0626eb0 2020-06-11T12:32:33+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Filtered_curved_kernel_via_analysis_2_impl.h $
+// $Id: Filtered_curved_kernel_via_analysis_2_impl.h bfc5b7e 2021-08-10T10:49:11+03:00 Efi Fogel
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,7 +22,6 @@
  * and where some operations are filtered.
  */
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_impl.h>
 #include <CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_functors.h>
@@ -34,7 +33,7 @@ namespace CGAL {
 #ifndef CKvA_CERR
 //#define FCKvA_DEBUG_PRINT_CERR
 #ifdef FCKvA_DEBUG_PRINT_CERR
-#define CKvA_CERR(x) Rcpp::Rcout << x
+#define CKvA_CERR(x) std::cout << x
 #else
 #define CKvA_CERR(x) static_cast<void>(0)
 #endif
@@ -99,10 +98,6 @@ public:
         return Base::operator()(p1, p2, equal_x);
     }
 };
-
-
-// TODO implement Compare_y_limit_on_boundary_2
-
 
 template < class CurvedKernelViaAnalysis_2, class FunctorBase >
 class Compare_y_near_boundary_2 :

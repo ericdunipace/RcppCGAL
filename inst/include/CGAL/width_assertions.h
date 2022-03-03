@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polytope_distance_d/include/CGAL/width_assertions.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polytope_distance_d/include/CGAL/width_assertions.h $
 // $Id: width_assertions.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_WIDTH_ASSERTIONS_H
 #define CGAL_WIDTH_ASSERTIONS_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Polytope_distance_d.h>
 
 #ifdef SIMPLIFY
@@ -89,16 +88,16 @@
  #include<iostream>
 
  #define DEBUGENDL(doit,msg,var)\
- if(doit!=0) Rcpp::Rcout << msg << " " << var << std::endl;
+ if(doit!=0) std::cout << msg << " " << var << std::endl;
 
  #define DEBUGPRINT(doit,msg,var)\
- if(doit!=0) Rcpp::Rcout << msg << " " << var;
+ if(doit!=0) std::cout << msg << " " << var;
 
  #define DEBUGMSG(doit,msg)\
- if(doit!=0) Rcpp::Rcout << msg << std::endl;
+ if(doit!=0) std::cout << msg << std::endl;
 
  #define INFOMSG(doit,msg)\
- if(doit!=0) Rcpp::Rcerr<<msg<<std::endl;
+ if(doit!=0) std::cerr<<msg<<std::endl;
 
 #else
  #define DEBUGENDL(doit,msg,var)

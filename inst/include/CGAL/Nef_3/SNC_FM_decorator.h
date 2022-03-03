@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/SNC_FM_decorator.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/SNC_FM_decorator.h $
 // $Id: SNC_FM_decorator.h 5038986 2021-04-07T12:01:02+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SNC_FM_DECORATOR_H
 #define CGAL_SNC_FM_DECORATOR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 #ifdef CGAL_I_DO_WANT_TO_USE_GENINFO
@@ -553,7 +552,7 @@ create_facet_objects(const Plane_3& plane_supporting_facet,
       p2 = e->twin()->source()->twin()->source()->point(),
       p3 = e->next()->twin()->source()->twin()->source()->point();
 
-    //      Rcpp::Rcerr << "minimal shalfedge " << e->source()->source()->point() << ":"
+    //      std::cerr << "minimal shalfedge " << e->source()->source()->point() << ":"
     //                << e->source()->point() << "->" << e->twin()->source()->point() << std::endl;
 
 
@@ -582,9 +581,9 @@ create_facet_objects(const Plane_3& plane_supporting_facet,
     do_sweep = true;
 
   CGAL_forall_iterators(eit,SHalfedges) {
-    //    Rcpp::Rcerr << "fc " << FacetCycle[*eit] << std::endl;
+    //    std::cerr << "fc " << FacetCycle[*eit] << std::endl;
     if ( (*eit)->facet() == Halffacet_handle() ) {
-      //      Rcpp::Rcerr << "nicht verlinkte shalfedge " << (*eit)->source()->source()->point() << ":"
+      //      std::cerr << "nicht verlinkte shalfedge " << (*eit)->source()->source()->point() << ":"
       //                << (*eit)->source()->point() << "->" << (*eit)->twin()->source()->point() << std::endl;
       do_sweep = true;
       break;
@@ -592,7 +591,7 @@ create_facet_objects(const Plane_3& plane_supporting_facet,
   }
 
 
-  //  Rcpp::Rcerr << std::endl;
+  //  std::cerr << std::endl;
 #ifndef CGAL_NEF3_PLANE_SWEEP_OPTIMIZATION_OFF
   if(!do_sweep) return;
 #endif

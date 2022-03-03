@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Curve_renderer_internals.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Curve_renderer_internals.h $
 // $Id: Curve_renderer_internals.h 32b31fd 2021-02-02T11:09:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -24,7 +24,6 @@
 #ifndef CGAL_CKVA_CURVE_RENDERER_INTERNALS_H
 #define CGAL_CKVA_CURVE_RENDERER_INTERNALS_H 1
 
-#include <Rcpp.h>
 #include <vector>
 #include <stack>
 // #include <boost/multi_index_container.hpp>
@@ -419,37 +418,37 @@ bool setup(const CGAL::Bbox_2& box_, int res_w_, int res_h_)
     res_h = res_h_;
 
     if (x_min >= x_max) {
-      Rcpp::Rcerr << "Incorrect setup parameters: "
+      std::cerr << "Incorrect setup parameters: "
                 << "x_min = " << x_min << " >= " << x_max << " = x_max"
                 << std::endl;
       return false;
     }
     if (y_min >= y_max) {
-      Rcpp::Rcerr << "Incorrect setup parameters: "
+      std::cerr << "Incorrect setup parameters: "
                 << "y_min = " << y_min << " >= " << y_max << " = y_max"
                 << std::endl;
       return false;
     }
     if (res_w < 4) {
-      Rcpp::Rcerr << "Incorrect setup parameters: "
+      std::cerr << "Incorrect setup parameters: "
                 << "res_w = " << res_w << " < 4"
                 << std::endl;
       return false;
     }
     if (res_h < 4) {
-      Rcpp::Rcerr << "Incorrect setup parameters: "
+      std::cerr << "Incorrect setup parameters: "
                 << "res_h = " << res_h << " < 4"
                 << std::endl;
       return false;
     }
      if (res_w > 2048) {
-      Rcpp::Rcerr << "Incorrect setup parameters: "
+      std::cerr << "Incorrect setup parameters: "
                 << "res_w = " << res_w << " > 2048"
                 << std::endl;
       return false;
     }
     if (res_h > 2048) {
-      Rcpp::Rcerr << "Incorrect setup parameters: "
+      std::cerr << "Incorrect setup parameters: "
                 << "res_h = " << res_h << " > 2048"
                 << std::endl;
       return false;
@@ -603,7 +602,7 @@ bool get_range_AF1_1(int var,
     }
     zero_bounds = ((eval1 & eval2) == 0);
     if(eval1 * eval2 < 0) {
-        //Rcpp::Rcerr << "eval1 = " << low << "; eval2 = " << up << std::endl;
+        //std::cerr << "eval1 = " << low << "; eval2 = " << up << std::endl;
         return true;
     }
     return false;
@@ -744,7 +743,7 @@ bool get_range_QF_1(int var, const NT& l_, const NT& r_, const NT& key,
         eval2 = CGAL_SGN(up);
     }
     //if(eval1*eval2 < 0)
-      //  Rcpp::Rcerr << "eval1 = " << low << "; eval2 = " << up << std::endl;
+      //  std::cerr << "eval1 = " << low << "; eval2 = " << up << std::endl;
     zero_bounds = ((eval1 & eval2) == 0);
     return (eval1*eval2 < 0);
 }
@@ -975,7 +974,7 @@ void precompute(const Polynomial_2& in) {
     Coeff_src max_c = max_coeff(in);
     /////// magic symbol ////////////
     // somehow relates to double precision fix
-    // Rcpp::Rcerr << ' ';
+    // std::cerr << ' ';
 
     typedef Reduce_by<Rat_coercion_type, Coeff_src> Reduce_op;
     Transform<Rational_poly_2, Polynomial_2, Reduce_op> transform;

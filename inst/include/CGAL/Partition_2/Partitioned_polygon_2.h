@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Partition_2/include/CGAL/Partition_2/Partitioned_polygon_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Partition_2/include/CGAL/Partition_2/Partitioned_polygon_2.h $
 // $Id: Partitioned_polygon_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_PARTITIONED_POLYGON_2_H
 #define CGAL_PARTITIONED_POLYGON_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -133,7 +132,7 @@ public:
 
       Diagonal_iterator d;
 #ifdef CGAL_PARTITIONED_POLY_DEBUG
-      Rcpp::Rcout << "pruning diagonals ..." << std::endl;
+      std::cout << "pruning diagonals ..." << std::endl;
 #endif
       do {
          d = (*c).diagonals_begin();
@@ -141,7 +140,7 @@ public:
             if (!diagonal_is_necessary(c, *d))
             {
 #ifdef CGAL_PARTITIONED_POLY_DEBUG
-               Rcpp::Rcout << "   removing from " << *c << " to " << **d
+               std::cout << "   removing from " << *c << " to " << **d
                          << std::endl;
 #endif
                (**d).diagonal_erase(c);
@@ -208,14 +207,14 @@ private:
        {
           new_polygon.push_back(*next);
 #ifdef CGAL_PARTITIONED_POLY_DEBUG
-          Rcpp::Rcout << "adding vertex " << *next << std::endl;
+          std::cout << "adding vertex " << *next << std::endl;
 #endif
           Circulator diag;
           if ((*next).has_unused_diagonals())
           {
              diag = (*next).current_diagonal();
 #ifdef CGAL_PARTITIONED_POLY_DEBUG
-             Rcpp::Rcout << "diagonal endpoint: " << *diag << std::endl;
+             std::cout << "diagonal endpoint: " << *diag << std::endl;
 #endif
              (*next).advance_diagonal();
              if (diag == start)
@@ -393,12 +392,12 @@ private:
 
     void print_diagonals( ) const
     {
-       Rcpp::Rcout << "from " << *this << std::endl;
+       std::cout << "from " << *this << std::endl;
        typename std::list<Circulator>::const_iterator it;
        for (it = diag_endpoint_refs.begin();it != diag_endpoint_refs.end();
             it++)
        {
-          Rcpp::Rcout << " to " << **it << std::endl;
+          std::cout << " to " << **it << std::endl;
        }
     }
 

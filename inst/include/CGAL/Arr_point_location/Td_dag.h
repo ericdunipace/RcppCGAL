@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_dag.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_dag.h $
 // $Id: Td_dag.h 319383c 2020-05-20T09:47:58+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_TD_DAG_H
 #define CGAL_TD_DAG_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -269,7 +268,7 @@ public:
   {
     if (!operator!())
       {
-        Rcpp::Rcout << operator*() << '\t';
+        std::cout << operator*() << '\t';
         left().preorder();
         right().preorder();
       }
@@ -279,7 +278,7 @@ public:
     if (!operator!())
       {
         left().inorder();
-        Rcpp::Rcout << operator*() << '\t';
+        std::cout << operator*() << '\t';
         right().inorder();
       }
   }
@@ -289,7 +288,7 @@ public:
       {
         left().postorder();
         right().postorder();
-        Rcpp::Rcout << operator*() << '\t';
+        std::cout << operator*() << '\t';
       }
   }
 #endif

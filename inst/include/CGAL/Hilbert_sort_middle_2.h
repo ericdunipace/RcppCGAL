@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_sorting/include/CGAL/Hilbert_sort_middle_2.h $
-// $Id: Hilbert_sort_middle_2.h 5c41b10 2020-01-02T10:26:44+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Spatial_sorting/include/CGAL/Hilbert_sort_middle_2.h $
+// $Id: Hilbert_sort_middle_2.h f5d2fb2 2021-09-01T16:41:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     :  Olivier Devillers
@@ -16,7 +16,7 @@
 #include <functional>
 #include <cstddef>
 #include <CGAL/Hilbert_sort_middle_base.h>
-#include <CGAL/Polygon_2_algorithms.h>
+#include <CGAL/number_utils.h>
 
 namespace CGAL {
 

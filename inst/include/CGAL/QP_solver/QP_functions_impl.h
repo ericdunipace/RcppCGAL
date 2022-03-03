@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/QP_solver/include/CGAL/QP_solver/QP_functions_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/QP_solver/include/CGAL/QP_solver/QP_functions_impl.h $
 // $Id: QP_functions_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_QP_FUNCTIONS_IMPL_H
 #define CGAL_QP_FUNCTIONS_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/QP_solver.h>
 
 
@@ -159,13 +158,13 @@ namespace QP_functions_detail {
     bool return_val = true;
     // check n
     if (qp1.get_n() != qp2.get_n()) {
-      Rcpp::Rcerr << "Equality test fails with n: "
+      std::cerr << "Equality test fails with n: "
                 << qp1.get_n() << " vs. " << qp2.get_n() << std::endl;
       return false; // wildly wrong, abort now
     }
     // check m
     if (qp1.get_m() != qp2.get_m()) {
-      Rcpp::Rcerr << "Equality test fails with m: "
+      std::cerr << "Equality test fails with m: "
                 << qp1.get_m() << " vs. " << qp2.get_m() << std::endl;
       return false; // wildly wrong, abort now
     }
@@ -177,7 +176,7 @@ namespace QP_functions_detail {
     for (int j=0; j<n; ++j, ++a1, ++a2)
       for (int i=0; i<m; ++i)
         if (*((*a1)+i) != *((*a2)+i)) {
-          Rcpp::Rcerr << "Equality test fails with A["
+          std::cerr << "Equality test fails with A["
                     << j << "][" << i << "]: "
                     << *((*a1)+i) << " vs. " <<  *((*a2)+i) << std::endl;
           return_val = false;
@@ -187,7 +186,7 @@ namespace QP_functions_detail {
     typename Quadratic_program2::B_iterator b2 = qp2.get_b();
     for (int i=0; i<m; ++i, ++b1, ++b2)
       if (*b1 != *b2) {
-        Rcpp::Rcerr << "Equality test fails with b[" << i << "]: "
+        std::cerr << "Equality test fails with b[" << i << "]: "
                   << *b1 << " vs. " <<  *b2 << std::endl;
         return_val = false;
       }
@@ -196,7 +195,7 @@ namespace QP_functions_detail {
     typename Quadratic_program2::R_iterator r2 = qp2.get_r();
     for (int i=0; i<m; ++i, ++r1, ++r2)
       if (*r1 != *r2) {
-        Rcpp::Rcerr << "Equality test fails with r[" << i << "]: "
+        std::cerr << "Equality test fails with r[" << i << "]: "
                   << *r1 << " vs. " <<  *r2 << std::endl;
         return_val = false;
       }
@@ -207,12 +206,12 @@ namespace QP_functions_detail {
     typename Quadratic_program2::L_iterator l2 = qp2.get_l();
     for (int j=0; j<n; ++j, ++fl1, ++fl2, ++l1, ++l2) {
       if (*fl1 != *fl2) {
-        Rcpp::Rcerr << "Equality test fails with fl[" << j << "]: "
+        std::cerr << "Equality test fails with fl[" << j << "]: "
                   << *fl1 << " vs. " <<  *fl2 << std::endl;
         return_val = false;
       }
       if ((*fl1 == true) && (*l1 != *l2)) {
-        Rcpp::Rcerr << "Equality test fails with l[" << j << "]: "
+        std::cerr << "Equality test fails with l[" << j << "]: "
                   << *l1 << " vs. " <<  *l2 << std::endl;
         return_val = false;
       }
@@ -225,12 +224,12 @@ namespace QP_functions_detail {
     typename Quadratic_program2::U_iterator u2 = qp2.get_u();
     for (int j=0; j<n; ++j, ++fu1, ++fu2, ++u1, ++u2) {
       if (*fu1 != *fu2) {
-        Rcpp::Rcerr << "Equality test fails with fu[" << j << "]: "
+        std::cerr << "Equality test fails with fu[" << j << "]: "
                   << *fu1 << " vs. " <<  *fu2 << std::endl;
         return_val = false;
       }
       if ((*fu1 == true) && (*u1 != *u2)) {
-        Rcpp::Rcerr << "Equality test fails with u[" << j << "]: "
+        std::cerr << "Equality test fails with u[" << j << "]: "
                   << *u1 << " vs. " <<  *u2 << std::endl;
         return_val = false;
       }
@@ -241,7 +240,7 @@ namespace QP_functions_detail {
     for (int i=0; i<n; ++i, ++d1, ++d2)
       for (int j=0; j<i+1; ++j)  // only access entries on/below diagonal
         if (*((*d1)+j) != *((*d2)+j)) {
-          Rcpp::Rcerr << "Equality test fails with D["
+          std::cerr << "Equality test fails with D["
                     << i << "][" << j << "]: "
                     << *((*d1)+j) << " vs. " <<  *((*d2)+j) << std::endl;
           return_val = false;
@@ -251,7 +250,7 @@ namespace QP_functions_detail {
     typename Quadratic_program2::C_iterator c2 = qp2.get_c();
     for (int j=0; j<n; ++j, ++c1, ++c2)
       if (*c1 != *c2) {
-        Rcpp::Rcerr << "Equality test fails with c[" << j << "]: "
+        std::cerr << "Equality test fails with c[" << j << "]: "
                   << *c1 << " vs. " <<  *c2 << std::endl;
         return_val = false;
       }
@@ -259,7 +258,7 @@ namespace QP_functions_detail {
     typename Quadratic_program1::C_entry c01 = qp1.get_c0();
     typename Quadratic_program2::C_entry c02 = qp2.get_c0();
     if (c01 != c02) {
-      Rcpp::Rcerr << "Equality test fails with c0: "
+      std::cerr << "Equality test fails with c0: "
                 << c01 << " vs. " <<  c02 << std::endl;
       return_val = false;
     }
@@ -355,7 +354,7 @@ namespace QP_functions_detail {
     if (options.get_auto_validation()) {
       // validate solution
       if (options.get_verbosity() > 0)
-        Rcpp::Rcout << "Validating solution...\n";
+        std::cout << "Validating solution...\n";
       if (!solution.solves_program(p, Is_linear(), Is_nonnegative())) {
         // write log file
         std::ofstream out("QP_solver.log");
@@ -375,7 +374,7 @@ namespace QP_functions_detail {
             << "--------\n"
             << options << std::endl;
         // print warning
-        Rcpp::Rcerr
+        std::cerr
           << "Error: Program solution is invalid "
           << "(see QP_solver.log for details)" << std::endl;
       }

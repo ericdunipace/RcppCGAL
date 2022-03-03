@@ -21,14 +21,13 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_Core/include/CGAL/CORE/Expr.h $
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_Core/include/CGAL/CORE/Expr.h $
  * $Id: Expr.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
 // We need to include BigFloat.h here because there is a circular dependency
 // between Expr and BigFloat.
-#include <Rcpp.h>
 #include <CGAL/CORE/BigFloat.h>
 
 #ifndef _CORE_EXPR_H_
@@ -75,7 +74,7 @@ public:
     if (! CGAL_CORE_finite(f)) {
       core_error(" ERROR : constructed an invalid float! ", __FILE__, __LINE__, false);
       if (get_static_AbortFlag())
-        Rcpp::stop("Error");
+        abort();
       get_static_InvalidFlag() = -1;
     }
     rep = new ConstDoubleRep(f);
@@ -86,7 +85,7 @@ public:
     if (! CGAL_CORE_finite(d)) {
       core_error(" ERROR : constructed an invalid double! ", __FILE__, __LINE__, false);
       if (get_static_AbortFlag())
-        Rcpp::stop("Error");
+        abort();
       get_static_InvalidFlag() = -2;
     }
     rep = new ConstDoubleRep(d);
@@ -176,7 +175,7 @@ public:
     if ((e.rep)->getSign() == 0) {
       core_error(" ERROR : division by zero ! ",__FILE__, __LINE__, false);
       if (get_static_AbortFlag())
-        Rcpp::stop("Error");
+        abort();
       get_static_InvalidFlag() = -3;
     }
     *this = new DivRep(rep, e.rep);
@@ -379,7 +378,7 @@ inline Expr operator/(const Expr& e1, const Expr& e2) {
   if (e2.sign() == 0) {
     core_error(" ERROR : division by zero ! ", __FILE__, __LINE__, false);
     if (get_static_AbortFlag())
-      Rcpp::stop("Error");
+      abort();
     get_static_InvalidFlag() = -4;
   }
   return Expr(new DivRep(e1.Rep(), e2.Rep()));
@@ -482,7 +481,7 @@ inline Expr sqrt(const Expr& e) {
   if (e.sign() < 0) {
     core_error(" ERROR : sqrt of negative value ! ", __FILE__, __LINE__, false);
     if (get_static_AbortFlag())
-      Rcpp::stop("Error");
+      abort();
     get_static_InvalidFlag() = -5;
   }
   return Expr(new SqrtRep(e.Rep()));

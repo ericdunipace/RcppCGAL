@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Smoothing/smoothing_evaluation.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Smoothing/smoothing_evaluation.h $
 // $Id: smoothing_evaluation.h f33618e 2020-02-06T09:54:35+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_SMOOTHING_EVALUATION_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_SMOOTHING_EVALUATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/Polygon_mesh_processing/measure.h>
@@ -63,7 +62,7 @@ public:
     }
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << "angles_ size = " << angles_.size() << std::endl;
+    std::cout << "angles_ size = " << angles_.size() << std::endl;
 #endif
   }
 
@@ -81,7 +80,7 @@ public:
       areas_.push_back(face_area(f, mesh_));
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << "areas_ size = " << areas_.size() << std::endl;
+    std::cout << "areas_ size = " << areas_.size() << std::endl;
 #endif
   }
 
@@ -99,7 +98,7 @@ public:
       aspect_ratios_.push_back(CGAL::Polygon_mesh_processing::face_aspect_ratio(f, mesh_));
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << "aspect_ratios_ size = " << aspect_ratios_.size() << std::endl;
+    std::cout << "aspect_ratios_ size = " << aspect_ratios_.size() << std::endl;
 #endif
   }
 

@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Hash_map/include/CGAL/Unique_hash_map.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Hash_map/include/CGAL/Unique_hash_map.h $
 // $Id: Unique_hash_map.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

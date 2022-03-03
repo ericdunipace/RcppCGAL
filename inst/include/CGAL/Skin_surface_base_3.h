@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Skin_surface_3/include/CGAL/Skin_surface_base_3.h $
-// $Id: Skin_surface_base_3.h 6bae0e3 2021-09-09T11:09:16+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Skin_surface_3/include/CGAL/Skin_surface_base_3.h $
+// $Id: Skin_surface_base_3.h 74c029c 2021-09-09T11:44:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SKIN_SURFACE_BASE_3_H
 #define CGAL_SKIN_SURFACE_BASE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
@@ -41,7 +40,7 @@
 #include <CGAL/Skin_surface_refinement_policy_3.h>
 #include <CGAL/subdivide_skin_surface_mesh_3.h>
 
-#include <CGAL/internal/Has_nested_type_Bare_point.h>
+#include <CGAL/STL_Extension/internal/Has_nested_type_Bare_point.h>
 
 #include <boost/mpl/if.hpp>
 #include <boost/mpl/identity.hpp>
@@ -211,9 +210,9 @@ Skin_surface_base_3(WP_iterator begin, WP_iterator end, FT shrink_,
   construct_bounding_box();
 
   if (verbose) {
-    Rcpp::Rcerr << "Triangulation ready" << std::endl;
-    Rcpp::Rcerr << "Vertices: " << regular().number_of_vertices() << std::endl;
-    Rcpp::Rcerr << "Cells:    " << regular().number_of_cells() << std::endl;
+    std::cerr << "Triangulation ready" << std::endl;
+    std::cerr << "Vertices: " << regular().number_of_vertices() << std::endl;
+    std::cerr << "Cells:    " << regular().number_of_cells() << std::endl;
   }
 }
 
@@ -729,7 +728,7 @@ locate_in_tmc(const Bare_point &p0, TMC_Cell_handle start) const
       continue;
     }
     if ( next->has_vertex(_tmc.infinite_vertex()) ) {
-      Rcpp::Rcout << "We are outside the convex hull." << std::endl;
+      std::cout << "We are outside the convex hull." << std::endl;
       return next;
     }
     previous = c;

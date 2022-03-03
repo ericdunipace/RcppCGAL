@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Line_2.h $
-// $Id: Line_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Line_2.h $
+// $Id: Line_2.h e7357ac 2021-07-19T14:53:27+02:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_LINE_2_H
 #define CGAL_LINE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 #include <boost/type_traits/is_same.hpp>
 #include <CGAL/Kernel/Return_base_tag.h>
@@ -66,6 +65,9 @@ public:
 
   Line_2(const RLine_2& l)  // conversion impl -> interface class
     : RLine_2(l) {}
+
+  Line_2(RLine_2&& l)
+    : RLine_2(std::move(l)) {}
 
   Line_2(const Point_2 &p, const Point_2 &q)
     : RLine_2(typename R::Construct_line_2()(Return_base_tag(), p,q)) {}
@@ -279,8 +281,8 @@ extract(std::istream& is, Line_2<R>& l)
         break;
     default:
         is.setstate(std::ios::failbit);
-        Rcpp::Rcerr << "" << std::endl;
-        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
+        std::cerr << "" << std::endl;
+        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
     }
     if (is)

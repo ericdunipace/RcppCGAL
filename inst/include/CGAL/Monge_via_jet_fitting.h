@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Jet_fitting_3/include/CGAL/Monge_via_jet_fitting.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Jet_fitting_3/include/CGAL/Monge_via_jet_fitting.h $
 // $Id: Monge_via_jet_fitting.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -11,7 +11,6 @@
 #ifndef CGAL_MONGE_VIA_JET_FITTING_H_
 #define CGAL_MONGE_VIA_JET_FITTING_H_
 
-#include <Rcpp.h>
 #include <CGAL/license/Jet_fitting_3.h>
 
 
@@ -585,7 +584,7 @@ compute_Monge_coefficients(FT* A, std::size_t dprime,
     A[k*(k+1)/2+i] /= fact(k-i)*fact(i);//this is A(k-i;i)
 
 /*   //debug */
-/*   Rcpp::Rcout << "coeff of A" << std::endl */
+/*   std::cout << "coeff of A" << std::endl */
 /*             << A[0] << " "<< A[1] << " "<< A[2] << std::endl */
 /*             << A[3] << " "<< A[4] << " "<< A[5] << std::endl */
 /*             << A[6] << " "<< A[7] << " "<< A[8] << " "<< A[9]<< std::endl */

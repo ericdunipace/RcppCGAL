@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/compute_c3t3_statistics.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/compute_c3t3_statistics.h $
 // $Id: compute_c3t3_statistics.h ab05dde 2020-06-12T08:08:56+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_TR_INTERNAL_COMPUTE_C3T3_STATISTICS_H
 #define CGAL_TR_INTERNAL_COMPUTE_C3T3_STATISTICS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <limits>
@@ -113,8 +112,8 @@ void compute_statistics(const Triangulation& tr,
     double v = CGAL::abs(tr.tetrahedron(cit).volume());
     if (v == 0.)
     {
-      Rcpp::Rcout << "degenerate cell :\n\t";
-      Rcpp::Rcout << p0 << "\n\t" << p1 << "\n\t" << p2 << "\n\t" << p3 << std::endl;
+      std::cout << "degenerate cell :\n\t";
+      std::cout << p0 << "\n\t" << p1 << "\n\t" << p2 << "\n\t" << p3 << std::endl;
     }
     double circumradius = (v == 0.)
                           ? CGAL::sqrt(CGAL::squared_radius(p0, p1, p2))

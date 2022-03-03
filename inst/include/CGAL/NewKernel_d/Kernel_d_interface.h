@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/NewKernel_d/include/CGAL/NewKernel_d/Kernel_d_interface.h $
-// $Id: Kernel_d_interface.h 81d9556 2021-02-10T10:06:45+01:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/NewKernel_d/include/CGAL/NewKernel_d/Kernel_d_interface.h $
+// $Id: Kernel_d_interface.h 31a0557 2021-08-13T16:45:28+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -126,6 +126,7 @@ template <class Base_> struct Kernel_d_interface : public Base_ {
           CGAL_FUNCTOR_INIT_STORE(Construct_cartesian_const_iterator_d)
           typedef typename Get_functor<Base, Construct_ttag<Point_cartesian_const_iterator_tag> >::type CPI;
           typedef typename Get_functor<Base, Construct_ttag<Vector_cartesian_const_iterator_tag> >::type CVI;
+          // @mglisse shall we update that code ?
           // FIXME: The following sometimes breaks compilation. The typedef below forces instantiation of this, which forces Point_d, which itself (in the wrapper) needs the derived kernel to tell it what the base kernel is, and that's a cycle. The exact circumstances are not clear, g++ and clang++ are ok in both C++03 and C++11, it is only clang in C++11 without CGAL_CXX11 that breaks. Relying on CPI::result_type is great for Epick_d but not Epeck_d.
           // typedef typename CGAL::decay<typename boost::result_of<CPI(Point_d,CGAL::Begin_tag)>::type>::type result_type;
           // typedef typename CGAL::decay<typename CPI::result_type>::type result_type;

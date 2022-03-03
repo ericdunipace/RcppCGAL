@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/orbifold_shortest_path.h $
-// $Id: orbifold_shortest_path.h d5185e6 2020-07-21T13:38:47+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/orbifold_shortest_path.h $
+// $Id: orbifold_shortest_path.h 752c07e 2021-06-04T11:23:16+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -12,7 +12,6 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_SHORTEST_PATH_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_SHORTEST_PATH_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/disable_warnings.h>
@@ -125,7 +124,7 @@ void compute_shortest_paths_between_two_cones(const TriangleMesh& mesh,
                                               EdgeOutputIterator oi)
 {
   if(source == target) {
-    Rcpp::Rcerr << "Warning: the source and target are identical in 'shortest_path' " << std::endl;
+    std::cerr << "Warning: the source and target are identical in 'shortest_path' " << std::endl;
     return;
   }
 
@@ -145,7 +144,7 @@ void compute_shortest_paths_between_two_cones(const TriangleMesh& mesh,
   try {
     boost::dijkstra_shortest_paths(mesh, source, boost::predecessor_map(pred_pmap).visitor(vis));
   } catch (const std::exception& e) {
-    Rcpp::Rcerr << e.what() << std::endl;
+    std::cerr << e.what() << std::endl;
   }
 
   // Draw the path from target to source and collect the edges along the way
@@ -191,8 +190,8 @@ void compute_shortest_paths_between_cones(const TriangleMesh& mesh,
     compute_shortest_paths_between_two_cones(mesh, *first, *next, std::back_inserter(seams));
   }
 
-  std::ofstream out("shortest_path.selection.txt");
 #ifdef CGAL_SMP_ORBIFOLD_DEBUG
+  std::ofstream out("shortest_path.selection.txt");
   internal::output_shortest_paths_to_selection_file(mesh, seams, out);
 #endif
 }

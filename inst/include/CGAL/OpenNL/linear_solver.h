@@ -22,7 +22,7 @@
  *      - Added SymmetricLinearSolverTraits
  *      - copied Jacobi preconditioner from Graphite 1.9 code
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/OpenNL/include/CGAL/OpenNL/linear_solver.h $
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4/OpenNL/include/CGAL/OpenNL/linear_solver.h $
  * $Id: linear_solver.h fcd0529 2019-10-20T00:47:56+02:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  */
@@ -31,7 +31,6 @@
 #ifndef __OPENNL_LINEAR_SOLVER__
 #define __OPENNL_LINEAR_SOLVER__
 
-#include <Rcpp.h>
 #include <CGAL/OpenNL/conjugate_gradient.h>
 #include <CGAL/OpenNL/bicgstab.h>
 #include <CGAL/OpenNL/preconditioner.h>
@@ -100,7 +99,7 @@ public:
 
         // On error, solve using BICGSTAB solver without preconditioner
 #ifdef DEBUG_TRACE
-        Rcpp::Rcerr << "  Failure of BICGSTAB solver with Jacobi preconditioner. "
+        std::cerr << "  Failure of BICGSTAB solver with Jacobi preconditioner. "
                   << "Trying BICGSTAB." << std::endl;
 #endif
         Solver solver ;
@@ -161,7 +160,7 @@ public:
 
         // On error, solve using Conjugate Gradient solver without preconditioner
 #ifdef DEBUG_TRACE
-        Rcpp::Rcerr << "  Failure of Conjugate Gradient solver with Jacobi preconditioner. "
+        std::cerr << "  Failure of Conjugate Gradient solver with Jacobi preconditioner. "
                   << "Trying Conjugate Gradient." << std::endl;
 #endif
         Solver solver ;

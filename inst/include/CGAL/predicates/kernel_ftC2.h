@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Cartesian_kernel/include/CGAL/predicates/kernel_ftC2.h $
-// $Id: kernel_ftC2.h 68dc09b 2021-04-10T07:10:29+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Cartesian_kernel/include/CGAL/predicates/kernel_ftC2.h $
+// $Id: kernel_ftC2.h 65ea1e3 2021-09-29T16:55:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -706,6 +706,28 @@ power_side_of_oriented_power_circleC2(const FT &px, const FT &py, const FT &pwt,
   // If not possible, then on the (y) axis.
   Comparison_result cmpy = CGAL_NTS compare(py, qy);
   return cmpy * sign_of_determinant(dpy, dpz, dqy, dqz);
+}
+
+template <class FT>
+Oriented_side
+circumcenter_oriented_side_of_oriented_segmentC2(const FT& ax,  const FT& ay,
+                                                 const FT& bx,  const FT& by,
+                                                 const FT& p0x, const FT& p0y,
+                                                 const FT& p1x, const FT& p1y,
+                                                 const FT& p2x, const FT& p2y)
+{
+  const FT dX = bx - ax;
+  const FT dY = by - ay;
+  const FT R0 = p0x * p0x + p0y * p0y;
+  const FT R1 = p1x * p1x + p1y * p1y;
+  const FT R2 = p2x * p2x + p2y * p2y;
+  const FT denominator = (p1x - p0x) * (p2y - p0y) +
+                         (p0x - p2x) * (p1y - p0y);
+  const FT det = 2 * denominator * (ax * dY - ay * dX)
+                   - (R2 - R1) * (p0x * dX + p0y * dY)
+                   - (R0 - R2) * (p1x * dX + p1y * dY)
+                   - (R1 - R0) * (p2x * dX + p2y * dY);
+  return CGAL::sign(det);
 }
 
 } //namespace CGAL

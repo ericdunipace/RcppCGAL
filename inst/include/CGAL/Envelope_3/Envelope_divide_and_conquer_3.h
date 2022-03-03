@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Envelope_3/include/CGAL/Envelope_3/Envelope_divide_and_conquer_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Envelope_3/include/CGAL/Envelope_3/Envelope_divide_and_conquer_3.h $
 // $Id: Envelope_divide_and_conquer_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_ENVELOPE_DIVIDE_AND_CONQUER_3_H
 #define CGAL_ENVELOPE_DIVIDE_AND_CONQUER_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Envelope_3.h>
 
 
@@ -1568,11 +1567,11 @@ protected:
 
       all_ok &= (hh->get_is_set());
       if (!all_ok)
-        Rcpp::Rcerr << "edge: " << hh->curve() << std::endl;
+        std::cerr << "edge: " << hh->curve() << std::endl;
       CGAL_assertion_msg(all_ok, "data not set over edge");
       all_ok &= (!hh->has_no_data());
       if (!all_ok)
-        Rcpp::Rcerr << "edge: " << hh->curve() << std::endl;
+        std::cerr << "edge: " << hh->curve() << std::endl;
       CGAL_assertion_msg(all_ok, "data empty over edge");
 
       /*all_ok &= (!hh->get_is_fake());*/

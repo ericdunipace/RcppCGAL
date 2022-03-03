@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Worksharing_data_structures.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Worksharing_data_structures.h $
 // $Id: Worksharing_data_structures.h 4fc2f59 2020-07-31T16:17:56+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_MESH_3_WORKSHARING_DATA_STRUCTURES_H
 #define CGAL_MESH_3_WORKSHARING_DATA_STRUCTURES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -97,7 +96,7 @@ public:
     m_resolution_z = n / (bbox.zmax() - m_zmin);
 
 #ifdef CGAL_CONCURRENT_MESH_3_VERBOSE
-    Rcpp::Rcerr << "Worksharing data structure Bounding Box = ["
+    std::cerr << "Worksharing data structure Bounding Box = ["
       << bbox.xmin() << ", " << bbox.xmax() << "], "
       << bbox.ymin() << ", " << bbox.ymax() << "], "
       << bbox.zmin() << ", " << bbox.zmax() << "]"
@@ -215,7 +214,7 @@ public:
         }
       }
     }
-    //Rcpp::Rcerr << "Occ=" << m_occupation_grid[laziest_index]
+    //std::cerr << "Occ=" << m_occupation_grid[laziest_index]
     //  << " / Bat=" << m_num_batches_grid[laziest_index]
     //  << std::endl;
     return laziest_index;*/
@@ -223,11 +222,11 @@ public:
 
     // Rotate
     static std::atomic<int> last_cell_index;
-    //Rcpp::Rcerr << "last=" << last_cell_index << std::endl;
+    //std::cerr << "last=" << last_cell_index << std::endl;
     int i = (last_cell_index + 1) % m_num_cells;
     for ( ; i != last_cell_index ; i = (i + 1) % m_num_cells)
     {
-      //Rcpp::Rcerr << "#" << i << "=" << m_num_batches_grid[i] << std::endl;
+      //std::cerr << "#" << i << "=" << m_num_batches_grid[i] << std::endl;
       if (m_num_batches_grid[i] > 0)
       {
         break;
@@ -565,7 +564,7 @@ public:
     add_occupation(index, 1);
 
 #ifdef CGAL_CONCURRENT_MESH_3_VERY_VERBOSE
-    Rcpp::Rcerr << "Running a batch of " << wb.size() <<
+    std::cerr << "Running a batch of " << wb.size() <<
       " elements on cell #" << index << std::endl;
 #endif
     wb();

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Apollonius_graph_hierarchy_2_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Apollonius_graph_hierarchy_2_impl.h $
 // $Id: Apollonius_graph_hierarchy_2_impl.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_APOLLONIUS_GRAPH_HIERARCHY_2_IMPL_H
 #define CGAL_APOLLONIUS_GRAPH_HIERARCHY_2_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Apollonius_graph_2.h>
 
 
@@ -127,11 +126,11 @@ is_valid(bool verbose, int level) const
   //verify correctness of triangulation at all levels
   for(unsigned int i = 0; i < ag_hierarchy_2__maxlevel; ++i) {
     if ( verbose ) {
-      Rcpp::Rcerr << "Level " << i << ": " << std::flush;
+      std::cerr << "Level " << i << ": " << std::flush;
     }
     result = result && hierarchy[i]->is_valid(verbose, level);
     if ( verbose ) {
-      Rcpp::Rcerr << std::endl;
+      std::cerr << std::endl;
     }
   }
   //verify that lower level has no down pointers

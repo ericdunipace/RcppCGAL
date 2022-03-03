@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Combinatorial_map/include/CGAL/Combinatorial_map_functors.h $
-// $Id: Combinatorial_map_functors.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Combinatorial_map/include/CGAL/Combinatorial_map_functors.h $
+// $Id: Combinatorial_map_functors.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -12,9 +12,8 @@
 #ifndef CGAL_COMBINATORIAL_MAP_FUNCTORS_H
 #define CGAL_COMBINATORIAL_MAP_FUNCTORS_H
 
-#include <Rcpp.h>
 #include <CGAL/Dart_const_iterators.h>
-#include <CGAL/internal/Combinatorial_map_internal_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_internal_functors.h>
 #include <vector>
 #include <boost/mpl/has_xxx.hpp>
 
@@ -74,7 +73,7 @@ struct Display_attribute_functor
                   typename CMap::Dart_const_handle adart)
   {
     if ( amap.template attribute<i>(adart)==nullptr )
-      Rcpp::Rcout<<"nullptr";
+      std::cout<<"nullptr";
     else
       amap.template display_attribute<i>(amap.template attribute<i>(adart));
   }

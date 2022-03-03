@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Generalized_map/include/CGAL/Generalized_map.h $
-// $Id: Generalized_map.h e6536aa 2020-06-09T20:15:16+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Generalized_map/include/CGAL/Generalized_map.h $
+// $Id: Generalized_map.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -12,12 +12,11 @@
 #ifndef CGAL_GENERALIZED_MAP_H
 #define CGAL_GENERALIZED_MAP_H 1
 
-#include <Rcpp.h>
 #include <CGAL/Generalized_map_fwd.h>
-#include <CGAL/internal/Combinatorial_map_utility.h>
-#include <CGAL/internal/Generalized_map_group_functors.h>
-#include <CGAL/internal/Combinatorial_map_copy_functors.h>
-#include <CGAL/internal/Generalized_map_sewable.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_utility.h>
+#include <CGAL/Generalized_map/internal/Generalized_map_group_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_copy_functors.h>
+#include <CGAL/Generalized_map/internal/Generalized_map_sewable.h>
 
 #include <CGAL/Generalized_map_storages.h>
 #include <CGAL/Combinatorial_map_functors.h>
@@ -43,7 +42,7 @@
 #endif
 
 #include <boost/config.hpp>
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
 _Pragma("GCC diagnostic push")
 _Pragma("GCC diagnostic ignored \"-Warray-bounds\"")
 #endif
@@ -857,9 +856,9 @@ namespace CGAL {
     {
       if (mnb_used_marks == NB_MARKS)
       {
-        Rcpp::Rcerr << "Not enough Boolean marks: "
+        std::cerr << "Not enough Boolean marks: "
           "increase NB_MARKS in item class." << std::endl;
-        Rcpp::Rcerr << "  (exception launched)" << std::endl;
+        std::cerr << "  (exception launched)" << std::endl;
         throw Exception_no_more_available_mark();
       }
 
@@ -1165,7 +1164,7 @@ namespace CGAL {
           for ( i = 0; i <= dimension; ++i)
             if (alpha(it, i, i)!=it)
             {
-              Rcpp::Rcerr << "Map not valid: alpha(" << i
+              std::cerr << "Map not valid: alpha(" << i
                         << ") is not an involution for dart "
                         <<darts().index(it)<< std::endl;
               valid = false;
@@ -1177,7 +1176,7 @@ namespace CGAL {
             for ( j = i + 2; j <= dimension; ++j)
               if (alpha(it, i, j)!=alpha(it, j, i))
               {
-                Rcpp::Rcerr <<"Map not valid: alpha(" << i
+                std::cerr <<"Map not valid: alpha(" << i
                           <<") o alpha(" << j
                           <<") is not an involution for dart "
                           <<darts().index(it)<< std::endl;
@@ -2696,7 +2695,7 @@ namespace CGAL {
     {
       if (accmark!=INVALID_MARK && aorientationmark==INVALID_MARK)
       {
-        Rcpp::Rcerr<<"Error for is_cc_orientable: you cannot use accmark"
+        std::cerr<<"Error for is_cc_orientable: you cannot use accmark"
                  <<" different from INVALID_MARK and aorientationmark "
                  <<" equal to INVALID_MARK"<<std::endl;
         accmark=INVALID_MARK;
@@ -3891,7 +3890,7 @@ namespace CGAL {
 
 } // namespace CGAL
 
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
  _Pragma("GCC diagnostic pop")
 #endif
 

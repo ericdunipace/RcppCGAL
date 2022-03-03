@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_lines_2/include/CGAL/Stream_lines_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_lines_2/include/CGAL/Stream_lines_2.h $
 // $Id: Stream_lines_2.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_STREAM_LINES_2_H_
 #define CGAL_STREAM_LINES_2_H_
 
-#include <Rcpp.h>
 #include <CGAL/license/Stream_lines_2.h>
 
 
@@ -265,11 +264,11 @@ void Stream_lines_2<VectorField_2, Integrator_2>::place_stream_lines(const Vecto
 
   while(!vector_field_2.is_in_domain(seed_point))
     {
-      // Rcpp::Rcout << "searching valid seed point..\n";
+      // std::cout << "searching valid seed point..\n";
       seed_point = Point_2(die_x(), die_y());
     }
-  // Rcpp::Rcout << seed_point << " first seed point\n";
-  // Rcpp::Rcout << "creating the placement..\n";
+  // std::cout << seed_point << " first seed point\n";
+  // std::cout << "creating the placement..\n";
   FT distance = (FT) max_x * (1.0/2.0);
   bool b = (distance>fSepStl_seed);
   //  int i=0;

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Mesher_level.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Mesher_level.h $
 // $Id: Mesher_level.h 5439dbd 2021-08-24T18:04:50+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_3_MESHER_LEVEL_H
 #define CGAL_MESH_3_MESHER_LEVEL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -237,9 +236,9 @@ public:
 
 #if defined(CGAL_MESH_3_USE_LAZY_UNSORTED_REFINEMENT_QUEUE)\
  && defined(CGAL_MESH_3_IF_UNSORTED_QUEUE_JUST_SORT_AFTER_SCAN)
-    Rcpp::Rcerr << "Sorting...";
+    std::cerr << "Sorting...";
     derived().sort();
-    Rcpp::Rcerr << " done." << std::endl;
+    std::cerr << " done." << std::endl;
 #endif
   }
 
@@ -372,7 +371,7 @@ public:
                   no_longer_element_to_refine() );
     /*if (done)
     {
-      Rcpp::Rcerr << "done in " << m_timer.elapsed() << " seconds." << std::endl;
+      std::cerr << "done in " << m_timer.elapsed() << " seconds." << std::endl;
       m_timer.reset();
     }*/
     return done;
@@ -553,7 +552,7 @@ public:
                        this->refinement_point(e));
 
 #ifdef CGAL_MESH_3_VERY_VERBOSE
-    Rcpp::Rcerr << "Trying to insert point: " << p <<
+    std::cerr << "Trying to insert point: " << p <<
       " inside element " << debug_info_element(e) << std::endl;
 #endif
 
@@ -570,30 +569,30 @@ public:
       result = test_point_conflict(p, zone);
 
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "(" << p << ") ";
+    std::cerr << "(" << p << ") ";
     switch( result )
     {
     case NO_CONFLICT:
-      Rcpp::Rcerr << "accepted\n";
+      std::cerr << "accepted\n";
       break;
     case CONFLICT_BUT_ELEMENT_CAN_BE_RECONSIDERED:
-      Rcpp::Rcerr << "rejected (temporarily)\n";
+      std::cerr << "rejected (temporarily)\n";
       break;
     case CONFLICT_AND_ELEMENT_SHOULD_BE_DROPPED:
-      Rcpp::Rcerr << "rejected (permanent)\n";
+      std::cerr << "rejected (permanent)\n";
       break;
     case THE_FACET_TO_REFINE_IS_NOT_IN_ITS_CONFLICT_ZONE:
-      Rcpp::Rcerr << "the facet to refine was not in the conflict zone "
+      std::cerr << "the facet to refine was not in the conflict zone "
         "(switching to exact)\n";
       break;
     case ELEMENT_WAS_A_ZOMBIE:
-      Rcpp::Rcerr << "element was a zombie\n";
+      std::cerr << "element was a zombie\n";
       break;
     case   COULD_NOT_LOCK_ELEMENT:
-      Rcpp::Rcerr << "could not lock element\n";
+      std::cerr << "could not lock element\n";
       break;
     case COULD_NOT_LOCK_ZONE:
-      Rcpp::Rcerr << "could not lock zone\n";
+      std::cerr << "could not lock zone\n";
       break;
     }
 #endif
@@ -890,7 +889,7 @@ public:
     typedef typename Derived::Container::value_type Container_quality_and_element;
 
 #ifdef CGAL_CONCURRENT_MESH_3_VERBOSE
-    Rcpp::Rcerr << "Refining elements...";
+    std::cerr << "Refining elements...";
 #endif
 
     previous_level.add_to_TLS_lists(true);
@@ -908,7 +907,7 @@ public:
     m_task_group->wait();
 
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    Rcpp::Rcerr << " Flushing";
+    std::cerr << " Flushing";
 #endif
     bool keep_flushing = true;
     while (keep_flushing)
@@ -916,7 +915,7 @@ public:
       keep_flushing = m_worksharing_ds->flush_work_buffers(*m_task_group);
       m_task_group->wait();
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-      Rcpp::Rcerr << ".";
+      std::cerr << ".";
 #endif
     }
 
@@ -929,7 +928,7 @@ public:
     add_to_TLS_lists(false);
 
 #ifdef CGAL_CONCURRENT_MESH_3_VERBOSE
-    Rcpp::Rcerr << " done." << std::endl;
+    std::cerr << " done." << std::endl;
 #endif
 
   }
@@ -943,7 +942,7 @@ public:
       this->refinement_point(e));
 
 #ifdef CGAL_MESH_3_VERY_VERBOSE
-    Rcpp::Rcerr << "Trying to insert point: " << p <<
+    std::cerr << "Trying to insert point: " << p <<
       " inside element " << debug_info_element(e) << std::endl;
 #endif
 
@@ -961,30 +960,30 @@ public:
       result = test_point_conflict(p, zone, visitor);
 
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "(" << p << ") ";
+    std::cerr << "(" << p << ") ";
     switch( result )
     {
     case NO_CONFLICT:
-      Rcpp::Rcerr << "accepted\n";
+      std::cerr << "accepted\n";
       break;
     case CONFLICT_BUT_ELEMENT_CAN_BE_RECONSIDERED:
-      Rcpp::Rcerr << "rejected (temporarily)\n";
+      std::cerr << "rejected (temporarily)\n";
       break;
     case CONFLICT_AND_ELEMENT_SHOULD_BE_DROPPED:
-      Rcpp::Rcerr << "rejected (permanent)\n";
+      std::cerr << "rejected (permanent)\n";
       break;
     case THE_FACET_TO_REFINE_IS_NOT_IN_ITS_CONFLICT_ZONE:
-      Rcpp::Rcerr << "the facet to refine was not in the conflict zone "
+      std::cerr << "the facet to refine was not in the conflict zone "
         "(switching to exact)\n";
       break;
     case ELEMENT_WAS_A_ZOMBIE:
-      Rcpp::Rcerr << "element was a zombie\n";
+      std::cerr << "element was a zombie\n";
       break;
     case   COULD_NOT_LOCK_ELEMENT:
-      Rcpp::Rcerr << "could not lock element\n";
+      std::cerr << "could not lock element\n";
       break;
     case COULD_NOT_LOCK_ZONE:
-      Rcpp::Rcerr << "could not lock zone\n";
+      std::cerr << "could not lock zone\n";
       break;
     }
 #endif

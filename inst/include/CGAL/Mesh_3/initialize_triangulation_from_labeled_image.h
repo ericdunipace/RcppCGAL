@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/initialize_triangulation_from_labeled_image.h $
-// $Id: initialize_triangulation_from_labeled_image.h 8e492aa 2021-02-12T16:53:45+01:00 Jane Tournois
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/initialize_triangulation_from_labeled_image.h $
+// $Id: initialize_triangulation_from_labeled_image.h fba3033 2021-04-12T15:33:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,11 +13,10 @@
 #ifndef CGAL_MESH_3_INITIALIZE_TRIANGULATION_FROM_LABELED_IMAGE_H
 #define CGAL_MESH_3_INITIALIZE_TRIANGULATION_FROM_LABELED_IMAGE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Mesh_3/search_for_connected_components_in_labeled_image.h>
-#include <CGAL/Mesh_3/squared_distance_Point_3_Triangle_3.h>
+#include <CGAL/Distance_3/Point_3_Triangle_3.h>
 #include <CGAL/Labeled_mesh_domain_3.h>
 #include <CGAL/make_mesh_3.h>
 
@@ -68,7 +67,7 @@ void init_tr_from_labeled_image_call_init_features(C3T3& c3t3,
   CGAL::Mesh_3::internal::init_c3t3_with_features(c3t3,
                                                   domain,
                                                   criteria);
-  Rcpp::Rcout << c3t3.triangulation().number_of_vertices()
+  std::cout << c3t3.triangulation().number_of_vertices()
             << " initial points on 1D-features" << std::endl;
 }
 
@@ -118,15 +117,15 @@ void initialize_triangulation_from_labeled_image(C3T3& c3t3,
   typedef std::vector<std::pair<Bare_point, std::size_t> > Seeds;
   Seeds seeds;
   Get_point<Bare_point> get_point(&image);
-  Rcpp::Rcout << "Searching for connected components..." << std::endl;
+  std::cout << "Searching for connected components..." << std::endl;
   search_for_connected_components_in_labeled_image(image,
                                                    std::back_inserter(seeds),
                                                    CGAL::Emptyset_iterator(),
                                                    transform,
                                                    get_point,
                                                    Image_word_type());
-  Rcpp::Rcout << "  " << seeds.size() << " components were found." << std::endl;
-  Rcpp::Rcout << "Construct initial points..." << std::endl;
+  std::cout << "  " << seeds.size() << " components were found." << std::endl;
+  std::cout << "Construct initial points..." << std::endl;
   for(typename Seeds::const_iterator it = seeds.begin(), end = seeds.end();
       it != end; ++it)
   {
@@ -236,19 +235,19 @@ void initialize_triangulation_from_labeled_image(C3T3& c3t3,
       }
       // else
       // {
-      //   Rcpp::Rcerr <<
+      //   std::cerr <<
       //     boost::format("Error. Segment (%1%, %2%) does not intersect the surface!\n")
       //     % it->first % test;
       // }
     }
   }
-  Rcpp::Rcout << "  " << tr.number_of_vertices() << " initial points." << std::endl;
+  std::cout << "  " << tr.number_of_vertices() << " initial points." << std::endl;
   if ( c3t3.triangulation().dimension() != 3 )
   {
-    Rcpp::Rcout << "  not enough points: triangulation.dimension() == "
+    std::cout << "  not enough points: triangulation.dimension() == "
               << c3t3.triangulation().dimension() << std::endl;
     CGAL::Mesh_3::internal::init_c3t3(c3t3, domain, criteria, 20);
-    Rcpp::Rcout << "  -> " << tr.number_of_vertices() << " initial points." << std::endl;
+    std::cout << "  -> " << tr.number_of_vertices() << " initial points." << std::endl;
   }
 }
 

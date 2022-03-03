@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Profiling_tools/include/CGAL/Memory_sizer.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Profiling_tools/include/CGAL/Memory_sizer.h $
 // $Id: Memory_sizer.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_MEMORY_SIZER_H
 #define CGAL_MEMORY_SIZER_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/assertions.h>
 
@@ -151,7 +150,7 @@ private:
                 // TODO: test if the following line works...
     //task_info(current_task(), TASK_BASIC_INFO, (task_info_t)&t_info, &t_info_count);
 #if 0
-    Rcpp::Rcerr << "PAGE SIZE IS " << getpagesize() << std::endl
+    std::cerr << "PAGE SIZE IS " << getpagesize() << std::endl
     << " RESIDENT SIZE IS " << t_info.resident_size << std::endl
     << " VIRTUAL SIZE IS " << t_info.virtual_size << std::endl;
 #endif

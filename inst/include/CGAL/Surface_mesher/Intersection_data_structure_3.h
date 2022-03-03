@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Intersection_data_structure_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Surface_mesher/Intersection_data_structure_3.h $
 // $Id: Intersection_data_structure_3.h 24a5fdb 2021-01-05T18:37:28+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_INTERSECTION_DATA_STRUCTURE_H
 #define CGAL_INTERSECTION_DATA_STRUCTURE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 
@@ -203,7 +202,7 @@ public:
     tree.window_query(std::make_pair(make_pure_interval(e), Type()),
                       std::back_inserter(intervals));
 #ifdef CGAL_SURFACE_MESHER_DEBUG_INTERSECTION_DATA_STRUCTURE
-    Rcpp::Rcerr << boost::format("intersection percentage: %1$.1f%% query=(%2%, %3%)\n")
+    std::cerr << boost::format("intersection percentage: %1$.1f%% query=(%2%, %3%)\n")
       % ( 100. * intervals.size() / number_of_elements() )
       % make_pure_interval(e).first
       % make_pure_interval(e).second;
@@ -228,7 +227,7 @@ public:
     tree.window_query(std::make_pair(make_pure_interval(e), Type()),
                                      std::back_inserter(intervals));
 #ifdef CGAL_SURFACE_MESHER_DEBUG_INTERSECTION_DATA_STRUCTURE
-    Rcpp::Rcerr << boost::format("number_of_intersections percentage: %1$.1f%% query=(%2%, %3%)\n")
+    std::cerr << boost::format("number_of_intersections percentage: %1$.1f%% query=(%2%, %3%)\n")
       % ( 100. * intervals.size() / number_of_elements() )
       % make_pure_interval(e).first
       % make_pure_interval(e).second;

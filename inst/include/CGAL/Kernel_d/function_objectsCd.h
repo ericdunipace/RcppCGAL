@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_d/include/CGAL/Kernel_d/function_objectsCd.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_d/include/CGAL/Kernel_d/function_objectsCd.h $
 // $Id: function_objectsCd.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_FUNCTION_OBJECTSCD_H
 #define CGAL_FUNCTION_OBJECTSCD_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/enum.h>
 #include <CGAL/use.h>
@@ -26,9 +25,9 @@
 #undef CGAL_KD_TRACE
 #undef CGAL_KD_TRACEN
 #undef CGAL_KD_TRACEV
-#define CGAL_KD_TRACE(t)  Rcpp::Rcerr << t
-#define CGAL_KD_TRACEN(t) Rcpp::Rcerr << t << std::endl
-#define CGAL_KD_TRACEV(t) Rcpp::Rcerr << #t << " = " << (t) << std::endl
+#define CGAL_KD_TRACE(t)  std::cerr << t
+#define CGAL_KD_TRACEN(t) std::cerr << t << std::endl
+#define CGAL_KD_TRACEV(t) std::cerr << #t << " = " << (t) << std::endl
 
 namespace CGAL {
 
@@ -455,7 +454,7 @@ public:
                         Orientation o = ori_(first, last);
                         if( COPLANAR == o )
             {
-                Rcpp::Rcerr << "\nAffine base is flat (it should have positive orientation) !!";
+                std::cerr << "\nAffine base is flat (it should have positive orientation) !!";
                 //return ON_ORIENTED_BOUNDARY;
             }
                         CGAL_assertion( o == POSITIVE );

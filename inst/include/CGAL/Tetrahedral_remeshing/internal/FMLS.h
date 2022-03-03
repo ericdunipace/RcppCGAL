@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/FMLS.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/FMLS.h $
 // $Id: FMLS.h ba695b9 2021-04-12T16:43:30+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_TETRAHEDRAL_REMESHING_FMLS_H
 #define CGAL_TETRAHEDRAL_REMESHING_FMLS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 // -------------------------------------------
@@ -587,7 +586,7 @@ void createMLSSurfaces(Subdomain__FMLS& subdomain_FMLS,
   if (upsample > 0)
   {
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-    Rcpp::Rcout << "Up sampling MLS " << upsample << std::endl;
+    std::cout << "Up sampling MLS " << upsample << std::endl;
 #endif
     for (typename C3t3::Facets_in_complex_iterator
       fit = c3t3.facets_in_complex_begin();
@@ -812,7 +811,7 @@ void createMLSSurfaces(Subdomain__FMLS& subdomain_FMLS,
       count++;
     }
     else {
-      Rcpp::Rcout << "Problem of number for MLS : " << current_v_count[it->second] << std::endl;
+      std::cout << "Problem of number for MLS : " << current_v_count[it->second] << std::endl;
     }
   }
 }

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Bounding_volumes/include/CGAL/Approximate_min_ellipsoid_d/Approximate_min_ellipsoid_d_debug.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Bounding_volumes/include/CGAL/Approximate_min_ellipsoid_d/Approximate_min_ellipsoid_d_debug.h $
 // $Id: Approximate_min_ellipsoid_d_debug.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_APPROX_MIN_ELL_D_DEBUG_H
 #define CGAL_APPROX_MIN_ELL_D_DEBUG_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -33,33 +32,33 @@ namespace CGAL {
     template<typename Iterator>
     void print_matrix(int d, const char *name, Iterator A)
     {
-      Rcpp::Rcout << name << ":= Matrix([\n";
+      std::cout << name << ":= Matrix([\n";
       for (int i=0; i<d; ++i) {
-        Rcpp::Rcout << "  [ ";
+        std::cout << "  [ ";
         for (int j=0; j<d; ++j) {
-          Rcpp::Rcout << std::setprecision(30) << A[i+j*d];
+          std::cout << std::setprecision(30) << A[i+j*d];
           if (j<d-1)
-            Rcpp::Rcout << ", ";
+            std::cout << ", ";
         }
-        Rcpp::Rcout << " ]";
+        std::cout << " ]";
         if (i<d-1)
-          Rcpp::Rcout << ",";
-        Rcpp::Rcout << "\n";
+          std::cout << ",";
+        std::cout << "\n";
       }
-      Rcpp::Rcout << "]);\n";
+      std::cout << "]);\n";
     }
 
     // For debugging only:
     template<typename Iterator>
     void print_vector(int d, const char *name, Iterator v)
     {
-      Rcpp::Rcout << name << ":= Vector([\n";
+      std::cout << name << ":= Vector([\n";
       for (int j=0; j<d; ++j) {
-        Rcpp::Rcout << std::setprecision(30) << v[j];
+        std::cout << std::setprecision(30) << v[j];
         if (j<d-1)
-          Rcpp::Rcout << ", ";
+          std::cout << ", ";
       }
-      Rcpp::Rcout << "]);\n";
+      std::cout << "]);\n";
     }
 
     #ifdef CGAL_APPEL_LOG_MODE
@@ -291,7 +290,7 @@ namespace CGAL {
         using std::endl;
         std::ofstream f(filename.c_str());
         if (!f)
-          Rcpp::Rcerr << "Couldn't open file " << filename << "." << endl;
+          std::cerr << "Couldn't open file " << filename << "." << endl;
 
         // write header:
         const double margin = 10.0;

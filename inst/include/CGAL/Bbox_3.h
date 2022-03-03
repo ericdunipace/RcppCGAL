@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Bbox_3.h $
-// $Id: Bbox_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Bbox_3.h $
+// $Id: Bbox_3.h 529add2 2021-07-07T14:37:41+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -57,12 +57,15 @@ public:
   inline bool operator!=(const Bbox_3 &b) const;
 
   inline int dimension() const;
-  double  xmin() const;
-  double  ymin() const;
-  double  zmin() const;
-  double  xmax() const;
-  double  ymax() const;
-  double  zmax() const;
+  double xmin() const;
+  double ymin() const;
+  double zmin() const;
+  double xmax() const;
+  double ymax() const;
+  double zmax() const;
+  double x_span() const;
+  double y_span() const;
+  double z_span() const;
 
   inline double min BOOST_PREVENT_MACRO_SUBSTITUTION (int i) const;
   inline double max BOOST_PREVENT_MACRO_SUBSTITUTION (int i) const;
@@ -105,6 +108,18 @@ inline
 double
 Bbox_3::zmax() const
 { return rep[5]; }
+
+inline double Bbox_3::x_span() const {
+  return xmax() - xmin();
+}
+
+inline double Bbox_3::y_span() const {
+  return ymax() - ymin();
+}
+
+inline double Bbox_3::z_span() const {
+  return zmax() - zmin();
+}
 
 inline
 bool

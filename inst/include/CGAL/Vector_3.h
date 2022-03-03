@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Vector_3.h $
-// $Id: Vector_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Vector_3.h $
+// $Id: Vector_3.h e7357ac 2021-07-19T14:53:27+02:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_VECTOR_3_H
 #define CGAL_VECTOR_3_H
 
-#include <Rcpp.h>
 #include <CGAL/Origin.h>
 #include <CGAL/Kernel/mpl.h>
 #include <CGAL/representation_tags.h>
@@ -70,6 +69,9 @@ public:
 
   Vector_3(const Rep& v)
       : Rep(v) {}
+
+  Vector_3(Rep&& v)
+      : Rep(std::move(v)) {}
 
   Vector_3(const Point_3& a, const Point_3& b)
     : Rep(typename R::Construct_vector_3()(Return_base_tag(), a, b)) {}
@@ -328,8 +330,8 @@ extract(std::istream& is, Vector_3<R>& v, const Cartesian_tag&)
       break;
     default:
       is.setstate(std::ios::failbit);
-      Rcpp::Rcerr << "" << std::endl;
-      Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
+      std::cerr << "" << std::endl;
+      std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
       break;
   }
   if (is)
@@ -355,8 +357,8 @@ extract(std::istream& is, Vector_3<R>& v, const Homogeneous_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        Rcpp::Rcerr << "" << std::endl;
-        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
+        std::cerr << "" << std::endl;
+        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
   }
   if (is)

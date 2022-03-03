@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Tetrahedral_remeshing/include/CGAL/tetrahedral_remeshing.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Tetrahedral_remeshing/include/CGAL/tetrahedral_remeshing.h $
 // $Id: tetrahedral_remeshing.h bfd4e99 2020-09-15T15:42:24+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef TETRAHEDRAL_REMESHING_H
 #define TETRAHEDRAL_REMESHING_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <CGAL/Triangulation_3.h>
@@ -254,13 +253,13 @@ void tetrahedral_isotropic_remeshing(
                        Tetrahedral_remeshing::internal::Default_remeshing_visitor());
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  Rcpp::Rcout << "Tetrahedral remeshing ("
+  std::cout << "Tetrahedral remeshing ("
             << "nb_iter = " << max_it << ", "
             << "protect = " << std::boolalpha << protect
             << ")" << std::endl;
 
-  Rcpp::Rcout << "Init tetrahedral remeshing...";
-  Rcpp::Rcout.flush();
+  std::cout << "Init tetrahedral remeshing...";
+  std::cout.flush();
 #endif
 
   typedef Tetrahedral_remeshing::internal::Adaptive_remesher<
@@ -272,7 +271,7 @@ void tetrahedral_isotropic_remeshing(
                   , visitor);
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  Rcpp::Rcout << "done." << std::endl;
+  std::cout << "done." << std::endl;
   Tetrahedral_remeshing::internal::compute_statistics(
     remesher.tr(), cell_select, "statistics_begin.txt");
 #endif
@@ -449,13 +448,13 @@ void tetrahedral_isotropic_remeshing(
                        Tetrahedral_remeshing::internal::Default_remeshing_visitor());
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  Rcpp::Rcout << "Tetrahedral remeshing ("
+  std::cout << "Tetrahedral remeshing ("
             << "nb_iter = " << max_it << ", "
             << "protect = " << std::boolalpha << protect
             << ")" << std::endl;
 
-  Rcpp::Rcout << "Init tetrahedral remeshing...";
-  Rcpp::Rcout.flush();
+  std::cout << "Init tetrahedral remeshing...";
+  std::cout.flush();
 #endif
 
   typedef Tetrahedral_remeshing::internal::Adaptive_remesher<
@@ -470,7 +469,7 @@ void tetrahedral_isotropic_remeshing(
                     , visitor);
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  Rcpp::Rcout << "done." << std::endl;
+  std::cout << "done." << std::endl;
   Tetrahedral_remeshing::internal::compute_statistics(
     remesher.tr(),
     cell_select, "statistics_begin.txt");

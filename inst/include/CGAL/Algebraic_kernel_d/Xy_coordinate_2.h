@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Xy_coordinate_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Xy_coordinate_2.h $
 // $Id: Xy_coordinate_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_ALGEBRAIC_CURVE_KERNEL_XY_COORDINATE_2_H
 #define CGAL_ALGEBRAIC_CURVE_KERNEL_XY_COORDINATE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <boost/numeric/interval.hpp>
 
@@ -684,7 +683,7 @@ std::ostream& operator<< (std::ostream& os,
     break;
   }
   case ::CGAL::IO::BINARY:
-    Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
+    std::cerr << "BINARY format not yet implemented" << std::endl;
     break;
   default:
     // ASCII

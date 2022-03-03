@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_2/include/CGAL/Delaunay_mesh_size_criteria_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_2/include/CGAL/Delaunay_mesh_size_criteria_2.h $
 // $Id: Delaunay_mesh_size_criteria_2.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_DELAUNAY_MESH_SIZE_CRITERIA_2_H
 #define CGAL_DELAUNAY_MESH_SIZE_CRITERIA_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -153,7 +152,7 @@ public:
       q.second = 0;
       if( squared_size_bound != 0 )
         {
-          //          Rcpp::Rcerr << squared_size_bound << std::endl;
+          //          std::cerr << squared_size_bound << std::endl;
           q.second = max_sq_length / squared_size_bound;
             // normalized by size bound to deal
             // with size field

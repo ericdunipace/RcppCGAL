@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polyline.h $
-// $Id: Triangulate_hole_polyline.h b775b04 2021-04-28T15:24:01+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polyline.h $
+// $Id: Triangulate_hole_polyline.h d26246b 2021-09-01T17:46:33+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_HOLE_FILLING_TRIANGULATE_HOLE_POLYLINE_H
 #define CGAL_HOLE_FILLING_TRIANGULATE_HOLE_POLYLINE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 
@@ -29,8 +28,9 @@
 #include <CGAL/Triangulation_vertex_base_with_info_2.h>
 #include <CGAL/Triangulation_face_base_with_info_2.h>
 #include <CGAL/Constrained_Delaunay_triangulation_2.h>
-#include <CGAL/Triangulation_2_projection_traits_3.h>
+#include <CGAL/Projection_traits_3.h>
 #include <queue>
+#include <CGAL/Polygon_2_algorithms.h>
 #endif
 
 #include <CGAL/utility.h>
@@ -797,7 +797,7 @@ public:
       #ifndef CGAL_TEST_SUITE
       CGAL_warning_msg(false, "Returning no output. Dimension of 3D Triangulation is below 2!");
       #else
-      Rcpp::Rcerr << "W: Returning no output. Dimension of 3D Triangulation is below 2!\n";
+      std::cerr << "W: Returning no output. Dimension of 3D Triangulation is below 2!\n";
       #endif
 #endif
       return Weight::NOT_VALID();
@@ -823,7 +823,7 @@ public:
         #ifndef CGAL_TEST_SUITE
         CGAL_warning_msg(false, "Returning no output. No possible triangulation is found!");
         #else
-        Rcpp::Rcerr << "W: Returning no output. No possible triangulation is found!\n";
+        std::cerr << "W: Returning no output. No possible triangulation is found!\n";
         #endif
 #endif
         return Weight::NOT_VALID();
@@ -1123,7 +1123,7 @@ private:
       #ifndef CGAL_TEST_SUITE
       CGAL_warning_msg(false, "Returning no output using Delaunay triangulation.\n Falling back to the general Triangulation framework.");
       #else
-      Rcpp::Rcerr << "W: Returning no output using Delaunay triangulation.\n"
+      std::cerr << "W: Returning no output using Delaunay triangulation.\n"
                 << "Falling back to the general Triangulation framework.\n";
       #endif
 #endif
@@ -1171,7 +1171,7 @@ public:
       #ifndef CGAL_TEST_SUITE
       CGAL_warning_msg(false, "Returning no output. No possible triangulation is found!");
       #else
-      Rcpp::Rcerr << "W: Returning no output. No possible triangulation is found!\n";
+      std::cerr << "W: Returning no output. No possible triangulation is found!\n";
       #endif
 #endif
       return Weight::NOT_VALID();
@@ -1287,14 +1287,14 @@ bool is_planar_2(
     avg_squared_distance += CGAL::abs(squared_distance_3(p, q));
   }
   avg_squared_distance /= static_cast<FT>(n);
-  // Rcpp::Rcout << "avg squared distance: " << avg_squared_distance << std::endl;
+  // std::cout << "avg squared distance: " << avg_squared_distance << std::endl;
 
   CGAL_assertion(max_squared_distance >= FT(0));
   if (avg_squared_distance > max_squared_distance) {
     return false; // the user distance criteria are not satisfied!
   }
 
-  // Rcpp::Rcout << "The hole seems to be near planar." << std::endl;
+  // std::cout << "The hole seems to be near planar." << std::endl;
   return true;
 }
 
@@ -1357,7 +1357,7 @@ triangulate_hole_polyline_with_cdt(const PointRange& points,
   }
 
   if (num_normals < 1) {
-    // Rcpp::Rcerr << "WARNING: num normals, cdt 2 falls back to the original solution!" << std::endl;
+    // std::cerr << "WARNING: num normals, cdt 2 falls back to the original solution!" << std::endl;
     return false;
   }
 
@@ -1366,19 +1366,19 @@ triangulate_hole_polyline_with_cdt(const PointRange& points,
   y /= static_cast<FT>(num_normals);
   z /= static_cast<FT>(num_normals);
   const Vector_3 avg_normal = Vector_3(x, y, z);
-  // Rcpp::Rcout << "avg normal: " << avg_normal << std::endl;
+  // std::cout << "avg normal: " << avg_normal << std::endl;
 
   // Checking the hole planarity.
   if (!is_planar_2(P, avg_normal, max_squared_distance, traits)) {
-    // Rcpp::Rcerr << "WARNING: planarity, cdt 2 falls back to the original solution!" << std::endl;
+    // std::cerr << "WARNING: planarity, cdt 2 falls back to the original solution!" << std::endl;
     return false;
   }
 
   // Checking the hole simplicity.
-  typedef Triangulation_2_projection_traits_3<Traits> P_traits;
+  typedef CGAL::Projection_traits_3<Traits> P_traits;
   const P_traits p_traits(avg_normal);
   if (!is_simple_2(P.begin(), P.end() - 1, p_traits)) {
-    // Rcpp::Rcerr << "WARNING: simplicity, cdt 2 falls back to the original solution!" << std::endl;
+    // std::cerr << "WARNING: simplicity, cdt 2 falls back to the original solution!" << std::endl;
     return false;
   }
 
@@ -1439,7 +1439,7 @@ triangulate_hole_polyline_with_cdt(const PointRange& points,
   }
 
   if (cdt.dimension() != 2 || cdt.number_of_vertices() != size) {
-    // Rcpp::Rcerr << "WARNING: dim + num vertices, cdt 2 falls back to the original solution!" << std::endl;
+    // std::cerr << "WARNING: dim + num vertices, cdt 2 falls back to the original solution!" << std::endl;
     return false;
   }
 
@@ -1456,14 +1456,14 @@ triangulate_hole_polyline_with_cdt(const PointRange& points,
       std::sort(is.begin(), is.end());
       lambda.put(is[0], is[2], is[1]);
       if (!is_valid(P, is[0], is[1], is[2])) {
-        // Rcpp::Rcerr << "WARNING: validity, cdt 2 falls back to the original solution!" << std::endl;
+        // std::cerr << "WARNING: validity, cdt 2 falls back to the original solution!" << std::endl;
         return false;
       }
     }
   }
 
   // Call the tracer. It correctly orients the patch faces.
-  // Rcpp::Rcout << "CDT is being used!" << std::endl;
+  // std::cout << "CDT is being used!" << std::endl;
   tracer(lambda, 0, static_cast<int>(size) - 1);
   return true;
 }
@@ -1522,7 +1522,7 @@ triangulate_hole_polyline(const PointRange1& points,
 #endif
 
   #ifdef CGAL_PMP_HOLE_FILLING_DEBUG
-  Rcpp::Rcerr << w << std::endl;
+  std::cerr << w << std::endl;
   #endif
   return w;
 }

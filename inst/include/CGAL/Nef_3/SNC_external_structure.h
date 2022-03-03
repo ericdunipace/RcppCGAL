@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/SNC_external_structure.h $
-// $Id: SNC_external_structure.h ce7d06d 2020-12-05T08:12:56+00:00 Giles Bathgate
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/SNC_external_structure.h $
+// $Id: SNC_external_structure.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_SNC_EXTERNAL_STRUCTURE_H
 #define CGAL_SNC_EXTERNAL_STRUCTURE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -845,7 +844,7 @@ public:
 #ifdef CGAL_NEF3_TIMER_INITIALIZE_KDTREE
     timer_initialize_kdtree.stop();
     if(cgal_nef3_timer_on)
-      Rcpp::Rcout << "Runtime_initialize_kdtree: "
+      std::cout << "Runtime_initialize_kdtree: "
                 << timer_initialize_kdtree.time() << std::endl;
 #endif
 
@@ -884,9 +883,9 @@ public:
       }
     }
 
-    // finaly, we go through all the Shells which do not correspond to a Volume
-    //     and we assign them to its enclosing Volume determined via a facet below
-    //     check.
+    // finally, we go through all the Shells which do not correspond to a Volume
+    // and we assign them to its enclosing Volume determined via a facet below
+    // check.
 
     CGAL_forall_sfaces(f,*this->sncp()) {
       //    progress3++;
@@ -997,17 +996,17 @@ public:
     CGAL::Timer timer_pluecker;
     timer_pluecker.start();
 #endif
-    //    SNC_io_parser<SNC_structure> O0(Rcpp::Rcerr,*this->sncp());
+    //    SNC_io_parser<SNC_structure> O0(std::cerr,*this->sncp());
     //    O0.print();
     pair_up_halfedges();
 #ifdef CGAL_NEF3_TIMER_PLUECKER
     timer_pluecker.stop();
      if(cgal_nef3_timer_on)
-      Rcpp::Rcout << "Runtime_pluecker: "
+      std::cout << "Runtime_pluecker: "
                 << timer_pluecker.time() << std::endl;
 #endif
     link_shalfedges_to_facet_cycles();
-    //    SNC_io_parser<SNC_structure> O0(Rcpp::Rcerr,*this->sncp());
+    //    SNC_io_parser<SNC_structure> O0(std::cerr,*this->sncp());
     //    O0.print();
     categorize_facet_cycles_and_create_facets();
     create_volumes();
@@ -1015,7 +1014,7 @@ public:
 #ifdef CGAL_NEF3_TIMER_EXTERNAL_STRUCTURE
     timer_external_structure.stop();
     if(cgal_nef3_timer_on)
-      Rcpp::Rcout << "Runtime_external_structure: "
+      std::cout << "Runtime_external_structure: "
                 << timer_external_structure.time() << std::endl;
 #endif
   }
@@ -1032,7 +1031,7 @@ public:
 #ifdef CGAL_NEF3_TIMER_SIMPLIFICATION
     timer_simplification.stop();
     if(cgal_nef3_timer_on)
-      Rcpp::Rcout << "Runtime_simplification: "
+      std::cout << "Runtime_simplification: "
                 << timer_simplification.time() << std::endl;
 #endif
 
@@ -1146,7 +1145,7 @@ public:
         Halfedge_handle e2 = *itl;
         CGAL_NEF_TRACEN(" + " << e2->source()->point() << ", " << e2->vector());
         make_twins(e1,e2);
-        //        SNC_io_parser<SNC_structure> O0(Rcpp::Rcerr,*this->sncp());
+        //        SNC_io_parser<SNC_structure> O0(std::cerr,*this->sncp());
         //        O0.print();
         CGAL_assertion(e1->mark()==e2->mark());
       }
@@ -1173,7 +1172,7 @@ public:
       SHalfedge_around_svertex_circulator cet(Dt.first_out_edge(et)),cete(cet);
 
       CGAL_For_all(cet,cete) {
-        //        Rcpp::Rcerr << cet->get_index() << ", " << ce->twin()->get_index() << std::endl;
+        //        std::cerr << cet->get_index() << ", " << ce->twin()->get_index() << std::endl;
         if (cet->get_forward_index() == ce->twin()->get_backward_index())
             //            cet->source()->twin() == ce->source())
           break;
@@ -1291,16 +1290,16 @@ public:
     CGAL::Timer timer_pluecker;
     timer_pluecker.start();
 #endif
-    //    SNC_io_parser<SNC_structure> O0(Rcpp::Rcerr,*this->sncp());
+    //    SNC_io_parser<SNC_structure> O0(std::cerr,*this->sncp());
     //    O0.print();
     pair_up_halfedges();
 #ifdef CGAL_NEF3_TIMER_PLUECKER
     timer_pluecker.stop();
      if(cgal_nef3_timer_on)
-      Rcpp::Rcout << "Runtime_pluecker: "
+      std::cout << "Runtime_pluecker: "
                 << timer_pluecker.time() << std::endl;
 #endif
-     //     SNC_io_parser<SNC_structure> O0(Rcpp::Rcerr,*this->sncp());
+     //     SNC_io_parser<SNC_structure> O0(std::cerr,*this->sncp());
      //     O0.print();
     link_shalfedges_to_facet_cycles();
 
@@ -1339,7 +1338,7 @@ public:
 #ifdef CGAL_NEF3_TIMER_EXTERNAL_STRUCTURE
     timer_external_structure.stop();
     if(cgal_nef3_timer_on)
-      Rcpp::Rcout << "Runtime_external_structure: "
+      std::cout << "Runtime_external_structure: "
                 << timer_external_structure.time() << std::endl;
 #endif
   }
@@ -1368,13 +1367,13 @@ public:
     //    CGAL_NEF_SETDTHREAD(43);
     /*
     {    CGAL::SNC_io_parser<SNC_structure> O
-      (Rcpp::Rcerr, *this->sncp(), false, true);
+      (std::cerr, *this->sncp(), false, true);
       O.print();}
     */
     pair_up_halfedges();
     /*
     {      CGAL::SNC_io_parser<SNC_structure> O
-        (Rcpp::Rcerr, *this->sncp(), false, true);
+        (std::cerr, *this->sncp(), false, true);
       O.print();}
     */
     link_shalfedges_to_facet_cycles();

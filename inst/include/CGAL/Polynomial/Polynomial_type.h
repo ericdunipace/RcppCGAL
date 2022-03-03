@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polynomial/include/CGAL/Polynomial/Polynomial_type.h $
-// $Id: Polynomial_type.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polynomial/include/CGAL/Polynomial/Polynomial_type.h $
+// $Id: Polynomial_type.h 625848e 2021-10-04T13:21:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -130,7 +130,7 @@ Polynomial_rep<NT>::Polynomial_rep(size_type n, ...)
   operations (e.g. for symbolic computation with an infimaximal \e x ),
   and various algebraic operations (gcd, resultant).
 
-  \c CGAL:Polynomial offers a full set of algebraic operators, i.e.
+  \c CGAL::Polynomial offers a full set of algebraic operators, i.e.
   binary +, -, *, / as well as +=, -=, *=, /=; not only for polynomials
   but also for a polynomial and a number of the coefficient type.
   (The / operator must only be used for integral divisions, i.e.

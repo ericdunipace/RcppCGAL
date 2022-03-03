@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_ImageIO/include/CGAL/Image_3_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_ImageIO/include/CGAL/Image_3_impl.h $
 // $Id: Image_3_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -16,7 +16,6 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 
 namespace CGAL {
@@ -32,7 +31,7 @@ bool Image_3::private_read(_image* im, Own own)
     }
     image_ptr = Image_shared_ptr(im, Image_deleter(own == OWN_THE_DATA));
 
-//     Rcpp::Rcerr <<
+//     std::cerr <<
 //       boost::format("image=%1% (xdim=%2%, ydim=%3%, zdim=%4%)\n")
 //       % image_ptr.get() % image_ptr->xdim % image_ptr->ydim % image_ptr->zdim;
 
@@ -104,7 +103,7 @@ Image_3::read_vtk_image_data(vtkImageData* vtk_image)
   image->wordKind = imageio_type.wordKind;
   image->sign = imageio_type.sign;
   image->data = ::ImageIO_alloc(dims[0]*dims[1]*dims[2]*image->wdim);
-  Rcpp::Rcerr << "GetNumberOfTuples()=" << vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples()
+  std::cerr << "GetNumberOfTuples()=" << vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples()
             << "\nimage->size()=" << dims[0]*dims[1]*dims[2]
             << "\nwdim=" << image->wdim << '\n';
   CGAL_assertion(vtk_image->GetPointData()->GetScalars()->GetNumberOfTuples() == dims[0]*dims[1]*dims[2]);

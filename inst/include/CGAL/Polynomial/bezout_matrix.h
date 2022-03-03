@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polynomial/include/CGAL/Polynomial/bezout_matrix.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polynomial/include/CGAL/Polynomial/bezout_matrix.h $
 // $Id: bezout_matrix.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_POLYNOMIAL_BEZOUT_MATRIX_H
 #define CGAL_POLYNOMIAL_BEZOUT_MATRIX_H
 
-#include <Rcpp.h>
 #include <algorithm>
 
 #include <CGAL/basic.h>
@@ -554,7 +553,7 @@ polynomial_subresultant_matrix(typename Polynomial_traits_d::Polynomial_d f,
 
       Matrix S = internal::s_matrix<NT>(B,intseq.begin(),(int)intseq.size());
       internal::swap_entries<NT>(S);
-      //Rcpp::Rcout << S << std::endl;
+      //std::cout << S << std::endl;
       int Sdim = S.row_dimension();
       int number_of_minors=(Sdim < m) ? Sdim : Sdim;
 

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Visibility_2/include/CGAL/Visibility_2/visibility_utils.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Visibility_2/include/CGAL/Visibility_2/visibility_utils.h $
 // $Id: visibility_utils.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_VISIBILITY_UTILS_H
 #define CGAL_VISIBILITY_UTILS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Visibility_2.h>
 
 
@@ -43,14 +42,14 @@ int count_edges_in_face(typename Arrangement_2::Face_const_handle fch) {
 
 template <class Edge_const_iterator>
 void print_edge(Edge_const_iterator eit) {
-  Rcpp::Rcout << "[" << eit->curve() << "]" << std::endl;
+  std::cout << "[" << eit->curve() << "]" << std::endl;
 }
 template <class Face_const_handle, class Ccb_halfedge_const_circulator>
 void print_simple_face(Face_const_handle fh) {
   Ccb_halfedge_const_circulator  cir = fh->outer_ccb();
   Ccb_halfedge_const_circulator  curr = cir;
   do {
-    Rcpp::Rcout << "[" << curr->curve() << "]" << std::endl;
+    std::cout << "[" << curr->curve() << "]" << std::endl;
   } while (++ curr != cir);
 }
 
@@ -58,7 +57,7 @@ template <class Arrangement_2>
 void print_arrangement(const Arrangement_2& arr) {
   typedef typename Arrangement_2::Edge_const_iterator Edge_const_iterator;
   Edge_const_iterator eit;
-  Rcpp::Rcout << arr.number_of_edges() << " edges:" << std::endl;
+  std::cout << arr.number_of_edges() << " edges:" << std::endl;
   for (eit = arr.edges_begin(); eit != arr.edges_end(); ++eit)
     print_edge(eit);
 }
@@ -71,9 +70,9 @@ void print_arrangement_by_face(const Arrangement_2& arr) {
   Face_const_iterator f;
   for (f = arr.faces_begin() ; f != arr.faces_end() ; f++) {
     if (!f->is_unbounded()) {
-      Rcpp::Rcout << "FACE\n";
+      std::cout << "FACE\n";
       print_simple_face<Face_const_iterator, Ccb_halfedge_const_circulator>(f);
-      Rcpp::Rcout << "END FACE\n";
+      std::cout << "END FACE\n";
     }
   }
 }

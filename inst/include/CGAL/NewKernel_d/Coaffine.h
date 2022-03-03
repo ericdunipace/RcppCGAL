@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/NewKernel_d/include/CGAL/NewKernel_d/Coaffine.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/NewKernel_d/include/CGAL/NewKernel_d/Coaffine.h $
 // $Id: Coaffine.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -11,7 +11,6 @@
 
 #ifndef CGAL_KD_COAFFINE_H
 #define CGAL_KD_COAFFINE_H
-#include <Rcpp.h>
 #include <vector>
 #include <algorithm>
 #include <iterator>
@@ -80,7 +79,7 @@ template<class R_> struct Construct_flat_orientation : private Store_kernel<R_> 
                 std::vector<int>& rest=o.rest; rest.reserve(dim+1);
                 for(int i=0; i<dim+1; ++i) rest.push_back(i);
                 for( ; f != e ; ++col, ++f ) {
-      //Rcpp::Rcerr << "(*f)[0]=" << (*f)[0] << std::endl;
+      //std::cerr << "(*f)[0]=" << (*f)[0] << std::endl;
                         Point const&p=*f;
                         // use a coordinate iterator instead?
                         for(int i=0; i<dim; ++i) coord(col, i) = ccc(p, i);

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_shortest_path/include/CGAL/Surface_mesh_shortest_path/Surface_mesh_shortest_path.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_shortest_path/include/CGAL/Surface_mesh_shortest_path/Surface_mesh_shortest_path.h $
 // $Id: Surface_mesh_shortest_path.h 81d9556 2021-02-10T10:06:45+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_SURFACE_MESH_SHORTEST_PATH_SURFACE_MESH_SHORTEST_PATH_H
 #define CGAL_SURFACE_MESH_SHORTEST_PATH_SURFACE_MESH_SHORTEST_PATH_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_shortest_path.h>
 
 #include <CGAL/disable_warnings.h>
@@ -594,14 +593,14 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "Filter: d + |I,B| > d1 + |v1,B|: " << std::endl;
-        Rcpp::Rcout << "v1 = " << v1Index << " , " << d1 << " , v2 = " << v2Index
+        std::cout << "Filter: d + |I,B| > d1 + |v1,B|: " << std::endl;
+        std::cout << "v1 = " << v1Index << " , " << d1 << " , v2 = " << v2Index
                   << " , " << d2 << " , v3 = " << v3Index << " , " << d3 << std::endl;
-        Rcpp::Rcout << "d = " << d << std::endl;
-        Rcpp::Rcout << "v1,B = " << CGAL::approximate_sqrt(csd2(v1, B)) << std::endl;
-        Rcpp::Rcout << "I,B = " << CGAL::approximate_sqrt(csd2(I, B)) << std::endl;
-        Rcpp::Rcout << "I,A = " << CGAL::approximate_sqrt(csd2(I, A)) << std::endl;
-        Rcpp::Rcout << (d + CGAL::approximate_sqrt(csd2(I, B)))
+        std::cout << "d = " << d << std::endl;
+        std::cout << "v1,B = " << CGAL::approximate_sqrt(csd2(v1, B)) << std::endl;
+        std::cout << "I,B = " << CGAL::approximate_sqrt(csd2(I, B)) << std::endl;
+        std::cout << "I,A = " << CGAL::approximate_sqrt(csd2(I, A)) << std::endl;
+        std::cout << (d + CGAL::approximate_sqrt(csd2(I, B)))
                   << " vs. " << (d1 + CGAL::approximate_sqrt(csd2(v1, B))) << std::endl;
       }
 
@@ -612,13 +611,13 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "Filter: d + |I,A| > d2 + |v2,A|: " << std::endl;
-        Rcpp::Rcout << "v1 = " << v1Index << " , " << d1 << " , v2 = " << v2Index
+        std::cout << "Filter: d + |I,A| > d2 + |v2,A|: " << std::endl;
+        std::cout << "v1 = " << v1Index << " , " << d1 << " , v2 = " << v2Index
                   << " , " << d2 << " , v3 = " << v3Index << " , " << d3 << std::endl;
-        Rcpp::Rcout << "d = " << d << std::endl;
-        Rcpp::Rcout << "v2,A = " << CGAL::approximate_sqrt(csd2(v2, A)) << std::endl;
-        Rcpp::Rcout << "I,A = " << CGAL::approximate_sqrt(csd2(I, A)) << std::endl;
-        Rcpp::Rcout << (d + CGAL::approximate_sqrt(csd2(I, A)))
+        std::cout << "d = " << d << std::endl;
+        std::cout << "v2,A = " << CGAL::approximate_sqrt(csd2(v2, A)) << std::endl;
+        std::cout << "I,A = " << CGAL::approximate_sqrt(csd2(I, A)) << std::endl;
+        std::cout << (d + CGAL::approximate_sqrt(csd2(I, A)))
                   << " vs. " << (d2 + CGAL::approximate_sqrt(csd2(v2, A))) << std::endl;
       }
 
@@ -629,13 +628,13 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "Filter: d + |I,A| > d3 + |v3,A|: " << std::endl;
-        Rcpp::Rcout << "v1 = " << v1Index << " , " << d1 << " , v2 = " << v2Index
+        std::cout << "Filter: d + |I,A| > d3 + |v3,A|: " << std::endl;
+        std::cout << "v1 = " << v1Index << " , " << d1 << " , v2 = " << v2Index
                   << " , " << d2 << " , v3 = " << v3Index << " , " << d3 << std::endl;
-        Rcpp::Rcout << "d = " << d << std::endl;
-        Rcpp::Rcout << "v3,A = " << CGAL::approximate_sqrt(csd2(v3, A)) << std::endl;
-        Rcpp::Rcout << "I,A = " << CGAL::approximate_sqrt(csd2(I, A)) << std::endl;
-        Rcpp::Rcout << (d + CGAL::approximate_sqrt(csd2(I, A)))
+        std::cout << "d = " << d << std::endl;
+        std::cout << "v3,A = " << CGAL::approximate_sqrt(csd2(v3, A)) << std::endl;
+        std::cout << "I,A = " << CGAL::approximate_sqrt(csd2(I, A)) << std::endl;
+        std::cout << (d + CGAL::approximate_sqrt(csd2(I, A)))
                   << " vs. " << (d3 + CGAL::approximate_sqrt(csd2(v3, A))) << std::endl;
       }
 
@@ -656,7 +655,7 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << std::endl << " >>>>>>>>>>>>>>>>>>> Expanding LEFT CHILD <<<<<<<<<<<<<<<<<<<" <<std::endl;
+      std::cout << std::endl << " >>>>>>>>>>>>>>>>>>> Expanding LEFT CHILD <<<<<<<<<<<<<<<<<<<" <<std::endl;
     }
 
     CGAL_assertion(cone->m_pendingLeftSubtree != nullptr);
@@ -677,7 +676,7 @@ private:
     }
     else if (m_debugOutput)
     {
-      Rcpp::Rcout << "\tNode was filtered." << std::endl;
+      std::cout << "\tNode was filtered." << std::endl;
     }
   }
 
@@ -695,7 +694,7 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << std::endl << " >>>>>>>>>>>>>>>>>>> Expanding RIGHT CHILD <<<<<<<<<<<<<<<<<<<" <<std::endl;
+      std::cout << std::endl << " >>>>>>>>>>>>>>>>>>> Expanding RIGHT CHILD <<<<<<<<<<<<<<<<<<<" <<std::endl;
     }
 
 
@@ -713,7 +712,7 @@ private:
     }
     else if (m_debugOutput)
     {
-      Rcpp::Rcout << "\tNode was filtered." << std::endl;
+      std::cout << "\tNode was filtered." << std::endl;
     }
   }
 
@@ -783,7 +782,7 @@ private:
     if (m_debugOutput)
     {
       typename Traits::Construct_barycentric_coordinates_weight cbcw(m_traits.construct_barycentric_coordinates_weight_object());
-      Rcpp::Rcout << "\tFace Root Expansion: id = " << get(m_faceIndexMap, f)
+      std::cout << "\tFace Root Expansion: id = " << get(m_faceIndexMap, f)
                 << " , Location = " << cbcw(faceLocation, 0) << " " << cbcw(faceLocation, 1)
                 << " " << cbcw(faceLocation, 2) << " " << std::endl;
     }
@@ -803,9 +802,9 @@ private:
 
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "\tExpanding face root #" << currentVertex << " : " << std::endl;;
-        Rcpp::Rcout << "\t\tFace = " << layoutFace << std::endl;
-        Rcpp::Rcout << "\t\tLocation = " << sourcePoint << std::endl;
+        std::cout << "\tExpanding face root #" << currentVertex << " : " << std::endl;;
+        std::cout << "\t\tFace = " << layoutFace << std::endl;
+        std::cout << "\t\tLocation = " << sourcePoint << std::endl;
       }
 
       process_node(child);
@@ -827,7 +826,7 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "\tEdge Root Expansion: faceA = " << get(m_faceIndexMap, face(baseEdge, m_graph))
+      std::cout << "\tEdge Root Expansion: faceA = " << get(m_faceIndexMap, face(baseEdge, m_graph))
                 << " , faceB = " << get(m_faceIndexMap, face(opposite(baseEdge, m_graph), m_graph))
                 << " , t0 = " << t0 << " , t1 = " << t1 << std::endl;
     }
@@ -857,9 +856,9 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "\tExpanding edge root #" << side << " : " << std::endl;;
-        Rcpp::Rcout << "\t\tFace = " << layoutFaces[side] << std::endl;
-        Rcpp::Rcout << "\t\tLocation = " << sourcePoints[side] << std::endl;
+        std::cout << "\tExpanding edge root #" << side << " : " << std::endl;;
+        std::cout << "\t\tFace = " << layoutFaces[side] << std::endl;
+        std::cout << "\t\tLocation = " << sourcePoints[side] << std::endl;
       }
 
       Cone_tree_node* mainChild = new Cone_tree_node(m_traits, m_graph, baseEdges[side], layoutFaces[side],
@@ -879,7 +878,7 @@ private:
   {
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "\tVertex Root Expansion: Vertex = " << get(m_vertexIndexMap, vertex) << std::endl;
+      std::cout << "\tVertex Root Expansion: Vertex = " << get(m_vertexIndexMap, vertex) << std::endl;
     }
 
     Cone_tree_node* vertexRoot = new Cone_tree_node(m_traits, m_graph, m_rootNodes.size(),
@@ -912,8 +911,8 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "expansionVertex: " << get(m_vertexIndexMap, expansionVertex) << std::endl;
-      Rcpp::Rcout << "Distance from target to root: " << distanceFromTargetToRoot << std::endl;
+      std::cout << "expansionVertex: " << get(m_vertexIndexMap, expansionVertex) << std::endl;
+      std::cout << "Distance from target to root: " << distanceFromTargetToRoot << std::endl;
     }
 
     // A potential optimization could be made by only expanding in the 'necessary' range (i.e. the range outside of geodesic visibility), but the
@@ -927,22 +926,22 @@ private:
 
       if (m_debugOutput)
       {
-        Rcpp::Rcout << std::endl << " >>>>>>>>>>>>>>>>>>> Expanding PseudoSource <<<<<<<<<<<<<<<<<<<" <<std::endl;
-        Rcpp::Rcout << "currentEdge: "
+        std::cout << std::endl << " >>>>>>>>>>>>>>>>>>> Expanding PseudoSource <<<<<<<<<<<<<<<<<<<" <<std::endl;
+        std::cout << "currentEdge: "
                   << get(m_vertexIndexMap, source(currentEdge, m_graph)) << " "
                   << get(m_vertexIndexMap, target(currentEdge, m_graph)) << std::endl;
-        Rcpp::Rcout << "face id = ";
+        std::cout << "face id = ";
         if (face(currentEdge, m_graph) != Graph_traits::null_face())
         {
-          Rcpp::Rcout << get(m_faceIndexMap, face(currentEdge, m_graph)) << std::endl;
+          std::cout << get(m_faceIndexMap, face(currentEdge, m_graph)) << std::endl;
 
-          Rcpp::Rcout << "3D face:" << std::endl << face3d[0] << std::endl << face3d[1] << std::endl << face3d[2] << std::endl;
-          Rcpp::Rcout << "current face: " << get(m_faceIndexMap, face(currentEdge, m_graph)) << " gives 2D layout: " << layoutFace << std::endl;
-          Rcpp::Rcout << "source: " << face3d[1] << std::endl;
+          std::cout << "3D face:" << std::endl << face3d[0] << std::endl << face3d[1] << std::endl << face3d[2] << std::endl;
+          std::cout << "current face: " << get(m_faceIndexMap, face(currentEdge, m_graph)) << " gives 2D layout: " << layoutFace << std::endl;
+          std::cout << "source: " << face3d[1] << std::endl;
         }
         else
         {
-          Rcpp::Rcout << "EXTERNAL" << std::endl;
+          std::cout << "EXTERNAL" << std::endl;
         }
       }
 
@@ -983,7 +982,7 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "Clipping Segment " << segment << std::endl
+      std::cout << "Clipping Segment " << segment << std::endl
                 << "\t with left = " << leftBoundary << std::endl
                 << "\t with right = " << rightBoundary << std::endl;
     }
@@ -995,7 +994,7 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "\tLeft is completely covered." << std::endl;
+        std::cout << "\tLeft is completely covered." << std::endl;
       }
       leftPoint = cs2(segment);
       leftT = FT(0);
@@ -1008,7 +1007,7 @@ private:
       {
         if (m_debugOutput)
         {
-          Rcpp::Rcout << "Dropping left due to co-linearity of boundary. " << bool(cgalIntersection) << std::endl;
+          std::cout << "Dropping left due to co-linearity of boundary. " << bool(cgalIntersection) << std::endl;
         }
         return false;
       }
@@ -1021,7 +1020,7 @@ private:
         {
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "Dropping due to missing left intersect. " << t0 << std::endl;
+            std::cout << "Dropping due to missing left intersect. " << t0 << std::endl;
           }
 
           return false;
@@ -1030,7 +1029,7 @@ private:
         {
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "\tLeft is completely covered (secondary check). " << t0 << std::endl;
+            std::cout << "\tLeft is completely covered (secondary check). " << t0 << std::endl;
           }
 
           leftPoint = cs2(segment);
@@ -1040,7 +1039,7 @@ private:
         {
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "\tLeft intersects at t = " << t0 << std::endl;
+            std::cout << "\tLeft intersects at t = " << t0 << std::endl;
           }
 
           leftPoint = *result;
@@ -1053,7 +1052,7 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "\tRight is completely covered." << std::endl;
+        std::cout << "\tRight is completely covered." << std::endl;
       }
       rightPoint = ct2(segment);
       rightT = FT(1);
@@ -1066,7 +1065,7 @@ private:
       {
         if (m_debugOutput)
         {
-          Rcpp::Rcout << "Dropping due to co-linearity of right boundary." << std::endl;
+          std::cout << "Dropping due to co-linearity of right boundary." << std::endl;
         }
         return false;
       }
@@ -1079,7 +1078,7 @@ private:
         {
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "Dropping due to missing right intersect. " << t0 << std::endl;
+            std::cout << "Dropping due to missing right intersect. " << t0 << std::endl;
           }
           return false;
         }
@@ -1087,7 +1086,7 @@ private:
         {
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "\tRight is completely covered (secondary check). " << t0 << std::endl;
+            std::cout << "\tRight is completely covered (secondary check). " << t0 << std::endl;
           }
           rightPoint = ct2(segment);
           rightT = FT(1);
@@ -1096,7 +1095,7 @@ private:
         {
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "\tRight intersects at t = " << t0 << std::endl;
+            std::cout << "\tRight intersects at t = " << t0 << std::endl;
           }
           rightPoint = *result;
           rightT = t0;
@@ -1108,7 +1107,7 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "Dropping due to overlap. " << leftT << " : " << rightT << std::endl;
+        std::cout << "Dropping due to overlap. " << leftT << " : " << rightT << std::endl;
       }
       return false;
     }
@@ -1125,28 +1124,28 @@ private:
   {
     if (m_debugOutput)
     {
-      Rcpp::Rcout << std::endl << " ---------------- Processing node ---------------" << std::endl;
-      Rcpp::Rcout << "Node: " << node << std::endl;
-      Rcpp::Rcout << "Node type: " << node->node_type() << std::endl;
-      Rcpp::Rcout << "Tree ID: " << node->tree_id() << " at level = " << node->level() << std::endl;
-      Rcpp::Rcout << "\tParent node: " << node->parent() << std::endl;
-      Rcpp::Rcout << "\tParent node type: " << node->parent()->node_type() << std::endl;
-      Rcpp::Rcout << "\tFace = " << node->layout_face() << std::endl;
-      Rcpp::Rcout << "\tVertices = ";
+      std::cout << std::endl << " ---------------- Processing node ---------------" << std::endl;
+      std::cout << "Node: " << node << std::endl;
+      std::cout << "Node type: " << node->node_type() << std::endl;
+      std::cout << "Tree ID: " << node->tree_id() << " at level = " << node->level() << std::endl;
+      std::cout << "\tParent node: " << node->parent() << std::endl;
+      std::cout << "\tParent node type: " << node->parent()->node_type() << std::endl;
+      std::cout << "\tFace = " << node->layout_face() << std::endl;
+      std::cout << "\tVertices = ";
       halfedge_descriptor current = node->entry_edge();
       for (std::size_t i = 0; i<3; ++i)
       {
-        Rcpp::Rcout << get(m_vertexIndexMap, source(current, m_graph)) << " ";
+        std::cout << get(m_vertexIndexMap, source(current, m_graph)) << " ";
         current = next(current, m_graph);
       }
-      Rcpp::Rcout << std::endl;
-      Rcpp::Rcout << "\tSource Image = " << node->source_image() << std::endl;
-      Rcpp::Rcout << "\tEntry Halfedge = (" << get(m_vertexIndexMap, source(node->entry_edge(), m_graph)) << " "
+      std::cout << std::endl;
+      std::cout << "\tSource Image = " << node->source_image() << std::endl;
+      std::cout << "\tEntry Halfedge = (" << get(m_vertexIndexMap, source(node->entry_edge(), m_graph)) << " "
                                            << get(m_vertexIndexMap, target(node->entry_edge(), m_graph)) << ")" << std::endl;
-      Rcpp::Rcout << "\tTarget vertex = " << get(m_vertexIndexMap, node->target_vertex()) << std::endl;
+      std::cout << "\tTarget vertex = " << get(m_vertexIndexMap, node->target_vertex()) << std::endl;
 
-      Rcpp::Rcout << "\tWindow Left = " << node->window_left() << std::endl;
-      Rcpp::Rcout << "\tWindow Right = " << node->window_right() << std::endl;
+      std::cout << "\tWindow Left = " << node->window_left() << std::endl;
+      std::cout << "\tWindow Right = " << node->window_right() << std::endl;
     }
 
     bool leftSide = false;
@@ -1173,7 +1172,7 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "\t Has Left : " << (leftSide ? "yes" : "no")
+      std::cout << "\t Has Left : " << (leftSide ? "yes" : "no")
                 << " , Has Right : " << (rightSide ? "yes" : "no") << std::endl;
     }
 
@@ -1185,7 +1184,7 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "\tContains target vertex" << std::endl;
+        std::cout << "\tContains target vertex" << std::endl;
       }
 
       std::size_t entryHalfEdgeIndex = get(m_halfedgeIndexMap, node->entry_edge());
@@ -1195,8 +1194,8 @@ private:
 
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "\t Distance to target: " << currentNodeDistance << std::endl;
-        Rcpp::Rcout << "\t Is there a current occupier? " << (currentOccupier.first != nullptr) << std::endl;
+        std::cout << "\t Distance to target: " << currentNodeDistance << std::endl;
+        std::cout << "\t Is there a current occupier? " << (currentOccupier.first != nullptr) << std::endl;
       }
 
       // the relative position of the ray between node.source() and node.target_vertex() and the ray
@@ -1232,12 +1231,12 @@ private:
 
         if (m_debugOutput)
         {
-          Rcpp::Rcout << "\t Current occupier, EH ("
+          std::cout << "\t Current occupier, EH ("
                     << get(m_vertexIndexMap, source(currentOccupier.first->entry_edge(), m_graph)) << " "
                     << get(m_vertexIndexMap, target(currentOccupier.first->entry_edge(), m_graph)) << ")" << std::endl;
-          Rcpp::Rcout << "\t Current occupier, Source = " << currentOccupier.first->source_image() << std::endl;
-          Rcpp::Rcout << "\t Current Occupier Distance = " << currentOccupier.second << std::endl;
-          Rcpp::Rcout << "\t smaller (-1)/equal (0)/larger (1) comparison? " << c << std::endl;
+          std::cout << "\t Current occupier, Source = " << currentOccupier.first->source_image() << std::endl;
+          std::cout << "\t Current Occupier Distance = " << currentOccupier.second << std::endl;
+          std::cout << "\t smaller (-1)/equal (0)/larger (1) comparison? " << c << std::endl;
         }
       }
 
@@ -1263,7 +1262,7 @@ private:
       {
         if (m_debugOutput)
         {
-          Rcpp::Rcout << "\t Current node is now the occupier of target vertex "
+          std::cout << "\t Current node is now the occupier of target vertex "
                     << get(m_vertexIndexMap, node->target_vertex()) << std::endl;
         }
 
@@ -1320,7 +1319,7 @@ private:
 
         if (m_debugOutput && currentClosest.first != nullptr)
         {
-          Rcpp::Rcout << "\t Current Closest Distance = " << currentClosest.second << std::endl;
+          std::cout << "\t Current Closest Distance = " << currentClosest.second << std::endl;
         }
 
         // If equal times, give priority to vertex sources since it's cleaner and simpler to handle than interval windows
@@ -1330,7 +1329,7 @@ private:
         {
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "\t Current node is now the closest at target vertex "
+            std::cout << "\t Current node is now the closest at target vertex "
                       << get(m_vertexIndexMap, node->target_vertex()) << std::endl;
           }
 
@@ -1339,14 +1338,14 @@ private:
           {
             if (m_debugOutput)
             {
-              Rcpp::Rcout << "\t Vertex " << targetVertexIndex << " is a pseudo-source" << std::endl;
+              std::cout << "\t Vertex " << targetVertexIndex << " is a pseudo-source" << std::endl;
             }
 
             if (currentClosest.first != nullptr)
             {
               if (m_debugOutput)
               {
-                Rcpp::Rcout << "\tEvicting old pseudo-source: " << currentClosest.first << std::endl;
+                std::cout << "\tEvicting old pseudo-source: " << currentClosest.first << std::endl;
               }
 
               if (currentClosest.first->m_pendingMiddleSubtree != nullptr)
@@ -1362,7 +1361,7 @@ private:
 
               if (m_debugOutput)
               {
-                Rcpp::Rcout << "\tFinished Evicting" << std::endl;
+                std::cout << "\tFinished Evicting" << std::endl;
               }
             }
 
@@ -1393,7 +1392,7 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "Propagate (L/M/R): " << propagateLeft << " " << propagateMiddle << " " << propagateRight << std::endl;
+      std::cout << "Propagate (L/M/R): " << propagateLeft << " " << propagateMiddle << " " << propagateRight << std::endl;
     }
 
     if (node->level() <= static_cast<std::size_t>(num_faces(m_graph)))
@@ -1415,7 +1414,7 @@ private:
     }
     else if (m_debugOutput)
     {
-      Rcpp::Rcout << "\tNo expansion since level limit reached" << std::endl;
+      std::cout << "\tNo expansion since level limit reached" << std::endl;
     }
 
   }
@@ -1440,7 +1439,7 @@ private:
         {
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "Left child clip failed, killing node." << std::endl;
+            std::cout << "Left child clip failed, killing node." << std::endl;
           }
           return;
         }
@@ -1451,7 +1450,7 @@ private:
 
       if (m_debugOutput)
       {
-        Rcpp::Rcout << ">>> Pushing Left Child, Segment = " << parent->left_child_base_segment()
+        std::cout << ">>> Pushing Left Child, Segment = " << parent->left_child_base_segment()
                   << " , clipped = " << leftWindow << " , Estimate = " << distanceEstimate << std::endl;
       }
 
@@ -1468,7 +1467,7 @@ private:
   {
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "Tentative push of right child..." << std::endl;
+      std::cout << "Tentative push of right child..." << std::endl;
     }
 
     typename Traits::Compute_squared_distance_2 csd2(m_traits.compute_squared_distance_2_object());
@@ -1483,7 +1482,7 @@ private:
       {
         if (m_debugOutput)
         {
-          Rcpp::Rcout << "Right child clip failed, killing node." << std::endl;
+          std::cout << "Right child clip failed, killing node." << std::endl;
         }
         return;
       }
@@ -1493,7 +1492,7 @@ private:
 
       if (m_debugOutput)
       {
-        Rcpp::Rcout << ">>> Pushing Right Child, Segment = " << parent->right_child_base_segment()
+        std::cout << ">>> Pushing Right Child, Segment = " << parent->right_child_base_segment()
                   << " , clipped = " << rightWindow << " , Estimate = " << distanceEstimate << std::endl;
       }
 
@@ -1510,7 +1509,7 @@ private:
   {
     if (m_debugOutput)
     {
-      Rcpp::Rcout << ">>> Pushing Middle Child, Estimate = " << parent->distance_from_target_to_root() << std::endl;
+      std::cout << ">>> Pushing Middle Child, Estimate = " << parent->distance_from_target_to_root() << std::endl;
     }
 
     Cone_expansion_event* event = new Cone_expansion_event(parent, parent->distance_from_target_to_root(), Cone_expansion_event::PSEUDO_SOURCE);
@@ -1527,7 +1526,7 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "Deleting node " << node << std::endl;
+        std::cout << "Deleting node " << node << std::endl;
       }
 
       if (node->m_pendingLeftSubtree != nullptr)
@@ -1540,7 +1539,7 @@ private:
       {
         if (m_debugOutput)
         {
-          Rcpp::Rcout << "\t"  << node << " Descending left." << std::endl;
+          std::cout << "\t"  << node << " Descending left." << std::endl;
         }
 
         delete_node(node->remove_left_child(), destruction);
@@ -1556,7 +1555,7 @@ private:
       {
         if (m_debugOutput)
         {
-          Rcpp::Rcout << "\t"  << node << " Descending right." << std::endl;
+          std::cout << "\t"  << node << " Descending right." << std::endl;
         }
 
         delete_node(node->remove_right_child(), destruction);
@@ -1570,7 +1569,7 @@ private:
 
       if (node->has_middle_children() && m_debugOutput)
       {
-        Rcpp::Rcout << "\t"  << node << " Descending middle." << std::endl;
+        std::cout << "\t"  << node << " Descending middle." << std::endl;
       }
 
       while (node->has_middle_children())
@@ -1722,26 +1721,26 @@ private:
 
           if (m_debugOutput)
           {
-            Rcpp::Rcout << "Current Node: " << current << " , Face = " << current->layout_face() << std::endl;
+            std::cout << "Current Node: " << current << " , Face = " << current->layout_face() << std::endl;
             halfedge_descriptor he = current->entry_edge();
-            Rcpp::Rcout << "Face vertices: ";
+            std::cout << "Face vertices: ";
             for (std::size_t i = 0; i < 3; ++i)
             {
-              Rcpp::Rcout << get(m_vertexIndexMap, source(he, m_graph)) << ",";
+              std::cout << get(m_vertexIndexMap, source(he, m_graph)) << ",";
               he = next(he, m_graph);
             }
-            Rcpp::Rcout << std::endl;
-            Rcpp::Rcout << "Current Location: " << currentLocation << std::endl;
-            Rcpp::Rcout << "Distance: " << current->distance_to_root(currentLocation) << std::endl;
-            Rcpp::Rcout << "Inside cone: " << (current->inside_window(currentLocation) ? "Yes" : "No") << std::endl;
-            Rcpp::Rcout << "Current Source: " << current->source_image() << std::endl;
-            Rcpp::Rcout << "Current Segment: " << entrySegment << std::endl;
-            Rcpp::Rcout << "Current Left Window: " << current->window_left() << "  ,  "
+            std::cout << std::endl;
+            std::cout << "Current Location: " << currentLocation << std::endl;
+            std::cout << "Distance: " << current->distance_to_root(currentLocation) << std::endl;
+            std::cout << "Inside cone: " << (current->inside_window(currentLocation) ? "Yes" : "No") << std::endl;
+            std::cout << "Current Source: " << current->source_image() << std::endl;
+            std::cout << "Current Segment: " << entrySegment << std::endl;
+            std::cout << "Current Left Window: " << current->window_left() << "  ,  "
                       << m_traits.compute_parametric_distance_along_segment_2_object()(entrySegment.start(), entrySegment.end(), current->window_left()) << std::endl;
-            Rcpp::Rcout << "Current Right Window: " << current->window_right() << "  ,  "
+            std::cout << "Current Right Window: " << current->window_right() << "  ,  "
                       << m_traits.compute_parametric_distance_along_segment_2_object()(entrySegment.start(), entrySegment.end(), current->window_right()) << std::endl;
-            Rcpp::Rcout << "Current Segment Intersection: " << *result << std::endl;
-            Rcpp::Rcout << "Edge: (" << get(m_vertexIndexMap, source(current->entry_edge(), m_graph))
+            std::cout << "Current Segment Intersection: " << *result << std::endl;
+            std::cout << "Edge: (" << get(m_vertexIndexMap, source(current->entry_edge(), m_graph))
                       << "," << get(m_vertexIndexMap, target(current->entry_edge(), m_graph)) << ")  :  " << t0 << std::endl;
           }
 
@@ -1991,7 +1990,7 @@ private:
 
       for (boost::tie(current,end) = vertices(m_graph); current != end; ++current)
       {
-        Rcpp::Rcout << "Vertex#" << numVertices
+        std::cout << "Vertex#" << numVertices
                   << ": p = " << get(m_vertexPointMap,*current)
                   << " , Saddle Vertex: " << (is_saddle_vertex(*current) ? "yes" : "no")
                   << " , Boundary Vertex: " << (is_boundary_vertex(*current) ? "yes" : "no") << std::endl;
@@ -2008,29 +2007,29 @@ private:
 
       for (boost::tie(facesCurrent, facesEnd) = faces(m_graph); facesCurrent != facesEnd; ++facesCurrent)
       {
-        Rcpp::Rcout << "Face#" << numFaces << ": Vertices = (";
+        std::cout << "Face#" << numFaces << ": Vertices = (";
         ++numFaces;
         halfedge_descriptor faceEdgesStart = halfedge(*facesCurrent, m_graph);
         halfedge_descriptor faceEdgesCurrent = faceEdgesStart;
 
         do
         {
-          Rcpp::Rcout << get(m_vertexIndexMap, source(faceEdgesCurrent, m_graph));
+          std::cout << get(m_vertexIndexMap, source(faceEdgesCurrent, m_graph));
 
           faceEdgesCurrent = next(faceEdgesCurrent, m_graph);
 
           if (faceEdgesCurrent != faceEdgesStart)
           {
-            Rcpp::Rcout << ", ";
+            std::cout << ", ";
           }
           else
           {
-            Rcpp::Rcout << ")";
+            std::cout << ")";
           }
         }
         while (faceEdgesCurrent != faceEdgesStart);
 
-        Rcpp::Rcout << std::endl;
+        std::cout << std::endl;
       }
 
     }
@@ -2039,7 +2038,7 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << "Root: " << get(m_faceIndexMap, it->first)
+        std::cout << "Root: " << get(m_faceIndexMap, it->first)
                   << " , " << it->second[0] << " " << it->second[1] << " " << it->second[2] << " " << std::endl;
       }
 
@@ -2048,10 +2047,10 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "PriQ start size = " << m_expansionPriqueue.size() << std::endl;
+      std::cout << "PriQ start size = " << m_expansionPriqueue.size() << std::endl;
 
-      Rcpp::Rcout << "Num face locations: " << m_faceLocations.size() << std::endl;
-      Rcpp::Rcout << "Num root nodes: " << m_rootNodes.size() << " (Hint: these should be the same size)" << std::endl;
+      std::cout << "Num face locations: " << m_faceLocations.size() << std::endl;
+      std::cout << "Num root nodes: " << m_rootNodes.size() << " (Hint: these should be the same size)" << std::endl;
 
     }
 
@@ -2059,32 +2058,32 @@ private:
     {
       if (m_debugOutput)
       {
-        Rcpp::Rcout << " -----------------------------------------------------------------------" << std::endl;
-        Rcpp::Rcout << " -----------------------------------------------------------------------" << std::endl;
-        Rcpp::Rcout << "Num face locations: " << m_faceLocations.size() << std::endl;
-        Rcpp::Rcout << "Num root nodes: " << m_rootNodes.size() << " (Hint: these should be the same size)" << std::endl;
+        std::cout << " -----------------------------------------------------------------------" << std::endl;
+        std::cout << " -----------------------------------------------------------------------" << std::endl;
+        std::cout << "Num face locations: " << m_faceLocations.size() << std::endl;
+        std::cout << "Num root nodes: " << m_rootNodes.size() << " (Hint: these should be the same size)" << std::endl;
 
-        Rcpp::Rcout << "Prio Queue size = " << m_expansionPriqueue.size() << std::endl;
-        Rcpp::Rcout << "Queue:" << std::endl;
+        std::cout << "Prio Queue size = " << m_expansionPriqueue.size() << std::endl;
+        std::cout << "Queue:" << std::endl;
         auto duplicate_queue = m_expansionPriqueue;
         while(duplicate_queue.size() > 0)
         {
           Cone_expansion_event* event = duplicate_queue.top();
 
-          Rcpp::Rcout << "event type: " << event->m_type << " "
+          std::cout << "event type: " << event->m_type << " "
                     << " time: " << event->m_distanceEstimate << " ";
-          Rcpp::Rcout << "cancelled? " << event->m_cancelled << " " ;
+          std::cout << "cancelled? " << event->m_cancelled << " " ;
 
           if (!event->m_cancelled)
           {
-            Rcpp::Rcout << " ------ Parent (" << event->m_parent << ") INFO: ";
-            Rcpp::Rcout << "EH = (" << get(m_vertexIndexMap, source(event->m_parent->entry_edge(), m_graph)) << " "
+            std::cout << " ------ Parent (" << event->m_parent << ") INFO: ";
+            std::cout << "EH = (" << get(m_vertexIndexMap, source(event->m_parent->entry_edge(), m_graph)) << " "
                                               << get(m_vertexIndexMap, target(event->m_parent->entry_edge(), m_graph)) << ") ";
-            Rcpp::Rcout << "S = (" << event->m_parent->source_image() << ") ";
-            Rcpp::Rcout << "T = " << get(m_vertexIndexMap, target(next(event->m_parent->entry_edge(), m_graph), m_graph));
+            std::cout << "S = (" << event->m_parent->source_image() << ") ";
+            std::cout << "T = " << get(m_vertexIndexMap, target(next(event->m_parent->entry_edge(), m_graph), m_graph));
           }
 
-          Rcpp::Rcout << std::endl;
+          std::cout << std::endl;
 
           duplicate_queue.pop();
         }
@@ -2103,7 +2102,7 @@ private:
           case Cone_expansion_event::PSEUDO_SOURCE:
             if (m_debugOutput)
             {
-              Rcpp::Rcout << "PseudoSource Expansion: Parent = " << parent
+              std::cout << "PseudoSource Expansion: Parent = " << parent
                         << " , Vertex = " << get(m_vertexIndexMap, event->m_parent->target_vertex())
                         << " , Distance = " << event->m_distanceEstimate
                         << " , Level = " << event->m_parent->level() + 1 << std::endl;
@@ -2114,7 +2113,7 @@ private:
           case Cone_expansion_event::LEFT_CHILD:
             if (m_debugOutput)
             {
-              Rcpp::Rcout << "Left Expansion: Parent = " << parent
+              std::cout << "Left Expansion: Parent = " << parent
                         << " Edge = (" << get(m_vertexIndexMap, source(event->m_parent->left_child_edge(), m_graph))
                         << "," << get(m_vertexIndexMap, target(event->m_parent->left_child_edge(), m_graph))
                         << ") , Distance = " << event->m_distanceEstimate
@@ -2126,7 +2125,7 @@ private:
           case Cone_expansion_event::RIGHT_CHILD:
             if (m_debugOutput)
             {
-              Rcpp::Rcout << "Right Expansion: Parent = " << parent
+              std::cout << "Right Expansion: Parent = " << parent
                         << " , Edge = (" << get(m_vertexIndexMap, source(event->m_parent->right_child_edge(), m_graph))
                         << "," << get(m_vertexIndexMap, target(event->m_parent->right_child_edge(), m_graph))
                         << ") , Distance = " << event->m_distanceEstimate
@@ -2139,7 +2138,7 @@ private:
       }
       else if (m_debugOutput)
       {
-        Rcpp::Rcout << "Found cancelled event for node: " << event->m_parent << std::endl;
+        std::cout << "Found cancelled event for node: " << event->m_parent << std::endl;
       }
 
       delete event;
@@ -2161,23 +2160,23 @@ private:
 
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "Closest distances: " << std::endl;
+      std::cout << "Closest distances: " << std::endl;
 
       for (std::size_t i = 0; i < m_closestToVertices.size(); ++i)
       {
-        Rcpp::Rcout << "\tVertex = " << i << std::endl;
-        Rcpp::Rcout << "\tDistance = " << m_closestToVertices[i].second << std::endl;
+        std::cout << "\tVertex = " << i << std::endl;
+        std::cout << "\tDistance = " << m_closestToVertices[i].second << std::endl;
       }
 
-      Rcpp::Rcout << std::endl;
+      std::cout << std::endl;
 
       for (std::size_t i = 0; i < m_faceOccupiers.size(); ++i)
       {
-        Rcpp::Rcout << "\tFace = " << i << std::endl;
-        Rcpp::Rcout << "\t#Occupiers = " << m_faceOccupiers[i].size() << std::endl;
+        std::cout << "\tFace = " << i << std::endl;
+        std::cout << "\t#Occupiers = " << m_faceOccupiers[i].size() << std::endl;
       }
 
-      Rcpp::Rcout << std::endl << "Done!" << std::endl;
+      std::cout << std::endl << "Done!" << std::endl;
     }
 
     m_firstNewSourcePoint = m_faceLocations.end();
@@ -2258,8 +2257,8 @@ public:
 #if !defined(NDEBUG)
     if (m_debugOutput)
     {
-      Rcpp::Rcout << "Final node count: " << m_currentNodeCount << std::endl;
-      Rcpp::Rcout << "Peak node count: " << m_peakNodeCount << std::endl;
+      std::cout << "Final node count: " << m_currentNodeCount << std::endl;
+      std::cout << "Peak node count: " << m_peakNodeCount << std::endl;
     }
 #endif
   }

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Small_unordered_map.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/STL_Extension/include/CGAL/Small_unordered_map.h $
 // $Id: Small_unordered_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_SMALL_UNORDERED_MAP_H
 #define CGAL_SMALL_UNORDERED_MAP_H
 
-#include <Rcpp.h>
 #include <array>
 #include <iostream>
 
@@ -41,14 +40,14 @@ public:
   ~Small_unordered_map()
   {
     int total = 0;
-    Rcpp::Rcout << "0 " << collisions[0] << std::endl;
+    std::cout << "0 " << collisions[0] << std::endl;
     for(int i = 1; i < 20; i++){
       total += collisions[i];
       if(collisions[i] != 0){
-        Rcpp::Rcout << i << " " << collisions[i] << std::endl;
+        std::cout << i << " " << collisions[i] << std::endl;
       }
     }
-    Rcpp::Rcout << "Total: " << total << " " << 100 * (double(total) / double(total + collisions[0])) << "%" << std::endl;
+    std::cout << "Total: " << total << " " << 100 * (double(total) / double(total + collisions[0])) << "%" << std::endl;
   }
 #endif
 
@@ -69,7 +68,7 @@ public:
         head = i;
 #ifdef  CGAL_SMALL_UNORDERED_MAP_STATS
         if(collision>19){
-          Rcpp::Rcerr << collision << " collisions" << std::endl;
+          std::cerr << collision << " collisions" << std::endl;
         }else{
           ++collisions[collision];
         }

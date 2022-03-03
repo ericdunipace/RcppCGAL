@@ -5,18 +5,17 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Alpha_shapes_2/include/CGAL/Alpha_shape_2.h $
-// $Id: Alpha_shape_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Alpha_shapes_2/include/CGAL/Alpha_shape_2.h $
+// $Id: Alpha_shape_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // Author(s)     : Tran Kai Frank DA
 //                 Andreas Fabri <Andreas.Fabri@geometryfactory.com>
 
 #ifndef CGAL_ALPHA_SHAPE_2_H
 #define CGAL_ALPHA_SHAPE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Alpha_shapes_2.h>
 
-#include <CGAL/internal/Lazy_alpha_nt_2.h>
+#include <CGAL/Alpha_shapes_2/internal/Lazy_alpha_nt_2.h>
 
 // for convenience only
 #include <CGAL/Alpha_shape_vertex_base_2.h>
@@ -1409,7 +1408,7 @@ Alpha_shape_2<Dt,EACT>::find_optimal_alpha(size_type nb_components)
       middle = first + half;
 
 #ifdef CGAL_DEBUG_ALPHA_SHAPE_2
-      Rcpp::Rcout << "first : " << *first << " last : " << *(first+len)
+      std::cout << "first : " << *first << " last : " << *(first+len)
                 << " mid : " << *middle
                 << " nb comps : " << number_of_solid_components(*middle)
                 << std::endl;
@@ -1831,7 +1830,7 @@ void Alpha_shape_2<Dt,EACT>::print_edge_map()
     Edge edge = (*iemapit).second;
     Point p1 = point(edge.first, cw(edge.second));
     Point p2 = point(edge.first, ccw(edge.second));
-    Rcpp::Rcout << "[ (" <<        p1 << ") - (" << p2 << ") ] :            "
+    std::cout << "[ (" <<        p1 << ") - (" << p2 << ") ] :            "
               << interval.first << " "
               << interval.second << " " << interval.third << std::endl;
   }

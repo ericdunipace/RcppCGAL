@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/Path_on_surface.h $
-// $Id: Path_on_surface.h 7a6634bd 2021-04-22T13:04:37+01:00 Andreas Fabri
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Path_on_surface.h $
+// $Id: Path_on_surface.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -12,7 +12,6 @@
 #ifndef CGAL_PATH_ON_SURFACE_H
 #define CGAL_PATH_ON_SURFACE_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Combinatorial_map_operations.h>
@@ -372,7 +371,7 @@ public:
   void simplify_flips(bool show_flips_left=false)
   {
     if (show_flips_left)
-    { Rcpp::Rcout<<"Flips left (maybe none) : "<<std::flush; }
+    { std::cout<<"Flips left (maybe none) : "<<std::flush; }
     for(unsigned int i=0; i<length(); ++i)
     {
       if (m_flip[i] && !get_map().template is_free<2>(m_path[i]))
@@ -381,10 +380,10 @@ public:
         m_flip[i]=!m_flip[i];
       }
       else if (show_flips_left)
-      { Rcpp::Rcout<<i<<" "<<std::flush; }
+      { std::cout<<i<<" "<<std::flush; }
     }
     if (show_flips_left)
-    { Rcpp::Rcout<<std::endl; }
+    { std::cout<<std::endl; }
   }
 
   /// @return the number of flips of this path.
@@ -424,7 +423,7 @@ public:
   /// Debugging method.
   void display_failed_extention(const std::string& /*name_of_function*/)
   {
-    // Rcpp::Rcout<<"Cant extend the path this way ("<<name_of_function<<")"
+    // std::cout<<"Cant extend the path this way ("<<name_of_function<<")"
     //          <<std::endl;
   }
 
@@ -883,10 +882,7 @@ public:
     return boost::algorithm::knuth_morris_pratt_search(pp2.m_path.begin(),
                                                        pp2.m_path.end(),
                                                        pp1.m_path.begin(),
-                                                       pp1.m_path.end())
-#if BOOST_VERSION>=106200
-      .first
-#endif
+                                                       pp1.m_path.end()).first
         !=pp2.m_path.end();
   }
   bool operator!=(const Self&  other) const
@@ -957,7 +953,7 @@ public:
       if (last_vertex==Map::null_handle)
       {
         if (display_error)
-        { Rcpp::Rcout<<"Invalid path: one of the vertices doesn't exist"
+        { std::cout<<"Invalid path: one of the vertices doesn't exist"
                    <<std::endl; }
         return false;
       }
@@ -966,7 +962,7 @@ public:
           (m_flip[i]?get_map().next(m_path[i]):m_path[i], last_vertex))
       {
         if (display_error)
-        { Rcpp::Rcout<<"Invalid path: dart "<<i-1<<" and dart "<<i
+        { std::cout<<"Invalid path: dart "<<i-1<<" and dart "<<i
                    <<" are not adjacents"<<std::endl; }
         return false;
       }
@@ -977,7 +973,7 @@ public:
       if (last_vertex==Map::null_handle)
       {
         if (display_error)
-        { Rcpp::Rcout<<"Invalid path: one of the vertices doesn't exist"
+        { std::cout<<"Invalid path: one of the vertices doesn't exist"
                    <<std::endl; }
         return false;
       }
@@ -985,7 +981,7 @@ public:
           (front_flip()?get_map().next(front()):front(), last_vertex))
       {
         if (display_error)
-        { Rcpp::Rcout<<"Invalid path: m_is_closed is true but the path is "
+        { std::cout<<"Invalid path: m_is_closed is true but the path is "
                    <<"not closed"<<std::endl; }
         return false;
       }
@@ -995,7 +991,7 @@ public:
       if (last_vertex==Map::null_handle)
       {
         if (display_error)
-        { Rcpp::Rcout<<"Invalid path: one of the vertices doesn't exist"
+        { std::cout<<"Invalid path: one of the vertices doesn't exist"
                    <<std::endl; }
         return false;
       }
@@ -1003,7 +999,7 @@ public:
           (front_flip()?get_map().next(front()):front(), last_vertex))
       {
         if (display_error)
-        { Rcpp::Rcout<<"Invalid path: m_is_closed is false but the path "
+        { std::cout<<"Invalid path: m_is_closed is false but the path "
                    <<"is closed"<<std::endl; }
         return false;
       }
@@ -1119,11 +1115,7 @@ public:
     auto itMatch = boost::algorithm::knuth_morris_pratt_search(pp2.m_path.begin() + 1,
                                                                pp2.m_path.end(),
                                                                pp1.m_path.begin(),
-                                                               pp1.m_path.end())
-#if BOOST_VERSION>=106200
-      .first
-#endif
-      ;
+                                                               pp1.m_path.end()).first;
     /// It can be proved that the first match location is the length of match
     auto primitiveSize = itMatch - pp2.m_path.begin();
     auto originalLength = pp1.length();
@@ -1265,26 +1257,26 @@ public:
 
   void display_positive_turns() const
   {
-    Rcpp::Rcout<<"+(";
+    std::cout<<"+(";
     std::vector<std::size_t> res=compute_positive_turns();
     for (std::size_t i=0; i<res.size(); ++i)
-    { Rcpp::Rcout<<res[i]<<(i<res.size()-1?" ":""); }
-    Rcpp::Rcout<<")";
+    { std::cout<<res[i]<<(i<res.size()-1?" ":""); }
+    std::cout<<")";
   }
 
   void display_negative_turns() const
   {
-    Rcpp::Rcout<<"-(";
+    std::cout<<"-(";
     std::vector<std::size_t> res=compute_negative_turns();
     for (std::size_t i=0; i<res.size(); ++i)
-    { Rcpp::Rcout<<res[i]<<(i<res.size()-1?" ":""); }
-    Rcpp::Rcout<<")";
+    { std::cout<<res[i]<<(i<res.size()-1?" ":""); }
+    std::cout<<")";
   }
 
   void display_pos_and_neg_turns() const
   {
     display_positive_turns();
-    Rcpp::Rcout<<"  ";
+    std::cout<<"  ";
     display_negative_turns();
   }
 
@@ -1292,13 +1284,13 @@ public:
   {
     for (std::size_t i=0; i<length(); ++i)
     {
-      Rcpp::Rcout<<m_map.darts().index(get_ith_dart(i));
+      std::cout<<m_map.darts().index(get_ith_dart(i));
       if (m_flip[i])
-      { Rcpp::Rcout<<"f"; }
-      if (i<length()-1) { Rcpp::Rcout<<" "; }
+      { std::cout<<"f"; }
+      if (i<length()-1) { std::cout<<" "; }
     }
      if (is_closed())
-     { Rcpp::Rcout<<" c "; } //<<m_map.darts().index(get_ith_dart(0)); }
+     { std::cout<<" c "; } //<<m_map.darts().index(get_ith_dart(0)); }
   }
 
   friend std::ostream& operator<<(std::ostream& os, const Self& p)

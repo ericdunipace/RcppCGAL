@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Number_types/include/CGAL/Number_type_checker.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Number_types/include/CGAL/Number_type_checker.h $
 // $Id: Number_type_checker.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_NUMBER_TYPE_CHECKER_H
 #define CGAL_NUMBER_TYPE_CHECKER_H
 
-#include <Rcpp.h>
 #include <CGAL/number_type_basic.h>
 #include <sstream>
 
@@ -26,7 +25,7 @@
 // It is also parameterized by a comparator which compares the values
 // of NT1 and NT2 after all arithmetic operations.
 
-// #define CGAL_NT_CHECK_DEBUG(s) Rcpp::Rcerr << s << std::endl
+// #define CGAL_NT_CHECK_DEBUG(s) std::cerr << s << std::endl
 #define CGAL_NT_CHECK_DEBUG(s)
 
 namespace CGAL {

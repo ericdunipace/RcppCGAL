@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/OFF_to_nef_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/OFF_to_nef_3.h $
 // $Id: OFF_to_nef_3.h 6d6dc0c 2020-06-24T17:41:20+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_OFF_TO_NEF_3_H
 #define CGAL_OFF_TO_NEF_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -206,7 +205,7 @@ OFF_to_nef_3 (std::istream &i_st, Nef_3 &nef_union, bool verb=false)
       if ( !is_nef )
       {  ++discarded_facets;
          if (verb)
-         {  Rcpp::Rcerr << "Hence, discard input facet " << (idx+1)
+         {  std::cerr << "Hence, discard input facet " << (idx+1)
                << " (enumerated beginning with 1)."
                << " Check semantics!\n" << std::endl;
          }
@@ -215,7 +214,7 @@ OFF_to_nef_3 (std::istream &i_st, Nef_3 &nef_union, bool verb=false)
 
 #ifdef CGAL_NEF_OFF_TO_NEF_TIMER
    t_convert.stop();
-   Rcpp::Rcout << "time (conversion): " << t_convert.time()<< std::endl;
+   std::cout << "time (conversion): " << t_convert.time()<< std::endl;
 #endif
 
    // union of queue entries
@@ -226,7 +225,7 @@ OFF_to_nef_3 (std::istream &i_st, Nef_3 &nef_union, bool verb=false)
 
 #ifdef CGAL_NEF_OFF_TO_NEF_TIMER
    t_union.stop();
-   Rcpp::Rcout << "time (union): " << t_union.time() << "\n" << std::endl;
+   std::cout << "time (union): " << t_union.time() << "\n" << std::endl;
 #endif
 
    // return values

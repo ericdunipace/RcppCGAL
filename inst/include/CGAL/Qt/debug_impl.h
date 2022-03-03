@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/GraphicsView/include/CGAL/Qt/debug_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/GraphicsView/include/CGAL/Qt/debug_impl.h $
 // $Id: debug_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #else
@@ -33,7 +32,7 @@ namespace Qt {
 CGAL_INLINE_FUNCTION
 void traverse_resources(const QString& name, const QString& dirname, int indent)
 {
-  Rcpp::Rcerr << qPrintable(QString(indent, ' '))
+  std::cerr << qPrintable(QString(indent, ' '))
             << qPrintable(name);
   QString fullname =
     dirname.isEmpty() ?
@@ -41,14 +40,14 @@ void traverse_resources(const QString& name, const QString& dirname, int indent)
     dirname + "/" + name;
   QDir dir(fullname);
   if(dir.exists()) {
-    Rcpp::Rcerr << "/\n";
+    std::cerr << "/\n";
     Q_FOREACH(QString path, dir.entryList())
     {
       traverse_resources(path, fullname, indent + 2);
     }
   }
   else {
-    Rcpp::Rcerr << "\n";
+    std::cerr << "\n";
   }
 }
 

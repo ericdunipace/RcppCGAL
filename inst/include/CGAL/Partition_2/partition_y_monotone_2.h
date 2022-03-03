@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Partition_2/include/CGAL/Partition_2/partition_y_monotone_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Partition_2/include/CGAL/Partition_2/partition_y_monotone_2.h $
 // $Id: partition_y_monotone_2.h 5a36ff8 2020-12-04T08:02:26+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -31,7 +31,6 @@
 #ifndef CGAL_PARTITION_Y_MONOTONE_H
 #define CGAL_PARTITION_Y_MONOTONE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -69,7 +68,7 @@ Partition_y_mono_vertex_type partition_y_mono_vertex_type(
    BidirectionalCirculator next = c;
    next++;
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << "partition_y_mono__vertex_type: previous " << *previous
+   std::cout << "partition_y_mono__vertex_type: previous " << *previous
              << " c " << *c << " next " << *next  << std::endl;
 #endif
    typename Traits::Compare_y_2 compare_y_2 = traits.compare_y_2_object();
@@ -110,10 +109,10 @@ void partition_y_mono_print_tree(Tree tree)
 
    iterator it = tree.begin();
    for (; it != tree.end(); it++) {
-    Rcpp::Rcout << "edge node " << *(*it).first << " helper " << *(*it).second
+    std::cout << "edge node " << *(*it).first << " helper " << *(*it).second
               << std::endl;
    }
-   Rcpp::Rcout << std::endl;
+   std::cout << std::endl;
 }
 
 template <class BidirectionalCirculator, class Tree>
@@ -123,11 +122,11 @@ void partition_y_mono_handle_start_vertex(BidirectionalCirculator c,
    typedef typename Tree::value_type ValuePair;
 
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << *c << " is a start vertex " << std::endl;
+   std::cout << *c << " is a start vertex " << std::endl;
 #endif
    tree.insert(ValuePair(c, c));
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << "partition_handle_start_vertex: after insert tree is "
+   std::cout << "partition_handle_start_vertex: after insert tree is "
              << std::endl;
    partition_y_mono_print_tree(tree);
 #endif
@@ -142,7 +141,7 @@ void partition_y_mono_handle_end_vertex(BidirectionalCirculator c, Tree& tree,
 {
 
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << *c << " is an end vertex " << std::endl;
+   std::cout << *c << " is an end vertex " << std::endl;
 #endif
 
    typedef typename Tree::iterator   tree_iterator;
@@ -151,7 +150,7 @@ void partition_y_mono_handle_end_vertex(BidirectionalCirculator c, Tree& tree,
    previous--;
 
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << "partition_y_mono_handle_end_vertex: previous " << *previous
+   std::cout << "partition_y_mono_handle_end_vertex: previous " << *previous
              << std::endl;
 #endif
    it = tree.find(previous);
@@ -161,14 +160,14 @@ void partition_y_mono_handle_end_vertex(BidirectionalCirculator c, Tree& tree,
           PARTITION_Y_MONO_MERGE_VERTEX)
    {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-       Rcpp::Rcout << "partition_y_mono_handle_end_vertex: diagonal "
+       std::cout << "partition_y_mono_handle_end_vertex: diagonal "
                  << *(*it).second << " to " << *c << std::endl;
 #endif
        partition_poly.insert_diagonal(c, (*it).second);
    }
    tree.erase(it);
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << "partition_y_mono_handle_end_vertex: after erase tree is "
+   std::cout << "partition_y_mono_handle_end_vertex: after erase tree is "
              << std::endl;
    partition_y_mono_print_tree(tree);
 #endif
@@ -187,7 +186,7 @@ void partition_y_mono_edge_directly_left(BidirectionalCirculator c, Tree& tree,
                               // left
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
    if (it != tree.end())
-   Rcpp::Rcout << "partition_y_mono_edge_directly_left: lower_bound  edge node: "
+   std::cout << "partition_y_mono_edge_directly_left: lower_bound  edge node: "
              << *((*it).first) << " helper " << *((*it).second) << std::endl;
 #endif
 }
@@ -198,7 +197,7 @@ void partition_y_mono_handle_split_vertex(BidirectionalCirculator c,
                                           Partition_Poly& partition_poly)
 {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << *c << " is a split vertex " << std::endl;
+   std::cout << *c << " is a split vertex " << std::endl;
 #endif
 
    typedef typename Tree::iterator     tree_iterator;
@@ -208,7 +207,7 @@ void partition_y_mono_handle_split_vertex(BidirectionalCirculator c,
    if (it != tree.end())
    {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-      Rcpp::Rcout << "partition_y_mono_handle_split_vertex: diagonal "
+      std::cout << "partition_y_mono_handle_split_vertex: diagonal "
                 << *(*it).second << " to " << *c << std::endl;
 #endif
       partition_poly.insert_diagonal(c, (*it).second);
@@ -218,7 +217,7 @@ void partition_y_mono_handle_split_vertex(BidirectionalCirculator c,
    }
    tree.insert(ValuePair(c, c));
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << "partition_y_mono_handle_split_vertex: "
+   std::cout << "partition_y_mono_handle_split_vertex: "
              << "after erase and inserts tree is" << std::endl;
    partition_y_mono_print_tree(tree);
 #endif
@@ -236,7 +235,7 @@ void partition_y_mono_handle_merge_vertex(BidirectionalCirculator c,
                                           const Traits& traits)
 {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << *c << " is a merge vertex " << std::endl;
+   std::cout << *c << " is a merge vertex " << std::endl;
 #endif
 
    typedef typename Tree::iterator     tree_iterator;
@@ -250,7 +249,7 @@ void partition_y_mono_handle_merge_vertex(BidirectionalCirculator c,
          PARTITION_Y_MONO_MERGE_VERTEX)
    {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-      Rcpp::Rcout << "partition_y_mono_handle_merge_vertex 1: diagonal "
+      std::cout << "partition_y_mono_handle_merge_vertex 1: diagonal "
                 << *(*it).second << " to " << *c << std::endl;
 #endif
       partition_poly.insert_diagonal(c, (*it).second);
@@ -264,7 +263,7 @@ void partition_y_mono_handle_merge_vertex(BidirectionalCirculator c,
              PARTITION_Y_MONO_MERGE_VERTEX)
       {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-      Rcpp::Rcout << "partition_y_mono_handle_merge_vertex 2: diagonal "
+      std::cout << "partition_y_mono_handle_merge_vertex 2: diagonal "
                 << *(*it).second << " to " << *c << std::endl;
 #endif
          partition_poly.insert_diagonal(c, (*it).second);
@@ -274,7 +273,7 @@ void partition_y_mono_handle_merge_vertex(BidirectionalCirculator c,
       tree.insert(ValuePair(ej,c));
    }
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << "partition_y_mono_handle_merge_vertex: after erase(s) tree is "
+   std::cout << "partition_y_mono_handle_merge_vertex: after erase(s) tree is "
              << std::endl;
    partition_y_mono_print_tree(tree);
 #endif
@@ -314,7 +313,7 @@ void partition_y_mono_handle_regular_vertex(BidirectionalCirculator c,
                                             const Traits& traits )
 {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << *c << " is a regular vertex " << std::endl;
+   std::cout << *c << " is a regular vertex " << std::endl;
 #endif
    typedef typename Tree::iterator     tree_iterator;
    typedef typename Tree::value_type   ValuePair;
@@ -332,7 +331,7 @@ void partition_y_mono_handle_regular_vertex(BidirectionalCirculator c,
              PARTITION_Y_MONO_MERGE_VERTEX)
       {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-         Rcpp::Rcout << "partition_y_mono_handle_regular_vertex 1: diagonal "
+         std::cout << "partition_y_mono_handle_regular_vertex 1: diagonal "
                    << *(*it).second << " to " << *c << std::endl;
 #endif
          partition_poly.insert_diagonal(c, (*it).second);
@@ -349,7 +348,7 @@ void partition_y_mono_handle_regular_vertex(BidirectionalCirculator c,
              PARTITION_Y_MONO_MERGE_VERTEX)
       {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-         Rcpp::Rcout << "partition_y_mono_handle_regular_vertex 2: diagonal "
+         std::cout << "partition_y_mono_handle_regular_vertex 2: diagonal "
                    << *c << " to " << *(*it).second << std::endl;
 #endif
          partition_poly.insert_diagonal(c, (*it).second);
@@ -359,7 +358,7 @@ void partition_y_mono_handle_regular_vertex(BidirectionalCirculator c,
       tree.insert(ValuePair(ej,c));
    }
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << "partition_y_mono_handle_regular_vertex: "
+   std::cout << "partition_y_mono_handle_regular_vertex: "
              << "after erase and insert tree is" << std::endl;
    partition_y_mono_print_tree(tree);
 #endif
@@ -382,7 +381,7 @@ void partition_y_mono_handle_collinear_vertex(BidirectionalCirculator c,
    typedef typename Tree::iterator     tree_iterator;
    typedef typename Tree::value_type   ValuePair;
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << *c << " is a collinear vertex " << std::endl;
+   std::cout << *c << " is a collinear vertex " << std::endl;
 #endif
 
    tree_iterator it;
@@ -390,14 +389,14 @@ void partition_y_mono_handle_collinear_vertex(BidirectionalCirculator c,
    BidirectionalCirculator previous = c;
    previous--;
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << *previous << " is the previous vertex " << std::endl;
+   std::cout << *previous << " is the previous vertex " << std::endl;
 #endif
 
    it = tree.find(previous);
    if ( it != tree.end() )
    {
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-      Rcpp::Rcout << "partition_y_mono_handle_collinear_vertex : removing "
+      std::cout << "partition_y_mono_handle_collinear_vertex : removing "
                 << *(*it).first << std::endl;
 #endif
       tree.erase(it);
@@ -438,13 +437,13 @@ OutputIterator partition_y_monotone_2(InputIterator first,
    std::sort(circulators.begin(), circulators.end(), Indirect_not_less_yx_2<Traits>(traits));
 
 #ifdef CGAL_PARTITION_Y_MONOTONE_DEBUG
-   Rcpp::Rcout << "Initial vertex list: "<< circulators << std::endl;
+   std::cout << "Initial vertex list: "<< circulators << std::endl;
    for(std::vector<Circulator>::const_iterator it = circulators.begin();
        it != circulators.end();
        it++){
-     Rcpp::Rcout << **it << " " ;
+     std::cout << **it << " " ;
    }
-   Rcpp::Rcout << std::endl;
+   std::cout << std::endl;
 #endif
 
    typedef Indirect_edge_compare<Circulator, Traits> Cmp;

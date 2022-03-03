@@ -5,8 +5,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Slivers_exuder.h $
-// $Id: Slivers_exuder.h 4bb0406 2021-02-04T18:12:12+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Slivers_exuder.h $
+// $Id: Slivers_exuder.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_MESH_3_SLIVERS_EXUDER_H
 #define CGAL_MESH_3_SLIVERS_EXUDER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -31,7 +30,7 @@
 #include <CGAL/Double_map.h>
 #include <CGAL/enum.h>
 #include <CGAL/functional.h>
-#include <CGAL/internal/Has_member_visited.h>
+#include <CGAL/STL_Extension/internal/Has_member_visited.h>
 #include <CGAL/iterator.h>
 #include <CGAL/Real_timer.h>
 
@@ -44,7 +43,7 @@
 
 #include <algorithm>
 #include <iomanip> // std::setprecision
-#include <iostream> // Rcpp::Rcerr/cout
+#include <iostream> // std::cerr/cout
 #include <map>
 #include <set>
 #include <vector>
@@ -425,7 +424,7 @@ public: // methods
 
 #ifdef CGAL_MESH_3_PROFILING
     double exudation_time = t.elapsed();
-    Rcpp::Rcerr << std::endl << "==== Total exudation 'wall-clock' time: "
+    std::cerr << std::endl << "==== Total exudation 'wall-clock' time: "
               << exudation_time << "s ====" << std::endl;
 #endif
 
@@ -826,7 +825,7 @@ private:
    */
   static void print_FT(const FT d)
   {
-    Rcpp::Rcerr << d << " ; ";
+    std::cerr << d << " ; ";
   }
 
   /** This function verifies that the pre_star contains exactly the set of
@@ -900,16 +899,16 @@ pump_vertices(FT sliver_criterion_limit,
   init(sliver_criterion_limit);
 
 #ifdef CGAL_MESH_3_PROFILING
-  Rcpp::Rcerr << std::endl << "==== Init time: "
+  std::cerr << std::endl << "==== Init time: "
             << t.elapsed() << "s ====" << std::endl;
 #endif
 
 #ifdef CGAL_MESH_3_EXUDER_VERBOSE
-  Rcpp::Rcerr << "Exuding...\n";
-  Rcpp::Rcerr << "Legend of the following line: "
+  std::cerr << "Exuding...\n";
+  std::cerr << "Legend of the following line: "
             << "(#cells left,#vertices pumped,#vertices ignored)" << std::endl;
 
-  Rcpp::Rcerr << "(" << this->cells_queue_size() << ",0,0)";
+  std::cerr << "(" << this->cells_queue_size() << ",0,0)";
 #endif // CGAL_MESH_3_EXUDER_VERBOSE
 
   running_time_.reset();
@@ -939,14 +938,14 @@ pump_vertices(FT sliver_criterion_limit,
     this->wait_for_all();
 
 # if defined(CGAL_MESH_3_EXUDER_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    Rcpp::Rcerr << " Flushing";
+    std::cerr << " Flushing";
 # endif
     bool keep_flushing = true;
     while (keep_flushing)
     {
       keep_flushing = this->flush_work_buffers();
 # if defined(CGAL_MESH_3_EXUDER_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-      Rcpp::Rcerr << ".";
+      std::cerr << ".";
 # endif
     }
 
@@ -989,7 +988,7 @@ pump_vertices(FT sliver_criterion_limit,
 
       visitor.after_cell_pumped(this->cells_queue_size());
   #ifdef CGAL_MESH_3_EXUDER_VERBOSE
-      Rcpp::Rcerr << boost::format("\r             \r"
+      std::cerr << boost::format("\r             \r"
                                  "(%1%,%2%,%3%) (%|4$.1f| vertices/s)")
         % this->cells_queue_size()
         % num_of_pumped_vertices_
@@ -1002,32 +1001,32 @@ pump_vertices(FT sliver_criterion_limit,
   running_time_.stop();
 
 #ifdef CGAL_MESH_3_PROFILING
-  Rcpp::Rcerr << std::endl << "==== Iterations time: "
+  std::cerr << std::endl << "==== Iterations time: "
             << t.elapsed() << "s ====" << std::endl;
 #endif
 
 #ifdef CGAL_MESH_3_EXUDER_VERBOSE
-  Rcpp::Rcerr << std::endl;
-  Rcpp::Rcerr << "Total exuding time: " << running_time_.time() << "s";
-  Rcpp::Rcerr << std::endl;
+  std::cerr << std::endl;
+  std::cerr << "Total exuding time: " << running_time_.time() << "s";
+  std::cerr << std::endl;
 #endif // CGAL_MESH_3_EXUDER_VERBOSE
 
   if ( is_time_limit_reached() ) {
 #ifdef CGAL_MESH_3_EXUDER_VERBOSE
-    Rcpp::Rcerr << "Exuding return code: TIME_LIMIT_REACHED\n\n";
+    std::cerr << "Exuding return code: TIME_LIMIT_REACHED\n\n";
 #endif // CGAL_MESH_3_EXUDER_VERBOSE
     return TIME_LIMIT_REACHED;
   }
 
   if ( check_sliver_bound() ) {
 #ifdef CGAL_MESH_3_EXUDER_VERBOSE
-    Rcpp::Rcerr << "Exuding return code: BOUND_REACHED\n\n";
+    std::cerr << "Exuding return code: BOUND_REACHED\n\n";
 #endif // CGAL_MESH_3_EXUDER_VERBOSE
     return BOUND_REACHED;
   }
 
 #ifdef CGAL_MESH_3_EXUDER_VERBOSE
-    Rcpp::Rcerr << "Exuding return code: CANT_IMPROVE_ANYMORE\n\n";
+    std::cerr << "Exuding return code: CANT_IMPROVE_ANYMORE\n\n";
 #endif // CGAL_MESH_3_EXUDER_VERBOSE
   return CANT_IMPROVE_ANYMORE;
 
@@ -1184,7 +1183,7 @@ expand_prestar(const Cell_handle& cell_to_add,
 
 #ifdef CGAL_MESH_3_DEBUG_SLIVERS_EXUDER
         if ( new_power_distance_to_power_sphere < power_distance_to_power_sphere )
-          Rcpp::Rcerr << "new power distance:" << new_power_distance_to_power_sphere
+          std::cerr << "new power distance:" << new_power_distance_to_power_sphere
                     << " / current power distance:" << power_distance_to_power_sphere
                     << std::endl;
 #endif // CGAL_MESH_3_DEBUG_SLIVERS_EXUDER
@@ -1619,10 +1618,10 @@ enqueue_task(Cell_handle ch, unsigned int erase_counter, FT value)
 template <typename Pre_star>
 void print_pre_stars(Pre_star pre_star_1, Pre_star pre_star_2)
 {
-  Rcpp::Rcout << "Stars: " << std::endl;
+  std::cout << "Stars: " << std::endl;
   while(!pre_star_1.empty() && !pre_star_2.empty())
   {
-    Rcpp::Rcout << "F: " << &*((pre_star_1.front()->second).first)
+    std::cout << "F: " << &*((pre_star_1.front()->second).first)
                        << " " << pre_star_1.front()->second.second
               << " S: " << pre_star_1.front()->first
               << " |||||| "
@@ -1632,7 +1631,7 @@ void print_pre_stars(Pre_star pre_star_1, Pre_star pre_star_2)
               << std::endl;
     if(pre_star_1.front()->second != pre_star_2.front()->second ||
        pre_star_1.front()->first != pre_star_2.front()->first)
-      Rcpp::Rcout << "Warning!" << std::endl;
+      std::cout << "Warning!" << std::endl;
 
     pre_star_1.pop_front();
     pre_star_2.pop_front();
@@ -1667,8 +1666,8 @@ check_pre_star(const Pre_star& pre_star,
     while(!pre_star_copy.empty() && !pre_star2.empty())
     {
       if(pre_star_copy.front()->first != pre_star2.front()->first) {
-        Rcpp::Rcerr << "bad order\n";
-        Rcpp::Rcerr << boost::format("pre_star.front()->first=%1%, should be %2%\n")
+        std::cerr << "bad order\n";
+        std::cerr << boost::format("pre_star.front()->first=%1%, should be %2%\n")
         % pre_star_copy.front()->first % pre_star2.front()->first;
         return false;
       }
@@ -1689,7 +1688,7 @@ check_pre_star(const Pre_star& pre_star,
         {
           Facet f1 = tr_.mirror_facet(pre_star_copy.front()->second);
           Facet f2 = tr_.mirror_facet(pre_star2.front()->second);
-          Rcpp::Rcerr << "Bad facet:" << f1.second << "/" << f2.second
+          std::cerr << "Bad facet:" << f1.second << "/" << f2.second
           << " - " << &*f1.first << "/" << &*f2.first << std::endl;
         }
       }
@@ -1701,13 +1700,13 @@ check_pre_star(const Pre_star& pre_star,
     }
 
     if(pre_star2.empty() && ! pre_star_copy.empty()) {
-      Rcpp::Rcerr << "pre_star is too big!\n";
+      std::cerr << "pre_star is too big!\n";
       while(!pre_star_copy.empty())
       {
         const Facet f = pre_star_copy.front()->second;
         const FT r = pre_star_copy.front()->first;
         pre_star_copy.pop_front();
-        Rcpp::Rcerr << boost::format("extra facet (%1%,%2%) (infinite: %3%, opposite infinite: %4%), power distance: %5%\n")
+        std::cerr << boost::format("extra facet (%1%,%2%) (infinite: %3%, opposite infinite: %4%), power distance: %5%\n")
         % &*f.first % f.second % tr_.is_infinite(f.first) % tr_.is_infinite(f.first->neighbor(f.second))
         % r;
       }
@@ -1715,12 +1714,12 @@ check_pre_star(const Pre_star& pre_star,
     }
 
     if( pre_star_copy.empty() && ! pre_star2.empty() ) {
-      Rcpp::Rcerr << "pre_star is too small!\n";
+      std::cerr << "pre_star is too small!\n";
       while(!pre_star2.empty())
       {
         const Facet f = pre_star2.front()->second;
         pre_star2.pop_front();
-        Rcpp::Rcerr << boost::format("missing facet (%1%,%2%) (infinite: %3%, opposite infinite: %4%)\n")
+        std::cerr << boost::format("missing facet (%1%,%2%) (infinite: %3%, opposite infinite: %4%)\n")
         % &*f.first % f.second % tr_.is_infinite(f.first) % tr_.is_infinite(f.first->neighbor(f.second));
       }
       return false;
@@ -1767,18 +1766,18 @@ check_pre_star(const Pre_star& pre_star,
                                       vh);
   if( ! result )
   {
-    Rcpp::Rcerr << "tested wp=" << wp << '\n';
-    Rcpp::Rcerr << "boundary_facets.size()=" << boundary_facets.size() << std::endl;
+    std::cerr << "tested wp=" << wp << '\n';
+    std::cerr << "boundary_facets.size()=" << boundary_facets.size() << std::endl;
     typename std::vector<Facet>::const_iterator bfit = boundary_facets.begin(),
                                                 bfend = boundary_facets.end();
     for(; bfit != bfend; ++bfit)
-      Rcpp::Rcerr << "Cell: " << &*(bfit->first) << " second: " << bfit->second << '\n';
+      std::cerr << "Cell: " << &*(bfit->first) << " second: " << bfit->second << '\n';
 
-    Rcpp::Rcerr << "\npre_star.size()=" << pre_star.size() << std::endl;
+    std::cerr << "\npre_star.size()=" << pre_star.size() << std::endl;
     typename Pre_star::const_iterator psit = pre_star.begin(), psend = pre_star.end();
     for(; psit != psend; ++psit)
-      Rcpp::Rcerr << "Cell: " << &*(psit->first.first) << " second: " << psit->first.second << '\n';
-    Rcpp::Rcerr << std::endl;
+      std::cerr << "Cell: " << &*(psit->first.first) << " second: " << psit->first.second << '\n';
+    std::cerr << std::endl;
   }
 
   return result;
@@ -1853,14 +1852,14 @@ check_ratios(const Sliver_values& criterion_values,
                         ratio_vector.begin(),ratio_vector.end(),
                         std::back_inserter(diff));
 
-    Rcpp::Rcerr << "\nExpected criterion_values (size: "
+    std::cerr << "\nExpected criterion_values (size: "
               << expected_ratios.size() << ") [";
     std::for_each(expected_ratios.begin(), expected_ratios.end(), print_FT);
-    Rcpp::Rcerr << "]\nRatios (size: " << ratio_vector.size() << ") [";
+    std::cerr << "]\nRatios (size: " << ratio_vector.size() << ") [";
     std::for_each(ratio_vector.begin(), ratio_vector.end(), print_FT);
-    Rcpp::Rcerr << "]\nDiff:[";
+    std::cerr << "]\nDiff:[";
     std::for_each(diff.begin(),diff.end(), print_FT);
-    Rcpp::Rcerr << "]\n";
+    std::cerr << "]\n";
   }
 
   return result;

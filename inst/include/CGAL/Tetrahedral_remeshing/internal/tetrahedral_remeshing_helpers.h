@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/tetrahedral_remeshing_helpers.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/tetrahedral_remeshing_helpers.h $
 // $Id: tetrahedral_remeshing_helpers.h 70058db 2021-05-03T15:30:52+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_INTERNAL_TET_REMESHING_HELPERS_H
 #define CGAL_INTERNAL_TET_REMESHING_HELPERS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <utility>
@@ -1230,7 +1229,7 @@ bool are_cell_orientations_valid(const Tr& tr)
   }
   if (!facets.empty())
   {
-    Rcpp::Rcerr << "Warning : there are inverted cells!\n"
+    std::cerr << "Warning : there are inverted cells!\n"
               << "\tSee cells_with_negative_volume.polylines.txt" << std::endl;
     dump_facets(facets, "cells_with_negative_volume.polylines.txt");
   }
@@ -1606,7 +1605,7 @@ void dump_cells_with_small_dihedral_angle(const Tr& tr,
       }
     }
   }
-  Rcpp::Rcout << "bad cells : " << cells.size() << std::endl;
+  std::cout << "bad cells : " << cells.size() << std::endl;
   dump_cells<Tr>(cells, indices, filename);
   dump_cells_off(cells, tr, "bad_cells.off");
 }
@@ -1634,7 +1633,7 @@ void dump_vertices_by_dimension(const Tr& tr, const char* prefix)
     //dimension is i
     const std::vector<Vertex_handle>& vertices_di = vertices_per_dimension[i];
 
-    Rcpp::Rcout << "Dimension " << i << " : " << vertices_di.size() << std::endl;
+    std::cout << "Dimension " << i << " : " << vertices_di.size() << std::endl;
 
     std::ostringstream oss;
     oss << prefix << "_dimension_" << i << ".off";

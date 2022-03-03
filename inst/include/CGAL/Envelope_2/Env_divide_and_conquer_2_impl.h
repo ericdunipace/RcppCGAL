@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Envelope_2/include/CGAL/Envelope_2/Env_divide_and_conquer_2_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Envelope_2/include/CGAL/Envelope_2/Env_divide_and_conquer_2_impl.h $
 // $Id: Env_divide_and_conquer_2_impl.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_ENVELOPE_DIVIDE_AND_CONQUER_2_IMPL_H
 #define CGAL_ENVELOPE_DIVIDE_AND_CONQUER_2_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Envelope_2.h>
 
 
@@ -70,20 +69,20 @@ _construct_envelope_non_vertical(Curve_pointer_iterator begin,
     Edge_const_handle    e = out_d.leftmost();
     Vertex_const_handle  v;
 
-    Rcpp::Rcout << "The diagram: ";
+    std::cout << "The diagram: ";
     while (e != out_d.rightmost())
     {
       if (! e->is_empty())
-        Rcpp::Rcout << e->curve() << "  ";
+        std::cout << e->curve() << "  ";
       else
-        Rcpp::Rcout << "[empty]" << "  ";
+        std::cout << "[empty]" << "  ";
 
       v = e->right();
-      Rcpp::Rcout << "(" << v->point() << ")  ";
+      std::cout << "(" << v->point() << ")  ";
 
       e = v->right();
     }
-    Rcpp::Rcout << "[empty]" << std::endl;
+    std::cout << "[empty]" << std::endl;
     */
   }
 

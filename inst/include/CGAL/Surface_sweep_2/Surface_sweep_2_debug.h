@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/Surface_sweep_2_debug.h $
-// $Id: Surface_sweep_2_debug.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_sweep_2/include/CGAL/Surface_sweep_2/Surface_sweep_2_debug.h $
+// $Id: Surface_sweep_2_debug.h 63e52b0 2021-03-25T15:42:47+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Baruch Zukerman <baruchzu@post.tau.ac.il>
@@ -13,7 +13,6 @@
 #ifndef CGAL_SURFACE_SWEEP_2_DEBUG_H
 #define CGAL_SURFACE_SWEEP_2_DEBUG_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 #include <CGAL/No_intersection_surface_sweep_2.h>
@@ -31,8 +30,8 @@ void No_intersection_surface_sweep_2<Vis>::print_text(const char* text,
                                                       bool do_eol)
 {
   if (m_need_indent)
-    for (uint8_t i = m_indent_size; i != 0; --i) Rcpp::Rcout << " ";
-  Rcpp::Rcout << text;
+    for (uint8_t i = m_indent_size; i != 0; --i) std::cout << " ";
+  std::cout << text;
   m_need_indent = false;
   if (do_eol) print_eol();
 }
@@ -40,7 +39,7 @@ void No_intersection_surface_sweep_2<Vis>::print_text(const char* text,
 template <typename Vis>
 void No_intersection_surface_sweep_2<Vis>::print_eol()
 {
-  Rcpp::Rcout << std::endl;
+  std::cout << std::endl;
   m_need_indent = true;
 }
 
@@ -76,7 +75,7 @@ template <typename Vis>
 void No_intersection_surface_sweep_2<Vis>::print_curve(const Subcurve* sc)
 {
   if (m_need_indent)
-    for (uint8_t i = m_indent_size; i != 0; --i) Rcpp::Rcout << " ";
+    for (uint8_t i = m_indent_size; i != 0; --i) std::cout << " ";
   sc->Print();
   m_need_indent = false;
 }
@@ -90,7 +89,7 @@ void No_intersection_surface_sweep_2<Vis>::PrintEventQueue()
     Event* e = *iter++;
     e->Print();
   }
-  CGAL_SS_DEBUG(Rcpp::Rcout << "--------------------------------" << std::endl;)
+  CGAL_SS_DEBUG(std::cout << "--------------------------------" << std::endl;)
 }
 
 template <typename Vis>
@@ -110,7 +109,7 @@ void No_intersection_surface_sweep_2<Vis>::PrintStatusLine()
   }
   print_text("Status line: ");
   if (m_currentEvent->is_closed())
-    Rcpp::Rcout << "(" << m_currentEvent->point() << ")";
+    std::cout << "(" << m_currentEvent->point() << ")";
   else {
     Arr_parameter_space x = m_currentEvent->parameter_space_in_x();
     Arr_parameter_space y = m_currentEvent->parameter_space_in_y();
@@ -133,30 +132,22 @@ template <typename Vis>
 void No_intersection_surface_sweep_2<Vis>::
 PrintOpenBoundaryType(Arr_parameter_space ps_x, Arr_parameter_space ps_y)
 {
-  switch (ps_x) {
-   case ARR_LEFT_BOUNDARY:  Rcpp::Rcout << "left boundary"; return;
-   case ARR_RIGHT_BOUNDARY: Rcpp::Rcout << "right boundary"; return;
-   case ARR_INTERIOR:
-   default: break;
-  }
-
-  switch (ps_y) {
-   case ARR_BOTTOM_BOUNDARY: Rcpp::Rcout << "bottom boundary"; return;
-   case ARR_TOP_BOUNDARY:    Rcpp::Rcout << "top boundary"; return;
-   case ARR_INTERIOR:
-   default: CGAL_error();
-  }
+  std::cout << "[" << ps_x << "," << ps_y << "]";
 }
 
 template <typename Vis>
 void No_intersection_surface_sweep_2<Vis>::PrintEvent(const Event* e)
 {
-  if (e->is_closed()) Rcpp::Rcout << e->point();
+  if (e->is_closed()) std::cout << e->point();
   else {
     Arr_parameter_space x = e->parameter_space_in_x();
     Arr_parameter_space y = e->parameter_space_in_y();
     PrintOpenBoundaryType(x, y);
-    Rcpp::Rcout << " with open curve: " << e->curve();
+    if (! e->is_isolated()) {
+      Arr_curve_end ce;
+      std::cout << " with open curve: " << e->boundary_touching_curve(ce)
+                << " at " << ce;
+    }
   }
 }
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polytope_distance_d/include/CGAL/Width_3.h $
-// $Id: Width_3.h 5a36ff8 2020-12-04T08:02:26+00:00 Giles Bathgate
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polytope_distance_d/include/CGAL/Width_3.h $
+// $Id: Width_3.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_WIDTH_3_H
 #define CGAL_WIDTH_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polytope_distance_d.h>
 
 
@@ -1133,7 +1132,7 @@ class Width_3 {
       ++vtxit;
     }
     //There must be a new EE-pair. If not, an error occurs
-    Rcpp::Rcerr<<"No new EE-pair found!"<<std::endl;
+    std::cerr<<"No new EE-pair found!"<<std::endl;
     CGAL_error();
   }
 
@@ -1232,7 +1231,7 @@ class Width_3 {
 
   // *** ORIGIN_INSIDE_CH ***
   //-------------------------
-  // To ensure that zero lies completly inside the convex hull of a point set.
+  // To ensure that zero lies completely inside the convex hull of a point set.
   // Returns true if the point set is not coplanar, false otherwise
   // PRECONDITION: Iterator range has at least 3 points
   template<class InputDA, class Vertex_iterator_>

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/IO/OFF.h $
-// $Id: OFF.h d6b2c8d 2021-05-18T18:13:38+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/IO/OFF.h $
+// $Id: OFF.h a34debc 2021-06-23T22:56:35+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -12,7 +12,6 @@
 #ifndef CGAL_BGL_IO_OFF_H
 #define CGAL_BGL_IO_OFF_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/OFF.h>
 #include <CGAL/IO/helpers.h>
 #include <CGAL/boost/graph/IO/Generic_facegraph_builder.h>
@@ -393,7 +392,7 @@ bool write_OFF_BGL(std::ostream& os,
     \cgalParamNBegin{stream_precision}
       \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
       \cgalParamType{int}
-      \cgalParamDefault{`the precision of the stream `os``}
+      \cgalParamDefault{the precision of the stream `os`}
     \cgalParamNEnd
   \cgalNamedParamsEnd
 
@@ -499,7 +498,7 @@ bool write_OFF(const std::string& fname,
   std::ofstream os(fname);
   if(!os)
   {
-    Rcpp::Rcerr<<"Could not create file.";
+    std::cerr<<"Could not create file.";
     return false;
   }
 

@@ -6,14 +6,13 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/GraphicsView/include/CGAL/Qt/qglviewer_impl.h $
-// $Id: qglviewer_impl.h 993a7b2 2021-09-28T15:36:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/GraphicsView/include/CGAL/Qt/qglviewer_impl.h $
+// $Id: qglviewer_impl.h 3640099 2021-09-28T15:36:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #else
@@ -306,33 +305,33 @@ void CGAL::QGLViewer::initializeGL() {
     {
       if(!vertex_shader.compileSourceCode(v_s))
       {
-        Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl;
+        std::cerr<<"Compiling vertex source FAILED"<<std::endl;
       }
 
       if(!fragment_shader.compileSourceCode(f_s))
       {
-        Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl;
+        std::cerr<<"Compiling fragmentsource FAILED"<<std::endl;
       }
     }
     else
     {
       if(!vertex_shader.compileSourceCode(v_source_comp))
       {
-        Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl;
+        std::cerr<<"Compiling vertex source FAILED"<<std::endl;
       }
 
       if(!fragment_shader.compileSourceCode(f_source_comp))
       {
-        Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl;
+        std::cerr<<"Compiling fragmentsource FAILED"<<std::endl;
       }
     }
     if(!rendering_program.addShader(&vertex_shader))
     {
-      Rcpp::Rcerr<<"adding vertex shader FAILED"<<std::endl;
+      std::cerr<<"adding vertex shader FAILED"<<std::endl;
     }
     if(!rendering_program.addShader(&fragment_shader))
     {
-      Rcpp::Rcerr<<"adding fragment shader FAILED"<<std::endl;
+      std::cerr<<"adding fragment shader FAILED"<<std::endl;
     }
     if(!rendering_program.link())
     {
@@ -454,33 +453,33 @@ void CGAL::QGLViewer::initializeGL() {
     {
       if(!vertex_shader.compileSourceCode(vertex_source))
       {
-        Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl;
+        std::cerr<<"Compiling vertex source FAILED"<<std::endl;
       }
 
       if(!fragment_shader.compileSourceCode(fragment_source))
       {
-        Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl;
+        std::cerr<<"Compiling fragmentsource FAILED"<<std::endl;
       }
     }
     else
     {
       if(!vertex_shader.compileSourceCode(vertex_source_comp))
       {
-        Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl;
+        std::cerr<<"Compiling vertex source FAILED"<<std::endl;
       }
 
       if(!fragment_shader.compileSourceCode(fragment_source_comp))
       {
-        Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl;
+        std::cerr<<"Compiling fragmentsource FAILED"<<std::endl;
       }
     }
     if(!rendering_program_light.addShader(&vertex_shader))
     {
-      Rcpp::Rcerr<<"adding vertex shader FAILED"<<std::endl;
+      std::cerr<<"adding vertex shader FAILED"<<std::endl;
     }
     if(!rendering_program_light.addShader(&fragment_shader))
     {
-      Rcpp::Rcerr<<"adding fragment shader FAILED"<<std::endl;
+      std::cerr<<"adding fragment shader FAILED"<<std::endl;
     }
     rendering_program_light.bindAttributeLocation("colors", 1);//because of MacOs
     if(!rendering_program_light.link())

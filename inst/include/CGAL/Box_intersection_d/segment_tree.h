@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Box_intersection_d/include/CGAL/Box_intersection_d/segment_tree.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Box_intersection_d/include/CGAL/Box_intersection_d/segment_tree.h $
 // $Id: segment_tree.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_BOX_INTERSECTION_D_SEGMENT_TREE_H
 #define CGAL_BOX_INTERSECTION_D_SEGMENT_TREE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Box_intersection_d.h>
 
 #include <CGAL/basic.h>
@@ -273,8 +272,8 @@ split_points( RandomAccessIter begin, RandomAccessIter end,
 #if CGAL_BOX_INTERSECTION_DEBUG
  #define CGAL_BOX_INTERSECTION_DUMP(msg) { \
    for( unsigned int i = level; i; --i ) \
-     Rcpp::Rcout << "  "; \
-    Rcpp::Rcout << msg; \
+     std::cout << "  "; \
+    std::cout << msg; \
   }
 #else
  #define CGAL_BOX_INTERSECTION_DUMP(msg) ;
@@ -285,30 +284,30 @@ template< class ForwardIter, class Traits >
 void dump_points( ForwardIter begin, ForwardIter end, Traits /* traits */,
                   int dim ) {
     while( begin != end ) {
-        Rcpp::Rcout << Traits::min_coord( *begin, dim ) << " ";
+        std::cout << Traits::min_coord( *begin, dim ) << " ";
         ++begin;
     }
-    Rcpp::Rcout << std::endl;
+    std::cout << std::endl;
 }
 
 template< class ForwardIter, class Traits >
 void dump_intervals( ForwardIter begin, ForwardIter end, Traits /* traits */,
                      int dim ) {
     while( begin != end ) {
-        Rcpp::Rcout << "[" << Traits::min_coord( *begin, dim ) << ","
+        std::cout << "[" << Traits::min_coord( *begin, dim ) << ","
                          << Traits::max_coord( *begin, dim ) << ") ";
         ++begin;
     }
-    Rcpp::Rcout << std::endl;
+    std::cout << std::endl;
 }
 
 template< class ForwardIter, class  Traits >
 void dump_box_numbers( ForwardIter begin, ForwardIter end, Traits /* traits */ ) {
     while( begin != end ) {
-        Rcpp::Rcout << Traits::id( *begin ) << " ";
+        std::cout << Traits::id( *begin ) << " ";
         ++begin;
     }
-    Rcpp::Rcout << std::endl;
+    std::cout << std::endl;
 }
 
 template< class T >

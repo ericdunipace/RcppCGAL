@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/Infimaximal_box.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/Infimaximal_box.h $
 // $Id: Infimaximal_box.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_INFIMAXIMAL_BOX_H
 #define CGAL_INFIMAXIMAL_BOX_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -167,13 +166,13 @@ class Infimaximal_box {
   }
 
   static Point_3 create_extended_point(NT, NT, NT) {
-    Rcpp::Rcerr << "function should not be called" << std::endl;
+    std::cerr << "function should not be called" << std::endl;
     CGAL_error_msg("function should not be called");
     return Point_3(0,0,0);
   }
 
   static Plane_3 create_extended_plane(NT, NT, NT, NT) {
-    Rcpp::Rcerr << "function should not be called" << std::endl;
+    std::cerr << "function should not be called" << std::endl;
     return Plane_3(1,0,0,0);
   }
 
@@ -185,7 +184,7 @@ class Infimaximal_box {
 
   template <typename SNC_constructor_>
   static void create_vertices_of_box_with_plane(SNC_constructor_&, const Plane_3&, bool) {
-    Rcpp::Rcerr << "Constructor not available for this Kernel" << std::endl;
+    std::cerr << "Constructor not available for this Kernel" << std::endl;
   }
 
   template <typename SNC_constructor>
@@ -776,7 +775,7 @@ class Infimaximal_box<Tag_true, CGAL::Pseudo_extended_homogeneous<RT_> > {
   }
 
   static bool check_point_on_plane(Point_3 p, Plane_3 h) {
-    Rcpp::Rcerr << p << ", " << h << std::endl;
+    std::cerr << p << ", " << h << std::endl;
 
     NT x(p.hx().eval_at(100));
     NT y(p.hy().eval_at(100));

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/ARAP_parameterizer_3.h $
-// $Id: ARAP_parameterizer_3.h bdd4efe 2021-01-15T10:06:56+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/ARAP_parameterizer_3.h $
+// $Id: ARAP_parameterizer_3.h cac04ed 2021-06-08T13:36:09+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -12,7 +12,6 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_ARAP_PARAMETERIZER_3_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_ARAP_PARAMETERIZER_3_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/license/Surface_mesh_parameterization.h>
@@ -27,8 +26,8 @@
 #include <CGAL/Surface_mesh_parameterization/LSCM_parameterizer_3.h>
 #include <CGAL/Surface_mesh_parameterization/MVC_post_processor_3.h>
 #include <CGAL/Surface_mesh_parameterization/Two_vertices_parameterizer_3.h>
-
 #include <CGAL/Surface_mesh_parameterization/parameterize.h>
+#include <CGAL/Weights/utils.h>
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 
@@ -450,7 +449,7 @@ private:
     const Point_3& position_vj = get(ppmap, vj);
     const Point_3& position_vk = get(ppmap, vk);
 
-    NT cot = internal::cotangent<Kernel>(position_vi, position_vj, position_vk);
+    const NT cot = CGAL::Weights::cotangent(position_vi, position_vj, position_vk);
     put(ctmap, hd, cot);
   }
 
@@ -490,13 +489,13 @@ private:
 
     // coefficient corresponding to the angle at vk if vk is the vertex before vj
     // while circulating around vi
-    NT c_k = get(ctmap, opposite(hd, mesh));
+    const NT c_k = get(ctmap, opposite(hd, mesh));
 
     // coefficient corresponding to the angle at vl if vl is the vertex after vj
     // while circulating around vi
-    NT c_l = get(ctmap, hd);
+    const NT c_l = get(ctmap, hd);
 
-    NT weight = c_k + c_l;
+    const NT weight = c_k + c_l;
     return weight;
   }
 
@@ -1132,7 +1131,7 @@ private:
     NT Du, Dv;
     if(!get_linear_algebra_traits().linear_solver(A, Bu, Xu, Du) ||
        !get_linear_algebra_traits().linear_solver(A, Bv, Xv, Dv)) {
-      Rcpp::Rcerr << "Could not solve linear system" << std::endl;
+      std::cerr << "Could not solve linear system" << std::endl;
       status = ERROR_CANNOT_SOLVE_LINEAR_SYSTEM;
       return status;
     }
@@ -1370,8 +1369,8 @@ public:
     NT energy_last;
 
 #ifdef CGAL_PARAMETERIZATION_ARAP_VERBOSE
-    Rcpp::Rcout << "Initial energy: " << energy_this << std::endl;
-    Rcpp::Rcout << m_iterations << " max iterations" << std::endl;
+    std::cout << "Initial energy: " << energy_this << std::endl;
+    std::cout << m_iterations << " max iterations" << std::endl;
 #endif
 
     // main loop
@@ -1396,7 +1395,7 @@ public:
         energy_this = compute_current_energy(mesh, faces, ctmap, lp, lpmap, ltmap, uvmap);
 
 #ifdef CGAL_PARAMETERIZATION_ARAP_VERBOSE
-        Rcpp::Rcout << "Energy at iteration " << ite << " : " << energy_this << std::endl;
+        std::cout << "Energy at iteration " << ite << " : " << energy_this << std::endl;
 #endif
 
         if(energy_this < 0) {
@@ -1419,7 +1418,7 @@ public:
     }
 
 #ifdef CGAL_PARAMETERIZATION_ARAP_VERBOSE
-    Rcpp::Rcout << "Minimization process ended after: " << ite << " iterations. " << std::endl;
+    std::cout << "Minimization process ended after: " << ite << " iterations. " << std::endl;
 #endif
 
 #ifdef CGAL_SMP_ARAP_DEBUG
@@ -1429,7 +1428,7 @@ public:
     if(!is_one_to_one_mapping(mesh, faces, uvmap)) {
      // Use post processing to handle flipped elements
 #ifdef CGAL_PARAMETERIZATION_ARAP_VERBOSE
-      Rcpp::Rcout << "Parameterization is not valid; calling post processor" << std::endl;
+      std::cout << "Parameterization is not valid; calling post processor" << std::endl;
 #endif
       status = post_process(mesh, vertices, faces, bhd, uvmap, vimap);
     }

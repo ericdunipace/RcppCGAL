@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/IO/read_xyz_points.h $
-// $Id: read_xyz_points.h 56025fb 2021-05-04T14:38:47+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/IO/read_xyz_points.h $
+// $Id: read_xyz_points.h 862f3ee 2021-11-17T09:46:17+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret
@@ -12,7 +12,6 @@
 #ifndef CGAL_POINT_SET_PROCESSING_READ_XYZ_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_READ_XYZ_POINTS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/property_map.h>
@@ -112,7 +111,7 @@ bool read_XYZ(std::istream& is,
 
   if(!is)
   {
-    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
+    std::cerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -140,35 +139,37 @@ bool read_XYZ(std::istream& is,
       continue;
     }
     // ...or reads position...
-    else {
+    else
+    {
       iss.clear();
       iss.str(line);
       if (iss >> iformat(x) >> iformat(y) >> iformat(z))
+      {
+        Point point(x,y,z);
+        Vector normal = CGAL::NULL_VECTOR;
+        // ... + normal...
+        if (iss >> iformat(nx))
         {
-          Point point(x,y,z);
-          Vector normal = CGAL::NULL_VECTOR;
-          // ... + normal...
-          if (iss >> iformat(nx))
-            {
-              // In case we could read one number, we expect that there are two more
-              if(iss  >> iformat(ny) >> iformat(nz)){
-                normal = Vector(nx,ny,nz);
-              } else {
-                Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
-                return false;
-              }
-            }
-          Enriched_point pwn;
-          put(point_map,  pwn, point);  // point_map[pwn] = point
-
-          if (has_normals)
-            put(normal_map, pwn, normal); // normal_map[pwn] = normal
-
-          *output++ = pwn;
-          continue;
+          // In case we could read one number, we expect that there are two more
+          if(iss >> iformat(ny) >> iformat(nz)){
+            normal = Vector(nx,ny,nz);
+          } else {
+            std::cerr << "Error line " << lineNumber << " of file (incomplete normal coordinates)" << std::endl;
+            return false;
+          }
         }
 
+        Enriched_point pwn;
+        put(point_map,  pwn, point);  // point_map[pwn] = point
+
+        if (has_normals)
+          put(normal_map, pwn, normal); // normal_map[pwn] = normal
+
+        *output++ = pwn;
+        continue;
+      }
     }
+
     // ...or skips number of points on first line (optional)
     if (lineNumber == 1 && std::istringstream(line) >> pointsCount)
     {
@@ -176,10 +177,13 @@ bool read_XYZ(std::istream& is,
     }
     else // if wrong file format
     {
-      Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
+      std::cerr << "Error line " << lineNumber << " of file (expected point coordinates)" << std::endl;
       return false;
     }
   }
+
+  if(is.eof())
+    is.clear(is.rdstate() & ~std::ios_base::failbit); // set by getline
 
   return true;
 }

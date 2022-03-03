@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_2_triangulation_2/include/CGAL/Periodic_2_triangulation_hierarchy_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_2_triangulation_2/include/CGAL/Periodic_2_triangulation_hierarchy_2.h $
 // $Id: Periodic_2_triangulation_hierarchy_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_PERIODIC_2_TRIANGULATION_HIERARCHY_2_H
 #define CGAL_PERIODIC_2_TRIANGULATION_HIERARCHY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_2_triangulation_2.h>
 
 
@@ -309,7 +308,7 @@ is_valid(bool verbose, int level) const
   for(i = 0; i < m_maxlevel; ++i)
     {
       if(verbose) // print  number of vertices at each level
-        Rcpp::Rcout << "number_of_vertices "
+        std::cout << "number_of_vertices "
                   <<  hierarchy[i]->number_of_vertices() << std::endl;
       result = result && hierarchy[i]->is_valid(verbose, level);
     }

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/search_for_connected_components_in_labeled_image.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/search_for_connected_components_in_labeled_image.h $
 // $Id: search_for_connected_components_in_labeled_image.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_3_SEARCH_FOR_CONNECTED_COMPONENTS_IN_LABELED_IMAGE_H
 #define CGAL_MESH_3_SEARCH_FOR_CONNECTED_COMPONENTS_IN_LABELED_IMAGE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -93,7 +92,7 @@ search_for_connected_components_in_labeled_image(const CGAL::Image_3& image,
 #ifdef CGAL_MESH_3_SEARCH_FOR_CONNECTED_COMPONENTS_IN_LABELED_IMAGE_VERBOSE
         // if we reach here, (i, j, k) is a new connected component
         ++number_of_connected_components;
-        Rcpp::Rcerr << boost::format("Found new connected component (#%5%) "
+        std::cerr << boost::format("Found new connected component (#%5%) "
                                    "at voxel (%1%, %2%, %3%), value=%4%, volume id=%6%\n")
           % i % j % k
           % (long)static_evaluate<Image_word_type>(image.image(), i, j, k)
@@ -215,7 +214,7 @@ search_for_connected_components_in_labeled_image(const CGAL::Image_3& image,
                 *it++ = std::make_pair(point(i, j, k),
                                        depth+1);
 #if CGAL_MESH_3_SEARCH_FOR_CONNECTED_COMPONENTS_IN_LABELED_IMAGE_VERBOSE > 1
-                Rcpp::Rcerr << boost::format("Found seed %5%, which is voxel "
+                std::cerr << boost::format("Found seed %5%, which is voxel "
                                            "(%1%, %2%, %3%), value=%4%\n")
                   % i % j % k
                   % (long)static_evaluate<Image_word_type>(image.image(), i, j, k)
@@ -226,7 +225,7 @@ search_for_connected_components_in_labeled_image(const CGAL::Image_3& image,
           } // end if queue.empty()
         } // end while !queue.empty() (with local indices i, j, k)
 #ifdef CGAL_MESH_3_SEARCH_FOR_CONNECTED_COMPONENTS_IN_LABELED_IMAGE_VERBOSE
-        Rcpp::Rcerr
+        std::cerr
           << boost::format("There was %1% voxel(s) in that component.\n"
                            "The bounding box is (%2% %3% %4%, %5% %6% %7%).\n"
                            "%8% voxel(s) on border\n")

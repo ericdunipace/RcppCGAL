@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/GraphicsView/include/CGAL/Qt/SegmentDelaunayGraphLinfGraphicsItem.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/GraphicsView/include/CGAL/Qt/SegmentDelaunayGraphLinfGraphicsItem.h $
 // $Id: SegmentDelaunayGraphLinfGraphicsItem.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_QT_SEGMENT_DELAUNAY_GRAPH_LINF_GRAPHICS_ITEM_H
 #define CGAL_QT_SEGMENT_DELAUNAY_GRAPH_LINF_GRAPHICS_ITEM_H
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 
@@ -123,44 +122,44 @@ SegmentDelaunayGraphLinfGraphicsItem<T>::drawDualEdge(QPainter * /*painter*/, ty
 //  CGAL::Polychainray_2<Kern>          pcr;
 //  CGAL::Polychainsegment_2<Kern>      pcs;
 
-//  Rcpp::Rcout << "debug drawDE pcl type= "
+//  std::cout << "debug drawDE pcl type= "
 //            << typeid(pcl).name() << std::endl;
-//  Rcpp::Rcout << "debug drawDE pcr type= "
+//  std::cout << "debug drawDE pcr type= "
 //            << typeid(pcr).name() << std::endl;
-//  Rcpp::Rcout << "debug drawDE pcs type= "
+//  std::cout << "debug drawDE pcs type= "
 //            << typeid(pcs).name() << std::endl;
 
   Object o = t->primal(e);
 
-  //Rcpp::Rcout << "debug drawDE trying to assign object at "
+  //std::cout << "debug drawDE trying to assign object at "
   //          << &o << std::endl;
 
   if (CGAL::assign(pcl, o)) {
     /* m_painter->setPen(::Qt::cyan);
-       Rcpp::Rcerr << "line " << std::endl; */
-//    Rcpp::Rcout << "debug drawDE pcl-assigned object at "
+       std::cerr << "line " << std::endl; */
+//    std::cout << "debug drawDE pcl-assigned object at "
 //              << &o << std::endl;
     //painterostream << pcl;
     pcl.draw(painterostream);
   }
   else if (CGAL::assign(pcr, o)) {
     /* m_painter->setPen(::Qt::magenta);
-       Rcpp::Rcerr << "segment " << std::endl; */
-//    Rcpp::Rcout << "debug drawDE pcr-assigned object at "
+       std::cerr << "segment " << std::endl; */
+//    std::cout << "debug drawDE pcr-assigned object at "
 //              << &o << std::endl;
     //painterostream << pcr;
     pcr.draw(painterostream);
   }
   else if (CGAL::assign(pcs, o))  {
     /* m_painter->setPen(::Qt::darkMagenta);
-       Rcpp::Rcerr << "ray " << r << std::endl;  */
-//    Rcpp::Rcout << "debug drawDE pcs-assigned object at "
+       std::cerr << "ray " << r << std::endl;  */
+//    std::cout << "debug drawDE pcs-assigned object at "
 //              << &o << std::endl;
     //painterostream << pcs;
     pcs.draw(painterostream);
   }
   else {
-    Rcpp::Rcerr << "error: drawDualEdge unknown curve" << std::endl;
+    std::cerr << "error: drawDualEdge unknown curve" << std::endl;
   }
 
   /* m_painter->setPen(::Qt::black); */
@@ -302,7 +301,7 @@ SegmentDelaunayGraphLinfGraphicsItem<T>::paint(QPainter *painter,
 
     drawAll(painter, option);
     //  } else {
-    //    Rcpp::Rcerr << "else" << std::endl;
+    //    std::cerr << "else" << std::endl;
     //  }
 }
 

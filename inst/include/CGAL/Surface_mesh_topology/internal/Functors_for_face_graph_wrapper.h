@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Functors_for_face_graph_wrapper.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Functors_for_face_graph_wrapper.h $
 // $Id: Functors_for_face_graph_wrapper.h 3fb644e 2020-04-10T17:40:30+02:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_FUNCTORS_FOR_FACE_GRAPH_WRAPPER_H
 #define CGAL_FUNCTORS_FOR_FACE_GRAPH_WRAPPER_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <boost/graph/graph_traits.hpp>
@@ -42,7 +41,7 @@ struct Get_beta
 
   static Dart_const_handle value(const HEG& /*heg*/, Dart_const_handle /*dh*/)
   {
-    Rcpp::Rcout<<"ERROR Get_beta<HEG, "<<i<<">"<<std::endl;
+    std::cout<<"ERROR Get_beta<HEG, "<<i<<">"<<std::endl;
     CGAL_assertion(false);
     return nullptr;
   }

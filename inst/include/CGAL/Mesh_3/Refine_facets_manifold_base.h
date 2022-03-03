@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Refine_facets_manifold_base.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Refine_facets_manifold_base.h $
 // $Id: Refine_facets_manifold_base.h 17ac255 2021-05-18T15:43:59+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_3_REFINE_FACETS_MANIFOLD_BASE_H
 #define CGAL_MESH_3_REFINE_FACETS_MANIFOLD_BASE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -146,7 +145,7 @@ private:
   biggest_incident_facet_in_complex(const Vertex_handle v) const
   {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "Bad vertex: " << this->r_tr_.point(v) << std::endl;
+    std::cerr << "Bad vertex: " << this->r_tr_.point(v) << std::endl;
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
     std::vector<Facet> facets;
     facets.reserve(64);
@@ -163,9 +162,9 @@ private:
     Facet biggest_facet = *fit++;
     FT biggest_sq_dist = compute_sq_distance_to_facet_center(biggest_facet, v);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "  " << v->cached_number_of_incident_facets()
+    std::cerr << "  " << v->cached_number_of_incident_facets()
               << " incident faces, with squared sizes:\n";
-    Rcpp::Rcerr << "    " << biggest_sq_dist << "\n";
+    std::cerr << "    " << biggest_sq_dist << "\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
     while(fit != facets.end() && !this->r_c3t3_.is_in_complex(*fit)) ++fit;
 
@@ -177,7 +176,7 @@ private:
       const FT current_sq_dist =
         compute_sq_distance_to_facet_center(current_facet, v);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-      Rcpp::Rcerr << "    " << current_sq_dist << "\n";
+      std::cerr << "    " << current_sq_dist << "\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
       if ( current_sq_dist > biggest_sq_dist )
       {
@@ -191,7 +190,7 @@ private:
                    facet_counter);
     CGAL_assertion(this->r_c3t3_.is_in_complex(biggest_facet));
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "Biggest facet squared radius: "
+    std::cerr << "Biggest facet squared radius: "
               << biggest_sq_dist
               << std::endl;
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
@@ -205,7 +204,7 @@ private:
     // use the list of incident facets in the complex
     Vertex_handle fev = edge_to_edgevv(arete).first;
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "Bad edge: (" << this->r_tr_.point(fev)
+    std::cerr << "Bad edge: (" << this->r_tr_.point(fev)
               << ", " << this->r_tr_.point(arete.first->vertex(arete.third))
               << ")\n  incident facets squared sizes:\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
@@ -216,7 +215,7 @@ private:
     FT biggest_sq_dist = compute_sq_distance_to_facet_center(biggest_facet,
                                                              fev);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "    "
+    std::cerr << "    "
               << biggest_sq_dist << std::endl;
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
 
@@ -227,7 +226,7 @@ private:
       const FT current_sq_dist =
         compute_sq_distance_to_facet_center(*fcirc, fev);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-      Rcpp::Rcerr << "    " << current_sq_dist << std::endl;
+      std::cerr << "    " << current_sq_dist << std::endl;
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
       // is the current facet bigger than the current biggest one
       if ( current_sq_dist > biggest_sq_dist ) {
@@ -236,7 +235,7 @@ private:
       }
     }
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "Biggest facet radius: "
+    std::cerr << "Biggest facet radius: "
               << biggest_sq_dist << std::endl;
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
 
@@ -293,7 +292,7 @@ private:
         if (i != j)
           if(m_bad_vertices.erase(c->vertex(j)) > 0) {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-            Rcpp::Rcerr << "m_bad_vertices.erase("
+            std::cerr << "m_bad_vertices.erase("
                       << this->r_tr_.point(c, j) << ")\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
           }
@@ -327,14 +326,14 @@ public:
     , m_with_boundary((mesh_topology & NO_BOUNDARY) == 0)
   {
 #ifdef CGAL_MESH_3_DEBUG_CONSTRUCTORS
-    Rcpp::Rcerr << "CONS: Refine_facets_manifold_base";
+    std::cerr << "CONS: Refine_facets_manifold_base";
     if(m_with_manifold_criterion) {
       if(m_with_boundary)
-        Rcpp::Rcerr << " (with boundaries)\n";
+        std::cerr << " (with boundaries)\n";
       else
-        Rcpp::Rcerr << " (without boundary)\n";
+        std::cerr << " (without boundary)\n";
     } else {
-      Rcpp::Rcerr << " (DEACTIVATED)\n";
+      std::cerr << " (DEACTIVATED)\n";
     }
 #endif
   }
@@ -344,10 +343,10 @@ public:
   void scan_edges() {
     if(!m_with_manifold_criterion) return;
 #ifdef CGAL_MESH_3_VERBOSE
-    Rcpp::Rcerr << "\nscanning edges ";
+    std::cerr << "\nscanning edges ";
     if(m_with_boundary)
-      Rcpp::Rcerr << "(boundaries allowed)";
-    Rcpp::Rcerr << "...\n";
+      std::cerr << "(boundaries allowed)";
+    std::cerr << "...\n";
     int n = 0;
 #endif
     for (typename Tr::Finite_edges_iterator
@@ -378,7 +377,7 @@ public:
     }
     m_manifold_info_initialized = true;
 #ifdef CGAL_MESH_3_VERBOSE
-    Rcpp::Rcerr << "   -> found " << n << " bad edges\n";
+    std::cerr << "   -> found " << n << " bad edges\n";
 #endif
   }
 
@@ -388,7 +387,7 @@ public:
     CGAL_assertion(m_bad_vertices_initialized == false);
     CGAL_assertion(m_bad_vertices.empty());
 #ifdef CGAL_MESH_3_VERBOSE
-    Rcpp::Rcerr << "\nscanning vertices..." << std::endl;
+    std::cerr << "\nscanning vertices..." << std::endl;
     int n = 0;
 #endif
     for (typename Tr::Finite_vertices_iterator
@@ -398,7 +397,7 @@ public:
     {
       if( this->r_c3t3_.face_status(vit) == C3t3::SINGULAR ) {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-        Rcpp::Rcerr << "m_bad_vertices.insert("
+        std::cerr << "m_bad_vertices.insert("
                   << this->r_tr_.point(vit) << ")\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
 #ifdef CGAL_LINKED_WITH_TBB
@@ -419,12 +418,12 @@ public:
     }
     m_bad_vertices_initialized = true;
 #ifdef CGAL_MESH_3_VERBOSE
-    Rcpp::Rcerr << "   -> found " << n << " bad vertices\n";
+    std::cerr << "   -> found " << n << " bad vertices\n";
 #  ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "Bad vertices queue:\n";
+    std::cerr << "Bad vertices queue:\n";
     for(Vertex_handle v2 : m_bad_vertices)
     {
-      Rcpp::Rcerr << this->r_tr_.point(v2) << std::endl;
+      std::cerr << this->r_tr_.point(v2) << std::endl;
     }
     CGAL::dump_c3t3(this->r_c3t3_, "dump-at-scan-vertices");
 #  endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
@@ -434,8 +433,8 @@ public:
 public:
   void scan_triangulation_impl_amendement() const {
 #ifdef CGAL_MESH_3_VERBOSE
-    Rcpp::Rcerr << "scanning edges (lazy)" << std::endl;
-    Rcpp::Rcerr << "scanning vertices (lazy)" << std::endl;
+    std::cerr << "scanning edges (lazy)" << std::endl;
+    std::cerr << "scanning vertices (lazy)" << std::endl;
 #endif
   }
 
@@ -484,7 +483,7 @@ public:
         Edge first_bad_edge = edgevv_to_edge(m_bad_edges.right.begin()->second);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
         const EdgeVV& edgevv = m_bad_edges.right.begin()->second;
-        Rcpp::Rcerr << "Bad edge "
+        std::cerr << "Bad edge "
                   << this->r_tr_.point(edgevv.first)
                   << " - "
                   << this->r_tr_.point(edgevv.second)
@@ -495,12 +494,12 @@ public:
         CGAL_assertion(!m_bad_vertices.empty());
         const Vertex_handle& v = *m_bad_vertices.begin();
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-        Rcpp::Rcerr << "Bad vertices queue:\n";
+        std::cerr << "Bad vertices queue:\n";
         for(Vertex_handle v2 : m_bad_vertices)
         {
-          Rcpp::Rcerr << this->r_tr_.point(v2) << std::endl;
+          std::cerr << this->r_tr_.point(v2) << std::endl;
         }
-        Rcpp::Rcerr << "Bad vertex " << this->r_tr_.point(v) << "\n";
+        std::cerr << "Bad vertex " << this->r_tr_.point(v) << "\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
         CGAL_assertion(this->r_c3t3_.has_incident_facets_in_complex(v));
         if(this->r_c3t3_.face_status(v) != C3t3::SINGULAR) {
@@ -618,7 +617,7 @@ public:
            )
       {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-        Rcpp::Rcerr << "m_bad_vertices.insert("
+        std::cerr << "m_bad_vertices.insert("
                   << this->r_tr_.point(*vit) << ")\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
 #ifdef CGAL_LINKED_WITH_TBB
@@ -641,7 +640,7 @@ public:
          )
     {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-      Rcpp::Rcerr << "m_bad_vertices.insert("
+      std::cerr << "m_bad_vertices.insert("
                 << this->r_tr_.point(v) << ")\n";
 #endif // CGAL_MESHES_DEBUG_REFINEMENT_POINTS
 #ifdef CGAL_LINKED_WITH_TBB

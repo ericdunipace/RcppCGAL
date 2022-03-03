@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_3.h $
-// $Id: Periodic_3_triangulation_3.h d6b2c8d 2021-05-18T18:13:38+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_3.h $
+// $Id: Periodic_3_triangulation_3.h 5945e48 2021-09-17T08:14:06+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -17,12 +17,11 @@
 #ifndef CGAL_PERIODIC_3_TRIANGULATION_3_H
 #define CGAL_PERIODIC_3_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_triangulation_3.h>
 
 #include <CGAL/basic.h>
 
-#include <CGAL/internal/Periodic_3_triangulation_iterators_3.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Periodic_3_triangulation_iterators_3.h>
 #include <CGAL/Periodic_3_triangulation_ds_cell_base_3.h>
 #include <CGAL/Periodic_3_triangulation_ds_vertex_base_3.h>
 #include <CGAL/Periodic_3_triangulation_traits_3.h>
@@ -30,16 +29,16 @@
 #include <CGAL/Triangulation_cell_base_3.h>
 #include <CGAL/Triangulation_vertex_base_3.h>
 #include <CGAL/triangulation_assertions.h>
-#include <CGAL/internal/canonicalize_helper.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/canonicalize_helper.h>
 
 #include <CGAL/array.h>
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 #include <CGAL/NT_converter.h>
 #include <CGAL/Unique_hash_map.h>
 #include <CGAL/use.h>
 
 #ifndef CGAL_NO_STRUCTURAL_FILTERING
-#include <CGAL/internal/Static_filters/tools.h>
+#include <CGAL/Filtered_kernel/internal/Static_filters/tools.h>
 #include <CGAL/Triangulation_structural_filtering_traits.h>
 #include <CGAL/determinant.h>
 #endif // no CGAL_NO_STRUCTURAL_FILTERING
@@ -1281,7 +1280,7 @@ private:
   template <class Point_iterator, class Offset_iterator>
   void periodic_sort(Point_iterator /*p_begin*/, Point_iterator /*p_end*/,
                      Offset_iterator /*o_begin*/, Offset_iterator /*o_end*/) const {
-    Rcpp::Rcout << "Periodic_sort not yet implemented" << std::endl;
+    std::cout << "Periodic_sort not yet implemented" << std::endl;
   }
 
   Vertex_handle create_initial_triangulation(const Point& p);
@@ -2753,7 +2752,7 @@ Periodic_3_triangulation_3<GT,TDS>::create_initial_triangulation(const Point& p)
   return vir_vertices[0][0][0];
 }
 #define CGAL_INCLUDE_FROM_PERIODIC_3_TRIANGULATION_3_H
-#include <CGAL/internal/Periodic_3_triangulation_dummy_36.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Periodic_3_triangulation_dummy_36.h>
 #undef CGAL_INCLUDE_FROM_PERIODIC_3_TRIANGULATION_3_H
 
 /** finds all cells that are in conflict with the currently added point
@@ -2990,8 +2989,8 @@ is_valid(bool verbose, int level) const
     if(orientation(*p[0], *p[1], *p[2], *p[3],
                    off[0], off[1], off[2], off[3]) != POSITIVE) {
       if(verbose) {
-        Rcpp::Rcerr<<"Periodic_3_triangulation_3: wrong orientation:"<<std::endl;
-        Rcpp::Rcerr<<off[0]<<'\t'<<*p[0]<<'\n'
+        std::cerr<<"Periodic_3_triangulation_3: wrong orientation:"<<std::endl;
+        std::cerr<<off[0]<<'\t'<<*p[0]<<'\n'
                          <<off[1]<<'\t'<<*p[1]<<'\n'
                          <<off[2]<<'\t'<<*p[2]<<'\n'
                          <<off[3]<<'\t'<<*p[3]<<std::endl;
@@ -3046,7 +3045,7 @@ is_valid_conflict(ConflictTester& tester, bool verbose, int level) const
                 it->neighbor(i)->vertex(it->neighbor(i)->index(it))->point(),
                 o_vt - o_nb)) {
         if(verbose) {
-          Rcpp::Rcerr << "non-empty sphere:\n"
+          std::cerr << "non-empty sphere:\n"
                     << "Point[0]: " << it->vertex(0)->point()
                     << " Off: " << int_to_off(it->offset(0)) << "\n"
                     << "Point[1]: " << it->vertex(1)->point()

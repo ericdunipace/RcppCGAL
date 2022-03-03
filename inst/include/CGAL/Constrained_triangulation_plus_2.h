@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_2/include/CGAL/Constrained_triangulation_plus_2.h $
-// $Id: Constrained_triangulation_plus_2.h bdc2f3e 2020-10-20T13:28:12+02:00 Sebastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_2/include/CGAL/Constrained_triangulation_plus_2.h $
+// $Id: Constrained_triangulation_plus_2.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_CONSTRAINED_TRIANGULATION_PLUS_2_H
 #define CGAL_CONSTRAINED_TRIANGULATION_PLUS_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -30,12 +29,7 @@
 #include <CGAL/Constrained_Delaunay_triangulation_2.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Triangulation_2/insert_constraints.h>
-
-#if defined(BOOST_MSVC) && (BOOST_VERSION == 105500)
-#include <set>
-#else
 #include <boost/container/flat_set.hpp>
-#endif
 
 
 namespace CGAL {
@@ -280,7 +274,7 @@ public:
   Constraint_id insert_constraint(Vertex_handle va, Vertex_handle vb)
   {
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::insert_constraint( #" << va->time_stamp() << "= " << va->point()
             << " , #" << vb->time_stamp() << "= " << vb->point()
             << " )\n";
@@ -468,7 +462,7 @@ public:
   {
     // Insertion before the first vertex
     if(pos == vertices_in_constraint_begin(cid)){
-      //Rcpp::Rcout << "insertion before first vertex" << std::endl;
+      //std::cout << "insertion before first vertex" << std::endl;
       Constraint_id head = insert_constraint(vh, *pos, out);
       hierarchy.concatenate2(head, cid);
       return vertices_in_constraint_begin(cid);
@@ -476,7 +470,7 @@ public:
 
     // Insertion after the last vertex
     if(pos == vertices_in_constraint_end(cid)){
-      //Rcpp::Rcout << "insertion after last vertex" << std::endl;
+      //std::cout << "insertion after last vertex" << std::endl;
       pos--;
       Constraint_id tail = insert_constraint(*pos, vh, out);
       pos = vertices_in_constraint_end(tail);
@@ -496,7 +490,7 @@ public:
     // If the constraint consists only of a segment, and we want to insert
     // in the middle
     if((pos == vcit) && (beg == vertices_in_constraint_end(cid))){
-      //Rcpp::Rcout << "insertion in constraint which is a segment" << std::endl;
+      //std::cout << "insertion in constraint which is a segment" << std::endl;
       Constraint_id aux1 = insert_constraint(a, vh, std::back_inserter(fc));
       Constraint_id aux2 = insert_constraint(vh, b, std::back_inserter(fc));
       pos = vertices_in_constraint_begin(aux2);
@@ -513,7 +507,7 @@ public:
     --pred;
     ++bit;
     if(pos != bit){
-      //Rcpp::Rcout << "split head" << std::endl;
+      //std::cout << "split head" << std::endl;
       head = split(cid, pred);
       std::swap(head,cid); // split2 does the job
       pred = vertices_in_constraint_begin(cid);
@@ -523,7 +517,7 @@ public:
     Vertices_in_constraint_iterator eit = vertices_in_constraint_end(cid);
     --eit;
     if(pos != eit){
-      //Rcpp::Rcout << "split tail" << std::endl;
+      //std::cout << "split tail" << std::endl;
       tail = split(cid, pos);
     }
 
@@ -534,7 +528,7 @@ public:
     concatenate(aux1, aux2);
 
     if(head.vl_ptr()){
-      //Rcpp::Rcout << "concatenate head" << std::endl;
+      //std::cout << "concatenate head" << std::endl;
       remove_constraint(cid, std::back_inserter(fc));
       hierarchy.concatenate(head, aux1);
     } else {
@@ -544,7 +538,7 @@ public:
     }
 
     if(tail.vl_ptr()){
-      //Rcpp::Rcout << "concatenate tail" << std::endl;
+      //std::cout << "concatenate tail" << std::endl;
       concatenate(head, tail);
     }
     fc.write_faces(out);
@@ -888,12 +882,12 @@ insert_subconstraint(Vertex_handle vaa,
   // it will eventually be split into several subconstraints
 {
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::insert_subconstraint( #" << vaa->time_stamp() << "= " << vaa->point()
             << " , #" << vbb->time_stamp() << "= " << vbb->point()
             << " )\n";
   internal::Indentation_level::Exit_guard exit_guard = CGAL::internal::cdt_2_indent_level.open_new_scope();
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::insert_constraint stack push [va, vb] ( #" << vaa->time_stamp() << "= " << vaa->point()
             << " , #" << vbb->time_stamp() << "= " << vbb->point()
             << " )\n";
@@ -906,7 +900,7 @@ insert_subconstraint(Vertex_handle vaa,
     stack.pop();
     CGAL_triangulation_precondition( vaa != vbb);
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-    Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+    std::cerr << CGAL::internal::cdt_2_indent_level
               << "CT_plus_2::insert_subconstraint, stack pop=( #" << vaa->time_stamp() << "= " << vaa->point()
               << " , #" << vbb->time_stamp() << "= " << vbb->point()
               << " ) remaining stack size: "
@@ -919,7 +913,7 @@ insert_subconstraint(Vertex_handle vaa,
     int i;
     if(this->includes_edge(vaa,vbb,vi,fr,i)) {
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-    Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+    std::cerr << CGAL::internal::cdt_2_indent_level
               << "CT_plus_2::insert_subconstraint, the segment ( #" << vaa->time_stamp() << "= " << vaa->point()
               << " , #" << vbb->time_stamp() << "= " << vbb->point()
               << " ) is an edge with #"
@@ -930,7 +924,7 @@ insert_subconstraint(Vertex_handle vaa,
       if (vi != vbb)  {
         hierarchy.split_constraint(vaa,vbb,vi);
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::insert_constraint (includes_edge) stack push [vi, vbb] ( #" << vi->time_stamp() << "= " << vi->point()
             << " , #" << vbb->time_stamp() << "= " << vbb->point()
             << " )\n";
@@ -954,11 +948,11 @@ insert_subconstraint(Vertex_handle vaa,
       if (vi != vaa && vi != vbb) {
         hierarchy.split_constraint(vaa,vbb,vi);
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::insert_constraint stack push [vaa, vi] ( #" << vaa->time_stamp() << "= " << vaa->point()
             << " , #" << vi->time_stamp() << "= " << vi->point()
             << " )\n";
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::insert_constraint stack push [vi, vbb] ( #" << vi->time_stamp() << "= " << vi->point()
             << " , #" << vbb->time_stamp() << "= " << vbb->point()
             << " )\n";
@@ -968,7 +962,7 @@ insert_subconstraint(Vertex_handle vaa,
       }
       else {
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::insert_constraint stack push [vaa, vbb]( #" << vaa->time_stamp() << "= " << vaa->point()
             << " , #" << vbb->time_stamp() << "= " << vbb->point()
             << " )\n";
@@ -988,12 +982,7 @@ insert_subconstraint(Vertex_handle vaa,
     // edges may contain mirror edges. They no longer exist after triangulate_hole
     // so we have to remove them before calling get_bounded_faces
     if(! edges.empty()){
-
-#if defined(BOOST_MSVC) && (BOOST_VERSION == 105500)
-      std::set<Face_handle> faces(intersected_faces.begin(), intersected_faces.end());
-#else
       boost::container::flat_set<Face_handle> faces(intersected_faces.begin(), intersected_faces.end());
-#endif
       for(typename List_edges::iterator it = edges.begin(); it!= edges.end();){
         if(faces.find(it->first) != faces.end()){
           typename List_edges::iterator it2 = it;
@@ -1115,7 +1104,7 @@ insert(const Point& a, Locate_type lt, Face_handle loc, int li)
   // update the hierarchy
   if (insert_in_constrained_edge) {
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-    Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+    std::cerr << CGAL::internal::cdt_2_indent_level
               << "  CT_plus_2::insert(" << a << ") = #"
               << va->time_stamp()
               << "   insert in constrained edge:  #" << v1->time_stamp() << "= " << v1->point()
@@ -1190,7 +1179,7 @@ intersect(Face_handle f, int i,
   const Point& pc = vc->point();
   const Point& pd = vd->point();
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::intersect segment ( #" << va->time_stamp() << "= " << va->point()
             << " , #" << vb->time_stamp() << "= " << vb->point()
             << " ) with edge ( #"<< vc->time_stamp() << "= " << vc->point()
@@ -1205,7 +1194,7 @@ intersect(Face_handle f, int i,
 
   Vertex_handle vi = insert(pi, Triangulation::EDGE, f, i);
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::intersect, `vi` is ( #" << vi->time_stamp() << "= " << vi->point()
             << " )\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS
@@ -1229,7 +1218,7 @@ intersect(Face_handle f, int i,
   const Point& pc = vcc->point();
   const Point& pd = vdd->point();
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::intersect segment ( #" << vaa->time_stamp() << "= " << vaa->point()
             << " , #" << vbb->time_stamp() << "= " << vbb->point()
             << " ) with edge ( #"<< vcc->time_stamp() << "= " << vcc->point()
@@ -1259,7 +1248,7 @@ intersect(Face_handle f, int i,
     vi = insert(pi, f);
   }
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "CT_plus_2::intersect, `vi` is ( #" << vi->time_stamp() << "= " << vi->point()
             << " )\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS

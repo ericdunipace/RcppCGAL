@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh/include/CGAL/Surface_mesh/IO/3MF.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh/include/CGAL/Surface_mesh/IO/3MF.h $
 // $Id: 3MF.h 56025fb 2021-05-04T14:38:47+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_SURFACE_MESH_IO_3MF_H
 #define CGAL_SURFACE_MESH_IO_3MF_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh.h>
 
 #include <CGAL/Surface_mesh/Surface_mesh_fwd.h>
@@ -68,7 +67,7 @@ bool read_3MF(const std::string& filename,
   const bool success = CGAL::IO::read_3MF(filename, all_points, all_triangles, all_colors, names);
   if(!success)
   {
-    Rcpp::Rcerr << "Error in reading meshes." << std::endl;
+    std::cerr << "Error in reading meshes." << std::endl;
     return false;
   }
 

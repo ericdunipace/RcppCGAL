@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Linear_cell_complex/include/CGAL/CMap_linear_cell_complex_storages.h $
-// $Id: CMap_linear_cell_complex_storages.h 70bf903 2020-10-22T15:42:15+02:00 Guillaume Damiand
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Linear_cell_complex/include/CGAL/CMap_linear_cell_complex_storages.h $
+// $Id: CMap_linear_cell_complex_storages.h e6c767d 2021-05-12T15:45:07+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -12,7 +12,6 @@
 #ifndef CGAL_CMAP_LINEAR_CELL_COMPLEX_STORAGES_H
 #define CGAL_CMAP_LINEAR_CELL_COMPLEX_STORAGES_H 1
 
-#include <Rcpp.h>
 #include <CGAL/Compact_container.h>
 #include <CGAL/Concurrent_compact_container.h>
 #include <CGAL/Dart.h>
@@ -20,7 +19,7 @@
 #include <bitset>
 
 #include <boost/config.hpp>
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
 _Pragma("GCC diagnostic push")
 _Pragma("GCC diagnostic ignored \"-Warray-bounds\"")
 #endif
@@ -398,11 +397,11 @@ namespace CGAL {
 
     // Debug function
     void display_dart(Dart_const_handle ADart) const
-    { Rcpp::Rcout<<mdarts.index(ADart); }
+    { std::cout<<mdarts.index(ADart); }
 
     template<unsigned int i>
     void display_attribute(typename Attribute_const_handle<i>::type ah) const
-    { Rcpp::Rcout<< std::get<Helper::template Dimension_index<i>::value>
+    { std::cout<< std::get<Helper::template Dimension_index<i>::value>
         (mattribute_containers).index(ah); }
 
   protected:
@@ -477,7 +476,7 @@ namespace CGAL {
 
 } // namespace CGAL
 
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
  _Pragma("GCC diagnostic pop")
 #endif
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_hull_d/include/CGAL/Regular_complex_d.h $
-// $Id: Regular_complex_d.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_hull_d/include/CGAL/Regular_complex_d.h $
+// $Id: Regular_complex_d.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,13 +21,12 @@
 #ifndef CGAL_REGULAR_COMPLEX_D_H
 #define CGAL_REGULAR_COMPLEX_D_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_hull_d.h>
 
 #define CGAL_DEPRECATED_HEADER "<CGAL/Regular_complex_d.h>"
 #define CGAL_DEPRECATED_MESSAGE_DETAILS \
   "The Triangulation package (see https://doc.cgal.org/latest/Triangulation) should be used instead."
-#include <CGAL/internal/deprecation_warning.h>
+#include <CGAL/Installation/internal/deprecation_warning.h>
 
 #include <CGAL/basic.h>
 #include <CGAL/Iterator_project.h>
@@ -217,7 +216,7 @@ public:
   }
   ~RC_simplex_d() {}
 
-  void print(std::ostream& O=Rcpp::Rcout) const
+  void print(std::ostream& O=std::cout) const
   {
     O << "RC_simplex_d {" ;
     for(int i=0;i < int(vertices.size());++i) {
@@ -563,7 +562,7 @@ typedef size_t Size_type;
 Size_type number_of_vertices() const  { return this->vertices_.size();}
 Size_type number_of_simplices() const  { return this->simplices_.size();}
 
-void print_statistics(std::ostream& os = Rcpp::Rcout) const
+void print_statistics(std::ostream& os = std::cout) const
 {
   os << "Regular_complex_d - statistic" << std::endl;
   os << "number of vertices = " << number_of_vertices() << std::endl;

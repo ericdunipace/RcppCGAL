@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/refine_zero_against.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/refine_zero_against.h $
 // $Id: refine_zero_against.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -18,7 +18,6 @@
 #ifndef CGAL_REFINE_ZERO_AGAINST_H
 #define CGAL_REFINE_ZERO_AGAINST_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/Polynomial.h>
@@ -123,7 +122,7 @@ bool refine_zero_against(Field& low, Field& high, Polynomial p, Polynomial q) {
                     gcd_pq = Polynomial(1);
                 }
             }
-            Rcpp::Rcout << CGAL::to_double(low) << " "
+            std::cout << CGAL::to_double(low) << " "
                       << CGAL::to_double(high) << " "
                       << CGAL::degree(gcd_pq) << " "
                       << gcd_pq
@@ -162,11 +161,11 @@ bool refine_zero_against(Field& low, Field& high, Polynomial p, Polynomial q) {
 template < class Polynomial, class Field >
 static bool strong_refine_zero_against(Field& low, Field& high,
                                        Polynomial p, Polynomial q){
-    Rcpp::Rcout << "comp has_common_root" << std::endl;
+    std::cout << "comp has_common_root" << std::endl;
 
     bool has_common_root = refine_zero_against(low,high,p,q);
 
-    Rcpp::Rcout << "done, " << has_common_root << std::endl;
+    std::cout << "done, " << has_common_root << std::endl;
 
     CGAL::Sign sign_p_low = p.sign_at(low);
     CGAL::Sign sign_p_high = p.sign_at(high);

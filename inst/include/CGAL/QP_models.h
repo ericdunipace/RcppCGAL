@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/QP_solver/include/CGAL/QP_models.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/QP_solver/include/CGAL/QP_models.h $
 // $Id: QP_models.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_QP_MODELS_H
 #define CGAL_QP_MODELS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/QP_solver.h>
 
 #include <CGAL/disable_warnings.h>
@@ -859,7 +858,7 @@ protected:
   }
 
   void warn(const std::string& msg) const {
-    Rcpp::Rcerr << "Warning: " << msg << '.' << std::endl;
+    std::cerr << "Warning: " << msg << '.' << std::endl;
   }
 
   void warn1(const std::string& msg,const std::string& parameter1) const {

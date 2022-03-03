@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Circular_kernel_2/include/CGAL/Circular_kernel_2/internal_functions_on_line_arc_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Circular_kernel_2/include/CGAL/Circular_kernel_2/internal_functions_on_line_arc_2.h $
 // $Id: internal_functions_on_line_arc_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -18,7 +18,6 @@
 #ifndef CGAL_CIRCULAR_KERNEL_PREDICATES_ON_LINE_ARC_2_H
 #define CGAL_CIRCULAR_KERNEL_PREDICATES_ON_LINE_ARC_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 
@@ -652,7 +651,7 @@ namespace CircularFunctors {
       } // Case 4b
 
 
-      Rcpp::Rcout << "oops we missed a case" << std::endl;
+      std::cout << "oops we missed a case" << std::endl;
 
     }
 #endif // CGAL_CK_EXPLOIT_IDENTITY

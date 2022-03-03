@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/ETHZ/Random_forest_classifier.h $
-// $Id: Random_forest_classifier.h 350b917 2021-04-11T14:50:44+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Classification/include/CGAL/Classification/ETHZ/Random_forest_classifier.h $
+// $Id: Random_forest_classifier.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -12,7 +12,6 @@
 #ifndef CGAL_CLASSIFICATION_ETHZ_RANDOM_FOREST_CLASSIFIER_H
 #define CGAL_CLASSIFICATION_ETHZ_RANDOM_FOREST_CLASSIFIER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/Classification/Feature_set.h>
@@ -204,7 +203,7 @@ public:
     CGAL_CLASSIFICATION_CERR << "Using " << gt.size() << " inliers:" << std::endl;
 #ifdef CGAL_CLASSIFICATION_VERBOSE
     for (std::size_t i = 0; i < m_labels.size(); ++ i)
-      Rcpp::Rcerr << " * " << m_labels[i]->name() << ": " << count[i] << " inlier(s)" << std::endl;
+      std::cerr << " * " << m_labels[i]->name() << ": " << count[i] << " inlier(s)" << std::endl;
 #endif
 
     CGAL::internal::liblearning::DataView2D<int> label_vector (&(gt[0]), gt.size(), 1);
@@ -325,7 +324,7 @@ public:
   /// @{
 
   /*!
-    \brief converts a deprecated configuration (in compressed ASCII
+    \brief converts a deprecated configuration (in compressed \ascii
     format) to a new configuration (in binary format).
 
     The input file should be a GZIP container written by the

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Solver_interface/include/CGAL/Eigen_diagonalize_traits.h $
-// $Id: Eigen_diagonalize_traits.h ce76bf0 2021-03-03T11:43:46+01:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Solver_interface/include/CGAL/Eigen_diagonalize_traits.h $
+// $Id: Eigen_diagonalize_traits.h 267a641 2021-05-31T14:01:08+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jocelyn Meyron and Quentin Mérigot
@@ -40,7 +40,7 @@ struct Restricted_FT<float> { typedef float type; };
 
 }
 
-/// \ingroup PkgSolverInterfaceRef
+/// \ingroup PkgSolverInterfaceLS
 ///
 /// The class `Eigen_diagonalize_traits` provides an interface to the
 /// diagonalization of covariance matrices of \ref thirdpartyEigen

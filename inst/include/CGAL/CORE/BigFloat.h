@@ -17,7 +17,7 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_Core/include/CGAL/CORE/BigFloat.h $
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_Core/include/CGAL/CORE/BigFloat.h $
  * $Id: BigFloat.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
@@ -25,7 +25,6 @@
 #ifndef _CORE_BIGFLOAT_H_
 #define _CORE_BIGFLOAT_H_
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/CORE/BigFloatRep.h>
@@ -583,8 +582,8 @@ inline BigFloat gcd(const BigFloat& a, const BigFloat& b) {
   unsigned long bin_b = getBinExpo(b.m());
 
 /* THE FOLLOWING IS ALTERNATIVE CODE, for GCD using base B=2^{14}:
- *Rcpp::Rcout << "bin_a=" << bin_a << ",bin_b=" << bin_b << std::endl;
-  Rcpp::Rcout << "a.exp()=" << a.exp() << ",b.exp()=" << b.exp() << std::endl;
+ *std::cout << "bin_a=" << bin_a << ",bin_b=" << bin_b << std::endl;
+  std::cout << "a.exp()=" << a.exp() << ",b.exp()=" << b.exp() << std::endl;
   long chunk_a = BigFloatRep::chunkFloor(bin_a);
   long chunk_b = BigFloatRep::chunkFloor(bin_b);
   BigInt m_a = BigFloatRep::chunkShift(a.m(), chunk_a);

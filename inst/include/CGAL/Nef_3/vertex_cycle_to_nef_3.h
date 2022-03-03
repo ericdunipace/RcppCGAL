@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/vertex_cycle_to_nef_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/vertex_cycle_to_nef_3.h $
 // $Id: vertex_cycle_to_nef_3.h 30e536b 2021-03-01T08:06:48+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_NEF_VERTEX_CYCLE_TO_NEF_3_H
 #define CGAL_NEF_VERTEX_CYCLE_TO_NEF_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -397,7 +396,7 @@ typedef CGAL::Constrained_triangulation_plus_2<YZ_tri>     YZ_tri_plus;
 
    // no successful conversion?
    if ( !is_nef && verb )
-   {  Rcpp::Rcerr << "\nConversion from vertex cycle to Nef_polyhedron_3"
+   {  std::cerr << "\nConversion from vertex cycle to Nef_polyhedron_3"
          << " was not successful. Error history:"
          << ostr.str().c_str()
          << " Finally, empty Nef_polyhedron_3 was constructed." << std::endl;

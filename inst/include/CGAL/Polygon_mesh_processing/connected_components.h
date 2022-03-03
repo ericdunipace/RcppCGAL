@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/connected_components.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/connected_components.h $
 // $Id: connected_components.h 863ab75 2021-10-05T11:43:39+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_CONNECTED_COMPONENTS_H
 #define CGAL_POLYGON_MESH_PROCESSING_CONNECTED_COMPONENTS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/connected_components.h>
 
 #include <CGAL/disable_warnings.h>
@@ -706,7 +705,7 @@ void keep_or_remove_connected_components(PolygonMesh& pmesh
       face_descriptor fh = face(h, pmesh), ofh = face(oh, pmesh);
       if (is_border(h, pmesh) && is_border(oh, pmesh)){
 #ifdef CGAL_CC_DEBUG
-        Rcpp::Rcerr << "null_face on both sides of " << e << " is kept\n";
+        std::cerr << "null_face on both sides of " << e << " is kept\n";
 #endif
       }
       else if ((is_border(oh, pmesh) && get(fcm,fh)) ||

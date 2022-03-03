@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_3/include/CGAL/Delaunay_triangulation_3.h $
-// $Id: Delaunay_triangulation_3.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_3/include/CGAL/Delaunay_triangulation_3.h $
+// $Id: Delaunay_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_DELAUNAY_TRIANGULATION_3_H
 #define CGAL_DELAUNAY_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -73,7 +72,7 @@ template < class Gt,
 class Delaunay_triangulation_3;
 
 // There is a specialization Delaunay_triangulation_3<Gt, Tds, Fast_location>
-// defined in <CGAL/internal/Delaunay_triangulation_hierarchy_3.h>.
+// defined in <CGAL/Triangulation_3/internal/Delaunay_triangulation_hierarchy_3.h>.
 
 // Here is the specialization Delaunay_triangulation_3<Gt, Tds>, with three
 // arguments, that is if Location_policy being the default value 'Default'.
@@ -397,7 +396,7 @@ public:
     }
 
 #ifdef CGAL_TRIANGULATION_3_PROFILING
-    Rcpp::Rcerr << "Triangulation computed in " << t.elapsed() << " seconds." << std::endl;
+    std::cerr << "Triangulation computed in " << t.elapsed() << " seconds." << std::endl;
 #endif
 
     return number_of_vertices() - n;
@@ -709,7 +708,7 @@ public:
 
 #ifdef CGAL_TRIANGULATION_3_PROFILING
     double elapsed = t.elapsed();
-    Rcpp::Rcerr << "Points removed in " << elapsed << " seconds." << std::endl;
+    std::cerr << "Points removed in " << elapsed << " seconds." << std::endl;
 #endif
     return n - number_of_vertices();
   }
@@ -1915,7 +1914,7 @@ is_valid(bool verbose, int level) const
   if(! tds().is_valid(verbose,level))
   {
     if(verbose)
-      Rcpp::Rcerr << "invalid data structure" << std::endl;
+      std::cerr << "invalid data structure" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -1924,7 +1923,7 @@ is_valid(bool verbose, int level) const
   if(infinite_vertex() == Vertex_handle())
   {
     if(verbose)
-      Rcpp::Rcerr << "no infinite vertex" << std::endl;
+      std::cerr << "no infinite vertex" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -1945,7 +1944,7 @@ is_valid(bool verbose, int level) const
                                 it->neighbor(i)->index(it))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                Rcpp::Rcerr << "non-empty sphere " << std::endl;
+                std::cerr << "non-empty sphere " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -1971,7 +1970,7 @@ is_valid(bool verbose, int level) const
                                        (*it).first))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                Rcpp::Rcerr << "non-empty circle " << std::endl;
+                std::cerr << "non-empty circle " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -1991,7 +1990,7 @@ is_valid(bool verbose, int level) const
     }
   }
   if(verbose)
-      Rcpp::Rcerr << "Delaunay valid triangulation" << std::endl;
+      std::cerr << "Delaunay valid triangulation" << std::endl;
 
   return true;
 }
@@ -2005,10 +2004,10 @@ is_valid(Cell_handle c, bool verbose, int level) const
   {
     if(verbose)
     {
-      Rcpp::Rcerr << "combinatorically invalid cell" ;
+      std::cerr << "combinatorically invalid cell" ;
       for(int i=0; i <= dimension(); i++)
-        Rcpp::Rcerr << c->vertex(i)->point() << ", " ;
-      Rcpp::Rcerr << std::endl;
+        std::cerr << c->vertex(i)->point() << ", " ;
+      std::cerr << std::endl;
     }
     CGAL_triangulation_assertion(false);
     return false;
@@ -2024,7 +2023,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
           if(side_of_sphere(c, c->vertex((c->neighbor(i))->index(c))->point()) == ON_BOUNDED_SIDE)
           {
             if(verbose)
-              Rcpp::Rcerr << "non-empty sphere " << std::endl;
+              std::cerr << "non-empty sphere " << std::endl;
 
             CGAL_triangulation_assertion(false);
             return false;
@@ -2042,7 +2041,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
           if(side_of_circle(c, 3, c->vertex(c->neighbor(i)->index(c))->point()) == ON_BOUNDED_SIDE)
           {
             if(verbose)
-              Rcpp::Rcerr << "non-empty circle " << std::endl;
+              std::cerr << "non-empty circle " << std::endl;
 
             CGAL_triangulation_assertion(false);
             return false;
@@ -2053,14 +2052,14 @@ is_valid(Cell_handle c, bool verbose, int level) const
     }
   }
   if(verbose)
-    Rcpp::Rcerr << "Delaunay valid cell" << std::endl;
+    std::cerr << "Delaunay valid cell" << std::endl;
 
   return true;
 }
 
 } //namespace CGAL
 
-#include <CGAL/internal/Delaunay_triangulation_hierarchy_3.h>
+#include <CGAL/Triangulation_3/internal/Delaunay_triangulation_hierarchy_3.h>
 
 #include <CGAL/enable_warnings.h>
 

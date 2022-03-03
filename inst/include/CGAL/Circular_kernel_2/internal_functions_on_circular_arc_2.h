@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Circular_kernel_2/include/CGAL/Circular_kernel_2/internal_functions_on_circular_arc_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Circular_kernel_2/include/CGAL/Circular_kernel_2/internal_functions_on_circular_arc_2.h $
 // $Id: internal_functions_on_circular_arc_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -18,7 +18,6 @@
 #ifndef CGAL_CIRCULAR_KERNEL_PREDICATES_ON_CIRCULAR_ARC_2_H
 #define CGAL_CIRCULAR_KERNEL_PREDICATES_ON_CIRCULAR_ARC_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 
@@ -526,7 +525,7 @@ namespace CircularFunctors {
     //if ( ca1.right()!=ca2.left() )
     if ( CircularFunctors::compare_x<CK>(ca1.left(), ca2.left()) != SMALLER )
       {
-        //Rcpp::Rcout << " SWAP " << std::endl;
+        //std::cout << " SWAP " << std::endl;
         std::swap(ca1,ca2);
       }*/
   }

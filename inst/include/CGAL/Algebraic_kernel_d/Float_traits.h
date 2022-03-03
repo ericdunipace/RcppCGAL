@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Float_traits.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Float_traits.h $
 // $Id: Float_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -20,7 +20,6 @@
 #ifndef CGAL_ALGEBRAIC_KERNEL_D_FLOAT_TRAITS_H
 #define CGAL_ALGEBRAIC_KERNEL_D_FLOAT_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #if CGAL_USE_LEDA
@@ -60,7 +59,7 @@ public:
   struct Get_mantissa
     : public CGAL::cpp98::unary_function< leda_bigfloat, leda_integer > {
     leda_integer operator()( const leda_bigfloat& x ) const {
-      //Rcpp::Rcout << x.get_significant() << std::endl;
+      //std::cout << x.get_significant() << std::endl;
       return x.get_significant();
     }
   };
@@ -146,9 +145,9 @@ struct Mul_by_pow_of_2
     Gmpfr result(0,a.get_precision()); // just to get the prec of a
     if (e >= 0 ){
       mpfr_mul_2si (result.fr(), a.fr(), e, mpfr_get_default_rounding_mode());
-      //Rcpp::Rcout << "INPUT   : "<< a <<"+" << e << std::endl;
-      //Rcpp::Rcout << "result: "<< result << std::endl;
-      //Rcpp::Rcout << "TRUTH   : "<< a * CGAL::ipower(Gmpfr(2),e) << std::endl;
+      //std::cout << "INPUT   : "<< a <<"+" << e << std::endl;
+      //std::cout << "result: "<< result << std::endl;
+      //std::cout << "TRUTH   : "<< a * CGAL::ipower(Gmpfr(2),e) << std::endl;
       CGAL_postcondition(a * CGAL::ipower(Gmpfr(2),e) == result);
     }
     else{

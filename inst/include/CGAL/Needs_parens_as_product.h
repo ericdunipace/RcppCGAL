@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_foundations/include/CGAL/Needs_parens_as_product.h $
-// $Id: Needs_parens_as_product.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_foundations/include/CGAL/Needs_parens_as_product.h $
+// $Id: Needs_parens_as_product.h a88a84b 2021-08-13T15:46:50+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -75,11 +75,9 @@ template <> struct Needs_parens_as_product<long>{
     bool operator()(const long& x){return x < long(0);}
 };
 
-#ifdef CGAL_USE_LONG_LONG
 template <> struct Needs_parens_as_product<long long>{
     bool operator()(const long long& x){return x < (long long)(0);}
 };
-#endif
 
 template <> struct Needs_parens_as_product<float>{
     bool operator()(const float& x){return x < float(0);}

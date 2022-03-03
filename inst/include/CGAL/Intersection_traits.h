@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Intersections_2/include/CGAL/Intersection_traits.h $
-// $Id: Intersection_traits.h 209513d 2020-07-31T15:58:38+02:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Intersections_2/include/CGAL/Intersection_traits.h $
+// $Id: Intersection_traits.h 9ed943e 2021-06-23T17:38:22+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -47,8 +47,8 @@
   template<typename K>                                                  \
   inline                                                                \
   decltype(auto) \
-  intersection(const B<K>& a, const A<K>& b) {                          \
-    return BOOST_PP_CAT(K().intersect_, BOOST_PP_CAT(DIM, _object()(a, b))); \
+  intersection(const B<K>& b, const A<K>& a) {                          \
+    return BOOST_PP_CAT(K().intersect_, BOOST_PP_CAT(DIM, _object()(b, a))); \
   }
 
 #define CGAL_INTERSECTION_FUNCTION_SELF(A, DIM)                         \
@@ -67,8 +67,8 @@
   }                                                        \
   template<typename K>                                     \
   inline bool                                              \
-  do_intersect(const B<K>& a, const A<K>& b) {             \
-    return BOOST_PP_CAT(K().do_intersect_, BOOST_PP_CAT(DIM, _object()(a, b))); \
+  do_intersect(const B<K>& b, const A<K>& a) {             \
+    return BOOST_PP_CAT(K().do_intersect_, BOOST_PP_CAT(DIM, _object()(b, a))); \
   }
 
 #define CGAL_DO_INTERSECT_FUNCTION_SELF(A, DIM)                         \

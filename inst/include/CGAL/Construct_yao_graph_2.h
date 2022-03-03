@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Cone_spanners_2/include/CGAL/Construct_yao_graph_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Cone_spanners_2/include/CGAL/Construct_yao_graph_2.h $
 // $Id: Construct_yao_graph_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -18,7 +18,6 @@
 #ifndef CGAL_CONSTRUCT_YAO_GRAPH_2_H
 #define CGAL_CONSTRUCT_YAO_GRAPH_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 
@@ -95,7 +94,7 @@ public:
 
     {
         if (k<2) {
-            Rcpp::Rcout << "The number of cones must be larger than 1!" << std::endl;
+            std::cout << "The number of cones must be larger than 1!" << std::endl;
             CGAL_assertion(false);
         }
 

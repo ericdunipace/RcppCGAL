@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/partition.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/partition.h $
 // $Id: partition.h 48c997a 2020-07-17T17:00:18+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -19,7 +19,6 @@
 * free functions of this package.
 */
 
-#include <Rcpp.h>
 #include <CGAL/boost/graph/METIS/partition_graph.h>
 #include <CGAL/boost/graph/METIS/partition_dual_graph.h>
 
@@ -69,7 +68,7 @@ void output_partition(const TriangleMesh& tm,
     Filtered_graph m_part(tm, i, fpmap);
     if(!m_part.is_selection_valid())
     {
-      Rcpp::Rcerr << "Warning: cannot extract subdomain #" << i << " because it is "
+      std::cerr << "Warning: cannot extract subdomain #" << i << " because it is "
                 << "not a manifold mesh" << std::endl;
       continue;
     }

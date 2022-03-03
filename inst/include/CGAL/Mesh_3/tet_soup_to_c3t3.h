@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/tet_soup_to_c3t3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/tet_soup_to_c3t3.h $
 // $Id: tet_soup_to_c3t3.h 086299c 2021-01-08T10:39:24+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_MESH_3_TET_SOUP_TO_C3T3_H
 #define CGAL_MESH_3_TET_SOUP_TO_C3T3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -92,7 +91,7 @@ bool add_facet_to_incident_cells_map(const typename Tr::Cell_handle c, int i,
     if (is_insert_successful.first->second.size() != 1)
     {
       if(verbose)
-        Rcpp::Rcout << "Error in add_facet_to_incident_cells_map" << std::endl;
+        std::cout << "Error in add_facet_to_incident_cells_map" << std::endl;
       return false;
     }
     is_insert_successful.first->second.push_back(e);
@@ -362,7 +361,7 @@ bool build_triangulation(Tr& tr,
 
   if(finite_cells.empty())
   {
-    Rcpp::Rcout << "WARNING: No finite cells were provided. Only the points will be loaded."<<std::endl;
+    std::cout << "WARNING: No finite cells were provided. Only the points will be loaded."<<std::endl;
   }
 
   tr.tds().clear(); // not tr.clear() since it calls tr.init() which we don't want
@@ -384,12 +383,12 @@ bool build_triangulation(Tr& tr,
       return false;
     if (verbose)
     {
-      Rcpp::Rcout << "built triangulation : " << std::endl;
-      Rcpp::Rcout << tr.number_of_cells() << " cells" << std::endl;
+      std::cout << "built triangulation : " << std::endl;
+      std::cout << tr.number_of_cells() << " cells" << std::endl;
     }
   }
   if(verbose)
-    Rcpp::Rcout << tr.number_of_vertices() << " vertices" << std::endl;
+    std::cout << tr.number_of_vertices() << " vertices" << std::endl;
 
   if(c3t3_loader_failed)
     return true;
@@ -421,7 +420,7 @@ bool build_triangulation_from_file(std::istream& is,
 
   CGAL_assertion(dim == 3);
 
-  Rcpp::Rcout << "Reading .mesh file..." << std::endl;
+  std::cout << "Reading .mesh file..." << std::endl;
   while(is >> word && word != "End")
   {
     if(word == "Vertices")
@@ -480,9 +479,9 @@ bool build_triangulation_from_file(std::istream& is,
     }
   }
 
-  Rcpp::Rcout << points.size() << " points" << std::endl;
-  Rcpp::Rcout << border_facets.size() << " border facets" << std::endl;
-  Rcpp::Rcout << finite_cells.size() << " cells" << std::endl;
+  std::cout << points.size() << " points" << std::endl;
+  std::cout << border_facets.size() << " border facets" << std::endl;
+  std::cout << finite_cells.size() << " cells" << std::endl;
 
   if(finite_cells.empty())
     return false;

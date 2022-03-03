@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/scanline_orient_normals.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/scanline_orient_normals.h $
 // $Id: scanline_orient_normals.h bce99e7 2020-11-09T08:36:45+01:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_SCANLINE_ORIENT_NORMALS_H
 #define CGAL_SCANLINE_ORIENT_NORMALS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/squared_distance_3.h>
@@ -263,9 +262,9 @@ void orient_scanline (Iterator begin, Iterator end,
   {
 #ifdef CGAL_SCANLINE_ORIENT_VERBOSE
     if (!solver_success)
-      Rcpp::Rcerr << "Inverting because olver failed: ";
+      std::cerr << "Inverting because olver failed: ";
     else
-      Rcpp::Rcerr << "Inverting because scanner under scanline: ";
+      std::cerr << "Inverting because scanner under scanline: ";
 #endif
 
     direction = -direction;
@@ -282,11 +281,11 @@ void orient_scanline (Iterator begin, Iterator end,
 
 #ifdef CGAL_SCANLINE_ORIENT_VERBOSE
     if (solver_success && scan_position.z() > mean_z)
-      Rcpp::Rcerr << "SOLVED" << std::endl;
+      std::cerr << "SOLVED" << std::endl;
     else if (!solver_success)
-      Rcpp::Rcerr << "FAILED, solver failure" << std::endl;
+      std::cerr << "FAILED, solver failure" << std::endl;
     else
-      Rcpp::Rcerr << "FAILED, scanner under scanline" << std::endl;
+      std::cerr << "FAILED, scanner under scanline" << std::endl;
 #endif
   }
 
@@ -545,7 +544,7 @@ void scanline_orient_normals (PointRange& points, const NamedParameters& np)
      scan_angle_map, Fallback_scan_angle());
 
 #ifdef CGAL_SCANLINE_ORIENT_VERBOSE
-  Rcpp::Rcerr << nb_scanlines << " scanline(s) identified (mean length = "
+  std::cerr << nb_scanlines << " scanline(s) identified (mean length = "
             << std::size_t(points.size() / double(nb_scanlines))
             << " point(s))" << std::endl;
 #endif

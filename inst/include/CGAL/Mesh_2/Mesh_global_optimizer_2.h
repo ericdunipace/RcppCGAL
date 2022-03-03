@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_2/include/CGAL/Mesh_2/Mesh_global_optimizer_2.h $
-// $Id: Mesh_global_optimizer_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_2/include/CGAL/Mesh_2/Mesh_global_optimizer_2.h $
+// $Id: Mesh_global_optimizer_2.h 0ac4bf6 2021-09-10T11:28:13+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jane Tournois, Raul Gallegos, Pierre Alliez, Stéphane Tayeb
@@ -14,7 +14,6 @@
 #ifndef CGAL_MESH_2_MESH_GLOBAL_OPTIMIZER_2_H
 #define CGAL_MESH_2_MESH_GLOBAL_OPTIMIZER_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 
@@ -128,8 +127,8 @@ public:
   double initial_vertices_nb = static_cast<double>(moving_vertices.size());
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
   double step_begin = running_time_.time();
-  Rcpp::Rcerr << "Running " << Mf::name() << "-smoothing..." << std::endl;
-  Rcpp::Rcerr << "(" << initial_vertices_nb << " vertices moving)" << std::endl;
+  std::cerr << "Running " << Mf::name() << "-smoothing..." << std::endl;
+  std::cerr << "(" << initial_vertices_nb << " vertices moving)" << std::endl;
 #endif
 
     // Initialize big moves (stores the largest moves)
@@ -175,7 +174,7 @@ public:
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
       double time = running_time_.time();
       double moving_vertices_size = static_cast<double>(moving_vertices.size());
-      Rcpp::Rcerr << boost::format("\r             \r"
+      std::cerr << boost::format("\r             \r"
         "end iteration %1% (%2%%% frozen), %3% / %4%, last step:%5$.2fs, step avg:%6$.2fs, avg large move:%7$.3f          ")
       % (i+1)
       % ((1. - moving_vertices_size/initial_vertices_nb)*100.)
@@ -193,17 +192,17 @@ public:
 
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
     if(sq_freeze_ratio_ > 0. && moving_vertices.empty())
-      Rcpp::Rcerr << "All vertices frozen" << std::endl;
+      std::cerr << "All vertices frozen" << std::endl;
     else if(sq_freeze_ratio_ > 0. && convergence_stop)
-      Rcpp::Rcerr << "Can't improve anymore" << std::endl;
+      std::cerr << "Can't improve anymore" << std::endl;
     else if ( is_time_limit_reached() )
-      Rcpp::Rcerr << "Time limit reached" << std::endl;
+      std::cerr << "Time limit reached" << std::endl;
     else if ( check_convergence() )
-      Rcpp::Rcerr << "Convergence reached" << std::endl;
+      std::cerr << "Convergence reached" << std::endl;
     else if ( i >= nb_iterations )
-      Rcpp::Rcerr << "Max iteration number reached" << std::endl;
+      std::cerr << "Max iteration number reached" << std::endl;
 
-    Rcpp::Rcerr << "Total optimization time: " << running_time_.time()
+    std::cerr << "Total optimization time: " << running_time_.time()
               << "s" << std::endl << std::endl;
 #endif
 
@@ -353,7 +352,7 @@ private:
       sum += CGAL::sqrt(*it);
 
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-    sum_moves_ = sum/big_moves_.size();
+    sum_moves_ = sum/FT(big_moves_.size());
 #endif
 
     return ( sum/FT(big_moves_.size()) < convergence_ratio_ );

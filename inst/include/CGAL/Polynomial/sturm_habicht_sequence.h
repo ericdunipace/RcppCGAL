@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polynomial/include/CGAL/Polynomial/sturm_habicht_sequence.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polynomial/include/CGAL/Polynomial/sturm_habicht_sequence.h $
 // $Id: sturm_habicht_sequence.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_POLYNOMIAL_STURM_HABICHT
 #define CGAL_POLYNOMIAL_STURM_HABICHT 1
 
-#include <Rcpp.h>
 #include <vector>
 #include <algorithm>
 #include <CGAL/Polynomial/bezout_matrix.h>
@@ -424,7 +423,7 @@ template<typename Polynomial_traits_d,
     int k;
     InputIterator el=start;
 
-    //Rcpp::Rcout << "Sign of." << (*el) << std::endl;
+    //std::cout << "Sign of." << (*el) << std::endl;
 
     curr_sign=CGAL::sign(*el);
 

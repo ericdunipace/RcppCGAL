@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org);
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/3MF.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/3MF.h $
 // $Id: 3MF.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -11,7 +11,6 @@
 #ifndef CGAL_IO_3MF_H
 #define CGAL_IO_3MF_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/3MF/read_3mf.h>
 #include <CGAL/IO/3MF/write_3mf.h>
 #include <CGAL/IO/Color.h>
@@ -68,7 +67,7 @@ bool read_3MF(const std::string& fname,
   hResult = NMR::lib3mf_getinterfaceversion(&nInterfaceVersionMajor, &nInterfaceVersionMinor, &nInterfaceVersionMicro);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not get 3MF Library version: " << std::hex << hResult << std::endl;
+    std::cerr << "could not get 3MF Library version: " << std::hex << hResult << std::endl;
     return false;
   }
 
@@ -76,7 +75,7 @@ bool read_3MF(const std::string& fname,
   hResult = NMR::lib3mf_createmodel(&pModel);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not create model: " << std::hex << hResult << std::endl;
+    std::cerr << "could not create model: " << std::hex << hResult << std::endl;
     return false;
   }
 
@@ -84,7 +83,7 @@ bool read_3MF(const std::string& fname,
   hResult = NMR::lib3mf_model_queryreader(pModel, sReaderName.c_str(), &pReader);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not create model reader: " << std::hex << hResult << std::endl;
+    std::cerr << "could not create model reader: " << std::hex << hResult << std::endl;
     NMR::lib3mf_release(pModel);
     return false;
   }
@@ -93,7 +92,7 @@ bool read_3MF(const std::string& fname,
   hResult = NMR::lib3mf_reader_readfromfileutf8(pReader, fname.c_str());
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not parse file: " << std::hex << hResult << std::endl;
+    std::cerr << "could not parse file: " << std::hex << hResult << std::endl;
     NMR::lib3mf_release(pReader);
     NMR::lib3mf_release(pModel);
     return false;
@@ -109,7 +108,7 @@ bool read_3MF(const std::string& fname,
   hResult = NMR::lib3mf_model_getobjects(pModel, &pResourceIterator);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not get object: " << std::hex << hResult << std::endl;
+    std::cerr << "could not get object: " << std::hex << hResult << std::endl;
     NMR::lib3mf_release(pModel);
     return false;
   }
@@ -117,7 +116,7 @@ bool read_3MF(const std::string& fname,
   hResult = NMR::lib3mf_resourceiterator_movenext(pResourceIterator, &pbHasNext);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not get next object: " << std::hex << hResult << std::endl;
+    std::cerr << "could not get next object: " << std::hex << hResult << std::endl;
     NMR::lib3mf_release(pResourceIterator);
     NMR::lib3mf_release(pModel);
     return false;
@@ -138,7 +137,7 @@ bool read_3MF(const std::string& fname,
     hResult = NMR::lib3mf_resourceiterator_getcurrent(pResourceIterator, &pResource);
     if(hResult != LIB3MF_OK)
     {
-      Rcpp::Rcerr << "could not get resource: " << std::hex << hResult << std::endl;
+      std::cerr << "could not get resource: " << std::hex << hResult << std::endl;
       NMR::lib3mf_release(pResourceIterator);
       NMR::lib3mf_release(pModel);
       return false;
@@ -148,7 +147,7 @@ bool read_3MF(const std::string& fname,
     hResult = NMR::lib3mf_resource_getresourceid(pResource, &ResourceID);
     if(hResult != LIB3MF_OK)
     {
-      Rcpp::Rcerr << "could not get resource id: " << std::hex << hResult << std::endl;
+      std::cerr << "could not get resource id: " << std::hex << hResult << std::endl;
       NMR::lib3mf_release(pResource);
       NMR::lib3mf_release(pResourceIterator);
       NMR::lib3mf_release(pModel);
@@ -250,7 +249,7 @@ bool read_3MF(const std::string& fname,
     hResult = NMR::lib3mf_resourceiterator_movenext(pResourceIterator, &pbHasNext);
     if(hResult != LIB3MF_OK)
     {
-      Rcpp::Rcerr << "could not get next object: " << std::hex << hResult << std::endl;
+      std::cerr << "could not get next object: " << std::hex << hResult << std::endl;
       return false;
     }
   }
@@ -264,7 +263,7 @@ bool read_3MF(const std::string& fname,
   hResult = NMR::lib3mf_model_getbuilditems(pModel, &pBuildItemIterator);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcout << "could not get build items: " << std::hex << hResult << std::endl;
+    std::cout << "could not get build items: " << std::hex << hResult << std::endl;
     NMR::lib3mf_release(pBuildItemIterator);
     NMR::lib3mf_release(pModel);
     return false;
@@ -273,7 +272,7 @@ bool read_3MF(const std::string& fname,
   hResult = NMR::lib3mf_builditemiterator_movenext(pBuildItemIterator, &pbHasNext);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcout << "could not get next build item: " << std::hex << hResult << std::endl;
+    std::cout << "could not get next build item: " << std::hex << hResult << std::endl;
     NMR::lib3mf_release(pBuildItemIterator);
     NMR::lib3mf_release(pModel);
     return false;
@@ -288,7 +287,7 @@ bool read_3MF(const std::string& fname,
     hResult = NMR::lib3mf_builditemiterator_getcurrent(pBuildItemIterator, &pBuildItem);
     if(hResult != LIB3MF_OK)
     {
-      Rcpp::Rcout << "could not get build item: " << std::hex << hResult << std::endl;
+      std::cout << "could not get build item: " << std::hex << hResult << std::endl;
       NMR::lib3mf_release(pBuildItemIterator);
       NMR::lib3mf_release(pModel);
       return false;
@@ -299,7 +298,7 @@ bool read_3MF(const std::string& fname,
     hResult = NMR::lib3mf_builditem_getobjectresource(pBuildItem, &pObjectResource);
     if(hResult != LIB3MF_OK)
     {
-      Rcpp::Rcout << "could not get build item resource: " << std::hex << hResult << std::endl;
+      std::cout << "could not get build item resource: " << std::hex << hResult << std::endl;
       NMR::lib3mf_release(pBuildItem);
       NMR::lib3mf_release(pBuildItemIterator);
       NMR::lib3mf_release(pModel);
@@ -328,7 +327,7 @@ bool read_3MF(const std::string& fname,
           NMR::lib3mf_release(pBuildItem);
           NMR::lib3mf_release(pBuildItemIterator);
           NMR::lib3mf_release(pModel);
-          Rcpp::Rcerr << "could not check object transform: " << std::hex << hResult << std::endl;
+          std::cerr << "could not check object transform: " << std::hex << hResult << std::endl;
           return false;
         }
 
@@ -341,7 +340,7 @@ bool read_3MF(const std::string& fname,
             NMR::lib3mf_release(pBuildItem);
             NMR::lib3mf_release(pBuildItemIterator);
             NMR::lib3mf_release(pModel);
-            Rcpp::Rcerr << "could not get object transform: " << std::hex << hResult << std::endl;
+            std::cerr << "could not get object transform: " << std::hex << hResult << std::endl;
             return false;
           }
         }
@@ -368,7 +367,7 @@ bool read_3MF(const std::string& fname,
     hResult = NMR::lib3mf_builditemiterator_movenext(pBuildItemIterator, &pbHasNext);
     if(hResult != LIB3MF_OK)
     {
-      Rcpp::Rcerr << "could not get next build item: " << std::hex << hResult << std::endl;
+      std::cerr << "could not get next build item: " << std::hex << hResult << std::endl;
       return false;
     }
   }
@@ -463,7 +462,7 @@ bool write_3MF(const std::string& fname,
   HRESULT hResult = NMR::lib3mf_createmodel(&pModel);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr << "could not create model: " << std::hex << hResult << std::endl;
+    std::cerr << "could not create model: " << std::hex << hResult << std::endl;
     return false;
   }
 

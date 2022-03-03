@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/3MF/read_3mf.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/3MF/read_3mf.h $
 // $Id: read_3mf.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #define CGAL_IO_READ_3MF_H
 
 
-#include <Rcpp.h>
 #include <CGAL/IO/Color.h>
 
 #include <CGAL/Kernel_traits.h>
@@ -72,7 +71,7 @@ bool extract_soups (NMR::PLib3MFModelMeshObject *pMeshObject,
   hResult = NMR::lib3mf_object_getnameutf8(pMeshObject, NULL, 0, &nNeededChars);
   if(hResult != LIB3MF_OK)
   {
-    Rcpp::Rcerr<<"Error during name extraction.";
+    std::cerr<<"Error during name extraction.";
     return false;
   }
 
@@ -101,9 +100,9 @@ bool extract_soups (NMR::PLib3MFModelMeshObject *pMeshObject,
   {
     DWORD nErrorMessage;
     LPCSTR pszErrorMessage;
-    Rcpp::Rcerr << "could not create property handler: " << std::hex << hResult << std::endl;
+    std::cerr << "could not create property handler: " << std::hex << hResult << std::endl;
     NMR::lib3mf_getlasterror(pMeshObject, &nErrorMessage, &pszErrorMessage);
-    Rcpp::Rcerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
+    std::cerr << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
     NMR::lib3mf_release(pMeshObject);
     return false;
   }

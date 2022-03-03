@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Partition_2/include/CGAL/partition_is_valid_2.h $
-// $Id: partition_is_valid_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Partition_2/include/CGAL/partition_is_valid_2.h $
+// $Id: partition_is_valid_2.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_PARTITION_IS_VALID_2_H
 #define CGAL_PARTITION_IS_VALID_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -53,7 +52,7 @@ polygons_w_steiner_are_equal(Circulator1 orig_first, Circulator2 new_first,
    if (new_circ == new_first)
    {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-      Rcpp::Rcout << "first vertex " << *orig_first << " not found "
+      std::cout << "first vertex " << *orig_first << " not found "
                 << std::endl;
 #endif // CGAL_PARTITION_CHECK_DEBUG
       return false;
@@ -80,7 +79,7 @@ polygons_w_steiner_are_equal(Circulator1 orig_first, Circulator2 new_first,
              COLLINEAR)
          {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-           Rcpp::Rcout << *new_circ << " is not collinear with " << prev_pt
+           std::cout << *new_circ << " is not collinear with " << prev_pt
                      << " and " << *orig_circ << std::endl;
 #endif
             return false;
@@ -113,7 +112,7 @@ polygons_are_equal(Circulator1 orig_first, Circulator2 new_first)
    do
    {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-      Rcpp::Rcout << *new_first << " is in the right place " << std::endl;
+      std::cout << *new_first << " is in the right place " << std::endl;
 #endif
       orig_circ++; new_circ++;
    }
@@ -161,15 +160,15 @@ partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
       vtx_begin = (*poly_first).vertices_begin();
       vtx_end = (*poly_first).vertices_end();
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-         Rcpp::Rcout << "Polygon " << poly_num << " is " << std::endl;
-         Rcpp::Rcout << *poly_first << std::endl;
+         std::cout << "Polygon " << poly_num << " is " << std::endl;
+         std::cout << *poly_first << std::endl;
 #endif
       CGAL_partition_assertion (
            orientation_2(vtx_begin, vtx_end, traits) == COUNTERCLOCKWISE);
       if (!is_valid(vtx_begin, vtx_end))
       {
 #ifdef CGAL_PARTITION_CHECK_DEBUG
-         Rcpp::Rcout << "It does NOT have the tested property." << std::endl;
+         std::cout << "It does NOT have the tested property." << std::endl;
 #endif
          return false;
       }
@@ -180,13 +179,13 @@ partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
 
 #ifdef CGAL_PARTITION_CHECK_DEBUG
    typename std::list<Point_2>::iterator  poly_iterator;
-   Rcpp::Rcout << "union polygon is " << std::endl;
+   std::cout << "union polygon is " << std::endl;
    for (poly_iterator = union_polygon.begin();
         poly_iterator != union_polygon.end(); poly_iterator++)
    {
-      Rcpp::Rcout << *poly_iterator << " ";
+      std::cout << *poly_iterator << " ";
    }
-   Rcpp::Rcout << std::endl;
+   std::cout << std::endl;
 #endif // CGAL_PARTITION_CHECK_DEBUG
 
    typedef typename std::list<Point_2>::iterator     I;
@@ -202,10 +201,10 @@ partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
 }
 } // namespace internal
 
-template<class InputIterator, class FowardIterator>
+template<class InputIterator, class ForwardIterator>
 bool
 partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
-                      FowardIterator poly_first, FowardIterator poly_last)
+                      ForwardIterator poly_first, ForwardIterator poly_last)
 {
    typedef typename std::iterator_traits<InputIterator>::value_type   Point_2;
    typedef typename Kernel_traits<Point_2>::Kernel     K;
@@ -219,10 +218,10 @@ partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
 }
 
 
-template<class InputIterator, class FowardIterator, class Traits>
+template<class InputIterator, class ForwardIterator, class Traits>
 bool
 partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
-                      FowardIterator poly_first, FowardIterator poly_last,
+                      ForwardIterator poly_first, ForwardIterator poly_last,
                       const Traits& traits)
 {
   //typedef typename std::iterator_traits<InputIterator>::value_type   Point_2;

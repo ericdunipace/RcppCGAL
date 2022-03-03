@@ -23,7 +23,7 @@
  *      - added comments
  *      - copied Conjugate Gradient algorithm WITH preconditioner from Graphite 1.9 code
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/OpenNL/include/CGAL/OpenNL/conjugate_gradient.h $
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4/OpenNL/include/CGAL/OpenNL/conjugate_gradient.h $
  * $Id: conjugate_gradient.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  */
@@ -31,7 +31,6 @@
 #ifndef __OPENNL_CONJUGATE_GRADIENT__
 #define __OPENNL_CONJUGATE_GRADIENT__
 
-#include <Rcpp.h>
 #include <CGAL/OpenNL/blas.h>
 #include <CGAL/assertions.h>
 
@@ -85,7 +84,7 @@ public:
     bool solve(const MATRIX &A, const VECTOR& b, VECTOR& x)
     {
 #ifdef DEBUG_TRACE
-        Rcpp::Rcerr << "  Call Conjugate Gradient" << std::endl;
+        std::cerr << "  Call Conjugate Gradient" << std::endl;
 #endif
         CGAL_assertion(A.dimension() > 0);
         unsigned int n = A.dimension() ;                        // (Square) matrix dimension
@@ -186,7 +185,7 @@ public:
     bool solve(const MATRIX &A, const PC_MATRIX &C, const VECTOR& b, VECTOR& x)
     {
 #ifdef DEBUG_TRACE
-        Rcpp::Rcerr << "  Call Conjugate Gradient with preconditioner" << std::endl;
+        std::cerr << "  Call Conjugate Gradient with preconditioner" << std::endl;
 #endif
         CGAL_assertion(A.dimension() > 0);
         unsigned int n = A.dimension() ;                        // (Square) matrix dimension

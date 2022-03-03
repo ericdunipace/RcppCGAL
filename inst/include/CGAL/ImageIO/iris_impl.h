@@ -3,7 +3,7 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_ImageIO/include/CGAL/ImageIO/iris_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_ImageIO/include/CGAL/ImageIO/iris_impl.h $
 // $Id: iris_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
@@ -23,9 +23,6 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
-#include <Rcpp.h>
-#include <Rcpp.h>
-#include <Rcpp.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>

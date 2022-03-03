@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Visitor.h $
-// $Id: Visitor.h 692f35a 2021-02-15T17:17:20+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Visitor.h $
+// $Id: Visitor.h 4454c5b 2021-08-30T12:25:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_COREFINEMENT_VISITOR_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_COREFINEMENT_VISITOR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/corefinement.h>
 
 #include <CGAL/disable_warnings.h>
@@ -24,7 +23,7 @@
 #include <CGAL/Default.h>
 #include <CGAL/boost/graph/Euler_operations.h>
 #include <CGAL/Constrained_Delaunay_triangulation_2.h>
-#include <CGAL/Triangulation_2_projection_traits_3.h>
+#include <CGAL/Projection_traits_3.h>
 #include <CGAL/Triangulation_vertex_base_with_info_2.h>
 
 #include <boost/container/flat_map.hpp>
@@ -388,9 +387,9 @@ private:
    typedef Non_manifold_feature_map<TriangleMesh>               NM_features_map;
 // typedef for the CDT
    typedef Intersection_nodes<TriangleMesh, VertexPointMap1, VertexPointMap2,
-            Predicates_on_constructions_needed>                          INodes;
+            Predicates_on_constructions_needed>                              INodes;
    typedef typename INodes::Exact_kernel                                     EK;
-    typedef Triangulation_2_projection_traits_3<EK>                  CDT_traits;
+    typedef Projection_traits_3<EK>                                          CDT_traits;
     typedef Triangulation_vertex_base_with_info_2<Node_id,CDT_traits>        Vb;
     typedef Constrained_triangulation_face_base_2<CDT_traits>                Fb;
     typedef Triangulation_data_structure_2<Vb,Fb>                         TDS_2;
@@ -625,7 +624,7 @@ public:
 
 //    user_visitor.new_node_added_triple_face(node_id, f1, f2, f3, tm); // NODE_VISITOR_TAG
 #ifdef CGAL_DEBUG_AUTOREFINEMENT
-    Rcpp::Rcout << "adding node " << node_id << " " << f1 << " " << f2 << " " << f3 << "\n";
+    std::cout << "adding node " << node_id << " " << f1 << " " << f2 << " " << f3 << "\n";
 #endif
     TriangleMesh* tm_ptr = const_cast<TriangleMesh*>(&tm);
     on_face[tm_ptr][f1].push_back(node_id);
@@ -648,7 +647,7 @@ public:
     graph_node_classifier.new_node(node_id, *tm2_ptr);
 
     //forward to the visitor
-//    user_visitor.new_node_added(node_id, type, h_1, h_2, is_target_coplanar, is_source_coplanar); // NODE_VISITOR_TAG
+    user_visitor.intersection_point_detected(node_id, type, h_1, h_2, tm1, tm2, is_target_coplanar, is_source_coplanar);
     if (tm2_ptr!=const_mesh_ptr)
     {
       switch(type)
@@ -910,7 +909,7 @@ public:
       }
       #ifdef CGAL_COREFINEMENT_DEBUG
       else
-        Rcpp::Rcout << "X0: Found an isolated point" << std::endl;
+        std::cout << "X0: Found an isolated point" << std::endl;
       #endif
       insert_constrained_edges_coplanar_case(id,cdt,id_to_CDT_vh);
     }
@@ -998,7 +997,6 @@ public:
         halfedge_descriptor hnew = Euler::split_edge(hedge, tm);
         CGAL_assertion(expected_src==source(hnew,tm));
         vertex_descriptor vnew=target(hnew,tm);
-//          user_visitor.new_vertex_added(node_id, vnew, tm); // NODE_VISITOR_TAG
         nodes.call_put(vpm, vnew, node_id, tm);
         // register the new vertex in the output builder
         output_builder.set_vertex_id(vnew, node_id, tm);
@@ -1011,6 +1009,7 @@ public:
         //update marker tags. If the edge was marked, then the resulting edges in the split must be marked
         if ( hedge_is_marked )
           call_put(marks_on_edges,tm,edge(hnew,tm),true);
+        user_visitor.new_vertex_added(node_id, target(hnew, tm), tm);
         user_visitor.edge_split(hnew, tm);
 
         CGAL_assertion_code(expected_src=vnew);
@@ -1384,7 +1383,7 @@ public:
         #ifdef CGAL_COREFINEMENT_DEBUG
         else
         {
-          Rcpp::Rcout << "X1: Found an isolated point" << std::endl;
+          std::cout << "X1: Found an isolated point" << std::endl;
         }
         #endif
       }

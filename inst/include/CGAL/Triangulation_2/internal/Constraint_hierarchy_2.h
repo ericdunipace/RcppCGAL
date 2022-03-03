@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_2/include/CGAL/Triangulation_2/internal/Constraint_hierarchy_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_2/include/CGAL/Triangulation_2/internal/Constraint_hierarchy_2.h $
 // $Id: Constraint_hierarchy_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_CONSTRAINT_HIERARCHY_2_H
 #define CGAL_CONSTRAINT_HIERARCHY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_2.h>
 
 
@@ -728,7 +727,7 @@ print() const
 //  typename std::map<T,int>::iterator vnit = vertex_num.begin();
 //  for(; vnit != vertex_num.end(); vnit++) {
 //    vnit->second = ++num;
-//    Rcpp::Rcerr << "vertex num " << num  << " " << vnit->first->point()
+//    std::cerr << "vertex num " << num  << " " << vnit->first->point()
 //              << std::endl;
 //  }
 
@@ -736,32 +735,32 @@ print() const
   H_sc_iterator scit=sc_begin();
 
   for(; cit != c_end();  cit++){
-    Rcpp::Rcout << std::endl ;
-    Rcpp::Rcout << "constraint " ;
-    Rcpp::Rcout << vertex_num[cit->first.first]  << " "
+    std::cout << std::endl ;
+    std::cout << "constraint " ;
+    std::cout << vertex_num[cit->first.first]  << " "
               <<  vertex_num[cit->first.second];
-    Rcpp::Rcout << "  subconstraints " ;
+    std::cout << "  subconstraints " ;
     H_vertex_it vit = cit->second->begin();
     for(; vit != cit->second->end(); vit++){
-      Rcpp::Rcout << vertex_num[*vit]  <<" ";
+      std::cout << vertex_num[*vit]  <<" ";
     }
   }
-  Rcpp::Rcout << std::endl ;
+  std::cout << std::endl ;
   for(;scit != sc_end(); scit++){
-    Rcpp::Rcout << "subconstraint " ;
-    Rcpp::Rcout << vertex_num[scit->first.first] << " "
+    std::cout << "subconstraint " ;
+    std::cout << vertex_num[scit->first.first] << " "
               << vertex_num[scit->first.second];
     H_constraint_list  hcl;
     enclosing_constraints( scit->first.first, scit->first.second,
                            hcl);
     H_constraint_it hcit=hcl.begin();
-    Rcpp::Rcout << "  enclosing " ;
+    std::cout << "  enclosing " ;
     for(; hcit != hcl.end(); hcit++) {
-      Rcpp::Rcout << vertex_num[hcit->first] <<" "
+      std::cout << vertex_num[hcit->first] <<" "
                 << vertex_num[hcit->second] ;
-      Rcpp::Rcout <<  "   " ;
+      std::cout <<  "   " ;
     }
-    Rcpp::Rcout << std::endl ;
+    std::cout << std::endl ;
   }
   return;
 }

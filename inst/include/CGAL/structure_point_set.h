@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/structure_point_set.h $
-// $Id: structure_point_set.h 131242b 2021-10-12T09:29:23+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/structure_point_set.h $
+// $Id: structure_point_set.h 8166579 2021-10-11T19:58:07+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_STRUCTURE_POINT_SET_3_H
 #define CGAL_STRUCTURE_POINT_SET_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -510,29 +509,29 @@ private:
     double radius = epsilon * attraction_factor;
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcerr << "Computing planar points... " << std::endl;
+    std::cerr << "Computing planar points... " << std::endl;
 #endif
 
     project_inliers ();
     resample_planes (epsilon);
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcerr << " -> Done" << std::endl;
-    Rcpp::Rcerr << "Finding adjacent primitives... " << std::endl;
+    std::cerr << " -> Done" << std::endl;
+    std::cerr << "Finding adjacent primitives... " << std::endl;
 #endif
 
     find_pairs_of_adjacent_primitives (radius);
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcerr << " -> Found " << m_edges.size () << " pair(s) of adjacent primitives." << std::endl;
-    Rcpp::Rcerr << "Computing edges... " << std::endl;
+    std::cerr << " -> Found " << m_edges.size () << " pair(s) of adjacent primitives." << std::endl;
+    std::cerr << "Computing edges... " << std::endl;
 #endif
 
     compute_edges (epsilon);
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcerr << " -> Done" << std::endl;
-    Rcpp::Rcerr << "Creating edge-anchor points... " << std::endl;
+    std::cerr << " -> Done" << std::endl;
+    std::cerr << "Creating edge-anchor points... " << std::endl;
     {
       std::size_t size_before = m_points.size ();
 #endif
@@ -540,17 +539,17 @@ private:
       create_edge_anchor_points (radius, epsilon);
 
 #ifdef CGAL_PSP3_VERBOSE
-      Rcpp::Rcerr << " -> " << m_points.size () - size_before << " anchor point(s) created." << std::endl;
+      std::cerr << " -> " << m_points.size () - size_before << " anchor point(s) created." << std::endl;
     }
 
-    Rcpp::Rcerr << "Computating first set of corners... " << std::endl;
+    std::cerr << "Computating first set of corners... " << std::endl;
 #endif
 
     compute_corners (radius);
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcerr << " -> Found " << m_corners.size () << " triple(s) of adjacent primitives/edges." << std::endl;
-    Rcpp::Rcerr << "Merging corners... " << std::endl;
+    std::cerr << " -> Found " << m_corners.size () << " triple(s) of adjacent primitives/edges." << std::endl;
+    std::cerr << "Merging corners... " << std::endl;
     {
       std::size_t size_before = m_points.size ();
 #endif
@@ -558,31 +557,31 @@ private:
       merge_corners (radius);
 
 #ifdef CGAL_PSP3_VERBOSE
-      Rcpp::Rcerr << " -> " << m_points.size () - size_before << " corner point(s) created." << std::endl;
+      std::cerr << " -> " << m_points.size () - size_before << " corner point(s) created." << std::endl;
     }
 
-    Rcpp::Rcerr << "Computing corner directions... " << std::endl;
+    std::cerr << "Computing corner directions... " << std::endl;
 #endif
 
     compute_corner_directions (epsilon);
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcerr << " -> Done" << std::endl;
-    Rcpp::Rcerr << "Refining sampling... " << std::endl;
+    std::cerr << " -> Done" << std::endl;
+    std::cerr << "Refining sampling... " << std::endl;
 #endif
 
     refine_sampling (epsilon);
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcerr << " -> Done" << std::endl;
+    std::cerr << " -> Done" << std::endl;
 
-    Rcpp::Rcerr << "Cleaning data set... " << std::endl;
+    std::cerr << "Cleaning data set... " << std::endl;
 #endif
 
     clean ();
 
 #ifdef CGAL_PSP3_VERBOSE
-    Rcpp::Rcerr << " -> Done" << std::endl;
+    std::cerr << " -> Done" << std::endl;
 #endif
   }
 
@@ -806,7 +805,7 @@ private:
         if (!result)
           {
 #ifdef CGAL_PSP3_VERBOSE
-            Rcpp::Rcerr << "Warning: bad plane/plane intersection" << std::endl;
+            std::cerr << "Warning: bad plane/plane intersection" << std::endl;
 #endif
             continue;
           }
@@ -816,7 +815,7 @@ private:
         else
           {
 #ifdef CGAL_PSP3_VERBOSE
-            Rcpp::Rcerr << "Warning: bad plane/plane intersection" << std::endl;
+            std::cerr << "Warning: bad plane/plane intersection" << std::endl;
 #endif
             continue;
           }
@@ -1054,14 +1053,14 @@ private:
                 else
                   {
 #ifdef CGAL_PSP3_VERBOSE
-                    Rcpp::Rcerr<<"Warning: bad plane/plane intersection"<<std::endl;
+                    std::cerr<<"Warning: bad plane/plane intersection"<<std::endl;
 #endif
                   }
               }
             else
               {
 #ifdef CGAL_PSP3_VERBOSE
-                Rcpp::Rcerr<<"Warning: bad plane/plane intersection"<<std::endl;
+                std::cerr<<"Warning: bad plane/plane intersection"<<std::endl;
 #endif
               }
 
@@ -1091,14 +1090,14 @@ private:
                 else
                   {
 #ifdef CGAL_PSP3_VERBOSE
-                    Rcpp::Rcerr<<"Warning: bad plane/plane intersection"<<std::endl;
+                    std::cerr<<"Warning: bad plane/plane intersection"<<std::endl;
 #endif
                   }
               }
             else
               {
 #ifdef CGAL_PSP3_VERBOSE
-                Rcpp::Rcerr<<"Warning: bad plane/plane intersection"<<std::endl;
+                std::cerr<<"Warning: bad plane/plane intersection"<<std::endl;
 #endif
               }
           }
@@ -1206,7 +1205,7 @@ private:
                     else
                       {
 #ifdef CGAL_PSP3_VERBOSE
-                        Rcpp::Rcerr << "Warning: bad plane/line intersection" << std::endl;
+                        std::cerr << "Warning: bad plane/line intersection" << std::endl;
 #endif
                         m_corners[i].active = false;
                         continue;
@@ -1215,7 +1214,7 @@ private:
                 else
                   {
 #ifdef CGAL_PSP3_VERBOSE
-                    Rcpp::Rcerr << "Warning: bad plane/line intersection" << std::endl;
+                    std::cerr << "Warning: bad plane/line intersection" << std::endl;
 #endif
                     m_corners[i].active = false;
                     continue;
@@ -1225,7 +1224,7 @@ private:
             else
               {
 #ifdef CGAL_PSP3_VERBOSE
-                Rcpp::Rcerr << "Warning: bad plane/plane intersection" << std::endl;
+                std::cerr << "Warning: bad plane/plane intersection" << std::endl;
 #endif
                 m_corners[i].active = false;
                 continue;
@@ -1234,7 +1233,7 @@ private:
         else
           {
 #ifdef CGAL_PSP3_VERBOSE
-            Rcpp::Rcerr << "Warning: bad plane/plane intersection" << std::endl;
+            std::cerr << "Warning: bad plane/plane intersection" << std::endl;
 #endif
             m_corners[i].active = false;
             continue;

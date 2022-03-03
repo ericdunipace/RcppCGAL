@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Cone_spanners_2/include/CGAL/Compute_cone_boundaries_2.h $
-// $Id: Compute_cone_boundaries_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Cone_spanners_2/include/CGAL/Compute_cone_boundaries_2.h $
+// $Id: Compute_cone_boundaries_2.h 3ad2b0f 2021-11-25T15:43:21+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,6 @@
 #ifndef CGAL_COMPUTE_CONE_BOUNDARIES_2_H
 #define CGAL_COMPUTE_CONE_BOUNDARIES_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 
@@ -81,7 +80,7 @@ public:
      * and output them to `result` in the counterclockwise order.
      * Finally, the past-the-end iterator for the resulting directions is returned.
      *
-         * \tparam DirectionOutputIterator  an `OutputIterator` with value type `Direction_2`.
+     * \tparam DirectionOutputIterator  an `OutputIterator` with value type `Direction_2`.
      * \param cone_number The number of cones
      * \param initial_direction The direction of the first ray
      * \param result  The output iterator
@@ -91,7 +90,7 @@ public:
                                        const Direction_2& initial_direction,
                                        DirectionOutputIterator result)  {
         if (cone_number<2) {
-            Rcpp::Rcout << "The number of cones must be larger than 1!" << std::endl;
+            std::cout << "The number of cones must be larger than 1!" << std::endl;
             CGAL_assertion(false);
         }
 
@@ -148,8 +147,8 @@ public:
                                        DirectionOutputIterator result)  {
 
         if (cone_number<2) {
-            Rcpp::Rcout << "The number of cones must be larger than 1!" << std::endl;
-            Rcpp::stop("Error");
+            std::cout << "The number of cones must be larger than 1!" << std::endl;
+            std::exit(1);
         }
 
         // Since CGAL::root_of() gives the k-th smallest root,

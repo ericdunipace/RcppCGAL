@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/QP_solver/include/CGAL/QP_solver/QP_solver_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/QP_solver/include/CGAL/QP_solver/QP_solver_impl.h $
 // $Id: QP_solver_impl.h 3f10219 2021-01-06T09:34:57+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 //                 Franz Wessendorp
 //                 Kaspar Fischer
 
-#include <Rcpp.h>
 #include <CGAL/QP_solver/Initialization.h>
 #include <CGAL/NT_converter.h>
 
@@ -2855,9 +2854,9 @@ check_basis_inverse( Tag_true)
         for ( row = 0; row < rows; ++row, ++q_it) {
             if ( *q_it != ( row == col ? d : et0)) {
                 if ( ! vout4.verbose()) {
-                    Rcpp::Rcerr << std::endl << "basis-inverse check: ";
+                    std::cerr << std::endl << "basis-inverse check: ";
                 }
-                Rcpp::Rcerr << "failed ( row=" << row << " | col=" << col << " )"
+                std::cerr << "failed ( row=" << row << " | col=" << col << " )"
                           << std::endl;
                 res = false;
             }
@@ -2926,9 +2925,9 @@ check_basis_inverse( Tag_false)
         for ( row = 0; row < rows; ++row, ++v_it) {
             if ( *v_it != ( row == col ? d : et0)) {
                 if ( ! vout4.verbose()) {
-                    Rcpp::Rcerr << std::endl << "basis-inverse check: ";
+                    std::cerr << std::endl << "basis-inverse check: ";
                 }
-                Rcpp::Rcerr << "failed ( row=" << row << " | col=" << col << " )"
+                std::cerr << "failed ( row=" << row << " | col=" << col << " )"
                           << std::endl;
                 //                return false;
                 res = false;
@@ -2938,9 +2937,9 @@ check_basis_inverse( Tag_false)
                              [this](const ET& v){ return v != this->et0; });
         if ( v_it != q_x_O.begin()+cols) {
             if ( ! vout4.verbose()) {
-                Rcpp::Rcerr << std::endl << "basis-inverse check: ";
+                std::cerr << std::endl << "basis-inverse check: ";
             }
-            Rcpp::Rcerr << "failed ( row=" << rows+(v_it-q_x_O.begin())
+            std::cerr << "failed ( row=" << rows+(v_it-q_x_O.begin())
                       << " | col=" << col << " )" << std::endl;
             // ToDo: return false;
             res = false;
@@ -2979,9 +2978,9 @@ check_basis_inverse( Tag_false)
                              [this](const ET& v){ return v != this->et0; });
         if ( v_it != q_lambda.begin()+rows) {
             if ( ! vout4.verbose()) {
-                Rcpp::Rcerr << std::endl << "basis-inverse check: ";
+                std::cerr << std::endl << "basis-inverse check: ";
             }
-            Rcpp::Rcerr << "failed ( row=" << v_it-q_lambda.begin()
+            std::cerr << "failed ( row=" << v_it-q_lambda.begin()
                       << " | col=" << col << " )" << std::endl;
             //            return false;
             res = false;
@@ -2990,9 +2989,9 @@ check_basis_inverse( Tag_false)
         for ( row = 0; row < cols; ++row, ++v_it) {
             if ( *v_it != ( row == col ? d : et0)) {
                 if ( ! vout4.verbose()) {
-                    Rcpp::Rcerr << std::endl << "basis-inverse check: ";
+                    std::cerr << std::endl << "basis-inverse check: ";
                 }
-                Rcpp::Rcerr << "failed ( row=" << row+rows << " | col="
+                std::cerr << "failed ( row=" << row+rows << " | col="
                           << col << " )" << std::endl;
                 //                return false;
                 res = false;

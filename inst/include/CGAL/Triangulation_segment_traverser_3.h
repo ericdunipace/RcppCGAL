@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_3/include/CGAL/Triangulation_segment_traverser_3.h $
-// $Id: Triangulation_segment_traverser_3.h 6671719 2020-11-03T17:57:30+01:00 Jane Tournois
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_3/include/CGAL/Triangulation_segment_traverser_3.h $
+// $Id: Triangulation_segment_traverser_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Thijs van Lankveld, Jane Tournois
@@ -13,9 +13,6 @@
 #ifndef CGAL_TRIANGULATION_SEGMENT_TRAVERSER_3_H
 #define CGAL_TRIANGULATION_SEGMENT_TRAVERSER_3_H
 
-#include <Rcpp.h>
-#include <Rcpp.h>
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <iostream>
@@ -1069,7 +1066,7 @@ private:
     else if (v1b == v2a || v1b == v2b)
       return v1b;
 
-    Rcpp::Rcerr << "There is no vertex shared by e1 and e2" << std::endl;
+    std::cerr << "There is no vertex shared by e1 and e2" << std::endl;
     CGAL_assertion(false);
     return Vertex_handle();
   }
@@ -1095,7 +1092,7 @@ private:
       }
     } while (++circ != end);
 
-    Rcpp::Rcerr << "There is no facet shared by e1 and e2" << std::endl;
+    std::cerr << "There is no facet shared by e1 and e2" << std::endl;
     CGAL_assertion(false);
     return Facet(Cell_handle(), 0);
   }
@@ -1113,7 +1110,7 @@ private:
         return f;
     } while (++circ != end);
 
-    Rcpp::Rcerr << "There is no facet shared by e and v" << std::endl;
+    std::cerr << "There is no facet shared by e and v" << std::endl;
     CGAL_assertion(false);
     return Facet(Cell_handle(), 0);
   }
@@ -1130,7 +1127,7 @@ private:
         return c;
     } while (++circ != end);
 
-    Rcpp::Rcerr << "There is no cell shared by e and v" << std::endl;
+    std::cerr << "There is no cell shared by e and v" << std::endl;
     CGAL_assertion(false);
     return Cell_handle();
   }
@@ -1152,6 +1149,6 @@ private:
 
 } // namespace CGAL
 
-#include <CGAL/internal/Triangulation_segment_traverser_3_impl.h>
+#include <CGAL/Triangulation_3/internal/Triangulation_segment_traverser_3_impl.h>
 
 #endif // CGAL_TRIANGULATION_SEGMENT_TRAVERSER_3_H

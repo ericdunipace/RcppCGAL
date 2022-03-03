@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Skin_surface_3/include/CGAL/mesh_skin_surface_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Skin_surface_3/include/CGAL/mesh_skin_surface_3.h $
 // $Id: mesh_skin_surface_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_SKIN_SURFACE_3_H
 #define CGAL_MESH_SKIN_SURFACE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 #include <CGAL/Cartesian_converter.h>
@@ -37,7 +36,7 @@ void mesh_skin_surface_3(SkinSurface_3 const &skin_surface, Polyhedron &p)
 //(SkinSurface_3 const &skin_surface,
 // Polyhedron_3<P_Traits, Skin_surface_polyhedral_items_3<SkinSurface_3> > &p)
 //{
-//  Rcpp::Rcout << "B" << std::endl;
+//  std::cout << "B" << std::endl;
 //  skin_surface.mesh_skin_surface_3(p);
 //}
 //

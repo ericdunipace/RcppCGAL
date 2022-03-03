@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/IO/File_medit.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/IO/File_medit.h $
 // $Id: File_medit.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_PERIODIC_3_MESH_3_IO_FILE_MEDIT_H
 #define CGAL_PERIODIC_3_MESH_3_IO_FILE_MEDIT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_mesh_3.h>
 
 #include <CGAL/array.h>
@@ -136,12 +135,12 @@ void output_to_medit(std::ostream& os,
   int occ_mult = Ox_rn * Oy_rn * Oz_rn;
 
 #ifdef CGAL_PERIODIC_3_MESH_3_VERBOSE
-  Rcpp::Rcerr << "Outputting mesh to medit... " << std::endl;
-  Rcpp::Rcerr << "occurrences over each axis: "
+  std::cerr << "Outputting mesh to medit... " << std::endl;
+  std::cerr << "occurrences over each axis: "
             << Ox_rn << " " << Oy_rn << " " << Oz_rn << std::endl;
-  Rcpp::Rcerr << number_of_vertices << " vertices" << std::endl;
-  Rcpp::Rcerr << number_of_facets << " facets" << std::endl;
-  Rcpp::Rcerr << number_of_cells << " cells" << std::endl;
+  std::cerr << number_of_vertices << " vertices" << std::endl;
+  std::cerr << number_of_facets << " facets" << std::endl;
+  std::cerr << number_of_cells << " cells" << std::endl;
 #endif
 
   os << std::setprecision(17);
@@ -305,7 +304,7 @@ void output_to_medit(std::ostream& os,
                      const bool distinguish_copies)
 {
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  Rcpp::Rcerr << "Output to medit:\n";
+  std::cerr << "Output to medit:\n";
 #endif
   CGAL_precondition(c3t3.triangulation().is_1_cover());
 
@@ -325,7 +324,7 @@ void output_to_medit(std::ostream& os,
                                      Generator().print_twice());
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  Rcpp::Rcerr << "done.\n";
+  std::cerr << "done.\n";
 #endif
 }
 

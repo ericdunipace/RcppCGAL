@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/internal/orbifold_cone_helper.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/internal/orbifold_cone_helper.h $
 // $Id: orbifold_cone_helper.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_INTERNAL_CONE_HELPER_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_INTERNAL_CONE_HELPER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/Surface_mesh_parameterization/internal/kernel_traits.h>
@@ -89,7 +88,7 @@ bool are_cones_unique(const Cone_container& cones)
 {
   std::size_t n_of_cones = cones.size();
   if(n_of_cones == 0) {
-    Rcpp::Rcerr << "Warning: Check cone uniquess with no cones...?" << std::endl;
+    std::cerr << "Warning: Check cone uniquess with no cones...?" << std::endl;
     return true;
   }
 
@@ -123,7 +122,7 @@ void find_start_cone(const ConeMap& cmap,
     return;
   }
 
-  Rcpp::Rcerr << "Error: did not find first cone" << std::endl;
+  std::cerr << "Error: did not find first cone" << std::endl;
   CGAL_postcondition(false);
 }
 
@@ -144,7 +143,7 @@ void find_start_cone(const ConeMap& cmap,
     return;
   }
 
-  Rcpp::Rcerr << "Error: did not find first cone" << std::endl;
+  std::cerr << "Error: did not find first cone" << std::endl;
   CGAL_postcondition(false);
 }
 
@@ -166,9 +165,9 @@ bool check_cone_validity(const SeamMesh& mesh,
   // check cone numbers
   if((number_of_cones_in_tm == 3 && cones.size() != 4) ||
      (number_of_cones_in_tm == 4 && cones.size() != 6)) {
-    Rcpp::Rcerr << "Invalid cone placement: " << std::endl;
-    Rcpp::Rcerr << number_of_cones_in_tm << " cones in the base mesh" << std::endl;
-    Rcpp::Rcerr << cones.size() << " cones in the seam mesh" << std::endl;
+    std::cerr << "Invalid cone placement: " << std::endl;
+    std::cerr << number_of_cones_in_tm << " cones in the base mesh" << std::endl;
+    std::cerr << cones.size() << " cones in the seam mesh" << std::endl;
     return false;
   }
 
@@ -180,21 +179,21 @@ bool check_cone_validity(const SeamMesh& mesh,
   for(; it!=end; ++it) {
     if(it->second == First_unique_cone) {
       if(found_first_unique_cone) {
-        Rcpp::Rcerr << "Error: More than one 'First_unique_cone'" << std::endl;
+        std::cerr << "Error: More than one 'First_unique_cone'" << std::endl;
         return false;
       }
       found_first_unique_cone = true;
     }
     else if(it->second == Second_unique_cone) {
       if(found_second_unique_cone) {
-        Rcpp::Rcerr << "Error: More than one 'Second_unique_cone'" << std::endl;
+        std::cerr << "Error: More than one 'Second_unique_cone'" << std::endl;
         return false;
       }
       found_second_unique_cone = true;
     }
     else {
       if(it->second != Duplicated_cone) {
-        Rcpp::Rcerr << "Error: Unknow cone type: " << it->second << std::endl;
+        std::cerr << "Error: Unknow cone type: " << it->second << std::endl;
         return false;
       }
       ++duplicated_cone_counter;
@@ -202,13 +201,13 @@ bool check_cone_validity(const SeamMesh& mesh,
   }
 
   if(!found_first_unique_cone || !found_second_unique_cone) {
-    Rcpp::Rcerr << "Error: Could not find all unique cones" << std::endl;
+    std::cerr << "Error: Could not find all unique cones" << std::endl;
     return false;
   }
 
   if((number_of_cones_in_tm == 3 && duplicated_cone_counter != 2) ||
      (number_of_cones_in_tm == 4 && duplicated_cone_counter != 4)) {
-    Rcpp::Rcerr << "Error: Wrong number of duplicated cones" << std::endl;
+    std::cerr << "Error: Wrong number of duplicated cones" << std::endl;
     return false;
   }
 
@@ -244,7 +243,7 @@ bool check_cone_validity(const SeamMesh& mesh,
 
   // check that the seam forms one connected component
   if(seam_vertices_counter.size() != (mesh.number_of_seam_edges() + 1)) {
-    Rcpp::Rcerr << "Seam is not a connected component" << std::endl;
+    std::cerr << "Seam is not a connected component" << std::endl;
     return false;
   }
 
@@ -253,8 +252,8 @@ bool check_cone_validity(const SeamMesh& mesh,
                                                                      send = seam_vertices_counter.end();
   for(; sit!=send; ++sit) {
     if(sit->second != 2 && sit->second != 4) {
-      Rcpp::Rcerr << sit->second << std::endl;
-      Rcpp::Rcerr << "Seam intersect itself (or something bad like that...)" << std::endl;
+      std::cerr << sit->second << std::endl;
+      std::cerr << "Seam intersect itself (or something bad like that...)" << std::endl;
       return false;
     }
   }
@@ -267,18 +266,18 @@ bool check_cone_validity(const SeamMesh& mesh,
     TM_vertex_descriptor cvd = target(vd.hd, mesh.mesh());
     sit = seam_vertices_counter.find(cvd);
     if(sit == seam_vertices_counter.end()) {
-      Rcpp::Rcerr << "Cone not on the seam" << std::endl;
+      std::cerr << "Cone not on the seam" << std::endl;
       return false;
     }
 
     if(it->second == First_unique_cone || it->second == Second_unique_cone) {
       if(sit->second != 2) {
-        Rcpp::Rcerr << "First or second cone not at the beginning/end of the seam" << std::endl;
+        std::cerr << "First or second cone not at the beginning/end of the seam" << std::endl;
         return false;
       }
     } else if(it->second == Duplicated_cone) {
       if(sit->second != 4) {
-        Rcpp::Rcerr << "Duplicate cone not in the interior of the seam" << std::endl;
+        std::cerr << "Duplicate cone not in the interior of the seam" << std::endl;
         return false;
       }
     }

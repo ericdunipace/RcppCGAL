@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/GraphicsView/include/CGAL/Qt/DemosMainWindow.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/GraphicsView/include/CGAL/Qt/DemosMainWindow.h $
 // $Id: DemosMainWindow.h b80daff 2021-02-19T11:29:38+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_QT_DEMOS_MAIN_WINDOW_H
 #define CGAL_QT_DEMOS_MAIN_WINDOW_H
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 
@@ -58,7 +57,7 @@ public:
 
   virtual void open(QString)
   {
-    Rcpp::Rcerr << "You should implement open(QString);" << std::endl;
+    std::cerr << "You should implement open(QString);" << std::endl;
   }
 
 public:

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/merge_border_vertices.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/merge_border_vertices.h $
 // $Id: merge_border_vertices.h 4231bc8 2020-07-13T14:17:50+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_MERGE_BORDER_VERTICES_H
 #define CGAL_POLYGON_MESH_PROCESSING_MERGE_BORDER_VERTICES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/boost/graph/helpers.h>
@@ -116,16 +115,16 @@ void sanitize_candidates(const std::vector<std::pair<typename boost::graph_trait
             CGAL_assertion(second_candidates_range <= cycle_hedges.size());
 
 #ifdef CGAL_PMP_MERGE_BORDER_VERTICES_DEBUG
-            Rcpp::Rcout << "Incompatible ranges:\n";
-            Rcpp::Rcout << "first range: " << first_left << " to " << first_right << std::endl;
-            Rcpp::Rcout << "second range: " << second_left << " to " << second_right << std::endl;
-            Rcpp::Rcout << "Full ranges:" << std::endl;
-            Rcpp::Rcout << cycle_hedges[first_candidates.front()].second << " to " << cycle_hedges[first_candidates.back()].second;
-            Rcpp::Rcout << " (" << first_candidates.size() << " halfedges)";
-            Rcpp::Rcout << " at " << get(vpm, target(cycle_hedges[first_candidates.front()].first, pm)) << std::endl;
-            Rcpp::Rcout << cycle_hedges[second_candidates.front()].second << " to " << cycle_hedges[second_candidates.back()].second;
-            Rcpp::Rcout << " (" << second_candidates.size() << " halfedges)";
-            Rcpp::Rcout << " at " << get(vpm, target(cycle_hedges[second_candidates.front()].first, pm)) << std::endl;
+            std::cout << "Incompatible ranges:\n";
+            std::cout << "first range: " << first_left << " to " << first_right << std::endl;
+            std::cout << "second range: " << second_left << " to " << second_right << std::endl;
+            std::cout << "Full ranges:" << std::endl;
+            std::cout << cycle_hedges[first_candidates.front()].second << " to " << cycle_hedges[first_candidates.back()].second;
+            std::cout << " (" << first_candidates.size() << " halfedges)";
+            std::cout << " at " << get(vpm, target(cycle_hedges[first_candidates.front()].first, pm)) << std::endl;
+            std::cout << cycle_hedges[second_candidates.front()].second << " to " << cycle_hedges[second_candidates.back()].second;
+            std::cout << " (" << second_candidates.size() << " halfedges)";
+            std::cout << " at " << get(vpm, target(cycle_hedges[second_candidates.front()].first, pm)) << std::endl;
 #endif
 
             std::vector<std::vector<std::size_t> >::iterator to_remove_iter = candidate_hedges_with_id.begin();

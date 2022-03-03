@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/flip_edges.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/flip_edges.h $
 // $Id: flip_edges.h 7c4a61e 2020-10-09T16:50:14+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_INTERNAL_FLIP_EDGES_H
 #define CGAL_INTERNAL_FLIP_EDGES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <CGAL/Triangulation_utils_3.h>
@@ -118,7 +117,7 @@ Sliver_removal_result flip_3_to_2(typename C3t3::Edge& edge,
   Cell_handle cell_to_remove = Cell_handle(circ++);
   if (circ != done)
   {
-    Rcpp::Rcout << "Wrong flip function" << std::endl;
+    std::cout << "Wrong flip function" << std::endl;
     return NOT_FLIPPABLE;
   }
 
@@ -363,7 +362,7 @@ Sliver_removal_result flip_3_to_2(typename C3t3::Edge& edge,
   //  }
 
   //  if ((curr_min_dh - new_min_dh) > 0.01){
-  //    Rcpp::Rcout << "Three_to_two_flip::Flip not improving the quality: " << curr_min_dh << " to " << new_min_dh << std::endl;
+  //    std::cout << "Three_to_two_flip::Flip not improving the quality: " << curr_min_dh << " to " << new_min_dh << std::endl;
   //    return INVALID_CELL;
   //  }
   //}
@@ -389,7 +388,7 @@ void find_best_flip_to_improve_dh(C3t3& c3t3,
   typedef typename Tr::Facet_circulator Facet_circulator;
   typedef typename Tr::Cell_circulator  Cell_circulator;
 
-  // Rcpp::Rcout << "find_best_flip_to_improve_dh boundary " << std::endl;
+  // std::cout << "find_best_flip_to_improve_dh boundary " << std::endl;
   Tr& tr = c3t3.triangulation();
 
   Vertex_handle vh0 = edge.first->vertex(edge.second);
@@ -510,7 +509,7 @@ void find_best_flip_to_improve_dh(C3t3& c3t3,
 
     if (keep && (max_flip_cos_dh < curr_max_cos_dh  || !is_sliver_well_oriented))
     {
-      //Rcpp::Rcout << "vh " << vh->info() <<" old " << curr_max_cos_dh << " min " << min_flip_tan_dh << std::endl;
+      //std::cout << "vh " << vh->info() <<" old " << curr_max_cos_dh << " min " << min_flip_tan_dh << std::endl;
       candidates.push(std::make_pair(max_flip_cos_dh, std::make_pair(vh, e_id)));
     }
   }
@@ -698,7 +697,7 @@ void find_best_flip_to_improve_dh(C3t3& c3t3,
 
     if (keep && (max_flip_cos_dh < curr_max_cosdh || !is_sliver_well_oriented))
     {
-      //Rcpp::Rcout << "vh " << vh->info() <<" old " << curr_max_cosdh << " min " << min_flip_tan_dh << std::endl;
+      //std::cout << "vh " << vh->info() <<" old " << curr_max_cosdh << " min " << min_flip_tan_dh << std::endl;
       candidates.push(std::make_pair(max_flip_cos_dh, std::make_pair(vh, e_id)));
     }
   }
@@ -713,7 +712,7 @@ Sliver_removal_result flip_n_to_m(C3t3& c3t3,
                                   bool check_validity = false)
 {
   CGAL_USE(check_validity);
-  // Rcpp::Rcout << "n_to_m_flip::start" << std::endl;
+  // std::cout << "n_to_m_flip::start" << std::endl;
   typedef typename C3t3::Triangulation  Tr;
   typedef typename C3t3::Vertex_handle  Vertex_handle;
   typedef typename C3t3::Cell_handle    Cell_handle;
@@ -747,7 +746,7 @@ Sliver_removal_result flip_n_to_m(C3t3& c3t3,
   } while (facet_circulator != done_facet_circulator && look_for_vh_iterator);
 
   if (look_for_vh_iterator) {
-    Rcpp::Rcout << "Vertex not an opposite of the edge!!" << std::endl;
+    std::cout << "Vertex not an opposite of the edge!!" << std::endl;
     return NOT_FLIPPABLE;
   }
 
@@ -995,7 +994,7 @@ Sliver_removal_result flip_n_to_m(C3t3& c3t3,
   //  }
 
   //  if ((current_min_dh - new_min_dh) > 0.01){
-  //    Rcpp::Rcout << pre_sliver_Removal_cells.size() << " to " << post_sliver_Removal_cells.size() << " flip not improving the quality: " <<
+  //    std::cout << pre_sliver_Removal_cells.size() << " to " << post_sliver_Removal_cells.size() << " flip not improving the quality: " <<
   //      current_min_dh << " to " << new_min_dh << std::endl;
   //    return INVALID_CELL;
   //  }
@@ -1003,7 +1002,7 @@ Sliver_removal_result flip_n_to_m(C3t3& c3t3,
   //}
   ///***********************************************************/
 
-  // Rcpp::Rcout << "n_to_m_flip::end with success" << std::endl;
+  // std::cout << "n_to_m_flip::end with success" << std::endl;
 
   return VALID_FLIP;
 }
@@ -1025,7 +1024,7 @@ Sliver_removal_result flip_n_to_m(typename C3t3::Edge& edge,
 
   typedef std::pair<Dihedral_angle_cosine, std::pair<Vertex_handle, int> > CosAngle_and_vertex;
 
-  //Rcpp::Rcout << "n_to_m_flip " << boundary_vertices.size() << std::endl;
+  //std::cout << "n_to_m_flip " << boundary_vertices.size() << std::endl;
   if (criterion == MIN_ANGLE_BASED)
   {
     std::priority_queue<CosAngle_and_vertex,
@@ -1054,11 +1053,11 @@ Sliver_removal_result flip_n_to_m(typename C3t3::Edge& edge,
       CosAngle_and_vertex curr_cost_vpair = candidates.top();
       candidates.pop();
 
-//      Rcpp::Rcout << "\tcurrent   cos = " << curr_max_cosdh
+//      std::cout << "\tcurrent   cos = " << curr_max_cosdh
 //        << "\t angle = " << std::acos(curr_max_cosdh) * 180./CGAL_PI << std::endl;
-//      Rcpp::Rcout << "\tcandidate cos = " << curr_cost_vpair.first
+//      std::cout << "\tcandidate cos = " << curr_cost_vpair.first
 //        << "\t angle = " << std::acos(curr_cost_vpair.first) * 180./CGAL_PI << std::endl;
-//      Rcpp::Rcout << std::endl;
+//      std::cout << std::endl;
 
       if (curr_max_cosdh <= curr_cost_vpair.first)
         return NO_BEST_CONFIGURATION;
@@ -1198,16 +1197,16 @@ std::size_t flip_all_edges(const std::vector<VertexPair>& edges,
       Sliver_removal_result res = find_best_flip(edge, c3t3, criterion, inc_cells, visitor);
       if (res == INVALID_CELL || res == INVALID_VERTEX || res == INVALID_ORIENTATION)
       {
-        Rcpp::Rcout << "FLIP PROBLEM!!!!" << std::endl;
+        std::cout << "FLIP PROBLEM!!!!" << std::endl;
         return count;
       }
       if (res == VALID_FLIP)
       {
         ++count;
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE_PROGRESS
-        Rcpp::Rcout << "\rFlip... (";
-        Rcpp::Rcout << count << " flips)";
-        Rcpp::Rcout.flush();
+        std::cout << "\rFlip... (";
+        std::cout << count << " flips)";
+        std::cout.flush();
 #endif
       }
     }
@@ -1231,8 +1230,8 @@ void flip_edges(C3T3& c3t3,
   typedef typename std::pair<Vertex_handle, Vertex_handle> Edge_vv;
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  Rcpp::Rcout << "Flip edges...";
-  Rcpp::Rcout.flush();
+  std::cout << "Flip edges...";
+  std::cout.flush();
   std::size_t nb_flips = 0;
 #endif
 
@@ -1246,7 +1245,7 @@ void flip_edges(C3T3& c3t3,
   // typedef boost::unordered_map<Surface_patch_index, unsigned int> Spi_map;
   //if (!protect_boundaries)
   //{
-  //  Rcpp::Rcout << "\tBoundary flips" << std::endl;
+  //  std::cout << "\tBoundary flips" << std::endl;
   //  //Boundary flip
   //  std::vector<Spi_map> boundary_vertices_valences;
   //  std::vector<Edge_vv> boundary_edges;
@@ -1277,7 +1276,7 @@ void flip_edges(C3T3& c3t3,
   //}
 
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-  Rcpp::Rcout << " done (" << nb_flips << " flips)." << std::endl;
+  std::cout << " done (" << nb_flips << " flips)." << std::endl;
 #endif
 }
 

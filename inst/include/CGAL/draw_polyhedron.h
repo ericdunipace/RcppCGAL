@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polyhedron/include/CGAL/draw_polyhedron.h $
-// $Id: draw_polyhedron.h c5ba414 2021-02-05T16:12:42+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polyhedron/include/CGAL/draw_polyhedron.h $
+// $Id: draw_polyhedron.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -46,8 +46,8 @@ void draw(const CGAL_POLY_TYPE& apoly,
   if (!cgal_test_suite)
   {
     CGAL::Qt::init_ogl_context(4,3);
-    int argc=2;
-    const char* argv[2]={"polyhedron_viewer","--old"};
+    int argc=1;
+    const char* argv[2]={"polyhedron_viewer", nullptr};
     QApplication app(argc,const_cast<char**>(argv));
     SimpleFaceGraphViewerQt
       mainwindow(app.activeWindow(), apoly, title, nofill);

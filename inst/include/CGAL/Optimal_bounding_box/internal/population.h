@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/population.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/population.h $
 // $Id: population.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_BOX_POPULATION_H
 #define CGAL_OPTIMAL_BOUNDING_BOX_POPULATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/Optimal_bounding_box/internal/fitness_function.h>
@@ -148,9 +147,9 @@ public:
     std::size_t id = 0;
     for(const Simplex& s : m_simplices)
     {
-      Rcpp::Rcout << "Simplex: " << id++ << std::endl;
+      std::cout << "Simplex: " << id++ << std::endl;
       for(const Matrix& m : s)
-        Rcpp::Rcout << m << "\n\n";
+        std::cout << m << "\n\n";
       std:: cout << std:: endl;
     }
   }

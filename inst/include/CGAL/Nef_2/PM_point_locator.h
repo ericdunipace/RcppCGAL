@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_2/include/CGAL/Nef_2/PM_point_locator.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_2/include/CGAL/Nef_2/PM_point_locator.h $
 // $Id: PM_point_locator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_PM_POINT_LOCATOR_H
 #define CGAL_PM_POINT_LOCATOR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 
@@ -738,8 +737,8 @@ public:
     Segment seg;
     bool found = false;
     CGAL_For_all(circ, end) {
-      //        Rcpp::Rcerr << s << std::endl;
-      //        Rcpp::Rcerr << point(source(circ)) << "->" << point(target(circ)) << std::endl;
+      //        std::cerr << s << std::endl;
+      //        std::cerr << point(source(circ)) << "->" << point(target(circ)) << std::endl;
       Object o = intersection(s, Segment(point(source(circ)),
                                          point(target(circ))));
 

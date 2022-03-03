@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_2/include/CGAL/Nef_2/PM_io_parser.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_2/include/CGAL/Nef_2/PM_io_parser.h $
 // $Id: PM_io_parser.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_PM_IO_PARSER_H
 #define CGAL_PM_IO_PARSER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 
@@ -104,7 +103,7 @@ public:
 PM_io_parser(std::istream& is, Plane_map& H)
 /*{\Mcreate creates an instance |\Mvar| of type |\Mname|
    to input |H| from |is|.}*/
-    : Base(H), in(is), out(Rcpp::Rcout), verbose(0), vn(0), en(0), fn(0)
+    : Base(H), in(is), out(std::cout), verbose(0), vn(0), en(0), fn(0)
         { this->clear(); }
 
 
@@ -149,7 +148,7 @@ std::string index(Vertex_handle v) const { return VI(v,verbose); }
 std::string index(Halfedge_handle e) const { return EI(e,verbose); }
 std::string index(Face_handle f) const { return FI(f,verbose); }
 
-static void dump(const PMDEC& D, std::ostream& os = Rcpp::Rcerr);
+static void dump(const PMDEC& D, std::ostream& os = std::cerr);
 /*{\Mstatic prints the plane map decorated by |D| to |os|.}*/
 
 }; // PM_io_parser<PMDEC>
@@ -240,7 +239,7 @@ bool PM_io_parser<PMDEC>::read_hedge(Halfedge_handle e)
        v >= 0 && (std::size_t) v < vn && f >= 0 && (std::size_t) f < fn ))
   {
     in.setstate(std::ios_base::badbit);
-    Rcpp::Rcerr<<"wrong index in read_hedge"<<std::endl;
+    std::cerr<<"wrong index in read_hedge"<<std::endl;
     return false;
   }
 

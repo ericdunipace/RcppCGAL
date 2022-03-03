@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Cone_spanners_2/include/CGAL/gnuplot_output_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Cone_spanners_2/include/CGAL/gnuplot_output_2.h $
 // $Id: gnuplot_output_2.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -20,7 +20,6 @@
 #ifndef GNUPLOT_OUTPUT_2_H
 #define GNUPLOT_OUTPUT_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 
@@ -144,7 +143,7 @@ void gnuplot_output_2 (const Graph& g, const std::string& prefix)
                      std::ofstream::out | std::ofstream::trunc);
     fs << gnuplot_vertex_list(g);
     fs.close();
-    Rcpp::Rcout << prefix << ".v" << " is generated. " << std::endl;
+    std::cout << prefix << ".v" << " is generated. " << std::endl;
 
     // Generate the Gnuplot Script to the .plt file
     fs.open((prefix + ".plt").c_str(),
@@ -189,7 +188,7 @@ void gnuplot_output_2 (const Graph& g, const std::string& prefix)
     //  fs << "replot" << std::endl;
 
     fs.close();
-    Rcpp::Rcout << prefix << ".plt" << " is generated. " << std::endl;
+    std::cout << prefix << ".plt" << " is generated. " << std::endl;
 }
 
 // directed graphs

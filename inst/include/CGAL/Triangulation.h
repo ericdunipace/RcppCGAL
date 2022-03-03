@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation/include/CGAL/Triangulation.h $
-// $Id: Triangulation.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation/include/CGAL/Triangulation.h $
+// $Id: Triangulation.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -12,12 +12,11 @@
 #ifndef CGAL_TRIANGULATION_H
 #define CGAL_TRIANGULATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation.h>
 
 #include <CGAL/disable_warnings.h>
 
-#include <CGAL/internal/Triangulation/utilities.h>
+#include <CGAL/Triangulation/internal/utilities.h>
 #include <CGAL/Triangulation_data_structure.h>
 #include <CGAL/Triangulation_full_cell.h>
 #include <CGAL/Triangulation_vertex.h>
@@ -763,16 +762,16 @@ protected:
 
   void display_all_full_cells__debugging() const
   {
-    Rcpp::Rcerr << "ALL FULL CELLS:" << std::endl;
+    std::cerr << "ALL FULL CELLS:" << std::endl;
     for (Full_cell_const_iterator cit = full_cells_begin() ;
           cit != full_cells_end() ; ++cit )
     {
-      Rcpp::Rcerr << std::hex << &*cit << ": ";
+      std::cerr << std::hex << &*cit << ": ";
       for (int jj = 0 ; jj <= current_dimension() ; ++jj)
-        Rcpp::Rcerr << (is_infinite(cit->vertex(jj)) ? 0xFFFFFFFF : (unsigned int)&*cit->vertex(jj)) << " - ";
-      Rcpp::Rcerr << std::dec << std::endl;
+        std::cerr << (is_infinite(cit->vertex(jj)) ? 0xFFFFFFFF : (unsigned int)&*cit->vertex(jj)) << " - ";
+      std::cerr << std::dec << std::endl;
     }
-    Rcpp::Rcerr << std::endl;
+    std::cerr << std::endl;
   }
 
 

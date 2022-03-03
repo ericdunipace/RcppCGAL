@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Envelope_3/include/CGAL/Env_tracing_traits_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Envelope_3/include/CGAL/Env_tracing_traits_3.h $
 // $Id: Env_tracing_traits_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -22,7 +22,6 @@
 #ifndef CGAL_ENV_TRACE_TRAITS_H
 #define CGAL_ENV_TRACE_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Envelope_3.h>
 
 
@@ -90,12 +89,12 @@ public:
                                  const Xy_monotone_surface_3& h2) const
     {
       Base base;
-      Rcpp::Rcerr << "Compare_z_at_xy_3:" << std::endl;
-      Rcpp::Rcerr << "Point: " << p << std::endl;
-      Rcpp::Rcerr << "Surface1: " << h1 << std::endl;
-      Rcpp::Rcerr << "Surface2: " << h2 << std::endl;
+      std::cerr << "Compare_z_at_xy_3:" << std::endl;
+      std::cerr << "Point: " << p << std::endl;
+      std::cerr << "Surface1: " << h1 << std::endl;
+      std::cerr << "Surface2: " << h2 << std::endl;
       Comparison_result res = base.compare_z_at_xy_3_object() (p, h1, h2);
-      Rcpp::Rcerr << "Result: " << res << std::endl;
+      std::cerr << "Result: " << res << std::endl;
       return res;
     }
 
@@ -104,12 +103,12 @@ public:
                                  const Xy_monotone_surface_3& h2) const
     {
       Base base;
-      Rcpp::Rcerr << "Compare_z_at_xy_3:" << std::endl;
-      Rcpp::Rcerr << "Curve: " << cv << std::endl;
-      Rcpp::Rcerr << "Surface1: " << h1 << std::endl;
-      Rcpp::Rcerr << "Surface2: " << h2 << std::endl;
+      std::cerr << "Compare_z_at_xy_3:" << std::endl;
+      std::cerr << "Curve: " << cv << std::endl;
+      std::cerr << "Surface1: " << h1 << std::endl;
+      std::cerr << "Surface2: " << h2 << std::endl;
       Comparison_result res = base.compare_z_at_xy_3_object() (cv, h1, h2);
-      Rcpp::Rcerr << "Result: " << res << std::endl;
+      std::cerr << "Result: " << res << std::endl;
       return res;
     }
 
@@ -119,11 +118,11 @@ public:
 
     {
       Base base;
-      Rcpp::Rcerr << "Compare_z_at_xy_3:" << std::endl;
-      Rcpp::Rcerr << "Surface1: " << h1 << std::endl;
-      Rcpp::Rcerr << "Surface2: " << h2 << std::endl;
+      std::cerr << "Compare_z_at_xy_3:" << std::endl;
+      std::cerr << "Surface1: " << h1 << std::endl;
+      std::cerr << "Surface2: " << h2 << std::endl;
       Comparison_result res = base.compare_z_at_xy_3_object() (h1, h2);
-      Rcpp::Rcerr << "Result: " << res << std::endl;
+      std::cerr << "Result: " << res << std::endl;
       return res;
     }
 
@@ -142,13 +141,13 @@ public:
                                  const Xy_monotone_surface_3& h2) const
     {
       Base base;
-      Rcpp::Rcerr << "Compare_z_at_xy_above_3:" << std::endl;
-      Rcpp::Rcerr << "Curve: " << cv << std::endl;
-      Rcpp::Rcerr << "Surface1: " << h1 << std::endl;
-      Rcpp::Rcerr << "Surface2: " << h2 << std::endl;
+      std::cerr << "Compare_z_at_xy_above_3:" << std::endl;
+      std::cerr << "Curve: " << cv << std::endl;
+      std::cerr << "Surface1: " << h1 << std::endl;
+      std::cerr << "Surface2: " << h2 << std::endl;
       Comparison_result res =
         base.compare_z_at_xy_above_3_object() (cv, h1, h2);
-      Rcpp::Rcerr << "Result: " << res << std::endl;
+      std::cerr << "Result: " << res << std::endl;
       return res;
     }
   };
@@ -166,13 +165,13 @@ public:
                                  const Xy_monotone_surface_3& h2) const
     {
       Base base;
-      Rcpp::Rcerr << "Compare_z_at_xy_below_3:" << std::endl;
-      Rcpp::Rcerr << "Curve: " << cv << std::endl;
-      Rcpp::Rcerr << "Surface1: " << h1 << std::endl;
-      Rcpp::Rcerr << "Surface2: " << h2 << std::endl;
+      std::cerr << "Compare_z_at_xy_below_3:" << std::endl;
+      std::cerr << "Curve: " << cv << std::endl;
+      std::cerr << "Surface1: " << h1 << std::endl;
+      std::cerr << "Surface2: " << h2 << std::endl;
       Comparison_result res =
         base.compare_z_at_xy_below_3_object() (cv, h1, h2);
-      Rcpp::Rcerr << "Result: " << res << std::endl;
+      std::cerr << "Result: " << res << std::endl;
       return res;
     }
 
@@ -193,8 +192,8 @@ public:
                               OutputIterator o) const
     {
       Base base;
-      Rcpp::Rcerr << "Construct_projected_boundary_2: JUST FIRST" << std::endl;
-      Rcpp::Rcerr << "Surface: " << s << std::endl;
+      std::cerr << "Construct_projected_boundary_2: JUST FIRST" << std::endl;
+      std::cerr << "Surface: " << s << std::endl;
       std::list<CGAL::Object> l;
       base.construct_projected_boundary_2_object() (s, std::back_inserter(l));
 
@@ -202,9 +201,9 @@ public:
       {
         std::pair<X_monotone_curve_2, CGAL::Oriented_side> i;
         if (CGAL::assign(i, l.front()))
-          Rcpp::Rcerr << "First: " << i.first << std::endl;
+          std::cerr << "First: " << i.first << std::endl;
         else
-          Rcpp::Rcerr << "First intersection is a point" << std::endl;
+          std::cerr << "First intersection is a point" << std::endl;
       }
 
       std::copy(l.begin(), l.end(), o);
@@ -229,10 +228,10 @@ public:
                               OutputIterator o) const
     {
       Base base;
-      Rcpp::Rcerr << "Construct_projected_intersections_2: JUST FIRST"
+      std::cerr << "Construct_projected_intersections_2: JUST FIRST"
                 << std::endl;
-      Rcpp::Rcerr << "Surface1: " << s1 << std::endl;
-      Rcpp::Rcerr << "Surface2: " << s2 << std::endl;
+      std::cerr << "Surface1: " << s1 << std::endl;
+      std::cerr << "Surface2: " << s2 << std::endl;
       std::list<CGAL::Object> l;
       base.construct_projected_intersections_2_object() (s1, s2,
                                                          std::back_inserter(l));
@@ -241,9 +240,9 @@ public:
       {
         Intersection_curve i;
         if (CGAL::assign(i, l.front()))
-          Rcpp::Rcerr << "First: " << i.first << std::endl;
+          std::cerr << "First: " << i.first << std::endl;
         else
-          Rcpp::Rcerr << "First intersection is not a point" << std::endl;
+          std::cerr << "First intersection is not a point" << std::endl;
       }
 
       std::copy(l.begin(), l.end(), o);

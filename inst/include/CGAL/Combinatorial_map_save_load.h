@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Combinatorial_map/include/CGAL/Combinatorial_map_save_load.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Combinatorial_map/include/CGAL/Combinatorial_map_save_load.h $
 // $Id: Combinatorial_map_save_load.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_COMBINATORIAL_MAP_SAVE_LOAD_H
 #define CGAL_COMBINATORIAL_MAP_SAVE_LOAD_H
 
-#include <Rcpp.h>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/lexical_cast.hpp>
@@ -536,10 +535,10 @@ namespace CGAL {
             std::string ptype_map= std::string
               (typeid(typename CMap::template Attribute_type<i>::type::Point).name());
 
-                //  Rcpp::Rcout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
+                //  std::cout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
                 /* if(type!=type_map && ptype!=ptype_map)
                 {
-                  //  Rcpp::Rcout<<"Not loaded."<<std::endl;
+                  //  std::cout<<"Not loaded."<<std::endl;
                   return;
                   }*/
 
@@ -607,10 +606,10 @@ namespace CGAL {
             std::string ptype =  v0.second.get<std::string>("type_point");
             std::string type_map= typeid
               (typename CMap::template Attribute_type<i>::type::Point).name();
-                //  Rcpp::Rcout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
+                //  std::cout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
                 /*                if(ptype!=type_map)
                 {
-                  //  Rcpp::Rcout<<"Not loaded."<<std::endl;
+                  //  std::cout<<"Not loaded."<<std::endl;
                   return;
                   }*/
 
@@ -668,10 +667,10 @@ namespace CGAL {
             std::string ptype =  v0.second.get<std::string>("type");
             std::string type_map= typeid
               (typename CMap::template Attribute_type<i>::type::Info).name();
-                //  Rcpp::Rcout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
+                //  std::cout<<"ptype="<<ptype<<"  and type_map="<<type_map<<std::endl;
                 /*      if(ptype!=type_map)
                 {
-                  //  Rcpp::Rcout<<"Not loaded."<<std::endl;
+                  //  std::cout<<"Not loaded."<<std::endl;
                   return;
                   } */
 

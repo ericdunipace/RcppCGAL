@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_rep_bfi.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_rep_bfi.h $
 // $Id: Algebraic_real_rep_bfi.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -24,7 +24,6 @@
 #ifndef CGAL_ALGEBRAIC_KERNEL_D_ALGEBRAIC_REAL_REP_BFI_H
 #define CGAL_ALGEBRAIC_KERNEL_D_ALGEBRAIC_REAL_REP_BFI_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Arithmetic_kernel.h>
 #include <CGAL/Polynomial_type_generator.h>
@@ -299,7 +298,7 @@ public:
 
 
     BFI evaluate_polynomial_approx(const BFI& x) const {
-       // Rcpp::Rcout << "eval approx  begin"<< std::endl;
+       // std::cout << "eval approx  begin"<< std::endl;
         typedef std::vector<BFI> BFI_VEC;
         typedef typename BFI_VEC::reverse_iterator RIT;
 
@@ -309,14 +308,14 @@ public:
             rit++){
             result = result * x + (*rit);
         }
-       // Rcpp::Rcout << "eval approx  end"<< std::endl;
+       // std::cout << "eval approx  end"<< std::endl;
         return result;
     }
 
     void refine_poly_approximation() const {
         CGAL_precondition(current_prec > 1);
         current_prec *= 2;
-        // Rcpp::Rcout <<"ALGREAL: refine approx: "<<  current_prec<<std::endl;
+        // std::cout <<"ALGREAL: refine approx: "<<  current_prec<<std::endl;
         set_precision(BFI(),current_prec);
         polynomial_approx.clear();
         convert_coeffs(
@@ -325,7 +324,7 @@ public:
 
         Self const *next = static_cast<const Self *>(this->next);
         while(this != next){
-            // Rcpp::Rcout << this << " " << next << std::endl;
+            // std::cout << this << " " << next << std::endl;
             next->polynomial_approx = polynomial_approx;
             next->current_prec      = current_prec;
             next = static_cast<const Self *>(next->next);
@@ -343,7 +342,7 @@ public:
         // TODO: Problems if the next block gets executed
 //        Self const *next = static_cast<const Self *>(this->next);
 //        while(this != next){
-//            // Rcpp::Rcout << this << " " << next << std::endl;
+//            // std::cout << this << " " << next << std::endl;
 //            next->polynomial_approx = polynomial_approx;
 //            next->current_prec      = current_prec;
 //            next = static_cast<const Self *>(next->next);
@@ -353,7 +352,7 @@ public:
     void refine() const{
         if(this->is_rational()) return;
 
-       // Rcpp::Rcout << "refine begin ------- "<< std::endl;
+       // std::cout << "refine begin ------- "<< std::endl;
 
         Field m = (this->low()+this->high())/Field(2);
 
@@ -361,7 +360,7 @@ public:
         // refinement.
         // TODO: But what if this changes?
         sign_of_polynomial_at( m );
-        //Rcpp::Rcout << "refine end ----------------- "<<current_prec<<  std::endl;
+        //std::cout << "refine end ----------------- "<<current_prec<<  std::endl;
     }
 
 protected:
@@ -388,7 +387,7 @@ protected:
         // correct sign if needed
         if( s*CGAL::sign(CGAL::upper(eval) ) != CGAL::POSITIVE ){
 
-            //Rcpp::Rcout << "APPROX FAILED-------------------------------"<<std::endl;
+            //std::cout << "APPROX FAILED-------------------------------"<<std::endl;
             s = this->polynomial().sign_at(m);
             if ( s != CGAL::ZERO ) {
                 refine_poly_approximation();

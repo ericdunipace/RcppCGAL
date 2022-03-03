@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Curve_renderer_facade.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Curve_renderer_facade.h $
 // $Id: Curve_renderer_facade.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -38,7 +38,7 @@
 #ifndef Gfx_DETAILED_OUT
 //#define Gfx_USE_DETAILED_OUT
 #ifdef Gfx_USE_DETAILED_OUT
-#define Gfx_DETAILED_OUT(x) Rcpp::Rcerr << x
+#define Gfx_DETAILED_OUT(x) std::cerr << x
 #else
 #define Gfx_DETAILED_OUT(x) static_cast<void>(0)
 #endif
@@ -48,16 +48,15 @@
 #ifndef Gfx_OUT
 // #define Gfx_USE_OUT
 #ifdef Gfx_USE_OUT
-#define Gfx_OUT(x) Rcpp::Rcerr << x
+#define Gfx_OUT(x) std::cerr << x
 #else
 #define Gfx_OUT(x) static_cast<void>(0)
 #endif
 #endif
 
 // I still breathe !!!
-#define STILL_ALIVE Rcpp::Rcout << __LINE__ << "\n";
+#define STILL_ALIVE std::cout << __LINE__ << "\n";
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/tss.h>
 #include <CGAL/Bbox_2.h>
@@ -272,12 +271,12 @@ Lrestart:
 
             int prev = renderer().set_IA_method(1);
             if(prev == 0) {
-                Rcpp::Rcerr << "Restarting with MAA\n";
+                std::cerr << "Restarting with MAA\n";
                 pts.clear();
                 goto Lrestart;
             }
 
-            Rcpp::Rcerr << "Switching to multi-precision arithmetic" <<
+            std::cerr << "Switching to multi-precision arithmetic" <<
                 std::endl;
 #ifdef CGAL_CKVA_USE_MULTIPREC_ARITHMETIC
             if(::boost::is_same<typename Algebraic_structure_traits< Float >::
@@ -296,7 +295,7 @@ Lrestart:
 
             // HACK HACK HACK: uses exact arithmetic
                 goto Lexit;
-                Rcpp::Rcerr << "Switching to exact arithmetic" << std::endl;
+                std::cerr << "Switching to exact arithmetic" << std::endl;
 #ifdef CGAL_CKVA_USE_RATIONAL_ARITHMETIC
 
                 if(::boost::is_same<
@@ -318,13 +317,13 @@ Lrestart:
                 return;
 #endif  // CGAL_CKVA_USE_RATIONAL_ARITHMETIC
             }
-Lexit:  Rcpp::Rcerr << "Sorry, this does not work even with exact "
+Lexit:  std::cerr << "Sorry, this does not work even with exact "
                     "arithmetic, bailing out..." << std::endl;
-        Rcpp::Rcerr << "polynomial: " << renderer().curve().polynomial_2() <<
+        std::cerr << "polynomial: " << renderer().curve().polynomial_2() <<
             std::endl;
 
         renderer().get_setup_parameters(&bbox, res_w, res_h);
-        Rcpp::Rcerr << "window: " << bbox << "; resolution: " <<
+        std::cerr << "window: " << bbox << "; resolution: " <<
             res_w << " x " << res_h << std::endl;
 
 #endif  // CGAL_CKVA_USE_MULTIPREC_ARITHMETIC
@@ -346,7 +345,7 @@ Lexit:  Rcpp::Rcerr << "Sorry, this does not work even with exact "
             return renderer().draw(point, coord);
         }
         catch(internal::Insufficient_rasterize_precision_exception) {
-            Rcpp::Rcerr << "Unable to rasterize point..\n";
+            std::cerr << "Unable to rasterize point..\n";
             return false;
         }
 #else

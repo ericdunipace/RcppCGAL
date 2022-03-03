@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/random_perturbation.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/random_perturbation.h $
 // $Id: random_perturbation.h 10ba347 2020-10-02T15:20:53+02:00 Sebastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_RANDOM_PERTURBATION_H
 #define CGAL_POLYGON_MESH_PROCESSING_RANDOM_PERTURBATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/disable_warnings.h>
@@ -166,10 +165,10 @@ void random_perturbation(VertexRange vertices
   typedef typename boost::graph_traits<PM>::vertex_descriptor vertex_descriptor;
 
 #ifdef CGAL_PMP_RANDOM_PERTURBATION_VERBOSE
-  Rcpp::Rcout << std::endl;
+  std::cout << std::endl;
   CGAL::Timer t;
-  Rcpp::Rcout << "Random perturbation (max size = "<< perturbation_max_size<<")...";
-  Rcpp::Rcout.flush();
+  std::cout << "Random perturbation (max size = "<< perturbation_max_size<<")...";
+  std::cout.flush();
   t.start();
 #endif
 
@@ -204,8 +203,8 @@ void random_perturbation(VertexRange vertices
 
 #ifdef CGAL_PMP_RANDOM_PERTURBATION_VERBOSE
   t.stop();
-  Rcpp::Rcout << "Perturbation done (";
-  Rcpp::Rcout << t.time() << " sec )." << std::endl;
+  std::cout << "Perturbation done (";
+  std::cout << t.time() << " sec )." << std::endl;
 #endif
 }
 

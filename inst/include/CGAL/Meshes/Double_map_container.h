@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesher_level/include/CGAL/Meshes/Double_map_container.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesher_level/include/CGAL/Meshes/Double_map_container.h $
 // $Id: Double_map_container.h 6fe18d8 2021-01-20T15:32:23+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESHES_DOUBLE_MAP_CONTAINER_H
 #define CGAL_MESHES_DOUBLE_MAP_CONTAINER_H
 
-#include <Rcpp.h>
 #include <set>
 #include <iostream>
 #include <CGAL/Double_map.h>
@@ -59,9 +58,9 @@ namespace CGAL {
       {
         CGAL_assertion(!m.empty());
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-        Rcpp::Rcerr << "get_next_element_impl(";
-        debug_element(Rcpp::Rcerr, m.front()->second);
-        Rcpp::Rcerr << ")\n";
+        std::cerr << "get_next_element_impl(";
+        debug_element(std::cerr, m.front()->second);
+        std::cerr << ")\n";
 #endif
         return m.front()->second;
 
@@ -70,9 +69,9 @@ namespace CGAL {
       void add_bad_element(const Element& e, const Quality& q)
       {
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-        Rcpp::Rcerr << "add_bad_element(";
-        debug_element(Rcpp::Rcerr, e);
-        Rcpp::Rcerr << ")\n";
+        std::cerr << "add_bad_element(";
+        debug_element(std::cerr, e);
+        std::cerr << ")\n";
 #endif
         m.insert(e, q);
       }
@@ -85,9 +84,9 @@ namespace CGAL {
       void remove_element(const Element& e)
       {
 #if CGAL_MESHES_DEBUG_DOUBLE_MAP
-        Rcpp::Rcerr << "remove_element(";
-        debug_element(Rcpp::Rcerr, e);
-        Rcpp::Rcerr << ")\n";
+        std::cerr << "remove_element(";
+        debug_element(std::cerr, e);
+        std::cerr << ")\n";
 #endif
         m.erase(e);
       }

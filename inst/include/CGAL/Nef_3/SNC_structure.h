@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/SNC_structure.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/SNC_structure.h $
 // $Id: SNC_structure.h 458ecf1 2021-06-08T17:32:12+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_SNC_STRUCTURE_H
 #define CGAL_SNC_STRUCTURE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -657,7 +656,7 @@ public:
   Size_type number_of_sfaces() const { return sfaces_.size();}
   /*{\Mop returns the number of sfaces.}*/
 
-  void print_statistics(std::ostream& os = Rcpp::Rcout) const
+  void print_statistics(std::ostream& os = std::cout) const
   /*{\Mop print the statistics of |P|: the number of vertices, edges,
       faces, volumes and sobjects.}*/
   {

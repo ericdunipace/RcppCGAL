@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polynomial/include/CGAL/Polynomial/modular_gcd_utils.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polynomial/include/CGAL/Polynomial/modular_gcd_utils.h $
 // $Id: modular_gcd_utils.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -19,7 +19,6 @@
 #ifndef CGAL_POLYNOMIAL_MODULAR_GCD_UTILS_H
 #define CGAL_POLYNOMIAL_MODULAR_GCD_UTILS_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <vector>
 #include <CGAL/Polynomial.h>
@@ -46,7 +45,7 @@ void euclidean_division_obstinate(const Polynomial<NT>& F1,
         const Polynomial<NT>& F2,
         Polynomial<NT>& Q, Polynomial<NT>& R){
 
-//    Rcpp::Rcout<<" my_modular_gcd_utils "<<std::endl;
+//    std::cout<<" my_modular_gcd_utils "<<std::endl;
     CGAL_precondition(!F2.is_zero());
     int d1 = F1.degree();
     int d2 = F2.degree();

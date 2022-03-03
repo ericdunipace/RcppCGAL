@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/OBJ.h $
-// $Id: OBJ.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/OBJ.h $
+// $Id: OBJ.h a34debc 2021-06-23T22:56:35+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Lutz Kettner
@@ -14,7 +14,6 @@
 #ifndef CGAL_IO_OBJ_H
 #define CGAL_IO_OBJ_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/OBJ/File_writer_wavefront.h>
 #include <CGAL/IO/Generic_writer.h>
 #include <CGAL/IO/io.h>
@@ -57,7 +56,7 @@ bool read_OBJ(std::istream& is,
   if(!is.good())
   {
     if(verbose)
-      Rcpp::Rcerr<<"File doesn't exist."<<std::endl;
+      std::cerr<<"File doesn't exist."<<std::endl;
     return false;
   }
 
@@ -85,7 +84,7 @@ bool read_OBJ(std::istream& is,
       if(!(iss >> p))
       {
         if(verbose)
-          Rcpp::Rcerr << "error while reading OBJ vertex." << std::endl;
+          std::cerr << "error while reading OBJ vertex." << std::endl;
         return false;
       }
 
@@ -154,27 +153,27 @@ bool read_OBJ(std::istream& is,
     else
     {
       if(verbose)
-        Rcpp::Rcerr << "error: unrecognized line: " << s << std::endl;
+        std::cerr << "error: unrecognized line: " << s << std::endl;
       return false;
     }
   }
 
   if(norm_found && verbose)
-    Rcpp::Rcout<<"NOTE: normals were found in this file, but were discarded."<<std::endl;
+    std::cout<<"NOTE: normals were found in this file, but were discarded."<<std::endl;
   if(tex_found && verbose)
-    Rcpp::Rcout<<"NOTE: textures were found in this file, but were discarded."<<std::endl;
+    std::cout<<"NOTE: textures were found in this file, but were discarded."<<std::endl;
 
   if(points.empty() || polygons.empty())
   {
     if(verbose)
-      Rcpp::Rcerr << "warning: empty file?" << std::endl;
+      std::cerr << "warning: empty file?" << std::endl;
     return false;
   }
 
   if(maxi > static_cast<int>(points.size()) || mini < -static_cast<int>(points.size()))
   {
     if(verbose)
-      Rcpp::Rcerr << "error: invalid face index" << std::endl;
+      std::cerr << "error: invalid face index" << std::endl;
     return false;
   }
 
@@ -319,7 +318,7 @@ bool read_OBJ(const std::string& fname, PointRange& points, PolygonRange& polygo
  *   \cgalParamNBegin{stream_precision}
  *     \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
  *     \cgalParamType{int}
- *     \cgalParamDefault{`the precision of the stream `os``}
+ *     \cgalParamDefault{the precision of the stream `os`}
  *   \cgalParamNEnd
  * \cgalNamedParamsEnd
  *

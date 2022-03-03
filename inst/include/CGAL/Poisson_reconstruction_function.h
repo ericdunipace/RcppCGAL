@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Poisson_surface_reconstruction_3/include/CGAL/Poisson_reconstruction_function.h $
-// $Id: Poisson_reconstruction_function.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Poisson_surface_reconstruction_3/include/CGAL/Poisson_reconstruction_function.h $
+// $Id: Poisson_reconstruction_function.h 3b7754f 2021-09-20T12:44:38+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Saboret, Pierre Alliez
@@ -12,7 +12,6 @@
 #ifndef CGAL_POISSON_RECONSTRUCTION_FUNCTION_H
 #define CGAL_POISSON_RECONSTRUCTION_FUNCTION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -498,7 +497,7 @@ public:
                                                                      &coarse_poisson_function);
 
       sizing_field_timer.stop();
-      Rcpp::Rcerr << "Construction time of the sizing field: " << sizing_field_timer.time()
+      std::cerr << "Construction time of the sizing field: " << sizing_field_timer.time()
                 << " seconds" << std::endl;
 
       NB.push_back( delaunay_refinement(radius_edge_ratio_bound,
@@ -532,7 +531,7 @@ public:
     double lambda = 0.1;
     if ( ! solve_poisson(solver, lambda) )
     {
-      Rcpp::Rcerr << "Error: cannot solve Poisson equation" << std::endl;
+      std::cerr << "Error: cannot solve Poisson equation" << std::endl;
       return false;
     }
 
@@ -664,7 +663,7 @@ public:
       }
       ++i;
     }
-    Rcpp::Rcerr << N << " out of " << i << " cells have NULL_VECTOR as normal" << std::endl;
+    std::cerr << N << " out of " << i << " cells have NULL_VECTOR as normal" << std::endl;
   }
 
   void initialize_duals() const
@@ -771,7 +770,7 @@ private:
     SparseLinearAlgebraTraits_d solver, ///< sparse linear solver
     double lambda)
   {
-    CGAL_TRACE("Calls solve_poisson()\n");
+    CGAL_TRACE_STREAM << "Calls solve_poisson()\n";
 
     double time_init = clock();
 
@@ -787,7 +786,7 @@ private:
     m_tr->index_unconstrained_vertices();
     unsigned int nb_variables = static_cast<unsigned int>(m_tr->number_of_vertices()-1);
 
-    CGAL_TRACE("  Number of variables: %ld\n", (long)(nb_variables));
+    CGAL_TRACE_STREAM  << "  Number of variables: " <<  nb_variables << std::endl;
 
     // Assemble linear system A*X=B
     typename SparseLinearAlgebraTraits_d::Matrix A(nb_variables); // matrix is symmetric definite positive
@@ -816,9 +815,9 @@ private:
     clear_duals();
     clear_normals();
     duration_assembly = (clock() - time_init)/CLOCKS_PER_SEC;
-    CGAL_TRACE("  Creates matrix: done (%.2lf s)\n", duration_assembly);
+    CGAL_TRACE_STREAM << "  Creates matrix: done (" << duration_assembly << "sec.)\n";
 
-    CGAL_TRACE("  Solve sparse linear system...\n");
+    CGAL_TRACE_STREAM << "  Solve sparse linear system...\n";
 
     // Solve "A*X = B". On success, solution is (1/D) * X.
     time_init = clock();
@@ -828,7 +827,7 @@ private:
     CGAL_surface_reconstruction_points_assertion(D == 1.0);
     duration_solve = (clock() - time_init)/CLOCKS_PER_SEC;
 
-    CGAL_TRACE("  Solve sparse linear system: done (%.2lf s)\n", duration_solve);
+    CGAL_TRACE_STREAM << "  Solve sparse linear system: done (" << duration_solve << "sec.)\n";
 
     // copy function's values to vertices
     unsigned int index = 0;
@@ -836,7 +835,7 @@ private:
       if(!m_tr->is_constrained(v))
         v->f() = X[index++];
 
-    CGAL_TRACE("End of solve_poisson()\n");
+    CGAL_TRACE_STREAM << "End of solve_poisson()\n";
 
     return true;
   }
@@ -887,7 +886,7 @@ private:
     std::size_t size = values.size();
     if(size == 0)
     {
-      Rcpp::Rcerr << "Contouring: no input points\n";
+      std::cerr << "Contouring: no input points\n";
       return 0.0;
     }
 
@@ -935,9 +934,9 @@ private:
     c = std::fabs(volume(pb,pa,pd,p) / v);
     d = std::fabs(volume(pb,pc,pa,p) / v);
 
-    Rcpp::Rcerr << "_________________________________\n";
-    Rcpp::Rcerr << aa << "  " << bb << "  " << cc << "  " << dd << std::endl;
-    Rcpp::Rcerr << a << "  " << b << "  " << c << "  " << d << std::endl;
+    std::cerr << "_________________________________\n";
+    std::cerr << aa << "  " << bb << "  " << cc << "  " << dd << std::endl;
+    std::cerr << a << "  " << b << "  " << c << "  " << d << std::endl;
 
 #endif
   }
@@ -1239,16 +1238,16 @@ private:
 
         if(m_tr->is_constrained(vj)){
           if(! is_valid(vj->f())){
-            Rcpp::Rcerr << "vj->f() = " << vj->f() << " is not valid" << std::endl;
+            std::cerr << "vj->f() = " << vj->f() << " is not valid" << std::endl;
           }
           B[vi->index()] -= cij * vj->f(); // change rhs
           if(! is_valid( B[vi->index()])){
-            Rcpp::Rcerr << " B[vi->index()] = " <<  B[vi->index()] << " is not valid" << std::endl;
+            std::cerr << " B[vi->index()] = " <<  B[vi->index()] << " is not valid" << std::endl;
           }
 
         } else {
           if(! is_valid(cij)){
-            Rcpp::Rcerr << "cij = " << cij << " is not valid" << std::endl;
+            std::cerr << "cij = " << cij << " is not valid" << std::endl;
           }
           A.set_coef(vi->index(),vj->index(), -cij, true /*new*/); // off-diagonal coefficient
         }

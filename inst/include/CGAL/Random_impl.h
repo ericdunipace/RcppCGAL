@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Random_numbers/include/CGAL/Random_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Random_numbers/include/CGAL/Random_impl.h $
 // $Id: Random_impl.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -20,7 +20,6 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
-#include <Rcpp.h>
 #include <ctime>
 #include <iostream>
 #include <sstream>
@@ -54,7 +53,7 @@ Random(internal::Random_print_seed)
     std::time_t s;
     std::time( &s);
     seed = (unsigned int)s;
-    Rcpp::Rcerr << "CGAL::Random()::get_seed() = " << seed << std::endl;
+    std::cerr << "CGAL::Random()::get_seed() = " << seed << std::endl;
     // initialize random numbers generator
     rng.seed(static_cast<boost::int32_t>(seed));
     random_value = get_int(0, 1<<15);

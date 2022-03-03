@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/fair_impl.h $
-// $Id: fair_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/fair_impl.h $
+// $Id: fair_impl.h 625848e 2021-10-04T13:21:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,14 +13,13 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_FAIR_POLYHEDRON_3_H
 #define CGAL_POLYGON_MESH_PROCESSING_FAIR_POLYHEDRON_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 
 #include <map>
 #include <set>
 #include <CGAL/assertions.h>
-#include <CGAL/Polygon_mesh_processing/Weights.h>
+#include <CGAL/boost/graph/helpers.h>
 #ifdef CGAL_PMP_FAIR_DEBUG
 #include <CGAL/Timer.h>
 #endif
@@ -66,7 +65,7 @@ private:
   double weight = 0;
   Halfedge_around_vertex_circulator circ(halfedge(v,pmesh),pmesh), done(circ);
   do {
-    weight += weight_calculator.w_ij(*circ);
+    weight += CGAL::to_double(weight_calculator.w_ij(*circ));
     } while(++circ != done);
     return weight;
   }
@@ -96,11 +95,11 @@ private:
       }
     }
     else {
-      double w_i = weight_calculator.w_i(v);
+      double w_i = CGAL::to_double(weight_calculator.w_i(v));
 
       Halfedge_around_vertex_circulator circ(halfedge(v,pmesh),pmesh), done(circ);
       do {
-        double w_i_w_ij = w_i * weight_calculator.w_ij(*circ) ;
+        double w_i_w_ij = w_i * CGAL::to_double(weight_calculator.w_ij(*circ)) ;
 
         vertex_descriptor nv = target(opposite(*circ,pmesh),pmesh);
         compute_row(nv, row_id, matrix, x, y, z, -w_i_w_ij*multiplier, vertex_id_map, depth-1);
@@ -154,7 +153,7 @@ public:
       compute_row(vd, v_id, A, Bx[v_id], By[v_id], Bz[v_id], 1, vertex_id_map, depth);
     }
     #ifdef CGAL_PMP_FAIR_DEBUG
-    std:cerr << "**Timer** System construction: " << timer.time() << std::endl; timer.reset();
+    std::cerr << "**Timer** System construction: " << timer.time() << std::endl; timer.reset();
     #endif
 
     // factorize
@@ -165,7 +164,7 @@ public:
       return false;
     }
     #ifdef CGAL_PMP_FAIR_DEBUG
-    Rcpp::Rcerr << "**Timer** System factorization: " << timer.time() << std::endl; timer.reset();
+    std::cerr << "**Timer** System factorization: " << timer.time() << std::endl; timer.reset();
     #endif
 
     // solve
@@ -175,7 +174,7 @@ public:
       return false;
     }
     #ifdef CGAL_PMP_FAIR_DEBUG
-    Rcpp::Rcerr << "**Timer** System solver: " << timer.time() << std::endl; timer.reset();
+    std::cerr << "**Timer** System solver: " << timer.time() << std::endl; timer.reset();
     #endif
 
 

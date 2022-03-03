@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Matrix_search/include/CGAL/sorted_matrix_search.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Matrix_search/include/CGAL/sorted_matrix_search.h $
 // $Id: sorted_matrix_search.h 1e249af 2020-11-10T19:21:21+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SORTED_MATRIX_SEARCH_H
 #define CGAL_SORTED_MATRIX_SEARCH_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Matrix_search.h>
 
 
@@ -102,7 +101,7 @@ public:
     for (int i = 0; i < dim; ++i)
       for (int j = 0; j < dim; ++j) {
         if (CGAL_NTS abs(base_matrix(x + i, y + j) - v) < Value(1E-10))
-          Rcpp::Rcerr << "***" << base_matrix(x + i, y + j) << std::endl;
+          std::cerr << "***" << base_matrix(x + i, y + j) << std::endl;
         if (base_matrix(x + i, y + j) == v)
           return true;
       }

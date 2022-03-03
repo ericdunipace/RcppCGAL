@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_2/include/CGAL/Mesh_2/Clusters.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_2/include/CGAL/Mesh_2/Clusters.h $
 // $Id: Clusters.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_MESH_2_CLUSTERS_H
 #define CGAL_MESH_2_CLUSTERS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 
@@ -351,7 +350,7 @@ update_cluster(Cluster& c, iterator it, Vertex_handle va,
                               c.smallest_angle.second->point())/FT(4);
   cluster_map.insert(Cluster_map_value_type(va,c));
 #ifdef CGAL_MESH_2_DEBUG_CLUSTERS
-  Rcpp::Rcerr << "Cluster at " << va->point() << " is updated.  "
+  std::cerr << "Cluster at " << va->point() << " is updated.  "
             << "\n  vm: " << vm->point()
             << "\n  reduction: " << reduction
             << "\n  min_sq_len: " << c.minimum_squared_length

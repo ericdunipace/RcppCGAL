@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Iterative_authalic_parameterizer_3.h $
-// $Id: Iterative_authalic_parameterizer_3.h 6594e75 2021-01-15T10:07:59+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Iterative_authalic_parameterizer_3.h $
+// $Id: Iterative_authalic_parameterizer_3.h 9e89439 2021-08-04T13:57:30+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -19,10 +19,8 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_ITERATIVE_AUTHALIC_PARAMETERIZER_3_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_ITERATIVE_AUTHALIC_PARAMETERIZER_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
-#include <CGAL/Surface_mesh_parameterization/internal/angles.h>
 #include <CGAL/Surface_mesh_parameterization/internal/Bool_property_map.h>
 #include <CGAL/Surface_mesh_parameterization/internal/Containers_filler.h>
 #include <CGAL/Surface_mesh_parameterization/internal/kernel_traits.h>
@@ -35,7 +33,9 @@
 #include <CGAL/Dynamic_property_map.h>
 #include <CGAL/Polygon_mesh_processing/measure.h>
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
-#include <CGAL/Polygon_mesh_processing/Weights.h>
+// #include <CGAL/Weights/authalic_weights.h>
+#include <CGAL/Weights/cotangent_weights.h>
+#include <CGAL/Weights/tangent_weights.h>
 #include <CGAL/number_type_config.h>
 
 #if defined(CGAL_EIGEN3_ENABLED)
@@ -246,7 +246,7 @@ public:
                     const Matrix& A,
                     const std::string name)
   {
-    Rcpp::Rcout << "Matrix " << name << "(" << A.row_dimension() << "x" << A.column_dimension() << ")" << std::endl;
+    std::cout << "Matrix " << name << "(" << A.row_dimension() << "x" << A.column_dimension() << ")" << std::endl;
 
     Matrix A1(A.row_dimension(), A.column_dimension());
     int r=0, c=0;
@@ -267,8 +267,8 @@ public:
     for(int r=0; r<A.row_dimension(); ++r)
     {
       for(int c=0; c<A.column_dimension(); ++c)
-        Rcpp::Rcout << std::setw(10) << A1.get_coef(r, c) << "\t" << std::flush;
-      Rcpp::Rcout << std::endl;
+        std::cout << std::setw(10) << A1.get_coef(r, c) << "\t" << std::flush;
+      std::cout << std::endl;
     }
   }
 
@@ -278,7 +278,7 @@ public:
                     const Vector& A,
                     const std::string name)
   {
-    Rcpp::Rcout << "Vector " << name << "(" << A.size() << ")" << std::endl;
+    std::cout << "Vector " << name << "(" << A.size() << ")" << std::endl;
     Vector A1(A.size());
     int r = 0;
     for(vertex_descriptor v1 : vertices)
@@ -289,17 +289,17 @@ public:
     }
 
     for(int r=0; r<A.size(); ++r)
-      Rcpp::Rcout << A1(r) << std::endl;
+      std::cout << A1(r) << std::endl;
   }
 
   void print(Matrix& A, Vector& Xu, Vector& Bu)
   {
-    Rcpp::Rcout << "Matrix " << "(" << A.row_dimension() << "x" << A.column_dimension() << ")" << std::endl;
+    std::cout << "Matrix " << "(" << A.row_dimension() << "x" << A.column_dimension() << ")" << std::endl;
     for(int r=0; r<A.row_dimension(); ++r)
     {
       for(int c=0; c<A.column_dimension(); ++c)
-        Rcpp::Rcout << std::setw(10) << A.get_coef(r, c) << "\t" << std::flush;
-      Rcpp::Rcout << "\t\t"  << Xu(r) << "\t\t" << Bu(r) << std::endl;
+        std::cout << std::setw(10) << A.get_coef(r, c) << "\t" << std::flush;
+      std::cout << "\t\t"  << Xu(r) << "\t\t" << Bu(r) << std::endl;
     }
   }
 
@@ -353,7 +353,7 @@ private:
     for(vertex_descriptor v : vertices)
     {
       put(m_vertex_L2_map, v, compute_vertex_L2(tmesh, v));
-//      Rcpp::Rcout << "Vertex L2: " << v << " = " << compute_vertex_L2(tmesh, v) << std::endl;
+//      std::cout << "Vertex L2: " << v << " = " << compute_vertex_L2(tmesh, v) << std::endl;
     }
   }
 
@@ -447,7 +447,7 @@ private:
     for(face_descriptor f : face_range)
     {
       put(m_face_L2_map, f, compute_face_L2(f, tmesh, uvmap, ppmap));
-//      Rcpp::Rcout << "Face L2: " << f << " = " << compute_face_L2(f, tmesh, uvmap, ppmap) << std::endl;
+//      std::cout << "Face L2: " << f << " = " << compute_face_L2(f, tmesh, uvmap, ppmap) << std::endl;
     }
   }
 
@@ -538,7 +538,7 @@ private:
 
     if(neighborsCounter == 2 && is_border(v, tmesh))
     {
-      Rcpp::Rcout << "Encountered inner border with valency-2 vertex (" << v << "), "
+      std::cout << "Encountered inner border with valency-2 vertex (" << v << "), "
                 << "initializing with Tutte weights, this can affect optimization" << std::endl;
 
       // Tutte weights
@@ -630,7 +630,7 @@ private:
 
   /// computes `w_ij`, coefficient of matrix `A` for `j` neighbor vertex of `i`.
   ///
-  /// \param mesh a triangulated surface.
+  /// \param tmesh a triangulated surface.
   /// \param main_vertex_v_i the vertex of `mesh` with index `i`
   /// \param neighbor_vertex_v_j the vertex of `mesh` with index `j`
   NT compute_w_ij(const Triangle_mesh& tmesh,
@@ -638,36 +638,28 @@ private:
                   Vertex_around_target_circulator<Triangle_mesh> neighbor_vertex_v_j) const
   {
     const PPM ppmap = get(vertex_point, tmesh);
-
     const PPM_ref position_v_i = get(ppmap, main_vertex_v_i);
     const PPM_ref position_v_j = get(ppmap, *neighbor_vertex_v_j);
 
-    // Compute the square norm of v_j -> v_i vector
-    Vector_3 edge = position_v_i - position_v_j;
-    NT square_len = edge*edge;
+    const Vector_3 edge = position_v_i - position_v_j;
+    const NT squared_length = edge * edge;
 
-    // Compute cotangent of (v_k,v_j,v_i) corner (i.e. cotan of v_j corner)
-    // if v_k is the vertex before v_j when circulating around v_i
     vertex_around_target_circulator previous_vertex_v_k = neighbor_vertex_v_j;
     --previous_vertex_v_k;
     const PPM_ref position_v_k = get(ppmap, *previous_vertex_v_k);
-//    NT cotg_psi_ij = internal::cotangent<Kernel>(position_v_k, position_v_j, position_v_i);
-    NT cotg_beta_ij = internal::cotangent<Kernel>(position_v_i, position_v_k, position_v_j);
 
-    // Compute cotangent of (v_i,v_j,v_l) corner (i.e. cotan of v_j corner)
-    // if v_l is the vertex after v_j when circulating around v_i
     vertex_around_target_circulator next_vertex_v_l = neighbor_vertex_v_j;
     ++next_vertex_v_l;
+    const PPM_ref position_v_l = get(ppmap, *next_vertex_v_l);
 
-    const Point_3 position_v_l = get(ppmap, *next_vertex_v_l);
-//    NT cotg_theta_ij = internal::cotangent<Kernel>(position_v_i, position_v_j, position_v_l);
-    NT cotg_alpha_ij = internal::cotangent<Kernel>(position_v_j, position_v_l, position_v_i);
-
-    NT weight = 0;
-    CGAL_assertion(square_len > NT(0)); // two points are identical!
-    if(square_len != NT(0))
-      weight = cotg_beta_ij + cotg_alpha_ij;
-
+    NT weight = NT(0);
+    CGAL_assertion(squared_length > NT(0)); // two points are identical!
+    if(squared_length != NT(0)) {
+      // This version was commented out to be an alternative weight
+      // in the original code by authors.
+      // weight = CGAL::Weights::authalic_weight(position_v_k, position_v_j, position_v_l, position_v_i) / NT(2);
+      weight = CGAL::Weights::cotangent_weight(position_v_k, position_v_j, position_v_l, position_v_i) / NT(2);
+    }
     return weight;
   }
 
@@ -693,7 +685,7 @@ private:
     else if(neighborsCounter == 2 && is_border(v, tmesh))
     {
       use_uniform_weights = true;
-      Rcpp::Rcerr << "Encountered inner border with valency-2 vertex (" << get(vimap, v) << ") "
+      std::cerr << "Encountered inner border with valency-2 vertex (" << get(vimap, v) << ") "
                 << "initializing with uniform weights, this can affect optimization" << std::endl;
     }
 
@@ -709,7 +701,7 @@ private:
 
       // Get j index
       const int j = get(vimap, *vj);
-//      Rcpp::Rcout << "W[" << i << ", " << j << "] = " << w_ij << std::endl;
+//      std::cout << "W[" << i << ", " << j << "] = " << w_ij << std::endl;
 
       // Set w_ij in matrix
       A.set_coef(i, j, w_ij, true /*new*/);
@@ -731,7 +723,7 @@ private:
                                               VertexIndexMap& vimap) const
   {
     auto vpm = get_const_property_map(CGAL::vertex_point, tmesh);
-    CGAL::internal::Mean_value_weight<Triangle_mesh, decltype(vpm)> compute_mvc(tmesh, vpm);
+    const CGAL::Weights::Edge_tangent_weight<Triangle_mesh, decltype(vpm)> compute_mvc(tmesh, vpm);
 
     const int i = get(vimap, v);
 
@@ -923,7 +915,7 @@ public:
     NT area_3D = initialize_faces_areas(cc_faces, tmesh);
 
     if(DEBUG_L0)
-      Rcpp::Rcout << std::endl;
+      std::cout << std::endl;
 
     unsigned int last_best_i = 0;
     NT gamma = 1; // @todo what value should that be
@@ -934,7 +926,7 @@ public:
     while(i < iterations)
     {
       if(DEBUG_L0)
-        Rcpp::Rcout << "Iteration " << i << ", gamma = " << gamma << std::flush;
+        std::cout << "Iteration " << i << ", gamma = " << gamma << std::flush;
 
       // update weights for inner vertices
       for(vertex_descriptor v : cc_vertices)
@@ -973,7 +965,7 @@ public:
          !get_linear_algebra_traits().linear_solver(A, Bv, Xv, Dv))
       {
         if(DEBUG_L0)
-          Rcpp::Rcout << " Linear solver failure #" << m_linear_solver_failures << std::endl;
+          std::cout << " Linear solver failure #" << m_linear_solver_failures << std::endl;
 
         status = ERROR_CANNOT_SOLVE_LINEAR_SYSTEM;
       }
@@ -1003,7 +995,7 @@ public:
       CGAL_postcondition(Dv == NT(1));
 
 //      for(std::size_t i=0; i<nv; ++i)
-//        Rcpp::Rcout << "Sol[" << i << "] = " << Xu[i] << " " << Xv[i] << std::endl;
+//        std::cout << "Sol[" << i << "] = " << Xu[i] << " " << Xv[i] << std::endl;
 
       // Copy A to A_prev, it is a computationally inefficient task but neccesary
       copy_sparse_matrix(A, A_prev, tmesh, cc_vertices, vimap);
@@ -1034,7 +1026,7 @@ public:
       err[i] = compute_area_distortion(cc_faces, area_3D, tmesh, uvmap);
 
       if(DEBUG_L0)
-        Rcpp::Rcout << " err " << err[i] << std::flush;
+        std::cout << " err " << err[i] << std::flush;
 
       if(err[i] <= err[last_best_i])
       {
@@ -1044,7 +1036,7 @@ public:
         is_changed = false;
 
         if(DEBUG_L0)
-          Rcpp::Rcout << " *****" << std::flush;
+          std::cout << " *****" << std::flush;
       }
       else if(err[i] > 100) // @fixme is that reasonnable
       {
@@ -1060,7 +1052,7 @@ public:
       }
 
       ++i;
-      Rcpp::Rcout << std::endl;
+      std::cout << std::endl;
     }
 
     // Check postconditions

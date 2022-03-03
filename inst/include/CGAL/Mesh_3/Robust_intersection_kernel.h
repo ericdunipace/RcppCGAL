@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Robust_intersection_kernel.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Robust_intersection_kernel.h $
 // $Id: Robust_intersection_kernel.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_MESH_3_ROBUST_INTERSECTION_KERNEL_3_H
 #define CGAL_MESH_3_ROBUST_INTERSECTION_KERNEL_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -61,7 +60,7 @@ public:
     Back_from_exact back_from_exact;
     EK::Intersect_3 exact_intersection = EK().intersect_3_object();
     Object object = exact_intersection(to_exact(line), to_exact(plane));
-    // Rcpp::stop("Error");
+    // std::exit(1);
     if ( const EK::Point_3* p = object_cast<EK::Point_3>(&object) )
       return make_object(back_from_exact(*p));
     else if ( const EK::Segment_3* seg = object_cast<EK::Segment_3>(&object) )

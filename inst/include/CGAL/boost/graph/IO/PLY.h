@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/IO/PLY.h $
-// $Id: PLY.h c8cc074 2021-09-27T15:33:42+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/IO/PLY.h $
+// $Id: PLY.h 4eb1464 2021-11-09T11:21:24+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -175,7 +175,7 @@ bool read_PLY(std::istream& is, Graph& g,
 
   \cgalNamedParamsBegin
     \cgalParamNBegin{use_binary_mode}
-      \cgalParamDescription{indicates whether data should be read in binary (`true`) or in ASCII (`false`)}
+      \cgalParamDescription{indicates whether data should be read in binary (`true`) or in \ascii (`false`)}
       \cgalParamType{Boolean}
       \cgalParamDefault{`true`}
     \cgalParamNEnd
@@ -312,8 +312,8 @@ bool read_PLY(const std::string& fname, Graph& g,
     \cgalParamNBegin{stream_precision}
       \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
       \cgalParamType{int}
-      \cgalParamDefault{`the precision of the stream `os``}
-      \cgalParamExtra{This parameter is only meaningful while using ASCII encoding.}
+      \cgalParamDefault{the precision of the stream `os`}
+      \cgalParamExtra{This parameter is only meaningful while using \ascii encoding.}
     \cgalParamNEnd
  \cgalNamedParamsEnd
 
@@ -335,7 +335,7 @@ bool write_PLY(std::ostream& os,
 
   typedef typename CGAL::GetInitializedVertexIndexMap<Graph, CGAL_BGL_NP_CLASS>::const_type VIMap;
   typedef typename GetVertexPointMap<Graph, CGAL_BGL_NP_CLASS>::const_type                  Vpm;
-  typedef typename boost::property_traits<Vpm>::reference                                   Point_3;
+  typedef typename boost::property_traits<Vpm>::value_type                                  Point_3;
   typedef CGAL::IO::Color                                                                   Color;
   typedef typename internal_np::Lookup_named_param_def<
                      internal_np::vertex_color_map_t,
@@ -407,7 +407,7 @@ bool write_PLY(std::ostream& os,
 
   for(vertex_descriptor vd : vertices(g))
   {
-    Point_3 p = get(vpm, vd);
+    const Point_3& p = get(vpm, vd);
     internal::output_properties(os, &p, make_ply_point_writer (CGAL::Identity_property_map<Point_3>()));
     if(has_vcolor)
     {
@@ -484,7 +484,7 @@ bool write_PLY(std::ostream& os, const Graph& g,
 
  \cgalNamedParamsBegin
     \cgalParamNBegin{use_binary_mode}
-      \cgalParamDescription{indicates whether data should be written in binary (`true`) or in ASCII (`false`)}
+      \cgalParamDescription{indicates whether data should be written in binary (`true`) or in \ascii (`false`)}
       \cgalParamType{Boolean}
       \cgalParamDefault{`true`}
     \cgalParamNEnd
@@ -523,7 +523,7 @@ bool write_PLY(std::ostream& os, const Graph& g,
       \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
       \cgalParamType{int}
       \cgalParamDefault{`6`}
-      \cgalParamExtra{This parameter is only meaningful while using ASCII encoding.}
+      \cgalParamExtra{This parameter is only meaningful while using \ascii encoding.}
     \cgalParamNEnd
  \cgalNamedParamsEnd
 

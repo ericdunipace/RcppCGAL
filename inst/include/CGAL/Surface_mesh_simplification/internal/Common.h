@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/internal/Common.h $
-// $Id: Common.h 131242b 2021-10-12T09:29:23+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/internal/Common.h $
+// $Id: Common.h 8166579 2021-10-11T19:58:07+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando.cacciola@geometryfactory.com>
@@ -11,7 +11,6 @@
 #ifndef CGAL_SURFACE_MESH_SIMPLIFICATION_DETAIL_COMMON_H
 #define CGAL_SURFACE_MESH_SIMPLIFICATION_DETAIL_COMMON_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_simplification.h>
 
 #include <CGAL/algorithm.h>
@@ -117,7 +116,7 @@ inline std::string optional_to_string(const boost::optional<T>& o) {
   #define CGAL_SMS_TRACE_IMPL(m) \
     if(::internal::cgal_enable_sms_trace) { \
     std::ostringstream ss; ss << m; std::string s = ss.str(); \
-    /*Surface_simplification_external_trace(s)*/ Rcpp::Rcerr << s << std::endl; \
+    /*Surface_simplification_external_trace(s)*/ std::cerr << s << std::endl; \
     }
 
   #define CGAL_SMS_DEBUG_CODE(code) code

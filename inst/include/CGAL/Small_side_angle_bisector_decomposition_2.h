@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Minkowski_sum_2/include/CGAL/Small_side_angle_bisector_decomposition_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Minkowski_sum_2/include/CGAL/Small_side_angle_bisector_decomposition_2.h $
 // $Id: Small_side_angle_bisector_decomposition_2.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

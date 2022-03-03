@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_lm_middle_edges_generator.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_lm_middle_edges_generator.h $
 // $Id: Arr_lm_middle_edges_generator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_ARR_LANDMARKS_MIDDLE_EDGES_GENERATOR_H
 #define CGAL_ARR_LANDMARKS_MIDDLE_EDGES_GENERATOR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -142,7 +141,7 @@ protected:
 
   virtual void _create_points_set(Points_set& /* points */)
   {
-    Rcpp::Rcerr << "should not reach here!" << std::endl;
+    std::cerr << "should not reach here!" << std::endl;
     CGAL_error();
   }
 };

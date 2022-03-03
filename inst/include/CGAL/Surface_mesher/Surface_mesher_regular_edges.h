@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher_regular_edges.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher_regular_edges.h $
 // $Id: Surface_mesher_regular_edges.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SURFACE_MESHER_REGULAR_EDGES_H
 #define CGAL_SURFACE_MESHER_REGULAR_EDGES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -199,21 +198,21 @@ namespace CGAL {
           bad_edges_initialized(false)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      Rcpp::Rcerr << "CONS: Surface_mesher_regular_edges_base";
+      std::cerr << "CONS: Surface_mesher_regular_edges_base";
       if(withBoundary)
-        Rcpp::Rcerr << " (with boundaries)\n";
+        std::cerr << " (with boundaries)\n";
       else
-        Rcpp::Rcerr << " (without boundary)\n";
+        std::cerr << " (without boundary)\n";
 #endif
     }
 
     // Initialization function
     void initialize_bad_edges() const {
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-      Rcpp::Rcerr << "\r             \rscanning edges ";
+      std::cerr << "\r             \rscanning edges ";
       if(withBoundary)
-        Rcpp::Rcerr << "(boundaries allowed)";
-      Rcpp::Rcerr << "...\n";
+        std::cerr << "(boundaries allowed)";
+      std::cerr << "...\n";
 #endif
       int n = 0;
       for (Finite_edges_iterator eit = SMB::tr.finite_edges_begin(); eit !=
@@ -229,14 +228,14 @@ namespace CGAL {
       }
       bad_edges_initialized = true;
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-        Rcpp::Rcerr << "   -> found " << n << " bad edges\n";
+        std::cerr << "   -> found " << n << " bad edges\n";
 #endif
     }
 
     void scan_triangulation_impl() {
       SMB::scan_triangulation_impl();
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-      Rcpp::Rcerr << "scanning edges (lazy)" << std::endl;
+      std::cerr << "scanning edges (lazy)" << std::endl;
 #endif
     }
 

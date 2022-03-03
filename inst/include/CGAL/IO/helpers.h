@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/helpers.h $
-// $Id: helpers.h f137b0e 2020-12-10T09:13:21+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/helpers.h $
+// $Id: helpers.h 31a0557 2021-08-13T16:45:28+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -26,6 +26,7 @@ namespace CGAL {
 namespace IO {
 namespace internal {
 
+// @MaelRL Shall we update that code now?
 // Ideally this should be a std::is_constructible(double, double, double) but boost::is_constructible
 // is not safe to use without CXX11
 template <typename Kernel>

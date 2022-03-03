@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arrangement_on_surface_with_history_2.h $
-// $Id: Arrangement_on_surface_with_history_2.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arrangement_on_surface_with_history_2.h $
+// $Id: Arrangement_on_surface_with_history_2.h ba8aec6 2021-04-21T13:24:05+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -618,7 +618,7 @@ protected:
     std::allocator_traits<Curves_alloc>::construct(m_curves_alloc, p_cv, cv);
     m_curves.push_back (*p_cv);
 
-    // Create a data-traits Curve_2 object, which is comprised of cv and
+    // Create a data-traits Curve_2 object, which comprises cv and
     // a pointer to the extended curve we have just created.
     // Insert this curve into the base arrangement. Note that the attached
     // observer will take care of updating the edges' set.
@@ -647,7 +647,7 @@ protected:
     std::allocator_traits<Curves_alloc>::construct(m_curves_alloc, p_cv, cv);
     m_curves.push_back (*p_cv);
 
-    // Create a data-traits Curve_2 object, which is comprised of cv and
+    // Create a data-traits Curve_2 object, which comprises cv and
     // a pointer to the extended curve we have just created.
     // Insert this curve into the base arrangement. Note that the attached
     // observer will take care of updating the edges' set.

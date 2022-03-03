@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/IO/write_ply_points.h $
-// $Id: write_ply_points.h 5578bf4 2021-09-27T15:35:40+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/IO/write_ply_points.h $
+// $Id: write_ply_points.h ad79d37 2021-09-29T11:46:30+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Simon Giraudot
@@ -12,7 +12,6 @@
 #ifndef CGAL_POINT_SET_PROCESSING_WRITE_PLY_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_WRITE_PLY_POINTS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/IO/helpers.h>
@@ -122,7 +121,7 @@ template <typename PointRange,
 
   if(!os)
   {
-    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
+    std::cerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -182,8 +181,8 @@ template <typename PointRange,
      \cgalParamNBegin{stream_precision}
        \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
        \cgalParamType{int}
-       \cgalParamDefault{`the precision of the stream `os``}
-       \cgalParamExtra{This parameter is only meaningful while using ASCII encoding.}
+       \cgalParamDefault{the precision of the stream `os`}
+       \cgalParamExtra{This parameter is only meaningful while using \ascii encoding.}
      \cgalParamNEnd
    \cgalNamedParamsEnd
 
@@ -215,7 +214,7 @@ bool write_PLY(std::ostream& os,
 
   if(!os)
   {
-    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
+    std::cerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -255,7 +254,7 @@ bool write_PLY(std::ostream& os, const PointRange& points,
 
    \cgalNamedParamsBegin
      \cgalParamNBegin{use_binary_mode}
-       \cgalParamDescription{indicates whether data should be written in binary (`true`) or in ASCII (`false`)}
+       \cgalParamDescription{indicates whether data should be written in binary (`true`) or in \ascii (`false`)}
        \cgalParamType{Boolean}
        \cgalParamDefault{`true`}
      \cgalParamNEnd
@@ -282,7 +281,7 @@ bool write_PLY(std::ostream& os, const PointRange& points,
        \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
        \cgalParamType{int}
        \cgalParamDefault{`6`}
-       \cgalParamExtra{This parameter is only meaningful while using ASCII encoding.}
+       \cgalParamExtra{This parameter is only meaningful while using \ascii encoding.}
      \cgalParamNEnd
    \cgalNamedParamsEnd
 

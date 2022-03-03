@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/bound_between_1.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/bound_between_1.h $
 // $Id: bound_between_1.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_BOUND_BETWEEN_1_H
 #define CGAL_BOUND_BETWEEN_1_H 1
 
-#include <Rcpp.h>
 #include <iterator>
 
 #include <CGAL/basic.h>
@@ -66,7 +65,7 @@ simple_bound_between(const Algebraic_real& a,
       return simple_bound_between(b,a);
     }
 
-    //Rcpp::Rcout << "Intermediate1: " << CGAL::to_double(a) << " " << CGAL::to_double(b) << std::endl;
+    //std::cout << "Intermediate1: " << CGAL::to_double(a) << " " << CGAL::to_double(b) << std::endl;
     /*
      * First, refine a and b until their isolating intervals are disjoint
      * Therefore, the bigger interval is refined in each substep
@@ -97,8 +96,8 @@ simple_bound_between(const Algebraic_real& a,
             size_max = size_a>size_b ? size_a : size_b,
             size_int = b.low()-a.high();
         while(x>=y) {
-            //Rcpp::Rcout << "x and y: " <<  x << " and " << y << std::endl;
-            //Rcpp::Rcout << "sizes: " << CGAL::to_double(size_int) << " " << CGAL::to_double(size_max) << std::endl;
+            //std::cout << "x and y: " <<  x << " and " << y << std::endl;
+            //std::cout << "sizes: " << CGAL::to_double(size_int) << " " << CGAL::to_double(size_max) << std::endl;
             if(size_int>size_max) {
                 CGAL::set_precision(Bigfloat_interval(),
                                    2*CGAL::get_precision(Bigfloat_interval()));
@@ -122,15 +121,15 @@ simple_bound_between(const Algebraic_real& a,
     CGAL_assertion(x<y);
 
     //srb_b.stop();
-    //Rcpp::Rcout << "Intermediate2: " << x << " " << y << std::endl;
+    //std::cout << "Intermediate2: " << x << " " << y << std::endl;
     typename CGAL::internal::Float_traits<Bigfloat>::Get_mantissa mantissa;
     typename CGAL::internal::Float_traits<Bigfloat>::Get_exponent exponent;
 
-    // Rcpp::Rcout << CGAL::to_double(x) << " < " << CGAL::to_double(y) << std::endl;
+    // std::cout << CGAL::to_double(x) << " < " << CGAL::to_double(y) << std::endl;
 
     Integer x_m = mantissa(x), y_m=mantissa(y);
     long x_e = exponent(x), y_e = exponent(y);
-    //Rcpp::Rcout << "Floats1: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
+    //std::cout << "Floats1: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
 
 
     if (((x_m > 0) && (y_m < 0)) || ((x_m < 0) && (y_m > 0))) {
@@ -147,7 +146,7 @@ simple_bound_between(const Algebraic_real& a,
     }
     // Now, we have that (x_m,x_e) represents a number smaller than (y_m,y_e)
     //srb_c.start();
-    //Rcpp::Rcout << "Floats2: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
+    //std::cout << "Floats2: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
 
     // As long as the mantissa is even, simplify
     while(x_m != 0 && (x_m & 1)==0 ) {
@@ -159,7 +158,7 @@ simple_bound_between(const Algebraic_real& a,
         y_e++;
     }
     //srb_c.stop();
-    //Rcpp::Rcout << "Floats3: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
+    //std::cout << "Floats3: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
 
     // Bring both numbers to a common exponent
     //srb_d.start();
@@ -175,7 +174,7 @@ simple_bound_between(const Algebraic_real& a,
     //srb_d.stop();
     CGAL_assertion(y_e==x_e && x_e==min_e);
     CGAL_assertion(x_m < y_m);
-    //Rcpp::Rcout << "Floats4: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
+    //std::cout << "Floats4: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
 
     // Avoid mantissas to have difference one
     if(y_m-x_m==Integer(1)) {
@@ -185,15 +184,15 @@ simple_bound_between(const Algebraic_real& a,
         y_e--;
         min_e--;
     }
-    //Rcpp::Rcout << "Floats5: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
+    //std::cout << "Floats5: " << x_m << " " << x_e << " and " << y_m << " " << y_e << std::endl;
     Integer final_mantissa(0);
     //srb_e.start();
     long x_log = x_m==Integer(0) ? -1 : CGAL::internal::floor_log2_abs(x_m),
         y_log = y_m==Integer(0) ? -1 : CGAL::internal::floor_log2_abs(y_m),
         old_log = y_log;
-    //Rcpp::Rcout << x_log << " < " << y_log << std::endl;
+    //std::cout << x_log << " < " << y_log << std::endl;
     while(x_log==y_log) {
-        //Rcpp::Rcout << "here" << std::endl;
+        //std::cout << "here" << std::endl;
         while(old_log > y_log) {
             final_mantissa = final_mantissa << 1;
             old_log--;
@@ -233,7 +232,7 @@ simple_bound_between(const Algebraic_real& a,
     //srb_f.stop();
     min_e += y_log;
     Rational rat_between;
-    //Rcpp::Rcout << "Min_e: " << min_e << std::endl;
+    //std::cout << "Min_e: " << min_e << std::endl;
     if(min_e > 0) {
         rat_between = compose(final_mantissa << min_e,
                               Integer(1));
@@ -243,7 +242,7 @@ simple_bound_between(const Algebraic_real& a,
     if(negative) {
         rat_between = -rat_between;
     }
-    //Rcpp::Rcout << "Result: " << a.high() << " " << rat_between << " " << b.low() << std::endl;
+    //std::cout << "Result: " << a.high() << " " << rat_between << " " << b.low() << std::endl;
     CGAL_assertion(a.high() < rat_between);
     CGAL_assertion(b.low() > rat_between);
     CGAL::set_precision(Bigfloat_interval(),old_prec);

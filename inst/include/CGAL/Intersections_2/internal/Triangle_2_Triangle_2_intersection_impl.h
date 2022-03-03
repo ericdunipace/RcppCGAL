@@ -7,14 +7,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Intersections_2/include/CGAL/Intersections_2/internal/Triangle_2_Triangle_2_intersection_impl.h $
-// $Id: Triangle_2_Triangle_2_intersection_impl.h 8b41189 2020-03-26T18:58:21+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Intersections_2/include/CGAL/Intersections_2/internal/Triangle_2_Triangle_2_intersection_impl.h $
+// $Id: Triangle_2_Triangle_2_intersection_impl.h fb37f69 2021-09-23T13:15:28+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Geert-Jan Giezeman
 
-#include <Rcpp.h>
 #include <CGAL/Triangle_2.h>
 #include <CGAL/kernel_assertions.h>
 #include <CGAL/number_utils.h>
@@ -23,6 +22,7 @@
 #include <CGAL/Intersections_2/Line_2_Line_2.h>
 #include <CGAL/Intersection_traits_2.h>
 #include <CGAL/Algebraic_structure_traits.h>
+#include <CGAL/Kernel/global_functions_2.h>
 
 namespace CGAL {
 
@@ -154,10 +154,10 @@ void _cut_off(Pointlist_2_<K> &list,
 template <class K>
 class Triangle_2_Triangle_2_pair {
 public:
-    enum Intersection_results {NO_INTERSECTION, POINT, SEGMENT, TRIANGLE, POLYGON};
+    enum Intersection_results {NO_INTERSECTION, POINT, SEGMENT, TRIANGLE, POLYGON, UNKNOWN};
     Triangle_2_Triangle_2_pair(typename K::Triangle_2 const *trian1,
                                typename K::Triangle_2 const *trian2)
-        : _trian1(trian1), _trian2(trian2), _known(false) {}
+        : _trian1(trian1), _trian2(trian2) {}
 
     Intersection_results intersection_type() const;
 
@@ -170,8 +170,7 @@ public:
 protected:
     typename K::Triangle_2 const*   _trian1;
     typename K::Triangle_2 const *  _trian2;
-    mutable bool                    _known;
-    mutable Intersection_results    _result;
+    mutable Intersection_results    _result = UNKNOWN;
     mutable Pointlist_2_<K>    _pointlist;
 };
 
@@ -180,10 +179,9 @@ typename Triangle_2_Triangle_2_pair<K>::Intersection_results
 Triangle_2_Triangle_2_pair<K>::intersection_type() const
 {
   typedef typename K::Line_2 Line_2;
-    if (_known)
+    if (_result!=UNKNOWN)
         return _result;
 // The non const this pointer is used to cast away const.
-    _known = true;
     if (!do_overlap(_trian1->bbox(), _trian2->bbox())) {
         _result = NO_INTERSECTION;
         return _result;
@@ -235,7 +233,7 @@ bool
 Triangle_2_Triangle_2_pair<K>::intersection(
         /* Polygon_2<R> &result */) const
 {
-    if (!_known)
+    if (_result==UNKNOWN)
         intersection_type();
     if (_result != TRIANGLE  &&  _result != POLYGON)
         return false;
@@ -244,10 +242,10 @@ Triangle_2_Triangle_2_pair<K>::intersection(
     for (i=0, cur = _pointlist.first;
          i<_pointlist.size;
          i++, cur = cur->next) {
-      Rcpp::Rcout << to_double(cur->point.x()) << ' ';
-      Rcpp::Rcout << to_double(cur->point.y()) << ' ';
+      std::cout << to_double(cur->point.x()) << ' ';
+      std::cout << to_double(cur->point.y()) << ' ';
     }
-    Rcpp::Rcout << std::endl;
+    std::cout << std::endl;
     return true;
 }
 
@@ -255,7 +253,7 @@ template <class K>
 int
 Triangle_2_Triangle_2_pair<K>::vertex_count() const
 {
-    CGAL_kernel_assertion(_known);
+    CGAL_kernel_assertion(_result!=UNKNOWN);
     return _pointlist.size;
 }
 
@@ -263,7 +261,7 @@ template <class K>
 typename K::Point_2
 Triangle_2_Triangle_2_pair<K>::vertex(int n) const
 {
-    CGAL_kernel_assertion(_known);
+    CGAL_kernel_assertion(_result!=UNKNOWN);
     CGAL_kernel_assertion(n >= 0 && n < _pointlist.size);
     Pointlist_2_rec_<K> *cur;
     int k;
@@ -279,7 +277,7 @@ typename K::Triangle_2
 Triangle_2_Triangle_2_pair<K>::intersection_triangle() const
 {
   typedef typename K::Triangle_2 Triangle_2;
-  if (!_known)
+  if (_result==UNKNOWN)
     intersection_type();
   CGAL_kernel_assertion(_result == TRIANGLE);
   if(CGAL::left_turn(_pointlist.first->point,
@@ -302,7 +300,7 @@ typename K::Segment_2
 Triangle_2_Triangle_2_pair<K>::intersection_segment() const
 {
   typedef typename K::Segment_2 Segment_2;
-    if (!_known)
+    if (_result==UNKNOWN)
         intersection_type();
     CGAL_kernel_assertion(_result == SEGMENT);
     return Segment_2(_pointlist.first->point,
@@ -313,7 +311,7 @@ template <class K>
 typename K::Point_2
 Triangle_2_Triangle_2_pair<K>::intersection_point() const
 {
-    if (!_known)
+    if (_result==UNKNOWN)
         intersection_type();
     CGAL_kernel_assertion(_result == POINT);
     return _pointlist.first->point;

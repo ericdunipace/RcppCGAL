@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Boolean_set_operations_2/include/CGAL/connect_holes.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Boolean_set_operations_2/include/CGAL/connect_holes.h $
 // $Id: connect_holes.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_CONNECT_HOLES_H
 #define CGAL_CONNECT_HOLES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Boolean_set_operations_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -142,7 +141,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
   the outer boundary or another hole's vertex/edge.
   */
   typename Arrangement_2::Face_const_handle fit;
-  //Rcpp::Rcout << arr.number_of_faces() << " faces:" << std::endl;
+  //std::cout << arr.number_of_faces() << " faces:" << std::endl;
   typename Arrangement_2::Hole_const_iterator f_hole_itc;
   for (fit = arr.faces_begin(); fit != arr.faces_end() ; ++fit)
     if (fit->contained()) {
@@ -162,7 +161,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
             v_top = circ->target();
           }
         } while (circ != first);
-       // Rcpp::Rcout << "inserted top vertex at " << v_top->point() <<std::endl;
+       // std::cout << "inserted top vertex at " << v_top->point() <<std::endl;
                         top_vertices[Vertex_const_handle (v_top)]=true;
     }
   }
@@ -209,7 +208,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
 
       arr.insert_at_vertices (Segment_2 (v_top->point(), v_above->point()),
                               v_top, v_above);
-      //Rcpp::Rcout << "connected ((" << v_top->point() << "),( " << v_above->point() << "))" <<std::endl;
+      //std::cout << "connected ((" << v_top->point() << "),( " << v_above->point() << "))" <<std::endl;
     }
     else if (CGAL::assign (he, vrs_iter->second.second))
     {
@@ -238,7 +237,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
         arr.insert_at_vertices (Segment_2 (v_top->point(), ip),
                                 he_above, v_top);
       //added for debugging
-      //Rcpp::Rcout << "connected ((" << v_top->point() << "),( " << ip << "))" <<std::endl;
+      //std::cout << "connected ((" << v_top->point() << "),( " << ip << "))" <<std::endl;
       }
     }
     else
@@ -282,15 +281,15 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
   if (he_han->face() != uf)
     he_han = he_han->twin();
   CGAL_assertion(he_han->face() == uf);
-  //Rcpp::Rcout << "outer boundary:" <<std::endl;
-  //Rcpp::Rcout << "(" << he_han->target()->point() << ")" <<std::endl;
+  //std::cout << "outer boundary:" <<std::endl;
+  //std::cout << "(" << he_han->target()->point() << ")" <<std::endl;
   //calculate num of vertices on outer boundary for hash map creation.
   std::size_t size = 1;
   Halfedge_const_handle begin = he_han;
   he_han = he_han->next();
   CGAL_assertion(he_han->face() == uf);
   while (he_han != begin) {
-    //Rcpp::Rcout << "(" << he_han->target()->point() << ")" <<std::endl;
+    //std::cout << "(" << he_han->target()->point() << ")" <<std::endl;
     if (he_han->target()->degree()>2)
             size++;
     he_han = he_han->next();
@@ -302,25 +301,25 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
   V_map ver_map(false ,size);
   if (he_han->target()->degree()>2)
            ver_map[he_han->target()]=true;
-  //Rcpp::Rcout << "(" << he_han->target()->point() << ")" <<std::endl;
+  //std::cout << "(" << he_han->target()->point() << ")" <<std::endl;
   he_han = he_han->next();
   while (he_han != begin) {
     CGAL_assertion(he_han->face() == uf);
     if (he_han->target()->degree()>2)
       ver_map[he_han->target()]=true;
-    //Rcpp::Rcout << "(" << he_han->target()->point() << ")" <<std::endl;
+    //std::cout << "(" << he_han->target()->point() << ")" <<std::endl;
     he_han = he_han->next();
   }
-  //Rcpp::Rcout << "outer boundary finished" <<std::endl;
+  //std::cout << "outer boundary finished" <<std::endl;
 
   //get iterator to edge on outer boundary
   first = f->outer_ccb();
-  //Rcpp::Rcout << "first edge is ((" << first->source()->point() << "),(" << first->target()->point() << "))" <<std::endl;
+  //std::cout << "first edge is ((" << first->source()->point() << "),(" << first->target()->point() << "))" <<std::endl;
   Halfedge_const_iterator  start, curr, next;
   start = first;
   while (start->twin()->face() != uf)
     start = start->next();
-  //Rcpp::Rcout << "start edge is ((" << start->source()->point() << "),(" << start->target()->point() << "))" <<std::endl;
+  //std::cout << "start edge is ((" << start->source()->point() << "),(" << start->target()->point() << "))" <<std::endl;
   curr = start;
   do
   {
@@ -337,7 +336,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
        //case we are starting to traverse an antenna
       if (curr->face() == curr->twin()->face()) {
         //antenna_trav = true ;
-        //Rcpp::Rcout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
+        //std::cout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
         *oi = curr->target()->point();
         ++oi;
         curr = curr->next();
@@ -349,7 +348,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
         /*mark the hole as a hole that has been traversed to save
          multiple traversals*/
         curr_face->set_visited(true);
-        //Rcpp::Rcout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
+        //std::cout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
         *oi = curr->target()->point();
         ++oi;
         //"turn inside" instead of next if target is located on outer boundary
@@ -383,7 +382,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
        Add the target to the output, and continue searching for next hole*/
 
       /*if (curr->target()->degree()==2) {
-        //Rcpp::Rcout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
+        //std::cout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
         //insert target point to result output iterator
         *oi = curr->target()->point();
         ++oi;
@@ -393,7 +392,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
       }*/
       if ((curr->target()->degree()==2) ||(next->twin()->face() == uf)) {
         /*if (!skip_print)
-          Rcpp::Rcout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
+          std::cout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
         else {
            skip_print=false;
            antenna_trav=false;
@@ -417,7 +416,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
             //case of antenna
                       || (next->face()==next->twin()->face())) {
         /*if (!skip_print)
-           Rcpp::Rcout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
+           std::cout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
         else {
            skip_print=false;
            //can be reached after an antenna
@@ -444,11 +443,11 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
         the current edge needs to be printed now before moving on, but the
         current (target) vertex will be inserted to output iterator in case 2*/
         /*if (traversed_holes.find(arr.non_const_handle(curr->twin()->face())) == traversed_holes.end())
-          Rcpp::Rcout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
+          std::cout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
         */
         //case this is the last half edge of an antenna
         /*if (antenna_trav == true) {
-          Rcpp::Rcout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
+          std::cout << "curr edge is ((" << curr->source()->point() << "),( " << curr->target()->point() << "))" <<std::endl;
           antenna_trav = false;
         }
         skip_print = true; */

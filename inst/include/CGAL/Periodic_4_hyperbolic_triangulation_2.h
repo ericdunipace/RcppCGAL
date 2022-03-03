@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Periodic_4_hyperbolic_triangulation_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Periodic_4_hyperbolic_triangulation_2.h $
 // $Id: Periodic_4_hyperbolic_triangulation_2.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_PERIODIC_4_HYPERBOLIC_TRIANGULATION_2_H
 #define CGAL_PERIODIC_4_HYPERBOLIC_TRIANGULATION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_4_hyperbolic_triangulation_2.h>
 
 #include <CGAL/basic.h>
@@ -728,7 +727,7 @@ is_valid(bool verbose) const {
     if(ori != POSITIVE)
     {
       if(verbose)
-        Rcpp::Rcerr << "Orientation test failed!" << std::endl;
+        std::cerr << "Orientation test failed!" << std::endl;
 
       error = true;
     }

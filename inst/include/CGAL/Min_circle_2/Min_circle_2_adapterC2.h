@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Bounding_volumes/include/CGAL/Min_circle_2/Min_circle_2_adapterC2.h $
-// $Id: Min_circle_2_adapterC2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Bounding_volumes/include/CGAL/Min_circle_2/Min_circle_2_adapterC2.h $
+// $Id: Min_circle_2_adapterC2.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MIN_CIRCLE_2_ADAPTERC2_H
 #define CGAL_MIN_CIRCLE_2_ADAPTERC2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -309,8 +308,8 @@ operator >> ( std::istream& is,
     switch ( CGAL::IO::get_mode( is)) {
 
       case CGAL::IO::PRETTY:
-        Rcpp::Rcerr << std::endl;
-        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
+        std::cerr << std::endl;
+        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
 
       case CGAL::IO::ASCII:

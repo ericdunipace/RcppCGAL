@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/IO/Fig_stream_Conic_arc_2.h $
-// $Id: Fig_stream_Conic_arc_2.h 755693b 2021-05-03T13:25:26+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/IO/Fig_stream_Conic_arc_2.h $
+// $Id: Fig_stream_Conic_arc_2.h 625848e 2021-10-04T13:21:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein           <wein@post.tau.ac.il>
@@ -100,6 +100,6 @@ void write_conic_arc
   return;
 }
 
-}} // namespace CGAL:IO
+}} // namespace CGAL::IO
 
 #endif

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/helpers.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/helpers.h $
 // $Id: helpers.h 5bd28b4 2020-07-29T10:24:02+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_BOOST_GRAPH_HELPERS_H
 #define CGAL_BOOST_GRAPH_HELPERS_H
 
-#include <Rcpp.h>
 #include <CGAL/boost/graph/iterator.h>
 #include <CGAL/boost/graph/properties.h>
 #include <CGAL/boost/graph/internal/Has_member_clear.h>
@@ -289,13 +288,13 @@ bool is_valid_halfedge_descriptor( typename boost::graph_traits<FaceGraph>::half
   halfedge_descriptor done(h);
   do{
     if(face(h,g) != f){
-      Rcpp::Rcerr << "halfedge " << h << " is invalid\n";
+      std::cerr << "halfedge " << h << " is invalid\n";
       return false;
     }
     halfedge_descriptor hn = h;
     hn = next(h,g);
     if(prev(hn,g) != h){
-      Rcpp::Rcerr << "halfedge " << h << " is invalid\n";
+      std::cerr << "halfedge " << h << " is invalid\n";
       return false;
     }
     h = hn;
@@ -313,7 +312,7 @@ bool is_valid_vertex_descriptor( typename boost::graph_traits<FaceGraph>::vertex
   }
   do{
     if(target(h,g) != v){
-      Rcpp::Rcerr << "vertex " << v << " is invalid\n";
+      std::cerr << "vertex " << v << " is invalid\n";
       return false;
     }
     h = opposite(next(h,g),g);
@@ -328,7 +327,7 @@ bool is_valid_face_descriptor( typename boost::graph_traits<FaceGraph>::face_des
 
   halfedge_descriptor h = halfedge(f,g);
   if(face(h,g) != f){
-    Rcpp::Rcerr << "face " << f << " is invalid\n";
+    std::cerr << "face " << f << " is invalid\n";
     return false;
   }
   return true;

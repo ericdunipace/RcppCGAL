@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_searching/include/CGAL/Kd_tree_node.h $
-// $Id: Kd_tree_node.h bd08ba8 2020-04-27T11:26:43+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Spatial_searching/include/CGAL/Kd_tree_node.h $
+// $Id: Kd_tree_node.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_KD_TREE_NODE_H
 #define CGAL_KD_TREE_NODE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Spatial_searching.h>
 
 
@@ -21,7 +20,7 @@
 #include <CGAL/Splitters.h>
 #include <CGAL/Compact_container.h>
 #include <CGAL/Has_member.h>
-#include <CGAL/internal/Search_helpers.h>
+#include <CGAL/Spatial_searching/internal/Search_helpers.h>
 #include <boost/cstdint.hpp>
 
 namespace CGAL {
@@ -152,7 +151,7 @@ namespace CGAL {
     indent(int d) const
     {
       for(int i = 0; i < d; i++){
-        Rcpp::Rcout << " ";
+        std::cout << " ";
       }
     }
 
@@ -164,21 +163,21 @@ namespace CGAL {
         Leaf_node_const_handle node =
           static_cast<Leaf_node_const_handle>(this);
         indent(d);
-        Rcpp::Rcout << "leaf" << std::endl;
+        std::cout << "leaf" << std::endl;
         if (node->size()>0)
           for (iterator i=node->begin(); i != node->end(); i++)
-          {indent(d);Rcpp::Rcout << *i << std::endl;}
+          {indent(d);std::cout << *i << std::endl;}
       }
       else {
         Internal_node_const_handle node =
           static_cast<Internal_node_const_handle>(this);
         indent(d);
-        Rcpp::Rcout << "lower tree" << std::endl;
+        std::cout << "lower tree" << std::endl;
         node->lower()->print(d+1);
         indent(d);
-        Rcpp::Rcout << "separator: dim = " << node->cutting_dimension() << "  val = " << node->cutting_value() << std::endl;
+        std::cout << "separator: dim = " << node->cutting_dimension() << "  val = " << node->cutting_value() << std::endl;
         indent(d);
-        Rcpp::Rcout << "upper tree" << std::endl;
+        std::cout << "upper tree" << std::endl;
         node->upper()->print(d+1);
       }
     }

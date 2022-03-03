@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Polyhedral_oracle.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Surface_mesher/Polyhedral_oracle.h $
 // $Id: Polyhedral_oracle.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SURFACE_MESHER_POLYHEDRAL_ORACLE_H
 #define CGAL_SURFACE_MESHER_POLYHEDRAL_ORACLE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 
@@ -77,9 +76,9 @@ public:
 //       is.seekg(0,std::ios::beg);
 //       tr.clear();
 //       // The data structure for testing intersections is set
-//       Rcpp::Rcerr << "Creating data structure for intersections detection... ";
+//       std::cerr << "Creating data structure for intersections detection... ";
 //       data_struct.input(is, CGAL::Insert_iterator<Tr>(tr));
-//       Rcpp::Rcerr << "done\n\n";
+//       std::cerr << "done\n\n";
   }
 
 //   Finite_vertices_iterator finite_vertices_begin()
@@ -237,7 +236,7 @@ public:
       return false;
 
 #ifdef CGAL_SURFACE_MESHER_DEBUG_INTERSECTION_DATA_STRUCTURE
-    Rcpp::Rcerr << "(in volume) ";
+    std::cerr << "(in volume) ";
 #endif
     std::pair<bool, int> result = std::make_pair(false, 0);
 
@@ -294,7 +293,7 @@ public:
       // debug: test if segment is degenerate
       // (can happen, because of rounding in circumcenter computations)
       if (is_degenerate(s)) {
-        Rcpp::Rcerr << "Warning: degenerate segment (" << s << ")\n";
+        std::cerr << "Warning: degenerate segment (" << s << ")\n";
         return CGAL::Object();
       }
 
@@ -309,7 +308,7 @@ public:
 
 //       if ((assign(p, oun) && !assign(p,odeux)) ||
 //           !assign(p, oun) && assign(p,odeux))
-//         Rcpp::Rcout << "s " << s
+//         std::cout << "s " << s
 //                   << " " << (assign(p, odeux))
 //                   << std::endl;
 
@@ -336,7 +335,7 @@ public:
       // debug: test if segment is degenerate
       // (can happen, because of rounding in circumcenter computations)
       if (is_degenerate(r)) {
-        Rcpp::Rcerr << "Warning: degenerate ray (" << r << ")\n";
+        std::cerr << "Warning: degenerate ray (" << r << ")\n";
         return CGAL::Object();
       }
       // debug: for detecting whether Marie's code works
@@ -349,7 +348,7 @@ public:
 
 //       if ((assign(p, oun) && !assign(p,odeux)) ||
 //           !assign(p, oun) && assign(p,odeux))
-//         Rcpp::Rcout << "r " << r
+//         std::cout << "r " << r
 //                   << " " << (assign(p, odeux))
 //                   << std::endl;
 

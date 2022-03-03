@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Apollonius_graph_2_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Apollonius_graph_2_impl.h $
 // $Id: Apollonius_graph_2_impl.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_APOLLONIUS_GRAPH_2_IMPL_H
 #define CGAL_APOLLONIUS_GRAPH_2_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Apollonius_graph_2.h>
 
 
@@ -45,7 +44,7 @@ is_valid(bool verbose, int level) const
   //  CGAL_assertion( result );
 
   if ( result && verbose ) {
-    Rcpp::Rcerr << "AGDS is ok... " << std::flush;
+    std::cerr << "AGDS is ok... " << std::flush;
   }
 
   if (level == 0) { return result; }
@@ -78,10 +77,10 @@ is_valid(bool verbose, int level) const
   }
 
   if ( result && verbose ) {
-    Rcpp::Rcerr << "Apollonius diagram is ok..." << std::flush;
+    std::cerr << "Apollonius diagram is ok..." << std::flush;
   }
   if ( !result && verbose ) {
-    Rcpp::Rcerr << "Apollonius diagram is NOT valid..." << std::flush;
+    std::cerr << "Apollonius diagram is NOT valid..." << std::flush;
   }
 
   //  CGAL_triangulation_assertion(result);

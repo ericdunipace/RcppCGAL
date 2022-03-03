@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polyline_simplification_2/include/CGAL/Polyline_simplification_2/simplify.h $
-// $Id: simplify.h 131242b 2021-10-12T09:29:23+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polyline_simplification_2/include/CGAL/Polyline_simplification_2/simplify.h $
+// $Id: simplify.h b7e688c 2021-10-12T09:05:42+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -99,6 +99,7 @@ public:
     typedef std::size_t                      value_type;
     typedef value_type                       reference;
     typedef Vertex_handle                    key_type;
+
 
     value_type operator[](const key_type& x) const
     {

@@ -7,14 +7,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon/include/CGAL/Polygon_2/Polygon_2_algorithms_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon/include/CGAL/Polygon_2/Polygon_2_algorithms_impl.h $
 // $Id: Polygon_2_algorithms_impl.h 6b87fe3 2020-12-05T11:11:33+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Wieger Wesselink <wieger@cs.ruu.nl>
 
-#include <Rcpp.h>
 #include <CGAL/algorithm.h>
 #include <CGAL/assertions.h>
 #include <CGAL/determinant.h>
@@ -288,14 +287,14 @@ bool is_convex_2(ForwardIterator first,
 
     if (NumOrderChanges > 2) {
 #ifdef CGAL_POLYGON_DEBUG
-Rcpp::Rcout << "too many order changes: not convex!" << std::endl;
+std::cout << "too many order changes: not convex!" << std::endl;
 #endif
       return false;
     }
 
     if (HasClockwiseTriples && HasCounterClockwiseTriples) {
 #ifdef CGAL_POLYGON_DEBUG
-Rcpp::Rcout << "polygon not locally convex!" << std::endl;
+std::cout << "polygon not locally convex!" << std::endl;
 #endif
       return false;
     }

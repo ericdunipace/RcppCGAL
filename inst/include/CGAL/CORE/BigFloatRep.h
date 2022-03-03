@@ -17,15 +17,14 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_Core/include/CGAL/CORE/BigFloatRep.h $
- * $Id: BigFloatRep.h a6e555c 2021-11-09T16:20:48+01:00 Sébastien Loriot
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_Core/include/CGAL/CORE/BigFloatRep.h $
+ * $Id: BigFloatRep.h 6680a6e 2021-11-09T16:20:48+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
 #ifndef _CORE_BIGFLOATREP_H_
 #define _CORE_BIGFLOATREP_H_
 
-#include <Rcpp.h>
 #include <CGAL/CORE/BigRat.h>
 #include <CGAL/CORE/CoreAux.h>
 #include <CGAL/CORE/CoreDefs.h>
@@ -428,14 +427,14 @@ inline std::string BigFloatRep::toString(long prec, bool sci) const {
 }
 
 inline void BigFloatRep::dump() const {
-  Rcpp::Rcout << "---- BFRep: " << this << " ----" << std::endl;
-  Rcpp::Rcout << "  BF value: ";
-  this->operator<<(Rcpp::Rcout);
-  Rcpp::Rcout <<  std::endl;
-  Rcpp::Rcout << "  m = " << m << std::endl;
-  Rcpp::Rcout << "  err = " << err << std::endl;
-  Rcpp::Rcout << "  exp = " << exp << std::endl;
-  Rcpp::Rcout << " -- End of BFRep " << this << " -- " << std::endl;
+  std::cout << "---- BFRep: " << this << " ----" << std::endl;
+  std::cout << "  BF value: ";
+  this->operator<<(std::cout);
+  std::cout <<  std::endl;
+  std::cout << "  m = " << m << std::endl;
+  std::cout << "  err = " << err << std::endl;
+  std::cout << "  exp = " << exp << std::endl;
+  std::cout << " -- End of BFRep " << this << " -- " << std::endl;
 }
 
 

@@ -1,10 +1,10 @@
-// Copyright (c) 2019 CNRS and LIRIS' Establishments (France).
+﻿// Copyright (c) 2019 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/draw_face_graph_with_paths.h $
-// $Id: draw_face_graph_with_paths.h 993a7b2 2021-09-28T15:36:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/draw_face_graph_with_paths.h $
+// $Id: draw_face_graph_with_paths.h ee11c85 2021-11-10T09:59:48+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -12,7 +12,6 @@
 #ifndef CGAL_DRAW_FACE_GRAPH_WITH_PATHS_H
 #define CGAL_DRAW_FACE_GRAPH_WITH_PATHS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <iostream>
@@ -413,7 +412,7 @@ void draw(const Mesh& alcc,
   {
     CGAL::Qt::init_ogl_context(4,3);
     int argc=1;
-    const char* argv[2]={"lccviewer","\0"};
+    const char* argv[1]={"lccviewer"};
     QApplication app(argc,const_cast<char**>(argv));
     Face_graph_with_path_viewer<Mesh, DrawingFunctor> mainwindow(app.activeWindow(),
                                                                  alcc, &paths, amark,
@@ -463,7 +462,7 @@ namespace CGAL
             (std::numeric_limits<typename Get_map<Mesh, Mesh>::type::size_type>::max)(),
             bool=false)
   {
-    Rcpp::Rcerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
+    std::cerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
   }
 
   template<class Mesh>
@@ -474,7 +473,7 @@ namespace CGAL
             (std::numeric_limits<typename Get_map<Mesh, Mesh>::type::size_type>::max)(),
             bool=false)
   {
-    Rcpp::Rcerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
+    std::cerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
   }
 
 } // End namespace CGAL

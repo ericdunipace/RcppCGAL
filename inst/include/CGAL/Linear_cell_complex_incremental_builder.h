@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Linear_cell_complex/include/CGAL/Linear_cell_complex_incremental_builder.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Linear_cell_complex/include/CGAL/Linear_cell_complex_incremental_builder.h $
 // $Id: Linear_cell_complex_incremental_builder.h 504e4cf 2021-03-20T19:34:55-04:00 Doug Roeper
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_LINEAR_CELL_COMPLEX_INCREMENTAL_BUILDER_H
 #define CGAL_LINEAR_CELL_COMPLEX_INCREMENTAL_BUILDER_H 1
 
-#include <Rcpp.h>
 #include <vector>
 #include <cstddef>
 #include <CGAL/Linear_cell_complex_base.h>
@@ -101,13 +100,13 @@ namespace CGAL {
     {
       first_dart = lcc.null_handle;
       prev_dart  = lcc.null_handle;
-      // Rcpp::Rcout<<"Begin facet: "<<std::flush;
+      // std::cout<<"Begin facet: "<<std::flush;
     }
 
     void add_vertex_to_facet(size_type i)
     {
       CGAL_assertion( i<new_vertices );
-      // Rcpp::Rcout<<i<<"  "<<std::flush;
+      // std::cout<<i<<"  "<<std::flush;
       Dart_handle cur = Add_vertex_to_face<LCC>::
           run(lcc, vertex_map[i], prev_dart);
 

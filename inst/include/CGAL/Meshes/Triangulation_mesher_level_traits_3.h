@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesher_level/include/CGAL/Meshes/Triangulation_mesher_level_traits_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesher_level/include/CGAL/Meshes/Triangulation_mesher_level_traits_3.h $
 // $Id: Triangulation_mesher_level_traits_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_3_H
 #define CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <vector>
@@ -118,13 +117,13 @@ struct Triangulation_mesher_level_traits_3 :
       sq_insertion_radius = (CGAL::min)(sq_insertion_radius,
                                         CGAL::squared_distance(v->point(),
                                                                (*vit)->point()) );
-    Rcpp::Rcerr << "insertion radius: " << CGAL::sqrt(sq_insertion_radius);
+    std::cerr << "insertion radius: " << CGAL::sqrt(sq_insertion_radius);
 #ifdef CGAL_MESH_3_DIRTY_DEBUG_SPHERES
-      Rcpp::Rcerr << " \t\tdistance: "
+      std::cerr << " \t\tdistance: "
                 << CGAL::sqrt(CGAL::squared_distance(v->point(),
                                       typename Tr::Geom_traits::Point_3(CGAL::ORIGIN)));
 #endif
-    Rcpp::Rcerr << std::endl;
+    std::cerr << std::endl;
     }
 #endif // CGAL_MESH_3_DEBUG_INSERTION_RADIUS
 

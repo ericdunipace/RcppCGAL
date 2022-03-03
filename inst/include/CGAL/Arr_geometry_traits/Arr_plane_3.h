@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Arr_plane_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Arr_plane_3.h $
 // $Id: Arr_plane_3.h 40152a2 2020-06-13T16:43:09+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_ARR_PLANE_3_h
 #define CGAL_ARR_PLANE_3_h
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -153,7 +152,7 @@ public:
     CGAL_assertion(i < 3);
 
 #if 0
-    Rcpp::Rcout << "(a, b, c): " << a() << "," << b() << "," << c()
+    std::cout << "(a, b, c): " << a() << "," << b() << "," << c()
               << std::endl;
 #endif
 

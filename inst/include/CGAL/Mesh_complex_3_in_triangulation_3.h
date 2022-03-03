@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_complex_3_in_triangulation_3.h $
-// $Id: Mesh_complex_3_in_triangulation_3.h 93d62b9 2020-08-18T14:07:27+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_complex_3_in_triangulation_3.h $
+// $Id: Mesh_complex_3_in_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,7 +18,6 @@
 #ifndef CGAL_MESH_COMPLEX_3_IN_TRIANGULATION_3_H
 #define CGAL_MESH_COMPLEX_3_IN_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Mesh_3/Mesh_complex_3_in_triangulation_3_fwd.h>
@@ -26,7 +25,7 @@
 #include <CGAL/iterator.h>
 #include <CGAL/Mesh_3/utilities.h>
 #include <CGAL/Mesh_3/Mesh_complex_3_in_triangulation_3_base.h>
-#include <CGAL/internal/Mesh_3/Boundary_of_subdomain_of_complex_3_in_triangulation_3_to_off.h>
+#include <CGAL/Mesh_3/internal/Boundary_of_subdomain_of_complex_3_in_triangulation_3_to_off.h>
 #include <CGAL/Time_stamper.h>
 
 #include <boost/bimap/bimap.hpp>
@@ -575,7 +574,7 @@ private:
   {
     CGAL_precondition(!is_in_complex(edge));
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "Add edge ( " << disp_vert(edge.left)
+    std::cerr << "Add edge ( " << disp_vert(edge.left)
               << " , " << disp_vert(edge.right) << " ), curve_index=" << index
               << " to c3t3.\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG
@@ -715,7 +714,7 @@ is_valid(bool verbose) const
     if ( vit->first->in_dimension() != 0 && vit->second != 2 )
     {
       if(verbose)
-        Rcpp::Rcerr << "Validity error: vertex " << (void*)(&*vit->first)
+        std::cerr << "Validity error: vertex " << (void*)(&*vit->first)
                   << " (" << this->triangulation().point(vit->first) << ") "
                   << "is not a corner (dimension " << vit->first->in_dimension()
                   << ") but has " << vit->second << " neighbor(s)!\n";
@@ -741,7 +740,7 @@ is_valid(bool verbose) const
 
     if ( ! do_intersect(sphere(cp(itrwp), cw(itrwp)), sphere(cp(itlwp), cw(itlwp))) )
     {
-      Rcpp::Rcerr << "Points p[" << disp_vert(it->right) << "], dim=" << it->right->in_dimension()
+      std::cerr << "Points p[" << disp_vert(it->right) << "], dim=" << it->right->in_dimension()
                 << " and q[" << disp_vert(it->left) << "], dim=" << it->left->in_dimension()
                 << " form an edge but do not intersect !\n";
       return false;

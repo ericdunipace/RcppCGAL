@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Smoothing/mesh_smoothing_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Smoothing/mesh_smoothing_impl.h $
 // $Id: mesh_smoothing_impl.h 29ddd67 2020-02-06T17:14:16+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_MESH_SMOOTHING_IMPL_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_MESH_SMOOTHING_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #ifdef CGAL_PMP_USE_CERES_SOLVER
@@ -134,7 +133,7 @@ public:
   void operator()(const FaceRange& face_range)
   {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << "Flipping edges" << std::endl;
+    std::cout << "Flipping edges" << std::endl;
 #endif
 
     // edges to consider
@@ -178,7 +177,7 @@ public:
         halfedge_descriptor h = halfedge(e, mesh_);
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG_PP
-        Rcpp::Rcout << "Flipping " << edge(h, mesh_) << std::endl;
+        std::cout << "Flipping " << edge(h, mesh_) << std::endl;
 #endif
         Euler::flip_edge(h, mesh_);
 
@@ -190,7 +189,7 @@ public:
     }
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << flipped_n << " flips" << std::endl;
+    std::cout << flipped_n << " flips" << std::endl;
 #endif
   }
 
@@ -462,10 +461,10 @@ public:
 //    options.minimizer_progress_to_stdout = true;
     ceres::Solver::Summary summary;
     ceres::Solve(options, &problem, &summary);
-//    Rcpp::Rcout << summary.BriefReport() << "\n";
-//    Rcpp::Rcout << "x : " << initial_x << " -> " << x << "\n";
-//    Rcpp::Rcout << "y : " << initial_y << " -> " << y << "\n";
-//    Rcpp::Rcout << "z : " << initial_z << " -> " << z << "\n";
+//    std::cout << summary.BriefReport() << "\n";
+//    std::cout << "x : " << initial_x << " -> " << x << "\n";
+//    std::cout << "y : " << initial_y << " -> " << y << "\n";
+//    std::cout << "z : " << initial_z << " -> " << z << "\n";
 
     return Vector(x - initial_x, y - initial_y, z - initial_z);
 #else
@@ -548,7 +547,7 @@ public:
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
     FT total_displacement = 0;
-    Rcpp::Rcout << "apply_moves_in_single_batch: " << apply_moves_in_single_batch << std::endl;
+    std::cout << "apply_moves_in_single_batch: " << apply_moves_in_single_batch << std::endl;
 #endif
 
     std::size_t moved_points = 0;
@@ -558,7 +557,7 @@ public:
         continue;
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG_PP
-      Rcpp::Rcout << "Considering " << v << " pos: " << get(vpmap_, v) << std::endl;
+      std::cout << "Considering " << v << " pos: " << get(vpmap_, v) << std::endl;
 #endif
 
       // compute normal to v
@@ -581,7 +580,7 @@ public:
          (!enforce_no_min_angle_regression || does_improve_min_angle_in_star(v, new_pos)))
       {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG_PP
-        Rcpp::Rcout << "moving " << get(vpmap_, v) << " to " << new_pos << std::endl;
+        std::cout << "moving " << get(vpmap_, v) << " to " << new_pos << std::endl;
 #endif
 
         if(apply_moves_in_single_batch)
@@ -598,7 +597,7 @@ public:
       else // some sanity check failed
       {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG_PP
-        Rcpp::Rcout << "move is rejected!" << std::endl;
+        std::cout << "move is rejected!" << std::endl;
 #endif
         if(apply_moves_in_single_batch)
           put(new_positions, v, pos);
@@ -618,9 +617,9 @@ public:
     }
 
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << "moved: " << moved_points << " points based on angle." << std::endl;
-    Rcpp::Rcout << "total displacement: " << total_displacement << std::endl;
-    Rcpp::Rcout << "not improved min angle: " << vrange_.size() - moved_points << " times." << std::endl;
+    std::cout << "moved: " << moved_points << " points based on angle." << std::endl;
+    std::cout << "total displacement: " << total_displacement << std::endl;
+    std::cout << "not improved min angle: " << vrange_.size() - moved_points << " times." << std::endl;
 #endif
 
     return moved_points;
@@ -630,7 +629,7 @@ public:
   void project_to_surface(const AABBTree& tree)
   {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << "Projecting back to the surface" << std::endl;
+    std::cout << "Projecting back to the surface" << std::endl;
 #endif
 
     for(vertex_descriptor v : vrange_)
@@ -641,7 +640,7 @@ public:
       Point_ref p_query = get(vpmap_, v);
       const Point projected = tree.closest_point(p_query);
 #ifdef CGAL_PMP_SMOOTHING_DEBUG_PP
-      Rcpp::Rcout << p_query << " to " << projected << std::endl;
+      std::cout << p_query << " to " << projected << std::endl;
 #endif
 
       put(vpmap_, v, projected);
@@ -695,7 +694,7 @@ private:
       if(!is_positive(traits_.compute_scalar_product_3_object()(old_n, new_n)))
       {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG_PP
-      Rcpp::Rcout << "Moving vertex would result in the inversion of a face normal!" << std::endl;
+      std::cout << "Moving vertex would result in the inversion of a face normal!" << std::endl;
 #endif
         return true;
       }
@@ -739,13 +738,13 @@ private:
 #ifdef CGAL_PMP_SMOOTHING_DEBUG_PP
         const Point_ref old_pos = get(vpmap_, v);
 
-        Rcpp::Rcout << "deterioration of min angle in the star!" << std::endl;
-        Rcpp::Rcout << "old/new positions: " << old_pos << " " << new_pos << std::endl;;
-        Rcpp::Rcout << "old min angle: " << old_min_angle << std::endl;
-        Rcpp::Rcout << "new angles: " << std::endl;
-        Rcpp::Rcout << get_radian_angle(Vector(new_pos, lpt), Vector(new_pos, rpt), traits_) << " ";
-        Rcpp::Rcout << get_radian_angle(Vector(lpt, rpt), Vector(lpt, new_pos), traits_) << " ";
-        Rcpp::Rcout << get_radian_angle(Vector(rpt, new_pos), Vector(rpt, lpt), traits_) << std::endl;
+        std::cout << "deterioration of min angle in the star!" << std::endl;
+        std::cout << "old/new positions: " << old_pos << " " << new_pos << std::endl;;
+        std::cout << "old min angle: " << old_min_angle << std::endl;
+        std::cout << "new angles: " << std::endl;
+        std::cout << get_radian_angle(Vector(new_pos, lpt), Vector(new_pos, rpt), traits_) << " ";
+        std::cout << get_radian_angle(Vector(lpt, rpt), Vector(lpt, new_pos), traits_) << " ";
+        std::cout << get_radian_angle(Vector(rpt, new_pos), Vector(rpt, lpt), traits_) << std::endl;
 #endif
         return false;
       }

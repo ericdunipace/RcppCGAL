@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_subcurve.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_subcurve.h $
 // $Id: No_overlap_subcurve.h a3d04af 2021-07-28T16:19:20+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_SURFACE_SWEEP_2_NO_OVERLAP_SUBCURVE_H
 #define CGAL_SURFACE_SWEEP_2_NO_OVERLAP_SUBCURVE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file
@@ -204,7 +203,7 @@ public:
 #ifdef CGAL_SS_VERBOSE
 template <typename Gt2, typename Evt, typename Allocator, typename Scv>
 void No_overlap_subcurve<Gt2, Evt, Allocator, Scv>::Print() const
-{ Rcpp::Rcout << "Curve " << this << "  (" << last_curve() << ") "; }
+{ std::cout << "Curve " << this << "  (" << last_curve() << ") "; }
 #endif
 
 } // namespace Surface_sweep_2

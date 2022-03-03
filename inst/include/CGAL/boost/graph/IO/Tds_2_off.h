@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/IO/Tds_2_off.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/IO/Tds_2_off.h $
 // $Id: Tds_2_off.h 5948bc8 2021-01-11T13:12:18+01:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -11,7 +11,6 @@
 
 #ifndef CGAL_BGL_IO_TDS_2_OFF_H
 #define CGAL_BGL_IO_TDS_2_OFF_H
-#include <Rcpp.h>
 #include <CGAL/IO/OFF.h>
 #include <CGAL/Triangulation_data_structure_2.h>
 
@@ -36,9 +35,9 @@ off_file_input( std::istream& is, Triangulation_data_structure_2<Vb,Fb>& tds, bo
   File_scanner_OFF scanner(is, verbose);
   if (! is) {
     if (scanner.verbose()) {
-         Rcpp::Rcerr << " " << std::endl;
-         Rcpp::Rcerr << "TDS::off_file_input" << std::endl;
-         Rcpp::Rcerr << " input error: file format is not OFF." << std::endl;
+         std::cerr << " " << std::endl;
+         std::cerr << "TDS::off_file_input" << std::endl;
+         std::cerr << " input error: file format is not OFF." << std::endl;
     }
     return vinf;
   }
@@ -73,9 +72,9 @@ off_file_input( std::istream& is, Triangulation_data_structure_2<Vb,Fb>& tds, bo
     scanner.scan_facet( no, i);
     if( ! is || no != 3) {
       if ( scanner.verbose()) {
-        Rcpp::Rcerr << " " << std::endl;
-        Rcpp::Rcerr << "TDS::off_file_input" << std::endl;
-        Rcpp::Rcerr << "facet " << i << "does not have  3 vertices."
+        std::cerr << " " << std::endl;
+        std::cerr << "TDS::off_file_input" << std::endl;
+        std::cerr << "facet " << i << "does not have  3 vertices."
                   << std::endl;
       }
       is.clear( std::ios::badbit);

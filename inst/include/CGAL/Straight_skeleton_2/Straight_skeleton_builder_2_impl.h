@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_builder_2_impl.h $
-// $Id: Straight_skeleton_builder_2_impl.h 1e249af 2020-11-10T19:21:21+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_builder_2_impl.h $
+// $Id: Straight_skeleton_builder_2_impl.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -11,7 +11,6 @@
 #ifndef CGAL_STRAIGHT_SKELETON_BUILDER_2_IMPL_H
 #define CGAL_STRAIGHT_SKELETON_BUILDER_2_IMPL_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Straight_skeleton_2.h>
 
 #include <CGAL/number_type_config.h>
@@ -20,10 +19,6 @@
 
 #include <boost/utility.hpp>
 #include <boost/version.hpp>
-#if BOOST_VERSION == 106000
-//ice_not is deprecated in boost 1.60 but used within adjacency_matrix.hpp
-#include <boost/type_traits/detail/ice_not.hpp>
-#endif
 #include <boost/graph/adjacency_matrix.hpp>
 
 #if defined(BOOST_MSVC)
@@ -302,7 +297,7 @@ void Straight_skeleton_builder_2<Gt,Ss,V>::CollectSplitEvents( Vertex_handle aNo
   }
 
 #ifdef CGAL_STRAIGHT_SKELETON_ENABLE_TRACE
-  Rcpp::Rcout << "  local queue size --> " << GetVertexData(aNode).mSplitEvents.size() << std::endl;
+  std::cout << "  local queue size --> " << GetVertexData(aNode).mSplitEvents.size() << std::endl;
 #endif
 }
 
@@ -1547,16 +1542,16 @@ void Straight_skeleton_builder_2<Gt,Ss,V>::Propagate()
     if ( !mPQ.empty() )
     {
 #ifdef CGAL_SLS_PRINT_QUEUE_BEFORE_EACH_POP
-      Rcpp::Rcout << "MAIN QUEUE -------------------------------------------------- " << std::endl;
-      Rcpp::Rcout << "Queue size: " << mPQ.size() << std::endl;
+      std::cout << "MAIN QUEUE -------------------------------------------------- " << std::endl;
+      std::cout << "Queue size: " << mPQ.size() << std::endl;
       auto mpq = mPQ;
       while(!mpq.empty())
       {
         EventPtr event = mpq.top();
         mpq.pop();
-        Rcpp::Rcout << *event << std::endl;
+        std::cout << *event << std::endl;
       }
-      Rcpp::Rcout << "END MAIN QUEUE --------------------------------------------- " << std::endl;
+      std::cout << "END MAIN QUEUE --------------------------------------------- " << std::endl;
 #endif
 
       EventPtr lEvent = PopEventFromPQ();

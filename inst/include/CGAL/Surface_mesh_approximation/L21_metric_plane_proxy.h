@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_approximation/include/CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_approximation/include/CGAL/Surface_mesh_approximation/L21_metric_plane_proxy.h $
 // $Id: L21_metric_plane_proxy.h fbbff67 2021-01-08T10:15:12+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

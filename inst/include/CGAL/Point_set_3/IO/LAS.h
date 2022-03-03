@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_3/include/CGAL/Point_set_3/IO/LAS.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_3/include/CGAL/Point_set_3/IO/LAS.h $
 // $Id: LAS.h c8cc074 2021-09-27T15:33:42+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -11,7 +11,6 @@
 #ifndef CGAL_POINT_SET_IO_LAS_H
 #define CGAL_POINT_SET_IO_LAS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_3.h>
 
 #ifdef CGAL_LINKED_WITH_LASLIB
@@ -70,7 +69,7 @@ bool read_LAS(std::istream& is,
 {
   if(!is)
   {
-    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
+    std::cerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -213,7 +212,7 @@ bool write_LAS(std::ostream& os,
 {
   if(!os)
   {
-    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
+    std::cerr << "Error: cannot open file" << std::endl;
     return false;
   }
 

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/External_structure_builder.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/External_structure_builder.h $
 // $Id: External_structure_builder.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_CD3_EXTERNAL_STRUCTURE_BUILDER_H
 #define CGAL_CD3_EXTERNAL_STRUCTURE_BUILDER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 
@@ -95,7 +94,7 @@ class External_structure_builder : public Modifier_base<typename Nef_::SNC_and_P
       }
     }
 
-    //    CGAL::SNC_io_parser<SNC_structure> O0(Rcpp::Rcerr, *sncp, false);
+    //    CGAL::SNC_io_parser<SNC_structure> O0(std::cerr, *sncp, false);
     //    O0.print();
 
     SHalfedge_iterator sei;
@@ -130,7 +129,7 @@ class External_structure_builder : public Modifier_base<typename Nef_::SNC_and_P
     C.clear_external_structure();
     C.build_external_structure();
 
-    //    CGAL::SNC_io_parser<SNC_structure> Ox(Rcpp::Rcerr, *sncp, false);
+    //    CGAL::SNC_io_parser<SNC_structure> Ox(std::cerr, *sncp, false);
     //    Ox.print();
   }
 };

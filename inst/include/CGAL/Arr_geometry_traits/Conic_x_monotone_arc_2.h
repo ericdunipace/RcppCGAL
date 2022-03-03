@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Conic_x_monotone_arc_2.h $
-// $Id: Conic_x_monotone_arc_2.h 993a7b2 2021-09-28T15:36:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Conic_x_monotone_arc_2.h $
+// $Id: Conic_x_monotone_arc_2.h a2ae7d8 2021-11-10T08:22:46+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein <wein@post.tau.ac.il>
@@ -202,7 +202,7 @@ public:
     // Invalid arc:
     if (dir_res == EQUAL) return;
 
-    this->_info = (Conic_arc_2::IS_VALID | DEGREE_1);
+    this->_info = (static_cast<int>(Conic_arc_2::IS_VALID) | static_cast<int>(DEGREE_1));
     if (dir_res == SMALLER)
       this->_info = (this->_info | IS_DIRECTED_RIGHT);
 

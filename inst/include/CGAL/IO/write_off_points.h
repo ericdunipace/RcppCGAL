@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/IO/write_off_points.h $
-// $Id: write_off_points.h 56025fb 2021-05-04T14:38:47+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/IO/write_off_points.h $
+// $Id: write_off_points.h ee1622e 2021-12-16T14:44:13+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret
@@ -12,7 +12,6 @@
 #ifndef CGAL_POINT_SET_PROCESSING_WRITE_OFF_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_WRITE_OFF_POINTS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/IO/helpers.h>
@@ -47,14 +46,13 @@ bool write_OFF_PSP(std::ostream& os,
 {
   using CGAL::parameters::choose_parameter;
   using CGAL::parameters::get_parameter;
+  using CGAL::parameters::is_default_parameter;
 
   // basic geometric types
   typedef typename CGAL::GetPointMap<PointRange, CGAL_BGL_NP_CLASS>::type                         PointMap;
   typedef typename Point_set_processing_3::GetNormalMap<PointRange, CGAL_BGL_NP_CLASS>::type      NormalMap;
 
-  bool has_normals = !(std::is_same<NormalMap,
-                                    typename Point_set_processing_3::GetNormalMap<
-                                      PointRange, CGAL_BGL_NP_CLASS>::NoMap>::value);
+  const bool has_normals = !(is_default_parameter(get_parameter(np, internal_np::normal_map)));
 
   PointMap point_map = choose_parameter<PointMap>(get_parameter(np, internal_np::point_map));
   NormalMap normal_map = choose_parameter<NormalMap>(get_parameter(np, internal_np::normal_map));
@@ -63,14 +61,17 @@ bool write_OFF_PSP(std::ostream& os,
 
   if(!os)
   {
-    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
+    std::cerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
   set_stream_precision_from_NP(os, np);
 
   // Write header
-  os << "NOFF" << std::endl;
+  if (has_normals)
+    os << "NOFF" << std::endl;
+  else
+    os << "OFF" << std::endl;
   os << points.size() << " 0 0" << std::endl;
 
   // Write positions + normals
@@ -127,7 +128,7 @@ namespace IO {
     \cgalParamNBegin{stream_precision}
       \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
       \cgalParamType{int}
-      \cgalParamDefault{`the precision of the stream `os``}
+      \cgalParamDefault{the precision of the stream `os`}
     \cgalParamNEnd
    \cgalNamedParamsEnd
 

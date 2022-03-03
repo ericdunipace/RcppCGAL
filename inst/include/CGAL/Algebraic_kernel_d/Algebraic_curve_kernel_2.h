@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_curve_kernel_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_curve_kernel_2.h $
 // $Id: Algebraic_curve_kernel_2.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -23,7 +23,6 @@
 #ifndef CGAL_ALGEBRAIC_CURVE_KERNEL_D_2_H
 #define CGAL_ALGEBRAIC_CURVE_KERNEL_D_2_H
 
-#include <Rcpp.h>
 #include <limits>
 #include <CGAL/iterator.h>
 #include <CGAL/assertions.h>
@@ -396,7 +395,7 @@ public:
     {
       _m_curve_cache_2 = std::shared_ptr<Curve_cache_2>(new Curve_cache_2(this));
       _m_curve_pair_cache_2 =  std::shared_ptr<Curve_pair_cache_2> (new Curve_pair_cache_2(this));
-      // Rcpp::Rcout << "CONSTRUCTION  Algebraic_curve_kernel_2 " << std::endl;
+      // std::cout << "CONSTRUCTION  Algebraic_curve_kernel_2 " << std::endl;
     }
 
 public:
@@ -1412,7 +1411,7 @@ public:
              typename Cmp_xy_map::Find_result r =
                 _m_kernel->_m_cmp_xy.find(p);
              if(r.second) {
-               //Rcpp::Rcerr << "Xy_coordinate2: precached compare_xy result\n";
+               //std::cerr << "Xy_coordinate2: precached compare_xy result\n";
                  return (swap ? -(r.first->second) : r.first->second);
              }*/
 
@@ -1668,8 +1667,8 @@ public:
 
             if(f == g) {
               // both curves are equal, but have different representations!
-              // Rcpp::Rcout <<"f: " << f <<std::endl;
-              // Rcpp::Rcout <<"g: " << g <<std::endl;
+              // std::cout <<"f: " << f <<std::endl;
+              // std::cout <<"g: " << g <<std::endl;
               CGAL_assertion(false);
               return false;
             }

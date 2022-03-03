@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Combinatorial_map/include/CGAL/Combinatorial_map.h $
-// $Id: Combinatorial_map.h e6536aa 2020-06-09T20:15:16+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Combinatorial_map/include/CGAL/Combinatorial_map.h $
+// $Id: Combinatorial_map.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -12,16 +12,15 @@
 #ifndef CGAL_COMBINATORIAL_MAP_H
 #define CGAL_COMBINATORIAL_MAP_H 1
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/Combinatorial_map_fwd.h>
 
-#include <CGAL/internal/Combinatorial_map_internal_functors.h>
-#include <CGAL/internal/Combinatorial_map_utility.h>
-#include <CGAL/internal/Combinatorial_map_group_functors.h>
-#include <CGAL/internal/Combinatorial_map_copy_functors.h>
-#include <CGAL/internal/Combinatorial_map_sewable.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_internal_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_utility.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_group_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_copy_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_sewable.h>
 
 #include <CGAL/Combinatorial_map_storages.h>
 #include <CGAL/Combinatorial_map_functors.h>
@@ -56,7 +55,7 @@
 #endif
 
 #include <boost/config.hpp>
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
 _Pragma("GCC diagnostic push")
 _Pragma("GCC diagnostic ignored \"-Warray-bounds\"")
 #endif
@@ -1010,9 +1009,9 @@ namespace CGAL {
     {
       if (mnb_used_marks == NB_MARKS)
       {
-        Rcpp::Rcerr << "Not enough Boolean marks: "
+        std::cerr << "Not enough Boolean marks: "
           "increase NB_MARKS in item class." << std::endl;
-        Rcpp::Rcerr << "  (exception launched)" << std::endl;
+        std::cerr << "  (exception launched)" << std::endl;
         throw Exception_no_more_available_mark();
       }
 
@@ -1353,7 +1352,7 @@ namespace CGAL {
               (!is_free(it, 1) && beta(it, 1, 0)!=it ))
           {
             if (show_errors)
-            { Rcpp::Rcerr << "Map not valid: beta(0) "
+            { std::cerr << "Map not valid: beta(0) "
                 "is not the inverse of beta(1) for dart "
                         <<darts().index(it) << std::endl;
             }
@@ -1365,7 +1364,7 @@ namespace CGAL {
             if (!is_free(it, i) && beta(it, i, i)!=it)
             {
               if (show_errors)
-              { Rcpp::Rcerr << "Map not valid: beta(" << i
+              { std::cerr << "Map not valid: beta(" << i
                           << ") is not an involution for dart "
                           <<darts().index(it)<< std::endl;
               }
@@ -1381,7 +1380,7 @@ namespace CGAL {
               {
                 if (show_errors)
                 {
-                  Rcpp::Rcerr << "Map not valid: beta(0) o beta(" << i
+                  std::cerr << "Map not valid: beta(0) o beta(" << i
                             << ") is not an involution for dart "
                             <<darts().index(it)<< std::endl;
                 }
@@ -1396,7 +1395,7 @@ namespace CGAL {
               {
                 if (show_errors)
                 {
-                  Rcpp::Rcerr << "Map not valid: beta(1) o beta(" << i
+                  std::cerr << "Map not valid: beta(1) o beta(" << i
                             << ") is not an involution for dart "
                             <<darts().index(it)<< std::endl;
                 }
@@ -1415,7 +1414,7 @@ namespace CGAL {
                 {
                   if (show_errors)
                   {
-                    Rcpp::Rcerr << "Map not valid: beta(" << i
+                    std::cerr << "Map not valid: beta(" << i
                               << ") o beta(" << j
                               << ") is not an involution for dart "
                               << darts().index(it)<< std::endl;
@@ -4825,7 +4824,7 @@ namespace CGAL {
 
 } // namespace CGAL
 
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
  _Pragma("GCC diagnostic pop")
 #endif
 

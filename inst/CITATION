@@ -6,12 +6,12 @@ citEntry(entry = "Misc",
                   person("CGAL team", role = "aut")),
   year         = "2022",
   url = "https://CRAN.R-project.org/package=RcppCGAL",
-  version = "5.3.1.1",
+  version = "5.4",
   date = "2022-01-06",
 
   textVersion  =
   paste("Eric Dunipace and the CGAL Team (2022).",
         "RcppCGAL: Rcpp Integration for CGAL",
-        "version 5.3.1.1",
+        "version 5.4",
         "URL https://cran.r-project.org/web/packages/RcppCGAL/index.html.")
 )

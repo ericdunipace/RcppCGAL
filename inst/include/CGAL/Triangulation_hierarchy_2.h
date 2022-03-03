@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_2/include/CGAL/Triangulation_hierarchy_2.h $
-// $Id: Triangulation_hierarchy_2.h b8bb3ff 2021-02-04T09:21:36+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_2/include/CGAL/Triangulation_hierarchy_2.h $
+// $Id: Triangulation_hierarchy_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,13 +14,12 @@
 #ifndef CGAL_TRIANGULATION_HIERARCHY_2_H
 #define CGAL_TRIANGULATION_HIERARCHY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_2.h>
 
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
-#include <CGAL/internal/Has_nested_type_Bare_point.h>
+#include <CGAL/STL_Extension/internal/Has_nested_type_Bare_point.h>
 #include <CGAL/Triangulation_hierarchy_vertex_base_2.h>
 #include <CGAL/triangulation_assertions.h>
 #include <CGAL/spatial_sort.h>
@@ -414,7 +413,7 @@ is_valid(bool verbose, int level) const
   //verify correctness of triangulation at all levels
   for(i=0;i<Triangulation_hierarchy_2__maxlevel;++i) {
     if(verbose) // pirnt  number of vertices at each level
-      Rcpp::Rcout << "number_of_vertices "
+      std::cout << "number_of_vertices "
                 <<  hierarchy[i]->number_of_vertices() << std::endl;
     result = result && hierarchy[i]->is_valid(verbose,level);
   }

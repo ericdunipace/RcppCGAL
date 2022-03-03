@@ -14,7 +14,7 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_Core/include/CGAL/CORE/CoreIO_impl.h $
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_Core/include/CGAL/CORE/CoreIO_impl.h $
  * $Id: CoreIO_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
@@ -28,7 +28,6 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
-#include <Rcpp.h>
 #include <CGAL/CORE/BigFloatRep.h>
 #include <CGAL/CORE/BigFloat.h>
 #include <CGAL/CORE/BigInt.h>
@@ -37,20 +36,20 @@ namespace CORE {
 
 CGAL_INLINE_FUNCTION
 void core_io_error_handler(const char *f, const char *m) {
-  Rcpp::Rcout << "\n error_handler";
-  Rcpp::Rcout << "::" << f << "::" << m << "\n";
-  Rcpp::Rcout.flush();
-  Rcpp::stop("Error");
+  std::cout << "\n error_handler";
+  std::cout << "::" << f << "::" << m << "\n";
+  std::cout.flush();
+  std::abort();
 }
 
 CGAL_INLINE_FUNCTION
 void core_io_memory_handler(char *t, const char *f, const char *m) {
   if (t == nullptr) {
-    Rcpp::Rcout << "\n memory_handler";
-    Rcpp::Rcout << "::" << f << "::" << m;
-    Rcpp::Rcout << "memory exhausted\n";
-    Rcpp::Rcout.flush();
-    Rcpp::stop("Error");
+    std::cout << "\n memory_handler";
+    std::cout << "::" << f << "::" << m;
+    std::cout << "memory exhausted\n";
+    std::cout.flush();
+    std::abort();
   }
 }
 
@@ -432,21 +431,21 @@ void BigFloat::write_to_file2(std::ostream& out, int base, int charsPerLine) {
   long tmp_exp = (rep->exp) * CHUNK_BIT;
   long q = tmp_exp / new_base;
   long r = tmp_exp % new_base;
-  Rcpp::Rcout << "CORE_DEBUG: q=" << q << ", r=" << r << std::endl;
+  std::cout << "CORE_DEBUG: q=" << q << ", r=" << r << std::endl;
   if ( r < 0 ) {
     r += new_base;
     q--;
   }
-  Rcpp::Rcout << "CORE_DEBUG: q=" << q << ", r=" << r << std::endl;
+  std::cout << "CORE_DEBUG: q=" << q << ", r=" << r << std::endl;
 
   BigInt m16 = (rep->m) << r;
 
   int size = mpz_sizeinbase(m16.I, base) + 2;
-  Rcpp::Rcout << "size=" << size << std::endl;
+  std::cout << "size=" << size << std::endl;
   char* buffer = new char[size];
 
   int length = bigint_to_string(m16, buffer, base);
-  Rcpp::Rcout << "length=" << length << std::endl;
+  std::cout << "length=" << length << std::endl;
 
   long exp16 = q + length - 1;
   if ( m16.is_negative() )

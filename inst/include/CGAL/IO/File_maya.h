@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/IO/File_maya.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/IO/File_maya.h $
 // $Id: File_maya.h 70058db 2021-05-03T15:30:52+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_IO_FILE_MAYA_H
 #define CGAL_IO_FILE_MAYA_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Time_stamper.h>
@@ -44,7 +43,7 @@ output_to_maya(std::ostream& os,
   typedef CGAL::Hash_handles_with_or_without_timestamps Hash_fct;
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  Rcpp::Rcerr << "Output to maya:\n";
+  std::cerr << "Output to maya:\n";
 #endif
 
   const Tr& tr = c3t3.triangulation();
@@ -308,7 +307,7 @@ output_to_maya(std::ostream& os,
   //-------------------------------------------------------
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  Rcpp::Rcerr << "done.\n";
+  std::cerr << "done.\n";
 #endif
 } // end output_to_maya(...)
 

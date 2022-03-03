@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Circular_kernel_2/include/CGAL/Circular_kernel_2/Circular_arc_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Circular_kernel_2/include/CGAL/Circular_kernel_2/Circular_arc_2.h $
 // $Id: Circular_arc_2.h 059bc60 2020-07-22T15:13:09+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -18,7 +18,6 @@
 #ifdef CGAL_INTERSECTION_MAP_FOR_XMONOTONIC_ARC_WITH_SAME_SUPPORTING_CIRCLE
 #define CGAL_USEFUL_MAPS_FOR_THE_CIRCULAR_KERNEL
 
-#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 #endif
@@ -268,8 +267,8 @@ namespace internal {
       *this = Circular_arc_2_base(c,
                              l1, compare_xy(begin, middle) < 0,
                              l2, compare_xy(end,   middle) < 0);*/
-          //Rcpp::Rcout << source() << std::endl;
-          //Rcpp::Rcout << target() << std::endl;
+          //std::cout << source() << std::endl;
+          //std::cout << target() << std::endl;
     }
 
     Circular_arc_2_base(const Circle_2 &support,

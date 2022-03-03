@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_2/include/CGAL/Mesh_2/Lipschitz_sizing_field_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_2/include/CGAL/Mesh_2/Lipschitz_sizing_field_2.h $
 // $Id: Lipschitz_sizing_field_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_LIPSCHITZ_SIZING_FIELD_2_H
 #define CGAL_LIPSCHITZ_SIZING_FIELD_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -92,7 +91,7 @@ public:
     : K(k)
   {
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-  Rcpp::Rcout << "Building sizing field..." << std::flush;
+  std::cout << "Building sizing field..." << std::flush;
 #endif
     points = std::list<Point>(first, beyond);
     generate_delaunay();
@@ -100,7 +99,7 @@ public:
     generate_sites();
     generate_apollonius();
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-  Rcpp::Rcout << "done." << std::endl;
+  std::cout << "done." << std::endl;
 #endif
   }
 
@@ -109,7 +108,7 @@ public:
     : K(k)
   {
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-    Rcpp::Rcout << "Building sizing field..." << std::flush;
+    std::cout << "Building sizing field..." << std::flush;
 #endif
     points = std::list<Point>(tr.points_begin(), tr.points_end());
     generate_delaunay();
@@ -117,7 +116,7 @@ public:
     generate_sites();
     generate_apollonius();
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-    Rcpp::Rcout << "done." << std::endl;
+    std::cout << "done." << std::endl;
 #endif
   }
 

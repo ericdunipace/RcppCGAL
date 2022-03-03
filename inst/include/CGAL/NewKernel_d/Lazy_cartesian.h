@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/NewKernel_d/include/CGAL/NewKernel_d/Lazy_cartesian.h $
-// $Id: Lazy_cartesian.h 6bae0e3 2021-09-09T11:09:16+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/NewKernel_d/include/CGAL/NewKernel_d/Lazy_cartesian.h $
+// $Id: Lazy_cartesian.h 74c029c 2021-09-09T11:44:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -109,6 +109,7 @@ template<typename AT, typename ET, typename AC, typename EC, typename E2A, typen
 class Lazy_rep_XXX :
   public Lazy_rep< AT, ET, E2A >, private EC
 {
+  typedef Lazy_rep< AT, ET, E2A > Base;
   // `default_construct<T>()` is the same as `T{}`. But, this is a
   // workaround to a MSVC-2015 bug (fixed in MSVC-2017): its parser
   // seemed confused by `T{}` somewhere below.
@@ -129,9 +130,10 @@ class Lazy_rep_XXX :
   const EC& ec() const { return *this; }
   template<class...T>
   void update_exact_helper(Lazy_internal::typelist<T...>) const {
-    this->et = new ET(ec()( CGAL::exact( Lazy_internal::do_extract(T{},l) ) ... ) );
-    this->at = E2A()(*(this->et));
-    l = LL(); // There should be a nicer way to clear. Destruction for instance. With this->et as a witness of whether l has already been destructed.
+    auto* p = new typename Base::Indirect(ec()( CGAL::exact( Lazy_internal::do_extract(T{},l) ) ... ) );
+    this->set_at(p);
+    this->set_ptr(p);
+    lazy_reset_member(l);
   }
   public:
   void update_exact() const {

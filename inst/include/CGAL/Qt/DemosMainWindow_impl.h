@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/GraphicsView/include/CGAL/Qt/DemosMainWindow_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/GraphicsView/include/CGAL/Qt/DemosMainWindow_impl.h $
 // $Id: DemosMainWindow_impl.h c9a020b 2021-02-09T12:12:56+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #else
@@ -280,7 +279,7 @@ DemosMainWindow::popupAboutBox(QString title, QString html_resource_name)
                                       ::Qt::LinksAccessibleByKeyboard);
   }
   else {
-    Rcpp::Rcerr << "Cannot find child \"qt_msgbox_label\" in QMessageBox\n"
+    std::cerr << "Cannot find child \"qt_msgbox_label\" in QMessageBox\n"
               << "  with Qt version " << QT_VERSION_STR << "!\n";
   }
   mb.exec();

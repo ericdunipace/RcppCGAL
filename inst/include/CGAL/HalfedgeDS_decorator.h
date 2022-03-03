@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/HalfedgeDS/include/CGAL/HalfedgeDS_decorator.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/HalfedgeDS/include/CGAL/HalfedgeDS_decorator.h $
 // $Id: HalfedgeDS_decorator.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_HALFEDGEDS_DECORATOR_H
 #define CGAL_HALFEDGEDS_DECORATOR_H 1
 
-#include <Rcpp.h>
 #include <CGAL/HalfedgeDS_items_decorator.h>
 #include <CGAL/HalfedgeDS_const_decorator.h>
 #include <CGAL/HalfedgeDS_iterator.h>
@@ -824,7 +823,7 @@ public:
         }
 
 //         if (nb_isolated_vertices > 0)
-//           Rcpp::Rcerr << "  Erased " << nb_isolated_vertices << " isolated vertices\n";
+//           std::cerr << "  Erased " << nb_isolated_vertices << " isolated vertices\n";
 
         return nb_erased_components;
     }

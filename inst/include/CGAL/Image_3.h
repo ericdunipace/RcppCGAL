@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_ImageIO/include/CGAL/Image_3.h $
-// $Id: Image_3.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_ImageIO/include/CGAL/Image_3.h $
+// $Id: Image_3.h ca89949 2021-10-29T17:01:33+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_IMAGE_3_H
 #define CGAL_IMAGE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
@@ -29,6 +28,7 @@
 #include <limits>
 #include <set>
 #include <cstdlib>
+#include <string>
 
 #if defined(BOOST_MSVC)
 #  pragma warning(push)
@@ -100,10 +100,10 @@ public:
   Image_3(const Image_3& bi)
     : image_ptr(bi.image_ptr)
   {
-//     Rcpp::Rcerr << "Image_3::copy_constructor\n";
+//     std::cerr << "Image_3::copy_constructor\n";
   }
 
-  Image_3(_image* im, Own own_the_data = OWN_THE_DATA)
+  explicit Image_3(_image* im, Own own_the_data = OWN_THE_DATA)
   {
     private_read(im, own_the_data);
   }
@@ -147,9 +147,9 @@ public:
   double vy() const { return image_ptr->vy; }
   double vz() const { return image_ptr->vz; }
 
-  double tx() const { return image_ptr->tx; }
-  double ty() const { return image_ptr->ty; }
-  double tz() const { return image_ptr->tz; }
+  float tx() const { return image_ptr->tx; }
+  float ty() const { return image_ptr->ty; }
+  float tz() const { return image_ptr->tz; }
 
   float value(const std::size_t i,
               const std::size_t j,
@@ -158,11 +158,21 @@ public:
     return ::evaluate(image(),i,j,k);
   }
 
+  bool is_valid() const
+  {
+    return image_ptr.get() != nullptr;
+  }
+
 public:
 
   bool read(const char* file)
   {
     return private_read(::_readImage(file));
+  }
+
+  bool read(const std::string& file)
+  {
+    return read(file.c_str());
   }
 
   bool read_raw(const char* file,
@@ -425,9 +435,9 @@ Image_3::trilinear_interpolation(const Coord_type& x,
   const Target_type dj1 = ly - j1;
   const Target_type dk2 = k2 - lx;
   const Target_type dk1 = lx - k1;
-//   Rcpp::Rcerr << di2 << " " << di1 << "\n";
-//   Rcpp::Rcerr << dj2 << " " << dj1 << "\n";
-//   Rcpp::Rcerr << dk2 << " " << dk1 << "\n";
+//   std::cerr << di2 << " " << di1 << "\n";
+//   std::cerr << dj2 << " " << dj1 << "\n";
+//   std::cerr << dk2 << " " << dk1 << "\n";
 
   return ( (  ( a * di2 + b * di1 ) * dj2 +
               ( d * di2 + c * di1 ) * dj1   ) * dk2 +

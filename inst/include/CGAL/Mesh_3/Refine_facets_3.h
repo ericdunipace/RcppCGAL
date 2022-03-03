@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Refine_facets_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Refine_facets_3.h $
 // $Id: Refine_facets_3.h f8a2878 2021-07-13T11:38:43+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -18,7 +18,6 @@
 #ifndef CGAL_MESH_3_REFINE_FACETS_3_H
 #define CGAL_MESH_3_REFINE_FACETS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -109,7 +108,7 @@ namespace Mesh_3 {
         << "}" << std::endl;
 
         std::string s = sstr.str();
-        Rcpp::Rcerr << s << std::endl;
+        std::cerr << s << std::endl;
       }*/
 #endif
       return (std::get<0>(f).first->erase_counter() == std::get<1>(f)
@@ -297,7 +296,7 @@ public:
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
     const Cell_handle c = facet.first;
     const int i = facet.second;
-    Rcpp::Rcerr << "\n Facet ("
+    std::cerr << "\n Facet ("
               << r_tr_.point(c, (i+1)&3) << " , "
               << r_tr_.point(c, (i+2)&3) << " , "
               << r_tr_.point(c, (i+3)&3) << ") : refinement point is "
@@ -482,7 +481,7 @@ protected:
     std::stringstream s;
     s << "insert_bad_facet(" << debug_info_element_impl(facet) << ", ...) by thread "
       << std::this_thread::get_id() << '\n';
-    Rcpp::Rcerr << s.str();
+    std::cerr << s.str();
 #endif
     // Insert the facet and its mirror
     this->add_bad_element(
@@ -976,7 +975,7 @@ scan_triangulation_impl()
 #endif
 
 #ifdef CGAL_MESH_3_VERY_VERBOSE
-  Rcpp::Rcerr
+  std::cerr
     << "Vertices: " << this->r_c3t3_.triangulation().number_of_vertices() << std::endl
     << "Facets  : " << this->r_c3t3_.number_of_facets_in_complex() << std::endl
     << "Tets    : " << this->r_c3t3_.number_of_cells_in_complex() << std::endl;
@@ -987,7 +986,7 @@ scan_triangulation_impl()
   if (boost::is_convertible<Ct, Parallel_tag>::value)
   {
 # if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    Rcpp::Rcerr << "Scanning triangulation for bad facets (in parallel) - "
+    std::cerr << "Scanning triangulation for bad facets (in parallel) - "
       "number of finite facets = "
       << this->r_c3t3_.triangulation().number_of_finite_facets() << "..."
       << std::endl;
@@ -1008,7 +1007,7 @@ scan_triangulation_impl()
 #endif // CGAL_LINKED_WITH_TBB
   {
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    Rcpp::Rcerr << "Scanning triangulation for bad facets (sequential) - "
+    std::cerr << "Scanning triangulation for bad facets (sequential) - "
       "number of finite facets = "
       << this->r_c3t3_.triangulation().number_of_finite_facets() << "..."
       << std::endl;
@@ -1020,7 +1019,7 @@ scan_triangulation_impl()
       // Cannot be const, see treat_new_facet signature
       Facet facet = *facet_it;
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      Rcpp::Rcerr << "TREAT FACET : " << std::endl
+      std::cerr << "TREAT FACET : " << std::endl
                  << "*" << *facet.first->vertex((facet.second+1)%4)  << std::endl
                 << "  " << *facet.first->vertex((facet.second+2)%4)  << std::endl
                 << "  " << *facet.first->vertex((facet.second+3)%4)  << std::endl;
@@ -1030,16 +1029,16 @@ scan_triangulation_impl()
   }
 
 #ifdef CGAL_MESH_3_PROFILING
-  Rcpp::Rcerr << "==== Facet scan: " << t.elapsed() << " seconds ===="
+  std::cerr << "==== Facet scan: " << t.elapsed() << " seconds ===="
             << std::endl << std::endl;
 #endif
 
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-  Rcpp::Rcerr << "Number of bad facets: " << C_::size() << std::endl;
+  std::cerr << "Number of bad facets: " << C_::size() << std::endl;
 #endif
 
 #ifdef CGAL_MESH_3_PROFILING
-  Rcpp::Rcerr << "Refining... ";
+  std::cerr << "Refining... ";
   Base_ML::m_timer.reset();
 #endif
   Base::scan_triangulation_impl_amendement();
@@ -1058,7 +1057,7 @@ number_of_bad_elements_impl()
   int count = 0, count_num_bad_surface_facets = 0;
   int num_internal_facets_that_should_be_on_surface = 0;
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-  Rcpp::Rcerr << "Scanning triangulation for bad facets - "
+  std::cerr << "Scanning triangulation for bad facets - "
     "number of finite facets = "
     << this->r_c3t3_.triangulation().number_of_finite_facets() << "...";
 #endif
@@ -1081,7 +1080,7 @@ number_of_bad_elements_impl()
       // This facet should be on surface...
       if (!this->is_facet_on_surface(facet))
       {
-        Rcpp::Rcerr << "\n\n*** The facet f is on surface but is NOT MARKED ON SURFACE. " << std::endl;
+        std::cerr << "\n\n*** The facet f is on surface but is NOT MARKED ON SURFACE. " << std::endl;
 
         Cell_handle c = facet.first;
         int ind = facet.second;
@@ -1105,7 +1104,7 @@ number_of_bad_elements_impl()
             const Facet f1(c, i);
             if (this->is_facet_on_surface(f1))
             {
-              Rcpp::Rcerr << "*** f1 is " << (this->r_criteria_(this->r_tr_, f1) ? "bad" : "good") << std::endl;
+              std::cerr << "*** f1 is " << (this->r_criteria_(this->r_tr_, f1) ? "bad" : "good") << std::endl;
 
 #ifdef SHOW_REMAINING_BAD_ELEMENT_IN_RED
               c->mark = i;
@@ -1123,7 +1122,7 @@ number_of_bad_elements_impl()
             const Facet f2(c, i);
             if (this->is_facet_on_surface(f2))
             {
-              Rcpp::Rcerr << "*** f2 is " << (this->r_criteria_(this->r_tr_, f2) ? "bad" : "good") << std::endl;
+              std::cerr << "*** f2 is " << (this->r_criteria_(this->r_tr_, f2) ? "bad" : "good") << std::endl;
 
 #ifdef SHOW_REMAINING_BAD_ELEMENT_IN_RED
               mc->mark = i;
@@ -1138,7 +1137,7 @@ number_of_bad_elements_impl()
           }
         }
 
-        Rcpp::Rcerr
+        std::cerr
           << "*** Num of erroneous surface facets in c: " << num_erroneous_surface_facets_in_c << std::endl
           << "*** Num of erroneous surface facets in mc: " << num_erroneous_surface_facets_in_mc << std::endl
           << "*** Num of real surface facets in c: " << num_real_surface_facets_in_c << std::endl
@@ -1147,7 +1146,7 @@ number_of_bad_elements_impl()
         const Subdomain c_subdomain = this->r_oracle_.is_in_domain_object()(this->r_tr_.dual(c));
         const Subdomain mc_subdomain = this->r_oracle_.is_in_domain_object()(this->r_tr_.dual(mc));
 
-        Rcpp::Rcerr << "*** Is in complex? c is marked in domain: " << this->r_c3t3_.is_in_complex(c)
+        std::cerr << "*** Is in complex? c is marked in domain: " << this->r_c3t3_.is_in_complex(c)
           << " / c is really in subdomain: " << c_subdomain
           << " / mc is marked in domain: " << this->r_c3t3_.is_in_complex(mc)
           << " / mc is really in subdomain: " << mc_subdomain
@@ -1189,7 +1188,7 @@ number_of_bad_elements_impl()
       // Marked on surface?
       if (this->is_facet_on_surface(facet))
       {
-        Rcpp::Rcerr << "************** The facet is marked on surface whereas it's not! **************" << std::endl;
+        std::cerr << "************** The facet is marked on surface whereas it's not! **************" << std::endl;
 #ifdef SHOW_REMAINING_BAD_ELEMENT_IN_RED
         facet.first->mark = facet.second;
 #endif
@@ -1197,12 +1196,12 @@ number_of_bad_elements_impl()
     }
   }
 
-  /*Rcpp::Rcerr << "done (" << num_internal_facets_that_should_be_on_surface
+  /*std::cerr << "done (" << num_internal_facets_that_should_be_on_surface
     << " facets which were internal facets were added to the surface)." << std::endl;*/
-  Rcpp::Rcerr << "done (" << num_internal_facets_that_should_be_on_surface
+  std::cerr << "done (" << num_internal_facets_that_should_be_on_surface
     << " facets that should be on surface are actually internal facets)." << std::endl;
-  Rcpp::Rcerr << std::endl << "Num_tested_facets = " << num_tested_facets << std::endl;
-  Rcpp::Rcerr << std::endl << "Num bad surface-marked facets = " << count_num_bad_surface_facets << std::endl;
+  std::cerr << std::endl << "Num_tested_facets = " << num_tested_facets << std::endl;
+  std::cerr << std::endl << "Num bad surface-marked facets = " << count_num_bad_surface_facets << std::endl;
 
   return count;
 }
@@ -1336,7 +1335,7 @@ conflicts_zone_impl(const Weighted_point& point
     if (p_facet != 0 && !facet_is_in_its_cz)
     {
 # ifdef CGAL_MESH_3_VERBOSE
-      Rcpp::Rcerr << "Info: the facet is not in the conflict zone of (" << point
+      std::cerr << "Info: the facet is not in the conflict zone of (" << point
                 << "). Switching to exact computation." << std::endl;
 # endif
 
@@ -1398,7 +1397,7 @@ conflicts_zone_impl(const Weighted_point& point
     if (could_lock_zone && p_facet != 0 && !facet_is_in_its_cz)
     {
 #ifdef CGAL_MESH_3_VERBOSE
-      Rcpp::Rcerr << "Info: the facet is not in its conflict zone. "
+      std::cerr << "Info: the facet is not in its conflict zone. "
         "Switching to exact computation." << std::endl;
 #endif
 
@@ -1510,7 +1509,7 @@ insert_impl(const Weighted_point& point, const Zone& zone)
   if( zone.locate_type == Tr::VERTEX )
   {
     // TODO look at this
-    Rcpp::Rcerr<<"VERTEX\n";
+    std::cerr<<"VERTEX\n";
     return zone.cell->vertex(zone.i);
   }
 
@@ -1590,7 +1589,7 @@ treat_new_facet(Facet& facet)
       insert_bad_facet(facet, *is_facet_bad);
 
 #ifdef CGAL_MESH_3_DEBUG_FACET_CRITERIA
-      Rcpp::Rcerr << "INSERT BAD FACET : " << std::endl
+      std::cerr << "INSERT BAD FACET : " << std::endl
                 << "* " << *facet.first->vertex((facet.second+1)%4) << std::endl
                 << "  " << *facet.first->vertex((facet.second+2)%4) << std::endl
                 << "  " << *facet.first->vertex((facet.second+3)%4) << std::endl

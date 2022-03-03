@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_3/include/CGAL/Triangulation_3.h $
-// $Id: Triangulation_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_3/include/CGAL/Triangulation_3.h $
+// $Id: Triangulation_3.h bac0822 2021-09-29T11:46:53+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -14,7 +14,6 @@
 #ifndef CGAL_TRIANGULATION_3_H
 #define CGAL_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -64,12 +63,12 @@
 #include <boost/container/small_vector.hpp>
 
 #ifndef CGAL_TRIANGULATION_3_DONT_INSERT_RANGE_OF_POINTS_WITH_INFO
-#include <CGAL/internal/info_check.h>
+#include <CGAL/STL_Extension/internal/info_check.h>
 #include <boost/iterator/zip_iterator.hpp>
 #endif
 
 #ifndef CGAL_NO_STRUCTURAL_FILTERING
-#include <CGAL/internal/Static_filters/tools.h>
+#include <CGAL/Filtered_kernel/internal/Static_filters/tools.h>
 #include <CGAL/Triangulation_structural_filtering_traits.h>
 #include <CGAL/determinant.h>
 #endif // no CGAL_NO_STRUCTURAL_FILTERING
@@ -447,7 +446,8 @@ private:
     const Self *t;
 
   public:
-    Infinite_tester() {}
+    Infinite_tester()
+      : t(nullptr) {}
 
     Infinite_tester(const Self *tr)
       : t(tr) {}
@@ -575,7 +575,7 @@ protected:
 
 public:
   template<typename P> // Point or Point_3
-  typename boost::result_of<Construct_point_3(P)>::type
+  typename boost::result_of<const Construct_point_3(const P&)>::type
   construct_point(const P& p) const
   {
     return geom_traits().construct_point_3_object()(p);
@@ -6982,7 +6982,7 @@ is_valid(bool verbose, int level) const
   if(! _tds.is_valid(verbose,level))
   {
     if(verbose)
-      Rcpp::Rcerr << "invalid data structure" << std::endl;
+      std::cerr << "invalid data structure" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -6991,7 +6991,7 @@ is_valid(bool verbose, int level) const
   if(infinite_vertex() == Vertex_handle())
   {
     if(verbose)
-      Rcpp::Rcerr << "no infinite vertex" << std::endl;
+      std::cerr << "no infinite vertex" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -7023,7 +7023,7 @@ is_valid(bool verbose, int level) const
   }
 
   if(verbose)
-    Rcpp::Rcerr << "valid triangulation" << std::endl;
+    std::cerr << "valid triangulation" << std::endl;
   return true;
 }
 
@@ -7036,11 +7036,11 @@ is_valid(Cell_handle c, bool verbose, int level) const
   {
     if(verbose)
     {
-      Rcpp::Rcerr << "combinatorially invalid cell";
+      std::cerr << "combinatorially invalid cell";
       for(int i=0; i <= dimension(); i++)
-        Rcpp::Rcerr << c->vertex(i)->point() << ", ";
+        std::cerr << c->vertex(i)->point() << ", ";
 
-      Rcpp::Rcerr << std::endl;
+      std::cerr << std::endl;
     }
 
     CGAL_triangulation_assertion(false);
@@ -7051,7 +7051,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
     is_valid_finite(c, verbose, level);
 
   if(verbose)
-    Rcpp::Rcerr << "geometrically valid cell" << std::endl;
+    std::cerr << "geometrically valid cell" << std::endl;
 
   return true;
 }
@@ -7073,7 +7073,7 @@ is_valid_finite(Cell_handle c, bool verbose, int) const
       {
         if(verbose)
         {
-          Rcpp::Rcerr << "badly oriented cell "
+          std::cerr << "badly oriented cell "
                     << c->vertex(0)->point() << ", "
                     << c->vertex(1)->point() << ", "
                     << c->vertex(2)->point() << ", "
@@ -7092,7 +7092,7 @@ is_valid_finite(Cell_handle c, bool verbose, int) const
       {
         if(verbose)
         {
-          Rcpp::Rcerr << "badly oriented face "
+          std::cerr << "badly oriented face "
                     << c->vertex(0)->point() << ", "
                     << c->vertex(1)->point() << ", "
                     << c->vertex(2)->point() << std::endl;
@@ -7114,7 +7114,7 @@ is_valid_finite(Cell_handle c, bool verbose, int) const
         {
           if(verbose)
           {
-            Rcpp::Rcerr << "badly oriented edge " << p0 << ", " << p1 << std::endl
+            std::cerr << "badly oriented edge " << p0 << ", " << p1 << std::endl
                       << "with neighbor 0"
                       << c->neighbor(0)->vertex(1-c->neighbor(0)->index(c))->point()
                       << ", " << v->point() << std::endl;
@@ -7131,7 +7131,7 @@ is_valid_finite(Cell_handle c, bool verbose, int) const
         {
           if(verbose)
           {
-            Rcpp::Rcerr << "badly oriented edge " << p0 << ", " << p1 << std::endl
+            std::cerr << "badly oriented edge " << p0 << ", " << p1 << std::endl
                       << "with neighbor 1"
                       << c->neighbor(1)->vertex(1-c->neighbor(1)->index(c))->point()
                       << ", " << v->point() << std::endl;

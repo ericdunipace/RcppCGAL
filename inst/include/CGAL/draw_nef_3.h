@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/draw_nef_3.h $
-// $Id: draw_nef_3.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/draw_nef_3.h $
+// $Id: draw_nef_3.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -256,7 +256,7 @@ void draw(const CGAL_NEF3_TYPE &anef,
   {
     CGAL::Qt::init_ogl_context(4,3);
     int argc = 1;
-    const char *argv[2] = {"nef_polyhedron_viewer", "\0"};
+    const char *argv[2] = {"nef_polyhedron_viewer", nullptr};
     QApplication app(argc, const_cast<char **>(argv));
     DefaultColorFunctorNefPolyhedron fcolor;
     SimpleNefPolyhedronViewerQt<CGAL_NEF3_TYPE,

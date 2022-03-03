@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Advancing_front_surface_reconstruction/include/CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Advancing_front_surface_reconstruction/include/CGAL/Advancing_front_surface_reconstruction_vertex_base_3.h $
 // $Id: Advancing_front_surface_reconstruction_vertex_base_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_ADVANCING_FRONT_SURFACE_RECONSTRUCTION_VERTEX_BASE_WITH_ID_3_H
 #define CGAL_ADVANCING_FRONT_SURFACE_RECONSTRUCTION_VERTEX_BASE_WITH_ID_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Advancing_front_surface_reconstruction.h>
 
 
@@ -221,7 +220,7 @@ namespace CGAL {
       else
         {
           if (m_incident_border->second->first != nullptr)
-            Rcpp::Rcerr << "+++probleme de MAJ du bord <Vertex_base>" << std::endl;
+            std::cerr << "+++probleme de MAJ du bord <Vertex_base>" << std::endl;
           *m_incident_border->second = elt;
         }
     }

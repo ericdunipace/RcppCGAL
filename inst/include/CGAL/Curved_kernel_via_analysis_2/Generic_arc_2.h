@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Generic_arc_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Generic_arc_2.h $
 // $Id: Generic_arc_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -20,7 +20,6 @@
  *  adds support for isolated points to native CKvA_2 object
  */
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/Handle_with_policy.h>
 
@@ -288,7 +287,7 @@ template <class SweepCurvesAdaptor_2, class Rep_>
 std::istream& operator >> (std::istream& is,
                            Generic_arc_2<SweepCurvesAdaptor_2, Rep_>& /* arc */) {
 
-    Rcpp::Rcerr << "bogus >> call for generic_arc\n";
+    std::cerr << "bogus >> call for generic_arc\n";
     return is;
 }
 

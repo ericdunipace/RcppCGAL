@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Segment_Delaunay_graph_Linf_2/include/CGAL/Side_of_oriented_square_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Segment_Delaunay_graph_Linf_2/include/CGAL/Side_of_oriented_square_2.h $
 // $Id: Side_of_oriented_square_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_SIDE_OF_ORIENTED_SQUARE_2_H
 #define CGAL_SIDE_OF_ORIENTED_SQUARE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -46,7 +45,7 @@ namespace CGAL {
       Oriented_side predicate(const Point_2 &p, const Point_2 &q,
                  const Point_2 &r, const Point_2 &t) const
       {
-        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug entering side_of_os (pqrt)= ("
+        CGAL_SDG_DEBUG(std::cout << "debug entering side_of_os (pqrt)= ("
           << p << ") (" << q << ") (" << r << ") (" << t << ")"
           << std::endl;);
 
@@ -54,30 +53,30 @@ namespace CGAL {
 
         if (orlpqr == DEGENERATE) {
           // here p,q,r are monotone
-          CGAL_SDG_DEBUG(Rcpp::Rcout << "debug side_of_os pqr are monotone" << std::endl;);
+          CGAL_SDG_DEBUG(std::cout << "debug side_of_os pqr are monotone" << std::endl;);
 
           bool is_degenerate_pqt = (orientation_Linf(p,q,t) == DEGENERATE);
           bool is_degenerate_qrt = (orientation_Linf(q,r,t) == DEGENERATE);
 
           if (is_degenerate_pqt && is_degenerate_qrt) {
             //p,q,r,t are all collinear
-            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs pqrt all collin" << std::endl;);
+            CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs pqrt all collin" << std::endl;);
             return ON_ORIENTED_BOUNDARY;
           }
 
           if (! is_degenerate_pqt) {
-            //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs qpt not monotone" << std::endl;);
+            //CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs qpt not monotone" << std::endl;);
             return predicate(q,p,t,r);
           }
 
           if (! is_degenerate_qrt) {
-            //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug Side_of_bs rqt not monotone" << std::endl;);
+            //CGAL_SDG_DEBUG(std::cout << "debug Side_of_bs rqt not monotone" << std::endl;);
             return predicate(r,q,t,p);
           }
 
         }
         else { // p,q,r are not monotone
-          //CGAL_SDG_DEBUG(Rcpp::Rcout << "side_of_os pqr not monotone" << std::endl;);
+          //CGAL_SDG_DEBUG(std::cout << "side_of_os pqr not monotone" << std::endl;);
 
           Comparison_result cxtp = compare_x_2(t,p);
           Comparison_result cytp = compare_y_2(t,p);
@@ -103,7 +102,7 @@ namespace CGAL {
            || ((cytq == EQUAL) && (cytr == EQUAL) && (cxtq != cxtr))
            || ((cytr == EQUAL) && (cytp == EQUAL) && (cxtr != cxtp)))
           {
-            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug side_of_os query point in segment"
+            CGAL_SDG_DEBUG(std::cout << "debug side_of_os query point in segment"
               << std::endl;);
             return (Oriented_side)
               (( (int) orlpqr ) *
@@ -112,7 +111,7 @@ namespace CGAL {
 
           Bounded_side bspqrt = side_of_bounded_square_2(p,q,r,t);
 
-          CGAL_SDG_DEBUG(Rcpp::Rcout << "debug side_of_os bspqrt="
+          CGAL_SDG_DEBUG(std::cout << "debug side_of_os bspqrt="
             << bspqrt << std::endl;);
 
           if (bspqrt == ON_BOUNDARY) {
@@ -138,7 +137,7 @@ namespace CGAL {
                  (((int) orientation_Linf(q,p,t)) *
                   ((int) side_of_bounded_square_2(q,p,t,r)) ) ;
             }
-            CGAL_SDG_DEBUG(Rcpp::Rcout << "debug side_of_os about to return "
+            CGAL_SDG_DEBUG(std::cout << "debug side_of_os about to return "
               << "ON_ORIENTED_BOUNDARY" << std::endl;);
             return ON_ORIENTED_BOUNDARY;
           }
@@ -153,7 +152,7 @@ namespace CGAL {
                     ON_NEGATIVE_SIDE : ON_POSITIVE_SIDE ;
           }
         }
-        CGAL_SDG_DEBUG(Rcpp::Rcout << "should not reach here" << std::endl;);
+        CGAL_SDG_DEBUG(std::cout << "should not reach here" << std::endl;);
 
         CGAL_assertion(false);
 

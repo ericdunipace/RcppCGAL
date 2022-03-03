@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_triangulation_pl_functions.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_triangulation_pl_functions.h $
 // $Id: Arr_triangulation_pl_functions.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_ARR_TRIANGULATION_POINT_LOCATION_FUNCTIONS_H
 #define CGAL_ARR_TRIANGULATION_POINT_LOCATION_FUNCTIONS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -25,7 +24,7 @@
 // #define CGAL_TRG_DEBUG
 
 #ifdef CGAL_TRG_DEBUG
-  #define CGAL_TRG_PRINT_DEBUG(expr)   Rcpp::Rcout << expr << std::endl
+  #define CGAL_TRG_PRINT_DEBUG(expr)   std::cout << expr << std::endl
 #else
   #define CGAL_TRG_PRINT_DEBUG(expr)
 #endif
@@ -226,7 +225,7 @@ void Arr_triangulation_point_location<Arrangement_2_>::build_triangulation()
 
     //check if source point is equal to destination point
     if (m_traits->equal_2_object()(pm_p1, pm_p2)) {
-      Rcpp::Rcerr << "WARNING: source point is equal to destination point!!! "
+      std::cerr << "WARNING: source point is equal to destination point!!! "
                 << pm_p1 << std::endl ;
       CDT_Vertex_handle cdt_vh1 = m_cdt.insert(cdt_p1);
       cdt_vh1->info() = pm_vh1;

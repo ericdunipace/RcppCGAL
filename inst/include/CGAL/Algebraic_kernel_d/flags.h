@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/flags.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/flags.h $
 // $Id: flags.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -29,7 +29,7 @@
 
 // If CGAL_ACK_DEBUG_FLAG is set, which output stream is used for debug?
 #ifndef CGAL_ACK_DEBUG_PRINT
-#define CGAL_ACK_DEBUG_PRINT Rcpp::Rcout
+#define CGAL_ACK_DEBUG_PRINT std::cout
 #endif
 
 // If enabled, needs includes from experimental package

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Lloyd_move.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Lloyd_move.h $
 // $Id: Lloyd_move.h 2d73ef3 2020-12-04T17:18:04+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_MESH_3_LLOYD_MOVE_H
 #define CGAL_MESH_3_LLOYD_MOVE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -78,7 +77,7 @@ public:
                       const Sizing_field& sizing_field = Sizing_field() ) const
   {
 #ifdef CGAL_MESH_3_OPTIMIZER_DEBUG_VERBOSE
-    Rcpp::Rcout << "computing move of: " << &*v
+    std::cout << "computing move of: " << &*v
               << " pos: " << c3t3.triangulation().point(v)
               << " dim: " << c3t3.in_dimension(v) << std::endl;
 #endif

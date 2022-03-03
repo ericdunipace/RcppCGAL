@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Direction_2.h $
-// $Id: Direction_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Direction_2.h $
+// $Id: Direction_2.h e7357ac 2021-07-19T14:53:27+02:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_DIRECTION_2_H
 #define CGAL_DIRECTION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 #include <boost/type_traits/is_same.hpp>
 #include <CGAL/kernel_assertions.h>
@@ -65,6 +64,9 @@ public:
 
   Direction_2(const RDirection_2& d)
     : RDirection_2(d) {}
+
+  Direction_2(RDirection_2&& d)
+    : RDirection_2(std::move(d)) {}
 
   explicit Direction_2(const Vector_2& v)
     : RDirection_2(typename R::Construct_direction_2()(Return_base_tag(), v)) {}
@@ -234,7 +236,7 @@ extract(std::istream& is, Direction_2<R>& d, const Cartesian_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        Rcpp::Rcerr << std::endl << "Stream must be in ascii or binary mode"
+        std::cerr << std::endl << "Stream must be in ASCII or binary mode"
                   << std::endl;
         break;
     }
@@ -259,8 +261,8 @@ extract(std::istream& is, Direction_2<R>& d, const Homogeneous_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        Rcpp::Rcerr << "" << std::endl;
-        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
+        std::cerr << "" << std::endl;
+        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
   }
   d = Direction_2<R>(x, y);

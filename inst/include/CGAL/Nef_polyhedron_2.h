@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_2/include/CGAL/Nef_polyhedron_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_2/include/CGAL/Nef_polyhedron_2.h $
 // $Id: Nef_polyhedron_2.h 618b409 2021-01-18T15:40:40+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_NEF_POLYHEDRON_2_H
 #define CGAL_NEF_POLYHEDRON_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -375,7 +374,7 @@ public:
       D.mark(el) = bool(line);
     } else {
       D.mark(--D.faces_end()) = bool(EMPTY);
-      Rcpp::Rcerr << "Constructor not available with standard kernel. "
+      std::cerr << "Constructor not available with standard kernel. "
                    " Returned empty polygon!" << std::endl;
     }
   }
@@ -1110,7 +1109,7 @@ std::istream& operator>>
       I.check_sep(NP.EK.output_identifier()) &&
       I.check_sep(">")) I.read();
   else {
-    Rcpp::Rcerr << "Nef_polyhedron_2 input corrupted." << std::endl;
+    std::cerr << "Nef_polyhedron_2 input corrupted." << std::endl;
     NP = Nef_polyhedron_2<T,Items,Mark>();
   }
   if(!is)

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/IO/File_binary_mesh_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/IO/File_binary_mesh_3.h $
 // $Id: File_binary_mesh_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_IO_FILE_BINARY_MESH_3_H
 #define CGAL_IO_FILE_BINARY_MESH_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 
@@ -66,7 +65,7 @@ bool load_binary_file(std::istream& is, C3T3& c3t3)
       s.resize(s.size() - 1);
     }
     if(s != std::string(" ") + CGAL::Get_io_signature<C3T3>()()) {
-      Rcpp::Rcerr << "load_binary_file:"
+      std::cerr << "load_binary_file:"
                 << "\n  expected format: " << CGAL::Get_io_signature<C3T3>()()
                 << "\n       got format:" << s << std::endl;
       return false;

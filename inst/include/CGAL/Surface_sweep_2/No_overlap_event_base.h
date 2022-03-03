@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_event_base.h $
-// $Id: No_overlap_event_base.h 702b477 2020-11-03T08:18:07+01:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_event_base.h $
+// $Id: No_overlap_event_base.h efa642a 2021-03-25T15:43:48+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi        <talizvi@post.tau.ac.il>,
@@ -15,7 +15,6 @@
 #ifndef CGAL_SURFACE_SWEEP_2_NO_OVERLAP_EVENT_BASE_H
 #define CGAL_SURFACE_SWEEP_2_NO_OVERLAP_EVENT_BASE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file
@@ -347,16 +346,19 @@ public:
   { return m_left_curves.rend(); }
 
   /*! Return the number of curves defined to the left of the event. */
-  size_t number_of_left_curves() { return m_left_curves.size(); }
+  size_t number_of_left_curves() const { return m_left_curves.size(); }
 
   /*! Return the number of curves defined to the right of the event. */
-  size_t number_of_right_curves() { return (m_right_curves.size()); }
+  size_t number_of_right_curves() const { return (m_right_curves.size()); }
 
   /*! Check whether at least one curve is defined to the left of the event. */
   bool has_left_curves() const { return (! m_left_curves.empty()); }
 
   /*! Checks if at least one curve is defined to the right of the event. */
   bool has_right_curves() const { return (! m_right_curves.empty()); }
+
+  /*! Returns whether an event has no incident curves */
+  bool is_isolated() const { return m_left_curves.empty() && m_right_curves.empty(); }
 
   /*! Obtain the actual event point (const version).
    * \pre The event is associated with a valid point.
@@ -377,14 +379,42 @@ public:
   }
 
   /*! Obtain a curve associated with the event (const version).
-   * \pre The event has incident curves.
+   *
+   * \pre The event does not lie on the boundary.
+   * \pre The event is not isolated.
    */
-  const X_monotone_curve_2& curve() const
-  {
-    if (has_left_curves()) return (m_left_curves.front()->last_curve());
+  const X_monotone_curve_2& curve() const {
+    // Use a right curve if exists first. A left curve might be the result of
+    // an overlap. In this case, the event currently being processed is not an
+    // endpoint of the (left) curve.
+    CGAL_precondition(! this->is_on_boundary());
+    CGAL_precondition(! this->is_isolated());
+    if (has_right_curves()) return (m_right_curves.front()->last_curve());
 
-    CGAL_assertion(has_right_curves());
-    return (m_right_curves.front()->last_curve());
+    CGAL_assertion(has_left_curves());
+    return (m_left_curves.front()->last_curve());
+  }
+
+  /*! Obtain a curve associated with the event and returns as a side-effect the
+   * respective end to `ce` (const version).
+   * \param ce reference to a curve-end that is returned as a side-effect.
+   * \pre The event lies on the boundary.
+   * \pre The event is not isolated.
+   */
+  const X_monotone_curve_2& boundary_touching_curve(Arr_curve_end& ce) const {
+    // Use a right curve if exists first. A left curve might be the result of
+    // an overlap. In this case, the event currently being processed is not an
+    // endpoint of the (left) curve.
+    CGAL_precondition(this->is_on_boundary());
+    CGAL_precondition(! this->is_isolated());
+    if (has_right_curves()) {
+      ce = ARR_MIN_END;
+      return m_right_curves.front()->last_curve();
+    }
+
+    CGAL_assertion(has_left_curves());
+    ce = ARR_MAX_END;
+    return m_left_curves.front()->last_curve();
   }
 
   /*! Set the event point. */
@@ -478,52 +508,52 @@ public:
   }
 
 #ifdef CGAL_SS_VERBOSE
-  void Print();
+  void Print() const;
 #endif
 };
 
 #ifdef CGAL_SS_VERBOSE
 template <typename Traits, typename Subcurve>
-void No_overlap_event_base<Traits, Subcurve>::Print()
+void No_overlap_event_base<Traits, Subcurve>::Print() const
 {
-  Rcpp::Rcout << "\tEvent info: "  << "\n" ;
-  if (this->is_closed()) Rcpp::Rcout << "\t" << m_point << "\n" ;
+  std::cout << "\tEvent info: "  << "\n" ;
+  if (this->is_closed()) std::cout << "\t" << m_point << "\n" ;
   else {
-    Rcpp::Rcout << "\t";
+    std::cout << "\t";
     Arr_parameter_space ps_x = this->parameter_space_in_x();
     Arr_parameter_space ps_y = this->parameter_space_in_y();
 
     switch (ps_x) {
-     case ARR_LEFT_BOUNDARY:  Rcpp::Rcout << "left boundary"; break;
-     case ARR_RIGHT_BOUNDARY: Rcpp::Rcout << "right boundary"; break;
+     case ARR_LEFT_BOUNDARY:  std::cout << "left boundary"; break;
+     case ARR_RIGHT_BOUNDARY: std::cout << "right boundary"; break;
      case ARR_INTERIOR:
      default:
       switch (ps_y) {
-       case ARR_BOTTOM_BOUNDARY: Rcpp::Rcout << "bottom boundary"; break;
-       case ARR_TOP_BOUNDARY:    Rcpp::Rcout << "top boundary"; break;
+       case ARR_BOTTOM_BOUNDARY: std::cout << "bottom boundary"; break;
+       case ARR_TOP_BOUNDARY:    std::cout << "top boundary"; break;
        case ARR_INTERIOR:
        default: CGAL_error();
       }
     }
   }
-  Rcpp::Rcout << "\n";
+  std::cout << "\n";
 
-  Rcpp::Rcout << "\tLeft curves: \n" ;
+  std::cout << "\tLeft curves: \n" ;
   Subcurve_iterator iter;
   for (iter = m_left_curves.begin(); iter != m_left_curves.end(); ++iter) {
-    Rcpp::Rcout << "\t";
+    std::cout << "\t";
     (*iter)->Print();
-    Rcpp::Rcout << "\n";
+    std::cout << "\n";
   }
-  Rcpp::Rcout << std::endl;
-  Rcpp::Rcout << "\tRight curves: \n" ;
+  std::cout << std::endl;
+  std::cout << "\tRight curves: \n" ;
   for (iter = m_right_curves.begin(); iter != m_right_curves.end(); ++iter) {
-    Rcpp::Rcout << "\t";
+    std::cout << "\t";
     (*iter)->Print();
-    Rcpp::Rcout << "\n";
+    std::cout << "\n";
   }
 
-  Rcpp::Rcout << std::endl;
+  std::cout << std::endl;
 }
 #endif // CGAL_SS_VERBOSE
 

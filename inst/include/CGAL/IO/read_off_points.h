@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/IO/read_off_points.h $
-// $Id: read_off_points.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/IO/read_off_points.h $
+// $Id: read_off_points.h 27f55f1 2021-11-17T09:46:29+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret
@@ -12,7 +12,6 @@
 #ifndef CGAL_POINT_SET_PROCESSING_READ_OFF_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_READ_OFF_POINTS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/IO/io.h>
@@ -119,11 +118,12 @@ bool read_OFF(std::istream& is,
 
   if(!is)
   {
-    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
+    std::cerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
   // scan points
+  std::string signature;
   long pointsCount = 0, facesCount = 0, edgesCount = 0; // number of items in file
   int pointsRead = 0; // current number of points read
   int lineNumber = 0; // current line number
@@ -138,27 +138,24 @@ bool read_OFF(std::istream& is,
     if (line.empty () || line[0] == '#')
       continue;
 
-    lineNumber++;
+    ++lineNumber;
 
     // Reads file signature on first line
     if (lineNumber == 1)
     {
-      std::string signature;
-      if ( !(iss >> signature)
-        || (signature != "OFF" && signature != "NOFF") )
+      if ( !(iss >> signature) || (signature != "OFF" && signature != "NOFF") )
       {
         // if wrong file format
-        Rcpp::Rcerr << "Incorrect file format line " << lineNumber << " of file" << std::endl;
+        std::cerr << "Error line " << lineNumber << " of file (unexpected header)" << std::endl;
         return false;
       }
     }
-
     // Reads number of points on 2nd line
     else if (lineNumber == 2)
     {
       if ( !(iss >> pointsCount >> facesCount >> edgesCount) )
       {
-        Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
+        std::cerr << "Error line " << lineNumber << " of file (incorrect header format)" << std::endl;
         return false;
       }
     }
@@ -171,8 +168,7 @@ bool read_OFF(std::istream& is,
       double nx,ny,nz;
       if (iss >> IO::iformat(x) >> IO::iformat(y) >> IO::iformat(z))
       {
-        //the extra `()` seem to fix a very strange bug. Without them, the put() won't compile.
-        Point point((FT(x)), (FT(y)), (FT(z)));
+        Point point{FT(x), FT(y), FT(z)};
         Vector normal = CGAL::NULL_VECTOR;
         // ... + normal...
         if (iss >> IO::iformat(nx))
@@ -181,21 +177,29 @@ bool read_OFF(std::istream& is,
           if(iss  >> IO::iformat(ny) >> IO::iformat(nz)){
             normal = Vector(FT(nx),FT(ny),FT(nz));
           } else {
-            Rcpp::Rcerr << "Error line " << lineNumber << " of file" << std::endl;
+            std::cerr << "Error line " << lineNumber << " of file (incomplete normal coordinates)" << std::endl;
             return false;
           }
         }
+        else if (signature == "NOFF")
+        {
+          std::cerr << "Error line " << lineNumber << " of file (expected normal coordinates)" << std::endl;
+          return false;
+        }
+
         Enriched_point pwn;
         put(point_map,  pwn, point);  // point_map[&pwn] = point
         if (has_normals)
           put(normal_map, pwn, normal); // normal_map[&pwn] = normal
+
         *output++ = pwn;
-        pointsRead++;
+        ++pointsRead;
       }
-      // ...or skip comment line
     }
-    // Skip remaining lines
   }
+
+  if(is.eof())
+    is.clear(is.rdstate() & ~std::ios_base::failbit); // set by getline
 
   return true;
 }

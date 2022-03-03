@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Subdivision_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Subdivision_2.h $
 // $Id: Subdivision_2.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -21,7 +21,6 @@
 
 #warning this file is considered obsolete
 
-#include <Rcpp.h>
 #include <vector>
 #include <CGAL/Polynomial.h>
 #include <CGAL/Interval_nt.h>
@@ -121,7 +120,7 @@ public:
                 res_h = res_h_;
                 if(x_min >= x_max||y_min >= y_max||res_w < 5||res_h < 5||res_w > 1024||
                         res_h > 1024) {
-                        Rcpp::Rcout << "Incorrect setup parameters" << std::endl;
+                        std::cout << "Incorrect setup parameters" << std::endl;
                         initialized = false;
                         return;
                 }
@@ -238,15 +237,15 @@ void Subdivision_2<NT, Algebraic_curve_2_>::draw(QPainter *painter_)
         if(!initialized||!polynomial_set||painter_==nullptr)
                 return;
         painter = painter_;
-        //Rcpp::Rcout << " P(x(y)): " << coeffs_x << std::endl;
-        //Rcpp::Rcout << " P(y(x)): " << coeffs_y << std::endl;
-        Rcpp::Rcout << "resolution: " << res_w << " x " << res_h << std::endl;
-        //Rcpp::Rcout << "box: [" << x_min << "; " << y_min << "]x[" << x_max << "; "
+        //std::cout << " P(x(y)): " << coeffs_x << std::endl;
+        //std::cout << " P(y(x)): " << coeffs_y << std::endl;
+        std::cout << "resolution: " << res_w << " x " << res_h << std::endl;
+        //std::cout << "box: [" << x_min << "; " << y_min << "]x[" << x_max << "; "
                 // <<        y_max << "]" << std::endl;
 
         //quad_tree(x_min/15, x_max/15, y_min/15, y_max/15);
         quad_tree(x_min, x_max, y_min, y_max);
-        //Rcpp::Rcout << "exit normal" << std::endl;
+        //std::cout << "exit normal" << std::endl;
 }
 
 //! \brief checks a rectangular area with 2D range analysis: either discrads it,
@@ -290,7 +289,7 @@ void Subdivision_2<NT_, Algebraic_curve_2_>::get_range_RT_2(
         const NT& x_low, const NT& x_high, const NT& y_low, const NT& y_high,
                 int depth, int index, Affine_form& res)
 {
-        //Rcpp::Rcout << "range for [" << x_low << "; " << y_low << "]x[" <<
+        //std::cout << "range for [" << x_low << "; " << y_low << "]x[" <<
         //x_high <<
                 //"; " << y_high << "]: (" << low << "; " << high << ")" << std::endl;
         typename std::vector<Poly_2>::const_iterator der_it =
@@ -368,7 +367,7 @@ void Subdivision_2<NT_, Algebraic_curve_2_>::get_range_RT_2(
         }
 
         //res.convert(lower, upper);
-        //Rcpp::Rcout << "range for depth = " << depth << " index = " << index <<
+        //std::cout << "range for depth = " << depth << " index = " << index <<
                 //" [" << lower << "; " << upper << "]" << std::endl;
 }
 
@@ -449,7 +448,7 @@ void Subdivision_2<NT_, Algebraic_curve_2_>::get_range_AARD_1(int var,
         }
         l1 = low;
         h1 = up;
-//Rcpp::Rcout << "AARD bounds: [" << low << "; " << up << "]" << std::endl;
+//std::cout << "AARD bounds: [" << low << "; " << up << "]" << std::endl;
 }
 
 //! \brief returns whether a polynomial has zero at a given interval,
@@ -462,7 +461,7 @@ template <class NT_, class Algebraic_curve_2_>
 void Subdivision_2<NT_, Algebraic_curve_2_>::get_range_1(int var,
         const NT& lower, const NT& upper, const Poly_1& poly, NT& l, NT& h)
 {
-        //Rcpp::Rcout << "range for: [" << lower << "; " << upper << "] poly: " <<
+        //std::cout << "range for: [" << lower << "; " << upper << "] poly: " <<
                 //poly << std::endl;
         get_range_AARD_1(var, lower, upper, poly, l, h);
 }
@@ -490,7 +489,7 @@ void Subdivision_2<NT_, Algebraic_curve_2_>::precompute()
                 max_deg = degree_y;
         NT *X = new NT[max_deg];
         NT det(1.0);
-        Rcpp::Rcout << "start" << std::endl;
+        std::cout << "start" << std::endl;
         for(i = 0; i < degree_x; i++) {
                 if(i != 0)
                         det = X[0];
@@ -533,15 +532,15 @@ void Subdivision_2<NT_, Algebraic_curve_2_>::precompute()
                 }
                 idx += i;
         }
-        Rcpp::Rcout << "finished" << std::endl;
+        std::cout << "finished" << std::endl;
         polynomial_set = true;
         /*typename std::vector<Poly_2>::const_iterator der_it =
                 mixed_derivatives.end()-1;
         for(i = max_deg; i >= 0; i--)
         {
-                Rcpp::Rcout << i << "th mixed derivatives: " << std::endl;
+                std::cout << i << "th mixed derivatives: " << std::endl;
                 for(j = 0; j < i+1; j++, der_it--)
-                        Rcpp::Rcout << *der_it << std::endl;
+                        std::cout << *der_it << std::endl;
         }*/
 }
 

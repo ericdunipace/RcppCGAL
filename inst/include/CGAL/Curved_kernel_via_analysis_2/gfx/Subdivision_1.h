@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Subdivision_1.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Subdivision_1.h $
 // $Id: Subdivision_1.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -19,7 +19,6 @@
 #ifndef CGAL_CKVA_SUBDIVISION_1_H
 #define CGAL_CKVA_SUBDIVISION_1_H 1
 
-#include <Rcpp.h>
 #include <vector>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/member.hpp>
@@ -275,8 +274,8 @@ OutputIterator Subdivision_1<Coeff_, Algebraic_curve_2_>::draw(
 {
     if(!initialized||!polynomial_set)
         return oi;
-    //Rcpp::Rcout << "resolution: " << res_w << " x " << res_h << std::endl;
-    //Rcpp::Rcout << "box: [" << x_min << "; " << y_min << "]x[" << x_max << "; "
+    //std::cout << "resolution: " << res_w << " x " << res_h << std::endl;
+    //std::cout << "box: [" << x_min << "; " << y_min << "]x[" << x_max << "; "
         // <<   y_max << "]" << std::endl;
 
     Isolated_points points;
@@ -294,7 +293,7 @@ OutputIterator Subdivision_1<Coeff_, Algebraic_curve_2_>::draw(
 
         typename Isolated_points::iterator it = points.begin();
         while(it != points.end()) {
-        //          Rcpp::Rcout << "(" << x << "; " << y << ")  ";
+        //          std::cout << "(" << x << "; " << y << ")  ";
             y = engine.res_h - (int)floor((*it).left);
             //if((*it).sign_change)
                 //painter->drawPoint(x, y);
@@ -318,7 +317,7 @@ OutputIterator Subdivision_1<Coeff_, Algebraic_curve_2_>::draw(
 
         typename Isolated_points::iterator it = points.begin();
         while(it != points.end()) {
-        //          Rcpp::Rcout << "(" << x << "; " << y << ")  ";
+        //          std::cout << "(" << x << "; " << y << ")  ";
             x = (int)floor((*it).left);
             *oi++ = std::make_pair(x, engine.res_h - y);
 
@@ -329,7 +328,7 @@ OutputIterator Subdivision_1<Coeff_, Algebraic_curve_2_>::draw(
             it++;
         }
     }
-    //Rcpp::Rcout << "exit normal" << std::endl;
+    //std::cout << "exit normal" << std::endl;
     return oi;
 }
 
@@ -351,7 +350,7 @@ void Subdivision_1<Coeff_, Algebraic_curve_2_>::refine_points(int var,
             else if(eval_r==0)
                 (*it).left = (*it).right = r;*/
             (*it).sign_change = false;
-            //Rcpp::Rcout << "no sign change\n";
+            //std::cout << "no sign change\n";
             it++;
             continue;
         }
@@ -384,7 +383,7 @@ bool Subdivision_1<Coeff_, Algebraic_curve_2_>::isolate_recursive
         return false;
 
     if(!engine.first_der) {
-        //Rcpp::Rcout << "interval found: " << (x_end - x_beg) << std::endl;
+        //std::cout << "interval found: " << (x_end - x_beg) << std::endl;
         points.push_back(Isolated_point(beg, end));
         return true;
     }
@@ -392,7 +391,7 @@ bool Subdivision_1<Coeff_, Algebraic_curve_2_>::isolate_recursive
     NT dist = NT(1)/NT(SoX_REFINE_ISOLATED_POINTS);
     make_exact(dist);
     if(end - beg < dist) {// pixel size is reached
-        //Rcpp::Rcout << "WARNING: roots are too close..\n";
+        //std::cout << "WARNING: roots are too close..\n";
 
         // in this case we should generate an exception..
         points.push_back(Isolated_point(beg, end));

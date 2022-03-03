@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/smooth_mesh.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/smooth_mesh.h $
 // $Id: smooth_mesh.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_SMOOTH_MESH_H
 #define CGAL_POLYGON_MESH_PROCESSING_SMOOTH_MESH_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/Polygon_mesh_processing/internal/Smoothing/mesh_smoothing_impl.h>
@@ -195,13 +194,13 @@ void smooth_mesh(const FaceRange& faces,
   bool use_area_smoothing = choose_parameter(get_parameter(np, internal_np::use_area_smoothing), true);
 
 #ifndef CGAL_PMP_USE_CERES_SOLVER
-  Rcpp::Rcerr << "Area-based smoothing requires the Ceres Library, which is not available." << std::endl;
-  Rcpp::Rcerr << "No such smoothing will be performed!" << std::endl;
+  std::cerr << "Area-based smoothing requires the Ceres Library, which is not available." << std::endl;
+  std::cerr << "No such smoothing will be performed!" << std::endl;
   use_area_smoothing = false;
 #endif
 
   if(!use_angle_smoothing && !use_area_smoothing)
-    Rcpp::Rcerr << "Called PMP::smooth_mesh() without any smoothing method selected or available" << std::endl;
+    std::cerr << "Called PMP::smooth_mesh() without any smoothing method selected or available" << std::endl;
 
   unsigned int nb_iterations = choose_parameter(get_parameter(np, internal_np::number_of_iterations), 1);
   const bool do_project = choose_parameter(get_parameter(np, internal_np::do_project), true);
@@ -272,13 +271,13 @@ void smooth_mesh(const FaceRange& faces,
   for(unsigned int i=0; i<nb_iterations; ++i)
   {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-    Rcpp::Rcout << "Iteration #" << i << std::endl;
+    std::cout << "Iteration #" << i << std::endl;
 #endif
 
     if(use_area_smoothing)
     {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-      Rcpp::Rcout << "Smooth areas..." << std::endl;
+      std::cout << "Smooth areas..." << std::endl;
 #endif
 
       // First apply area smoothing...
@@ -290,7 +289,7 @@ void smooth_mesh(const FaceRange& faces,
         if(use_safety_constraints && does_self_intersect(tmesh))
         {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-          Rcpp::Rcerr << "Cannot re-project as there are self-intersections in the mesh!\n";
+          std::cerr << "Cannot re-project as there are self-intersections in the mesh!\n";
 #endif
           break;
         }
@@ -306,7 +305,7 @@ void smooth_mesh(const FaceRange& faces,
     if(use_angle_smoothing)
     {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-      Rcpp::Rcout << "Smooth angles..." << std::endl;
+      std::cout << "Smooth angles..." << std::endl;
 #endif
 
       angle_smoother.optimize(use_safety_constraints /*check for bad faces*/,
@@ -318,7 +317,7 @@ void smooth_mesh(const FaceRange& faces,
         if(use_safety_constraints && does_self_intersect(tmesh))
         {
 #ifdef CGAL_PMP_SMOOTHING_DEBUG
-          Rcpp::Rcerr << "Can't do re-projection, there are self-intersections in the mesh!\n";
+          std::cerr << "Can't do re-projection, there are self-intersections in the mesh!\n";
 #endif
           break;
         }

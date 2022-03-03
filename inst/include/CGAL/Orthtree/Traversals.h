@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Orthtree/include/CGAL/Orthtree/Traversals.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Orthtree/include/CGAL/Orthtree/Traversals.h $
 // $Id: Traversals.h 4d761ed 2021-04-01T14:21:01+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_ORTHTREE_TRAVERSALS_H
 #define CGAL_ORTHTREE_TRAVERSALS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Orthtree.h>
 
 #include <iostream>
@@ -236,7 +235,7 @@ public:
 
   template <typename Node>
   Node next(Node n) const {
-    Rcpp::Rcerr << depth << " ";
+    std::cerr << depth << " ";
     Node next = next_sibling(n);
 
     if (next.is_null())

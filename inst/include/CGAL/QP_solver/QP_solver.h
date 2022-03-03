@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/QP_solver/include/CGAL/QP_solver/QP_solver.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/QP_solver/include/CGAL/QP_solver/QP_solver.h $
 // $Id: QP_solver.h a91f023 2021-01-29T10:05:48+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_QP_SOLVER_H
 #define CGAL_QP_SOLVER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/QP_solver.h>
 
 #include <CGAL/disable_warnings.h>
@@ -709,7 +708,7 @@ private:
   void  set_pricing_strategy ( Quadratic_program_pricing_strategy strategy);
 
   // diagnostic output
-  void  set_verbosity( int verbose = 0, std::ostream& stream = Rcpp::Rcout);
+  void  set_verbosity( int verbose = 0, std::ostream& stream = std::cout);
 
 
 public:

@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/IO/File_medit.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/IO/File_medit.h $
 // $Id: File_medit.h 70058db 2021-05-03T15:30:52+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_IO_FILE_MEDIT_H
 #define CGAL_IO_FILE_MEDIT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Mesh_3/config.h>
@@ -94,17 +93,17 @@ public:
     }
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-    Rcpp::Rcerr << "Nb of subdomains: " << subdomain_map_.size() << "\n";
-    Rcpp::Rcerr << "Subdomain mapping:\n\t" ;
+    std::cerr << "Nb of subdomains: " << subdomain_map_.size() << "\n";
+    std::cerr << "Subdomain mapping:\n\t" ;
 
     typedef typename Subdomain_map::iterator Subdomain_map_iterator;
     for ( Subdomain_map_iterator sub_it = subdomain_map_.begin() ;
           sub_it != subdomain_map_.end() ;
           ++sub_it )
     {
-      Rcpp::Rcerr << "[" << (*sub_it).first << ":" << (*sub_it).second << "] ";
+      std::cerr << "[" << (*sub_it).first << ":" << (*sub_it).second << "] ";
     }
-    Rcpp::Rcerr << "\n";
+    std::cerr << "\n";
 #endif
   }
 
@@ -255,18 +254,18 @@ public:
     }
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-    Rcpp::Rcerr << "Nb of surface patches: " << surface_map_.size() << "\n";
-    Rcpp::Rcerr << "Surface mapping:\n\t" ;
+    std::cerr << "Nb of surface patches: " << surface_map_.size() << "\n";
+    std::cerr << "Surface mapping:\n\t" ;
 
     typedef typename Surface_map::iterator Surface_map_iterator;
     for ( Surface_map_iterator surf_it = surface_map_.begin() ;
          surf_it != surface_map_.end() ;
          ++surf_it )
     {
-      Rcpp::Rcerr << "[" << (*surf_it).first
+      std::cerr << "[" << (*surf_it).first
       << ":" << (*surf_it).second << "] ";
     }
-    Rcpp::Rcerr << "\n";
+    std::cerr << "\n";
 #endif
   }
 
@@ -707,7 +706,7 @@ output_to_medit(std::ostream& os,
                 const C3T3& c3t3)
 {
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  Rcpp::Rcerr << "Output to medit:\n";
+  std::cerr << "Output to medit:\n";
 #endif
 
   typedef Medit_pmap_generator<C3T3,rebind,no_patch> Generator;
@@ -730,7 +729,7 @@ output_to_medit(std::ostream& os,
                   Generator().print_twice());
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  Rcpp::Rcerr << "done.\n";
+  std::cerr << "done.\n";
 #endif
 }
 

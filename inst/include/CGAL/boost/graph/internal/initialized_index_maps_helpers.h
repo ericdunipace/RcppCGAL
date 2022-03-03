@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/internal/initialized_index_maps_helpers.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/internal/initialized_index_maps_helpers.h $
 // $Id: initialized_index_maps_helpers.h 87bb4d1 2020-07-07T16:04:09+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_BOOST_GRAPH_INITIALIZED_INTERNAL_INDEX_MAPS_HELPERS
 #define CGAL_BOOST_GRAPH_INITIALIZED_INTERNAL_INDEX_MAPS_HELPERS
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 #include <CGAL/boost/graph/Named_function_parameters.h>
 #include <CGAL/boost/graph/properties.h>
@@ -48,7 +47,7 @@ bool is_index_map_valid(IndexMap idmap,
     else
     {
 #ifdef CGAL_BGL_INDEX_MAP_DEBUG
-      Rcpp::Rcerr << "Invalid ID: " << id << " num_simplices: " << num_simplices << std::endl;
+      std::cerr << "Invalid ID: " << id << " num_simplices: " << num_simplices << std::endl;
 #endif
       return false;
     }
@@ -241,7 +240,7 @@ get_initialized_dynamic_index_map(DynamicIndexMap index_map,
                                   const Graph& g)
 {
 #ifdef CGAL_PERFORMANCE_WARNINGS
-  Rcpp::Rcerr << "Warning: the automatically selected index map is a dynamic property map,"
+  std::cerr << "Warning: the automatically selected index map is a dynamic property map,"
             << " which might not have constant-time access complexity." << std::endl;
 #endif
 

@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/RS/rs3_refiner_1.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/RS/rs3_refiner_1.h $
 // $Id: rs3_refiner_1.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -11,7 +11,6 @@
 #ifndef CGAL_RS_RS3_REFINER_1_H
 #define CGAL_RS_RS3_REFINER_1_H
 
-#include <Rcpp.h>
 #include <CGAL/Polynomial_traits_d.h>
 #include "rs2_calls.h"
 #include <rs3_fncts.h>
@@ -56,7 +55,7 @@ operator()
         CGAL::Sign sl=signof(left);
         CGAL_precondition(sl!=signof(right)||(left==right&&sl==ZERO));
 #endif
-        //Rcpp::Rcout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
+        //std::cout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
         int deg=Degree()(pol);
         mpz_t* coefficients=(mpz_t*)malloc((deg+1)*sizeof(mpz_t));
         __mpfi_struct interval;
@@ -94,7 +93,7 @@ operator()
                              mpfr_get_prec(&interval.right),
                              mpfr_custom_get_mantissa(&interval.right));
         CGAL_postcondition(left<=right);
-        //Rcpp::Rcout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
+        //std::cout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
         return;
 }
 
@@ -112,7 +111,7 @@ operator()
         typedef CGAL::RS_AK1::Signat_1<ZPolynomial,Gmpfr>
                                                         Signat;
 #endif
-        //Rcpp::Rcout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
+        //std::cout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
         // Construct a Gmpz polynomial from the original Gmpq polynomial.
         Polynomial<Gmpz> zpol=CGAL::RS_AK1::Polynomial_converter_1<
                                         CGAL::Polynomial<Gmpq>,
@@ -160,7 +159,7 @@ operator()
                              mpfr_get_prec(&interval.right),
                              mpfr_custom_get_mantissa(&interval.right));
         CGAL_postcondition(left<=right);
-        //Rcpp::Rcout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
+        //std::cout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
         return;
 }
 

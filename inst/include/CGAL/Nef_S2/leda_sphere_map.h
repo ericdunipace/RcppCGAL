@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_S2/include/CGAL/Nef_S2/leda_sphere_map.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_S2/include/CGAL/Nef_S2/leda_sphere_map.h $
 // $Id: leda_sphere_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_LEDA_SPHERE_MAP_H
 #define CGAL_LEDA_SPHERE_MAP_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 
@@ -134,11 +133,11 @@ typedef CGAL::generic_sweep<NHS_traits> Negative_halfsphere_sweep;
   typedef typename PHS_traits::INPUT Input_range;
   Positive_halfsphere_sweep SP(Input_range(Lp.begin(),Lp.end()),O);
   SP.sweep();
-  CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(Rcpp::Rcerr),""));
+  CGAL_NEF_TRACEN("POS SWEEP\n"<<(dump(std::cerr),""));
   v1=G.first_node(); v2=G.last_node();
   Negative_halfsphere_sweep SM(Input_range(Lm.begin(),Lm.end()),O);
   SM.sweep();
-  CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(Rcpp::Rcerr),""));
+  CGAL_NEF_TRACEN("NEG SWEEP\n"<<(dump(std::cerr),""));
   v2 = G.succ_node(v2);
   // now two CCs of sphere graph calculated
   // v1 = first node of CC in positive xy-sphere

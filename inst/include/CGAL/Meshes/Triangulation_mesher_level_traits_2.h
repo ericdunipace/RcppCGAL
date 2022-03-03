@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesher_level/include/CGAL/Meshes/Triangulation_mesher_level_traits_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesher_level/include/CGAL/Meshes/Triangulation_mesher_level_traits_2.h $
 // $Id: Triangulation_mesher_level_traits_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_2_H
 #define CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_2_H
 
-#include <Rcpp.h>
 #include <list>
 #include <CGAL/Mesher_level.h>
 
@@ -56,7 +55,7 @@ struct Triangulation_mesher_level_traits_2 :
   Vertex_handle insert_impl(const Point& p, Zone& zone)
   {
 #ifdef CGAL_MESH_2_DEBUG_INSERTIONS
-    Rcpp::Rcerr << "insert(" << p << "): "
+    std::cerr << "insert(" << p << "): "
               << zone.boundary_edges.size() << " edges." << std::endl;
 #endif
     if( zone.locate_type == Tr::VERTEX )

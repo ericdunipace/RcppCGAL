@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/refine_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/refine_impl.h $
 // $Id: refine_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REFINE_POLYHEDRON_3_H
 #define CGAL_POLYGON_MESH_PROCESSING_REFINE_POLYHEDRON_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 
@@ -163,7 +162,7 @@ private:
     collect_interior_edges(new_faces, border_edges, interior_edges, included_map);
 
     #ifdef CGAL_PMP_REFINE_DEBUG
-    Rcpp::Rcerr << "Test " << interior_edges.size() << " edges " << std::endl;
+    std::cerr << "Test " << interior_edges.size() << " edges " << std::endl;
     #endif
     //do not just use std::set (included_map) for iteration, the order effects the output (we like to make it deterministic)
     for(halfedge_descriptor h : interior_edges)
@@ -174,7 +173,7 @@ private:
     }
 
     #ifdef CGAL_PMP_REFINE_DEBUG
-    Rcpp::Rcerr  << "|flips| = " << flips << std::endl;
+    std::cerr  << "|flips| = " << flips << std::endl;
     #endif
     return flips > 0;
   }
@@ -317,14 +316,14 @@ public:
       #endif
       bool is_subdivided = subdivide(all_faces, border_edges, scale_attribute, vertex_out, facet_out, new_faces, alpha);
       #ifdef CGAL_PMP_REFINE_DEBUG
-      Rcpp::Rcerr  << "**Timer** subdivide() :" << timer.time() << std::endl; timer.reset();
+      std::cerr  << "**Timer** subdivide() :" << timer.time() << std::endl; timer.reset();
       #endif
       if(!is_subdivided)
         break;
 
       bool is_relaxed = relax(faces, new_faces, border_edges);
       #ifdef CGAL_PMP_REFINE_DEBUG
-      Rcpp::Rcerr << "**Timer** relax() :" << timer.time() << std::endl;
+      std::cerr << "**Timer** relax() :" << timer.time() << std::endl;
       #endif
       if(!is_relaxed)
         break;
@@ -332,7 +331,7 @@ public:
     }
 
     #ifdef CGAL_PMP_REFINE_DEBUG
-    Rcpp::Rcerr << "**Timer** TOTAL: " << total_timer.time() << std::endl;
+    std::cerr << "**Timer** TOTAL: " << total_timer.time() << std::endl;
     #endif
   }
 

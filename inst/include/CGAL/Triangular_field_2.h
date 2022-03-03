@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_lines_2/include/CGAL/Triangular_field_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_lines_2/include/CGAL/Triangular_field_2.h $
 // $Id: Triangular_field_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_TRIANGULAR_FIELD_2_H_
 #define CGAL_TRIANGULAR_FIELD_2_H_
 
-#include <Rcpp.h>
 #include <CGAL/license/Stream_lines_2.h>
 
 
@@ -61,7 +60,7 @@ protected:
   template <class PointInputIterator, class VectorInputIterator>
   void fill(PointInputIterator pBegin, PointInputIterator pEnd, VectorInputIterator vBegin)
     {
-      Rcpp::Rcout << "reading file...\n";
+      std::cout << "reading file...\n";
       while(pBegin != pEnd)
         {
           Point_2 p;
@@ -94,7 +93,7 @@ protected:
           ++pBegin;
           ++vBegin;
         }
-      Rcpp::Rcout << "number of samples " << m_D_Ttr.number_of_vertices() << "\n";
+      std::cout << "number of samples " << m_D_Ttr.number_of_vertices() << "\n";
     }
 public:
   template <class PointInputIterator, class VectorInputIterator>

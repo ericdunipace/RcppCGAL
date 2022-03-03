@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/make_mesh_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/make_mesh_3.h $
 // $Id: make_mesh_3.h 3e03d50 2021-05-05T15:32:22+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_MAKE_MESH_3_H
 #define CGAL_MAKE_MESH_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -271,7 +270,7 @@ struct C3t3_initializer < C3T3, MD, MC, false, HasFeatures >
   {
     if ( with_features )
     {
-      Rcpp::Rcerr << "Warning: you requested a mesh with features from a domain"
+      std::cerr << "Warning: you requested a mesh with features from a domain"
                 << " without features !" << std::endl;
     }
 
@@ -353,7 +352,7 @@ struct C3t3_initializer < C3T3, MD, MC, true, CGAL::Tag_false >
   {
     if ( with_features )
     {
-      Rcpp::Rcerr << "Warning: you requested a mesh with features from a domain"
+      std::cerr << "Warning: you requested a mesh with features from a domain"
                 << " without features !" << std::endl;
     }
 

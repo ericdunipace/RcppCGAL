@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Concurrent_mesher_config.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Concurrent_mesher_config.h $
 // $Id: Concurrent_mesher_config.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_MESH_3_CONCURRENT_MESHER_CONFIG_H
 #define CGAL_MESH_3_CONCURRENT_MESHER_CONFIG_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -121,7 +120,7 @@ protected:
     }
     catch (std::exception &e)
     {
-      Rcpp::Rcerr << "Concurrency configuration file error: "
+      std::cerr << "Concurrency configuration file error: "
         << e.what() << std::endl;
       return false;
     }
@@ -148,7 +147,7 @@ protected:
     m_config_file_loaded = true;
 
 #else // CGAL_USE_BOOST_PROGRAM_OPTIONS not defined
-    Rcpp::Rcerr << "Warning: could not load concurrency configuration file '"
+    std::cerr << "Warning: could not load concurrency configuration file '"
       << filename << "'. Default values will be used."
       << std::endl;
 #endif // CGAL_USE_BOOST_PROGRAM_OPTIONS

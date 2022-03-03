@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Hash_map/include/CGAL/Tools/chained_map.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Hash_map/include/CGAL/Tools/chained_map.h $
 // $Id: chained_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_CHAINED_MAP_H
 #define CGAL_CHAINED_MAP_H
 
-#include <Rcpp.h>
 #include <CGAL/memory.h>
 #include <iostream>
 
@@ -366,16 +365,16 @@ chained_map<T, Allocator>::next_item(chained_map_item it) const
 
 template <typename T, typename Allocator>
 void chained_map<T, Allocator>::statistics() const
-{ Rcpp::Rcout << "table_size: " << table_size <<"\n";
+{ std::cout << "table_size: " << table_size <<"\n";
   std::size_t n = 0;
   for (chained_map_item p = table + 1; p < table + table_size; p++)
      if (p ->k != nullptrKEY) n++;
   std::size_t used_in_overflow = free - (table + table_size );
   n += used_in_overflow;
-  Rcpp::Rcout << "number of entries: " << n << "\n";
-  Rcpp::Rcout << "fraction of entries in first position: " <<
+  std::cout << "number of entries: " << n << "\n";
+  std::cout << "fraction of entries in first position: " <<
                ((double) (n - used_in_overflow))/n <<"\n";
-  Rcpp::Rcout << "fraction of empty lists: " <<
+  std::cout << "fraction of empty lists: " <<
                ((double) (n - used_in_overflow))/table_size<<"\n";
 }
 

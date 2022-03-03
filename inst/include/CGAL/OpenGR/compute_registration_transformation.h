@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/OpenGR/compute_registration_transformation.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/OpenGR/compute_registration_transformation.h $
 // $Id: compute_registration_transformation.h c253679 2020-04-18T16:27:58+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_OPENGR_COMPUTE_REGISTRATION_TRANSFORMATION_H
 #define CGAL_OPENGR_COMPUTE_REGISTRATION_TRANSFORMATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #if defined(CGAL_LINKED_WITH_OPENGR) || defined(DOXYGEN_RUNNING)
@@ -125,12 +124,12 @@ compute_registration_transformation(const PointRange1& range1,    const PointRan
     matcher.ComputeTransformation(gr_point_range_1, gr_point_range_2, mat, sampler, visitor);
 
 #ifdef CGAL_OPENGR_VERBOSE
-  Rcpp::Rcerr << "Transformation matrix: " << std::endl;
+  std::cerr << "Transformation matrix: " << std::endl;
   for (std::size_t i = 0; i < 4; ++ i)
   {
     for (std::size_t j = 0; j < 4; ++ j)
-      Rcpp::Rcerr << mat.coeff(i,j) << " ";
-    Rcpp::Rcerr << std::endl;
+      std::cerr << mat.coeff(i,j) << " ";
+    std::cerr << std::endl;
   }
 #endif
 

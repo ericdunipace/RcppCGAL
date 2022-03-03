@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Bitstream_descartes.h $
-// $Id: Bitstream_descartes.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Bitstream_descartes.h $
+// $Id: Bitstream_descartes.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_GENERIC_DESCARTES
 #define CGAL_GENERIC_DESCARTES 1
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
@@ -219,8 +218,8 @@ public:
     ++end;
     begin=curr;
     do {
-      //Rcpp::Rcout << bitstream_tree.lower(begin) << " " << bitstream_tree.upper(begin) << std::endl;
-      //Rcpp::Rcout << bitstream_tree.min_var(begin) << " " << bitstream_tree.max_var(begin) << std::endl;
+      //std::cout << bitstream_tree.lower(begin) << " " << bitstream_tree.upper(begin) << std::endl;
+      //std::cout << bitstream_tree.min_var(begin) << " " << bitstream_tree.max_var(begin) << std::endl;
       int new_intervals = bitstream_tree.subdivide(begin,new_begin,helper);
       intervals += new_intervals-1;
       begin = new_begin;
@@ -242,7 +241,7 @@ public:
 
     }
     while (intervals != 1);
-    //Rcpp::Rcout << "Refined " << left_bound(i) << " " << right_bound(i) << std::endl;
+    //std::cout << "Refined " << left_bound(i) << " " << right_bound(i) << std::endl;
 
   }
 
@@ -790,7 +789,7 @@ public:
       if(Base::bitstream_tree.max_var(curr) == 1) {
         ++curr;
         ++curr_mark;
-        //AcX_DSTREAM("nothing happend" << std::endl);
+        //AcX_DSTREAM("nothing happened" << std::endl);
       }
       else {
         newly_created =

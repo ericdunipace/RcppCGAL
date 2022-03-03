@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_2/include/CGAL/Triangulation_2/internal/Polyline_constraint_hierarchy_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_2/include/CGAL/Triangulation_2/internal/Polyline_constraint_hierarchy_2.h $
 // $Id: Polyline_constraint_hierarchy_2.h bdec436 2021-06-25T10:05:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYLINE_CONSTRAINT_HIERARCHY_2_H
 #define CGAL_POLYLINE_CONSTRAINT_HIERARCHY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_2.h>
 
 
@@ -861,7 +860,7 @@ insert_constraint(T va, T vb){
   Context_list* fathers;
 
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "C_hierachy.insert_constraint( #"
               << va->time_stamp()
               << ", #"
@@ -898,7 +897,7 @@ insert_constraint_old_API(T va, T vb){
   Context_list* fathers;
 
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "C_hierachy.insert_constraint_old_API( #"
               << va->time_stamp()
               << ", #"
@@ -933,7 +932,7 @@ append_constraint(Constraint_id cid, T va, T vb){
   Context_list* fathers;
 
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "C_hierachy.append_constraint( ..., #"
               << va->time_stamp()
               << ", #"
@@ -1052,7 +1051,7 @@ void
 Polyline_constraint_hierarchy_2<T,Compare,Point>::
 add_Steiner(T va, T vb, T vc){
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+  std::cerr << CGAL::internal::cdt_2_indent_level
             << "C_hierachy.add_Steinter( #"
               << va->time_stamp()
               << ", #"
@@ -1064,7 +1063,7 @@ add_Steiner(T va, T vb, T vc){
   Context_list* hcl=nullptr;
   if(!get_contexts(va,vb,hcl)) {
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
-      Rcpp::Rcerr << CGAL::internal::cdt_2_indent_level
+      std::cerr << CGAL::internal::cdt_2_indent_level
                 << "  -> the constraint is already split\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS
     return;
@@ -1197,7 +1196,7 @@ print() const
 //  typename std::map<T,int>::iterator vnit = vertex_num.begin();
 //  for(; vnit != vertex_num.end(); vnit++) {
 //    vnit->second = ++num;
-//    Rcpp::Rcerr << "vertex num " << num  << " " << vnit->first->point()
+//    std::cerr << "vertex num " << num  << " " << vnit->first->point()
 //              << std::endl;
 //  }
 
@@ -1205,33 +1204,33 @@ print() const
   Sc_iterator scit=sc_begin();
 
   for(; cit != c_end();  cit++){
-    Rcpp::Rcout << std::endl ;
-    Rcpp::Rcout << "constraint " ;
-    Rcpp::Rcout << cit->vl_ptr();
-    Rcpp::Rcout << "  subconstraints " ;
+    std::cout << std::endl ;
+    std::cout << "constraint " ;
+    std::cout << cit->vl_ptr();
+    std::cout << "  subconstraints " ;
     Vertex_it vit = (*cit).vl_ptr()->skip_begin(), end = (*cit).vl_ptr()->skip_end();
     for(; vit != end; vit++){
-      Rcpp::Rcout << vertex_num[*vit]  <<" ";
+      std::cout << vertex_num[*vit]  <<" ";
     }
     vit = (*cit).vl_ptr()->skip_begin(), end = (*cit).vl_ptr()->skip_end();
     for(; vit != end; vit++){
-      Rcpp::Rcout << (*vit)->point()  <<" ";
+      std::cout << (*vit)->point()  <<" ";
     }
   }
-  Rcpp::Rcout << std::endl ;
+  std::cout << std::endl ;
   for(;scit != sc_end(); scit++){
-    Rcpp::Rcout << "subconstraint " ;
-    Rcpp::Rcout << vertex_num[scit->first.first] << " "
+    std::cout << "subconstraint " ;
+    std::cout << vertex_num[scit->first.first] << " "
               << vertex_num[scit->first.second];
     Context_iterator cb, ce;
     get_contexts(scit->first.first, scit->first.second, cb, ce);
 
-    Rcpp::Rcout << "  enclosing " ;
+    std::cout << "  enclosing " ;
     for(; cb != ce; cb++) {
-      Rcpp::Rcout << cb->id().vl_ptr();
-      Rcpp::Rcout <<  "   " ;
+      std::cout << cb->id().vl_ptr();
+      std::cout <<  "   " ;
     }
-    Rcpp::Rcout << std::endl ;
+    std::cout << std::endl ;
   }
   return;
 }

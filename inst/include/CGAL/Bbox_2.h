@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Bbox_2.h $
-// $Id: Bbox_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Bbox_2.h $
+// $Id: Bbox_2.h 529add2 2021-07-07T14:37:41+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -61,6 +61,8 @@ public:
   inline double     ymin() const;
   inline double     xmax() const;
   inline double     ymax() const;
+  inline double x_span() const;
+  inline double y_span() const;
 
   inline double     max BOOST_PREVENT_MACRO_SUBSTITUTION (int i) const;
   inline double     min BOOST_PREVENT_MACRO_SUBSTITUTION (int i) const;
@@ -90,6 +92,14 @@ inline
 double
 Bbox_2::ymax() const
 { return rep[3]; }
+
+inline double Bbox_2::x_span() const {
+  return xmax() - xmin();
+}
+
+inline double Bbox_2::y_span() const {
+  return ymax() - ymin();
+}
 
 inline
 bool

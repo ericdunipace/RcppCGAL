@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_ImageIO/include/CGAL/SEP_header.h $
-// $Id: SEP_header.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_ImageIO/include/CGAL/SEP_header.h $
+// $Id: SEP_header.h ef59128 2021-12-27T11:08:34+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau
@@ -12,7 +12,6 @@
 #ifndef CGAL_SEP_HEADER_HPP
 #define CGAL_SEP_HEADER_HPP
 
-#include <Rcpp.h>
 #include <string>
 #include <map>
 #include <fstream>
@@ -23,11 +22,11 @@
 #include <boost/fusion/adapted/boost_tuple.hpp>
 #include <boost/array.hpp>
 #include <boost/spirit/include/qi.hpp>
-#include <boost/spirit/include/phoenix_core.hpp>
-#include <boost/spirit/include/phoenix_operator.hpp>
-#include <boost/spirit/include/phoenix_object.hpp>
-#include <boost/spirit/include/phoenix_stl.hpp>
-#include <boost/spirit/include/phoenix_fusion.hpp>
+#include <boost/phoenix/core.hpp>
+#include <boost/phoenix/operator.hpp>
+#include <boost/phoenix/object.hpp>
+#include <boost/phoenix/stl.hpp>
+#include <boost/phoenix/fusion.hpp>
 #include <boost/fusion/include/adapt_struct.hpp>
 
 #ifdef CGAL_SEP_READER_DEBUG
@@ -73,7 +72,7 @@ private:
 
     template <typename T>
     void operator()(const T& t) {
-      // Rcpp::Rcerr << "My assignement ("
+      // std::cerr << "My assignement ("
       //           << typeid(t).name() << "): "
       //           << key << "=" << t << std::endl;
       self->add(key, t);
@@ -120,7 +119,7 @@ public:
   SEP_header(std::string fileName) : _dim(-1) {
     std::ifstream input(fileName.c_str());
     if(!input) {
-      Rcpp::Rcerr << "Error: cannot open the header file \""
+      std::cerr << "Error: cannot open the header file \""
                 << fileName << "\"!\n";
       return;
     }
@@ -243,7 +242,7 @@ private:
       qi::on_error<qi::fail>
         (
          header,
-         Rcpp::Rcout
+         std::cout
          << val("Error! Expecting ")
          << qi::_4                               // what failed?
          << val(" here: \"")

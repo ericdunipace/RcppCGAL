@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/bounded_side_3.h $
-// $Id: bounded_side_3.h a91c0ed 2021-05-14T18:17:01+01:00 Giles Bathgate
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/bounded_side_3.h $
+// $Id: bounded_side_3.h 7cb53ab 2021-11-03T17:30:26+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,8 +38,8 @@ Bounded_side bounded_side_3(IteratorForward first,
 
   CGAL_assertion(!plane.is_degenerate());
 
-  typename R::Non_zero_dimension_3 non_zero_dimension_3;
-  int dir = non_zero_dimension_3(plane.orthogonal_vector());
+  typename R::Non_zero_coordinate_index_3 non_zero_coordinate_index_3;
+  int dir = non_zero_coordinate_index_3(plane.orthogonal_vector());
 
   if(dir == 0) {
     return bounded_side_2(first, last, point, YZ());

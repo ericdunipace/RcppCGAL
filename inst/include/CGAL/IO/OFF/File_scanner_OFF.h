@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org);
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/OFF/File_scanner_OFF.h $
-// $Id: File_scanner_OFF.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/OFF/File_scanner_OFF.h $
+// $Id: File_scanner_OFF.h 4fa136d 2022-01-17T09:06:57+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_IO_OFF_FILE_SCANNER_OFF_H
 #define CGAL_IO_OFF_FILE_SCANNER_OFF_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #include <CGAL/IO/binary_file_io.h>
@@ -118,7 +117,7 @@ public:
       {
         m_in.clear(std::ios::badbit);
         if(verbose())
-          Rcpp::Rcerr<<"error while reading vertex."<<std::endl;
+          std::cerr<<"error while reading vertex."<<std::endl;
         return;
       }
       x = entries[0];
@@ -129,7 +128,7 @@ public:
         if(entries.size() < 4){
           m_in.clear(std::ios::badbit);
           if(verbose())
-            Rcpp::Rcerr<<"error while reading vertex."<<std::endl;
+            std::cerr<<"error while reading vertex."<<std::endl;
           return;
         }
         w = entries[3];
@@ -218,7 +217,7 @@ public:
           {
             m_in.clear(std::ios::badbit);
             if(verbose())
-              Rcpp::Rcerr<<"error while reading texture."<<std::endl;
+              std::cerr<<"error while reading texture."<<std::endl;
             return;
           }
           w = entries[first_texture_index + 2];
@@ -305,7 +304,7 @@ public:
         {
           m_in.clear(std::ios::badbit);
           if(verbose())
-            Rcpp::Rcerr<<"error while reading normal."<<std::endl;
+            std::cerr<<"error while reading normal."<<std::endl;
           return;
         }
         x = entries[first_normal_index];
@@ -317,7 +316,7 @@ public:
           if(entries.size() <= first_normal_index + 3){
             m_in.clear(std::ios::badbit);
             if(verbose())
-              Rcpp::Rcerr<<"error while reading normal."<<std::endl;
+              std::cerr<<"error while reading normal."<<std::endl;
             return;
           }
           w = entries[first_normal_index + 3];
@@ -661,9 +660,9 @@ public:
           m_in.clear(std::ios::badbit);
           if(verbose())
           {
-            Rcpp::Rcerr << " " << std::endl;
-            Rcpp::Rcerr << "File_scanner_OFF::" << std::endl;
-            Rcpp::Rcerr << "skip_to_next_vertex(): input error: bad "
+            std::cerr << " " << std::endl;
+            std::cerr << "File_scanner_OFF::" << std::endl;
+            std::cerr << "skip_to_next_vertex(): input error: bad "
                          " number of color indices at vertex "
                       << current_vertex << "." << std::endl;
           }
@@ -742,7 +741,8 @@ public:
       {
         m_in.clear(std::ios::badbit);
         if(verbose())
-          Rcpp::Rcerr<<"error while reading facet. Missing index."<<std::endl;
+          std::cerr<<"error while reading facet. Missing index."<<std::endl;
+        index=0;
         return;
       }
       index = static_cast<std::size_t>(entries[current_entry]);
@@ -752,13 +752,13 @@ public:
     {
       if(verbose())
       {
-        Rcpp::Rcerr << " " << std::endl;
-        Rcpp::Rcerr << "File_scanner_OFF::" << std::endl;
-        Rcpp::Rcerr << "scan_facet_vertex_index(): input error:  "
+        std::cerr << " " << std::endl;
+        std::cerr << "File_scanner_OFF::" << std::endl;
+        std::cerr << "scan_facet_vertex_index(): input error:  "
                      "cannot read OFF file beyond facet "
                   << current_facet << "." << std::endl;
       }
-
+      index=0;
       set_off_header(false);
       return;
     }
@@ -771,14 +771,14 @@ public:
       m_in.clear(std::ios::failbit);
       if(verbose())
       {
-        Rcpp::Rcerr << " " << std::endl;
-        Rcpp::Rcerr << "File_scanner_OFF::" << std::endl;
-        Rcpp::Rcerr << "scan_facet_vertex_index(): input error: "
+        std::cerr << " " << std::endl;
+        std::cerr << "File_scanner_OFF::" << std::endl;
+        std::cerr << "scan_facet_vertex_index(): input error: "
                      "facet " << current_facet << ": vertex index "
                   << index + index_offset() << ": is out of range."
                   << std::endl;
       }
-
+      index = 0;
       set_off_header(false);
       return;
     }
@@ -796,9 +796,9 @@ public:
         m_in.clear(std::ios::badbit);
         if(verbose())
         {
-          Rcpp::Rcerr << " " << std::endl;
-          Rcpp::Rcerr << "File_scanner_OFF::" << std::endl;
-          Rcpp::Rcerr << "skip_to_next_facet(): input error: bad "
+          std::cerr << " " << std::endl;
+          std::cerr << "File_scanner_OFF::" << std::endl;
+          std::cerr << "skip_to_next_facet(): input error: bad "
                        "number of color indices at vertex "
                     << current_facet << "." << std::endl;
         }

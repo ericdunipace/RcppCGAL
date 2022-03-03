@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/polygon_mesh_to_nef_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/polygon_mesh_to_nef_3.h $
 // $Id: polygon_mesh_to_nef_3.h 45800d2 2021-03-24T15:05:22+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_POLYGON_MESH_TO_NEF_3_H
 #define CGAL_POLYGON_MESH_TO_NEF_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -101,7 +100,7 @@ struct Facet_plane_3 {
     CGAL_NEF_TRACEN( *point_cir);
     CGAL_NEF_TRACEN(internal::Plane_constructor<Plane>::get_type_plane(*point_cir, Vector( plane_orthogonal_vector)));
     if(plane_orthogonal_vector == Vector(0,0,0))
-      Rcpp::Rcerr << "Error: Normal vector cannot be (0,0,0)" << std::endl;
+      std::cerr << "Error: Normal vector cannot be (0,0,0)" << std::endl;
     return(internal::Plane_constructor<Plane>::get_type_plane( *point_cir, Vector( plane_orthogonal_vector)));
   }
 };

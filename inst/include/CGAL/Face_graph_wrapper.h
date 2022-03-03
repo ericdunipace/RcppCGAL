@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/Face_graph_wrapper.h $
-// $Id: Face_graph_wrapper.h 52186a0 2020-05-14T11:38:15+02:00 Guillaume Damiand
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Face_graph_wrapper.h $
+// $Id: Face_graph_wrapper.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -12,12 +12,11 @@
 #ifndef CGAL_FACE_GRAPH_WRAPPER_H
 #define CGAL_FACE_GRAPH_WRAPPER_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Surface_mesh_topology/internal/Functors_for_face_graph_wrapper.h>
 #include <CGAL/Surface_mesh_topology/internal/Iterators_for_face_graph_wrapper.h>
-#include <CGAL/internal/Combinatorial_map_internal_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_internal_functors.h>
 #include <CGAL/Polyhedron_3_fwd.h>
 #include <CGAL/Surface_mesh/Surface_mesh_fwd.h>
 #include <CGAL/Combinatorial_map_fwd.h>
@@ -228,9 +227,9 @@ public:
     initialize_marks();
     if (mnb_used_marks==NB_MARKS)
     {
-      Rcpp::Rcerr << "Not enough Boolean marks: "
+      std::cerr << "Not enough Boolean marks: "
         "increase NB_MARKS in item class." << std::endl;
-      Rcpp::Rcerr << "  (exception launched)" << std::endl;
+      std::cerr << "  (exception launched)" << std::endl;
       throw Exception_no_more_available_mark();
     }
 

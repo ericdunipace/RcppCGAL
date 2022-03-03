@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_dag_node.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_dag_node.h $
 // $Id: Td_dag_node.h 319383c 2020-05-20T09:47:58+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_TD_DAG_NODE_H
 #define CGAL_TD_DAG_NODE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -423,7 +422,7 @@ public:
   {
     if (!is_null())
     {
-      Rcpp::Rcout << operator*() << '\t';
+      std::cout << operator*() << '\t';
       left_child().preorder();
       right_child().preorder();
     }
@@ -434,7 +433,7 @@ public:
     if (!is_null())
     {
       left_child().inorder();
-      Rcpp::Rcout << operator*() << '\t';
+      std::cout << operator*() << '\t';
       right_child().inorder();
     }
   }
@@ -445,7 +444,7 @@ public:
     {
       left_child().postorder();
       right_child().postorder();
-      Rcpp::Rcout << operator*() << '\t';
+      std::cout << operator*() << '\t';
     }
   }
 
@@ -497,10 +496,10 @@ protected:
   {
     if (is_null())
       return 0;
-   //Rcpp::Rcout << curr_rec_depth << "," << std::flush;
+   //std::cout << curr_rec_depth << "," << std::flush;
     if ( curr_rec_depth > rec_bound + 30)
     {
-      Rcpp::Rcout << "passed " << rec_bound + 30 << ", stopping\n";
+      std::cout << "passed " << rec_bound + 30 << ", stopping\n";
       return 0;
     }
     return 1 + (std::max)(left_child().recursive_check(curr_rec_depth + 1, rec_bound),

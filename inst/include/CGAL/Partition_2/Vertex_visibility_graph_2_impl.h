@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Partition_2/include/CGAL/Partition_2/Vertex_visibility_graph_2_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Partition_2/include/CGAL/Partition_2/Vertex_visibility_graph_2_impl.h $
 // $Id: Vertex_visibility_graph_2_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -85,7 +85,7 @@ Vertex_visibility_graph_2<Traits>::initialize_vertex_map(const Polygon& polygon,
    {
       event_it = iterator_list.front();
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-      Rcpp::Rcout << "event = " << *event_it << std::endl;
+      std::cout << "event = " << *event_it << std::endl;
 #endif
       next_endpt = event_it; next_endpt++;
       if (next_endpt == polygon.end()) next_endpt = polygon.begin();
@@ -106,7 +106,7 @@ Vertex_visibility_graph_2<Traits>::initialize_vertex_map(const Polygon& polygon,
          // Find the entry for the edge's first endpoint in the vertex map.
          vis_it = vertex_map.find((*edge_it).first);
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-         Rcpp::Rcout << "the potential visibility point is " << (*vis_it).first
+         std::cout << "the potential visibility point is " << (*vis_it).first
                    << endl;
 #endif
          // an edge that ends at this event point cannot be below this
@@ -138,7 +138,7 @@ Vertex_visibility_graph_2<Traits>::initialize_vertex_map(const Polygon& polygon,
          {
             vis_it = vertex_map.find((*edge_it).first);
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-            Rcpp::Rcout << "the edge beginning at  " << *(*vis_it).second.first
+            std::cout << "the edge beginning at  " << *(*vis_it).second.first
                       << " is visible" << endl;
 #endif
             // set the visibility iterator for this point to the iterator
@@ -156,7 +156,7 @@ Vertex_visibility_graph_2<Traits>::initialize_vertex_map(const Polygon& polygon,
          }
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
          else
-            Rcpp::Rcout << "nothing is visible " << endl;
+            std::cout << "nothing is visible " << endl;
 #endif
       }
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
@@ -181,7 +181,7 @@ Vertex_visibility_graph_2<Traits>::initialize_vertex_map(const Polygon& polygon,
       {
          ordered_edges.erase(Point_pair(*event_it,*next_endpt));
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-         Rcpp::Rcout << "erasing edge from "
+         std::cout << "erasing edge from "
                    << *event_it << " to " << *next_endpt << endl;
 #endif
       }
@@ -199,7 +199,7 @@ Vertex_visibility_graph_2<Traits>::initialize_vertex_map(const Polygon& polygon,
        {
           ordered_edges.erase(Point_pair(*prev_endpt,*event_it));
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-          Rcpp::Rcout << "erasing edge from "
+          std::cout << "erasing edge from "
                     << *prev_endpt << " to " << *event_it << endl;
 #endif
        }
@@ -310,7 +310,7 @@ bool Vertex_visibility_graph_2<Traits>::point_is_visible(
 
     {
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-       Rcpp::Rcout << "looker sees point" << std::endl;
+       std::cout << "looker sees point" << std::endl;
 #endif
        return true;
     }
@@ -425,7 +425,7 @@ void Vertex_visibility_graph_2<Traits>::update_visibility(
                                                       int are_adjacent)
 {
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-      Rcpp::Rcout << "updating visibility:  " << std::endl;
+      std::cout << "updating visibility:  " << std::endl;
 #endif
    Polygon_const_iterator prev_q;
    Polygon_const_iterator turn_q;
@@ -447,7 +447,7 @@ void Vertex_visibility_graph_2<Traits>::update_visibility(
       turn_q = prev_q;
 
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-   Rcpp::Rcout << "prev_q = " << *prev_q  << " turn_q = " << *turn_q
+   std::cout << "prev_q = " << *prev_q  << " turn_q = " << *turn_q
              << std::endl;
 #endif
 
@@ -457,7 +457,7 @@ void Vertex_visibility_graph_2<Traits>::update_visibility(
       {
          (*p_it).second.second = (*q_it).second.second; // p sees what q sees
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-         Rcpp::Rcout << "adjacent with right turn; p now sees what q sees"
+         std::cout << "adjacent with right turn; p now sees what q sees"
                    << std::endl;
 #endif
       }
@@ -465,7 +465,7 @@ void Vertex_visibility_graph_2<Traits>::update_visibility(
       {
          (*p_it).second.second = (*q_it).second.first;  // p sees q
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-         Rcpp::Rcout << "adjacent and NOT right turn; p now sees q "
+         std::cout << "adjacent and NOT right turn; p now sees q "
                    << std::endl;
 #endif
       }
@@ -481,7 +481,7 @@ void Vertex_visibility_graph_2<Traits>::update_visibility(
       if (turn_q == polygon.end()) turn_q = polygon.begin();
 
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-      Rcpp::Rcout << "prev_q = " << *prev_q  << " turn_q = " << *turn_q
+      std::cout << "prev_q = " << *prev_q  << " turn_q = " << *turn_q
                 << std::endl;
 #endif
       // q sees nothing or there is not a right turn to the point after q
@@ -490,7 +490,7 @@ void Vertex_visibility_graph_2<Traits>::update_visibility(
       {
          (*p_it).second.second = (*q_it).second.first; // p sees q
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-         Rcpp::Rcout << "p sees q's segment, q sees nothing and not right to "
+         std::cout << "p sees q's segment, q sees nothing and not right to "
                    << " next point; p sees q " << std::endl;
 #endif
       }
@@ -498,7 +498,7 @@ void Vertex_visibility_graph_2<Traits>::update_visibility(
       {
          (*p_it).second.second = (*q_it).second.second; // p sees what q sees
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-         Rcpp::Rcout << "p sees q's segment, q sees something;"
+         std::cout << "p sees q's segment, q sees something;"
                    << " p sees what q sees" << std::endl;
 #endif
       }
@@ -562,7 +562,7 @@ void Vertex_visibility_graph_2<Traits>::update_visibility(
    {
       (*p_it).second.second = (*q_it).second.first;
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-      Rcpp::Rcout << "p sees nothing; p sees what q sees" << std::endl;
+      std::cout << "p sees nothing; p sees what q sees" << std::endl;
 #endif
    }
 }
@@ -574,7 +574,7 @@ void Vertex_visibility_graph_2<Traits>::update_collinear_visibility(
                                                     const Polygon& polygon)
 {
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-   Rcpp::Rcout << "updating collinear visibility" << std::endl;
+   std::cout << "updating collinear visibility" << std::endl;
 #endif
    Polygon_const_iterator prev_q;
    if ((*q_it).second.first == polygon.begin())
@@ -588,7 +588,7 @@ void Vertex_visibility_graph_2<Traits>::update_collinear_visibility(
    if (next_q == polygon.end()) next_q = polygon.begin();
 
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-   Rcpp::Rcout << "q's neighbors are: prev " << *prev_q
+   std::cout << "q's neighbors are: prev " << *prev_q
              << " q " << (*q_it).first
              << " next " << *next_q << std::endl;
 #endif
@@ -621,7 +621,7 @@ void Vertex_visibility_graph_2<Traits>::handle(Tree_iterator p,
                                         Vertex_map& vertex_map)
 {
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-      Rcpp::Rcout << "Handling edge from " << (*p).x() << " " << (*p).y()
+      std::cout << "Handling edge from " << (*p).x() << " " << (*p).y()
                 << " to " << (*q).x() << " " << (*q).y() << std::endl;
 #endif
    Vertex_map_iterator p_it = vertex_map.find(*p);
@@ -629,11 +629,11 @@ void Vertex_visibility_graph_2<Traits>::handle(Tree_iterator p,
    CGAL_assertion (p_it != vertex_map.end());
    CGAL_assertion (q_it != vertex_map.end());
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-   Rcpp::Rcout << "p currently sees : ";
+   std::cout << "p currently sees : ";
    if ((*p_it).second.second != polygon.end())
-      Rcpp::Rcout << *((*p_it).second.second) << endl;
+      std::cout << *((*p_it).second.second) << endl;
    else
-      Rcpp::Rcout << " NADA" << endl;
+      std::cout << " NADA" << endl;
 #endif
 
    // if p and q are adjacent
@@ -690,11 +690,11 @@ void Vertex_visibility_graph_2<Traits>::handle(Tree_iterator p,
       }
    }
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-   Rcpp::Rcout << "p now sees : ";
+   std::cout << "p now sees : ";
    if ((*p_it).second.second != polygon.end())
-      Rcpp::Rcout << *((*p_it).second.second) << endl;
+      std::cout << *((*p_it).second.second) << endl;
    else
-      Rcpp::Rcout << " NADA" << endl;
+      std::cout << " NADA" << endl;
 #endif
 }
 

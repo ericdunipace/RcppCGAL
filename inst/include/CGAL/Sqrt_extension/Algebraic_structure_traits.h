@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Number_types/include/CGAL/Sqrt_extension/Algebraic_structure_traits.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Number_types/include/CGAL/Sqrt_extension/Algebraic_structure_traits.h $
 // $Id: Algebraic_structure_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_SQRT_EXTENSION_ALGEBRAIC_STRUCTURE_TRAITS_H
 #define CGAL_SQRT_EXTENSION_ALGEBRAIC_STRUCTURE_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 namespace CGAL {
@@ -81,11 +80,11 @@ public:
     BOOL operator()( const Type& x, const Type& y, Type& q) const {
       Divides_coeff divides;
 
-//            Rcpp::Rcout<<"integral domain for sqrt"<<std::endl;
+//            std::cout<<"integral domain for sqrt"<<std::endl;
       BOOL result;
       COEFF q1, q2;
       if(x.is_extended()){
-//                Rcpp::Rcout<<" y is extended "<<std::endl;
+//                std::cout<<" y is extended "<<std::endl;
         COEFF denom = x.a0()*x.a0() - x.a1()*x.a1() * Root_nt_cast()(x.root());
         if ( denom == COEFF(0) ) {
           // this is for the rare case in which root is a square
@@ -105,7 +104,7 @@ public:
           q =  Type( q1, q2, y.root());
         }
       }else{
-//                Rcpp::Rcout<<" x is not extended "<<std::endl;
+//                std::cout<<" x is not extended "<<std::endl;
         if(y.is_extended()){
           result = divides(x.a0(),y.a0(),q1);
           if(!result) return false;

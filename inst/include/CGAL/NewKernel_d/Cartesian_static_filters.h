@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/NewKernel_d/include/CGAL/NewKernel_d/Cartesian_static_filters.h $
-// $Id: Cartesian_static_filters.h ece8478 2020-12-31T16:23:31+01:00 Marc Glisse
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/NewKernel_d/include/CGAL/NewKernel_d/Cartesian_static_filters.h $
+// $Id: Cartesian_static_filters.h 5945e48 2021-09-17T08:14:06+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -13,9 +13,9 @@
 #define CGAL_KD_CARTESIAN_STATIC_FILTERS_H
 #include <CGAL/NewKernel_d/functor_tags.h>
 #include <CGAL/Dimension.h>
-#include <CGAL/internal/Static_filters/tools.h> // bug, should be included by the next one
-#include <CGAL/internal/Static_filters/Orientation_2.h>
-#include <CGAL/internal/Static_filters/Side_of_oriented_circle_2.h>
+#include <CGAL/Filtered_kernel/internal/Static_filters/tools.h> // bug, should be included by the next one
+#include <CGAL/Filtered_kernel/internal/Static_filters/Orientation_2.h>
+#include <CGAL/Filtered_kernel/internal/Static_filters/Side_of_oriented_circle_2.h>
 #include <boost/mpl/if.hpp>
 
 namespace CGAL {

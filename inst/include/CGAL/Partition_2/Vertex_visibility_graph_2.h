@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Partition_2/include/CGAL/Partition_2/Vertex_visibility_graph_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Partition_2/include/CGAL/Partition_2/Vertex_visibility_graph_2.h $
 // $Id: Vertex_visibility_graph_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -50,7 +50,6 @@
 #ifndef  CGAL_VERTEX_VISIBILITY_GRAPH_2_H
 #define  CGAL_VERTEX_VISIBILITY_GRAPH_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 #include <CGAL/Partition_2/Rotation_tree_2.h>
@@ -150,45 +149,45 @@ public:
          p = stack.top();
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
          if (p != tree.end())
-            Rcpp::Rcout << "p = " << *p << std::endl;
+            std::cout << "p = " << *p << std::endl;
          else
-            Rcpp::Rcout << "p == nullptr" << std::endl;
+            std::cout << "p == nullptr" << std::endl;
 #endif
          stack.pop();
          p_r = tree.right_sibling(p);
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
          if (p_r != tree.end())
-            Rcpp::Rcout << "p_r = " << *p_r << std::endl;
+            std::cout << "p_r = " << *p_r << std::endl;
          else
-            Rcpp::Rcout << "p_r == nullptr" << std::endl;
+            std::cout << "p_r == nullptr" << std::endl;
 #endif
          q = tree.parent(p);
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
          if (q != tree.end())
-            Rcpp::Rcout << "q = " << *q << std::endl;
+            std::cout << "q = " << *q << std::endl;
          else
-            Rcpp::Rcout << "q == nullptr" << std::endl;
+            std::cout << "q == nullptr" << std::endl;
 #endif
          if (!tree.parent_is_p_minus_infinity(p))
          {
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-            Rcpp::Rcout << "q is not p_minus_infinity" << std::endl;
+            std::cout << "q is not p_minus_infinity" << std::endl;
 #endif
             handle(p,q,polygon,vertex_map);
          }
          z = tree.left_sibling(q);
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
          if (z != tree.end())
-            Rcpp::Rcout << "z = " << *z << std::endl;
+            std::cout << "z = " << *z << std::endl;
          else
-            Rcpp::Rcout << "z == nullptr" << std::endl;
-         Rcpp::Rcout << "erasing " << *p << " from tree " << std::endl;
+            std::cout << "z == nullptr" << std::endl;
+         std::cout << "erasing " << *p << " from tree " << std::endl;
 #endif
          tree.erase(p);
          if ((z == tree.end()) || !left_turn_to_parent(p,z,tree))
          {
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-            Rcpp::Rcout << "making " << *p << " the left sibling of " << *q
+            std::cout << "making " << *p << " the left sibling of " << *q
                       << std::endl;
 #endif
             tree.set_left_sibling(p,q);
@@ -204,14 +203,14 @@ public:
             {
                z = tree.rightmost_child(z);
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-               Rcpp::Rcout << "    z = " << *z << std::endl;
+               std::cout << "    z = " << *z << std::endl;
 #endif
             }
             tree.set_rightmost_child(p,z);
             if (!stack.empty() && z == stack.top())
             {
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-               Rcpp::Rcout << "popping " << *z << " from top of stack "
+               std::cout << "popping " << *z << " from top of stack "
                          << std::endl;
 #endif
                z = stack.top();
@@ -219,13 +218,13 @@ public:
             }
          }
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-         Rcpp::Rcout << " p is now " << *p << std::endl;
+         std::cout << " p is now " << *p << std::endl;
 #endif
          if (tree.left_sibling(p) == tree.end() &&
              !tree.parent_is_p_infinity(p))
          {
 #ifdef CGAL_VISIBILITY_GRAPH_DEBUG
-            Rcpp::Rcout << "pushing " << *p << std::endl;
+            std::cout << "pushing " << *p << std::endl;
 #endif
             stack.push(p);
          }
@@ -312,7 +311,7 @@ private:
       for (const_iterator it = vertex_map.begin(); it != vertex_map.end();it++)
       {
          if ((*it).second.second != polygon.end())
-         Rcpp::Rcout << (*it).first << " sees " << *((*it).second.second)
+         std::cout << (*it).first << " sees " << *((*it).second.second)
                    << std::endl;
       }
    }
@@ -323,7 +322,7 @@ private:
       typedef typename E::iterator   iterator;
       for (iterator it = edges.begin(); it != edges.end(); it++)
       {
-         Rcpp::Rcout << (*it).first << " " << (*it).second << std::endl;
+         std::cout << (*it).first << " " << (*it).second << std::endl;
       }
    }
 

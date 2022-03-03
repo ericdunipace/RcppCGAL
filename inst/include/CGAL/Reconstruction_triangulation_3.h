@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Poisson_surface_reconstruction_3/include/CGAL/Reconstruction_triangulation_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Poisson_surface_reconstruction_3/include/CGAL/Reconstruction_triangulation_3.h $
 // $Id: Reconstruction_triangulation_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_IMPLICIT_FCT_DELAUNAY_TRIANGULATION_H
 #define CGAL_IMPLICIT_FCT_DELAUNAY_TRIANGULATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -371,7 +370,7 @@ public:
     Visitor visitor)
   {
     if(! points.empty()){
-      Rcpp::Rcerr << "WARNING: not all points inserted yet" << std::endl;
+      std::cerr << "WARNING: not all points inserted yet" << std::endl;
     }
     // Convert input points to Point_with_normal_3
     //std::vector<Point_with_normal> points;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Handle_with_policy.h $
-// $Id: Handle_with_policy.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/STL_Extension/include/CGAL/Handle_with_policy.h $
+// $Id: Handle_with_policy.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Michael Seel <seel@mpi-inf.mpg.de>
@@ -275,7 +275,7 @@ public:
     //! the virtual destructor is essential for proper memory management here.
     virtual ~Reference_counted_hierarchy() {}
     //! can be used to minimize memory consumption once it is known that this
-    //! representation is not used anymore and only needed to keep a fowarding
+    //! representation is not used anymore and only needed to keep a forwarding
     //! pointer. One example would be cleaning up dynamically allocated
     //! data, or another example would be overwriting a \c leda::real with
     //! a default constructed value to free its old expression tree. However,

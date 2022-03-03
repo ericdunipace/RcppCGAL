@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_3/include/CGAL/Point_set_3.h $
-// $Id: Point_set_3.h 131242b 2021-10-12T09:29:23+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_3/include/CGAL/Point_set_3.h $
+// $Id: Point_set_3.h 8166579 2021-10-11T19:58:07+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POINT_SET_3_H
 #define CGAL_POINT_SET_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_3.h>
 
 #include <typeindex>
@@ -590,7 +589,7 @@ public:
         while (source != last // All elements have been moved
                && dest != last - 1) // All elements are at the end of the container
           {
-            Rcpp::Rcerr << "Swapping " << *source << " and " << *dest << std::endl;
+            std::cerr << "Swapping " << *source << " and " << *dest << std::endl;
             std::swap (*(source ++), *(dest --));
           }
       }

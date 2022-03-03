@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_polyhedron_3.h $
-// $Id: Nef_polyhedron_3.h 0992a97 2021-12-03T15:25:55+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_polyhedron_3.h $
+// $Id: Nef_polyhedron_3.h 28cdf9b 2021-12-03T15:27:31+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_NEF_POLYHEDRON_3_H
 #define CGAL_NEF_POLYHEDRON_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -1197,7 +1196,7 @@ protected:
          if(spherical_orientation(sec->source()->point(),
                                   sec->snext()->source()->point(),
                                   sec->snext()->snext()->source()->point())<0) {
-           Rcpp::Rcerr << "vertex at " << v->point() << " is not convex" << std::endl;
+           std::cerr << "vertex at " << v->point() << " is not convex" << std::endl;
            return false;
          }
      }
@@ -1519,9 +1518,9 @@ protected:
   {
 #ifdef CGAL_NEF_VISUAL_HULL
     CGAL_NEF_SETDTHREAD(19*43*71);
-    Rcpp::Rcerr << "visual hull code " << std::endl;
-    Rcpp::Rcerr << *this << std::endl;
-    Rcpp::Rcerr << const_cast<Nef_polyhedron&>(N1) << std::endl;
+    std::cerr << "visual hull code " << std::endl;
+    std::cerr << *this << std::endl;
+    std::cerr << const_cast<Nef_polyhedron&>(N1) << std::endl;
     AND _and;
     typename CGAL::Modifying_binary_operation<SNC_structure>
       mbo(this->snc());
@@ -1996,7 +1995,7 @@ protected:
 
   std::size_t bytes_reduced() {
     // bytes used for the Nef_polyhedron_3.
-    Rcpp::Rcout << sizeof(Self) + (snc().bytes_reduced2() - sizeof(SNC_structure)) << std::endl;
+    std::cout << sizeof(Self) + (snc().bytes_reduced2() - sizeof(SNC_structure)) << std::endl;
     return sizeof(Self) + (snc().bytes_reduced() - sizeof(SNC_structure));
   }
 

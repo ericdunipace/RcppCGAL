@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Two_vertices_parameterizer_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Two_vertices_parameterizer_3.h $
 // $Id: Two_vertices_parameterizer_3.h bdd4efe 2021-01-15T10:06:56+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_TWO_VERTICES_PARAMETERIZER_3_H_INCLUDED
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_TWO_VERTICES_PARAMETERIZER_3_H_INCLUDED
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/disable_warnings.h>
@@ -120,7 +119,7 @@ public:
       }
 
       if(!found_min || !found_max) {
-        Rcpp::Rcerr << "Error: Fixed vertices must be in the same connected component" << std::endl;
+        std::cerr << "Error: Fixed vertices must be in the same connected component" << std::endl;
         return ERROR_NON_CONVEX_BORDER;
       }
 
@@ -268,7 +267,7 @@ public:
     put(vpmap, vxmax, true);
 
 #ifdef DEBUG_TRACE
-    Rcpp::Rcerr << "  map two vertices..." << std::endl;
+    std::cerr << "  map two vertices..." << std::endl;
 #endif
 
     return OK;

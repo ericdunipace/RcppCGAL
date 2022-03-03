@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_sorting/include/CGAL/Hilbert_sort_middle_d.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Spatial_sorting/include/CGAL/Hilbert_sort_middle_d.h $
 // $Id: Hilbert_sort_middle_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_HILBERT_SORT_MIDDLE_d_H
 #define CGAL_HILBERT_SORT_MIDDLE_d_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <functional>
 #include <cstddef>
@@ -118,7 +117,7 @@ public:
 
 
      for(int i=1; i<two_to_dim-1; i +=2){
-       //Rcpp::Rcout<<i<<";"<<start[0]<<start[1]<<start[2]<<start[3]<<"/"<<dir[i+1]<<std::endl;
+       //std::cout<<i<<";"<<start[0]<<start[1]<<start[2]<<start[3]<<"/"<<dir[i+1]<<std::endl;
        if (places[i]!=begin || places[i+1]!=end)
          sort( places[i  ], places[i+1], start, dir[i+1],cmin,cmax);
        cmax[ dir[i+1] ] =  (cmin[ dir[i+1]]==mini[ dir[i+1]])

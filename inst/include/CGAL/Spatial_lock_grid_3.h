@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Spatial_lock_grid_3.h $
-// $Id: Spatial_lock_grid_3.h ea0386c 2021-01-06T11:36:32+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/STL_Extension/include/CGAL/Spatial_lock_grid_3.h $
+// $Id: Spatial_lock_grid_3.h 288c283 2021-08-30T19:24:59+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement Jamin
@@ -14,15 +14,10 @@
 
 #ifdef CGAL_LINKED_WITH_TBB
 
-#include <Rcpp.h>
 #include <CGAL/Bbox_3.h>
 
 #include <atomic>
-#if TBB_IMPLEMENT_CPP0X
-# include <tbb/compat/thread>
-#else
-# include <thread>
-#endif
+#include <thread>
 #include <tbb/enumerable_thread_specific.h>
 
 #include <algorithm>
@@ -69,7 +64,7 @@ public:
     m_resolution_z = n / (bbox.zmax() - bbox.zmin());
 
 #ifdef CGAL_CONCURRENT_MESH_3_VERBOSE
-    Rcpp::Rcerr << "Locking data structure Bounding Box = "
+    std::cerr << "Locking data structure Bounding Box = "
       << "[" << bbox.xmin() << ", " << bbox.xmax() << "], "
       << "[" << bbox.ymin() << ", " << bbox.ymax() << "], "
       << "[" << bbox.zmin() << ", " << bbox.zmax() << "]"

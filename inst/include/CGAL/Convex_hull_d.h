@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_hull_d/include/CGAL/Convex_hull_d.h $
-// $Id: Convex_hull_d.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_hull_d/include/CGAL/Convex_hull_d.h $
+// $Id: Convex_hull_d.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,13 +21,12 @@
 #ifndef CGAL_CONVEX_HULL_D_H
 #define CGAL_CONVEX_HULL_D_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_hull_d.h>
 
 #define CGAL_DEPRECATED_HEADER "<CGAL/Convex_hull_d.h>"
 #define CGAL_DEPRECATED_MESSAGE_DETAILS \
   "The Triangulation package (see https://doc.cgal.org/latest/Triangulation) should be used instead."
-#include <CGAL/internal/deprecation_warning.h>
+#include <CGAL/Installation/internal/deprecation_warning.h>
 
 /*{\Manpage {Convex_hull_d}{R}{Convex Hulls}{C}}*/
 
@@ -609,16 +608,16 @@ public:
   /*{\Mop gives information about the size of the current hull and the
   number of visibility tests performed.}*/
   {
-    Rcpp::Rcout << "Convex_hull_d ("
+    std::cout << "Convex_hull_d ("
               << current_dimension() << "/" << dimension()
               << ") - statistic" << std::endl;
-    Rcpp::Rcout<<" # points = " << all_pnts_.size() << std::endl;
-    Rcpp::Rcout<<" # vertices = " << num_of_vertices << std::endl;
-    Rcpp::Rcout<<" # unbounded simplices = " << num_of_unbounded_simplices
+    std::cout<<" # points = " << all_pnts_.size() << std::endl;
+    std::cout<<" # vertices = " << num_of_vertices << std::endl;
+    std::cout<<" # unbounded simplices = " << num_of_unbounded_simplices
       << std::endl;
-    Rcpp::Rcout<<" # bounded simplices = " << num_of_bounded_simplices
+    std::cout<<" # bounded simplices = " << num_of_bounded_simplices
       << std::endl;
-    Rcpp::Rcout<<" # visibility tests = " << num_of_visibility_tests
+    std::cout<<" # visibility tests = " << num_of_visibility_tests
       << std::endl;
   }
 

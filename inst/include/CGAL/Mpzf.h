@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Number_types/include/CGAL/Mpzf.h $
-// $Id: Mpzf.h 6f9419f 2021-04-28T19:18:01+02:00 Marc Glisse
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Number_types/include/CGAL/Mpzf.h $
+// $Id: Mpzf.h 6481cb2 2021-08-13T16:44:53+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)        :  Marc Glisse
@@ -16,7 +16,6 @@
 
 #ifndef CGAL_MPZF_H
 #define CGAL_MPZF_H
-#include <Rcpp.h>
 #include <cstdlib>
 #include <algorithm>
 #include <climits>
@@ -113,16 +112,9 @@
 #if !defined(CGAL_HAS_THREADS)
 #define CGAL_MPZF_THREAD_LOCAL
 #define CGAL_MPZF_TLS
-#elif defined(CGAL_CAN_USE_CXX11_THREAD_LOCAL)
+#else
 #define CGAL_MPZF_THREAD_LOCAL thread_local
 #define CGAL_MPZF_TLS thread_local
-#elif defined(_MSC_VER)
-#define CGAL_MPZF_THREAD_LOCAL __declspec(thread)
-#define CGAL_MPZF_TLS
-#else
-#define CGAL_MPZF_THREAD_LOCAL __thread
-#define CGAL_MPZF_TLS
-// Too bad for the others
 #endif
 namespace CGAL {
 namespace Mpzf_impl {
@@ -163,7 +155,6 @@ template <class T, class = void> struct pool2 {
   static T& ptr(T t) { t -= extra+1; return *reinterpret_cast<T*>(t); }
 };
 
-#if defined(CGAL_CAN_USE_CXX11_THREAD_LOCAL)
 template <class T, class = void> struct pool3 {
   static T pop() { T ret = data(); data() = ptr(data()); return ret; }
   static void push(T t) { ptr(t) = data(); data() = t; }
@@ -186,7 +177,6 @@ template <class T, class = void> struct pool3 {
   }
   static T& ptr(T t) { t -= extra+1; return *reinterpret_cast<T*>(t); }
 };
-#endif
 
 // No caching
 template <class T, class = void> struct no_pool {
@@ -526,16 +516,16 @@ struct Mpzf {
 #if 0
   // For debug purposes only
   void print()const{
-    //Rcpp::Rcout << "size: " << size << std::endl;
-    if(size==0) { Rcpp::Rcout << "zero\n"; return; }
-    if(size<0) Rcpp::Rcout << "- ";
+    //std::cout << "size: " << size << std::endl;
+    if(size==0) { std::cout << "zero\n"; return; }
+    if(size<0) std::cout << "- ";
     int asize = std::abs(size);
-    Rcpp::Rcout << std::hex;
-    while(--asize>=0) { Rcpp::Rcout << data()[asize] << ' '; }
-    Rcpp::Rcout << std::dec << "exp " << exp << ' ';
-    Rcpp::Rcout << std::dec << "size " << size << ' ';
+    std::cout << std::hex;
+    while(--asize>=0) { std::cout << data()[asize] << ' '; }
+    std::cout << std::dec << "exp " << exp << ' ';
+    std::cout << std::dec << "size " << size << ' ';
     asize = std::abs(size);
-    Rcpp::Rcout << "double: " << std::ldexp((double)data()[asize-1],64*(exp+asize-1))*((size<0)?-1:1) << '\n';
+    std::cout << "double: " << std::ldexp((double)data()[asize-1],64*(exp+asize-1))*((size<0)?-1:1) << '\n';
   }
 #endif
 

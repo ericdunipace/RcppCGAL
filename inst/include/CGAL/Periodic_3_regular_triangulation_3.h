@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_regular_triangulation_3.h $
-// $Id: Periodic_3_regular_triangulation_3.h 209513d 2020-07-31T15:58:38+02:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_3_triangulation_3/include/CGAL/Periodic_3_regular_triangulation_3.h $
+// $Id: Periodic_3_regular_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@inria.fr>
@@ -14,11 +14,10 @@
 #ifndef CGAL_PERIODIC_3_REGULAR_TRIANGULATION_3_H
 #define CGAL_PERIODIC_3_REGULAR_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_triangulation_3.h>
 
 // Needed by remove to fill the hole.
-#include <CGAL/internal/Periodic_3_regular_triangulation_remove_traits_3.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Periodic_3_regular_triangulation_remove_traits_3.h>
 
 #include <CGAL/Periodic_3_triangulation_3.h>
 #include <CGAL/Periodic_3_triangulation_ds_vertex_base_3.h>
@@ -28,7 +27,7 @@
 #include <CGAL/Regular_triangulation_cell_base_3.h>
 
 #include <CGAL/enum.h>
-#include <CGAL/internal/Has_nested_type_Bare_point.h>
+#include <CGAL/STL_Extension/internal/Has_nested_type_Bare_point.h>
 #include <CGAL/spatial_sort.h>
 #include <CGAL/utility.h>
 
@@ -580,8 +579,8 @@ public:
 
     if(!Tr_Base::periodic_remove(v, remover, cover_manager, true /*abort if cover change*/))
     {
-//      Rcpp::Rcerr << "Warning: removing " << &*v << " (" << v->point() << ") would change cover" << std::endl;
-//      Rcpp::Rcerr << "Aborted removal." << std::endl;
+//      std::cerr << "Warning: removing " << &*v << " (" << v->point() << ") would change cover" << std::endl;
+//      std::cerr << "Aborted removal." << std::endl;
       return false; // removing would cause a cover change
     }
 
@@ -683,7 +682,7 @@ public:
                                      const Offset& offset = Offset(),
                                      bool perturb = false) const
   {
-//    Rcpp::Rcout << "_side_of_power_sphere with at " << &*c << std::endl
+//    std::cout << "_side_of_power_sphere with at " << &*c << std::endl
 //              << "                              " << &*(c->vertex(0)) << " : " << c->vertex(0)->point() << std::endl
 //              << "                              " << &*(c->vertex(1)) << " : " << c->vertex(1)->point() << std::endl
 //              << "                              " << &*(c->vertex(2)) << " : " << c->vertex(2)->point() << std::endl
@@ -789,12 +788,12 @@ public:
 
 //#define CGAL_PERIODIC_SET_POINT_VERBOSE
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-    Rcpp::Rcout.precision(20);
-    Rcpp::Rcout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
-    Rcpp::Rcout << "SET POINT " << std::endl;
-    Rcpp::Rcout << "v: " << &*v << " new canonical position " << new_position << std::endl;
-    Rcpp::Rcout << "position: " << p << " move: " << move << std::endl;
-    Rcpp::Rcout << "position and move: " << moved_p << std::endl;
+    std::cout.precision(20);
+    std::cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
+    std::cout << "SET POINT " << std::endl;
+    std::cout << "v: " << &*v << " new canonical position " << new_position << std::endl;
+    std::cout << "position: " << p << " move: " << move << std::endl;
+    std::cout << "position and move: " << moved_p << std::endl;
 #endif
 
     // Disallow moves larger than the domain
@@ -830,7 +829,7 @@ public:
       offset_change_from_move[2] = 1;
 
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-    Rcpp::Rcout << "offset change from move: " << offset_change_from_move << std::endl;
+    std::cout << "offset change from move: " << offset_change_from_move << std::endl;
 #endif
 
     // Go through the cells incident to 'v' and modify their offset if needed
@@ -846,18 +845,18 @@ public:
       Offset offset = this->int_to_off(c->offset(index));
 
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-      Rcpp::Rcout << "--" << std::endl;
-      Rcpp::Rcout << "v: " << &*v << " new canonical position " << new_position << std::endl;
-      Rcpp::Rcout << "position: " << p << " move: " << move << std::endl;
-      Rcpp::Rcout << "position and move: " << moved_p << std::endl;
-      Rcpp::Rcout << "in cell: " << &*c << " v: " << point(c, index) << " offset: " << offset << std::endl;
-      Rcpp::Rcout << "offset after move is: " << offset_change_from_move << std::endl;
+      std::cout << "--" << std::endl;
+      std::cout << "v: " << &*v << " new canonical position " << new_position << std::endl;
+      std::cout << "position: " << p << " move: " << move << std::endl;
+      std::cout << "position and move: " << moved_p << std::endl;
+      std::cout << "in cell: " << &*c << " v: " << point(c, index) << " offset: " << offset << std::endl;
+      std::cout << "offset after move is: " << offset_change_from_move << std::endl;
 #endif
 
       for(int i=0; i<4; ++i)
       {
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-        Rcpp::Rcout << "vertex: " << c->vertex(i)->point().point()
+        std::cout << "vertex: " << c->vertex(i)->point().point()
                   << " offset: " << this->int_to_off(c->offset(i))
                   << " in cell: " << (this->point(c, i)).point() << std::endl;
 #endif
@@ -899,27 +898,27 @@ public:
       }
 
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-      Rcpp::Rcout << "canonical_offset_change: " << canonical_offset_change << std::endl;
-      Rcpp::Rcout << "four offsets: " << std::endl;
+      std::cout << "canonical_offset_change: " << canonical_offset_change << std::endl;
+      std::cout << "four offsets: " << std::endl;
 #endif
 
       boost::array<int, 4> offsets;
       for(int i=0; i<4; ++i)
       {
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-        Rcpp::Rcout << "old: " << this->int_to_off(c->offset(i));
+        std::cout << "old: " << this->int_to_off(c->offset(i));
 #endif
         if(i == index)
         {
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-          Rcpp::Rcout << " new (v): " << offset + canonical_offset_change << std::endl;
+          std::cout << " new (v): " << offset + canonical_offset_change << std::endl;
 #endif
           offsets[i] = this->off_to_int(offset + canonical_offset_change);
         }
         else
         {
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-          Rcpp::Rcout << " new: " << this->int_to_off(c->offset(i)) + canonical_offset_change << std::endl;
+          std::cout << " new: " << this->int_to_off(c->offset(i)) + canonical_offset_change << std::endl;
 #endif
           offsets[i] = this->off_to_int(this->int_to_off(c->offset(i)) + canonical_offset_change);
         }
@@ -934,7 +933,7 @@ public:
 
     v->set_point(new_position);
 #ifdef CGAL_PERIODIC_SET_POINT_VERBOSE
-    Rcpp::Rcout << "moved v to " << v->point() << std::endl;
+    std::cout << "moved v to " << v->point() << std::endl;
 #endif
 
     CGAL_triangulation_precondition(!(v->point().x() < domain().xmin()) && v->point().x() < domain().xmax());
@@ -964,7 +963,7 @@ public:
   // end of geometric functions
 
 #define CGAL_INCLUDE_FROM_PERIODIC_3_REGULAR_TRIANGULATION_3_H
-#include <CGAL/internal/Periodic_3_regular_triangulation_dummy_288.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Periodic_3_regular_triangulation_dummy_288.h>
 #undef CGAL_INCLUDE_FROM_PERIODIC_3_REGULAR_TRIANGULATION_3_H
 
   Vertex_handle nearest_power_vertex(const Bare_point& p, Cell_handle start) const
@@ -988,23 +987,23 @@ public:
     Cell_handle c = locate(p2wp(p), query_offset, lt, li, lj, start);
 
 #ifdef CGAL_PERIODIC_DEBUG_NEAREST_POWER_VERTEX
-    Rcpp::Rcout << "nearest power vertex: " << p << std::endl;
-    Rcpp::Rcout << "vertices: " << number_of_vertices() << std::endl;
-    Rcpp::Rcout << "stored vertices: " << this->number_of_stored_vertices() << std::endl;
-    Rcpp::Rcout << "Locate: " << p << std::endl;
-    Rcpp::Rcout << "Cell: " << &*c << std::endl;
-    Rcpp::Rcout << this->point(c, 0) << std::endl;
-    Rcpp::Rcout << this->point(c, 1) << std::endl;
-    Rcpp::Rcout << this->point(c, 2) << std::endl;
-    Rcpp::Rcout << this->point(c, 3) << std::endl;
-    Rcpp::Rcout << "offset query: " << query_offset << std::endl;
-    Rcpp::Rcout << "bounded side : " << geom_traits().bounded_side_3_object()(
+    std::cout << "nearest power vertex: " << p << std::endl;
+    std::cout << "vertices: " << number_of_vertices() << std::endl;
+    std::cout << "stored vertices: " << this->number_of_stored_vertices() << std::endl;
+    std::cout << "Locate: " << p << std::endl;
+    std::cout << "Cell: " << &*c << std::endl;
+    std::cout << this->point(c, 0) << std::endl;
+    std::cout << this->point(c, 1) << std::endl;
+    std::cout << this->point(c, 2) << std::endl;
+    std::cout << this->point(c, 3) << std::endl;
+    std::cout << "offset query: " << query_offset << std::endl;
+    std::cout << "bounded side : " << geom_traits().bounded_side_3_object()(
                    Tetrahedron(this->point(c, 0).point(), this->point(c, 1).point(),
                                this->point(c, 2).point(), this->point(c, 3).point()), p) << std::endl;
-    Rcpp::Rcout << "power side: " << geom_traits().power_side_of_bounded_power_sphere_3_object()(
+    std::cout << "power side: " << geom_traits().power_side_of_bounded_power_sphere_3_object()(
                    this->point(c, 0), this->point(c, 1),
                    this->point(c, 2), this->point(c, 3), p2wp(p)) << std::endl;
-    Rcpp::Rcout << "power distance: " << geom_traits().compute_power_distance_to_power_sphere_3_object()(
+    std::cout << "power distance: " << geom_traits().compute_power_distance_to_power_sphere_3_object()(
                    this->point(c, 0), this->point(c, 1),
                    this->point(c, 2), this->point(c, 3), p2wp(p)) << std::endl;
 #endif
@@ -1021,8 +1020,8 @@ public:
     Offset offset_of_nearest = get_min_dist_offset(p, query_offset, nearest);
 
 #ifdef CGAL_PERIODIC_DEBUG_NEAREST_POWER_VERTEX
-    Rcpp::Rcout << "nearest vertex in cell : " << &*nearest << " : " << nearest->point() << std::endl;
-    Rcpp::Rcout << "offset_of_nearest: " << offset_of_nearest << std::endl;
+    std::cout << "nearest vertex in cell : " << &*nearest << " : " << nearest->point() << std::endl;
+    std::cout << "offset_of_nearest: " << offset_of_nearest << std::endl;
 #endif
 
     std::vector<Vertex_handle> vs;
@@ -1031,7 +1030,7 @@ public:
     {
       Vertex_handle tmp = nearest;
 #ifdef CGAL_PERIODIC_DEBUG_NEAREST_POWER_VERTEX
-      Rcpp::Rcout << "tmp set to : " << &*nearest << " : " << nearest->point()
+      std::cout << "tmp set to : " << &*nearest << " : " << nearest->point()
                 << " || offset: " << nearest->offset() << std::endl;
 #endif
 
@@ -1050,7 +1049,7 @@ public:
           tmp = *vsit;
           offset_of_nearest = min_dist_offset;
 #ifdef CGAL_PERIODIC_DEBUG_NEAREST_POWER_VERTEX
-          Rcpp::Rcout << " Closer adjacent vertex: " << &*tmp << " : " << tmp->point()
+          std::cout << " Closer adjacent vertex: " << &*tmp << " : " << tmp->point()
                     << " || offset " << offset_of_nearest << std::endl;
 #endif
         }
@@ -1478,19 +1477,19 @@ is_valid(bool verbose, int level) const
 {
   if(!Tr_Base::is_valid(verbose, level)) {
     if(verbose)
-      Rcpp::Rcerr << "Regular: invalid base" << std::endl;
+      std::cerr << "Regular: invalid base" << std::endl;
     return false;
   }
 
   Conflict_tester tester(this);
   if(!is_valid_conflict(tester, verbose, level)) {
     if(verbose)
-      Rcpp::Rcerr << "Regular: conflict problems" << std::endl;
+      std::cerr << "Regular: conflict problems" << std::endl;
     return false;
   }
 
   if(verbose)
-    Rcpp::Rcerr << "Regular valid triangulation" << std::endl;
+    std::cerr << "Regular valid triangulation" << std::endl;
   return true;
 }
 
@@ -1503,10 +1502,10 @@ is_valid(Cell_handle ch, bool verbose, int level) const
   if(!Tr_Base::is_valid(ch, verbose, level)) {
     error = true;
     if(verbose) {
-      Rcpp::Rcerr << "geometrically invalid cell" << std::endl;
+      std::cerr << "geometrically invalid cell" << std::endl;
       for(int i=0; i<4; i++ )
-        Rcpp::Rcerr << ch->vertex(i)->point() << ", ";
-      Rcpp::Rcerr << std::endl;
+        std::cerr << ch->vertex(i)->point() << ", ";
+      std::cerr << std::endl;
     }
   }
 
@@ -1526,12 +1525,12 @@ is_valid(Cell_handle ch, bool verbose, int level) const
               != ON_UNBOUNDED_SIDE) {
             error = true;
             if(verbose) {
-              Rcpp::Rcerr << "Regular invalid cell" << std::endl;
+              std::cerr << "Regular invalid cell" << std::endl;
               for(int i=0; i<4; i++) {
                 Periodic_weighted_point pp = periodic_point(ch, i);
-                Rcpp::Rcerr <<"("<<pp.first <<","<<pp.second<< "), ";
+                std::cerr <<"("<<pp.first <<","<<pp.second<< "), ";
               }
-              Rcpp::Rcerr << std::endl;
+              std::cerr << std::endl;
             }
           }
         }

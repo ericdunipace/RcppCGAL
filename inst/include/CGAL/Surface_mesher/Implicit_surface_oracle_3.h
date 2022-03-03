@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Implicit_surface_oracle_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Surface_mesher/Implicit_surface_oracle_3.h $
 // $Id: Implicit_surface_oracle_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_SURFACE_MESHER_IMPLICIT_SURFACE_ORACLE_3_H
 #define CGAL_SURFACE_MESHER_IMPLICIT_SURFACE_ORACLE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -171,7 +170,7 @@ namespace CGAL {
 //       surface_identifiers_generator()
 //     {
 // #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-//       Rcpp::Rcerr << "CONS: Implicit_surface_oracle_3\n";
+//       std::cerr << "CONS: Implicit_surface_oracle_3\n";
 // #endif
 //     }
 
@@ -186,7 +185,7 @@ namespace CGAL {
       surface_identifiers_generator(surface_identifiers_generator)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      Rcpp::Rcerr << "CONS: Implicit_surface_oracle_3\n";
+      std::cerr << "CONS: Implicit_surface_oracle_3\n";
 #endif
     }
 
@@ -243,7 +242,7 @@ namespace CGAL {
         Point_3 b = point_on(s, 1);
 
 #ifdef CGAL_SURFACE_MESHER_DEBUG_IMPLICIT_ORACLE
-        Rcpp::Rcerr <<
+        std::cerr <<
           boost::format("** Implicit_surface_oracle_3::operator()( (%1%), (%2%) )\n")
           % a % b;
 #endif
@@ -261,7 +260,7 @@ namespace CGAL {
                                            surface.squared_error_bound());
         // else
 #ifdef CGAL_SURFACE_MESHER_DEBUG_IMPLICIT_ORACLE
-        Rcpp::Rcerr << "No intersection\n";
+        std::cerr << "No intersection\n";
 #endif
         return Object();
       } // end operator()(Surface_3, Segment_3)
@@ -334,7 +333,7 @@ namespace CGAL {
       {
         CGAL_SURFACE_MESHER_PROFILER("intersect_clipped_segment");
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CLIPPED_SEGMENT
-        Rcpp::Rcerr << "clipped_segment( ("  << p1 << "), (" << p2 << ") )\n";
+        std::cerr << "clipped_segment( ("  << p1 << "), (" << p2 << ") )\n";
 #endif
         typename GT::Compute_squared_distance_3 squared_distance =
           GT().compute_squared_distance_3_object();
@@ -359,7 +358,7 @@ namespace CGAL {
           ++steps;
 #endif
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CLIPPED_SEGMENT
-          Rcpp::Rcerr << debug_point(surface, p1) << ", "
+          std::cerr << debug_point(surface, p1) << ", "
                     << debug_point(surface, p2) << "\n";
 #endif
           // mid cannot be const, because it is modified below.
@@ -370,7 +369,7 @@ namespace CGAL {
           // If the two points are close, then we must decide
           {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CLIPPED_SEGMENT
-            Rcpp::Rcerr << "=" << debug_point(surface, mid) << "\n";
+            std::cerr << "=" << debug_point(surface, mid) << "\n";
 #endif
             // the following function conditionnally call
             // mid.set_on_surface(...) if mid has such a function.
@@ -438,7 +437,7 @@ namespace CGAL {
                                     vector_3(CGAL::ORIGIN, initial_center));
 
 #ifdef CGAL_SURFACE_MESHER_DEBUG_INITIAL_POINTS
-          Rcpp::Rcerr << "test "
+          std::cerr << "test "
                     << intersect.debug_point(surface, center)
                     << ", " << intersect.debug_point(surface, p);
 #endif
@@ -448,7 +447,7 @@ namespace CGAL {
             *out++= *intersection;
             --n;
 #ifdef CGAL_SURFACE_MESHER_DEBUG_INITIAL_POINTS
-            Rcpp::Rcerr << " = "
+            std::cerr << " = "
                       << intersect.debug_point(surface, *intersection)
                       << "\n";
 #endif
@@ -458,10 +457,10 @@ namespace CGAL {
             center = translate(*random_point_in_sphere++,
                                vector_3(CGAL::ORIGIN, initial_center));
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-            Rcpp::Rcerr << "Warning: new center " << center << "\n";
+            std::cerr << "Warning: new center " << center << "\n";
 #endif
 #ifdef CGAL_SURFACE_MESHER_DEBUG_INITIAL_POINTS
-            Rcpp::Rcerr << " = null\n";
+            std::cerr << " = null\n";
 #endif
           }
         }

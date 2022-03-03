@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/oriented_bounding_box.h $
-// $Id: oriented_bounding_box.h 2b18b8d 2020-06-25T15:17:44+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/oriented_bounding_box.h $
+// $Id: oriented_bounding_box.h 93ee230 2021-08-23T22:25:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,26 +13,22 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_BOX_ORIENTED_BOUNDING_BOX_H
 #define CGAL_OPTIMAL_BOUNDING_BOX_ORIENTED_BOUNDING_BOX_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/Optimal_bounding_box/internal/evolution.h>
 #include <CGAL/Optimal_bounding_box/internal/population.h>
 #include <CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h>
 
-#include <CGAL/boost/graph/Named_function_parameters.h>
-#include <CGAL/boost/graph/named_params_helper.h>
-
+#include <CGAL/Aff_transformation_3.h>
 #include <CGAL/assertions.h>
 #include <CGAL/boost/graph/helpers.h>
+#include <CGAL/boost/graph/Named_function_parameters.h>
+#include <CGAL/boost/graph/named_params_helper.h>
 #include <CGAL/convex_hull_3.h>
 #include <CGAL/Convex_hull_traits_3.h>
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Iso_cuboid_3.h>
 #include <CGAL/Iterator_range.h>
 #include <CGAL/Kernel_traits.h>
 #include <CGAL/Random.h>
-#include <CGAL/Simple_cartesian.h>
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_BENCHMARKS
 #include <CGAL/Real_timer.h>
@@ -106,7 +102,7 @@ void construct_oriented_bounding_box(const PointRange& points,
   {
     obb_points[i] = inverse_transformation.transform(obb_points[i]);
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG
-    Rcpp::Rcout << "  OBB[" << i << "] = " << obb_points[i] << std::endl;
+    std::cout << "  OBB[" << i << "] = " << obb_points[i] << std::endl;
 #endif
   }
 }
@@ -136,14 +132,14 @@ void compute_best_transformation(const PointRange& points,
   search_solution.evolve(max_generations, population_size, nelder_mead_iterations);
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_BENCHMARKS
-  Rcpp::Rcout << "evolve: " << timer.time() << std::endl;
+  std::cout << "evolve: " << timer.time() << std::endl;
   timer.reset();
 #endif
 
   const Matrix& rot = search_solution.get_best_vertex().matrix();
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_BENCHMARKS
-  Rcpp::Rcout << "get best: " << timer.time() << std::endl;
+  std::cout << "get best: " << timer.time() << std::endl;
 #endif
 
   transformation = Aff_transformation_3(rot(0, 0), rot(0, 1), rot(0, 2),
@@ -226,11 +222,11 @@ void construct_oriented_bounding_box(const PointRange& points,
     extreme_points_3(points, std::back_inserter(ch_points), CH_traits);
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_BENCHMARKS
-    Rcpp::Rcout << "CH time: " << timer.time() << std::endl;
+    std::cout << "CH time: " << timer.time() << std::endl;
 #endif
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG
-    Rcpp::Rcout << ch_points.size() << " points on the convex hull" << std::endl;
+    std::cout << ch_points.size() << " points on the convex hull" << std::endl;
 #endif
 
     return construct_oriented_bounding_box(ch_points, output, rng, traits);
@@ -246,7 +242,7 @@ void construct_oriented_bounding_box(const PointRange& points,
 
 /// \addtogroup PkgOptimalBoundingBox_Oriented_bounding_box
 ///
-/// The function `oriented_bounding_box` computes an approximation of the <i>optimal bounding box</i>,
+/// The function `oriented_bounding_box()` computes an approximation of the <i>optimal bounding box</i>,
 /// which is defined as the rectangular box with smallest volume of all the rectangular boxes containing
 /// the input points.
 ///
@@ -278,7 +274,7 @@ void construct_oriented_bounding_box(const PointRange& points,
 
 /// \ingroup PkgOptimalBoundingBox_Oriented_bounding_box
 ///
-/// The function `oriented_bounding_box` computes an approximation of the <i>optimal bounding box</i>,
+/// The function `oriented_bounding_box()` computes an approximation of the <i>optimal bounding box</i>,
 /// which is defined as the rectangular box with smallest volume of all the rectangular boxes containing
 /// the input points.
 ///
@@ -362,13 +358,13 @@ void oriented_bounding_box(const PointRange& points,
   CGAL::Random& rng = (seed == unsigned(-1)) ? CGAL::get_default_random() : fixed_seed_rng;
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_DEBUG
-  Rcpp::Rcout << "Random seed: " << rng.get_seed() << std::endl;
+  std::cout << "Random seed: " << rng.get_seed() << std::endl;
 #endif
 
   // @todo handle those cases (or call min_rectangle_2 with a projection)
   if(points.size() <= 3)
   {
-    Rcpp::Rcerr << "The oriented bounding box cannot (yet) be computed for a mesh with fewer than 4 vertices!\n";
+    std::cerr << "The oriented bounding box cannot (yet) be computed for a mesh with fewer than 4 vertices!\n";
     return;
   }
 

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polyhedron/include/CGAL/Polyhedron_3_to_lcc.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polyhedron/include/CGAL/Polyhedron_3_to_lcc.h $
 // $Id: Polyhedron_3_to_lcc.h 9a50c0f 2019-11-26T13:22:03+01:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYHEDRON_3_TO_LCC_H
 #define CGAL_POLYHEDRON_3_TO_LCC_H
 
-#include <Rcpp.h>
 #include <CGAL/Polyhedron_3.h>
 #include <CGAL/assertions.h>
 #include <iostream>
@@ -103,7 +102,7 @@ namespace CGAL {
   {
     if (!ais.good())
     {
-      Rcpp::Rcout << "Error reading flux." << std::endl;
+      std::cout << "Error reading flux." << std::endl;
       return LCC::null_handle;
     }
     CGAL::Polyhedron_3<typename LCC::Traits> P;

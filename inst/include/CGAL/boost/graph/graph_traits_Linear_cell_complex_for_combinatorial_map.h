@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Linear_cell_complex/include/CGAL/boost/graph/graph_traits_Linear_cell_complex_for_combinatorial_map.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Linear_cell_complex/include/CGAL/boost/graph/graph_traits_Linear_cell_complex_for_combinatorial_map.h $
 // $Id: graph_traits_Linear_cell_complex_for_combinatorial_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_BOOST_GRAPH_TRAITS_LINEAR_CELL_COMPLEX_FOR_COMBINATORIAL_MAP_H
 #define CGAL_BOOST_GRAPH_TRAITS_LINEAR_CELL_COMPLEX_FOR_COMBINATORIAL_MAP_H
 
-#include <Rcpp.h>
 #include <utility>
 #include <iterator>
 
@@ -563,7 +562,7 @@ CGAL_LCC_TEMPLATE_ARGS
 bool is_valid(const CGAL_LCC_TYPE& lcc, bool verbose=false)
 {
   if (verbose)
-    lcc.display_characteristics(Rcpp::Rcout)<<std::endl;
+    lcc.display_characteristics(std::cout)<<std::endl;
   return lcc.is_valid();
 }
 

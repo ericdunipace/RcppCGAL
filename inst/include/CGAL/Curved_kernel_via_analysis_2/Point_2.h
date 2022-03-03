@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Point_2.h $
-// $Id: Point_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Point_2.h $
+// $Id: Point_2.h a3d1765 2021-07-19T14:18:40+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,6 @@
  * be analyzed.
  */
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #include <boost/optional.hpp>
@@ -696,7 +695,7 @@ public:
             os << std::flush;
             break;
         case ::CGAL::IO::BINARY:
-            Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
+            std::cerr << "BINARY format not yet implemented" << std::endl;
             break;
         default:
           // ASCII
@@ -739,35 +738,12 @@ public:
 
     // read values
     is >> rep._m_xy;
-#if BOOST_VERSION < 104300
-    // EBEB: This fixes a bug in optional_io.hpp, reported to Fernando on
-    //       April 27, 2010, don't know whether the fix makes it into
-    //       boost 1_43.
-    if (!rep._m_xy) {
-      swallow(is, '-');
-    }
-#endif
     swallow(is, ',');
     is >> rep._m_x;
-#if BOOST_VERSION < 104300
-    if (!rep._m_x) {
-      swallow(is, '-');
-    }
-#endif
     swallow(is, ',');
     is >> rep._m_curve;
-#if BOOST_VERSION < 104300
-    if (!rep._m_curve) {
-      swallow(is, '-');
-    }
-#endif
     swallow(is, ',');
     is >> rep._m_arcno;
-#if BOOST_VERSION < 104300
-    if (!rep._m_arcno) {
-      swallow(is, '-');
-    }
-#endif
     swallow(is, ',');
     is >> rep._m_location;
 

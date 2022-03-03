@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/classify.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Classification/include/CGAL/Classification/classify.h $
 // $Id: classify.h 0e934b1 2020-08-04T13:16:13+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_CLASSIFICATION_CLASSIFY_H
 #define CGAL_CLASSIFICATION_CLASSIFY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/boost/graph/alpha_expansion_graphcut.h>
@@ -311,8 +310,8 @@ namespace Classification {
       }
 
 #ifdef CGAL_CLASSIFICATION_VERBOSE
-    Rcpp::Rcerr << "Number of divisions = " << nb_x * nb_y << std::endl;
-    Rcpp::Rcerr << " -> Size of division: " << Dx / nb_x << " " << Dy / nb_y << std::endl;
+    std::cerr << "Number of divisions = " << nb_x * nb_y << std::endl;
+    std::cerr << " -> Size of division: " << Dx / nb_x << " " << Dy / nb_y << std::endl;
 #endif
 
     std::vector<std::vector<std::size_t> > indices (nb);

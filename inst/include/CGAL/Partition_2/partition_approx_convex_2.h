@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Partition_2/include/CGAL/Partition_2/partition_approx_convex_2.h $
-// $Id: partition_approx_convex_2.h 5a36ff8 2020-12-04T08:02:26+00:00 Giles Bathgate
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Partition_2/include/CGAL/Partition_2/partition_approx_convex_2.h $
+// $Id: partition_approx_convex_2.h e6c767d 2021-05-12T15:45:07+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,12 +13,11 @@
 #ifndef CGAL_PARTITION_APPROX_CONVEX_H
 #define CGAL_PARTITION_APPROX_CONVEX_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
 #include <boost/config.hpp>
-#if  (BOOST_GCC >= 40800)
+#if defined(BOOST_GCC)
 _Pragma("GCC diagnostic push")
 _Pragma("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
 #endif
@@ -76,7 +75,7 @@ bool partition_appx_cvx_cuts_nonconvex_angle( Edge_circulator e_circ,
    typedef typename Triangulation::Point          Point;
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
    Segment_2 edge = triangles.segment((*e_circ).first, (*e_circ).second);
-   Rcpp::Rcout << "edge: " << *edge.source() << " " << *edge.target()
+   std::cout << "edge: " << *edge.source() << " " << *edge.target()
              << std::endl;
 #endif
 
@@ -93,9 +92,9 @@ bool partition_appx_cvx_cuts_nonconvex_angle( Edge_circulator e_circ,
    Segment_2  next_edge = triangles.segment((*next_e).first,(*next_e).second);
    Segment_2  prev_edge = triangles.segment((*prev_e).first,(*prev_e).second);
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-   Rcpp::Rcout << "next_edge: " << *next_edge.source() << " "
+   std::cout << "next_edge: " << *next_edge.source() << " "
              << *next_edge.target() <<std::endl;
-   Rcpp::Rcout << "prev_edge: " << *prev_edge.source() << " "
+   std::cout << "prev_edge: " << *prev_edge.source() << " "
              << *prev_edge.target() <<std::endl;
 #endif
    // find which endpoint is shared by the two edges
@@ -105,7 +104,7 @@ bool partition_appx_cvx_cuts_nonconvex_angle( Edge_circulator e_circ,
      (prev_edge.source() == v_ref) ? prev_edge.target() : prev_edge.source();
 
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-   Rcpp::Rcout << "partition_appx_cvx_cuts_nonconvex_angle: next_ccw_pt "
+   std::cout << "partition_appx_cvx_cuts_nonconvex_angle: next_ccw_pt "
              << *next_ccw_pt_ref << " v_ref " << *v_ref << " prev_ccw_pt_ref "
              << *prev_ccw_pt_ref << std::endl;
 #endif
@@ -156,7 +155,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
    } while (++c != first_c);
 
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-   Rcpp::Rcout << "Inserting diagonals: " << std::endl;
+   std::cout << "Inserting diagonals: " << std::endl;
 #endif
 
    Edge_circulator e_circ, first_e;
@@ -181,7 +180,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
           {
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
              Segment_2 edge = triangles.segment((*e_circ).first, (*e_circ).second);
-             Rcpp::Rcout << "edge " <<  *edge.source() << " " << *edge.target()
+             std::cout << "edge " <<  *edge.source() << " " << *edge.target()
                        << " is constrained " << std::endl;
 #endif
           }
@@ -195,7 +194,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
                 Circulator before_s = edge.source(); before_s--;
                 Circulator after_s = edge.source(); after_s++;
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-                Rcpp::Rcout << "considering " << *source << " " << *target
+                std::cout << "considering " << *source << " " << *target
                           << "...";
 #endif
                 if (partition_appx_cvx_is_edge_through_interior(*before_s,
@@ -205,7 +204,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
                                  (*v_it).point(), triangles, traits))
                    {
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-                      Rcpp::Rcout << "inserting" << std::endl;
+                      std::cout << "inserting" << std::endl;
 #endif
                       polygon.insert_diagonal(source.unsafe_circulator()
                                              ,target.unsafe_circulator()
@@ -214,17 +213,17 @@ OutputIterator partition_approx_convex_2(InputIterator first,
                    }
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
                    else
-                      Rcpp::Rcout << "doesn't cut reflex angle" << std::endl;
+                      std::cout << "doesn't cut reflex angle" << std::endl;
 #endif
                 }
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
                 else
-                   Rcpp::Rcout << "not an edge through the interior"
+                   std::cout << "not an edge through the interior"
                              << std::endl;
 #endif
              }
 #ifdef CGAL_PARTITION_APPROX_CONVEX_DEBUG
-             Rcpp::Rcout << "edge is infinite " << std::endl;
+             std::cout << "edge is infinite " << std::endl;
 #endif
           }
        } while (++e_circ != first_e);
@@ -265,7 +264,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
 }
 
 }
-#if  (BOOST_GCC >= 40800)
+#if defined(BOOST_GCC)
  _Pragma("GCC diagnostic pop")
 #endif
 #endif // CGAL_PARTITION_APPROX_CONVEX_H

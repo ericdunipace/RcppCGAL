@@ -40,7 +40,7 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_Core/include/CGAL/CORE/poly/Sturm.h $
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_Core/include/CGAL/CORE/poly/Sturm.h $
  * $Id: Sturm.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
@@ -49,7 +49,6 @@
 #ifndef CORE_STURM_H
 #define CORE_STURM_H
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 #include "CGAL/CORE/BigFloat.h"
 #include "CGAL/CORE/Expr.h"
@@ -182,11 +181,11 @@ public:
 
   // dump functions
   void dump(std::string msg) const {
-    Rcpp::Rcerr << msg << std::endl;
-    if (len <= 0) Rcpp::Rcerr << " len = " << len << std::endl;
+    std::cerr << msg << std::endl;
+    if (len <= 0) std::cerr << " len = " << len << std::endl;
     else
        for (int i=0; i<=len; i++)
-         Rcpp::Rcerr << " seq[" << i << "] = " << seq[i] << std::endl;
+         std::cerr << " seq[" << i << "] = " << seq[i] << std::endl;
   }
   void dump() const {
     dump("");
@@ -761,7 +760,7 @@ public:
     CGAL_assertion(z.isExact());   // the bound only makes sense for exact z
 
 #ifdef CORE_DEBUG
-    Rcpp::Rcout <<"Computing Smale's bound = " <<  std::endl;
+    std::cout <<"Computing Smale's bound = " <<  std::endl;
 #endif
 
     if(seq[0].evalExactSign(z) == 0)// Reached the exact root.
@@ -791,7 +790,7 @@ public:
     }
 
 #ifdef CORE_DEBUG
-    Rcpp::Rcout <<"Value returned by Smale bound = " << temp * temp1.makeCeilExact() << std::endl;
+    std::cout <<"Value returned by Smale bound = " << temp * temp1.makeCeilExact() << std::endl;
 #endif
 
     if(temp * temp1.makeCeilExact() < 0.03)          // make temp1 exact!
@@ -835,7 +834,7 @@ public:
   BFInterval newtonRefine(BFInterval &J, int aprec) {
 
 #ifdef CORE_DEBUG_NEWTON
-Rcpp::Rcout << "In newtonRefine, input J=" << J.first
+std::cout << "In newtonRefine, input J=" << J.first
         << ", " << J.second << " precision = " << aprec << std::endl;
 #endif
 
@@ -1012,12 +1011,12 @@ Rcpp::Rcout << "In newtonRefine, input J=" << J.first
       //  NOTE: We implemented this DEL in newtonIterE.
 
 #ifdef CORE_DEBUG
-      Rcpp::Rcout << "Inside Newton Refine: Refining Part " << std::endl;
+      std::cout << "Inside Newton Refine: Refining Part " << std::endl;
 
       if((J.second - J.first) > yap)
-        Rcpp::Rcout << "Smales Bound satisfied " << std::endl;
+        std::cout << "Smales Bound satisfied " << std::endl;
       else
-        Rcpp::Rcout << "Chees Bound satisfied " << std::endl;
+        std::cout << "Chees Bound satisfied " << std::endl;
 #endif
       xSign = sign(seq[0].evalExactSign(x));
       if(xSign == 0){
@@ -1043,7 +1042,7 @@ Rcpp::Rcout << "In newtonRefine, input J=" << J.first
 
 
 #ifdef CORE_DEBUG
-    Rcpp::Rcout << " Returning from Newton Refine: J.first = " << J.first
+    std::cout << " Returning from Newton Refine: J.first = " << J.first
               << " J.second = " << J.second << " aprec = " << aprec
               << " Sign at the interval endpoints = "
               << sign(seq[0].evalExactSign(J.first))
@@ -1055,9 +1054,9 @@ Rcpp::Rcout << "In newtonRefine, input J=" << J.first
 
 #ifdef CORE_DEBUG_NEWTON
     if (seq[0].evalExactSign(J.first) * seq[0].evalExactSign(J.second) > 0)
-      Rcpp::Rcout <<" ERROR! Root is not in the Interval " << std::endl;
+      std::cout <<" ERROR! Root is not in the Interval " << std::endl;
     if(J.second - J.first >  BigFloat(1).exp2(-aprec))
-      Rcpp::Rcout << "ERROR! Newton Refine failed to achieve the desired precision" << std::endl;
+      std::cout << "ERROR! Newton Refine failed to achieve the desired precision" << std::endl;
 #endif
 
       return(J);
@@ -1088,15 +1087,15 @@ CORE_INLINE void testSturm(const Polynomial<NT>&P, int prec, int n = -1) {
   Sturm<NT> Ss (P);
   BFVecInterval v;
   Ss.refineAllRoots(v, prec);
-  Rcpp::Rcout << "   Number of roots is " << v.size() <<std::endl;
+  std::cout << "   Number of roots is " << v.size() <<std::endl;
   if ((n >= 0) & (v.size() == (unsigned)n))
-    Rcpp::Rcout << " (CORRECT!)" << std::endl;
+    std::cout << " (CORRECT!)" << std::endl;
   else
-    Rcpp::Rcout << " (ERROR!) " << std::endl;
+    std::cout << " (ERROR!) " << std::endl;
   int i = 0;
   for (BFVecInterval::const_iterator it = v.begin();
        it != v.end(); ++it) {
-    Rcpp::Rcout << ++i << "th Root is in ["
+    std::cout << ++i << "th Root is in ["
     << it->first << " ; " << it->second << "]" << std::endl;
   }
 }// testSturm
@@ -1111,21 +1110,21 @@ CORE_INLINE void testNewtonSturm(const Polynomial<NT>&P, int prec, int n = -1) {
   Sturm<NT> Ss (P);
   BFVecInterval v;
   Ss.newtonRefineAllRoots(v, prec);
-  Rcpp::Rcout << "   Number of roots is " << v.size();
+  std::cout << "   Number of roots is " << v.size();
   if ((n >= 0) & (v.size() == (unsigned)n))
-    Rcpp::Rcout << " (CORRECT!)" << std::endl;
+    std::cout << " (CORRECT!)" << std::endl;
   else
-    Rcpp::Rcout << " (ERROR!) " << std::endl;
+    std::cout << " (ERROR!) " << std::endl;
 
   int i = 0;
   for (BFVecInterval::iterator it = v.begin();
        it != v.end(); ++it) {
-    Rcpp::Rcout << ++i << "th Root is in ["
+    std::cout << ++i << "th Root is in ["
     << it->first << " ; " << it->second << "]" << std::endl;
     if(it->second - it->first <= (1/power(BigFloat(2), prec)))
-      Rcpp::Rcout << " (CORRECT!) Precision attained" << std::endl;
+      std::cout << " (CORRECT!) Precision attained" << std::endl;
     else
-      Rcpp::Rcout << " (ERROR!) Precision not attained" << std::endl;
+      std::cout << " (ERROR!) Precision not attained" << std::endl;
   }
 }// testNewtonSturm
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_spherical_gaussian_map_3.h $
-// $Id: Arr_spherical_gaussian_map_3.h 89e5200 2020-07-02T19:10:56+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_spherical_gaussian_map_3.h $
+// $Id: Arr_spherical_gaussian_map_3.h 774e353 2022-01-11T11:32:50+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel         <efif@post.tau.ac.il>
@@ -13,7 +13,6 @@
 #ifndef CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_H
 #define CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -134,9 +133,12 @@ public:
                                  const Vector_3 & normal2,
                                  OutputIterator oi)
   {
-    Curve_2 cv(normal1.direction(), normal2.direction());
-    const Geometry_traits_2 * traits = this->m_sgm.geometry_traits();
-    oi = traits->make_x_monotone_2_object()(cv, oi);
+    const Geometry_traits_2* traits = this->m_sgm.geometry_traits();
+    auto ctr_point = traits->construct_point_2_object();
+    Curve_2 cv =
+      traits->construct_curve_2_object()(ctr_point(normal1.direction()),
+                                         ctr_point(normal2.direction()));
+    *oi++ = traits->make_x_monotone_2_object()(cv, oi);
     return oi;
   }
 
@@ -161,7 +163,7 @@ public:
     auto it = x_objects.begin();
     const auto* xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    Rcpp::Rcout << "1.a. insert_in_face_interior(" << *xc << ")" << std::endl;
+    std::cout << "1.a. insert_in_face_interior(" << *xc << ")" << std::endl;
 #endif
     Halfedge_handle he = m_sgm.insert_in_face_interior(*xc, m_sgm.faces_begin());
     if (! xc->is_directed_right()) he = he->twin();
@@ -172,7 +174,7 @@ public:
 
     xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    Rcpp::Rcout << "1.b. insert_from_vertex(" << *xc << ")" << std::endl;
+    std::cout << "1.b. insert_from_vertex(" << *xc << ")" << std::endl;
 #endif
     *oi++ = (xc->is_directed_right()) ?
       m_sgm.insert_from_left_vertex(*xc, he->target()) :
@@ -202,7 +204,7 @@ public:
     auto it = x_objects.begin();
     const auto* xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    Rcpp::Rcout << "2.a. insert_from_vertex(" << *xc << ", "
+    std::cout << "2.a. insert_from_vertex(" << *xc << ", "
               << vertex1->point() << ")" << std::endl;
 #endif
 
@@ -216,7 +218,7 @@ public:
 
     xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    Rcpp::Rcout << "2.b. insert_from_vertex(" << *xc << ")" << std::endl;
+    std::cout << "2.b. insert_from_vertex(" << *xc << ")" << std::endl;
 #endif
     *oi++ = (xc->is_directed_right()) ?
       m_sgm.insert_from_left_vertex(*xc, he->target()) :
@@ -247,7 +249,7 @@ public:
     if (x_objects.size() == 1) {
       const auto* xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-      Rcpp::Rcout << "3. insert_from_vertex(" << *xc << ")" << std::endl;
+      std::cout << "3. insert_from_vertex(" << *xc << ")" << std::endl;
 #endif
       Halfedge_handle he = (xc->is_directed_right()) ?
         m_sgm.insert_from_right_vertex(*xc, vertex2) :
@@ -260,14 +262,14 @@ public:
     const X_monotone_curve_2* xc2 = boost::get<X_monotone_curve_2>(&(*it));
 
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    Rcpp::Rcout << "3.a. insert_from_vertex(" << *xc2 << ")" << std::endl;
+    std::cout << "3.a. insert_from_vertex(" << *xc2 << ")" << std::endl;
 #endif
     Halfedge_handle he2 = (xc2->is_directed_right()) ?
       m_sgm.insert_from_right_vertex(*xc2, vertex2) :
       m_sgm.insert_from_left_vertex(*xc2, vertex2);
     he2 = he2->twin();
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    Rcpp::Rcout << "3.b. insert_from_vertex(" << *xc1 << ")" << std::endl;
+    std::cout << "3.b. insert_from_vertex(" << *xc1 << ")" << std::endl;
 #endif
     Halfedge_handle he1 = (xc1->is_directed_right()) ?
       m_sgm.insert_from_right_vertex(*xc1, he2->source()) :
@@ -300,7 +302,7 @@ public:
     if (x_objects.size() == 1) {
       const auto* xc = boost::get<X_monotone_curve_2>(&(*it));
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-      Rcpp::Rcout << "4. insert_at_vertices(" << *xc << ")" << std::endl;
+      std::cout << "4. insert_at_vertices(" << *xc << ")" << std::endl;
 #endif
       *oi++ = m_sgm.insert_at_vertices(*xc, vertex1, vertex2);
       return oi;
@@ -310,7 +312,7 @@ public:
     const X_monotone_curve_2 * xc2 = boost::get<X_monotone_curve_2>(&(*it));
 
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    Rcpp::Rcout << "4.a. insert_from_vertex(" << *xc1
+    std::cout << "4.a. insert_from_vertex(" << *xc1
               << "," << vertex1->point() << ")" << std::endl;
 #endif
     Halfedge_handle he = (xc1->is_directed_right()) ?
@@ -318,7 +320,7 @@ public:
       m_sgm.insert_from_right_vertex(*xc1, vertex1);
     *oi++ = he;
 #if CGAL_ARR_SPHERICAL_GAUSSIAN_MAP_3_DEBUG==1
-    Rcpp::Rcout << "4.b. insert_at_vertices(" << *xc2 << ")" << std::endl;
+    std::cout << "4.b. insert_at_vertices(" << *xc2 << ")" << std::endl;
 #endif
     *oi++ = m_sgm.insert_at_vertices(*xc2, he->target(), vertex2);
     return oi;
@@ -350,8 +352,8 @@ public:
   typedef Traits                                            Geometry_traits_2;
 
   typedef Arrangement_on_surface_2<Traits,
-        Arr_spherical_topology_traits_2<Traits, T_Dcel<Traits> > >
-                                                                                                                        Base;
+    Arr_spherical_topology_traits_2<Traits, T_Dcel<Traits> > >
+                                                            Base;
 
   /*! Parameter-less Constructor */
   Arr_spherical_gaussian_map_3() { }
@@ -395,7 +397,7 @@ public:
   /*! Print statistics */
   void print_stat()
   {
-    Rcpp::Rcout << "No. vertices: " << this->number_of_vertices()
+    std::cout << "No. vertices: " << this->number_of_vertices()
               << ",  no. halfedges: " << this->number_of_halfedges()
               << ",  no. faces: " << this->number_of_faces()
               << std::endl;

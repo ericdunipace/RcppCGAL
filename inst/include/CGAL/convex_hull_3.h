@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_hull_3/include/CGAL/convex_hull_3.h $
-// $Id: convex_hull_3.h c8624ee 2021-09-09T11:01:03+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_hull_3/include/CGAL/convex_hull_3.h $
+// $Id: convex_hull_3.h 61d42c3 2021-12-16T13:49:45+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -15,25 +15,22 @@
 #ifndef CGAL_CONVEX_HULL_3_H
 #define CGAL_CONVEX_HULL_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_hull_3.h>
 
-#include <CGAL/disable_warnings.h>
-
-#include <CGAL/basic.h>
 #include <CGAL/algorithm.h>
 #include <CGAL/convex_hull_2.h>
+#include <CGAL/Convex_hull_traits_3.h>
+#include <CGAL/Convex_hull_2/ch_assertions.h>
+#include <CGAL/Convex_hull_face_base_2.h>
+#include <CGAL/Convex_hull_vertex_base_2.h>
 #include <CGAL/Projection_traits_xy_3.h>
 #include <CGAL/Projection_traits_xz_3.h>
 #include <CGAL/Projection_traits_yz_3.h>
-#include <CGAL/Convex_hull_traits_3.h>
-#include <CGAL/Convex_hull_2/ch_assertions.h>
 #include <CGAL/Triangulation_data_structure_2.h>
-#include <CGAL/Triangulation_vertex_base_with_info_2.h>
 #include <CGAL/Cartesian_converter.h>
 #include <CGAL/Simple_cartesian.h>
 
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 #include <CGAL/boost/graph/copy_face_graph.h>
 #include <CGAL/boost/graph/Named_function_parameters.h>
 #include <CGAL/boost/graph/graph_traits_Triangulation_data_structure_2.h>
@@ -759,7 +756,7 @@ void non_coplanar_quickhull_3(std::list<typename Traits::Point_3>& points,
 
   ch_quickhull_3_scan(tds, pending_facets, traits);
 
-  //Rcpp::Rcout << "|V(tds)| = " << tds.number_of_vertices() << std::endl;
+  //std::cout << "|V(tds)| = " << tds.number_of_vertices() << std::endl;
 //  CGAL_ch_expensive_postcondition(all_points_inside(points.begin(),
 //                                                    points.end(),P,traits));
 //  CGAL_ch_postcondition(is_strongly_convex_3(P, traits));
@@ -773,15 +770,15 @@ ch_quickhull_face_graph(std::list<typename Traits::Point_3>& points,
                         const Traits& traits)
 {
   typedef typename Traits::Point_3                            Point_3;
-  typedef typename Traits::Plane_3                                Plane_3;
-  typedef typename std::list<Point_3>::iterator           P3_iterator;
+  typedef typename Traits::Plane_3                            Plane_3;
+  typedef typename std::list<Point_3>::iterator               P3_iterator;
 
   typedef Triangulation_data_structure_2<
-    Triangulation_vertex_base_with_info_2<int, GT3_for_CH3<Traits> >,
-    Convex_hull_face_base_2<int, Traits> >                           Tds;
+    Convex_hull_vertex_base_2<int, GT3_for_CH3<Traits> >,
+    Convex_hull_face_base_2<int, Traits> >                    Tds;
 
-  typedef typename Tds::Vertex_handle                     Vertex_handle;
-  typedef typename Tds::Face_handle                     Face_handle;
+  typedef typename Tds::Vertex_handle                         Vertex_handle;
+  typedef typename Tds::Face_handle                           Face_handle;
 
   // found three points that are not collinear, so construct the plane defined
   // by these points and then find a point that has maximum distance from this
@@ -1111,7 +1108,5 @@ extreme_points_3(const InputRange& range, OutputIterator out)
 }
 
 } // namespace CGAL
-
-#include <CGAL/enable_warnings.h>
 
 #endif // CGAL_CONVEX_HULL_3_H

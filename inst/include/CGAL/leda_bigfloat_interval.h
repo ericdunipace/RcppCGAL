@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Number_types/include/CGAL/leda_bigfloat_interval.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Number_types/include/CGAL/leda_bigfloat_interval.h $
 // $Id: leda_bigfloat_interval.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_LEDA_BIGFLOAT_INTERVAL_H
 #define CGAL_LEDA_BIGFLOAT_INTERVAL_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/LEDA_basic.h>
@@ -430,7 +429,7 @@ public:
 //             else            lower_m = (lower_m << -shift);
 //             //CGAL_postcondition(lower_m.length() == upper_m.length());
 //             leda::integer err = upper_m - lower_m;
-//             Rcpp::Rcout <<"LEDA: " << lower_m << " " << err << " " << std::endl;
+//             std::cout <<"LEDA: " << lower_m << " " << err << " " << std::endl;
 //             return CGAL::abs(lower_m.length()-err.length());
 //         }
 //     };

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Skin_surface_3/include/CGAL/triangulate_power_diagram_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Skin_surface_3/include/CGAL/triangulate_power_diagram_3.h $
 // $Id: triangulate_power_diagram_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_TRIANGULATE_POWER_DIAGRAM_3_H
 #define CGAL_TRIANGULATE_POWER_DIAGRAM_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 
@@ -129,11 +128,11 @@ private:
     triangulation_incr_builder.begin_triangulation(3);
 
     if (verbose)
-      Rcpp::Rcout << "Construct vertices" << std::endl;
+      std::cout << "Construct vertices" << std::endl;
     construct_vertices();
 
     if (verbose)
-      Rcpp::Rcout << "Construct cells" << std::endl;
+      std::cout << "Construct cells" << std::endl;
     construct_cells(); // mixed cells corresponding to regular vertices
 
     triangulation_incr_builder.end_triangulation();
@@ -335,10 +334,10 @@ construct_vertices()
   Rt_Simplex sVor;
   Tmc_Vertex_handle vh;
 
-  if (verbose) Rcpp::Rcout << "construct_anchors" << std::endl;
+  if (verbose) std::cout << "construct_anchors" << std::endl;
   construct_anchors();
 
-  if (verbose) Rcpp::Rcout << "4 ";
+  if (verbose) std::cout << "4 ";
   // anchor dimDel=0, dimVor=3
   for (cit=regular.finite_cells_begin();
        cit!=regular.finite_cells_end(); cit++) {
@@ -350,7 +349,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) Rcpp::Rcout << "3 ";
+  if (verbose) std::cout << "3 ";
   // anchor dimDel=2, dimVor=3 and dimDel=0, dimVor=2
   for (fit=regular.finite_facets_begin(); fit!=regular.finite_facets_end(); fit++) {
     // anchor dimDel=0, dimVor=2
@@ -362,7 +361,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) Rcpp::Rcout << "2 ";
+  if (verbose) std::cout << "2 ";
   // anchor dimDel=0, dimVor=1
   for (eit=regular.finite_edges_begin(); eit!=regular.finite_edges_end(); eit++) {
     sVor = get_anchor_vor(*eit);
@@ -373,7 +372,7 @@ construct_vertices()
     }
   }
 
-  if (verbose) Rcpp::Rcout << "1 ";
+  if (verbose) std::cout << "1 ";
   // anchor dimDel=0, dimVor=0
   for (vit=regular.finite_vertices_begin(); vit!=regular.finite_vertices_end(); vit++) {
     sVor = get_anchor_vor(Rt_Simplex(vit));
@@ -508,7 +507,7 @@ add_cell(Tmc_Vertex_handle vh[], int orient, Rt_Simplex s)
   if (orient) {
     if (orientation(vh[0]->point(), vh[1]->point(),
                     vh[2]->point(), vh[3]->point()) != POSITIVE) {
-      Rcpp::Rcout << orientation(vh[0]->point(), vh[1]->point(),
+      std::cout << orientation(vh[0]->point(), vh[1]->point(),
                                vh[2]->point(), vh[3]->point())<< std::endl;
     }
     CGAL_assertion(orientation(vh[0]->point(), vh[1]->point(),
@@ -616,7 +615,7 @@ remove_small_edges()
       do_collapse(vh,vh_collapse_to);
     }
   }
-  Rcpp::Rcout << "Collapsed: " << nCollapsed << std::endl;
+  std::cout << "Collapsed: " << nCollapsed << std::endl;
 }
 
 template <class RegularTriangulation_3,

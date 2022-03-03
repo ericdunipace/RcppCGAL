@@ -3,14 +3,13 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Qt/GraphicsViewPointInput.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Qt/GraphicsViewPointInput.h $
 // $Id: GraphicsViewPointInput.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 
 #ifndef CGAL_QT_GRAPHICS_VIEW_POINT_INPUT_H
 #define CGAL_QT_GRAPHICS_VIEW_POINT_INPUT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/Qt/GraphicsViewInput.h>
@@ -50,7 +49,7 @@ void
 GraphicsViewPointInput< K >::
 mousePressEvent( QGraphicsSceneMouseEvent* event )
 {
-    Rcpp::Rcout << event->pos( ).x( ) << std::endl;
+    std::cout << event->pos( ).x( ) << std::endl;
     this->point = this->convert( event->scenePos( ) );
 }
 

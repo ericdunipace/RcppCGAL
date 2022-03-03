@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/GraphicsView/include/CGAL/Qt/Basic_viewer_qt.h $
-// $Id: Basic_viewer_qt.h 993a7b2 2021-09-28T15:36:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/GraphicsView/include/CGAL/Qt/Basic_viewer_qt.h $
+// $Id: Basic_viewer_qt.h 3640099 2021-09-28T15:36:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_BASIC_VIEWER_QT_H
 #define CGAL_BASIC_VIEWER_QT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 #include <iostream>
 #include <tuple>
@@ -246,7 +245,10 @@ public:
   void clear()
   {
     for (unsigned int i=0; i<LAST_INDEX; ++i)
-    { arrays[i].clear(); }
+    {
+      if (i!=POS_CLIPPING_PLANE)
+      { arrays[i].clear(); }
+    }
 
     m_bounding_box=CGAL::Bbox_3();
     m_texts.clear();
@@ -313,6 +315,17 @@ public:
       m_buffer_for_mono_lines.has_zero_z() &&
       m_buffer_for_colored_lines.has_zero_z();
   }
+
+  Local_kernel::Plane_3 clipping_plane() const
+  {
+    CGAL::qglviewer::Vec n=m_frame_plane->inverseTransformOf
+        (CGAL::qglviewer::Vec(0.f, 0.f, 1.f));
+    const CGAL::qglviewer::Vec& pos=m_frame_plane->position();
+    return Local_kernel::Plane_3(n[0], n[1], n[2], -n*pos);
+  }
+
+  bool is_clipping_plane_enabled() const
+  { return (m_use_clipping_plane!=CLIPPING_PLANE_OFF); }
 
   template<typename KPoint>
   void add_point(const KPoint& p)
@@ -407,7 +420,7 @@ public:
   {
     if (is_a_face_started())
     {
-      Rcpp::Rcerr<<"You cannot start a new face before to finish the previous one."<<std::endl;
+      std::cerr<<"You cannot start a new face before to finish the previous one."<<std::endl;
     }
     else
     { m_buffer_for_mono_faces.face_begin(); }
@@ -417,7 +430,7 @@ public:
   {
     if (is_a_face_started())
     {
-      Rcpp::Rcerr<<"You cannot start a new face before to finish the previous one."<<std::endl;
+      std::cerr<<"You cannot start a new face before to finish the previous one."<<std::endl;
     }
     else
     { m_buffer_for_colored_faces.face_begin(acolor); }
@@ -482,13 +495,13 @@ protected:
     for (unsigned int i=0; i<NB_VBO_BUFFERS; ++i)
     {
       if(!buffers[i].isCreated() && !buffers[i].create())
-      { Rcpp::Rcerr<<"VBO Creation number "<<i<<" FAILED"<<std::endl; }
+      { std::cerr<<"VBO Creation number "<<i<<" FAILED"<<std::endl; }
     }
 
     for (unsigned int i=0; i<NB_VAO_BUFFERS; ++i)
     {
       if(!vao[i].isCreated() && !vao[i].create())
-      { Rcpp::Rcerr<<"VAO Creation number "<<i<<" FAILED"<<std::endl; }
+      { std::cerr<<"VAO Creation number "<<i<<" FAILED"<<std::endl; }
     }
 
     // Vertices and segments shader
@@ -499,7 +512,7 @@ protected:
 
     QOpenGLShader *vertex_shader_p_l = new QOpenGLShader(QOpenGLShader::Vertex);
     if(!vertex_shader_p_l->compileSourceCode(source_))
-    { Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl; }
+    { std::cerr<<"Compiling vertex source FAILED"<<std::endl; }
 
     source_ = isOpenGL_4_3()
         ? fragment_source_p_l
@@ -507,14 +520,14 @@ protected:
 
     QOpenGLShader *fragment_shader_p_l= new QOpenGLShader(QOpenGLShader::Fragment);
     if(!fragment_shader_p_l->compileSourceCode(source_))
-    { Rcpp::Rcerr<<"Compiling fragmentsource FAILED"<<std::endl; }
+    { std::cerr<<"Compiling fragmentsource FAILED"<<std::endl; }
 
     if(!rendering_program_p_l.addShader(vertex_shader_p_l))
-    { Rcpp::Rcerr<<"adding vertex shader FAILED"<<std::endl; }
+    { std::cerr<<"adding vertex shader FAILED"<<std::endl; }
     if(!rendering_program_p_l.addShader(fragment_shader_p_l))
-    { Rcpp::Rcerr<<"adding fragment shader FAILED"<<std::endl; }
+    { std::cerr<<"adding fragment shader FAILED"<<std::endl; }
     if(!rendering_program_p_l.link())
-    { Rcpp::Rcerr<<"linking Program FAILED"<<std::endl; }
+    { std::cerr<<"linking Program FAILED"<<std::endl; }
 
     // Faces shader
 
@@ -524,7 +537,7 @@ protected:
 
     QOpenGLShader *vertex_shader_face = new QOpenGLShader(QOpenGLShader::Vertex);
     if(!vertex_shader_face->compileSourceCode(source_))
-    { Rcpp::Rcerr<<"Compiling vertex source FAILED"<<std::endl; }
+    { std::cerr<<"Compiling vertex source FAILED"<<std::endl; }
 
     source_ = isOpenGL_4_3()
             ? fragment_source_color
@@ -532,38 +545,36 @@ protected:
 
     QOpenGLShader *fragment_shader_face= new QOpenGLShader(QOpenGLShader::Fragment);
     if(!fragment_shader_face->compileSourceCode(source_))
-    { Rcpp::Rcerr<<"Compiling fragment source FAILED"<<std::endl; }
+    { std::cerr<<"Compiling fragment source FAILED"<<std::endl; }
 
     if(!rendering_program_face.addShader(vertex_shader_face))
-    { Rcpp::Rcerr<<"adding vertex shader FAILED"<<std::endl; }
+    { std::cerr<<"adding vertex shader FAILED"<<std::endl; }
     if(!rendering_program_face.addShader(fragment_shader_face))
-    { Rcpp::Rcerr<<"adding fragment shader FAILED"<<std::endl; }
+    { std::cerr<<"adding fragment shader FAILED"<<std::endl; }
     if(!rendering_program_face.link())
-    { Rcpp::Rcerr<<"linking Program FAILED"<<std::endl; }
-
-    // clipping plane shader
-
+    { std::cerr<<"linking Program FAILED"<<std::endl; }
 
     if (isOpenGL_4_3())
     {
+      // clipping plane shader
       source_ = vertex_source_clipping_plane;
 
       QOpenGLShader *vertex_shader_clipping_plane = new QOpenGLShader(QOpenGLShader::Vertex);
       if (!vertex_shader_clipping_plane->compileSourceCode(source_))
-      { Rcpp::Rcerr << "Compiling vertex source for clipping plane FAILED" << std::endl; }
+      { std::cerr << "Compiling vertex source for clipping plane FAILED" << std::endl; }
 
       source_ = fragment_source_clipping_plane;
 
       QOpenGLShader *fragment_shader_clipping_plane = new QOpenGLShader(QOpenGLShader::Fragment);
       if (!fragment_shader_clipping_plane->compileSourceCode(source_))
-      { Rcpp::Rcerr << "Compiling fragment source for clipping plane FAILED" << std::endl; }
+      { std::cerr << "Compiling fragment source for clipping plane FAILED" << std::endl; }
 
       if (!rendering_program_clipping_plane.addShader(vertex_shader_clipping_plane))
-      { Rcpp::Rcerr << "Adding vertex shader for clipping plane FAILED" << std::endl;}
+      { std::cerr << "Adding vertex shader for clipping plane FAILED" << std::endl;}
       if (!rendering_program_clipping_plane.addShader(fragment_shader_clipping_plane))
-      { Rcpp::Rcerr << "Adding fragment shader for clipping plane FAILED" << std::endl; }
+      { std::cerr << "Adding fragment shader for clipping plane FAILED" << std::endl; }
       if (!rendering_program_clipping_plane.link())
-      { Rcpp::Rcerr << "Linking Program for clipping plane FAILED" << std::endl; }
+      { std::cerr << "Linking Program for clipping plane FAILED" << std::endl; }
 
     }
 
@@ -573,7 +584,7 @@ protected:
 
     // QOpenGLShader *vertex_shader_clipping_plane = new QOpenGLShader(QOpenGLShader::Vertex);
     // if (!vertex_shader_clipping_plane->compileSourceCode(source_))
-    // { Rcpp::Rcerr << "Compiling vertex source for clipping plane FAILED" << std::endl; }
+    // { std::cerr << "Compiling vertex source for clipping plane FAILED" << std::endl; }
 
     // source_ = isOpenGL_4_3()
     //         ? fragment_source_clipping_plane
@@ -581,14 +592,14 @@ protected:
 
     // QOpenGLShader *fragment_shader_clipping_plane = new QOpenGLShader(QOpenGLShader::Fragment);
     // if (!fragment_shader_clipping_plane->compileSourceCode(source_))
-    // { Rcpp::Rcerr << "Compiling fragment source for clipping plane FAILED" << std::endl; }
+    // { std::cerr << "Compiling fragment source for clipping plane FAILED" << std::endl; }
 
     // if (!rendering_program_clipping_plane.addShader(vertex_shader_clipping_plane))
-    // { Rcpp::Rcerr << "Adding vertex shader for clipping plane FAILED" << std::endl;}
+    // { std::cerr << "Adding vertex shader for clipping plane FAILED" << std::endl;}
     // if (!rendering_program_clipping_plane.addShader(fragment_shader_clipping_plane))
-    // { Rcpp::Rcerr << "Adding fragment shader for clipping plane FAILED" << std::endl; }
+    // { std::cerr << "Adding fragment shader for clipping plane FAILED" << std::endl; }
     // if (!rendering_program_clipping_plane.link())
-    // { Rcpp::Rcerr << "Linking Program for clipping plane FAILED" << std::endl; }
+    // { std::cerr << "Linking Program for clipping plane FAILED" << std::endl; }
   }
 
   void initialize_buffers()
@@ -869,6 +880,8 @@ protected:
     // 6) clipping plane shader
     if (isOpenGL_4_3())
     {
+      generate_clipping_plane();
+
       rendering_program_clipping_plane.bind();
 
       vao[VAO_CLIPPING_PLANE].bind();
@@ -957,11 +970,8 @@ protected:
     {
       QMatrix4x4 clipping_mMatrix;
       clipping_mMatrix.setToIdentity();
-      if(m_frame_plane)
-      {
-        for(int i=0; i< 16 ; i++)
-          clipping_mMatrix.data()[i] =  m_frame_plane->matrix()[i];
-      }
+      for(int i=0; i< 16 ; i++)
+      { clipping_mMatrix.data()[i] =  m_frame_plane->matrix()[i]; }
 
       rendering_program_clipping_plane.bind();
       int vpLocation = rendering_program_clipping_plane.uniformLocation("vp_matrix");
@@ -984,11 +994,8 @@ protected:
 
     QMatrix4x4 clipping_mMatrix;
     clipping_mMatrix.setToIdentity();
-    if(m_frame_plane)
-    {
-      for(int i=0; i< 16 ; i++)
-        clipping_mMatrix.data()[i] =  m_frame_plane->matrix()[i];
-    }
+    for(int i=0; i< 16 ; i++)
+    { clipping_mMatrix.data()[i] =  m_frame_plane->matrix()[i]; }
     QVector4D clipPlane = clipping_mMatrix * QVector4D(0.0, 0.0, 1.0, 0.0);
     QVector4D plane_point = clipping_mMatrix * QVector4D(0,0,0,1);
     if(!m_are_buffers_initialized)
@@ -1378,33 +1385,38 @@ protected:
                                                        bb.ymax(),
                                                        bb.zmax()));
 
-    // init clipping plane array
-    auto generate_clipping_plane = [this](qreal size, int nbSubdivisions)
-    {
-      for (int i = 0; i <= nbSubdivisions; i++)
-      {
-        const float pos = float(size*(2.0*i/nbSubdivisions-1.0));
-        arrays[POS_CLIPPING_PLANE].push_back(pos);
-        arrays[POS_CLIPPING_PLANE].push_back(float(-size));
-        arrays[POS_CLIPPING_PLANE].push_back(0.f);
-
-        arrays[POS_CLIPPING_PLANE].push_back(pos);
-        arrays[POS_CLIPPING_PLANE].push_back(float(+size));
-        arrays[POS_CLIPPING_PLANE].push_back(0.f);
-
-        arrays[POS_CLIPPING_PLANE].push_back(float(-size));
-        arrays[POS_CLIPPING_PLANE].push_back(pos);
-        arrays[POS_CLIPPING_PLANE].push_back(0.f);
-
-        arrays[POS_CLIPPING_PLANE].push_back(float(size));
-        arrays[POS_CLIPPING_PLANE].push_back(pos);
-        arrays[POS_CLIPPING_PLANE].push_back(0.f);
-      }
-    };
-    clipping_plane_rendering_size = ((bb.xmax() - bb.xmin()) + (bb.ymax() - bb.ymin()) + (bb.zmax() - bb.zmin())) / 3;
-    generate_clipping_plane(3.0 * clipping_plane_rendering_size, 30);
+    m_frame_plane=new CGAL::qglviewer::ManipulatedFrame;
 
     this->showEntireScene();
+  }
+
+  void generate_clipping_plane()
+  {
+    qreal size=((bounding_box().xmax() - bounding_box().xmin()) +
+                (bounding_box().ymax() - bounding_box().ymin()) +
+                (bounding_box().zmax() - bounding_box().zmin()));
+    const unsigned int nbSubdivisions=30;
+
+    arrays[POS_CLIPPING_PLANE].clear();
+    for (unsigned int i=0; i<=nbSubdivisions; ++i)
+    {
+      const float pos = float(size*(2.0*i/nbSubdivisions-1.0));
+      arrays[POS_CLIPPING_PLANE].push_back(pos);
+      arrays[POS_CLIPPING_PLANE].push_back(float(-size));
+      arrays[POS_CLIPPING_PLANE].push_back(0.f);
+
+      arrays[POS_CLIPPING_PLANE].push_back(pos);
+      arrays[POS_CLIPPING_PLANE].push_back(float(+size));
+      arrays[POS_CLIPPING_PLANE].push_back(0.f);
+
+      arrays[POS_CLIPPING_PLANE].push_back(float(-size));
+      arrays[POS_CLIPPING_PLANE].push_back(pos);
+      arrays[POS_CLIPPING_PLANE].push_back(0.f);
+
+      arrays[POS_CLIPPING_PLANE].push_back(float(size));
+      arrays[POS_CLIPPING_PLANE].push_back(pos);
+      arrays[POS_CLIPPING_PLANE].push_back(0.f);
+    }
   }
 
   void negate_all_normals()
@@ -1424,21 +1436,14 @@ protected:
       {
         // toggle clipping plane
         m_use_clipping_plane = (m_use_clipping_plane + 1) % CLIPPING_PLANE_END_INDEX;
-        if (m_use_clipping_plane==CLIPPING_PLANE_OFF && m_frame_plane)
-        {
-          setManipulatedFrame(nullptr);
-          delete m_frame_plane;
-          m_frame_plane=nullptr;
-        }
-        else if (m_frame_plane==nullptr)
-        {
-          m_frame_plane=new CGAL::qglviewer::ManipulatedFrame;
-          setManipulatedFrame(m_frame_plane);
-        }
+        if (m_use_clipping_plane==CLIPPING_PLANE_OFF)
+        { setManipulatedFrame(nullptr); }
+        else
+        { setManipulatedFrame(m_frame_plane); }
 
         switch(m_use_clipping_plane)
         {
-        case CLIPPING_PLANE_OFF: displayMessage(QString("Draw clipping = flase")); break;
+        case CLIPPING_PLANE_OFF: displayMessage(QString("Draw clipping = false")); break;
         case CLIPPING_PLANE_SOLID_HALF_TRANSPARENT_HALF: clipping_plane_rendering=true; displayMessage(QString("Draw clipping = solid half & transparent half")); break;
         case CLIPPING_PLANE_SOLID_HALF_WIRE_HALF: displayMessage(QString("Draw clipping = solid half & wireframe half")); break;
         case CLIPPING_PLANE_SOLID_HALF_ONLY: displayMessage(QString("Draw clipping = solid half only")); break;
@@ -1790,7 +1795,6 @@ protected:
   // variables for clipping plane
   bool clipping_plane_rendering = true; // will be toggled when alt+c is pressed, which is used for indicating whether or not to render the clipping plane ;
   float clipping_plane_rendering_transparency = 0.5f; // to what extent the transparent part should be rendered;
-  float clipping_plane_rendering_size; // to what extent the size of clipping plane should be rendered;
 
   std::vector<std::tuple<Local_point, QString> > m_texts;
 };
@@ -1805,7 +1809,7 @@ namespace CGAL
   template<class T>
   void draw(const T&, const char* ="", bool=false)
   {
-    Rcpp::Rcerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
+    std::cerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
   }
 
 } // End namespace CGAL

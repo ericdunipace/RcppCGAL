@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Partition_2/include/CGAL/Partition_2/partition_optimal_convex_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Partition_2/include/CGAL/Partition_2/partition_optimal_convex_2.h $
 // $Id: partition_optimal_convex_2.h 5a36ff8 2020-12-04T08:02:26+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -55,7 +55,6 @@
 #ifndef CGAL_PARTITION_OPTIMAL_CONVEX_H
 #define CGAL_PARTITION_OPTIMAL_CONVEX_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 
@@ -91,7 +90,7 @@ int partition_opt_cvx_best_so_far(Partition_opt_cvx_vertex& pivot_vertex,
                                   Partition_opt_cvx_diagonal_list& diag_list)
 {
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "best(" << pivot_vertex.vertex_num() << "."
+   std::cout << "best(" << pivot_vertex.vertex_num() << "."
              << partition_opt_cvx_debug_list_count
              << ", " << extension << ")" << std::endl;
 #endif
@@ -99,7 +98,7 @@ int partition_opt_cvx_best_so_far(Partition_opt_cvx_vertex& pivot_vertex,
    while (!pivot_vertex.stack_empty()) {
       Partition_opt_cvx_stack_record old = pivot_vertex.stack_top();
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-      Rcpp::Rcout << "best(" << pivot_vertex.vertex_num() << "."
+      std::cout << "best(" << pivot_vertex.vertex_num() << "."
                 << partition_opt_cvx_debug_list_count << ", " << extension
                 << ")" << " old = " << old.vertex_num()
                 << ", " << old.value() << std::endl;
@@ -112,7 +111,7 @@ int partition_opt_cvx_best_so_far(Partition_opt_cvx_vertex& pivot_vertex,
                     polygon[pivot_vertex.vertex_num()], polygon[extension]))
       {
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-         Rcpp::Rcout << "best(" << pivot_vertex.vertex_num() << "."
+         std::cout << "best(" << pivot_vertex.vertex_num() << "."
                    << partition_opt_cvx_debug_list_count
                    << ", " << extension << ")" << " returning(a) "
                    << best_so_far.value() << std::endl;
@@ -123,7 +122,7 @@ int partition_opt_cvx_best_so_far(Partition_opt_cvx_vertex& pivot_vertex,
       else if (old.value() < best_so_far.value())
          best_so_far = old;
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-      Rcpp::Rcout << "best(" << pivot_vertex.vertex_num() << "."
+      std::cout << "best(" << pivot_vertex.vertex_num() << "."
                 << partition_opt_cvx_debug_list_count
                 << ", " << extension << ") " << "popping off "
                 << old.vertex_num() << ", " << old.value() << std::endl;
@@ -131,14 +130,14 @@ int partition_opt_cvx_best_so_far(Partition_opt_cvx_vertex& pivot_vertex,
       pivot_vertex.stack_pop();
    }
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "best(" << pivot_vertex.vertex_num() << "."
+   std::cout << "best(" << pivot_vertex.vertex_num() << "."
              << partition_opt_cvx_debug_list_count
              << ", " << extension << ") returning(b) " << best_so_far.value()
              << std::endl;
 #endif
    diag_list = best_so_far.solution();
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "     diagonal list " << diag_list << std::endl;
+   std::cout << "     diagonal list " << diag_list << std::endl;
 #endif
    return best_so_far.value();
 }
@@ -155,11 +154,11 @@ void partition_opt_cvx_load(int current,
     Partition_opt_cvx_diagonal_list diag_list1, diag_list2;
 
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-    Rcpp::Rcout << "load(" << v_list[current].vertex_num() << ")" << std::endl;
+    std::cout << "load(" << v_list[current].vertex_num() << ")" << std::endl;
 #endif
     for (previous = current-1; previous >= 0; previous--) {
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-      Rcpp::Rcout << "load:  previous = " << v_list[previous].vertex_num()
+      std::cout << "load:  previous = " << v_list[previous].vertex_num()
                 << std::endl;
 #endif
       // must look at all valid edges and at all edges that are visible and
@@ -180,12 +179,12 @@ void partition_opt_cvx_load(int current,
                                                   polygon, traits, diag_list2);
          diag_list1.splice(diag_list1.end(), diag_list2);
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-         Rcpp::Rcout << "load:  pushing previous = "
+         std::cout << "load:  pushing previous = "
                    << v_list[previous].vertex_num() << " num_polygons = "
                    << num_polygons << " on stack "
                    << v_list[current].vertex_num() << "."
                    << partition_opt_cvx_debug_list_count << std::endl;
-         Rcpp::Rcout << "     diagonal list = " << diag_list1 << std::endl;
+         std::cout << "     diagonal list = " << diag_list1 << std::endl;
 #endif
          v_list[current].stack_push(v_list[previous].vertex_num(),
                                     num_polygons, diag_list1);
@@ -224,18 +223,18 @@ int partition_opt_cvx_decompose(unsigned int edge_num1, unsigned int edge_num2,
                                 Partition_opt_cvx_diagonal_list& diag_list)
 {
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "decompose(" << edge_num1 << ", " << edge_num2 << ")";
+   std::cout << "decompose(" << edge_num1 << ", " << edge_num2 << ")";
 #endif
    if (edges[edge_num1][edge_num2].is_done())  {
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-      Rcpp::Rcout << " returning " << edges[edge_num1][edge_num2].value()
+      std::cout << " returning " << edges[edge_num1][edge_num2].value()
                 << std::endl;
 #endif
       diag_list = edges[edge_num1][edge_num2].solution();
       return edges[edge_num1][edge_num2].value();
    }
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << std::endl;
+   std::cout << std::endl;
 #endif
 
    // temporarily invalidate this edge so we don't try to decompose on this
@@ -263,11 +262,11 @@ int partition_opt_cvx_decompose(unsigned int edge_num1, unsigned int edge_num2,
    std::vector< int >::size_type v;
 
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "v_list(" << edge_num1 << ", " << edge_num2 << ")";
+   std::cout << "v_list(" << edge_num1 << ", " << edge_num2 << ")";
    for(v = 0; v < v_list.size(); v++) {
-       Rcpp::Rcout << " " << v_list[v].vertex_num();
+       std::cout << " " << v_list[v].vertex_num();
    }
-   Rcpp::Rcout << std::endl;
+   std::cout << std::endl;
 #endif
 
    for(v = 0; v < v_list.size(); v++) {
@@ -278,7 +277,7 @@ int partition_opt_cvx_decompose(unsigned int edge_num1, unsigned int edge_num2,
                                                   edge_num1, polygon, traits,
                                                   diag_list) + 1;
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "decompose: num_pieces = " << num_pieces << std::endl;
+   std::cout << "decompose: num_pieces = " << num_pieces << std::endl;
 #endif
    edges[edge_num1][edge_num2].set_value(num_pieces);
    diag_list.push_back(Partition_opt_cvx_diagonal(edge_num1, edge_num2));
@@ -289,13 +288,13 @@ int partition_opt_cvx_decompose(unsigned int edge_num1, unsigned int edge_num2,
    // revalidate the edge; next time it will pick up the computed value
    // stored with this edge
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "decompose(" << edge_num1 << ", " << edge_num2 << "): "
+   std::cout << "decompose(" << edge_num1 << ", " << edge_num2 << "): "
              << " edge[" << edge_num1 << "][" << edge_num2 << "] set to "
              << edges[edge_num1][edge_num2] << std::endl;
-   Rcpp::Rcout << " with diagonal list "
+   std::cout << " with diagonal list "
              << edges[edge_num1][edge_num2].solution()
              << std::endl;
-   Rcpp::Rcout << "decompose(" << edge_num1 << ", " << edge_num2
+   std::cout << "decompose(" << edge_num1 << ", " << edge_num2
              << "): returning " << num_pieces << std::endl;
    partition_opt_cvx_debug_list_count--;
 #endif
@@ -525,18 +524,18 @@ OutputIterator partition_optimal_convex_2(InputIterator first,
     orientation_2(polygon.begin(), polygon.end(), traits) == COUNTERCLOCKWISE);
 
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "The polygon: " << std::endl;
+   std::cout << "The polygon: " << std::endl;
    for (S i = 0; i < polygon.size(); i++)
-      Rcpp::Rcout << polygon[i] << " ";
-   Rcpp::Rcout << std::endl;
+      std::cout << polygon[i] << " ";
+   std::cout << std::endl;
 #endif
 
    Matrix<Partition_opt_cvx_edge> edges(polygon.size(), polygon.size());
    partition_opt_cvx_preprocessing(polygon, edges, traits);
 #ifdef CGAL_PARTITION_OPTIMAL_CONVEX_DEBUG
-   Rcpp::Rcout << "after preprocessing edges are (done, valid, visible, value): "
+   std::cout << "after preprocessing edges are (done, valid, visible, value): "
              << std::endl;
-   Rcpp::Rcout << edges << std::endl;
+   std::cout << edges << std::endl;
 #endif
 
    Partition_opt_cvx_diagonal_list diag_list;

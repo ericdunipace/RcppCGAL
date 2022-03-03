@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/mesh_to_point_set_hausdorff_distance.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/mesh_to_point_set_hausdorff_distance.h $
 // $Id: mesh_to_point_set_hausdorff_distance.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_TO_POINT_SET_HAUSDORFF_DISTANCE_H
 #define CGAL_MESH_TO_POINT_SET_HAUSDORFF_DISTANCE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/distance.h>
 
 
@@ -145,7 +144,7 @@ public:
   #ifdef CGAL_MTPS_HD_DEBUG
   void print () const
   {
-    Rcpp::Rcerr << "[Refinement triangle]" << std::endl
+    std::cerr << "[Refinement triangle]" << std::endl
               << "   Bounds: " << m_lower_bound << " to "
               << m_upper_bound << std::endl
               << " * " << m_point[0]() << std::endl

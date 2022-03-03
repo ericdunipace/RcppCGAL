@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Set_movable_separability_2/include/CGAL/Set_movable_separability_2/internal/Circle_arrangment.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Set_movable_separability_2/include/CGAL/Set_movable_separability_2/internal/Circle_arrangment.h $
 // $Id: Circle_arrangment.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SET_MOVABLE_SEPARABILITY_2_INTERNAL_CIRCLE_ARRANGMENT_H
 #define CGAL_SET_MOVABLE_SEPARABILITY_2_INTERNAL_CIRCLE_ARRANGMENT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Set_movable_separability_2.h>
 
 
@@ -367,12 +366,12 @@ public:
   void printArrangement()
   {
     for (auto it = m_edges.begin(); it != m_edges.end(); ++it) {
-      if (it->m_start_is_closed) Rcpp::Rcout<<")[";
-      else Rcpp::Rcout << "](";
-      Rcpp::Rcout << it->m_edge_start_angle;
-      Rcpp::Rcout << ","<<(int)it->m_count;
+      if (it->m_start_is_closed) std::cout<<")[";
+      else std::cout << "](";
+      std::cout << it->m_edge_start_angle;
+      std::cout << ","<<(int)it->m_count;
     }
-    Rcpp::Rcout << "\n\n";
+    std::cout << "\n\n";
   }
 #endif
 

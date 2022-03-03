@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_mesh_3/include/CGAL/refine_periodic_3_mesh_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_3_mesh_3/include/CGAL/refine_periodic_3_mesh_3.h $
 // $Id: refine_periodic_3_mesh_3.h 53d4c9b 2019-10-28T11:29:08+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_REFINE_PERIODIC_3_MESH_3_H
 #define CGAL_REFINE_PERIODIC_3_MESH_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_mesh_3.h>
 
 #include <CGAL/Mesh_3/config.h>
@@ -111,10 +110,10 @@ void project_points(C3T3& c3t3,
     const FT sq_d = CGAL::squared_distance(new_point, vh_p);
 
 #ifdef CGAL_PERIODIC_3_MESH_3_DEBUG_DUMMY_PROJECTION
-    Rcpp::Rcerr << "vh: " << &*vh << std::endl;
-    Rcpp::Rcerr << "vhp: " << vh_p << std::endl;
-    Rcpp::Rcerr << "projected: " << new_point << std::endl;
-    Rcpp::Rcerr << "squared distance from dummy to surface: " << sq_d << std::endl;
+    std::cerr << "vh: " << &*vh << std::endl;
+    std::cerr << "vhp: " << vh_p << std::endl;
+    std::cerr << "projected: " << new_point << std::endl;
+    std::cerr << "squared distance from dummy to surface: " << sq_d << std::endl;
 #endif
 
     // Skip tiny moves for efficiency

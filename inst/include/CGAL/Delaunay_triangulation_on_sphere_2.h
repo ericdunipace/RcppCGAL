@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_on_sphere_2/include/CGAL/Delaunay_triangulation_on_sphere_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_on_sphere_2/include/CGAL/Delaunay_triangulation_on_sphere_2.h $
 // $Id: Delaunay_triangulation_on_sphere_2.h d871728 2021-07-23T13:09:37+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_DELAUNAY_TRIANGULATION_ON_SPHERE_2_H
 #define CGAL_DELAUNAY_TRIANGULATION_ON_SPHERE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_on_sphere_2.h>
 
 #include <CGAL/Triangulation_on_sphere_2.h>
@@ -1142,7 +1141,7 @@ is_valid_face(Face_handle fh, bool verbose, int /*level*/) const
   {
     if(verbose)
     {
-      Rcpp::Rcerr << " from is_valid_face\n face " << std::endl;
+      std::cerr << " from is_valid_face\n face " << std::endl;
       show_face(fh);
     }
   }
@@ -1161,7 +1160,7 @@ is_valid(bool verbose, int level) const
   if(!tds().is_valid(verbose, level))
   {
     if(verbose)
-      Rcpp::Rcerr << "invalid data structure" << std::endl;
+      std::cerr << "invalid data structure" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -1195,7 +1194,7 @@ is_valid(bool verbose, int level) const
 
   // in any dimension
   if(verbose)
-    Rcpp::Rcerr << " number of vertices " << number_of_vertices() << "\t" << std::endl;
+    std::cerr << " number of vertices " << number_of_vertices() << "\t" << std::endl;
 
   CGAL_triangulation_assertion(result);
   return result;

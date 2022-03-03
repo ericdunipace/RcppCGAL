@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/Label_set.h $
-// $Id: Label_set.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Classification/include/CGAL/Classification/Label_set.h $
+// $Id: Label_set.h 7fe4c32 2021-12-27T09:19:42+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -12,7 +12,6 @@
 #ifndef CGAL_CLASSIFICATION_LABEL_SET_H
 #define CGAL_CLASSIFICATION_LABEL_SET_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/Classification/Label.h>
@@ -206,7 +205,6 @@ public:
     // else
     return add (name, found->second.second, found->second.first);
   }
-  /// \endcond
 
   /*!
     \brief removes a label.
@@ -311,14 +309,14 @@ public:
 
     if (verbose)
     {
-      Rcpp::Rcout << "Ground truth is " << (valid ? "valid" : "invalid") << ":" << std::endl;
-      Rcpp::Rcout << " * " << nb_inliers[m_labels.size()] << " unclassified item(s) ("
+      std::cout << "Ground truth is " << (valid ? "valid" : "invalid") << ":" << std::endl;
+      std::cout << " * " << nb_inliers[m_labels.size()] << " unclassified item(s) ("
                 << 100. * (nb_inliers[m_labels.size()] / double(total)) << "%)" << std::endl;
       for (std::size_t i = 0; i < m_labels.size(); ++ i)
-        Rcpp::Rcout << " * " << nb_inliers[i] << " " << m_labels[i]->name() << " inlier(s) ("
+        std::cout << " * " << nb_inliers[i] << " " << m_labels[i]->name() << " inlier(s) ("
                   << 100. * (nb_inliers[i] / double(total)) << "%)" << std::endl;
       if (!valid)
-        Rcpp::Rcout << " * " << nb_inliers[m_labels.size() + 1] << " item(s) with out-of-range index ("
+        std::cout << " * " << nb_inliers[m_labels.size() + 1] << " item(s) with out-of-range index ("
                   << 100. * (nb_inliers[m_labels.size() + 1] / double(total)) << "%)" << std::endl;
     }
 

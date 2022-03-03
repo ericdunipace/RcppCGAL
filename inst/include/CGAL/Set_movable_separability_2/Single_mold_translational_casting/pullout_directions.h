@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Set_movable_separability_2/include/CGAL/Set_movable_separability_2/Single_mold_translational_casting/pullout_directions.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Set_movable_separability_2/include/CGAL/Set_movable_separability_2/Single_mold_translational_casting/pullout_directions.h $
 // $Id: pullout_directions.h 1f45360 2021-01-26T09:05:24+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SMS_2_PULLOUT_DIRECTIONS_SINGLE_MOLD_TRANSLATIONAL_CASTING_H
 #define CGAL_SMS_2_PULLOUT_DIRECTIONS_SINGLE_MOLD_TRANSLATIONAL_CASTING_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Set_movable_separability_2.h>
 
 
@@ -95,10 +94,10 @@ pullout_directions
 
   for (auto e_it = pgn.edges_begin(); e_it != pgn.edges_end(); ++e_it) {
     if (e_it==i) continue;
-    // Rcpp::Rcout << "f " << clock_first << " s " << clock_second << std::endl;
+    // std::cout << "f " << clock_first << " s " << clock_second << std::endl;
     auto segment_outer_circle =
       internal::get_segment_outer_circle<Casting_traits_2>(*e_it, orientation);
-    // Rcpp::Rcout << "a "<< segment_outer_circle.second << " b "
+    // std::cout << "a "<< segment_outer_circle.second << " b "
     //           << segment_outer_circle.first<<std::endl;
 
     // notice that we are interested in the segment_inner_circle
@@ -107,14 +106,14 @@ pullout_directions
       if ((segment_outer_circle.first == clock_second) &&
           (segment_outer_circle.second == clock_first))
       {
-        // Rcpp::Rcout<<"case 1b"<<std::endl<<std::endl;
+        // std::cout<<"case 1b"<<std::endl<<std::endl;
         // the arc is the range case 1b
         continue;
       }
       if ((segment_outer_circle.first == clock_first) &&
           (segment_outer_circle.second == clock_second))
       {
-        // Rcpp::Rcout<<"case 4b"<<std::endl<<std::endl;
+        // std::cout<<"case 4b"<<std::endl<<std::endl;
 
         // the arc the opposite of the range case 4b
         return std::make_pair(false, std::make_pair(clock_first, clock_second));
@@ -129,22 +128,22 @@ pullout_directions
                                      segment_outer_circle.first);
     //is true if segment_outer_circle \in [first,clock_first,clock_second]
     if (f_between_ab && s_between_ab) {
-      // Rcpp::Rcout<<"case 1"<<std::endl<<std::endl;
+      // std::cout<<"case 1"<<std::endl<<std::endl;
       // case 1 //surly not case 4b since [f,s] is less than a semicircle
       continue;
     }
     if (!f_between_ab && s_between_ab) {
-      // Rcpp::Rcout<<"case 2"<<std::endl<<std::endl;
+      // std::cout<<"case 2"<<std::endl<<std::endl;
       // case 2 - return a,s
       clock_first = segment_outer_circle.second;
     }
     else if(f_between_ab && !s_between_ab) {
-      // Rcpp::Rcout<<"case 3"<<std::endl<<std::endl;
+      // std::cout<<"case 3"<<std::endl<<std::endl;
       // case 3 - return f,b
       clock_second = segment_outer_circle.first;
     }
     else {
-      //  Rcpp::Rcout<<"case 4a"<<std::endl<<std::endl;
+      //  std::cout<<"case 4a"<<std::endl<<std::endl;
       //case 4a
       return std::make_pair(false, std::make_pair(clock_first, clock_second));
     }

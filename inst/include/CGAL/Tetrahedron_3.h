@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Tetrahedron_3.h $
-// $Id: Tetrahedron_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Tetrahedron_3.h $
+// $Id: Tetrahedron_3.h 8fa0f55 2021-05-27T10:27:38+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -57,6 +57,9 @@ public:
 
   Tetrahedron_3(const Rep& t)
       : Rep(t) {}
+
+  Tetrahedron_3(Rep&& t)
+      : Rep(std::move(t)) {}
 
   Tetrahedron_3(const Point_3& p, const Point_3& q,
                 const Point_3& r, const Point_3& s)

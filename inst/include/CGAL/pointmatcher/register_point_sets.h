@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/pointmatcher/register_point_sets.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/pointmatcher/register_point_sets.h $
 // $Id: register_point_sets.h c253679 2020-04-18T16:27:58+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_POINTMATCHER_REGISTER_POINT_SETS_H
 #define CGAL_POINTMATCHER_REGISTER_POINT_SETS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #if defined(CGAL_LINKED_WITH_POINTMATCHER) || defined(DOXYGEN_RUNNING)
@@ -223,7 +222,7 @@ namespace pointmatcher {
    \cgalNamedParamsEnd
 
    \return `true` if registration is converged, `false` otherwise. A log why it
-   failed to converge is written to `Rcpp::Rcerr` if the registration cannot converge.
+   failed to converge is written to `std::cerr` if the registration cannot converge.
 */
 template <class PointRange1, class PointRange2,
           class NamedParameters1, class NamedParameters2>

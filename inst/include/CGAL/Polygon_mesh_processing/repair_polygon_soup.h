@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_polygon_soup.h $
-// $Id: repair_polygon_soup.h 9b442d1 2021-04-06T15:12:47+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_polygon_soup.h $
+// $Id: repair_polygon_soup.h c03444a 2021-06-17T08:29:08+02:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -12,7 +12,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REPAIR_POLYGON_SOUP
 #define CGAL_POLYGON_MESH_PROCESSING_REPAIR_POLYGON_SOUP
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/boost/graph/Named_function_parameters.h>
@@ -130,7 +129,7 @@ bool simplify_polygon(PointRange& points,
        traits.equal_3_object()(points[polygon[i]], points[polygon[ni]]))
     {
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-      Rcpp::Rcout << "Duplicate point: polygon[" << ni << "] = " << polygon[ni] << std::endl;
+      std::cout << "Duplicate point: polygon[" << ni << "] = " << polygon[ni] << std::endl;
 #endif
       polygon.erase(polygon.begin() + i--);
     }
@@ -187,7 +186,7 @@ std::size_t simplify_polygons_in_polygon_soup(PointRange& points,
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE
   if(simplified_polygons_n > 0)
-    Rcpp::Rcout << "Cleaned consecutive duplicate vertices in " << simplified_polygons_n << " polygon(s)" << std::endl;
+    std::cout << "Cleaned consecutive duplicate vertices in " << simplified_polygons_n << " polygon(s)" << std::endl;
 #endif
 
   return simplified_polygons_n;
@@ -240,8 +239,8 @@ std::size_t split_pinched_polygons_in_polygon_soup(PointRange& points,
     const std::size_t ini_polygon_size = polygon.size();
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-    Rcpp::Rcout << "Input polygon: ";
-    internal::print_polygon(Rcpp::Rcout, polygon);
+    std::cout << "Input polygon: ";
+    internal::print_polygon(std::cout, polygon);
 #endif
 
     if(ini_polygon_size <= 3)
@@ -263,8 +262,8 @@ std::size_t split_pinched_polygons_in_polygon_soup(PointRange& points,
       if(!is_insert_successful.second)
       {
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE
-        Rcpp::Rcout << "Pinched polygon: ";
-        internal::print_polygon(Rcpp::Rcout, polygon);
+        std::cout << "Pinched polygon: ";
+        internal::print_polygon(std::cout, polygon);
 #endif
 
         // We have already met that point, split the polygon into two smaller polygons
@@ -279,12 +278,12 @@ std::size_t split_pinched_polygons_in_polygon_soup(PointRange& points,
         split_polygon_2.insert(split_polygon_2.end(), polygon.begin() + i, polygon.end());
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-        Rcpp::Rcout << "New polygons:" << std::endl;
-        Rcpp::Rcout << "P1:";
-        internal::print_polygon(Rcpp::Rcout, split_polygon_1);
+        std::cout << "New polygons:" << std::endl;
+        std::cout << "P1:";
+        internal::print_polygon(std::cout, split_polygon_1);
 
-        Rcpp::Rcout << "P2:";
-        internal::print_polygon(Rcpp::Rcout, split_polygon_2);
+        std::cout << "P2:";
+        internal::print_polygon(std::cout, split_polygon_2);
 #endif
 
         std::swap(polygon, split_polygon_1);
@@ -323,8 +322,8 @@ std::size_t remove_invalid_polygons_in_polygon_soup(PointRange& /*points*/,
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
                                     if(polygon.size() <= 2)
                                     {
-                                      Rcpp::Rcout << "Invalid polygon:";
-                                      print_polygon(Rcpp::Rcout, polygon);
+                                      std::cout << "Invalid polygon:";
+                                      print_polygon(std::cout, polygon);
                                     }
 #endif
                                     return (polygon.size() <= 2);
@@ -336,7 +335,7 @@ std::size_t remove_invalid_polygons_in_polygon_soup(PointRange& /*points*/,
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE
   if(removed_polygons_n > 0)
-    Rcpp::Rcout << "Removed " << removed_polygons_n << " invalid polygon(s)" << std::endl;
+    std::cout << "Removed " << removed_polygons_n << " invalid polygon(s)" << std::endl;
 #endif
 
   return removed_polygons_n;
@@ -398,8 +397,8 @@ std::size_t remove_isolated_points_in_polygon_soup(PointRange& points,
       CGAL_assertion(swap_position < ini_points_size);
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-      Rcpp::Rcout << "points[" << i << "] = " << points[i] << " is isolated" << std::endl;
-      Rcpp::Rcout << "  swapping it to pos: " << swap_position << std::endl;
+      std::cout << "points[" << i << "] = " << points[i] << " is isolated" << std::endl;
+      std::cout << "  swapping it to pos: " << swap_position << std::endl;
 #endif
       std::swap(points[swap_position], points[i]);
 
@@ -440,7 +439,7 @@ std::size_t remove_isolated_points_in_polygon_soup(PointRange& points,
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE
   if(removed_points_n > 0)
-    Rcpp::Rcout << "Removed " << removed_points_n << " isolated point(s)" << std::endl;
+    std::cout << "Removed " << removed_points_n << " isolated point(s)" << std::endl;
 #endif
 
   return removed_points_n;
@@ -509,7 +508,7 @@ std::size_t merge_duplicate_points_in_polygon_soup(PointRange& points,
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
     if(!is_insert_successful.second)
-      Rcpp::Rcout << "points[" <<i << "] = " << points[i] << " was already encountered" << std::endl;
+      std::cout << "points[" <<i << "] = " << points[i] << " was already encountered" << std::endl;
 #endif
     std::size_t id = is_insert_successful.first->second;
 
@@ -524,16 +523,16 @@ std::size_t merge_duplicate_points_in_polygon_soup(PointRange& points,
     {
       Polygon_3& polygon = polygons[polygon_index];
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-      Rcpp::Rcout << "Input polygon: ";
-      internal::print_polygon(Rcpp::Rcout, polygon);
+      std::cout << "Input polygon: ";
+      internal::print_polygon(std::cout, polygon);
 #endif
 
       for(std::size_t i=0, polygon_size = polygon.size(); i<polygon_size; ++i)
         polygon[i] = point_index[polygon[i]];
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-      Rcpp::Rcout << "Output polygon: ";
-      internal::print_polygon(Rcpp::Rcout, polygon);
+      std::cout << "Output polygon: ";
+      internal::print_polygon(std::cout, polygon);
 #endif
     }
 
@@ -544,7 +543,7 @@ std::size_t merge_duplicate_points_in_polygon_soup(PointRange& points,
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE
   if(removed_points_n > 0)
-    Rcpp::Rcout << "Removed (merged) " << removed_points_n << " duplicate points" << std::endl;
+    std::cout << "Removed (merged) " << removed_points_n << " duplicate points" << std::endl;
 #endif
 
   return removed_points_n;
@@ -580,7 +579,7 @@ void canonical_polygon_markers(const PointRange& points,
   first = min_id - polygon.begin();
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-  Rcpp::Rcout << "first: " << first
+  std::cout << "first: " << first
             << " points[" << *min_id << "] = " << points[*min_id] << std::endl;
 #endif
 
@@ -592,11 +591,11 @@ void canonical_polygon_markers(const PointRange& points,
   reversed = traits.less_xyz_3_object()(points[polygon[pos_prev]], points[polygon[pos_next]]);
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-  Rcpp::Rcout << "pos_prev: " << pos_prev
+  std::cout << "pos_prev: " << pos_prev
             << " points[" << polygon[pos_prev] << "] = " << points[polygon[pos_prev]] << std::endl;
-  Rcpp::Rcout << "pos_next: " << pos_next
+  std::cout << "pos_next: " << pos_next
             << " points[" << polygon[pos_next] << "] = " << points[polygon[pos_next]] << std::endl;
-  Rcpp::Rcout << "reversed: " << std::boolalpha << reversed << std::endl;
+  std::cout << "reversed: " << std::boolalpha << reversed << std::endl;
 #endif
 }
 
@@ -640,8 +639,8 @@ Polygon construct_canonical_polygon(const PointRange& points,
 
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-  Rcpp::Rcout << "Input polygon:";
-  internal::print_polygon(Rcpp::Rcout, polygon);
+  std::cout << "Input polygon:";
+  internal::print_polygon(std::cout, polygon);
 #endif
 
   std::size_t first;
@@ -649,8 +648,8 @@ Polygon construct_canonical_polygon(const PointRange& points,
   Polygon canonical_polygon = construct_canonical_polygon_with_markers(polygon, first, reversed);
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-  Rcpp::Rcout << "Canonical polygon:";
-  internal::print_polygon(Rcpp::Rcout, canonical_polygon);
+  std::cout << "Canonical polygon:";
+  internal::print_polygon(std::cout, canonical_polygon);
 #endif
 
   return canonical_polygon;
@@ -825,7 +824,7 @@ DuplicateOutputIterator collect_duplicate_polygons(const PointRange& points,
     {
       const P_ID other_polygon_id = *(is_insert_successful.first);
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-      Rcpp::Rcout << "polygon: " << polygon_index << " is a duplicate of polygon: " << other_polygon_id << std::endl;
+      std::cout << "polygon: " << polygon_index << " is a duplicate of polygon: " << other_polygon_id << std::endl;
 #endif
       duplicates.collect_duplicates(other_polygon_id, polygon_index);
     }
@@ -896,21 +895,21 @@ std::size_t merge_duplicate_polygons_in_polygon_soup(const PointRange& points,
   const bool same_orientation = choose_parameter(get_parameter(np, internal_np::require_same_orientation), false);
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-  Rcpp::Rcout << "Only polygons with the same orientation are duplicates: " << std::boolalpha << same_orientation << std::endl;
-  Rcpp::Rcout << "Erase all duplicate polygons: " << std::boolalpha << erase_all_duplicates << std::endl;
+  std::cout << "Only polygons with the same orientation are duplicates: " << std::boolalpha << same_orientation << std::endl;
+  std::cout << "Erase all duplicate polygons: " << std::boolalpha << erase_all_duplicates << std::endl;
 #endif
 
   typedef typename internal::GetPolygonGeomTraits<PointRange, PolygonRange, NamedParameters>::type Traits;
   Traits traits = choose_parameter<Traits>(get_parameter(np, internal_np::geom_traits));
 
-  std::vector<std::vector<P_ID> > all_duplicate_polygons;
+  std::deque<std::vector<P_ID> > all_duplicate_polygons;
   internal::collect_duplicate_polygons(points, polygons, std::back_inserter(all_duplicate_polygons), traits, same_orientation);
 
   if(all_duplicate_polygons.empty())
     return 0;
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-  Rcpp::Rcout << all_duplicate_polygons.size() << " duplicate(s)" << std::endl;
+  std::cout << all_duplicate_polygons.size() << " duplicate(s)" << std::endl;
 #endif
 
   // Move all polygons that will be removed to the end of container
@@ -946,8 +945,8 @@ std::size_t merge_duplicate_polygons_in_polygon_soup(const PointRange& points,
       const P_ID polygon_at_swap_position_id = pos_to_PID[swap_position];
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE_PP
-      Rcpp::Rcout << "Removing duplicate, PID: " << polygon_to_remove_id << " at position: " << polygon_to_remove_pos << std::endl;
-      Rcpp::Rcout << "  swap position: " << swap_position << ", position of PID: " << polygon_at_swap_position_id << std::endl;
+      std::cout << "Removing duplicate, PID: " << polygon_to_remove_id << " at position: " << polygon_to_remove_pos << std::endl;
+      std::cout << "  swap position: " << swap_position << ", position of PID: " << polygon_at_swap_position_id << std::endl;
 #endif
 
       // Need to keep track of who goes where
@@ -974,8 +973,8 @@ std::size_t merge_duplicate_polygons_in_polygon_soup(const PointRange& points,
   polygons.erase(first, polygons.end());
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE
-  Rcpp::Rcout << "Removed " << removed_polygons_n << " duplicate polygon(s)" << std::endl;
-  Rcpp::Rcout << polygons.size() << " polygon(s) left" << std::endl;
+  std::cout << "Removed " << removed_polygons_n << " duplicate polygon(s)" << std::endl;
+  std::cout << polygons.size() << " polygon(s) left" << std::endl;
 #endif
 
   return removed_polygons_n;
@@ -1057,7 +1056,7 @@ void repair_polygon_soup(PointRange& points,
   Traits traits = choose_parameter<Traits>(get_parameter(np, internal_np::geom_traits));
 
 #ifdef CGAL_PMP_REPAIR_POLYGON_SOUP_VERBOSE
-  Rcpp::Rcout << "Repairing soup with " << points.size() << " points and " << polygons.size() << " polygons" << std::endl;
+  std::cout << "Repairing soup with " << points.size() << " points and " << polygons.size() << " polygons" << std::endl;
 #endif
 
   merge_duplicate_points_in_polygon_soup(points, polygons, np);

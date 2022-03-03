@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Bounding_volumes/include/CGAL/Approximate_min_ellipsoid_d/Approximate_min_ellipsoid_d_configure.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Bounding_volumes/include/CGAL/Approximate_min_ellipsoid_d/Approximate_min_ellipsoid_d_configure.h $
 // $Id: Approximate_min_ellipsoid_d_configure.h 5a36ff8 2020-12-04T08:02:26+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_APPROX_MIN_ELL_CONFIGURE_H
 #define CGAL_APPROX_MIN_ELL_CONFIGURE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -75,7 +74,7 @@
 // - CGAL_APPEL_TIMER_PRINT(channel,timer,msg): Prints the string msg followed
 //   by the time elapsed since the last CGAL_APPEL_TIMER_START(timer).  The
 //   destination is either channel 'channel' in case logging mode is on,
-//   or Rcpp::Rcout otherwise.
+//   or std::cout otherwise.
 //
 // - CGAL_APPEL_TIMER_STRING(timer): Returns a string with the number of
 //   seconds elapsed since the last CGAL_APPEL_TIMER_START(timer).
@@ -136,7 +135,7 @@
    #else
      #define CGAL_APPEL_TIMER_PRINT(channel,timer,msg) \
        { \
-         Rcpp::Rcerr << msg << std::setiosflags(std::ios::fixed) \
+         std::cerr << msg << std::setiosflags(std::ios::fixed) \
                    << std::setprecision(5) \
                    << CGAL::Approximate_min_ellipsoid_d_impl:: \
                       Timer::instance().lapse(timer) \

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_searching/include/CGAL/Point_container.h $
-// $Id: Point_container.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Spatial_searching/include/CGAL/Point_container.h $
+// $Id: Point_container.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_POINT_CONTAINER_H
 #define CGAL_POINT_CONTAINER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Spatial_searching.h>
 
 
@@ -24,7 +23,7 @@
 #include <functional>
 #include <algorithm>
 #include <CGAL/Kd_tree_rectangle.h>
-#include <CGAL/internal/Get_dimension_tag.h>
+#include <CGAL/Spatial_searching/internal/Get_dimension_tag.h>
 
 #include <boost/optional.hpp>
 
@@ -295,11 +294,11 @@ public:
       typename Traits2::Cartesian_const_iterator_d ptit;
       ptit = construct_it(*pt);
       if(! ( *(ptit+split_coord) <= high ) ){
-        //        Rcpp::Rcerr << "Point " << *pt << " exceeds " << high << " in dimension " << split_coord << std::endl;
+        //        std::cerr << "Point " << *pt << " exceeds " << high << " in dimension " << split_coord << std::endl;
         return false;
       }
       if(! ( *(ptit+split_coord) >= low ) ){
-        //Rcpp::Rcerr << "Point " << *pt << " below " << low << " in dimension " << split_coord << std::endl;
+        //std::cerr << "Point " << *pt << " below " << low << " in dimension " << split_coord << std::endl;
         return false;
       }
       return true;

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Interpolation/include/CGAL/natural_neighbor_coordinates_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Interpolation/include/CGAL/natural_neighbor_coordinates_3.h $
 // $Id: natural_neighbor_coordinates_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_NATURAL_NEIGHBORS_3_H
 #define CGAL_NATURAL_NEIGHBORS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Interpolation.h>
 
 #include <CGAL/tags.h>
@@ -322,7 +321,7 @@ bool is_correct_natural_neighborhood(const Dt& /*dt*/,
   }
   //!!!! to be replaced by a linear combination of points as soon
   // as it is available in the kernel.
-  Rcpp::Rcout << sum_x/norm_coeff << " "
+  std::cout << sum_x/norm_coeff << " "
             << sum_y/norm_coeff << " "
             << sum_z/norm_coeff << std::endl;
   return ((sum_x == norm_coeff*Q.x()) && (sum_y == norm_coeff*Q.y())

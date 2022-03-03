@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_tracing_traits_2.h $
-// $Id: Arr_tracing_traits_2.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_tracing_traits_2.h $
+// $Id: Arr_tracing_traits_2.h 12a85a9 2021-03-01T15:39:36+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel    <efif@post.tau.ac.il>
@@ -12,7 +12,6 @@
 #ifndef CGAL_ARR_TRACING_TRAITS_H
 #define CGAL_ARR_TRACING_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -70,8 +69,6 @@ public:
 
     PARAMETER_SPACE_IN_Y_OP,
     IS_ON_Y_IDENTIFICATION_OP,
-    COMPARE_X_AT_LIMIT_OP,
-    COMPARE_X_NEAR_LIMIT_OP,
     COMPARE_X_ON_BOUNDARY_OP,
     COMPARE_X_NEAR_BOUNDARY_OP,
 
@@ -158,12 +155,6 @@ private:
   bool is_on_y_identification_op() const
   { return m_flags & (0x1 << IS_ON_Y_IDENTIFICATION_OP); }
 
-  bool compare_x_at_limit_op() const
-  { return m_flags & (0x1 << COMPARE_X_AT_LIMIT_OP); }
-
-  bool compare_x_near_limit_op() const
-  { return m_flags & (0x1 << COMPARE_X_NEAR_LIMIT_OP); }
-
   bool compare_x_on_boundary_op() const
   { return (0 != (m_flags & (0x1 << COMPARE_X_ON_BOUNDARY_OP))); }
 
@@ -228,7 +219,7 @@ public:
 
   public:
     /*! Construct */
-    Compare_x_2(const Base * base, bool enabled = true) :
+    Compare_x_2(const Base* base, bool enabled = true) :
       m_object(base->compare_x_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -236,14 +227,14 @@ public:
      * \param p2 second point
      * \return the comparison result
      */
-    Comparison_result operator()(const Point_2 & p1, const Point_2 & p2) const
+    Comparison_result operator()(const Point_2& p1, const Point_2& p2) const
     {
       if (!m_enabled) return m_object(p1, p2);
-      Rcpp::Rcout << "compare_x" << std::endl
+      std::cout << "compare_x" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       Comparison_result cr = m_object(p1, p2);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -256,7 +247,7 @@ public:
 
   public:
     /*! Construct */
-    Compare_xy_2(const Base * base, bool enabled = true) :
+    Compare_xy_2(const Base* base, bool enabled = true) :
       m_object(base->compare_xy_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -264,14 +255,14 @@ public:
      * \param p2 the second point
      * \return the comparison result
      */
-    Comparison_result operator()(const Point_2 & p1, const Point_2 & p2) const
+    Comparison_result operator()(const Point_2& p1, const Point_2& p2) const
     {
       if (!m_enabled) return m_object(p1, p2);
-      Rcpp::Rcout << "compare_xy" << std::endl
+      std::cout << "compare_xy" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       Comparison_result cr = m_object(p1, p2);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -284,20 +275,20 @@ public:
 
   public:
     /*! Construct */
-    Construct_min_vertex_2(const Base * base, bool enabled = true) :
+    Construct_min_vertex_2(const Base* base, bool enabled = true) :
       m_object(base->construct_min_vertex_2_object()), m_enabled(enabled) {}
 
     /*! Operate
      * \param xcv the curev the left endpoint of which is obtained
      * \return the left endpoint
      */
-    const Point_2 operator()(const X_monotone_curve_2 & xcv) const
+    const Point_2 operator()(const X_monotone_curve_2& xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      Rcpp::Rcout << "construct_min_vertex" << std::endl
+      std::cout << "construct_min_vertex" << std::endl
                 << "  xcv: " << xcv << std::endl;
       Point_2 p = m_object(xcv);
-      Rcpp::Rcout << "  result: " << p << std::endl;
+      std::cout << "  result: " << p << std::endl;
       return p;
     }
   };
@@ -310,20 +301,20 @@ public:
 
   public:
     /*! Construct */
-    Construct_max_vertex_2(const Base * base, bool enabled = true) :
+    Construct_max_vertex_2(const Base* base, bool enabled = true) :
       m_object(base->construct_max_vertex_2_object()), m_enabled(enabled) {}
 
     /*! Operate
      * \param xcv the curev the right endpoint of which is obtained
      * \return the right endpoint
      */
-    const Point_2 operator()(const X_monotone_curve_2 & xcv) const
+    const Point_2 operator()(const X_monotone_curve_2& xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      Rcpp::Rcout << "construct_max_vertex" << std::endl
+      std::cout << "construct_max_vertex" << std::endl
                 << "  xcv: " << xcv << std::endl;
       Point_2 p = m_object(xcv);
-      Rcpp::Rcout << "  result: " << p << std::endl;
+      std::cout << "  result: " << p << std::endl;
       return p;
     }
   };
@@ -336,20 +327,20 @@ public:
 
   public:
     /*! Construct */
-    Is_vertical_2(const Base * base, bool enabled = true) :
+    Is_vertical_2(const Base* base, bool enabled = true) :
       m_object(base->is_vertical_2_object()), m_enabled(enabled) {}
 
     /*! Operate
      * \param xcv the curve
      * \return a Boolean that indicates whether the curve is vertical or not
      */
-    bool operator()(const X_monotone_curve_2 & xcv) const
+    bool operator()(const X_monotone_curve_2& xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      Rcpp::Rcout << "is_vertical" << std::endl
+      std::cout << "is_vertical" << std::endl
                 << "  xcv: " << xcv << std::endl;
       bool is_vertical = m_object(xcv);
-      Rcpp::Rcout << "  result: " << is_vertical << std::endl;
+      std::cout << "  result: " << is_vertical << std::endl;
       return is_vertical;
     }
   };
@@ -364,7 +355,7 @@ public:
 
   public:
     /*! Construct */
-    Compare_y_at_x_2(const Base * base, bool enabled = true) :
+    Compare_y_at_x_2(const Base* base, bool enabled = true) :
       m_object(base->compare_y_at_x_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -372,15 +363,15 @@ public:
      * \param xcv the curve
      * \return the comparison result
      */
-    Comparison_result operator()(const Point_2 & p,
-                                 const X_monotone_curve_2 & xcv) const
+    Comparison_result operator()(const Point_2& p,
+                                 const X_monotone_curve_2& xcv) const
     {
       if (!m_enabled) return m_object(p, xcv);
-      Rcpp::Rcout << "compare_y_at_x" << std::endl
+      std::cout << "compare_y_at_x" << std::endl
                 << "  p: " << p << std::endl
                 << "  xcv: " << xcv << std::endl;
       Comparison_result cr = m_object(p, xcv);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -396,7 +387,7 @@ public:
 
   public:
     /*! Construct */
-    Equal_2(const Base * base,
+    Equal_2(const Base* base,
             bool enabled_point = true, bool enabled_curve = true) :
       m_object(base->equal_2_object()),
       m_enabled_point(enabled_point),
@@ -408,15 +399,15 @@ public:
      * \param xcv2 the second curve
      * \return true if the x-monotone curves are equal and false otherwise
      */
-    bool operator()(const X_monotone_curve_2 & xcv1,
-                    const X_monotone_curve_2 & xcv2) const
+    bool operator()(const X_monotone_curve_2& xcv1,
+                    const X_monotone_curve_2& xcv2) const
     {
       if (!m_enabled_curve) return m_object(xcv1, xcv2);
-      Rcpp::Rcout << "equal 1" << std::endl
+      std::cout << "equal 1" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv1: " << xcv1 << std::endl;
       bool equal = m_object(xcv1, xcv2);
-      Rcpp::Rcout << "  result: " << equal << std::endl;
+      std::cout << "  result: " << equal << std::endl;
       return equal;
     }
 
@@ -425,14 +416,14 @@ public:
      * \param p2 the second point
      * \return true if the points are equal and false otherwise
      */
-    bool operator()(const Point_2 & p1, const Point_2 & p2) const
+    bool operator()(const Point_2& p1, const Point_2& p2) const
     {
       if (!m_enabled_point) return m_object(p1, p2);
-      Rcpp::Rcout << "equal 2" << std::endl
+      std::cout << "equal 2" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       bool equal = m_object(p1, p2);
-      Rcpp::Rcout << "  result: " << equal << std::endl;
+      std::cout << "  result: " << equal << std::endl;
       return equal;
     }
   };
@@ -447,7 +438,7 @@ public:
 
   public:
     /*! Construct */
-    Compare_y_at_x_left_2(const Base * base, bool enabled = true) :
+    Compare_y_at_x_left_2(const Base* base, bool enabled = true) :
       m_object(base->compare_y_at_x_left_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -456,17 +447,17 @@ public:
      * \param p the reference point
      * \return the comparison result
      */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv1,
-                                 const X_monotone_curve_2 & xcv2,
-                                 const Point_2 & p) const
+    Comparison_result operator()(const X_monotone_curve_2& xcv1,
+                                 const X_monotone_curve_2& xcv2,
+                                 const Point_2& p) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, p);
-      Rcpp::Rcout << "compare_y_at_x_left" << std::endl
+      std::cout << "compare_y_at_x_left" << std::endl
                 << "  p: " << p << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, p);
-      Rcpp::Rcout << "  result:" << cr << std::endl;
+      std::cout << "  result:" << cr << std::endl;
       return cr;
     }
   };
@@ -481,7 +472,7 @@ public:
 
   public:
     /*! Construct */
-    Compare_y_at_x_right_2(const Base * base, bool enabled = true) :
+    Compare_y_at_x_right_2(const Base* base, bool enabled = true) :
       m_object(base->compare_y_at_x_right_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -490,17 +481,17 @@ public:
      * \param p the reference point
      * \return the comparison result
      */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv1,
-                                 const X_monotone_curve_2 & xcv2,
-                                 const Point_2 & p) const
+    Comparison_result operator()(const X_monotone_curve_2& xcv1,
+                                 const X_monotone_curve_2& xcv2,
+                                 const Point_2& p) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, p);
-      Rcpp::Rcout << "compare_y_at_x_right" << std::endl
+      std::cout << "compare_y_at_x_right" << std::endl
                 << "  p: " << p << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, p);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -518,7 +509,7 @@ public:
 
   public:
     /*! Construct */
-    Make_x_monotone_2(const Base * base, bool enabled = true) :
+    Make_x_monotone_2(const Base* base, bool enabled = true) :
       m_object(base->make_x_monotone_2_object()), m_enabled(enabled) {}
 
     /*! Subdivide a given curve into x-monotone subcurves and insert them into
@@ -528,11 +519,11 @@ public:
      *           that wraps Point_2 or X_monotone_curve_2 objects.
      * \return the output iterator.
      */
-    template <typename OutputIterator>
-    OutputIterator operator()(const Curve_2 & cv, OutputIterator oi) const
+    template<typename OutputIterator>
+    OutputIterator operator()(const Curve_2& cv, OutputIterator oi) const
     {
       if (! m_enabled) return m_object(cv, oi);
-      Rcpp::Rcout << "make_x_monotone" << std::endl
+      std::cout << "make_x_monotone" << std::endl
                 << "  cv: " << cv << std::endl;
 
       typedef boost::variant<Point_2, X_monotone_curve_2>
@@ -545,12 +536,12 @@ public:
       size_t i = 0;
       for (auto it = container.begin(); it != container.end(); ++it) {
         if (const auto* xcv = boost::get<X_monotone_curve_2>(*it)) {
-          Rcpp::Rcout << "  result[" << i++ << "]: xcv: " << *xcv << std::endl;
+          std::cout << "  result[" << i++ << "]: xcv: " << *xcv << std::endl;
           continue;
         }
 
         if (const Point_2* p = boost::get<Point_2>(*it)) {
-          Rcpp::Rcout << "  result[" << i++ << "]: p: " << *p << std::endl;
+          std::cout << "  result[" << i++ << "]: p: " << *p << std::endl;
           continue;
         }
 
@@ -571,7 +562,7 @@ public:
 
   public:
     /*! Construct */
-    Split_2(const Base * base, bool enabled = true) :
+    Split_2(const Base* base, bool enabled = true) :
       m_object(base->split_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -580,18 +571,18 @@ public:
      * \param xcv1
      * \param xcv2
      */
-    void operator()(const X_monotone_curve_2 & xcv, const Point_2 & p,
-                    X_monotone_curve_2 & xcv1, X_monotone_curve_2 & xcv2) const
+    void operator()(const X_monotone_curve_2& xcv, const Point_2& p,
+                    X_monotone_curve_2& xcv1, X_monotone_curve_2& xcv2) const
     {
       if (!m_enabled) {
         m_object(xcv, p, xcv1, xcv2);
         return;
       }
-      Rcpp::Rcout << "split: " << std::endl
+      std::cout << "split: " << std::endl
                 << "  xcv: " << xcv << std::endl
                 << "  p: " << p << std::endl;
       m_object(xcv, p, xcv1, xcv2);
-      Rcpp::Rcout << "  result xcv1: " << xcv1 << std::endl
+      std::cout << "  result xcv1: " << xcv1 << std::endl
                 << "         xcv2: " << xcv2 << std::endl;
     }
   };
@@ -617,8 +608,8 @@ public:
      * \return the past-the-end output iterator.
      */
     template <typename OutputIterator>
-    OutputIterator operator()(const X_monotone_curve_2 & xcv1,
-                              const X_monotone_curve_2 & xcv2,
+    OutputIterator operator()(const X_monotone_curve_2& xcv1,
+                              const X_monotone_curve_2& xcv2,
                               OutputIterator oi) const
     {
       typedef std::pair<Point_2, Multiplicity>          Intersection_point;
@@ -627,7 +618,7 @@ public:
 
       if (! m_enabled) return m_object(xcv1, xcv2, oi);
 
-      Rcpp::Rcout << "intersect" << std::endl
+      std::cout << "intersect" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       std::list<Intersection_result> container;
@@ -638,13 +629,13 @@ public:
       for (const auto& item : container) {
         const X_monotone_curve_2* xcv = boost::get<X_monotone_curve_2>(&item);
         if (xcv != nullptr) {
-          Rcpp::Rcout << "  result[" << i++ << "]: xcv: " << *xcv << std::endl;
+          std::cout << "  result[" << i++ << "]: xcv: " << *xcv << std::endl;
           continue;
         }
 
         const Intersection_point* ip = boost::get<Intersection_point>(&item);
         if (ip != nullptr) {
-          Rcpp::Rcout << "  result[" << i++ << "]: p: " << ip->first
+          std::cout << "  result[" << i++ << "]: p: " << ip->first
                     << ", multiplicity: " << ip->second << std::endl;
           continue;
         }
@@ -664,7 +655,7 @@ public:
 
   public:
     /*! Construct */
-    Are_mergeable_2(const Base * base, bool enabled = true) :
+    Are_mergeable_2(const Base* base, bool enabled = true) :
       m_object(base->are_mergeable_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -674,15 +665,15 @@ public:
      * Two curves are mergeable if they have the same underlying theoretical
      * curve
      */
-    bool operator()(const X_monotone_curve_2 & xcv1,
-                    const X_monotone_curve_2 & xcv2) const
+    bool operator()(const X_monotone_curve_2& xcv1,
+                    const X_monotone_curve_2& xcv2) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2);
-      Rcpp::Rcout << "are_mergeable" << std::endl
+      std::cout << "are_mergeable" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       bool are_mergeable = m_object(xcv1, xcv2);
-      Rcpp::Rcout << "  result: " << are_mergeable << std::endl;
+      std::cout << "  result: " << are_mergeable << std::endl;
       return are_mergeable;
     }
   };
@@ -695,7 +686,7 @@ public:
 
   public:
     /*! Construct */
-    Merge_2(const Base * base, bool enabled = true) :
+    Merge_2(const Base* base, bool enabled = true) :
       m_object(base->merge_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -703,15 +694,15 @@ public:
      * \param xcv2 the second curve
      * \param xcv the merged curve
      */
-    void operator()(const X_monotone_curve_2 & xcv1,
-                    const X_monotone_curve_2 & xcv2,
-                    X_monotone_curve_2 & xcv) const
+    void operator()(const X_monotone_curve_2& xcv1,
+                    const X_monotone_curve_2& xcv2,
+                    X_monotone_curve_2& xcv) const
     {
-      Rcpp::Rcout << "merge" << std::endl
+      std::cout << "merge" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       return m_object(xcv1, xcv2, xcv);
-      Rcpp::Rcout << "  result: " << xcv << std::endl;
+      std::cout << "  result: " << xcv << std::endl;
     }
   };
 
@@ -723,20 +714,20 @@ public:
 
   public:
     /*! Construct */
-    Construct_opposite_2(const Base * base, bool enabled = true) :
+    Construct_opposite_2(const Base* base, bool enabled = true) :
       m_object(base->construct_opposite_2_object()), m_enabled(enabled) {}
 
     /*! Operate
      * \param xcv the curve
      * \return the opposite curve
      */
-    X_monotone_curve_2 operator()(const X_monotone_curve_2 & xcv)
+    X_monotone_curve_2 operator()(const X_monotone_curve_2& xcv)
     {
       if (!m_enabled) return m_object(xcv);
-      Rcpp::Rcout << "construct_opposite" << std::endl
+      std::cout << "construct_opposite" << std::endl
                 << "  xcv: " << xcv << std::endl;
       X_monotone_curve_2 xcv_out = m_object(xcv);
-      Rcpp::Rcout << "  result: " << xcv_out << std::endl;
+      std::cout << "  result: " << xcv_out << std::endl;
       return xcv;
     }
   };
@@ -751,20 +742,20 @@ public:
 
   public:
     /*! Construct */
-    Compare_endpoints_xy_2(const Base * base, bool enabled = true) :
+    Compare_endpoints_xy_2(const Base* base, bool enabled = true) :
       m_object(base->compare_endpoints_xy_2_object()), m_enabled(enabled) {}
 
     /*! Operate
      * \param xcv the curve
      * \return the comparison result
      */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv)
+    Comparison_result operator()(const X_monotone_curve_2& xcv)
     {
       if (!m_enabled) return m_object(xcv);
-      Rcpp::Rcout << "compare_endpoints_xy" << std::endl
+      std::cout << "compare_endpoints_xy" << std::endl
                 << "  xcv: " << xcv << std::endl;
       Comparison_result cr = m_object(xcv);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -781,7 +772,7 @@ public:
 
   public:
     /*! Construct */
-    Parameter_space_in_x_2(const Base * base, bool enabled = true) :
+    Parameter_space_in_x_2(const Base* base, bool enabled = true) :
       m_object(base->parameter_space_in_x_2_object()), m_enabled(enabled)
     {}
 
@@ -790,14 +781,31 @@ public:
      * \param ce the curve-end identifier
      * \return the boundary type
      */
-    Arr_parameter_space operator()(const X_monotone_curve_2 & xcv,
-                             Arr_curve_end ce) const
+    Arr_parameter_space operator()(const X_monotone_curve_2& xcv,
+                                   Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv, ce);
-      Rcpp::Rcout << "parameter_space_in_x" << std::endl
+      std::cout << "parameter_space_in_x" << std::endl
                 << "  ce: " << ce << ", xcv: " << xcv << std::endl;
       Arr_parameter_space bt = m_object(xcv, ce);
-      Rcpp::Rcout << "  result: " << bt << std::endl;
+      std::cout << "  result: " << bt << std::endl;
+      return bt;
+    }
+
+    /*! A functor that obtains the parameter space at a point along the x-axis.
+     * Every non-interior point is assumed to lie on the left-right
+     * identification.
+     * Points at the poles additionally lie on the bottom or top boundary.
+     * \param p the point.
+     * \return the parameter space at p.
+     */
+    Arr_parameter_space operator()(const Point_2& p) const
+    {
+      if (!m_enabled) return m_object(p);
+      std::cout << "parameter_space_in_x" << std::endl
+                << "  p: " << p << std::endl;
+      Arr_parameter_space bt = m_object(p);
+      std::cout << "  result: " << bt << std::endl;
       return bt;
     }
   };
@@ -812,31 +820,31 @@ public:
 
   public:
     /*! Construct */
-    Is_on_x_identification_2(const Base * base, bool enabled = true) :
+    Is_on_x_identification_2(const Base* base, bool enabled = true) :
       m_object(base->is_on_x_identification_2_object()), m_enabled(enabled) {}
     /*! Operate
      * \param p1 the point.
      */
-    Comparison_result operator()(const Point_2 & p) const
+    bool operator()(const Point_2& p) const
     {
       if (!m_enabled) return m_object(p);
-      Rcpp::Rcout << "is_on_x_identification" << std::endl
+      std::cout << "is_on_x_identification" << std::endl
                 << "  p: " << p << std::endl;
-      Comparison_result cr = m_object(p);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      bool cr = m_object(p);
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
 
     /*! Operate
      * \param xcv1 the curve
      */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv) const
+    bool operator()(const X_monotone_curve_2& xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      Rcpp::Rcout << "is_on_x_identification" << std::endl
+      std::cout << "is_on_x_identification" << std::endl
                 << "  xcv: " << xcv << std::endl;
-      Comparison_result cr = m_object(xcv);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      bool cr = m_object(xcv);
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -851,7 +859,7 @@ public:
 
   public:
     /*! Construct */
-    Compare_y_on_boundary_2(const Base * base, bool enabled = true) :
+    Compare_y_on_boundary_2(const Base* base, bool enabled = true) :
       m_object(base->compare_y_on_boundary_2_object()),
       m_enabled(enabled)
     {}
@@ -860,14 +868,14 @@ public:
      * \param p1 the first point.
      * \param p2 the second point.
      */
-    Comparison_result operator()(const Point_2 & p1, const Point_2 & p2) const
+    Comparison_result operator()(const Point_2& p1, const Point_2& p2) const
     {
       if (!m_enabled) return m_object(p1, p2);
-      Rcpp::Rcout << "compare_y_on_boundary" << std::endl
+      std::cout << "compare_y_on_boundary" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       Comparison_result cr = m_object(p1, p2);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -882,7 +890,7 @@ public:
 
   public:
     /*! Construct */
-    Compare_y_near_boundary_2(const Base * base, bool enabled = true) :
+    Compare_y_near_boundary_2(const Base* base, bool enabled = true) :
       m_object(base->compare_y_near_boundary_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -891,17 +899,17 @@ public:
      * \param ce the curve-end identifier
      * \return the comparison result
      */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv1,
-                                 const X_monotone_curve_2 & xcv2,
+    Comparison_result operator()(const X_monotone_curve_2& xcv1,
+                                 const X_monotone_curve_2& xcv2,
                                  Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, ce);
-      Rcpp::Rcout << "compare_y_near_boundary" << std::endl
+      std::cout << "compare_y_near_boundary" << std::endl
                 << "  ce: " << ce << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, ce);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -918,7 +926,7 @@ public:
 
   public:
     /*! Construct */
-    Parameter_space_in_y_2(const Base * base, bool enabled = true) :
+    Parameter_space_in_y_2(const Base* base, bool enabled = true) :
       m_object(base->parameter_space_in_y_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -926,14 +934,14 @@ public:
      * \param ce the curve-end identifier
      * \return the boundary type
      */
-    Arr_parameter_space operator()(const X_monotone_curve_2 & xcv,
+    Arr_parameter_space operator()(const X_monotone_curve_2& xcv,
                              Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv, ce);
-        Rcpp::Rcout << "parameter_space_in_y" << std::endl
+        std::cout << "parameter_space_in_y" << std::endl
                   << "  ce: " << ce << ", xcv: " << xcv << std::endl;
       Arr_parameter_space bt = m_object(xcv, ce);
-      Rcpp::Rcout << "  result: " << bt << std::endl;
+      std::cout << "  result: " << bt << std::endl;
       return bt;
     }
 
@@ -941,13 +949,13 @@ public:
      * \param p the point
      * \return the boundary type
      */
-    Arr_parameter_space operator()(const Point_2 & p) const
+    Arr_parameter_space operator()(const Point_2& p) const
     {
       if (!m_enabled) return m_object(p);
-        Rcpp::Rcout << "parameter_space_in_y" << std::endl
+        std::cout << "parameter_space_in_y" << std::endl
                   << "  point: " << p << std::endl;
       Arr_parameter_space bt = m_object(p);
-      Rcpp::Rcout << "  result: " << bt << std::endl;
+      std::cout << "  result: " << bt << std::endl;
       return bt;
     }
   };
@@ -962,121 +970,31 @@ public:
 
   public:
     /*! Construct */
-    Is_on_y_identification_2(const Base * base, bool enabled = true) :
+    Is_on_y_identification_2(const Base* base, bool enabled = true) :
       m_object(base->is_on_y_identification_2_object()), m_enabled(enabled) {}
     /*! Operate
      * \param p1 the point.
      */
-    Comparison_result operator()(const Point_2 & p) const
+    bool operator()(const Point_2& p) const
     {
       if (!m_enabled) return m_object(p);
-      Rcpp::Rcout << "is_on_y_identification" << std::endl
+      std::cout << "is_on_y_identification" << std::endl
                 << "  p: " << p << std::endl;
-      Comparison_result cr = m_object(p);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      bool cr = m_object(p);
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
 
     /*! Operate
      * \param xcv1 the curve
      */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv) const
+    bool operator()(const X_monotone_curve_2& xcv) const
     {
       if (!m_enabled) return m_object(xcv);
-      Rcpp::Rcout << "is_on_y_identification" << std::endl
+      std::cout << "is_on_y_identification" << std::endl
                 << "  xcv: " << xcv << std::endl;
-      Comparison_result cr = m_object(xcv);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
-      return cr;
-    }
-  };
-
-  /*! A functor that compares the x-limits of curve ends on the
-   * boundary of the parameter space.
-   */
-  class Compare_x_at_limit_2 {
-  private:
-    typename Base::Compare_x_at_limit_2 m_object;
-    bool m_enabled;
-
-  public:
-    /*! Construct */
-    Compare_x_at_limit_2(const Base * base, bool enabled = true) :
-      m_object(base->compare_x_at_limit_2_object()), m_enabled(enabled) {}
-
-    /*! Operate
-     * \param p the first point
-     * \param xcv the curve the end of which is to be compared
-     * \param ce the curve-end identifier
-     * \return the comparison result
-     */
-    Comparison_result operator()(const Point_2 & p,
-                                 const X_monotone_curve_2 & xcv,
-                                 Arr_curve_end ce) const
-    {
-      if (!m_enabled) return m_object(p, xcv, ce);
-      Rcpp::Rcout << "compare_x_at_limit 1" << std::endl
-                << "  p: " << p << std::endl
-                << "  ce: " << ce << ", xcv: " << xcv << std::endl;
-      Comparison_result cr = m_object(p, xcv, ce);
-      Rcpp::Rcout << "  result: " << std::endl;
-      return cr;
-    }
-
-    /*! Operate
-     * \param xcv1 the first curve the end of which is to be compared
-     * \param ce1 the identifier of the end of the first curve
-     * \param xcv2 the second curve the end of which is to be compared
-     * \param ce2 the identifier of the end of the second curve
-     * \return the comparison result
-     */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv1,
-                                 Arr_curve_end ce1,
-                                 const X_monotone_curve_2 & xcv2,
-                                 Arr_curve_end ce2) const
-    {
-      if (!m_enabled) return m_object(xcv1, ce1, xcv2, ce2);
-      Rcpp::Rcout << "compare_x_at_limit 2" << std::endl
-                << "  ce1: " << ce1 << ", xcv1: " << xcv1 << std::endl
-                << "  ce2: " << ce2 << ", xcv2: " << xcv2 << std::endl;
-      Comparison_result cr = m_object(xcv1, ce1, xcv2, ce2);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
-      return cr;
-    }
-  };
-
-
-  /*! A functor that compares the x-coordinates of curve ends near the
-   * boundary of the parameter space.
-   */
-  class Compare_x_near_limit_2 {
-  private:
-    typename Base::Compare_x_near_limit_2 m_object;
-    bool m_enabled;
-
-  public:
-    /*! Construct */
-    Compare_x_near_limit_2(const Base * base, bool enabled = true) :
-      m_object(base->compare_x_near_limit_2_object()), m_enabled(enabled) {}
-
-    /*! Operate
-     * \param xcv1 the first curve the end of which is to be compared
-     * \param ce1 the identifier of the end of the first curve
-     * \param xcv2 the second curve the end of which is to be compared
-     * \param ce2 the identifier of the end of the second curve
-     * \return the comparison result
-     */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv1,
-                                 const X_monotone_curve_2 & xcv2,
-                                 Arr_curve_end ce) const
-    {
-      if (!m_enabled) return m_object(xcv1, xcv2, ce);
-      Rcpp::Rcout << "compare_x_near_limit 2" << std::endl
-                << "  xcv1: " << xcv1 << std::endl
-                << "  xcv2: " << xcv2 << std::endl
-                << "    ce: " << ce << std::endl;
-      Comparison_result cr = m_object(xcv1, xcv2, ce);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      bool cr = m_object(xcv);
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -1091,20 +1009,20 @@ public:
 
   public:
     /*! Construct */
-    Compare_x_on_boundary_2(const Base * base, bool enabled = true) :
+    Compare_x_on_boundary_2(const Base* base, bool enabled = true) :
       m_object(base->compare_x_on_boundary_2_object()), m_enabled(enabled) {}
     /*! Operate
      * \param p1 the first point.
      * \param p2 the second point.
      */
-    Comparison_result operator()(const Point_2 & p1, const Point_2 & p2) const
+    Comparison_result operator()(const Point_2& p1, const Point_2& p2) const
     {
       if (!m_enabled) return m_object(p1, p2);
-      Rcpp::Rcout << "compare_x_on_boundary" << std::endl
+      std::cout << "compare_x_on_boundary" << std::endl
                 << "  p1: " << p1 << std::endl
                 << "  p2: " << p2 << std::endl;
       Comparison_result cr = m_object(p1, p2);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
 
@@ -1113,16 +1031,17 @@ public:
      * \param xcv the curve.
      * \param ce the curve-end
      */
-    Comparison_result operator()(const Point_2 & pt,
-                                 const X_monotone_curve_2 & xcv, Arr_curve_end ce) const
+    Comparison_result operator()(const Point_2& pt,
+                                 const X_monotone_curve_2& xcv,
+                                 Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(pt, xcv, ce);
-      Rcpp::Rcout << "compare_x_on_boundary" << std::endl
+      std::cout << "compare_x_on_boundary" << std::endl
                 << "  pt: " << pt << std::endl
                 << " xcv: " << xcv << std::endl
                 << "  ce: " << ce << std::endl;
       Comparison_result cr = m_object(pt, xcv, ce);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
 
@@ -1132,20 +1051,21 @@ public:
      * \param xcv2 the second curve.
      * \param ce2 the second curve-end
      */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv1, Arr_curve_end ce1,
-                                 const X_monotone_curve_2 & xcv2, Arr_curve_end ce2) const
+    Comparison_result operator()(const X_monotone_curve_2& xcv1,
+                                 Arr_curve_end ce1,
+                                 const X_monotone_curve_2& xcv2,
+                                 Arr_curve_end ce2) const
     {
       if (!m_enabled) return m_object(xcv2, ce1, xcv2, ce2);
-      Rcpp::Rcout << "compare_x_on_boundary" << std::endl
+      std::cout << "compare_x_on_boundary" << std::endl
                 << "xcv1: " << xcv1 << std::endl
                 << " ce1: " << ce1 << std::endl
                 << "xcv2: " << xcv2 << std::endl
                 << " ce2: " << ce2 << std::endl;
       Comparison_result cr = m_object(xcv1, ce1, xcv2, ce2);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
-
   };
 
   /*! A functor that compares the x-coordinates of curve ends near the
@@ -1158,7 +1078,7 @@ public:
 
   public:
     /*! Construct */
-    Compare_x_near_boundary_2(const Base * base, bool enabled = true) :
+    Compare_x_near_boundary_2(const Base* base, bool enabled = true) :
       m_object(base->compare_x_near_boundary_2_object()), m_enabled(enabled) {}
 
     /*! Operate
@@ -1168,17 +1088,17 @@ public:
      * \param ce2 the identifier of the end of the second curve
      * \return the comparison result
      */
-    Comparison_result operator()(const X_monotone_curve_2 & xcv1,
-                                 const X_monotone_curve_2 & xcv2,
+    Comparison_result operator()(const X_monotone_curve_2& xcv1,
+                                 const X_monotone_curve_2& xcv2,
                                  Arr_curve_end ce) const
     {
       if (!m_enabled) return m_object(xcv1, xcv2, ce);
-      Rcpp::Rcout << "compare_x_near_boundary 2" << std::endl
+      std::cout << "compare_x_near_boundary 2" << std::endl
                 << "  xcv1: " << xcv1 << std::endl
                 << "  xcv2: " << xcv2 << std::endl
                 << "    ce: " << ce << std::endl;
       Comparison_result cr = m_object(xcv1, xcv2, ce);
-      Rcpp::Rcout << "  result: " << cr << std::endl;
+      std::cout << "  result: " << cr << std::endl;
       return cr;
     }
   };
@@ -1258,12 +1178,6 @@ public:
   Is_on_y_identification_2 is_on_y_identification_2_object() const
   { return Is_on_y_identification_2(this, is_on_y_identification_op()); }
 
-  Compare_x_at_limit_2 compare_x_at_limit_2_object() const
-  { return Compare_x_at_limit_2(this, compare_x_at_limit_op()); }
-
-  Compare_x_near_limit_2 compare_x_near_limit_2_object() const
-  { return Compare_x_near_limit_2(this, compare_x_near_limit_op()); }
-
   Compare_x_on_boundary_2 compare_x_on_boundary_2_object() const
   { return Compare_x_on_boundary_2(this, compare_x_on_boundary_op()); }
 
@@ -1273,8 +1187,8 @@ public:
   //@}
 };
 
-template <class OutputStream>
-OutputStream & operator<<(OutputStream & os, Comparison_result cr)
+template <typename OutputStream>
+OutputStream& operator<<(OutputStream& os, Comparison_result cr)
 {
   os << ((cr == SMALLER) ? "SMALLER" : (cr == EQUAL) ? "EQUAL" : "LARGER");
   return os;

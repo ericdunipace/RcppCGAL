@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Snap_rounding_2/include/CGAL/Snap_rounding_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Snap_rounding_2/include/CGAL/Snap_rounding_2.h $
 // $Id: Snap_rounding_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SNAP_ROUNDING_2_H
 #define CGAL_SNAP_ROUNDING_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Snap_rounding_2.h>
 
 
@@ -779,7 +778,7 @@ void snap_rounding_2(InputIterator begin,
   delete mul_kd_tree;
 
 #ifdef CGAL_SR_DEBUG
-  Rcpp::Rcout << "Overall number of false hot pixels in all the queries : "
+  std::cout << "Overall number of false hot pixels in all the queries : "
             << number_of_false_hp << std::endl;
 #endif
 

@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/io_signature.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/io_signature.h $
 // $Id: io_signature.h b64a171 2020-06-16T17:47:00+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_3_IO_SIGNATURE_H
 #define CGAL_MESH_3_IO_SIGNATURE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #define CGAL_MESH_3_IO_H // the old include macro, tested by other files
@@ -67,7 +66,7 @@ struct Get_io_signature_aux<T, false>
 {
   std::string operator()() const
   {
-    Rcpp::Rcerr << "Type without signature: " << typeid(T).name() << std::endl;
+    std::cerr << "Type without signature: " << typeid(T).name() << std::endl;
     return std::string();
   }
 }; // end template partial specialization Get_io_signature_aux<T, false>

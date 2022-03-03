@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm.h $
-// $Id: Arr_polyhedral_sgm.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm.h $
+// $Id: Arr_polyhedral_sgm.h 74a0e95 2021-03-03T11:01:18+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel         <efif@post.tau.ac.il>
@@ -13,7 +13,6 @@
 #ifndef CGAL_ARR_POLYHEDRAL_SGM_H
 #define CGAL_ARR_POLYHEDRAL_SGM_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -39,6 +38,7 @@
 #include <CGAL/aff_transformation_tags.h>
 #include <CGAL/intersections.h>
 #include <CGAL/Polygon_2_algorithms.h>
+#include <CGAL/Kernel/global_functions_3.h>
 
 #include <CGAL/Arr_overlay_2.h>
 #include <CGAL/Arr_spherical_gaussian_map_3/Arr_spherical_gaussian_map_3.h>
@@ -412,7 +412,7 @@ private:
         m_trg_vertex = next_hec->opposite()->vertex();
 
 #if 0
-        Rcpp::Rcout << "process_vertex trg: "
+        std::cout << "process_vertex trg: "
                   << static_cast<float>(todouble(m_trg_vertex->point().x()))
                   << ","
                   << static_cast<float>(todouble(m_trg_vertex->point().y()))
@@ -534,7 +534,7 @@ public:
   {
 #if 0
     std::copy(polyhedron.points_begin(), polyhedron.points_end(),
-              std::ostream_iterator<Point_3>(Rcpp::Rcout, "\n"));
+              std::ostream_iterator<Point_3>(std::cout, "\n"));
 #endif
 
     m_visitor = visitor;
@@ -570,7 +570,7 @@ public:
 
 #if 0
     std::copy(polyhedron.points_begin(), polyhedron.points_end(),
-              std::ostream_iterator<Point_3>(Rcpp::Rcout, "\n"));
+              std::ostream_iterator<Point_3>(std::cout, "\n"));
 #endif
 
 #if 0
@@ -788,7 +788,7 @@ public:
   {
     typename Base::Face_const_iterator vit;
     for (vit = this->faces_begin(); vit != this->faces_end(); ++vit)
-      Rcpp::Rcout << "vertex of polyhedron = " << vit->point() << std::endl;
+      std::cout << "vertex of polyhedron = " << vit->point() << std::endl;
   }
 
   /*! Print statistics */
@@ -796,7 +796,7 @@ public:
   {
     Base::print_stat();
 
-    Rcpp::Rcout << "Polyhedron"
+    std::cout << "Polyhedron"
               << ", no. facets: " << number_of_facets()
               << ", no. edges: " << number_of_edges()
               << ", no. vertices: " << number_of_vertices()

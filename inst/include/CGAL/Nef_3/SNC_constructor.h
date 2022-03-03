@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/SNC_constructor.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/SNC_constructor.h $
 // $Id: SNC_constructor.h 43115e4 2021-05-05T21:57:47+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_SNC_CONSTRUCTOR_H
 #define CGAL_SNC_CONSTRUCTOR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -1770,7 +1769,7 @@ public:
       sfc->twin()->incident_sface()->volume() = c0;
     }
 
-    SNC_io_parser<SNC_structure>::dump(*this->sncp(), Rcpp::Rcerr);
+    SNC_io_parser<SNC_structure>::dump(*this->sncp(), std::cerr);
   }
 
   void correct_infibox_sedge_marks() {

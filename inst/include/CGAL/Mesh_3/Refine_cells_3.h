@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Refine_cells_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Refine_cells_3.h $
 // $Id: Refine_cells_3.h 59a0da4 2021-05-19T17:23:53+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_MESH_3_REFINE_CELLS_3_H
 #define CGAL_MESH_3_REFINE_CELLS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 
@@ -666,7 +665,7 @@ scan_triangulation_impl()
   if (boost::is_convertible<Ct, Parallel_tag>::value)
   {
 # if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    Rcpp::Rcerr << "Scanning triangulation for bad cells (in parallel)";
+    std::cerr << "Scanning triangulation for bad cells (in parallel)";
 # endif
     add_to_TLS_lists(true);
 
@@ -687,7 +686,7 @@ scan_triangulation_impl()
     }
 
 # if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    Rcpp::Rcerr << " - Num cells to scan = " << cells.size() << "..." << std::endl;
+    std::cerr << " - Num cells to scan = " << cells.size() << "..." << std::endl;
 # endif
     tbb::parallel_for(
       tbb::blocked_range<size_t>(0, cells.size(), 1000),
@@ -702,7 +701,7 @@ scan_triangulation_impl()
 #endif // CGAL_LINKED_WITH_TBB
   {
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    Rcpp::Rcerr << "Scanning triangulation for bad cells (sequential)... ";
+    std::cerr << "Scanning triangulation for bad cells (sequential)... ";
 #endif
 
     int count = 0;
@@ -714,17 +713,17 @@ scan_triangulation_impl()
       ++count;
     }
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-    Rcpp::Rcerr << count << " cells scanned, ";
+    std::cerr << count << " cells scanned, ";
 #endif
   }
 
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-  Rcpp::Rcerr << "done." << std::endl;
+  std::cerr << "done." << std::endl;
 #endif
 
 #ifdef CGAL_MESH_3_PROFILING
   double cell_scan_time = t.elapsed();
-  Rcpp::Rcerr << "==== Cell scan: " << cell_scan_time << " seconds ===="
+  std::cerr << "==== Cell scan: " << cell_scan_time << " seconds ===="
             << std::endl << std::endl;
 # ifdef CGAL_MESH_3_EXPORT_PERFORMANCE_DATA
     // If it's parallel but the refinement is forced to sequential, we don't
@@ -733,11 +732,11 @@ scan_triangulation_impl()
   CGAL_MESH_3_SET_PERFORMANCE_DATA("Cells_scan_time", cell_scan_time);
 #   endif
 # endif
-  Rcpp::Rcerr << "Refining... ";
+  std::cerr << "Refining... ";
 #endif
 
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-  Rcpp::Rcerr << "Number of bad cells: " << C_::size() << std::endl;
+  std::cerr << "Number of bad cells: " << C_::size() << std::endl;
 #endif
 }
 
@@ -752,7 +751,7 @@ number_of_bad_elements_impl()
 
   int count = 0;
 #if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-  Rcpp::Rcerr << "Scanning triangulation for bad cells - "
+  std::cerr << "Scanning triangulation for bad cells - "
     "number of finite cells = "
     << r_c3t3_.triangulation().number_of_finite_cells() << "...";
 #endif
@@ -770,7 +769,7 @@ number_of_bad_elements_impl()
     }
   }
 # if defined(CGAL_MESH_3_VERBOSE) || defined(CGAL_MESH_3_PROFILING)
-  Rcpp::Rcerr << "done." << std::endl;
+  std::cerr << "done." << std::endl;
 # endif
 
   return count;

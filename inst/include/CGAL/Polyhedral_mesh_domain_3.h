@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Polyhedral_mesh_domain_3.h $
-// $Id: Polyhedral_mesh_domain_3.h 263ad6b 2020-08-20T18:25:01+02:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Polyhedral_mesh_domain_3.h $
+// $Id: Polyhedral_mesh_domain_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,6 @@
 #ifndef CGAL_POLYHEDRAL_MESH_DOMAIN_3_H
 #define CGAL_POLYHEDRAL_MESH_DOMAIN_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -60,9 +59,9 @@
 
 // To handle I/O for Surface_patch_index if that is a pair of `int` (the
 // default)
-#include <CGAL/internal/Mesh_3/Handle_IO_for_pair_of_int.h>
+#include <CGAL/Mesh_3/internal/Handle_IO_for_pair_of_int.h>
 
-#include <CGAL/internal/Mesh_3/indices_management.h>
+#include <CGAL/Mesh_3/internal/indices_management.h>
 
 namespace CGAL {
 
@@ -220,7 +219,7 @@ public:
   {
     this->add_primitives(p);
     if(! is_triangle_mesh(p)) {
-      Rcpp::Rcerr << "Your input polyhedron must be triangulated!\n";
+      std::cerr << "Your input polyhedron must be triangulated!\n";
       CGAL_error_msg("Your input polyhedron must be triangulated!");
     }
     this->build();
@@ -704,7 +703,7 @@ Construct_initial_points::operator()(OutputIterator pts,
 
   int i = n;
 # ifdef CGAL_MESH_3_VERBOSE
-  Rcpp::Rcerr << "construct initial points:" << std::endl;
+  std::cerr << "construct initial points:" << std::endl;
 # endif
   // Point construction by ray shooting from the center of the enclosing bbox
   while ( i > 0 )
@@ -724,7 +723,7 @@ Construct_initial_points::operator()(OutputIterator pts,
       --i;
 
 #ifdef CGAL_MESH_3_VERBOSE
-      Rcpp::Rcerr << boost::format("\r             \r"
+      std::cerr << boost::format("\r             \r"
                                  "%1%/%2% initial point(s) found...")
         % (n - i)
         % n;
@@ -734,7 +733,7 @@ Construct_initial_points::operator()(OutputIterator pts,
   }
 
 #ifdef CGAL_MESH_3_VERBOSE
-  Rcpp::Rcerr << std::endl;
+  std::cerr << std::endl;
 #endif
   if(r_domain_.p_rng_ == 0) delete &rng;
   return pts;

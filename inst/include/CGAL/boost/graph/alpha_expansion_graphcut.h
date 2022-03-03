@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/alpha_expansion_graphcut.h $
-// $Id: alpha_expansion_graphcut.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/alpha_expansion_graphcut.h $
+// $Id: alpha_expansion_graphcut.h 20cdd62 2022-01-12T11:41:26+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,12 +27,7 @@
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/compressed_sparse_row_graph.hpp>
-
-#if BOOST_VERSION >= 104400 // at this version kolmogorov_max_flow become depricated.
-#  include <boost/graph/boykov_kolmogorov_max_flow.hpp>
-#else
-#  include <boost/graph/kolmogorov_max_flow.hpp>
-#endif
+#include <boost/graph/boykov_kolmogorov_max_flow.hpp>
 
 #include <vector>
 
@@ -241,12 +236,8 @@ public:
 
   double max_flow()
   {
-#if BOOST_VERSION >= 104400
     return boost::boykov_kolmogorov_max_flow(graph, cluster_source,
                                                       cluster_sink);
-#else
-    return boost::kolmogorov_max_flow(graph, cluster_source, cluster_sink);
-#endif
   }
 
   template <typename VertexLabelMap, typename InputVertexDescriptor>
@@ -351,13 +342,8 @@ public:
 
   void init_vertices()
   {
-#if BOOST_VERSION >= 104000
     graph = Graph(boost::edges_are_unsorted, edge_map.begin(), edge_map.end(),
                   edge_map_weights.begin(), nb_vertices);
-#else
-    graph= Graph(edge_map.begin(), edge_map.end(),
-                 edge_map_weights.begin(), nb_vertices);
-#endif
 
     // PERFORMANCE PROBLEM
     // need to set reverse edge map, I guess there is no way to do that before creating the graph
@@ -378,7 +364,6 @@ public:
 
   double max_flow()
   {
-#if BOOST_VERSION >= 104400
     // since properties are bundled, defaults does not work need to specify them
     return boost::boykov_kolmogorov_max_flow
       (graph,
@@ -391,19 +376,6 @@ public:
        boost::get(boost::vertex_index,
                   graph), // this is not bundled, get it from graph (CRS provides one)
        0, 1);
-#else
-    return boost::kolmogorov_max_flow
-       (graph,
-        boost::get(&EdgeP::edge_capacity, graph),
-        boost::get(&EdgeP::edge_residual_capacity, graph),
-        boost::get(&EdgeP::edge_reverse, graph),
-        boost::get(&VertexP::vertex_predecessor, graph),
-        boost::get(&VertexP::vertex_color, graph),
-        boost::get(&VertexP::vertex_distance_t, graph),
-        boost::get(boost::vertex_index,
-                   graph), // this is not bundled, get it from graph
-        0, 1);
-#endif
   }
 
   template <typename VertexLabelMap, typename InputVertexDescriptor>
@@ -688,6 +660,7 @@ double alpha_expansion_graphcut (const InputGraph& input_graph,
   return min_cut;
 }
 
+/// \cond SKIP_IN_MANUAL
 
 /// \cond SKIP_IN_MANUAL
 // variant with default NP

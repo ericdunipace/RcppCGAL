@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/Dump_c3t3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/Dump_c3t3.h $
 // $Id: Dump_c3t3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESH_3_DUMP_C3T3_H
 #define CGAL_MESH_3_DUMP_C3T3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -65,20 +64,20 @@ template <typename C3t3>
 struct Dump_c3t3<C3t3, false>
 {
   void dump_c3t3(const C3t3&, std::string) {
-    Rcpp::Rcerr << "Warning " << __FILE__ << ":" << __LINE__ << "\n"
+    std::cerr << "Warning " << __FILE__ << ":" << __LINE__ << "\n"
               << "  the c3t3 object of following type:\n"
               << typeid(C3t3).name() << std::endl
               << "  cannot be dumped because some types are not streamable:\n";
     if(!is_streamable<typename C3t3::Triangulation::Vertex>::value) {
-      Rcpp::Rcerr << "     - C3t3::Triangulation::Vertex is not streamble\n";
-      Rcpp::Rcerr << "       "
+      std::cerr << "     - C3t3::Triangulation::Vertex is not streamble\n";
+      std::cerr << "       "
                 << typeid(typename C3t3::Triangulation::Vertex).name()
                 << "\n";
     }
 
     if(!is_streamable<typename C3t3::Triangulation::Cell>::value) {
-      Rcpp::Rcerr << "     - C3t3::Triangulation::Cell is not streamble\n";
-      Rcpp::Rcerr << "       "
+      std::cerr << "     - C3t3::Triangulation::Cell is not streamble\n";
+      std::cerr << "       "
                 << typeid(typename C3t3::Triangulation::Cell).name()
                 << "\n";
     }
@@ -86,16 +85,16 @@ struct Dump_c3t3<C3t3, false>
     if(!is_streamable<typename C3t3::Surface_patch_index>::value &&
        !CGAL::Output_rep<typename C3t3::Surface_patch_index>::is_specialized)
     {
-      Rcpp::Rcerr << "     - C3t3::Surface_patch_index is not streamable\n";
-      Rcpp::Rcerr << "       "
+      std::cerr << "     - C3t3::Surface_patch_index is not streamable\n";
+      std::cerr << "       "
                 << typeid(typename C3t3::Surface_patch_index).name()
                 << "\n";
     }
     if(!is_streamable<typename C3t3::Subdomain_index>::value &&
        !CGAL::Output_rep<typename C3t3::Subdomain_index>::is_specialized)
     {
-      Rcpp::Rcerr << "     - C3t3::Subdomain_index is not streamable\n";
-      Rcpp::Rcerr << "       "
+      std::cerr << "     - C3t3::Subdomain_index is not streamable\n";
+      std::cerr << "       "
                 << typeid(typename C3t3::Subdomain_index).name()
                 << "\n";
     }

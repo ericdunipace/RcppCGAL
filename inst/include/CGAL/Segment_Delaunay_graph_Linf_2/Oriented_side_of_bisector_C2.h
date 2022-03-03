@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Oriented_side_of_bisector_C2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Oriented_side_of_bisector_C2.h $
 // $Id: Oriented_side_of_bisector_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_ORIENTED_SIDE_OF_BISECTOR_C2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_ORIENTED_SIDE_OF_BISECTOR_C2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -90,7 +89,7 @@ private:
     if ( same_points(q, p1) ) { return SMALLER; }
     if ( same_points(q, p2) ) { return LARGER; }
 
-    //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug compare_distances_pp" << std::endl;);
+    //CGAL_SDG_DEBUG(std::cout << "debug compare_distances_pp" << std::endl;);
 
     return
       compare_distance_to_point_linf(q.point(), p1.point(), p2.point());
@@ -103,7 +102,7 @@ private:
                        const Site_2& q) const
   {
 
-    //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug compare_distances_sp entering "
+    //CGAL_SDG_DEBUG(std::cout << "debug compare_distances_sp entering "
     //  << "(s =" << s << ") p=(" << p << ") q=(" << q << ")"
     //  << std::endl;);
 
@@ -128,7 +127,7 @@ private:
 
       const Oriented_side os = oriented_side_of_line(lp, q.point());
 
-      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug compare_distances_sp "
+      CGAL_SDG_DEBUG(std::cout << "debug compare_distances_sp "
           << " is_src=" << is_src << " is_trg=" << is_trg
           << " has os=" << os << std::endl;);
 
@@ -175,7 +174,7 @@ private:
     CGAL_precondition( !is_degenerate(s1) );
     CGAL_precondition( !is_degenerate(s2) );
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug compare_distances_ss "
+    CGAL_SDG_DEBUG(std::cout << "debug compare_distances_ss "
         << "entering with s1=" << s1 << " s2=" << s2
         << " q=" << q << std::endl;);
 
@@ -240,11 +239,11 @@ private:
       }
     }
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug compare_distances_ss "
+    CGAL_SDG_DEBUG(std::cout << "debug compare_distances_ss "
         << " os_src1=" << os_src1 << " os_trg1=" << os_trg1
         << " os_src2=" << os_src2 << " os_trg2=" << os_trg2 << std::endl;);
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug compare_distances_ss "
+    CGAL_SDG_DEBUG(std::cout << "debug compare_distances_ss "
         << " idx=" << idx1 << " idx2=" << idx2 << std::endl;);
 
     CGAL_assertion( idx1 >= -1 && idx1 <= 1 );
@@ -315,12 +314,12 @@ private:
 
     if ( t1.is_point() && t2.is_point() ) {
       r = compare_distances_pp(t1, t2, q);
-      //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug compare_distances pp result"
+      //CGAL_SDG_DEBUG(std::cout << "debug compare_distances pp result"
       //          << " t1=" << t1 << " t2=" << t2
       //          << " q=" << q << "  res=" << r << std::endl;);
     } else if ( t1.is_segment() && t2.is_point() ) {
       r = compare_distances_sp(t1, t2, q);
-      //CGAL_SDG_DEBUG(Rcpp::Rcout << "debug compare_distances sp result"
+      //CGAL_SDG_DEBUG(std::cout << "debug compare_distances sp result"
       //          << " t1=" << t1 << " t2=" << t2
       //          << " q=" << q << "  res=" << r << std::endl;);
     } else if ( t1.is_point() && t2.is_segment() ) {

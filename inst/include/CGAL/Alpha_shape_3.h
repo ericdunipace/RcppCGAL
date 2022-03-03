@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Alpha_shapes_3/include/CGAL/Alpha_shape_3.h $
-// $Id: Alpha_shape_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Alpha_shapes_3/include/CGAL/Alpha_shape_3.h $
+// $Id: Alpha_shape_3.h 115fa5a 2021-12-14T14:01:21+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Tran Kai Frank DA <Frank.Da@sophia.inria.fr>
@@ -14,10 +14,9 @@
 #ifndef CGAL_ALPHA_SHAPE_3_H
 #define CGAL_ALPHA_SHAPE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Alpha_shapes_3.h>
 
-#include <CGAL/internal/Lazy_alpha_nt_3.h>
+#include <CGAL/Alpha_shapes_3/internal/Lazy_alpha_nt_3.h>
 #include <CGAL/Alpha_shape_cell_base_3.h> // for Alpha_status
 
 #include <CGAL/basic.h>
@@ -25,9 +24,6 @@
 #include <CGAL/iterator.h>
 #include <CGAL/Object.h>
 #include <CGAL/Unique_hash_map.h>
-#ifdef CGAL_USE_GEOMVIEW
-#include <CGAL/IO/Geomview_stream.h>  // TBC
-#endif
 #include <CGAL/Triangulation_utils_3.h>
 
 #include <boost/type_traits/is_same.hpp>
@@ -787,11 +783,6 @@ private:
 
   //---------------------------------------------------------------------
 public:
-#ifdef CGAL_USE_GEOMVIEW
-  void show_triangulation_edges(Geomview_stream &gv) const;
-  void show_alpha_shape_faces(Geomview_stream &gv) const;
-#endif
-
 
   // to Debug
   void print_maps() const;
@@ -1003,7 +994,7 @@ public:
    {
      *it++ = make_object(vh);
      *it++ = alpha;
-     //Rcpp::Rcerr << "filtration " << alpha << " \t  VERTEX " << std::endl;
+     //std::cerr << "filtration " << alpha << " \t  VERTEX " << std::endl;
      return it;
    }
 
@@ -1028,7 +1019,7 @@ public:
        *it++ = make_object(vh);
        *it++ = alpha;
      }
-     //Rcpp::Rcerr << "filtration " << alpha << " \t  VERTEX " << std::endl;
+     //std::cerr << "filtration " << alpha << " \t  VERTEX " << std::endl;
      return it;
    }
 
@@ -1062,7 +1053,7 @@ public:
     }
     *it++ = make_object(e);
     *it++ = alpha;
-    //Rcpp::Rcerr << "filtration " << alpha << " \t EDGE " << std::endl;
+    //std::cerr << "filtration " << alpha << " \t EDGE " << std::endl;
     return it;
   }
 
@@ -1101,7 +1092,7 @@ public:
 
     *it++ = make_object(f);
     *it++ = alpha;
-    //Rcpp::Rcerr << "filtration " << alpha << " \t FACET " << std::endl;
+    //std::cerr << "filtration " << alpha << " \t FACET " << std::endl;
     return it;
   }
 
@@ -1130,7 +1121,7 @@ public:
 
     *it++ = make_object(c);
     *it++ = alpha;
-    //Rcpp::Rcerr << "filtration " << alpha << " \t CELL " << std::endl;
+    //std::cerr << "filtration " << alpha << " \t CELL " << std::endl;
     return it;
   }
 
@@ -1804,7 +1795,7 @@ Alpha_shape_3<Dt,EACT>::find_optimal_alpha(size_type nb_components) const
     middle = first + half;
 
 #ifdef CGAL_DEBUG_ALPHA_SHAPE_3
-    Rcpp::Rcerr << "first : " << *first
+    std::cerr << "first : " << *first
               << " last : "
               << ((first+len != last) ? *(first+len) : *(last-1))
               << " mid : " << *middle
@@ -1823,15 +1814,15 @@ Alpha_shape_3<Dt,EACT>::find_optimal_alpha(size_type nb_components) const
   }
 
 #ifdef CGAL_DEBUG_ALPHA_SHAPE_3
-  Rcpp::Rcerr << "In the end: " << std::endl
+  std::cerr << "In the end: " << std::endl
             << "first : " << *first
             << " nb comps : " << number_of_solid_components(*first)
             << std::endl;
   if ((first+1) < alpha_end())
-    Rcpp::Rcerr << "first+1 " << *(first+1)
+    std::cerr << "first+1 " << *(first+1)
               << " nb comps : " << number_of_solid_components(*(first+1))
               << std::endl;
-  Rcpp::Rcerr << std::endl;
+  std::cerr << std::endl;
 #endif
 
   if (number_of_solid_components(*first) <= nb_components )
@@ -1863,39 +1854,39 @@ Alpha_shape_3<Dt,EACT>::print_maps() const
   typename Alpha_edge_map::const_iterator eit ;
   typename Alpha_vertex_map::const_iterator vit;
 
-  Rcpp::Rcerr << "size of cell map " << alpha_cell_map.size()
+  std::cerr << "size of cell map " << alpha_cell_map.size()
             <<   std::endl;
-  Rcpp::Rcerr << "size of facet map " << alpha_min_facet_map.size() <<
+  std::cerr << "size of facet map " << alpha_min_facet_map.size() <<
     std::endl;
-  Rcpp::Rcerr << "size of edge map " << alpha_min_edge_map.size() <<
+  std::cerr << "size of edge map " << alpha_min_edge_map.size() <<
     std::endl;
-  Rcpp::Rcerr << "size of vertex map " << alpha_min_vertex_map.size() <<
+  std::cerr << "size of vertex map " << alpha_min_vertex_map.size() <<
     std::endl;
-  Rcpp::Rcerr << std::endl;
-  Rcpp::Rcerr << "alpha_cell_map " << std::endl;
+  std::cerr << std::endl;
+  std::cerr << "alpha_cell_map " << std::endl;
   for(cit = alpha_cell_map.begin();
       cit != alpha_cell_map.end(); ++cit) {
-    Rcpp::Rcerr << cit->first << std::endl;
+    std::cerr << cit->first << std::endl;
   }
-  Rcpp::Rcerr << std::endl;
-  Rcpp::Rcerr << "alpha_min_facet_map " << std::endl;
+  std::cerr << std::endl;
+  std::cerr << "alpha_min_facet_map " << std::endl;
   for(fit = alpha_min_facet_map.begin();
       fit != alpha_min_facet_map.end(); ++fit) {
-    Rcpp::Rcerr << fit->first << std::endl;
+    std::cerr << fit->first << std::endl;
   }
-  Rcpp::Rcerr << std::endl;
-  Rcpp::Rcerr << "alpha_min_edge_map " << std::endl;
+  std::cerr << std::endl;
+  std::cerr << "alpha_min_edge_map " << std::endl;
   for(eit = alpha_min_edge_map.begin();
       eit != alpha_min_edge_map.end(); ++eit) {
-    Rcpp::Rcerr << eit->first << std::endl;
+    std::cerr << eit->first << std::endl;
   }
-  Rcpp::Rcerr << std::endl;
-  Rcpp::Rcerr << "alpha_min_vertex_map " << std::endl;
+  std::cerr << std::endl;
+  std::cerr << "alpha_min_vertex_map " << std::endl;
   for(vit = alpha_min_vertex_map.begin();
       vit != alpha_min_vertex_map.end(); ++vit) {
-    Rcpp::Rcerr << vit->first << std::endl;
+    std::cerr << vit->first << std::endl;
   }
-  Rcpp::Rcerr << std::endl;
+  std::cerr << std::endl;
 }
 
 
@@ -1903,16 +1894,16 @@ template <class Dt,class EACT>
 void
 Alpha_shape_3<Dt,EACT>::print_alphas() const
 {
-  Rcpp::Rcerr << std::endl;
-  Rcpp::Rcerr << " alpha values of facets" << std::endl;
+  std::cerr << std::endl;
+  std::cerr << " alpha values of facets" << std::endl;
   for(Finite_facets_iterator fit = finite_facets_begin();
       fit != finite_facets_end();
       ++fit) {
     Alpha_status_iterator as = fit->first->get_facet_status(fit->second);
     print_alpha_status(*as);
   }
-  Rcpp::Rcerr << std::endl;
-  Rcpp::Rcerr << " alpha values of edges " << std::endl;
+  std::cerr << std::endl;
+  std::cerr << " alpha values of edges " << std::endl;
   if (get_mode() == GENERAL) {
     for(Finite_edges_iterator eit = finite_edges_begin();
         eit != finite_edges_end();
@@ -1924,8 +1915,8 @@ Alpha_shape_3<Dt,EACT>::print_alphas() const
       print_alpha_status(*as);
     }
   }
-  Rcpp::Rcerr << std::endl;
-  Rcpp::Rcerr << " alpha values of vertices " << std::endl;
+  std::cerr << std::endl;
+  std::cerr << " alpha values of vertices " << std::endl;
   for(Finite_vertices_iterator vit = finite_vertices_begin();
       vit != finite_vertices_end();
       ++vit) {
@@ -1940,19 +1931,16 @@ void
 Alpha_shape_3<Dt,EACT>::print_alpha_status(const Alpha_status& as) const
 {
   if ( get_mode() == GENERAL &&  as.is_Gabriel())
-  Rcpp::Rcerr << as.alpha_min() ;
-  else Rcpp::Rcerr <<  "---   " ;
-  Rcpp::Rcerr << "\t";
-  Rcpp::Rcerr <<  as.alpha_mid()  << "\t";
-  if(as.is_on_chull()) Rcpp::Rcerr <<  "---   ";
-  else   Rcpp::Rcerr << as.alpha_max();
-  Rcpp::Rcerr << std::endl;
+  std::cerr << as.alpha_min() ;
+  else std::cerr <<  "---   " ;
+  std::cerr << "\t";
+  std::cerr <<  as.alpha_mid()  << "\t";
+  if(as.is_on_chull()) std::cerr <<  "---   ";
+  else   std::cerr << as.alpha_max();
+  std::cerr << std::endl;
 }
 
 } //namespace CGAL
 
-#ifdef CGAL_USE_GEOMVIEW
-#include <CGAL/IO/alpha_shape_geomview_ostream_3.h>
-#endif
 
 #endif //CGAL_ALPHA_SHAPE_3_H

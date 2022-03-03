@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Curve_analysis_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Curve_analysis_2.h $
 // $Id: Curve_analysis_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_ALGEBRAIC_CURVE_KERNEL_CURVE_ANALYSIS_2_ALCIX_H
 #define CGAL_ALGEBRAIC_CURVE_KERNEL_CURVE_ANALYSIS_2_ALCIX_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <vector>
@@ -2498,7 +2497,7 @@ std::ostream& operator<< (
       break;
     }
     case ::CGAL::IO::BINARY:
-      Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
+      std::cerr << "BINARY format not yet implemented" << std::endl;
       break;
     default:
       // ASCII

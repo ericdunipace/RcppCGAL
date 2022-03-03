@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_3/include/CGAL/Nef_3/SNC_io_parser.h $
-// $Id: SNC_io_parser.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/SNC_io_parser.h $
+// $Id: SNC_io_parser.h c552735 2021-09-29T11:46:49+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_SNC_IO_PARSER_H
 #define CGAL_SNC_IO_PARSER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 
@@ -1071,7 +1070,7 @@ public:
   void read();
   template <typename K> void read_items(int);
 
-  static void dump(SNC_structure& W, std::ostream& os = Rcpp::Rcerr, bool sort = false)
+  static void dump(SNC_structure& W, std::ostream& os = std::cerr, bool sort = false)
   { Self O(os,W, sort); O.print(); }
 
   template <typename Iter, typename Index>
@@ -1089,7 +1088,10 @@ public:
 
 template <typename EW>
 SNC_io_parser<EW>::SNC_io_parser(std::istream& is, SNC_structure& W) :
-  Base(W), in(is), out(Rcpp::Rcout) {
+  Base(W), in(is), out(std::cout),
+  reduce(false), sorted(false), addInfiBox(false),
+  i(0), vn(0), en(0), fn(0), cn(0), sen(0), sln(0), sfn(0)
+{
   W.clear();
   CGAL_assertion(W.is_empty());
   verbose = false;
@@ -1100,11 +1102,13 @@ template <typename EW>
 SNC_io_parser<EW>::SNC_io_parser(std::ostream& os, SNC_structure& W,
                                  bool sort, bool reduce_) :
   Base(W), in(std::cin), out(os),
+  addInfiBox(false),
   FI(W.halffacets_begin(),W.halffacets_end(),'F'),
   CI(W.volumes_begin(),W.volumes_end(),'C'),
   SEI(W.shalfedges_begin(),W.shalfedges_end(),'e'),
   SLI(W.shalfloops_begin(),W.shalfloops_end(),'l'),
   SFI(W.sfaces_begin(),W.sfaces_end(),'f'),
+  i(0),
   vn(W.number_of_vertices()),
   en(W.number_of_halfedges()),
   fn(W.number_of_halffacets()),
@@ -1148,9 +1152,9 @@ SNC_io_parser<EW>::SNC_io_parser(std::ostream& os, SNC_structure& W,
   CGAL_forall_halfedges(ei, *this->sncp()) {
     EL.push_back(ei);
     if(sorted) {
-      //      Rcpp::Rcerr << ei->point() << " | " << normalized(ei->point()) << " |";
+      //      std::cerr << ei->point() << " | " << normalized(ei->point()) << " |";
       ei->point() = normalized(ei->point());
-      //      Rcpp::Rcerr << ei->point() << std::endl;
+      //      std::cerr << ei->point() << std::endl;
       sort_sedges<SNC_structure> sortSE(*this->sncp());
       SHalfedge_handle new_outedge = ei->out_sedge();
       SHalfedge_around_svertex_circulator cb(new_outedge), ce(cb);

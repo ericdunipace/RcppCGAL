@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/Concurrent_compact_container.h $
-// $Id: Concurrent_compact_container.h 9ad2991 2021-11-04T16:27:05+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/STL_Extension/include/CGAL/Concurrent_compact_container.h $
+// $Id: Concurrent_compact_container.h e683686 2021-11-18T12:31:39+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement Jamin
@@ -394,10 +394,6 @@ private:
 
     std::allocator_traits<allocator_type>::destroy(m_alloc, &*x);
 
-/* WE DON'T DO THAT BECAUSE OF THE ERASE COUNTER
-#ifndef CGAL_NO_ASSERTIONS
-    std::memset(&*x, 0, sizeof(T));
-#endif*/
     put_on_free_list(&*x, fl);
   }
 public:

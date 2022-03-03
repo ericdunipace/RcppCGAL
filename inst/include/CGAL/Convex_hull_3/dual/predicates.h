@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_hull_3/include/CGAL/Convex_hull_3/dual/predicates.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_hull_3/include/CGAL/Convex_hull_3/dual/predicates.h $
 // $Id: predicates.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

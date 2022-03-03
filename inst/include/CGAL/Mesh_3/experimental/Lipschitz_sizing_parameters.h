@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_parameters.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_parameters.h $
 // $Id: Lipschitz_sizing_parameters.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_LIP_SIZING_PARAMETERS_H
 #define CGAL_LIP_SIZING_PARAMETERS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <map>
@@ -74,7 +73,7 @@ public:
   {
     typename Parameters_map::iterator it = m_parameters.find(index);
     if (it != m_parameters.end())
-      Rcpp::Rcout << "Warning : sizing parameters for subdomain " << index
+      std::cout << "Warning : sizing parameters for subdomain " << index
                 << "will be overwritten." << std::endl;
 
     if (index == -1)

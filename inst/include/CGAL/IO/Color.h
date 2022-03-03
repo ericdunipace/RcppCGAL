@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/Color.h $
-// $Id: Color.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/Color.h $
+// $Id: Color.h 115fa5a 2021-12-14T14:01:21+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -40,8 +40,6 @@ namespace IO {
   The alpha parameter (representing transparency) is often ignored and
   left to its default value (255 = no transparency), which is why we
   often refer to the <I>rgb-value</I> of the color.
-
-  \sa `CGAL::Geomview_stream`
 
 */
 

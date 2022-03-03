@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/bilateral_smooth_point_set.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/bilateral_smooth_point_set.h $
 // $Id: bilateral_smooth_point_set.h 2a54687 2021-06-04T13:52:14+02:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_BILATERAL_SMOOTH_POINT_SET_H
 #define CGAL_BILATERAL_SMOOTH_POINT_SET_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -301,7 +300,7 @@ bilateral_smooth_point_set(
   std::size_t nb_points = points.size();
 
 #ifdef CGAL_PSP3_VERBOSE
-   Rcpp::Rcout << "Initialization and compute max spacing: " << std::endl;
+   std::cout << "Initialization and compute max spacing: " << std::endl;
 #endif
    // initiate a KD-tree search for points
    Neighbor_query neighbor_query (points, point_map);
@@ -327,10 +326,10 @@ bilateral_smooth_point_set(
 
 #ifdef CGAL_PSP3_VERBOSE
    CGAL::Memory_sizer::size_type memory = CGAL::Memory_sizer().virtual_size();
-   Rcpp::Rcout << "done: " << task_timer.time() << " seconds, "
+   std::cout << "done: " << task_timer.time() << " seconds, "
              << (memory>>20) << " Mb allocated" << std::endl;
 
-   Rcpp::Rcout << "Compute all neighbors: " << std::endl;
+   std::cout << "Compute all neighbors: " << std::endl;
    task_timer.reset();
    task_timer.start();
 #endif
@@ -373,10 +372,10 @@ bilateral_smooth_point_set(
 #ifdef CGAL_PSP3_VERBOSE
    task_timer.stop();
    memory = CGAL::Memory_sizer().virtual_size();
-   Rcpp::Rcout << "done: " << task_timer.time() << " seconds, "
+   std::cout << "done: " << task_timer.time() << " seconds, "
              << (memory>>20) << " Mb allocated" << std::endl;
 
-   Rcpp::Rcout << "Compute update points and normals: " << std::endl;
+   std::cout << "Compute update points and normals: " << std::endl;
    task_timer.reset();
    task_timer.start();
 #endif
@@ -423,7 +422,7 @@ bilateral_smooth_point_set(
 #ifdef CGAL_PSP3_VERBOSE
    task_timer.stop();
    memory = CGAL::Memory_sizer().virtual_size();
-   Rcpp::Rcout << "done: " << task_timer.time() << " seconds, "
+   std::cout << "done: " << task_timer.time() << " seconds, "
              << (memory>>20) << " Mb allocated" << std::endl;
 #endif
    // save results

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_experimental.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_experimental.h $
 // $Id: Lipschitz_sizing_experimental.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_LIPSCHITZ_SIZING_H
 #define CGAL_LIPSCHITZ_SIZING_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/AABB_tree.h>
@@ -147,7 +146,7 @@ public:
   {
     CGAL_assertion(!m_params.empty());
 #ifdef CGAL_MESH_3_LIPSCHITZ_SIZING_VERBOSE
-    Rcpp::Rcout << "D = " << dim << "\t";
+    std::cout << "D = " << dim << "\t";
 #endif
     if (dim == 3)
     {
@@ -162,7 +161,7 @@ public:
         && !is_on_cube_boundary(p))
       {
 #ifdef CGAL_MESH_3_LIPSCHITZ_SIZING_VERBOSE
-        Rcpp::Rcout << "          \n";
+        std::cout << "          \n";
 #endif
         FT size_max;
         m_params.get_parameters(sp_index, size_max);
@@ -171,7 +170,7 @@ public:
       else
       {
 #ifdef CGAL_MESH_3_LIPSCHITZ_SIZING_VERBOSE
-        Rcpp::Rcout << "(on cube) ";
+        std::cout << "(on cube) ";
 #endif
         const std::pair<Subdomain_index, Subdomain_index>& index
           = m_params.incident_subdomains(sp_index);

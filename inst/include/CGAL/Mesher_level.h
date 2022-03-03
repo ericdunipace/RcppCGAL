@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesher_level/include/CGAL/Mesher_level.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesher_level/include/CGAL/Mesher_level.h $
 // $Id: Mesher_level.h 5439dbd 2021-08-24T18:04:50+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_MESHER_LEVEL_H
 #define CGAL_MESHER_LEVEL_H
 
-#include <Rcpp.h>
 #include <string>
 
 namespace CGAL {
@@ -316,17 +315,17 @@ public:
 
     const Mesher_level_conflict_status result = test_point_conflict(p, zone);
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-    Rcpp::Rcerr << "(" << p << ") ";
+    std::cerr << "(" << p << ") ";
     switch( result )
     {
     case NO_CONFLICT:
-      Rcpp::Rcerr << "accepted\n";
+      std::cerr << "accepted\n";
       break;
     case CONFLICT_BUT_ELEMENT_CAN_BE_RECONSIDERED:
-      Rcpp::Rcerr << "rejected (temporarily)\n";
+      std::cerr << "rejected (temporarily)\n";
       break;
     case CONFLICT_AND_ELEMENT_SHOULD_BE_DROPPED:
-      Rcpp::Rcerr << "rejected (permanent)\n";
+      std::cerr << "rejected (permanent)\n";
       break;
     }
 #endif

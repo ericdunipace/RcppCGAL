@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Property_map/include/CGAL/property_map.h $
-// $Id: property_map.h 131242b 2021-10-12T09:29:23+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Property_map/include/CGAL/property_map.h $
+// $Id: property_map.h da0ba6a 2021-12-20T18:06:31+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri and Laurent Saboret
@@ -15,17 +15,9 @@
 #include <CGAL/value_type_traits.h>
 
 #include <boost/version.hpp>
-#if BOOST_VERSION >= 104000
-  #include <boost/property_map/property_map.hpp>
-#else
-  #include <boost/property_map.hpp>
-  #include <boost/vector_property_map.hpp>
-
-#endif
+#include <boost/property_map/property_map.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <CGAL/tuple.h>
-
-#include <utility> // defines std::pair
 
 #include <CGAL/boost/iterator/counting_iterator.hpp>
 #include <CGAL/boost/iterator/transform_iterator.hpp>
@@ -34,21 +26,26 @@
 #include <CGAL/Kernel_traits_fwd.h>
 #include <CGAL/assertions.h>
 
+#include <algorithm>
+#include <iterator>
+#include <tuple>
+#include <type_traits>
+#include <utility>
+#include <vector>
+
 namespace CGAL {
 
 /// \cond SKIP_DOXYGEN
 
 /// A boolean property map return a const value at compile time
 template <typename Key, bool default_value>
-class Static_boolean_property_map
+struct Static_boolean_property_map
 {
-public:
   typedef Key key_type;
   typedef bool value_type;
   typedef bool reference;
   typedef boost::read_write_property_map_tag category;
 
-public:
   inline friend
   value_type
   get(Static_boolean_property_map, const key_type&)
@@ -65,15 +62,16 @@ public:
 
 template <typename PM1, typename PM2>
 class OR_property_map {
+  PM1 pm1;
+  PM2 pm2;
+
+ public:
+
   typedef typename PM1::key_type key_type;
   typedef typename PM1::value_type value_type;
   typedef typename PM1::reference reference;
   typedef boost::read_write_property_map_tag category;
 
-  PM1 pm1;
-  PM2 pm2;
-
- public:
   OR_property_map() {} // required by boost::connected_components
 
   OR_property_map(PM1 pm1, PM2 pm2)
@@ -105,7 +103,8 @@ make_OR_property_map(const PM1& pm1, const PM2& pm2)
 
 // A property map that uses the result of a property map as key.
 template <class KeyMap, class ValueMap>
-struct Property_map_binder{
+struct Property_map_binder
+{
   typedef typename boost::property_traits<KeyMap>::key_type key_type;
   typedef typename boost::property_traits<ValueMap>::value_type value_type;
   typedef typename boost::property_traits<ValueMap>::reference reference;
@@ -114,10 +113,16 @@ struct Property_map_binder{
   KeyMap key_map;
   ValueMap value_map;
 
-  Property_map_binder(const KeyMap& key_map, const ValueMap& value_map)
-    : key_map(key_map)
-    , value_map(value_map)
-  {}
+  Property_map_binder(const KeyMap& key_map = KeyMap(),
+                      const ValueMap& value_map = ValueMap())
+    : key_map(key_map), value_map(value_map)
+  { }
+
+  template <typename VM>
+  Property_map_binder(const VM& value_map,
+                      typename std::enable_if<!std::is_same<KeyMap, VM>::value>::type* = nullptr)
+    : value_map(value_map)
+  { }
 
   friend
   reference get(const Property_map_binder& map, key_type k)
@@ -192,31 +197,43 @@ make_dereference_property_map(Iter)
 
 /// \ingroup PkgPropertyMapRef
 /// A `LvaluePropertyMap` property map mapping a key to itself (by reference).
+/// It is mutable if `T` is not `const` and non-mutable otherwise.
 ///
 /// \cgalModels `LvaluePropertyMap`
 template <typename T>
 struct Identity_property_map
 {
+/// \cond SKIP_IN_MANUAL
   typedef Identity_property_map<T> Self;
 
-  typedef T key_type; ///< typedef to `T`
-  typedef T value_type; ///< typedef to `T`
-  typedef const T& reference; ///< typedef to `const T&`
-  typedef boost::lvalue_property_map_tag category; ///< `boost::lvalue_property_map_tag`
+  typedef T key_type;
+  typedef T value_type;
+  typedef T& reference;
+  typedef boost::lvalue_property_map_tag category;
 
-  /// Access a property map element.
-  /// @param k a key which is returned as mapped value.
-  const value_type& operator[](const key_type& k) const { return k; }
+  value_type& operator[](key_type& k) const { return k; }
 
-  /// \name Put/get free functions
-  /// @{
-  friend reference get(const Self&, const key_type& k) { return k; }
+  friend value_type& get(const Self&, key_type& k) { return k; }
+  friend const value_type& get(const Self&, const key_type& k) { return k; }
   friend void put(const Self&, key_type& k, const value_type& v) { k = v; }
-  /// @}
+/// \endcond
 };
 
-
 /// \cond SKIP_IN_MANUAL
+template <typename T>
+struct Identity_property_map<const T>
+{
+  typedef Identity_property_map<const T> Self;
+
+  typedef T key_type;
+  typedef T value_type;
+  typedef const T& reference;
+  typedef boost::lvalue_property_map_tag category;
+
+  const value_type& operator[](key_type& k) const { return k; }
+  friend const value_type& get(const Self&, const key_type& k) { return k; }
+};
+
 template <typename T>
 struct Identity_property_map_no_lvalue
 {
@@ -393,7 +410,7 @@ struct Property_map_to_unary_function{
   {}
 
   template <class KeyType>
-  result_type
+  decltype(auto)
   operator()(const KeyType& a) const
   {
     return get(map,a);

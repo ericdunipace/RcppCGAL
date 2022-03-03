@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/Polygonal_schema.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Polygonal_schema.h $
 // $Id: Polygonal_schema.h 52186a0 2020-05-14T11:38:15+02:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_POLYGONAL_SCHEMA_H
 #define CGAL_POLYGONAL_SCHEMA_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Polygonal_schema_fwd.h>
@@ -65,7 +64,7 @@ namespace Surface_mesh_topology {
       {
         if (dart_same_label!=CMap::null_handle && dart_opposite_label!=CMap::null_handle)
         {
-          Rcpp::Rcerr<<"Polygonal_schema ERROR: "<<"both labels "<<s
+          std::cerr<<"Polygonal_schema ERROR: "<<"both labels "<<s
                    <<" and "<<internal::opposite_label(s)
                    <<" are already added in the surface."
                    <<" This label can not be use anymore."<<std::endl;
@@ -74,7 +73,7 @@ namespace Surface_mesh_topology {
 
         if (dart_same_label!=CMap::null_handle)
         {
-          Rcpp::Rcerr<<"Polygonal_schema ERROR: "<<"label "<<s
+          std::cerr<<"Polygonal_schema ERROR: "<<"label "<<s
                    <<" is already added in the surface."
                    <<" Since the surface is orientable, this label can "
                    <<"not be use anymore."<<std::endl;
@@ -114,7 +113,7 @@ namespace Surface_mesh_topology {
       {
         if (dart_same_label!=GMap::null_handle && dart_opposite_label!=GMap::null_handle)
         {
-          Rcpp::Rcerr<<"Polygonal_schema ERROR: "<<"both labels "<<s
+          std::cerr<<"Polygonal_schema ERROR: "<<"both labels "<<s
                    <<" and "<<internal::opposite_label(s)
                    <<" are already added in the surface."
                    <<" This label can not be use anymore."<<std::endl;
@@ -198,7 +197,7 @@ namespace Surface_mesh_topology {
     {
       if (facet_started)
       {
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to start a facet"
                  <<" but the previous facet is not yet ended."<<std::endl;
         return;
@@ -215,7 +214,7 @@ namespace Surface_mesh_topology {
     {
       if (!facet_started)
       {
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to add an edge to a facet"
                  <<" but the facet is not yet started."<<std::endl;
         return;
@@ -241,7 +240,7 @@ namespace Surface_mesh_topology {
     {
       if (!facet_started)
       {
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to add edges to a facet"
                  <<" but the facet is not yet started."<<std::endl;
         return;
@@ -257,7 +256,7 @@ namespace Surface_mesh_topology {
     {
       if (facet_started)
       {
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to add a new facet"
                  <<" but the previous facet is not yet ended."<<std::endl;
         return;
@@ -273,7 +272,7 @@ namespace Surface_mesh_topology {
     {
       if (!facet_started)
       {
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to add edges to a facet"
                  <<" but the facet is not yet started."<<std::endl;
         return;
@@ -287,7 +286,7 @@ namespace Surface_mesh_topology {
     {
       if (facet_started)
       {
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to add a new facet"
                  <<" but the previous facet is not yet ended."<<std::endl;
         return;
@@ -302,7 +301,7 @@ namespace Surface_mesh_topology {
     {
       if (!facet_started)
       {
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to end a facet"
                  <<" but the facet is not yet started."<<std::endl;
         return Map::null_handle;
@@ -344,7 +343,7 @@ namespace Surface_mesh_topology {
       auto ite=edge_label_to_dart.find(s);
       if (ite==edge_label_to_dart.end())
       {// maybe there is no need to put an error message
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to label "<<s<<" to be a border"
                  <<" but this label does not exist yet."<<std::endl;
         return 0;
@@ -369,7 +368,7 @@ namespace Surface_mesh_topology {
       auto ite=edge_label_to_dart.find(s);
       if (ite==edge_label_to_dart.end())
       {// maybe there is no need to put an error message
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you try to label "<<s<<" to be a non border"
                  <<" but this label does not exist yet."<<std::endl;
         return 0;
@@ -388,7 +387,7 @@ namespace Surface_mesh_topology {
       auto ite=edge_label_to_dart.find(s);
       if (ite==edge_label_to_dart.end())
       {// maybe there is no need to put an error message
-        Rcpp::Rcerr<<"Polygonal_schema ERROR: "
+        std::cerr<<"Polygonal_schema ERROR: "
                  <<"you ask if label "<<s<<" represents a dart border"
                  <<" but this label does not exist yet."<<std::endl;
         return false;
@@ -402,11 +401,11 @@ namespace Surface_mesh_topology {
 
     void display_perforated_darts() const
     {
-      Rcpp::Rcout<<"labels is_free<2> is_perforated"<<std::endl;
+      std::cout<<"labels is_free<2> is_perforated"<<std::endl;
       for (auto it=edge_label_to_dart.begin(), itend=edge_label_to_dart.end();
            it!=itend; ++it)
       {
-        Rcpp::Rcout<<it->first<<" "<<Self::template is_free<2>(it->second)
+        std::cout<<it->first<<" "<<Self::template is_free<2>(it->second)
                  <<" "<<is_perforated(it->second)<<std::endl;
       }
     }

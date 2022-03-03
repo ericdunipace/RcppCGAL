@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Standard_criteria.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Surface_mesher/Standard_criteria.h $
 // $Id: Standard_criteria.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_SURFACE_MESHER_STANDARD_CRITERIA_H
 #define CGAL_SURFACE_MESHER_STANDARD_CRITERIA_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 
@@ -64,14 +63,14 @@ namespace CGAL {
           bad = true;
       if( bad )
       {
-        Rcpp::Rcerr << "bad triangle: |";
+        std::cerr << "bad triangle: |";
         for(typename Criteria::iterator cit = criteria.begin(); cit !=
               criteria.end(); ++cit)
         {
           FT dummy_q;
-          Rcpp::Rcerr << (*cit)->is_bad (f, dummy_q) << "|" ;
+          std::cerr << (*cit)->is_bad (f, dummy_q) << "|" ;
         }
-        Rcpp::Rcerr << "\n";
+        std::cerr << "\n";
       }
       return bad;
 #endif

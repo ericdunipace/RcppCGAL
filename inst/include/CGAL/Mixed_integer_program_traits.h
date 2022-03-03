@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Solver_interface/include/CGAL/Mixed_integer_program_traits.h $
-// $Id: Mixed_integer_program_traits.h 2a54687 2021-06-04T13:52:14+02:00 albert-github
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Solver_interface/include/CGAL/Mixed_integer_program_traits.h $
+// $Id: Mixed_integer_program_traits.h 94b7580 2021-06-18T10:02:11+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan
@@ -11,7 +11,6 @@
 #ifndef CGAL_MIXED_INTEGER_PROGRAM_TRAITS_H
 #define CGAL_MIXED_INTEGER_PROGRAM_TRAITS_H
 
-#include <Rcpp.h>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -97,7 +96,7 @@ namespace CGAL {
         };
         /// \endcond
 
-        /// \ingroup PkgSolverInterfaceRef
+        /// \ingroup PkgSolverInterfaceMIP
         ///
         /// The variable of a mixed integer program.
         ///
@@ -196,7 +195,7 @@ namespace CGAL {
         };
         /// \endcond
 
-        /// \ingroup PkgSolverInterfaceRef
+        /// \ingroup PkgSolverInterfaceMIP
         ///
         /// The linear constraint of a mixed integer program.
         ///
@@ -228,7 +227,7 @@ namespace CGAL {
         };
 
 
-        /// \ingroup PkgSolverInterfaceRef
+        /// \ingroup PkgSolverInterfaceMIP
         ///
         /// The linear objective of a mixed integer program.
         ///
@@ -264,7 +263,7 @@ namespace CGAL {
                 /// \endcond
         };
 
-        /// \ingroup PkgSolverInterfaceRef
+        /// \ingroup PkgSolverInterfaceMIP
         ///
         /// The class `CGAL::Mixed_integer_program_traits` provides an interface for
         /// formulating and solving (constrained or unconstrained) mixed integer
@@ -476,7 +475,7 @@ namespace CGAL {
                 if (pos != coefficients_.end())
                         return pos->second;
                 else {
-                        Rcpp::Rcerr << "linear expression does not own variable " << var->name() << " (" << var->index() << ")" << std::endl;
+                        std::cerr << "linear expression does not own variable " << var->name() << " (" << var->index() << ")" << std::endl;
                         return 0.0;
                 }
         }
@@ -633,7 +632,7 @@ namespace CGAL {
         template<typename FT>
         const typename Mixed_integer_program_traits<FT>::Linear_objective * Mixed_integer_program_traits<FT>::objective() const {
                 if (!objective_)
-                        Rcpp::Rcerr << "please call \'create_objective()\' to create an objective first" << std::endl;
+                        std::cerr << "please call \'create_objective()\' to create an objective first" << std::endl;
 
                 return objective_;
         }
@@ -641,7 +640,7 @@ namespace CGAL {
         template<typename FT>
         typename Mixed_integer_program_traits<FT>::Linear_objective * Mixed_integer_program_traits<FT>::objective() {
                 if (!objective_)
-                        Rcpp::Rcerr << "please call \'create_objective()\' to create an objective first" << std::endl;
+                        std::cerr << "please call \'create_objective()\' to create an objective first" << std::endl;
 
                 return objective_;
         }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Profiling_tools/include/CGAL/Profile_counter.h $
-// $Id: Profile_counter.h 1b5b61a 2021-05-07T12:17:32+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Profiling_tools/include/CGAL/Profile_counter.h $
+// $Id: Profile_counter.h a885f9b 2021-08-25T13:02:11+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -42,7 +42,6 @@
 //   - lock counters in parallel mode
 //     (e.g. time spent spinning, and/or number of locks taken or forbidden...)
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <iostream>
 #include <sstream>
@@ -103,7 +102,7 @@ struct Profile_counter
     {
 
 
-      Rcpp::Rcerr << "[CGAL::Profile_counter] "
+      std::cerr << "[CGAL::Profile_counter] "
                 << std::setw(10) << internal::dot_it(i) << " " << s << std::endl;
     }
 
@@ -122,9 +121,9 @@ struct Profile_histogram_counter
 {
 private:
 #ifdef CGAL_CONCURRENT_PROFILE
-    typedef tbb::concurrent_hash_map<unsigned, unsigned>  Counters;
+    typedef tbb::concurrent_hash_map<unsigned, unsigned>  CounterMap;
 #else
-    typedef std::map<unsigned, unsigned>  Counters;
+    typedef std::map<unsigned, unsigned>  CounterMap;
 #endif
 
 public:
@@ -134,7 +133,7 @@ public:
     void operator()(unsigned i)
     {
 #ifdef CGAL_CONCURRENT_PROFILE
-      Counters::accessor a;
+      CounterMap::accessor a;
       counters.insert(a, i);
       ++a->second;
 #else
@@ -145,21 +144,21 @@ public:
     ~Profile_histogram_counter()
     {
         unsigned total=0;
-        for (Counters::const_iterator it=counters.begin(), end=counters.end();
+        for (CounterMap::const_iterator it=counters.begin(), end=counters.end();
              it != end; ++it) {
-            Rcpp::Rcerr << "[CGAL::Profile_histogram_counter] " << s;
-            Rcpp::Rcerr << " [ " << std::setw(10) << internal::dot_it(it->first) << " : "
+            std::cerr << "[CGAL::Profile_histogram_counter] " << s;
+            std::cerr << " [ " << std::setw(10) << internal::dot_it(it->first) << " : "
                       << std::setw(10) << internal::dot_it(it->second) << " ]"
                                << std::endl;
             total += it->second;
         }
-        Rcpp::Rcerr << "[CGAL::Profile_histogram_counter] " << s;
-        Rcpp::Rcerr << " [ " << std::setw(10) << "Total" << " : "
+        std::cerr << "[CGAL::Profile_histogram_counter] " << s;
+        std::cerr << " [ " << std::setw(10) << "Total" << " : "
                            << std::setw(10) << total << " ]" << std::endl;
     }
 
 private:
-    Counters  counters;
+    CounterMap  counters;
     const std::string s;
 };
 
@@ -178,7 +177,7 @@ struct Profile_branch_counter
 
     ~Profile_branch_counter()
     {
-        Rcpp::Rcerr << "[CGAL::Profile_branch_counter] "
+        std::cerr << "[CGAL::Profile_branch_counter] "
                   << std::setw(10) << internal::dot_it(j) << " / "
                   << std::setw(10) << internal::dot_it(i) << " " << s << std::endl;
     }
@@ -208,7 +207,7 @@ struct Profile_branch_counter_3
 
     ~Profile_branch_counter_3()
     {
-        Rcpp::Rcerr << "[CGAL::Profile_branch_counter_3] "
+        std::cerr << "[CGAL::Profile_branch_counter_3] "
                   << std::setw(10) << internal::dot_it(k) << " / "
                   << std::setw(10) << internal::dot_it(j) << " / "
                   << std::setw(10) << internal::dot_it(i) << " " << s << std::endl;

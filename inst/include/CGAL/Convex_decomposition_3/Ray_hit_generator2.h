@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator2.h $
-// $Id: Ray_hit_generator2.h 30e536b 2021-03-01T08:06:48+00:00 Giles Bathgate
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator2.h $
+// $Id: Ray_hit_generator2.h 2d9dc6c 2021-09-29T11:46:58+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -69,7 +69,8 @@ class Ray_hit_generator2 : public Modifier_base<typename Nef_::SNC_and_PL> {
   bool vertex_added;
 
  public:
-  Ray_hit_generator2(Vector_3 d, Vertex_handle v) : dir(d), vs(v) {}
+  Ray_hit_generator2(Vector_3 d, Vertex_handle v)
+    : dir(d), vs(v), sncp(nullptr), pl(nullptr), edge_splitted(false), vertex_added(false) {}
 
   Vertex_handle create_vertex_on_first_hit(const Ray_3& r) {
 

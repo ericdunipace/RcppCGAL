@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_degeneracies.h $
-// $Id: repair_degeneracies.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_degeneracies.h $
+// $Id: repair_degeneracies.h 2337757 2021-09-14T21:43:41+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sebastien Loriot,
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REPAIR_DEGENERACIES_H
 #define CGAL_POLYGON_MESH_PROCESSING_REPAIR_DEGENERACIES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/Polygon_mesh_processing/shape_predicates.h>
@@ -43,6 +42,7 @@
 #include <sstream>
 #include <utility>
 #include <vector>
+#include <functional>
 
 // First part of the file: remove_ALMOST_degenerate_faces (needles/caps)
 // Second part of the file: remove_degenerate_edges/faces
@@ -111,7 +111,7 @@ void collect_badly_shaped_triangles(const typename boost::graph_traits<TriangleM
   if(res[0] != boost::graph_traits<TriangleMesh>::null_halfedge())
   {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-    Rcpp::Rcout << "add new needle: " << edge(res[0], tmesh) << std::endl;
+    std::cout << "add new needle: " << edge(res[0], tmesh) << std::endl;
 #endif
     CGAL_assertion(!is_border(res[0], tmesh));
     CGAL_assertion(!get(ecm, edge(res[0], tmesh)));
@@ -122,7 +122,7 @@ void collect_badly_shaped_triangles(const typename boost::graph_traits<TriangleM
     if(res[1] != boost::graph_traits<TriangleMesh>::null_halfedge())
     {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-      Rcpp::Rcout << "add new cap: " << edge(res[1],tmesh) << std::endl;
+      std::cout << "add new cap: " << edge(res[1],tmesh) << std::endl;
 #endif
       CGAL_assertion(!is_border(res[1], tmesh));
       CGAL_assertion(!get(ecm, edge(res[1], tmesh)));
@@ -339,6 +339,191 @@ bool should_flip(typename boost::graph_traits<TriangleMesh>::edge_descriptor e,
   return p0p2 <= p1p3;
 }
 
+template <class TriangleMesh, class VPM, class Traits, class Functor>
+struct Filter_wrapper_for_cap_needle_removal
+{
+  Filter_wrapper_for_cap_needle_removal(TriangleMesh& tm, const VPM& vpm, const Functor& functor)
+    : m_tm(tm)
+    , m_vpm(vpm)
+    , m_functor(functor)
+  {}
+
+  typedef boost::graph_traits<TriangleMesh> Graph_traits;
+  typedef typename Graph_traits::halfedge_descriptor halfedge_descriptor;
+  typedef typename Graph_traits::edge_descriptor edge_descriptor;
+  typedef typename Graph_traits::vertex_descriptor vertex_descriptor;
+  typedef typename Traits::Point_3 Point_3;
+
+  bool flip(halfedge_descriptor h)
+  {
+    CGAL_assertion(!is_border(h, m_tm));
+
+    const Point_3& o1 = get(m_vpm, target(next(h, m_tm), m_tm));
+    const Point_3& o2 = get(m_vpm, target(next(opposite(h, m_tm), m_tm), m_tm));
+    const Point_3& src =  get(m_vpm, source(h,m_tm));
+    const Point_3& tgt =  get(m_vpm, target(h,m_tm));
+
+    if (!m_functor(o1, o2, src))
+      return false;
+
+    if (!m_functor(o1, o2, tgt))
+      return false;
+
+    return true;
+  }
+
+  bool collapse(edge_descriptor e)
+  {
+    halfedge_descriptor h = halfedge(e, m_tm),
+                        oh = opposite(h, m_tm);
+    vertex_descriptor vkept = target(h, m_tm);
+    const Point_3& p = get(m_vpm, vkept);
+
+    // look at all the triangles that will be created after the collapse of the edge
+    // and call the functor using them. If we get a negative answer for one of them
+    // return false. Code copy/pasted/adapted from SMS package
+    halfedge_descriptor endleft = next(oh, m_tm);
+    halfedge_descriptor endright = next(h, m_tm);
+
+    // counterclockwise around src
+    halfedge_descriptor e02 = opposite(prev(h, m_tm), m_tm);
+    vertex_descriptor v = target(e02, m_tm), v2 = v;
+
+    while(e02 != endleft)
+    {
+      bool is_b = is_border(e02, m_tm);
+      e02 = opposite(prev(e02, m_tm), m_tm);
+      v = target(e02, m_tm);
+      if(!is_b)
+        if (!m_functor(get(m_vpm,v), p, get(m_vpm,v2)))
+          return false;
+      v2 = v;
+    }
+
+    e02 = opposite(prev(oh, m_tm), m_tm);
+
+    // counterclockwise around tgt
+    v2 = target(e02, m_tm);
+    v = v2;
+    while(e02 != endright)
+    {
+      bool is_b = is_border(e02, m_tm);
+      e02 = opposite(prev(e02, m_tm), m_tm);
+      v = target(e02, m_tm);
+
+      if(!is_b)
+        if (!m_functor(get(m_vpm,v),p,get(m_vpm,v2)))
+          return false;
+      v2 = v;
+    }
+    return true;
+  }
+
+  TriangleMesh& m_tm;
+  const VPM& m_vpm;
+  const Functor& m_functor;
+};
+
+template <class TriangleMesh, class VPM, class Traits, class Functor>
+struct Filter_wrapper_for_cap_needle_removal<TriangleMesh, VPM, Traits, std::reference_wrapper<Functor> >
+  : public Filter_wrapper_for_cap_needle_removal<TriangleMesh, VPM, Traits, Functor >
+{
+  typedef Filter_wrapper_for_cap_needle_removal<TriangleMesh, VPM, Traits, Functor > Base;
+
+  Filter_wrapper_for_cap_needle_removal(TriangleMesh& tm, const VPM& vpm, const std::reference_wrapper<Functor>& functor_ref)
+    : Base(tm, vpm, functor_ref.get())
+  {}
+};
+
+template <class TriangleMesh, class VPM, class Traits, class Functor>
+struct Filter_wrapper_for_cap_needle_removal<TriangleMesh, VPM, Traits, std::function<Functor(const std::vector<typename boost::graph_traits<TriangleMesh>::face_descriptor>&)> >
+{
+  typedef boost::graph_traits<TriangleMesh> Graph_traits;
+  typedef typename Graph_traits::halfedge_descriptor halfedge_descriptor;
+  typedef typename Graph_traits::edge_descriptor edge_descriptor;
+  typedef typename Graph_traits::face_descriptor face_descriptor;
+
+  typedef Filter_wrapper_for_cap_needle_removal<TriangleMesh, VPM, Traits, Functor> Base;
+  typedef std::function<Functor(const std::vector<face_descriptor>&)> Make_env;
+
+  Filter_wrapper_for_cap_needle_removal(TriangleMesh& tm, const VPM& vpm, const Make_env& make_envelope)
+    : m_tm(tm)
+    , m_vpm(vpm)
+    , m_make_envelope(make_envelope)
+  {}
+
+  void collect_link_faces(edge_descriptor e, std::vector<face_descriptor>& link_faces)
+  {
+    halfedge_descriptor h = halfedge(e, m_tm);
+    halfedge_descriptor h_opp = opposite(h, m_tm);
+
+    halfedge_descriptor endleft = next(h_opp, m_tm);
+    halfedge_descriptor endright = next(h, m_tm);
+
+    face_descriptor f = face(h, m_tm);
+    if(f!=boost::graph_traits<TriangleMesh>::null_face())
+      link_faces.push_back(f);
+    f = face(h_opp, m_tm);
+    if(f!=boost::graph_traits<TriangleMesh>::null_face())
+      link_faces.push_back(f);
+
+    // counterclockwise around src
+    halfedge_descriptor hl = opposite(prev(h, m_tm), m_tm);
+
+    while(hl != endleft)
+    {
+      if (!is_border(hl, m_tm))
+        link_faces.push_back(face(hl, m_tm));
+      hl = opposite(prev(hl, m_tm), m_tm);
+    }
+
+    // counterclockwise around tgt
+    hl = opposite(prev(h_opp, m_tm), m_tm);
+
+    while(hl != endright)
+    {
+      if (!is_border(hl, m_tm))
+        link_faces.push_back(face(hl, m_tm));
+      hl = opposite(prev(hl, m_tm), m_tm);
+    }
+  }
+
+  bool flip(halfedge_descriptor h)
+  {
+    std::vector<face_descriptor> link_faces;
+    collect_link_faces(edge(h, m_tm), link_faces);
+    Functor f = m_make_envelope(link_faces);
+    Base base(m_tm, m_vpm, f);
+    return base.flip(h);
+  }
+
+  bool collapse(edge_descriptor e)
+  {
+    std::vector<face_descriptor> link_faces;
+    collect_link_faces(e, link_faces);
+    Functor f = std::move(m_make_envelope(link_faces));
+    Base base(m_tm, m_vpm, f);
+    return base.collapse(e);
+  }
+
+  TriangleMesh& m_tm;
+  const VPM& m_vpm;
+  const Make_env& m_make_envelope;
+};
+
+template <class TriangleMesh, class VPM, class Traits>
+struct Filter_wrapper_for_cap_needle_removal<TriangleMesh, VPM, Traits, Identity<void*> >
+{
+  Filter_wrapper_for_cap_needle_removal(TriangleMesh&, const VPM&, Identity<void*>) {}
+
+  typedef boost::graph_traits<TriangleMesh> Graph_traits;
+  typedef typename Graph_traits::halfedge_descriptor halfedge_descriptor;
+  typedef typename Graph_traits::edge_descriptor edge_descriptor;
+
+  bool flip(halfedge_descriptor){ return true; }
+  bool collapse(edge_descriptor){ return true; }
+};
+
 } // namespace internal
 
 namespace experimental {
@@ -378,6 +563,16 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
 
   typedef typename GetGeomTraits<TriangleMesh, NamedParameters>::type           Traits;
   Traits gt = choose_parameter(get_parameter(np, internal_np::geom_traits), Traits());
+
+  typedef typename internal_np::Lookup_named_param_def<
+            internal_np::filter_t,
+            NamedParameters,
+            Identity<void*>
+          > ::type  User_filter;
+  User_filter user_filter = choose_parameter<Identity<void*>>(get_parameter(np, internal_np::filter));
+
+  typedef internal::Filter_wrapper_for_cap_needle_removal<TriangleMesh, VPM, Traits, User_filter> Accept_change_functor;
+  Accept_change_functor accept_change(tmesh, vpm, user_filter);
 
   // Vertex property map that combines the VCM and the fact that extremities of a constrained edge should be constrained
   typedef CGAL::dynamic_vertex_property_t<bool>                                 Vertex_property_tag;
@@ -420,8 +615,8 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
   }
 
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES
-  Rcpp::Rcout << edges_to_collapse.size() << " to collapse" << std::endl;
-  Rcpp::Rcout << edges_to_flip.size() << " to flip" << std::endl;
+  std::cout << edges_to_collapse.size() << " to collapse" << std::endl;
+  std::cout << edges_to_flip.size() << " to flip" << std::endl;
 #endif
 
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES
@@ -433,8 +628,8 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
     bool something_was_done = false;
 
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES
-    Rcpp::Rcout << edges_to_collapse.size() << " needles and " << edges_to_flip.size() << " caps" << std::endl;
-    Rcpp::Rcout << "Iter: " << iter << std::endl;
+    std::cout << edges_to_collapse.size() << " needles and " << edges_to_flip.size() << " caps" << std::endl;
+    std::cout << "Iter: " << iter << std::endl;
     std::ostringstream oss;
     oss << "degen_cleaning_iter_" << iter++ << ".off";
     CGAL::IO::write_polygon_mesh(oss.str(), tmesh, CGAL::parameters::stream_precision(17));
@@ -466,7 +661,7 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
         continue;
 
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-      Rcpp::Rcout << "  treat needle: " << e
+      std::cout << "  treat needle: " << e
                 << " (" << source(e, tmesh) << " " << tmesh.point(source(h, tmesh))
                 << " --- " << source(e, tmesh) << " " << tmesh.point(target(h, tmesh)) << ")" << std::endl;
 #endif
@@ -480,7 +675,7 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
         if(nc[0] != h)
         {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-          Rcpp::Rcout << "\t Needle criteria no longer verified" << std::endl;
+          std::cout << "\t Needle criteria no longer verified" << std::endl;
 #endif
           continue;
         }
@@ -490,7 +685,16 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
         if(best_h == boost::graph_traits<TriangleMesh>::null_halfedge())
         {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-            Rcpp::Rcout << "\t Geometrically invalid edge collapse!" << std::endl;
+            std::cout << "\t Geometrically invalid edge collapse!" << std::endl;
+#endif
+          next_edges_to_collapse.insert(h);
+          continue;
+        }
+
+        if (!accept_change.collapse(edge(best_h, tmesh)))
+        {
+#ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
+            std::cout << "\t edge collapse prevented by the user functor" << std::endl;
 #endif
           next_edges_to_collapse.insert(h);
           continue;
@@ -523,7 +727,7 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
         }
 
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-        Rcpp::Rcout << "  " << kk << " -- Collapsing " << tmesh.point(source(best_h, tmesh)) << "  "
+        std::cout << "  " << kk << " -- Collapsing " << tmesh.point(source(best_h, tmesh)) << "  "
                                                      << tmesh.point(target(best_h, tmesh)) << std::endl;
 #endif
 
@@ -570,7 +774,7 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
       else // ! CGAL::Euler::does_satisfy_link_condition(e, tmesh)
       {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-        Rcpp::Rcout << "\t Uncollapsable edge!" << std::endl;
+        std::cout << "\t Uncollapsable edge!" << std::endl;
 #endif
         next_edges_to_collapse.insert(h);
       }
@@ -594,7 +798,7 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
       CGAL_assertion(!get(ecm, e));
 
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-      Rcpp::Rcout << "  treat cap: " << e
+      std::cout << "  treat cap: " << e
                 << " (" << source(e, tmesh) << " " << tmesh.point(source(h, tmesh))
                 << " --- " << target(e, tmesh) << " " << tmesh.point(target(h, tmesh)) << ")" << std::endl;
 #endif
@@ -606,7 +810,7 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
       if(nc[1] != h)
       {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-        Rcpp::Rcout << "\t Cap criteria no longer verified" << std::endl;
+        std::cout << "\t Cap criteria no longer verified" << std::endl;
 #endif
         continue;
       }
@@ -637,14 +841,22 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
         if(!internal::should_flip(e, tmesh, vpm, gt))
         {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-          Rcpp::Rcout << "\t Flipping prevented: not the best diagonal" << std::endl;
+          std::cout << "\t Flipping prevented: not the best diagonal" << std::endl;
 #endif
           next_edges_to_flip.insert(h);
           continue;
         }
 
+        if (!accept_change.flip(h))
+        {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-        Rcpp::Rcout << "\t step " << kk << " -- Flipping" << std::endl;
+          std::cout << "\t Flipping prevented: rejected by user functor" << std::endl;
+#endif
+          continue;
+        }
+
+#ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
+        std::cout << "\t step " << kk << " -- Flipping" << std::endl;
 #endif
         Euler::flip_edge(h, tmesh);
         CGAL_assertion(edge(h, tmesh) == e);
@@ -670,7 +882,7 @@ bool remove_almost_degenerate_faces(const FaceRange& face_range,
       else // flipped edge already exists in the mesh
       {
 #ifdef CGAL_PMP_DEBUG_REMOVE_DEGENERACIES_EXTRA
-        Rcpp::Rcout << "\t Unflippable edge!" << std::endl;
+        std::cout << "\t Unflippable edge!" << std::endl;
 #endif
         CGAL_assertion(!is_border(h, tmesh));
         next_edges_to_flip.insert(h);
@@ -852,7 +1064,7 @@ remove_a_border_edge(typename boost::graph_traits<TriangleMesh>::edge_descriptor
       if(is_border(queue.back(), tm))
       {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-        Rcpp::Rcout << "Boundary reached during exploration, the region to be removed is not a topological disk, not handled for now.\n";
+        std::cout << "Boundary reached during exploration, the region to be removed is not a topological disk, not handled for now.\n";
 #endif
         return GT::null_vertex();
       }
@@ -861,7 +1073,7 @@ remove_a_border_edge(typename boost::graph_traits<TriangleMesh>::edge_descriptor
       if(is_border(queue.back(), tm))
       {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-        Rcpp::Rcout << "Boundary reached during exploration, the region to be removed is not a topological disk, not handled for now.\n";
+        std::cout << "Boundary reached during exploration, the region to be removed is not a topological disk, not handled for now.\n";
 #endif
         return GT::null_vertex();
       }
@@ -893,7 +1105,7 @@ remove_a_border_edge(typename boost::graph_traits<TriangleMesh>::edge_descriptor
   if(!is_selection_a_topological_disk(marked_faces, tm))
   {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-    Rcpp::Rcout << "The region to be removed is not a topological disk, not handled for now.\n";
+    std::cout << "The region to be removed is not a topological disk, not handled for now.\n";
 #endif
     return GT::null_vertex();
   }
@@ -901,7 +1113,7 @@ remove_a_border_edge(typename boost::graph_traits<TriangleMesh>::edge_descriptor
   if(is_border(hk1, tm) && is_border(hk2, tm))
   {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-    Rcpp::Rcout << "The region to be removed is an isolated region, not handled for now.\n";
+    std::cout << "The region to be removed is an isolated region, not handled for now.\n";
 #endif
     return GT::null_vertex();
   }
@@ -1056,7 +1268,7 @@ bool remove_degenerate_edges(const EdgeRange& edge_range,
                                                             degenerate_edges_to_remove.end()));
 
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-    Rcpp::Rcout << "Found " << degenerate_edges_to_remove.size() << " null edges.\n";
+    std::cout << "Found " << degenerate_edges_to_remove.size() << " null edges.\n";
 #endif
 
     // first try to remove all collapsable edges
@@ -1104,7 +1316,7 @@ bool remove_degenerate_edges(const EdgeRange& edge_range,
 
     CGAL_assertion(is_valid_polygon_mesh(tmesh));
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-    Rcpp::Rcout << "Remaining " << degenerate_edges_to_remove.size() << " null edges to be handled.\n";
+    std::cout << "Remaining " << degenerate_edges_to_remove.size() << " null edges to be handled.\n";
 #endif
 
     while(!degenerate_edges_to_remove.empty())
@@ -1168,7 +1380,7 @@ bool remove_degenerate_edges(const EdgeRange& edge_range,
           }
 
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-          Rcpp::Rcout << "Calling remove_a_border_edge\n";
+          std::cout << "Calling remove_a_border_edge\n";
 #endif
 
           vertex_descriptor vd = remove_a_border_edge(ed, tmesh, local_edge_range,
@@ -1268,7 +1480,7 @@ bool remove_degenerate_edges(const EdgeRange& edge_range,
         {
           // a whole connected component (without boundary) got selected and will disappear (not handled for now)
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-          Rcpp::Rcout << "Trying to remove a whole connected component, not handled yet\n";
+          std::cout << "Trying to remove a whole connected component, not handled yet\n";
 #endif
           all_removed = false;
           continue;
@@ -1342,7 +1554,7 @@ bool remove_degenerate_edges(const EdgeRange& edge_range,
           {
             // most probably, one cc is a cycle of border edges
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-            Rcpp::Rcout << "Trying to remove a component with a cycle of halfedges (nested hole or whole component), not handled yet.\n";
+            std::cout << "Trying to remove a component with a cycle of halfedges (nested hole or whole component), not handled yet.\n";
 #endif
             all_removed = false;
             continue;
@@ -1409,7 +1621,7 @@ bool remove_degenerate_edges(const EdgeRange& edge_range,
         if(!is_selection_a_topological_disk(marked_faces, tmesh))
         {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-          Rcpp::Rcout << "Trying to handle a non-topological disk, do nothing\n";
+          std::cout << "Trying to handle a non-topological disk, do nothing\n";
 #endif
           all_removed = false;
           continue;
@@ -1680,7 +1892,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
 
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
   {
-    Rcpp::Rcout <<"Done with null edges.\n";
+    std::cout <<"Done with null edges.\n";
     CGAL::IO::write_polygon_mesh("/tmp/no_null_edges.off", tmesh, CGAL::parameters::stream_precision(17));
   }
 #endif
@@ -1794,7 +2006,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
   while(!degenerate_face_set.empty())
   {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-    Rcpp::Rcout << "Loop on removing deg faces\n";
+    std::cout << "Loop on removing deg faces\n";
 
     // ensure the mesh is not broken
     {
@@ -1808,7 +2020,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
       CGAL::IO::read_OFF(in, points, triangles);
       if(!CGAL::Polygon_mesh_processing::is_polygon_soup_a_polygon_mesh(triangles))
       {
-        Rcpp::Rcerr << "Warning: got a polygon soup (may simply be a non-manifold vertex)!\n";
+        std::cerr << "Warning: got a polygon soup (may simply be a non-manifold vertex)!\n";
       }
     }
 #endif
@@ -1830,7 +2042,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
     if(!detect_cc_of_degenerate_triangles)
     {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-      Rcpp::Rcout << "  no degenerate neighbors, using a flip.\n";
+      std::cout << "  no degenerate neighbors, using a flip.\n";
 #endif
       degenerate_face_set.erase(degenerate_face_set.begin());
 
@@ -1882,7 +2094,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
         {
           all_removed = false;
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-          Rcpp::Rcout << "  WARNING: flip is not possible\n";
+          std::cout << "  WARNING: flip is not possible\n";
           // @todo Let p and q be the vertices opposite to `edge_to_flip`, and let
           //       r be the vertex of `edge_to_flip` that is the furthest away from
           //       the edge `pq`. In that case I think we should remove all the triangles
@@ -1926,7 +2138,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
       }
 
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-      Rcpp::Rcout << "  Deal with a cc of " << cc_faces.size() << " degenerate faces.\n";
+      std::cout << "  Deal with a cc of " << cc_faces.size() << " degenerate faces.\n";
       /// dump cc_faces
       {
         int id = 0;
@@ -1985,7 +2197,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
         //cc_faces does not define a topological disk
         // @todo Find to way to handle that case
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-        Rcpp::Rcout << "  WARNING: Cannot remove the component of degenerate faces: not a topological disk.\n";
+        std::cout << "  WARNING: Cannot remove the component of degenerate faces: not a topological disk.\n";
 #endif
 
         for(face_descriptor f : cc_faces)
@@ -2060,7 +2272,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
       if(non_monotone_border)
       {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-        Rcpp::Rcout << "  WARNING: Cannot remove the component of degenerate faces: border not a monotonic cycle.\n";
+        std::cout << "  WARNING: Cannot remove the component of degenerate faces: border not a monotonic cycle.\n";
 #endif
 
         for(face_descriptor f : cc_faces)
@@ -2103,7 +2315,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
       if(non_monotone_border)
       {
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-        Rcpp::Rcout << "  WARNING: Cannot remove the component of degenerate faces: border not a monotonic cycle.\n";
+        std::cout << "  WARNING: Cannot remove the component of degenerate faces: border not a monotonic cycle.\n";
 #endif
 
         for(face_descriptor f : cc_faces)
@@ -2212,7 +2424,7 @@ bool remove_degenerate_faces(const FaceRange& face_range,
           degenerate_face_set.erase(f);
 
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-        Rcpp::Rcout << "  WARNING: cannot remove a connected components of degenerate faces.\n";
+        std::cout << "  WARNING: cannot remove a connected components of degenerate faces.\n";
 #endif
         continue;
       }
@@ -2251,8 +2463,8 @@ bool remove_degenerate_faces(const FaceRange& face_range,
         remove_vertex(v, tmesh);
 
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
-      Rcpp::Rcout << "  side_one.size() " << side_one.size() << "\n";
-      Rcpp::Rcout << "  side_two.size() " << side_two.size() << "\n";
+      std::cout << "  side_one.size() " << side_one.size() << "\n";
+      std::cout << "  side_two.size() " << side_two.size() << "\n";
 #endif
 
       CGAL_assertion(source(side_one.front(), tmesh) == *ref_vertices.first);

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Envelope_3/include/CGAL/Env_sphere_traits_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Envelope_3/include/CGAL/Env_sphere_traits_3.h $
 // $Id: Env_sphere_traits_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_ENV_SPHERE_TRAITS_3_H
 #define CGAL_ENV_SPHERE_TRAITS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Envelope_3.h>
 
 
@@ -811,9 +810,9 @@ public:
       Algebraic A2 = sqr_r2 - x_diff2*x_diff2 - y_diff2*y_diff2;
 
       if (CGAL_NTS sign(A1) == NEGATIVE)
-        Rcpp::Rcout << "A1 = " << A1 << std::endl;
+        std::cout << "A1 = " << A1 << std::endl;
       if (CGAL_NTS sign(A2) == NEGATIVE)
-        Rcpp::Rcout << "A2 = " << A2 << std::endl;
+        std::cout << "A2 = " << A2 << std::endl;
 
       Sign res;
       // sign_a_plus_b_x_sqrt_e_plus_c_x_sqrt_f is a CGAL method which

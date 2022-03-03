@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Mesh_3/include/CGAL/IO/File_tetgen.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/IO/File_tetgen.h $
 // $Id: File_tetgen.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_IO_FILE_TETGEN_H
 #define CGAL_IO_FILE_TETGEN_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Time_stamper.h>
@@ -34,7 +33,7 @@ output_to_tetgen(std::string filename,
                  const C3T3& c3t3)
 {
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  Rcpp::Rcerr << "Output to tetgen:\n";
+  std::cerr << "Output to tetgen:\n";
 #endif
 
   typedef Medit_pmap_generator<C3T3,rebind,no_patch> Generator;
@@ -57,7 +56,7 @@ output_to_tetgen(std::string filename,
                    Generator().print_twice());
 
 #ifdef CGAL_MESH_3_IO_VERBOSE
-  Rcpp::Rcerr << "done.\n";
+  std::cerr << "done.\n";
 #endif
 }
 

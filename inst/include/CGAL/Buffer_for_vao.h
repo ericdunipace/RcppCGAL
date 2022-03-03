@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/GraphicsView/include/CGAL/Buffer_for_vao.h $
-// $Id: Buffer_for_vao.h c891f60 2021-09-23T16:12:46+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/GraphicsView/include/CGAL/Buffer_for_vao.h $
+// $Id: Buffer_for_vao.h 2cbc381 2021-09-23T16:13:57+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,10 +13,9 @@
 #ifndef CGAL_VBO_BUFFER_FILLER_H
 #define CGAL_VBO_BUFFER_FILLER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
-#include <CGAL/Triangulation_2_projection_traits_3.h>
+#include <CGAL/Projection_traits_3.h>
 #include <CGAL/Triangulation_vertex_base_with_info_2.h>
 #include <CGAL/Triangulation_face_base_with_info_2.h>
 #include <CGAL/Constrained_Delaunay_triangulation_2.h>
@@ -407,7 +406,7 @@ public:
 
     if (m_points_of_face.size()<3)
     {
-      /* Rcpp::Rcerr<<"PB: you try to triangulate a face with "<<m_points_of_face.size()<<" vertices."
+      /* std::cerr<<"PB: you try to triangulate a face with "<<m_points_of_face.size()<<" vertices."
                <<std::endl; */
 
       m_face_started=false;
@@ -420,7 +419,7 @@ public:
     if (m_indices_of_points_of_face.size()>0 &&
         m_indices_of_points_of_face.size()!=m_points_of_face.size())
     {
-      Rcpp::Rcerr<<"PB: you mixed some add_point_in_face(...) and some add_indexed_point_in_face(...)"
+      std::cerr<<"PB: you mixed some add_point_in_face(...) and some add_indexed_point_in_face(...)"
                <<" for a same face. Indices for this face are ignored."<<std::endl;
       m_indices_of_points_of_face.clear();
     }
@@ -428,7 +427,7 @@ public:
     if (m_vertex_normals_for_face.size()>0 &&
         m_vertex_normals_for_face.size()!=m_points_of_face.size())
     {
-      Rcpp::Rcerr<<"PB: you only gave some vertex normals (and not all) for a same face. "
+      std::cerr<<"PB: you only gave some vertex normals (and not all) for a same face. "
                <<"All vertex normal are ignored and thus it is not possible to use Gouraud "
                <<"shading for this face."
                <<std::endl;
@@ -543,7 +542,7 @@ protected:
   {
     if (is_a_face_started())
     {
-      Rcpp::Rcerr<<"You cannot start a new face before to finish the previous one."<<std::endl;
+      std::cerr<<"You cannot start a new face before to finish the previous one."<<std::endl;
       return;
     }
 
@@ -826,7 +825,7 @@ protected:
     }
     catch(...)
     { // Triangulation crash: the face is not filled
-      Rcpp::Rcerr<<"Catch: face not filled."<<std::endl;
+      std::cerr<<"Catch: face not filled."<<std::endl;
     }
   }
 
@@ -886,7 +885,7 @@ protected:
     bool is_process;
   };
 
-  typedef CGAL::Triangulation_2_projection_traits_3<CGAL::Exact_predicates_inexact_constructions_kernel> P_traits;
+  typedef CGAL::Projection_traits_3<CGAL::Exact_predicates_inexact_constructions_kernel> P_traits;
   typedef CGAL::Triangulation_vertex_base_with_info_2<Vertex_info, P_traits> Vb;
   typedef CGAL::Triangulation_face_base_with_info_2<Face_info, P_traits>     Fb1;
   typedef CGAL::Constrained_triangulation_face_base_2<P_traits, Fb1>         Fb;

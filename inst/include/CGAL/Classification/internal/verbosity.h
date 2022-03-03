@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/internal/verbosity.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Classification/include/CGAL/Classification/internal/verbosity.h $
 // $Id: verbosity.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CLASSIFICATION_INTERNAL_VERBOSITY_H
 #define CLASSIFICATION_INTERNAL_VERBOSITY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 // General verbosity
@@ -24,7 +23,7 @@
 #endif
 
 #define CGAL_CLASSIFICATION_CERR \
-  if(CGAL_CLASSIFICATION_SILENT) {} else Rcpp::Rcerr
+  if(CGAL_CLASSIFICATION_SILENT) {} else std::cerr
 
 // Verbosity for training part
 
@@ -35,6 +34,6 @@
 #endif
 
 #define CGAL_CLASSTRAINING_CERR \
-  if(CGAL_CLASSTRAINING_SILENT) {} else Rcpp::Rcerr
+  if(CGAL_CLASSTRAINING_SILENT) {} else std::cerr
 
 #endif

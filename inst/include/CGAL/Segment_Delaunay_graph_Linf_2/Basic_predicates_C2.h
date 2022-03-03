@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Basic_predicates_C2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Basic_predicates_C2.h $
 // $Id: Basic_predicates_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_BASIC_PREDICATES_C2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_LINF_2_BASIC_PREDICATES_C2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 
@@ -525,7 +524,7 @@ public:
     if (crude != EQUAL) {
       return crude;
     } else {
-      CGAL_SDG_DEBUG(Rcpp::Rcout
+      CGAL_SDG_DEBUG(std::cout
           << "compare_linf_distances_to_line refining"
           << std::endl;);
       return crude;
@@ -552,7 +551,7 @@ public:
     if (crude != EQUAL) {
       return crude;
     } else {
-      CGAL_SDG_DEBUG(Rcpp::Rcout << "compare_linf_distances_to_lines refining"
+      CGAL_SDG_DEBUG(std::cout << "compare_linf_distances_to_lines refining"
                      << std::endl;);
       return crude;
     }
@@ -586,7 +585,7 @@ public:
     const Comparison_result resmax = CGAL::compare(pqmax, prmax);
 
     if (resmax == EQUAL) {
-      CGAL_SDG_DEBUG(Rcpp::Rcout <<
+      CGAL_SDG_DEBUG(std::cout <<
           "debug cmpdistlinf break ties with min" << std::endl;);
       return CGAL::compare(pqmin, prmin);
     } else {
@@ -611,7 +610,7 @@ public:
     // line but are not the same point, then the bounding
     // box of p and q degenerates to the line segment pq.
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bounded_side_of_bbox (p q r) = ("
+    CGAL_SDG_DEBUG(std::cout << "debug bounded_side_of_bbox (p q r) = ("
                    << p << ") (" << q << ") (" << r << ")" << std::endl; );
 
     if ((CGAL::compare(p.x(), q.x()) == EQUAL) &&
@@ -629,20 +628,20 @@ public:
     Comparison_result comp =
       CGAL::compare(cmpxpr*cmpxrq + cmpypr*cmpyrq, 0);
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug bounded_side_of_bbox returns ";);
+    CGAL_SDG_DEBUG(std::cout << "debug bounded_side_of_bbox returns ";);
 
     switch(comp) {
       case SMALLER:
-        CGAL_SDG_DEBUG(Rcpp::Rcout << "ON_UNBOUNDED_SIDE" << std::endl;);
+        CGAL_SDG_DEBUG(std::cout << "ON_UNBOUNDED_SIDE" << std::endl;);
         return ON_UNBOUNDED_SIDE;
       case EQUAL:
-        CGAL_SDG_DEBUG(Rcpp::Rcout << "ON_BOUNDARY" << std::endl;);
+        CGAL_SDG_DEBUG(std::cout << "ON_BOUNDARY" << std::endl;);
         return ON_BOUNDARY;
       case LARGER:
-        CGAL_SDG_DEBUG(Rcpp::Rcout << "ON_BOUNDED_SIDE" << std::endl;);
+        CGAL_SDG_DEBUG(std::cout << "ON_BOUNDED_SIDE" << std::endl;);
         return ON_BOUNDED_SIDE;
       default:
-        CGAL_SDG_DEBUG(Rcpp::Rcout << "error: should never reach here";);
+        CGAL_SDG_DEBUG(std::cout << "error: should never reach here";);
         CGAL_assertion( false );
         return ON_BOUNDARY;
     }
@@ -663,7 +662,7 @@ public:
     Point_2 ssrc = seg.source();
     Point_2 strg = seg.target();
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout
+    CGAL_SDG_DEBUG(std::cout
       << "debug: intersects_segment_positive_halfplane "
       << "s=" << s
       << " l=" << l.a() << " " << l.b() << " " << l.c()
@@ -672,7 +671,7 @@ public:
     Oriented_side oslsrc = oriented_side_of_line(l, ssrc);
     Oriented_side osltrg = oriented_side_of_line(l, strg);
 
-      CGAL_SDG_DEBUG(Rcpp::Rcout
+      CGAL_SDG_DEBUG(std::cout
           << "debug: intersects_segment_positive_halfplane "
           << "oslsrc=" << oslsrc << " osltrg=" << osltrg
                      << std::endl;);
@@ -701,7 +700,7 @@ public:
     Point_2 ssrc = seg.source();
     Point_2 strg = seg.target();
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout
+    CGAL_SDG_DEBUG(std::cout
         << "debug: intersects_segment_negative_halfplane "
         << "s=" << s
         << " l=" << l.a() << " " << l.b() << " " << l.c()
@@ -710,7 +709,7 @@ public:
     Oriented_side oslsrc = oriented_side_of_line(l, ssrc);
     Oriented_side osltrg = oriented_side_of_line(l, strg);
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout
+    CGAL_SDG_DEBUG(std::cout
         << "debug: intersects_segment_negative_halfplane "
         << "oslsrc=" << oslsrc << " osltrg=" << osltrg
         << std::endl;);
@@ -765,7 +764,7 @@ public:
       is_ssrc_positive = (conflp && conflq);
     }
     if (is_ssrc_positive) {
-      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug is_segment_inside_inf_box "
+      CGAL_SDG_DEBUG(std::cout << "debug is_segment_inside_inf_box "
                      << "src endpoint inside" << std::endl;);
       return true;
     }
@@ -783,13 +782,13 @@ public:
     }
 
     if (is_strg_positive) {
-      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug is_segment_inside_inf_box "
+      CGAL_SDG_DEBUG(std::cout << "debug is_segment_inside_inf_box "
                      << "trg endpoint inside" << std::endl;);
       return true;
     } else {
       // here you have to check if the interior is inside
 
-      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug is_segment_inside_inf_box "
+      CGAL_SDG_DEBUG(std::cout << "debug is_segment_inside_inf_box "
                      << "try for interior to be inside" << std::endl;);
 
       const Point_2 corner = eqcmp ?
@@ -892,20 +891,20 @@ public:
          (os_lcp_strg == ON_POSITIVE_SIDE)    ) ;
     }
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug qcp= (" << q << ") (" << corner
+    CGAL_SDG_DEBUG(std::cout << "debug qcp= (" << q << ") (" << corner
         << ") (" << p << ")"
         << " isssrcpos=" << is_ssrc_positive
         << " isstrgpos=" << is_strg_positive
         << std::endl;);
 
     if (is_ssrc_positive || is_strg_positive) {
-      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug is_segment_inside_inf_box "
+      CGAL_SDG_DEBUG(std::cout << "debug is_segment_inside_inf_box "
                      << "endpoint inside" << std::endl;);
       return true;
     } else {
       // here you have to check if the interior is inside
 
-      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug is_segment_inside_inf_box "
+      CGAL_SDG_DEBUG(std::cout << "debug is_segment_inside_inf_box "
                      << "try for interior to be inside" << std::endl;);
 
       // in fact, here you can intersect the segment
@@ -980,7 +979,7 @@ public:
     CGAL_assertion(s.is_segment());
     Segment_2 seg = s.segment();
 
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug sofw s=" << s
+    CGAL_SDG_DEBUG(std::cout << "debug sofw s=" << s
                    << " orside=" << orside << std::endl;);
 
     Point_2 ssrc = seg.source();
@@ -996,14 +995,14 @@ public:
          (os_lver_ssrc == orside)) ||
         ((os_lhor_strg == orside) &&
          (os_lver_strg == orside))   ) {
-          CGAL_SDG_DEBUG(Rcpp::Rcout
+          CGAL_SDG_DEBUG(std::cout
               << "debug intersects_segment_side_of_wedge "
               << "endpoint inside" << std::endl;);
       return true;
     } else {
       // here we have to check if the interior is inside
 
-      CGAL_SDG_DEBUG(Rcpp::Rcout
+      CGAL_SDG_DEBUG(std::cout
           << "debug intersects_segment_side_of_wedge "
           << "try for interior to be inside" << std::endl;);
 
@@ -1019,7 +1018,7 @@ public:
 
       Point_2 corner ( cx, cy, cw );
 
-      CGAL_SDG_DEBUG(Rcpp::Rcout << "debug corner=" << corner << std::endl;);
+      CGAL_SDG_DEBUG(std::cout << "debug corner=" << corner << std::endl;);
 
       RT one(1);
 
@@ -1027,7 +1026,7 @@ public:
           corner.x() + ( (+orside)*CGAL::sign(lver.a()) ) * one ,
           corner.y() +   (+orside)*CGAL::sign(lhor.b())   * one   );
 
-      CGAL_SDG_DEBUG(Rcpp::Rcout
+      CGAL_SDG_DEBUG(std::cout
           << "debug displaced=" << displaced << std::endl;);
 
       Line_2 l = compute_line_from_to(corner, displaced);
@@ -1036,7 +1035,7 @@ public:
 
       RT hx, hy, hw;
 
-      CGAL_SDG_DEBUG(Rcpp::Rcout
+      CGAL_SDG_DEBUG(std::cout
           << "debug: intersects_segment_side_of_wedge "
           << " l=" << l.a() << " " << l.b() << " " << l.c()
           << " lseg=" << lseg.a() << " " << lseg.b() << " " << lseg.c()
@@ -1045,13 +1044,13 @@ public:
       compute_intersection_of_lines(l, lseg, hx, hy, hw);
 
       if (CGAL::sign(hw) == ZERO) {
-        CGAL_SDG_DEBUG(Rcpp::Rcout
+        CGAL_SDG_DEBUG(std::cout
             << "debug l and lseg are parallel" << std::endl;);
         return false;
       } else {
         Point_2 ip ( hx, hy, hw );
-        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug ip=" << ip << std::endl;);
-        CGAL_SDG_DEBUG(Rcpp::Rcout << "debug ip_hom="
+        CGAL_SDG_DEBUG(std::cout << "debug ip=" << ip << std::endl;);
+        CGAL_SDG_DEBUG(std::cout << "debug ip_hom="
             << hx << ' ' << hy << ' ' << hw << std::endl;);
         Oriented_side os_lhor_ip = oriented_side_of_line(lhor, ip);
         Oriented_side os_lver_ip = oriented_side_of_line(lver, ip);
@@ -1260,7 +1259,7 @@ public:
     Point_2 ttrg = t.supporting_site().target();
     Comparison_result tcmpx = cmpx(tsrc, ttrg);
     Comparison_result tcmpy = cmpy(tsrc, ttrg);
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug have_same_slope"
+    CGAL_SDG_DEBUG(std::cout << "debug have_same_slope"
         << " scmpx=" << scmpx << " scmpy=" << scmpy
         << " tcmpx=" << tcmpx << " tcmpy=" << tcmpy
         << std::endl;);
@@ -1574,7 +1573,7 @@ public:
 
     CGAL_assertion( i_no != -1 );
 
-    CGAL_SDG_DEBUG( Rcpp::Rcout << "orient_lines_linf i_no: "
+    CGAL_SDG_DEBUG( std::cout << "orient_lines_linf i_no: "
         << p << ' ' << q << ' ' << ' ' << r << " i_no=" << i_no
         << std::endl;);
 
@@ -1592,14 +1591,14 @@ public:
       return;
     }
 
-    CGAL_SDG_DEBUG( Rcpp::Rcout << "orient_lines_linf lonely bearing: "
+    CGAL_SDG_DEBUG( std::cout << "orient_lines_linf lonely bearing: "
         << p << ' ' << q << ' ' << ' ' << r << " i_no=" << i_no
         << std::endl;);
     const unsigned int iprev = (i_no+2)%3;
     const unsigned int inext = (i_no+1)%3;
     const Bearing bprev = bearing(l[iprev]);
     const Bearing bnext = bearing(l[inext]);
-    CGAL_SDG_DEBUG( Rcpp::Rcout << "orient_lines_linf"
+    CGAL_SDG_DEBUG( std::cout << "orient_lines_linf"
         << " bprev=" << bprev << " bnext=" << bnext
         << std::endl;);
     CGAL_assertion(bprev != bnext);
@@ -1700,12 +1699,12 @@ public:
     } else {
       RT hx, hy, hw;
       compute_intersection_of_lines(lp, lq, hx, hy, hw);
-      CGAL_SDG_DEBUG( Rcpp::Rcout << "debug xpq hom="
+      CGAL_SDG_DEBUG( std::cout << "debug xpq hom="
         << hx << ' ' << hy << ' ' << hw << std::endl; );
       xpq = Homogeneous_point_2(hx, hy, hw);
     }
     const Direction_2 dirbpq = dir_from_lines(lp, lq);
-    CGAL_SDG_DEBUG( Rcpp::Rcout << "debug xpq hom="
+    CGAL_SDG_DEBUG( std::cout << "debug xpq hom="
         << xpq.hx() << ' ' << xpq.hy() << ' ' << xpq.hw()
         << " dirbpq=" << dirbpq << std::endl; );
     return compute_line_dir(xpq, dirbpq);
@@ -1815,7 +1814,7 @@ public:
     CGAL_precondition(pt_site.is_point());
     CGAL_precondition(t.is_point());
     CGAL_USE(other_s);
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug points_inside_touching_sides_v "
+    CGAL_SDG_DEBUG(std::cout << "debug points_inside_touching_sides_v "
         << "ls: " << ls.a() << ' ' << ls.b() << ' ' <<  ls.c()
         << " pt_site=" << pt_site << " other_s=" << other_s
         << " t=" << t << " v=" << v << std::endl;);
@@ -1827,7 +1826,7 @@ public:
         oriented_side_of_line(ltest, v) == ON_ORIENTED_BOUNDARY);
     const Oriented_side ost = oriented_side_of_line(ltest, t.point());
     const Oriented_side osx = oriented_side_of_line(ltest, corner);
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug points_inside_touching_sides_v"
+    CGAL_SDG_DEBUG(std::cout << "debug points_inside_touching_sides_v"
         << " ltest: " << ltest.a() << ' ' << ltest.b() << ' ' <<  ltest.c()
         << " v=" << v << " ost=" << ost
         << " corner=" << corner << " osx=" << osx << std::endl;);
@@ -1857,7 +1856,7 @@ public:
     CGAL_precondition(t.is_point());
     CGAL_precondition(pt_site.is_point());
     CGAL_precondition(s.is_segment());
-    CGAL_SDG_DEBUG(Rcpp::Rcout << "debug points_inside_touching_sides_v "
+    CGAL_SDG_DEBUG(std::cout << "debug points_inside_touching_sides_v "
         << "s=" << s
         << " pt_site=" << pt_site << " other_s=" << other_s
         << " t=" << t << std::endl;);

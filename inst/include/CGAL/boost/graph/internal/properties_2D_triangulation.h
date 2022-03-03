@@ -2,13 +2,14 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_2/include/CGAL/boost/graph/internal/properties_2D_triangulation.h $
-// $Id: properties_2D_triangulation.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_2/include/CGAL/boost/graph/internal/properties_2D_triangulation.h $
+// $Id: properties_2D_triangulation.h 129f427 2021-12-16T13:48:01+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
 
 #include <CGAL/assertions.h>
+#include <CGAL/boost/graph/internal/graph_traits_2D_triangulation_helper.h>
 #include <CGAL/boost/graph/internal/Has_member_id.h>
 #include <CGAL/boost/graph/properties.h>
 
@@ -20,19 +21,13 @@
   #error CGAL_2D_TRIANGULATION is not defined
 #endif
 
-// note only the properties below are protected by the macro,
+// note that only the properties below are protected by the macro,
 // the rest of the file is the shared implementation of properties for all 2D triangulations
 #ifndef CGAL_BOOST_GRAPH_PROPERTIES_2D_TRIANGULATION_H
 #define CGAL_BOOST_GRAPH_PROPERTIES_2D_TRIANGULATION_H
 
 namespace CGAL {
 namespace internal {
-
-template <class Tr>
-struct T2_halfedge_descriptor;
-
-template <class Tr>
-struct T2_edge_descriptor;
 
 template <typename Tr>
 class T2_vertex_point_map

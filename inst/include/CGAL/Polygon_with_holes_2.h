@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon/include/CGAL/Polygon_with_holes_2.h $
-// $Id: Polygon_with_holes_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon/include/CGAL/Polygon_with_holes_2.h $
+// $Id: Polygon_with_holes_2.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -82,12 +82,11 @@ public:
 /*!
 This operator exports a polygon with holes to the output stream `out`.
 
-An ASCII and a binary format exist. The format can be selected with
+An \ascii and a binary format exist. The format can be selected with
 the \cgal modifiers for streams, `set_ascii_mode()` and `set_binary_mode()`
 respectively. The modifier `set_pretty_mode()` can be used to allow for (a
 few) structuring comments in the output. Otherwise, the output would
-be free of comments. The default for writing is ASCII without
-comments.
+be free of comments. The default for writing is \ascii without comments.
 
 The number of points of the outer boundary is exported followed by the
 points themselves in counterclockwise order. Then, the number of holes

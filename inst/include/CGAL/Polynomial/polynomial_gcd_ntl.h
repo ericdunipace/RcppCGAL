@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polynomial/include/CGAL/Polynomial/polynomial_gcd_ntl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polynomial/include/CGAL/Polynomial/polynomial_gcd_ntl.h $
 // $Id: polynomial_gcd_ntl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -21,7 +21,6 @@
 #ifndef CGAL_POLYNOMIAL_GCD_NTL_H
 #define CGAL_POLYNOMIAL_GCD_NTL_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #ifndef CGAL_USE_NTL
@@ -98,7 +97,7 @@ template<typename NT> Polynomial<NT>
 inline
 modular_NTL_gcd_for_univariate_integer_polynomials
   (Polynomial<NT> p1, Polynomial<NT> p2) {
-  //    Rcpp::Rcout<<" NTL GCD"<<std::endl;
+  //    std::cout<<" NTL GCD"<<std::endl;
 
     NTL::ZZX q1,q2,h;
     Polynomial<NT> g;
@@ -119,7 +118,7 @@ template<typename NT> Polynomial<NT>
 inline
 canonical_modular_NTL_gcd_for_univariate_integer_polynomials
   (Polynomial<NT> p1, Polynomial<NT> p2) {
-  //    Rcpp::Rcout<<" NTL canonical GCD"<<std::endl;
+  //    std::cout<<" NTL canonical GCD"<<std::endl;
   return CGAL::canonicalize(modular_NTL_gcd_for_univariate_integer_polynomials(p1,p2));
 }
 

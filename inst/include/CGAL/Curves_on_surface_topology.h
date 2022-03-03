@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh_topology/include/CGAL/Curves_on_surface_topology.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Curves_on_surface_topology.h $
 // $Id: Curves_on_surface_topology.h b58c05e 2020-08-13T17:59:32-04:00 Youmu
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_CURVES_ON_SURFACE_TOPOLOGY_H
 #define CGAL_CURVES_ON_SURFACE_TOPOLOGY_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Surface_mesh_topology/internal/Minimal_quadrangulation.h>
@@ -181,7 +180,7 @@ public:
 //================================================================================
 // Utility functions
 
-  // Set whether to display warning message in `Rcpp::Rcerr` when input doesn't meet
+  // Set whether to display warning message in `std::cerr` when input doesn't meet
   // prerequesite
   void set_verbose(bool is_verbose)
   {

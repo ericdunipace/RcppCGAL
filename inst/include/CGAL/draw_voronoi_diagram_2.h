@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Voronoi_diagram_2/include/CGAL/draw_voronoi_diagram_2.h $
-// $Id: draw_voronoi_diagram_2.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Voronoi_diagram_2/include/CGAL/draw_voronoi_diagram_2.h $
+// $Id: draw_voronoi_diagram_2.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Jasmeet Singh <jasmeet.singh.mec11@iitbhu.ac.in>
@@ -319,7 +319,7 @@ void draw(const CGAL_VORONOI_TYPE &av2,
   if (!cgal_test_suite) {
     CGAL::Qt::init_ogl_context(4,3);
     int argc = 1;
-    const char *argv[2] = {"voronoi_2_viewer", "\0"};
+    const char *argv[2] = {"voronoi_2_viewer", nullptr};
     QApplication app(argc, const_cast<char **>(argv));
     DefaultColorFunctorV2 fcolor;
     SimpleVoronoiDiagram2ViewerQt<CGAL_VORONOI_TYPE, DefaultColorFunctorV2>

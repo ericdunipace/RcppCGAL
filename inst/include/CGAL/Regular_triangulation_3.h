@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_3/include/CGAL/Regular_triangulation_3.h $
-// $Id: Regular_triangulation_3.h 9533a9f 2021-05-04T10:43:26+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_3/include/CGAL/Regular_triangulation_3.h $
+// $Id: Regular_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,7 +16,6 @@
 #ifndef CGAL_REGULAR_TRIANGULATION_3_H
 #define CGAL_REGULAR_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>
@@ -34,7 +33,7 @@
 #include <CGAL/Triangulation_3.h>
 #include <CGAL/Regular_triangulation_vertex_base_3.h>
 #include <CGAL/Regular_triangulation_cell_base_3.h>
-#include <CGAL/internal/Has_nested_type_Bare_point.h>
+#include <CGAL/STL_Extension/internal/Has_nested_type_Bare_point.h>
 
 #include <CGAL/Cartesian_converter.h>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
@@ -42,7 +41,7 @@
 
 #ifndef CGAL_TRIANGULATION_3_DONT_INSERT_RANGE_OF_POINTS_WITH_INFO
 #include <CGAL/Spatial_sort_traits_adapter_3.h>
-#include <CGAL/internal/info_check.h>
+#include <CGAL/STL_Extension/internal/info_check.h>
 
 #include <boost/iterator/zip_iterator.hpp>
 #include <boost/mpl/and.hpp>
@@ -428,7 +427,7 @@ public:
       }
     }
 #ifdef CGAL_TRIANGULATION_3_PROFILING
-    Rcpp::Rcerr << "Points inserted in " << t.elapsed() << " seconds." << std::endl;
+    std::cerr << "Points inserted in " << t.elapsed() << " seconds." << std::endl;
 #endif
     return number_of_vertices() - n;
   }
@@ -889,7 +888,7 @@ public:
     }
 
 #ifdef CGAL_TRIANGULATION_3_PROFILING
-    Rcpp::Rcerr << "Points removed in " << t.elapsed() << " seconds." << std::endl;
+    std::cerr << "Points removed in " << t.elapsed() << " seconds." << std::endl;
 #endif
     return n - number_of_vertices();
   }
@@ -2677,7 +2676,7 @@ is_valid(bool verbose, int level) const
   if(! Tr_Base::is_valid(verbose,level))
   {
     if(verbose)
-      Rcpp::Rcerr << "invalid base triangulation" << std::endl;
+      std::cerr << "invalid base triangulation" << std::endl;
 
     CGAL_triangulation_assertion(false);
     return false;
@@ -2700,7 +2699,7 @@ is_valid(bool verbose, int level) const
                                       it->neighbor(i)->index(it))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                Rcpp::Rcerr << "non-empty sphere " << std::endl;
+                std::cerr << "non-empty sphere " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -2726,7 +2725,7 @@ is_valid(bool verbose, int level) const
                                            ->index((*it).first))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                Rcpp::Rcerr << "non-empty circle " << std::endl;
+                std::cerr << "non-empty circle " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -2754,7 +2753,7 @@ is_valid(bool verbose, int level) const
                                          (*it).first))->point()) == ON_BOUNDED_SIDE)
             {
               if(verbose)
-                Rcpp::Rcerr << "non-empty edge " << std::endl;
+                std::cerr << "non-empty edge " << std::endl;
 
               CGAL_triangulation_assertion(false);
               return false;
@@ -2767,7 +2766,7 @@ is_valid(bool verbose, int level) const
   }
 
   if(verbose)
-    Rcpp::Rcerr << "valid regular triangulation" << std::endl;
+    std::cerr << "valid regular triangulation" << std::endl;
 
   return true;
 }

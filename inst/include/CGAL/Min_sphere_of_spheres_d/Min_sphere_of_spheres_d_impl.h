@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Bounding_volumes/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Bounding_volumes/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_impl.h $
 // $Id: Min_sphere_of_spheres_d_impl.h a522818 2021-03-21T19:06:01+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_MINIBALL_MINIBALL_C
 #define CGAL_MINIBALL_MINIBALL_C
 
-#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 
@@ -249,7 +248,7 @@ namespace  Bounding_volumes {
   bool Min_sphere_of_spheres_d<Traits>::
     is_valid(const Tag_true /* is_exact */) {
     using namespace Min_sphere_of_spheres_d_impl;
-    using Rcpp::Rcerr;
+    using std::cerr;
     using std::endl;
 
     // check size of support set:

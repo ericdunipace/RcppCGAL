@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_d/include/CGAL/Kernel_d/Linear_algebraCd_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_d/include/CGAL/Kernel_d/Linear_algebraCd_impl.h $
 // $Id: Linear_algebraCd_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -18,7 +18,6 @@
 #ifndef CGAL_LINEAR_ALGEBRACD_C
 #define CGAL_LINEAR_ALGEBRACD_C
 
-#include <Rcpp.h>
 #include <algorithm>
 #include <functional>
 
@@ -389,7 +388,7 @@ homogeneous_linear_solver(const Matrix &M, Matrix &spanning_vectors)
       /* we check whether the $l$ - th spanning vector is a solution
          of the homogeneous system */
       if ( !(M*spanning_vectors.column(l)).is_zero() )
-        Rcpp::Rcerr << M*spanning_vectors.column(l) << std::endl;
+        std::cerr << M*spanning_vectors.column(l) << std::endl;
       CGAL_assertion( (M*spanning_vectors.column(l)).is_zero() );
 #endif
     }

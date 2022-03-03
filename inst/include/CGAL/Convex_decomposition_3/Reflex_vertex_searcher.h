@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Reflex_vertex_searcher.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Reflex_vertex_searcher.h $
 // $Id: Reflex_vertex_searcher.h 4229fa4 2021-04-27T22:34:01+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_CD3_REFLEX_VERTEX_SEARCHER_H
 #define CGAL_CD3_REFLEX_VERTEX_SEARCHER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 
@@ -186,7 +185,7 @@ class Reflex_vertex_searcher : public Modifier_base<typename Nef_::SNC_structure
     for(sei = v->shalfedges_begin();
         sei != v->shalfedges_end(); ++sei) {
       int isrse = is_reflex_sedge<SNC_structure>(sei, dir);
-      Rcpp::Rcerr << "check " << sei->source()->source()->point()
+      std::cerr << "check " << sei->source()->source()->point()
                 << "->" << sei->source()->twin()->source()->point()
                 << ": " << isrse << std::endl;
     }

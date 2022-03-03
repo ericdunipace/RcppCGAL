@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation_2/include/CGAL/boost/graph/properties_Triangulation_data_structure_2.h $
-// $Id: properties_Triangulation_data_structure_2.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/TDS_2/include/CGAL/boost/graph/properties_Triangulation_data_structure_2.h $
+// $Id: properties_Triangulation_data_structure_2.h 129f427 2021-12-16T13:48:01+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -12,7 +12,7 @@
 #define CGAL_PROPERTIES_TRIANGULATION_DATA_STRUCTURE_2_H
 
 #include <CGAL/Triangulation_data_structure_2.h>
-#include <CGAL/boost/graph/internal/graph_traits_2D_triangulation_helper.h>
+#include <CGAL/boost/graph/internal/graph_traits_2D_TDS_helper.h>
 #include <CGAL/boost/graph/internal/Has_member_id.h>
 
 #include <CGAL/boost/graph/Named_function_parameters.h>
@@ -81,7 +81,7 @@ public:
   typedef boost::readable_property_map_tag                         category;
   typedef int                                                      value_type;
   typedef int                                                      reference;
-  typedef CGAL::internal::T2_halfedge_descriptor<TDS>              key_type;
+  typedef CGAL::internal::TDS2_halfedge_descriptor<TDS>            key_type;
 
   typedef typename TDS::Face_handle                                face_descriptor;
 
@@ -112,7 +112,7 @@ public:
   typedef boost::readable_property_map_tag                           category;
   typedef int                                                        value_type;
   typedef int                                                        reference;
-  typedef CGAL::internal::T2_edge_descriptor<TDS>                    key_type;
+  typedef CGAL::internal::TDS2_edge_descriptor<TDS>                  key_type;
 
   typedef typename TDS::Face_handle                                  Face_handle;
 

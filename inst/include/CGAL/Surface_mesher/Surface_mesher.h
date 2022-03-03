@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher.h $
-// $Id: Surface_mesher.h 627a7b2 2020-04-27T17:08:35+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher.h $
+// $Id: Surface_mesher.h 0b4f136 2022-01-10T10:41:44+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -20,7 +20,6 @@
 #ifndef CGAL_SURFACE_MESHER_SURFACE_MESHER_H
 #define CGAL_SURFACE_MESHER_SURFACE_MESHER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -39,6 +38,8 @@
 #include <CGAL/Surface_mesher/Types_generators.h>
 #include <CGAL/Surface_mesher/Profile_counter.h>
 #include <CGAL/Surface_mesher/Profile_timer.h>
+
+#include <CGAL/use.h>
 
 namespace CGAL {
 
@@ -96,7 +97,7 @@ namespace CGAL {
       criteria(c)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      Rcpp::Rcerr << "CONS: Surface_mesher_base\n";
+      std::cerr << "CONS: Surface_mesher_base\n";
 #endif
     }
 
@@ -159,7 +160,7 @@ namespace CGAL {
       // We test only the finite Delaunay facets
 
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-      Rcpp::Rcout << "scanning facets..." << std::endl;
+      std::cout << "scanning facets..." << std::endl;
 #endif
       for (Finite_facets_iterator fit = tr.finite_facets_begin(); fit !=
              tr.finite_facets_end(); ++fit) {
@@ -216,7 +217,7 @@ namespace CGAL {
     Point refinement_point_impl(const Facet& f) const
       {
 #ifdef CGAL_MESHES_DEBUG_REFINEMENT_POINTS
-        Rcpp::Rcerr << "point from Surface_mesher: ";
+        std::cerr << "point from Surface_mesher: ";
 #endif
         CGAL_assertion (c2t3.face_status(f) == C2T3::REGULAR);
         //CGAL_assertion (f.first->is_facet_on_surface (f.second));
@@ -229,7 +230,7 @@ namespace CGAL {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_BEFORE_CONFLICTS
                                                         s)
     {
-      Rcpp::Rcerr << "Refine_facets: before conflicts of " << s << " ";
+      std::cerr << "Refine_facets: before conflicts of " << s << " ";
 #else
                                                         )
     {
@@ -299,6 +300,7 @@ namespace CGAL {
 
           for(bool exit = false; ; exit = true)
           {
+            CGAL_USE(exit);
             // this for loop is a trick to pass in the following "if" once
             // with center="surface center", and once with
             // center="circumcenter"
@@ -419,7 +421,7 @@ namespace CGAL {
     void after_insertion_impl(const Vertex_handle& v) {
       CGAL_SURFACE_MESHER_PROFILER("inserted point")
 #ifdef CGAL_SURFACE_MESHER_DEBUG_AFTER_INSERTION
-      Rcpp::Rcerr << "Inserted\n";
+      std::cerr << "Inserted\n";
 #endif
       restore_restricted_Delaunay(v);
     }
@@ -615,9 +617,9 @@ namespace CGAL {
       }
       // Else there is a problem with the dual
       else {
-        Rcpp::Rcerr << "In is_facet_on_surface(const Facet& f, Point& center)\n"
+        std::cerr << "In is_facet_on_surface(const Facet& f, Point& center)\n"
                   << "file " << __FILE__ << ", line " << __LINE__ << "\n";
-        Rcpp::Rcerr << "Incorrect object type: " << dual.type().name() << "\n";
+        std::cerr << "Incorrect object type: " << dual.type().name() << "\n";
         CGAL_error();
       }
 
@@ -697,7 +699,7 @@ namespace CGAL {
         initialized(false)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      Rcpp::Rcerr << "CONS: Surface_mesher\n";
+      std::cerr << "CONS: Surface_mesher\n";
 #endif
     }
 
@@ -711,7 +713,7 @@ namespace CGAL {
         initialized(false)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      Rcpp::Rcerr << "CONS: Surface_mesher\n";
+      std::cerr << "CONS: Surface_mesher\n";
 #endif
     }
 
@@ -752,13 +754,13 @@ namespace CGAL {
       if (verbose == NOT_VERBOSE)
         refine (visitor);
       else {
-        Rcpp::Rcerr << "Refining...\n";
+        std::cerr << "Refining...\n";
         int nbsteps = 0;
         CGAL::Timer timer;
-        Rcpp::Rcerr << "Legende of the following line: "
+        std::cerr << "Legende of the following line: "
                   << "(#vertices,#steps," << this->debug_info_header()
                   << ")\n";
-        Rcpp::Rcerr
+        std::cerr
           << boost::format("\r             \r"
                            "(%1%,%2%,%3%) (%|4$.1f| vertices/s)")
           % tr.number_of_vertices()
@@ -771,7 +773,7 @@ namespace CGAL {
             CGAL_SURFACE_MESHER_TIME_PROFILER("Surface_mesher::one_step()");
             one_step (visitor);
           }
-          Rcpp::Rcerr
+          std::cerr
             << boost::format("\r             \r"
                              "(%1%,%2%,%3%) (%|4$.1f| vertices/s)")
             % tr.number_of_vertices()
@@ -779,7 +781,7 @@ namespace CGAL {
             % (nbsteps / timer.time());
           ++nbsteps;
         }
-        Rcpp::Rcerr << "\ndone.\n";
+        std::cerr << "\ndone.\n";
       }
 
       initialized = false;

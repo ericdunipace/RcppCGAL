@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Infinite_edge_test_C2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Infinite_edge_test_C2.h $
 // $Id: Infinite_edge_test_C2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_APOLLONIUS_GRAPH_2_INFINITE_EDGE_TEST_C2_H
 #define CGAL_APOLLONIUS_GRAPH_2_INFINITE_EDGE_TEST_C2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Apollonius_graph_2.h>
 
 
@@ -91,8 +90,8 @@ public:
         Orientation o2 = chi2(l2, l3, tag);
                         //sign_of_determinant(a2, b2, a3, b3);
 
-        //        Rcpp::Rcout << "orientation(l1, l3): " << int(o1) << std::endl;
-        //        Rcpp::Rcout << "orientation(l2, l3): " << int(o2) << std::endl;
+        //        std::cout << "orientation(l1, l3): " << int(o1) << std::endl;
+        //        std::cout << "orientation(l2, l3): " << int(o2) << std::endl;
 
         if ( o1 == LEFT_TURN ) {
           if ( o2 == COLLINEAR ) { return ON_BOUNDARY; }
@@ -108,8 +107,8 @@ public:
       Orientation o2 = chi2(l2, l3, tag);
                         //sign_of_determinant(a2, b2, a3, b3);
 
-      //      Rcpp::Rcout << "orientation(l1, l3): " << int(o1) << std::endl;
-      //      Rcpp::Rcout << "orientation(l2, l3): " << int(o2) << std::endl;
+      //      std::cout << "orientation(l1, l3): " << int(o1) << std::endl;
+      //      std::cout << "orientation(l2, l3): " << int(o2) << std::endl;
 
 
       if ( o1 == LEFT_TURN || o2 == RIGHT_TURN ) { return ON_BOUNDED_SIDE; }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Three/include/CGAL/Three/exceptions.h $
-// $Id: exceptions.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Three/include/CGAL/Three/exceptions.h $
+// $Id: exceptions.h 2478b85 2021-11-04T09:14:02+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_THREE_EXCEPTIONS_H
 #define CGAL_THREE_EXCEPTIONS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Three.h>
 
 
@@ -68,13 +67,13 @@ enum Context { CURRENT_CONTEXT, PARENT_CONTEXT };
 /// exception. That allows a Qt Script to catch the exception and deal
 /// with it.
 template <typename Callable>
-typename Optional_or_bool<typename std::result_of<Callable()>::type>::type
+typename Optional_or_bool<typename cpp11::result_of<Callable()>::type>::type
 wrap_a_call_to_cpp(Callable f,
                    QScriptable* qs = 0,
                    const char* file = 0,
                    int line = -1,
                    Context c = CURRENT_CONTEXT) {
-  typedef typename std::result_of<Callable()>::type Callable_RT;
+  typedef typename cpp11::result_of<Callable()>::type Callable_RT;
   typedef Optional_or_bool<Callable_RT> O_r_b;
   typedef typename O_r_b::type Return_type;
 
@@ -89,19 +88,19 @@ wrap_a_call_to_cpp(Callable f,
       QScriptContext* context = qs->context();
       QStringList qt_bt = context->backtrace();
       if(se) qt_bt = se->backtrace();
-      Rcpp::Rcerr << "Backtrace:\n";
+      std::cerr << "Backtrace:\n";
       Q_FOREACH(QString s, qt_bt)
       {
-        Rcpp::Rcerr << "  " << qPrintable(s) << std::endl;
+        std::cerr << "  " << qPrintable(s) << std::endl;
       }
       context = context->parentContext();
       if(c == PARENT_CONTEXT) {
-        Rcpp::Rcerr << "> parent";
+        std::cerr << "> parent";
         context = context->parentContext();
       } else {
-        Rcpp::Rcerr << "> current";
+        std::cerr << "> current";
       }
-      Rcpp::Rcerr << " context: "
+      std::cerr << " context: "
                 << qPrintable(context->toString()) << std::endl;
       QString error;
       if(se) {
@@ -120,7 +119,7 @@ wrap_a_call_to_cpp(Callable f,
       QScriptValue v = context->throwError(error);
       v.setProperty("backtrace",
                     qScriptValueFromSequence(context->engine(), qt_bt));
-      Rcpp::Rcerr << "result after throwError: "
+      std::cerr << "result after throwError: "
                 << qPrintable(v.toString()) << std::endl;
       return Return_type();
     }

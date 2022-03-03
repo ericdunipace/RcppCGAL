@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Spatial_sorting/include/CGAL/Spatial_sort_traits_adapter_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Spatial_sorting/include/CGAL/Spatial_sort_traits_adapter_3.h $
 // $Id: Spatial_sort_traits_adapter_3.h 7870a02 2021-03-20T02:53:09+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

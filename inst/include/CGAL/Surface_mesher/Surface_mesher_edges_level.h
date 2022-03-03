@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher_edges_level.h $
-// $Id: Surface_mesher_edges_level.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher_edges_level.h $
+// $Id: Surface_mesher_edges_level.h 6ac74ca 2022-01-07T09:26:10+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SURFACE_MESHER_EDGES_LEVEL_H
 #define CGAL_SURFACE_MESHER_EDGES_LEVEL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 
@@ -85,7 +84,7 @@ namespace Surface_mesher {
                                   const typename Tr::Edge& e)
   {
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INTERSECTION
-    Rcpp::Rcerr <<
+    std::cerr <<
       boost::format("compute_edge_intersection_curve(Edge(%1%, %2%, %3%)="
                     "(%4%, %5%))\n")
       % &*e.first % e.second % e.third
@@ -220,7 +219,7 @@ namespace Surface_mesher {
         const FT sq_norm_middle_vector = sq_length(middle_vector);
 
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INTERSECTION
-        Rcpp::Rcerr << ::boost::format("lengths=%1%, %2%, %3%\n")
+        std::cerr << ::boost::format("lengths=%1%, %2%, %3%\n")
           % sq_norm_first_vector
           % sq_norm_middle_vector
           % sq_norm_second_vector;
@@ -266,7 +265,7 @@ namespace Surface_mesher {
 
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INTERSECTION
     CGAL_assertion_code(
-    Rcpp::Rcerr <<
+    std::cerr <<
       boost::format("  number of finite/infinite incident cells: %1%/%2%\n"
                     "  edge_dual.size(): %3%\n")
       % number_of_finite_incident_cells
@@ -299,16 +298,16 @@ namespace Surface_mesher {
                                                              first));
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INTERSECTION
       CGAL_assertion_code(
-      Rcpp::Rcerr << boost::format("  triangle test (%1%, %2%, %3%) = %4%\n")
+      std::cerr << boost::format("  triangle test (%1%, %2%, %3%) = %4%\n")
       % current % next % first % !o.is_empty();
       )
-        Rcpp::Rcerr << boost::format("intersecion type: %1%\n") % o.type().name();
+        std::cerr << boost::format("intersecion type: %1%\n") % o.type().name();
 #endif // CGAL_SURFACE_MESHER_EDGES_DEBUG_INTERSECTION
       if(const Intersection_point* point = object_cast<Intersection_point>(&o))
       {
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INTERSECTION
         CGAL_assertion_code(
-        Rcpp::Rcerr << boost::format("  result=(%1%)\n")
+        std::cerr << boost::format("  result=(%1%)\n")
         % (*point);
                             )
 #endif
@@ -483,7 +482,7 @@ namespace Surface_mesher {
       criteria(c)
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
-      Rcpp::Rcerr << "CONS: Surface_mesher_edges_level_base\n";
+      std::cerr << "CONS: Surface_mesher_edges_level_base\n";
 #endif // CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
     }
 
@@ -523,7 +522,7 @@ namespace Surface_mesher {
     {
       if( zone.locate_type == Tr::VERTEX )
       {
-        Rcpp::Rcerr << boost::format("Error: (%1%) is already inserted on edge\n") % p;
+        std::cerr << boost::format("Error: (%1%) is already inserted on edge\n") % p;
         return CONFLICT_AND_ELEMENT_SHOULD_BE_DROPPED;
       }
       else
@@ -539,7 +538,7 @@ namespace Surface_mesher {
       zone.cell =
         tr.locate(p, zone.locate_type, zone.i, zone.j, e.first);
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INSERTIONS
-      Rcpp::Rcerr <<
+      std::cerr <<
         boost::format("-> edge Edge(%1%, %2%, %3%)=(%4%, %5%)\n"
                       "     insertion point: %6% (locate_type=%7%)\n")
         % &*e.first % e.second % e.third
@@ -559,14 +558,14 @@ namespace Surface_mesher {
     void scan_triangulation_impl()
     {
 #ifdef CGAL_SURFACE_MESHER_VERBOSE
-      Rcpp::Rcout << "scanning edges (curves)..." << std::endl;
+      std::cout << "scanning edges (curves)..." << std::endl;
 #endif // CGAL_SURFACE_MESHER_VERBOSE
       for(Finite_edges_iterator eit = tr.finite_edges_begin();
           eit != tr.finite_edges_end();
           ++eit)
         new_edge(*eit);
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INTERSECTION
-      Rcpp::Rcout << "number of edges: " << this->size() << std::endl;
+      std::cout << "number of edges: " << this->size() << std::endl;
 #endif // CGAL_SURFACE_MESHER_EDGES_DEBUG_INTERSECTION
     }
 
@@ -592,7 +591,6 @@ namespace Surface_mesher {
                                const Point_3&,
                                const Zone& zone)
     {
-      CGAL_assertion_code(bool is_e_removed = false);
       CGAL_assertion_code(const Cell_handle& c = e.first);
       CGAL_assertion_code(Vertex_handle va = c->vertex(e.second));
       CGAL_assertion_code(Vertex_handle vb = c->vertex(e.third));
@@ -615,7 +613,6 @@ namespace Surface_mesher {
           CGAL_assertion_code(Vertex_handle eit_va = eit->first->vertex(eit->second));
           CGAL_assertion_code(Vertex_handle eit_vb = eit->first->vertex(eit->third));
           CGAL_assertion_code(order_pair(eit_va, eit_vb));
-          CGAL_assertion_code(if(va == eit_va && vb == eit_vb) is_e_removed = true);
 //           c2t3.remove_from_complex(*eit);
           this->remove_element(make_pair_of_vertices(*eit));
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INSERTIONS
@@ -623,11 +620,10 @@ namespace Surface_mesher {
 #endif
         }
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INSERTIONS
-      Rcpp::Rcerr <<
+      std::cerr <<
         boost::format("     before insertion: remove %1% edges\n")
         % number_of_edges_removed;
 #endif
-//       CGAL_assertion(is_e_removed == true);
     }
 
     // for visitors
@@ -653,7 +649,7 @@ namespace Surface_mesher {
 #endif
         }
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INSERTIONS
-      Rcpp::Rcerr <<
+      std::cerr <<
         boost::format("     before insertion: remove %1% edges\n")
         % number_of_edges_removed;
 #endif
@@ -671,7 +667,7 @@ namespace Surface_mesher {
                 CGAL::inserter(edges));
 
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INSERTIONS
-      Rcpp::Rcerr <<
+      std::cerr <<
         boost::format("     after insertion: %1% new edges \n")
         % edges.size();
 #endif // CGAL_SURFACE_MESHER_EDGES_DEBUG_INSERTIONS
@@ -680,7 +676,7 @@ namespace Surface_mesher {
           ++eit)
         new_edge(*eit);
 #ifdef CGAL_SURFACE_MESHER_EDGES_DEBUG_INSERTIONS
-      Rcpp::Rcerr <<
+      std::cerr <<
         boost::format("     c2t3.number_of_marked_edges=%1%\n"
                       "     number of bad edges=%2%\n")
         % c2t3.number_of_marked_edges()

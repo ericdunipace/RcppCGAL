@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Complex_2_in_triangulation_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Complex_2_in_triangulation_3.h $
 // $Id: Complex_2_in_triangulation_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_COMPLEX_2_IN_TRIANGULATION_3_H
 #define CGAL_COMPLEX_2_IN_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -726,7 +725,7 @@ public:
     if(number_of_facets() != nb)
     {
       if(verbose) {
-        Rcpp::Rcerr << boost::format("C2t3: Invalid number of facet: %1% (should be %2%)!\n")
+        std::cerr << boost::format("C2t3: Invalid number of facet: %1% (should be %2%)!\n")
           % number_of_facets() % nb;
       }
       return false;
@@ -740,7 +739,7 @@ public:
       if(!f.first->is_facet_on_surface(f.second))
       {
         if(verbose) {
-          Rcpp::Rcerr <<
+          std::cerr <<
             boost::format("C2t3: facet (%1%, %2%) is marked on surface"
                           "will its mirror facet (%3, %4) is not!\n")
             % &*it->first % it->second

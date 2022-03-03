@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/IO/write_xyz_points.h $
-// $Id: write_xyz_points.h d6b2c8d 2021-05-18T18:13:38+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/IO/write_xyz_points.h $
+// $Id: write_xyz_points.h a34debc 2021-06-23T22:56:35+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret
@@ -12,7 +12,6 @@
 #ifndef CGAL_POINT_SET_PROCESSING_WRITE_XYZ_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_WRITE_XYZ_POINTS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/IO/helpers.h>
@@ -64,7 +63,7 @@ bool write_XYZ_PSP(std::ostream& os,
 
   if(!os)
   {
-    Rcpp::Rcerr << "Error: cannot open file" << std::endl;
+    std::cerr << "Error: cannot open file" << std::endl;
     return false;
   }
 
@@ -124,7 +123,7 @@ namespace IO {
      \cgalParamNBegin{stream_precision}
        \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
        \cgalParamType{int}
-       \cgalParamDefault{`the precision of the stream `os``}
+       \cgalParamDefault{the precision of the stream `os`}
      \cgalParamNEnd
    \cgalNamedParamsEnd
 

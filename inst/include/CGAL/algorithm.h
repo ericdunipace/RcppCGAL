@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/algorithm.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/STL_Extension/include/CGAL/algorithm.h $
 // $Id: algorithm.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -19,7 +19,6 @@
 #ifndef CGAL_ALGORITHM_H
 #define CGAL_ALGORITHM_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/utils.h>
 #include <CGAL/enum.h>
@@ -270,7 +269,7 @@ lexicographical_compare_three_valued( InputIterator1 first1, InputIterator1 last
     Example:
 <PRE>
     int a[] = {1, 2, 3};
-    output_range(Rcpp::Rcout, a, a+3, ":", "(", ")");
+    output_range(std::cout, a, a+3, ":", "(", ")");
 </PRE>
     produces \c (1):(2):(3)
  */

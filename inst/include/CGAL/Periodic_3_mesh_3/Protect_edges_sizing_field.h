@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/Protect_edges_sizing_field.h $
-// $Id: Protect_edges_sizing_field.h 676c367 2021-11-29T18:02:31+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/Protect_edges_sizing_field.h $
+// $Id: Protect_edges_sizing_field.h a93dda8 2021-09-10T17:43:47+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stephane Tayeb, Laurent Rineau, Mael Rouxel-Labbé
@@ -29,7 +29,6 @@
 //   (unordered sets, improving 'unchecked_vertices', etc.)
 // - No wonky indentation :)
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_mesh_3.h>
 
 #include <CGAL/Mesh_3/io_signature.h>
@@ -41,7 +40,7 @@
 #include <CGAL/Mesh_3/Triangulation_helpers.h>
 
 #include <CGAL/enum.h>
-#include <CGAL/internal/Has_member_visited.h>
+#include <CGAL/STL_Extension/internal/Has_member_visited.h>
 #include <CGAL/iterator.h>
 #include <CGAL/number_utils.h>
 #include <CGAL/Periodic_3_Delaunay_triangulation_traits_3.h>
@@ -560,28 +559,28 @@ operator()(const bool refine)
   CGAL_assertion((boost::is_same<typename Tr::Periodic_tag, CGAL::Tag_true>::value));
 
 #ifdef CGAL_MESH_3_VERBOSE
-  Rcpp::Rcerr << "Inserting protection balls..." << std::endl
+  std::cerr << "Inserting protection balls..." << std::endl
             << "  refine_balls = " << std::boolalpha << refine << std::endl
             << "  min_balls_radius = " << minimal_size_ << std::endl
             << "  min_balls_weight = " << minimal_weight_ << std::endl;
 #endif
 
 #if defined(CGAL_PERIODIC_PROTECTION_ATTEMPT_TO_REMOVE_DUMMY_PTS) && defined(CGAL_MESH_3_VERBOSE)
-  Rcpp::Rcerr << "Dumping dummy vertices pre protection treatment" << std::endl;
+  std::cerr << "Dumping dummy vertices pre protection treatment" << std::endl;
   dump_dummy_points("dummies_pre_treatement.xyz");
 #endif
 
   // Insert 0-dimensional features
   insert_corners();
 #ifdef CGAL_MESH_3_VERBOSE
-  Rcpp::Rcerr << "insert_corners() done. Nb of points in triangulation: "
+  std::cerr << "insert_corners() done. Nb of points in triangulation: "
             << c3t3_.triangulation().number_of_vertices() << std::endl;
 #endif
 
   // Insert 1-dimensional features
   insert_balls_on_edges();
 #ifdef CGAL_MESH_3_VERBOSE
-  Rcpp::Rcerr << "insert_balls_on_edges() done. Nb of points in triangulation: "
+  std::cerr << "insert_balls_on_edges() done. Nb of points in triangulation: "
             << c3t3_.triangulation().number_of_vertices() << std::endl;
 #endif
 
@@ -590,7 +589,7 @@ operator()(const bool refine)
   {
     refine_balls();
 #ifdef CGAL_MESH_3_VERBOSE
-    Rcpp::Rcerr << "refine_balls() done. Nb of points in triangulation: "
+    std::cerr << "refine_balls() done. Nb of points in triangulation: "
               << c3t3_.triangulation().number_of_vertices() << std::endl;
 #endif
 
@@ -604,7 +603,7 @@ operator()(const bool refine)
   // debug_dump_c3t3("dump-mesh-after-protect_edges.binary.cgal", c3t3_);
 
 #if defined(CGAL_PERIODIC_PROTECTION_ATTEMPT_TO_REMOVE_DUMMY_PTS) && defined(CGAL_MESH_3_VERBOSE)
-  Rcpp::Rcerr << "Dumping dummy vertices post protection treatment" << std::endl;
+  std::cerr << "Dumping dummy vertices post protection treatment" << std::endl;
   dump_dummy_points("dummies_post_treatement.xyz");
 #endif
 
@@ -622,18 +621,18 @@ dump_correspondence_map() const
                                               cmcend = vertex_handle_to_full_space_position.end();
   for(; cmcit!= cmcend; ++cmcit)
   {
-    Rcpp::Rcerr << "Curve " << cmcit->first << std::endl;
+    std::cerr << "Curve " << cmcit->first << std::endl;
     const Curve_correspondence_map& cmap = cmcit->second;
     typename Curve_correspondence_map::const_iterator ccmcit = cmap.begin(),
                                                       ccmcend = cmap.end();
     for(; ccmcit!=ccmcend; ++ccmcit)
     {
-      Rcpp::Rcerr << "  Vertex: " << &*(ccmcit->first)
+      std::cerr << "  Vertex: " << &*(ccmcit->first)
                 << " canonical pos: " << c3t3_.triangulation().point(ccmcit->first) << std::endl;
       const Domain_pts_container& vpts = ccmcit->second;
       typename Domain_pts_container::const_iterator ptit = vpts.begin();
       for(; ptit!=vpts.end(); ++ptit)
-        Rcpp::Rcerr << "    Point: " << *ptit << std::endl;
+        std::cerr << "    Point: " << *ptit << std::endl;
     }
   }
 }
@@ -667,7 +666,7 @@ insert_in_correspondence_map(const Vertex_handle v,
                              const Curve_index& curve_index)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << "insert_in_correspondence_map: " << &*v
+  std::cerr << "insert_in_correspondence_map: " << &*v
             << " pos: " << p
             << " index: " << curve_index << std::endl;
 #endif
@@ -686,7 +685,7 @@ insert_in_correspondence_map(const Vertex_handle v,
     Domain_pts_container& v_bps = is_insert_successful.first->second;
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-    Rcpp::Rcerr << "Point already existed for this curve, "
+    std::cerr << "Point already existed for this curve, "
               << "at position: " << *(v_bps.begin()) << std::endl;
 #endif
 
@@ -756,7 +755,7 @@ get_positions_with_vertex_at_extremity(const Bare_point& known_point,
                                        const CGAL::Orientation orientation) const
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << "get_positions_with_vertex_at_extremity()" << std::endl
+  std::cerr << "get_positions_with_vertex_at_extremity()" << std::endl
             << "known_point: " << known_point << " on curve " << CGAL::IO::oformat(curve_index)
             << " orientation: " << orientation
             << " inverted order ? " << std::boolalpha << inverted_return_order << std::endl;
@@ -774,7 +773,7 @@ get_positions_with_vertex_at_extremity(const Bare_point& known_point,
   CGAL_assertion(known_point != extr_pt);
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-  Rcpp::Rcerr << "extr/other: " << extr_pt << " // " << other_extr_pt << std::endl;
+  std::cerr << "extr/other: " << extr_pt << " // " << other_extr_pt << std::endl;
 #endif
 
   // Check for unknown orientation, which is indicated by a 'Zero'
@@ -799,7 +798,7 @@ get_positions_with_vertex_at_extremity(const Bare_point& known_point,
                                    domain_.distance_sign(known_point, other_extr_pt, curve_index));
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-    Rcpp::Rcerr << "distances: " << distance_to_extr_pt << " // "
+    std::cerr << "distances: " << distance_to_extr_pt << " // "
               << distance_to_other_extr_pt << std::endl;
 #endif
 
@@ -857,7 +856,7 @@ get_positions(const Vertex_handle v1,
               const CGAL::Orientation orientation) const
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << "get positions: " << &*v1 << " " << &*v2
+  std::cerr << "get positions: " << &*v1 << " " << &*v2
             << " in curve " << curve_index << " and orientation: " << orientation << std::endl;
 #endif
 
@@ -1009,7 +1008,7 @@ Protect_edges_sizing_field<C3T3, MD, Sf>::
 get_maximum_weight(const Vertex_handle protection_vertex, const FT intended_weight) const
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-  Rcpp::Rcerr << "Compute max weight(), intended weight: " << intended_weight << std::endl;
+  std::cerr << "Compute max weight(), intended weight: " << intended_weight << std::endl;
 #endif
 
   FT max_possible_weight = intended_weight;
@@ -1049,7 +1048,7 @@ change_ball_size_with_dummy_scaffholding(Vertex_handle& v, const FT w, bool is_s
                                          const Weighted_point& dummy_point)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << "Changing ball size with scaffholding dummy pt: " << dummy_point << std::endl;
+  std::cerr << "Changing ball size with scaffholding dummy pt: " << dummy_point << std::endl;
 #endif
 
   // If we are here, we have removed the dummy vertex and are still in 1-cover,
@@ -1079,18 +1078,18 @@ change_ball_size_with_dummy_scaffholding(Vertex_handle& v, const FT w, bool is_s
        try_to_remove_dummy_vertex(dummy_vertex))
     {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-      Rcpp::Rcerr << "All good, changed weight and re-removed the dummy!" << std::endl;
+      std::cerr << "All good, changed weight and re-removed the dummy!" << std::endl;
 #endif
       return true;
     }
     else
     {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-      Rcpp::Rcerr << "The dummy point now refuses to be removed... ?" << std::endl;
+      std::cerr << "The dummy point now refuses to be removed... ?" << std::endl;
 #endif
       if(!change_ball_size(v, previous_weight, is_special)) // restore the weight
       {
-        Rcpp::Rcerr << "Error: failed to remove scaffholding dummy point" << std::endl;
+        std::cerr << "Error: failed to remove scaffholding dummy point" << std::endl;
         CGAL_assertion(false); // do not allow the weight restoration to fail
       }
     }
@@ -1098,7 +1097,7 @@ change_ball_size_with_dummy_scaffholding(Vertex_handle& v, const FT w, bool is_s
   else
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-    Rcpp::Rcerr << "Couldn't change the weight... ?" << std::endl;
+    std::cerr << "Couldn't change the weight... ?" << std::endl;
 #endif
   }
   return false;
@@ -1111,7 +1110,7 @@ Protect_edges_sizing_field<C3T3, MD, Sf>::
 insert_dummy_point(const Weighted_point& dummy_point)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-  Rcpp::Rcerr << "(Re-)inserting dummy point: " << dummy_point << std::endl;
+  std::cerr << "(Re-)inserting dummy point: " << dummy_point << std::endl;
 #endif
   typename Tr::Locate_type lt;
   int li, lj;
@@ -1136,7 +1135,7 @@ try_to_remove_close_dummy_vertex(Vertex_handle& protection_vertex,
   if(try_to_remove_dummy_vertex(dummy_vertex))
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-    Rcpp::Rcerr << "Successfully removed the dummy vertex" << std::endl;
+    std::cerr << "Successfully removed the dummy vertex" << std::endl;
 #endif
     CGAL_expensive_assertion(c3t3_.triangulation().tds().is_valid());
     CGAL_expensive_assertion(c3t3_.triangulation().is_valid());
@@ -1146,7 +1145,7 @@ try_to_remove_close_dummy_vertex(Vertex_handle& protection_vertex,
     // 'intended_weight' might still be too much, reduce it as little as possible
     FT weight = get_maximum_weight(protection_vertex, intended_weight);
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-    Rcpp::Rcerr << "maximum possible weight: " << weight << std::endl;
+    std::cerr << "maximum possible weight: " << weight << std::endl;
 #endif
 
     // @todo (?) : if the weight is small compared to 'intended_weight' and the nearest
@@ -1156,7 +1155,7 @@ try_to_remove_close_dummy_vertex(Vertex_handle& protection_vertex,
          protection_vertex, weight, is_special(protection_vertex), dummy_point))
     {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-      Rcpp::Rcerr << "Successfuly removed the dummy point and changed the vertex weight" << std::endl;
+      std::cerr << "Successfuly removed the dummy point and changed the vertex weight" << std::endl;
 #endif
       return true;
     }
@@ -1164,14 +1163,14 @@ try_to_remove_close_dummy_vertex(Vertex_handle& protection_vertex,
     {
       // 'change_ball_size_with_dummy_scaffholding()' re-inserts the dummy point on failure
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-      Rcpp::Rcerr << "Failed to change the weight..." << std::endl;
+      std::cerr << "Failed to change the weight..." << std::endl;
 #endif
     }
   }
   else
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-    Rcpp::Rcerr << "Failed to remove dummy point" << std::endl;
+    std::cerr << "Failed to remove dummy point" << std::endl;
 #endif
   }
   return false;
@@ -1192,14 +1191,14 @@ try_to_move_dummy_vertex(const Vertex_handle dummy_vertex,
     // If we didn't manage to remove the old position, remove the new position
     if(!try_to_remove_dummy_vertex(new_dummy))
     {
-      Rcpp::Rcerr << "Error: failed to remove scaffholding dummy point" << std::endl;
+      std::cerr << "Error: failed to remove scaffholding dummy point" << std::endl;
       CGAL_assertion(false); // Do not allow failure in removing the new point
     }
     return false;
   }
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << "Moved dummy vertex to new position: " << new_position << std::endl;
+  std::cerr << "Moved dummy vertex to new position: " << new_position << std::endl;
 #endif
   return true;
 }
@@ -1235,7 +1234,7 @@ move_dummy_vertex_away_from_corner_with_direction(Vertex_handle& protection_vert
 
     const Bare_point moved_bp = cp(protection_position) + CGAL::sqrt(sq_distance) * dir;
 #ifdef CGAL_PERIODIC_3_MESH_3_DEBUG_DUMMY_TREATMENT
-    Rcpp::Rcerr << "Trying to move " << cp(dummy_point) << " to " << moved_bp << std::endl;
+    std::cerr << "Trying to move " << cp(dummy_point) << " to " << moved_bp << std::endl;
 #endif
 
     // The modified position must not be in an existing ball
@@ -1253,7 +1252,7 @@ move_dummy_vertex_away_from_corner_with_direction(Vertex_handle& protection_vert
     if(try_to_remove_dummy_vertex(dummy_vertex))
     {
 #ifdef CGAL_PERIODIC_3_MESH_3_DEBUG_DUMMY_TREATMENT
-      Rcpp::Rcerr << "With this move, the initial dummy vertex can be removed" << std::endl;
+      std::cerr << "With this move, the initial dummy vertex can be removed" << std::endl;
 #endif
       FT weight = get_maximum_weight(protection_vertex, intended_weight);
 
@@ -1264,20 +1263,20 @@ move_dummy_vertex_away_from_corner_with_direction(Vertex_handle& protection_vert
            protection_vertex, weight, is_special(protection_vertex), dummy_point))
       {
 #ifdef CGAL_PERIODIC_3_MESH_3_DEBUG_DUMMY_TREATMENT
-        Rcpp::Rcerr << "Successfully moved the dummy point and changed the vertex weight" << std::endl;
+        std::cerr << "Successfully moved the dummy point and changed the vertex weight" << std::endl;
 #endif
         return true;
       }
       else
       {
 #ifdef CGAL_PERIODIC_3_MESH_3_DEBUG_DUMMY_TREATMENT
-        Rcpp::Rcerr << "Failed to change the weight..." << std::endl;
+        std::cerr << "Failed to change the weight..." << std::endl;
 #endif
 
         // 'change_ball_size_with_dummy_scaffholding()' re-inserts the initial dummy point on failure
         if(!try_to_remove_dummy_vertex(moved_dummy_vertex))
         {
-          Rcpp::Rcerr << "Error: Failed to remove moved dummy vertex" << std::endl;
+          std::cerr << "Error: Failed to remove moved dummy vertex" << std::endl;
           CGAL_assertion(false); // do not allow the removal of the moved vertex to fail
         }
         continue;
@@ -1286,11 +1285,11 @@ move_dummy_vertex_away_from_corner_with_direction(Vertex_handle& protection_vert
     else // failed to remove the dummy point
     {
 #ifdef CGAL_PERIODIC_3_MESH_3_DEBUG_DUMMY_TREATMENT
-      Rcpp::Rcerr << "Can't remove the initial dummy point" << std::endl;
+      std::cerr << "Can't remove the initial dummy point" << std::endl;
 #endif
       if(try_to_remove_dummy_vertex(moved_dummy_vertex))
       {
-        Rcpp::Rcerr << "Error: Failed to remove moved dummy vertex" << std::endl;
+        std::cerr << "Error: Failed to remove moved dummy vertex" << std::endl;
         CGAL_assertion(false); // do not allow the removal of the moved vertex to fail
       }
       continue;
@@ -1346,7 +1345,7 @@ try_to_solve_close_dummy_point(Vertex_handle& protection_vertex,
   CGAL_precondition_code(})
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-      Rcpp::Rcerr << "Dummy vertex: " << c3t3_.triangulation().point(dummy_vertex) << " is too close "
+      std::cerr << "Dummy vertex: " << c3t3_.triangulation().point(dummy_vertex) << " is too close "
             << "to vertex: " << c3t3_.triangulation().point(protection_vertex) << std::endl;
 #endif
 
@@ -1392,15 +1391,15 @@ insert_corners()
     Index p_index = domain_.index_from_corner_index(corner_index);
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "** treat corner #" << CGAL::IO::oformat(p_index) << std::endl;
+    std::cerr << "** treat corner #" << CGAL::IO::oformat(p_index) << std::endl;
 #endif
 
     // Get weight (the ball radius is given by the 'query_size' function)
     FT w = CGAL::square(query_size(p, 0, p_index));
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "Point: " << p << std::endl;
-    Rcpp::Rcerr << "Weight from sizing field: " << w << std::endl;
+    std::cerr << "Point: " << p << std::endl;
+    std::cerr << "Weight from sizing field: " << w << std::endl;
 #endif
 
     //--------------------------------------------------------------------------
@@ -1422,12 +1421,12 @@ insert_corners()
 
       w = (std::min)(w, nearest_sq_dist / FT(9));
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-      Rcpp::Rcerr << "sq distance to nearest neighbor: " << nearest_sq_dist << std::endl;
+      std::cerr << "sq distance to nearest neighbor: " << nearest_sq_dist << std::endl;
 #endif
     }
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "Final weight: " << w << std::endl;
+    std::cerr << "Final weight: " << w << std::endl;
 #endif
 
     // get curve indices here
@@ -1439,7 +1438,7 @@ insert_corners()
       // This corner won't be added to the correspondence map, but it's okay
       // because we will never need it.
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-      Rcpp::Rcerr << "Warning: corner without any incident curve" << std::endl;
+      std::cerr << "Warning: corner without any incident curve" << std::endl;
 #endif
     }
 
@@ -1451,7 +1450,7 @@ insert_corners()
     // As C3t3::add_to_complex modifies the 'in_dimension' of the vertex,
     // we need to backup and re-set the 'is_special' marker after.
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-    Rcpp::Rcerr << "Adding: " << c3t3_.triangulation().point(v) << " to complex" << std::endl;
+    std::cerr << "Adding: " << c3t3_.triangulation().point(v) << " to complex" << std::endl;
 #endif
     c3t3_.add_to_complex(v,cit->first);
 
@@ -1461,7 +1460,7 @@ insert_corners()
   }
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-  Rcpp::Rcerr << "Correspondence map after insert corners: " << std::endl;
+  std::cerr << "Correspondence map after insert corners: " << std::endl;
   dump_correspondence_map();
 #endif
 }
@@ -1475,8 +1474,8 @@ insert_point(const Bare_point& p, const Weight& w, int dim, const Index& index,
              const Curve_index_container& curve_indices, const bool special_ball)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "insert_point()" << std::endl;
-  Rcpp::Rcerr << "pos: " << p << " weight: " << w
+  std::cerr << "insert_point()" << std::endl;
+  std::cerr << "pos: " << p << " weight: " << w
             << " dim: " << dim << " index: " << CGAL::IO::oformat(index) << std::endl;
 #endif
 
@@ -1508,7 +1507,7 @@ insert_point(const Bare_point& p, const Weight& w, int dim, const Index& index,
   Vertex_handle v = c3t3_.triangulation().insert(wp, lt, ch, li, lj);
   CGAL_postcondition(Vertex_handle() != v);
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "Inserted point: " << wp << " vertex_handle: " << &*v << std::endl;
+  std::cerr << "Inserted point: " << wp << " vertex_handle: " << &*v << std::endl;
 #endif
 
 #ifndef CGAL_PERIODIC_PROTECTION_ATTEMPT_TO_REMOVE_DUMMY_PTS
@@ -1521,30 +1520,30 @@ insert_point(const Bare_point& p, const Weight& w, int dim, const Index& index,
   insert_in_correspondence_map(v, p, curve_indices);
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "Insertion of ";
+  std::cerr << "Insertion of ";
   if(special_ball)
-    Rcpp::Rcerr << "SPECIAL ";
-  Rcpp::Rcerr << "protecting ball ";
+    std::cerr << "SPECIAL ";
+  std::cerr << "protecting ball ";
   if(v == Vertex_handle())
-    Rcpp::Rcerr << cwp(p,w*weight_modifier);
+    std::cerr << cwp(p,w*weight_modifier);
   else
-    Rcpp::Rcerr << disp_vert(v);
+    std::cerr << disp_vert(v);
 
   switch(dim) {
   case 0:
-    Rcpp::Rcerr << " on corner #";
+    std::cerr << " on corner #";
     break;
   case 1:
-    Rcpp::Rcerr << " on curve #";
+    std::cerr << " on curve #";
     break;
   default:
-    Rcpp::Rcerr << " ERROR dim=" << dim << " index=";
+    std::cerr << " ERROR dim=" << dim << " index=";
   }
 
-  Rcpp::Rcerr << CGAL::IO::oformat(index) << std::endl;
+  std::cerr << CGAL::IO::oformat(index) << std::endl;
   if(v == Vertex_handle())
-    Rcpp::Rcerr << "  HIDDEN!\n";
-  Rcpp::Rcerr << "The weight was " << w << std::endl;
+    std::cerr << "  HIDDEN!\n";
+  std::cerr << "The weight was " << w << std::endl;
 #endif // CGAL_MESH_3_PROTECTION_DEBUG
 
   c3t3_.set_dimension(v, dim);
@@ -1567,7 +1566,7 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
                    const Curve_index_container& curve_indices, ErasedVeOutIt out)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "smart_insert_point((" << p
+  std::cerr << "smart_insert_point((" << p
             << "), w=" << w
             << ", dim=" << dim
             << ", index=" << CGAL::IO::oformat(index) << ")\n";
@@ -1575,7 +1574,7 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
   const Tr& tr = c3t3_.triangulation();
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << " Triangulation has " << tr.number_of_vertices() << " vertices" << std::endl;
+  std::cerr << " Triangulation has " << tr.number_of_vertices() << " vertices" << std::endl;
 #endif
 
   typename Gt::Compare_weighted_squared_radius_3 cwsr =
@@ -1596,15 +1595,15 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
   Cell_handle ch = tr.locate(wp0, lt, li, lj);
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << "locate returns: " << &*ch << " lt: " << lt << " lilj: " << li << " " << lj << std::endl;
+  std::cerr << "locate returns: " << &*ch << " lt: " << lt << " lilj: " << li << " " << lj << std::endl;
   for(int i=0; i<4; ++i)
-    Rcpp::Rcerr << " -> " << c3t3_.triangulation().point(ch, i) << std::endl;
+    std::cerr << " -> " << c3t3_.triangulation().point(ch, i) << std::endl;
 #endif
 
   if(lt == Tr::VERTEX)
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "Warning: point " << p << " already inserted" << std::endl;
+    std::cerr << "Warning: point " << p << " already inserted" << std::endl;
 #endif
     Vertex_handle v = ch->vertex(li);
 
@@ -1614,7 +1613,7 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
     if(i && *i == 0)
     {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-      Rcpp::Rcerr << "Trying to insert on a dummy point" << std::endl;
+      std::cerr << "Trying to insert on a dummy point" << std::endl;
 #endif
 
       // The point we want to insert is unfortunately already in as a dummy...
@@ -1652,7 +1651,7 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
       }
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-      Rcpp::Rcerr << "Moved dummy point, calling smart_insert() again" << std::endl;
+      std::cerr << "Moved dummy point, calling smart_insert() again" << std::endl;
 #endif
       return smart_insert_point(p, w, dim, index, curve_indices, out);
     }
@@ -1673,14 +1672,14 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
   CGAL_assertion(tr.point(nearest_vh) != cwp(tr.canonicalize_point(p)));
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << "Nearest power vertex of (" << p << ") is "
+  std::cerr << "Nearest power vertex of (" << p << ") is "
             << &*nearest_vh << " (" << c3t3_.triangulation().point(nearest_vh) << ") "
             << "at distance: " << sq_d << std::endl;
 
   Index nearest_vh_index = c3t3_.index(nearest_vh);
   int* i = boost::get<int>(&nearest_vh_index);
   if(i && *i == 0)
-    Rcpp::Rcerr << "Nearest power vertex is a dummy point" << std::endl;
+    std::cerr << "Nearest power vertex is a dummy point" << std::endl;
 #endif
 
   // This will never happen for a dummy point
@@ -1787,7 +1786,7 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
   if(w > min_sq_distance)
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "smart_insert_point: weight " << w
+    std::cerr << "smart_insert_point: weight " << w
               << " reduced to " << min_sq_distance
               << "\n (near existing point: "
               << c3t3_.triangulation().point(nearest_vertex) << ")\n";
@@ -1795,7 +1794,7 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
     Index nearest_vertex_index = c3t3_.index(nearest_vertex);
     i = boost::get<int>(&nearest_vertex_index);
     if(i && *i == 0)
-      Rcpp::Rcerr << "reduced due to dummy" << std::endl;
+      std::cerr << "reduced due to dummy" << std::endl;
 #endif
     w = min_sq_distance;
   }
@@ -1822,7 +1821,7 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
   if(w > w_max)
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "smart_insert_point: weight " << w
+    std::cerr << "smart_insert_point: weight " << w
               << " reduced to " << w_max << " (sizing field)\n";
 #endif
     w = w_max;
@@ -1851,13 +1850,13 @@ smart_insert_point(const Bare_point& p, Weight w, int dim, const Index& index,
     if(try_to_solve_close_dummy_point(new_vertex, nearest_vertex, initial_weight))
     {
 #ifdef CGAL_PERIODIC_3_MESH_3_DEBUG_DUMMY_TREATMENT
-      Rcpp::Rcerr << "The dummy vertex was (re)moved and the weight was increased!" << std::endl;
+      std::cerr << "The dummy vertex was (re)moved and the weight was increased!" << std::endl;
 #endif
     }
     else
     {
 #ifdef CGAL_PERIODIC_3_MESH_3_DEBUG_DUMMY_TREATMENT
-      Rcpp::Rcerr << "The dummy vertex is too tough to handle..." << std::endl;
+      std::cerr << "The dummy vertex is too tough to handle..." << std::endl;
 #endif
     }
 
@@ -1893,8 +1892,8 @@ insert_balls_on_edges()
     if(! is_treated(curve_index))
     {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-      Rcpp::Rcerr << "** treat curve #" << curve_index << std::endl;
-      Rcpp::Rcerr << "is it a loop? " << domain_.is_loop(curve_index) << std::endl;
+      std::cerr << "** treat curve #" << curve_index << std::endl;
+      std::cerr << "is it a loop? " << domain_.is_loop(curve_index) << std::endl;
 #endif
       const Bare_point& p = std::get<1>(*fit).first;
       const Bare_point& q = std::get<2>(*fit).first;
@@ -2028,14 +2027,14 @@ insert_balls(const Vertex_handle& vp,
              ErasedVeOutIt out)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "insert_balls(vp=" << disp_vert(vp) << ",\n"
+  std::cerr << "insert_balls(vp=" << disp_vert(vp) << ",\n"
             << "             vq=" << disp_vert(vq) << ",\n"
             << "             sp=" << sp << ",\n"
             << "             sq=" << sq << ",\n"
             << "             d=" << d << ",\n"
             << "             d_sign=" << d_sign << ",\n"
             << "             curve_index=" << curve_index << ")\n";
-  Rcpp::Rcerr << "nonlinear growth? " << std::boolalpha << nonlinear_growth_of_balls << '\n'
+  std::cerr << "nonlinear growth? " << std::boolalpha << nonlinear_growth_of_balls << '\n'
             << "refine_balls_iteration_nb: " << refine_balls_iteration_nb << '\n'
             << "max_nb_vertices_to_reevaluate_size" << Mesh_3::internal::max_nb_vertices_to_reevaluate_size << std::endl;
 #endif
@@ -2105,7 +2104,7 @@ insert_balls(const Vertex_handle& vp,
        d >= (Mesh_3::internal::max_nb_vertices_to_reevaluate_size * minimal_weight_))
     {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-      Rcpp::Rcerr << "Number of to-be-inserted balls is: "
+      std::cerr << "Number of to-be-inserted balls is: "
                 << n << "\n  between points ("
                 << vpp << ") and (" << vqp
                 << ") (arc length: "
@@ -2123,8 +2122,8 @@ insert_balls(const Vertex_handle& vp,
       const FT point_weight = CGAL::square(size_(new_point, dim, index));
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-      Rcpp::Rcerr << "  middle point: " << new_point << std::endl;
-      Rcpp::Rcerr << "  new weight: " << point_weight << std::endl;
+      std::cerr << "  middle point: " << new_point << std::endl;
+      std::cerr << "  new weight: " << point_weight << std::endl;
 #endif
       std::pair<Vertex_handle, ErasedVeOutIt> pair =
         smart_insert_point(new_point, point_weight, dim, index, curve_index, out);
@@ -2149,7 +2148,7 @@ insert_balls(const Vertex_handle& vp,
   FT r = (sq - sp) / FT(n+1);
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "  n=" << n
+  std::cerr << "  n=" << n
             << "\n  r=" << r << std::endl;
 #endif
 
@@ -2256,7 +2255,7 @@ refine_balls()
   Tr& tr = c3t3_.triangulation();
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "Refine balls() " << std::endl;
+  std::cerr << "Refine balls() " << std::endl;
 #endif
 
   // Loop
@@ -2275,7 +2274,7 @@ refine_balls()
 #endif //CGAL_MESH_3_DUMP_FEATURES_PROTECTION_ITERATIONS
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "RESTART REFINE LOOP (" << refine_balls_iteration_nb << ")\n"
+    std::cerr << "RESTART REFINE LOOP (" << refine_balls_iteration_nb << ")\n"
               << "\t unchecked_vertices size: " << unchecked_vertices_.size() <<"\n";
 #endif
     ++refine_balls_iteration_nb;
@@ -2289,9 +2288,9 @@ refine_balls()
       Vertex_handle vb = eit->first->vertex(eit->third);
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 16
-      Rcpp::Rcerr << "Treat edge: " << c3t3_.triangulation().point(va) << " || "
+      std::cerr << "Treat edge: " << c3t3_.triangulation().point(va) << " || "
                                   << c3t3_.triangulation().point(vb) << std::endl;
-      Rcpp::Rcerr << "Intersecting edges ? " << do_balls_intersect(va, vb) << std::endl;
+      std::cerr << "Intersecting edges ? " << do_balls_intersect(va, vb) << std::endl;
 #endif
 
       // If those vertices are not adjacent in the complex but still intersect,
@@ -2309,10 +2308,10 @@ refine_balls()
         FT sb_new = (std::min)(ab/distance_divisor, rb);
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 16
-        Rcpp::Rcerr << "ab: " << ab << std::endl;
-        Rcpp::Rcerr << "distance divisor: " << distance_divisor << std::endl;
-        Rcpp::Rcerr << "ra | rb: " << ra << " " << rb << std::endl;
-        Rcpp::Rcerr << "sa_new | sb_new: " << sa_new << " " << sb_new << std::endl;
+        std::cerr << "ab: " << ab << std::endl;
+        std::cerr << "distance divisor: " << distance_divisor << std::endl;
+        std::cerr << "ra | rb: " << ra << " " << rb << std::endl;
+        std::cerr << "sa_new | sb_new: " << sa_new << " " << sb_new << std::endl;
 #endif
 
         // In case of va or vb have already been in conflict, keep minimal size
@@ -2327,7 +2326,7 @@ refine_balls()
         }
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 16
-        Rcpp::Rcerr << "refine_balls: " << disp_vert(va) << " and "
+        std::cerr << "refine_balls: " << disp_vert(va) << " and "
                   << disp_vert(vb) << " are non-adjacent but do intersect\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG & 16
 
@@ -2335,7 +2334,7 @@ refine_balls()
         if(sa_new != ra)
         {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 16
-          Rcpp::Rcerr << "  new_sizes[" << disp_vert(va) << ":"
+          std::cerr << "  new_sizes[" << disp_vert(va) << ":"
                     << new_sizes[va] << "\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG & 16
           new_sizes[va] = sa_new;
@@ -2344,7 +2343,7 @@ refine_balls()
         if(sb_new != rb)
         {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 16
-          Rcpp::Rcerr << "  new_sizes[" << disp_vert(vb) << ":"
+          std::cerr << "  new_sizes[" << disp_vert(vb) << ":"
                     << new_sizes[vb] << "\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG & 16
           new_sizes[vb] = sb_new;
@@ -2396,7 +2395,7 @@ refine_balls()
   if(this->refine_balls_iteration_nb == refine_balls_max_nb_of_loops)
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "Warning : features protection has reached maximal "
+    std::cerr << "Warning : features protection has reached maximal "
               << " number of loops." << std::endl
               << "          It might result in a crash." << std::endl;
 #endif
@@ -2453,7 +2452,7 @@ change_ball_size(Vertex_handle& v, const FT squared_size, const bool special_bal
   //   return true;
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "change_ball_size(v=" << disp_vert(v)
+  std::cerr << "change_ball_size(v=" << disp_vert(v)
             << " dim=" << c3t3_.in_dimension(v)
             << " index=" << CGAL::IO::oformat(c3t3_.index(v))
             << " ,\n"
@@ -2498,7 +2497,7 @@ change_ball_size(Vertex_handle& v, const FT squared_size, const bool special_bal
   {
     // This should only happen if we're fiddling with dummy points
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-    Rcpp::Rcerr << "Warning: change_ball_size() can't remove vertex "
+    std::cerr << "Warning: change_ball_size() can't remove vertex "
               << "as it would switch the triangulation's cover" << std::endl;
 #endif
 
@@ -2591,9 +2590,9 @@ Protect_edges_sizing_field<C3T3, MD, Sf>::
 check_and_repopulate_edges()
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "check_and_repopulate_edges()\n";
-  Rcpp::Rcerr << c3t3_.number_of_vertices_in_complex() << " corners" << std::endl;
-  Rcpp::Rcerr << c3t3_.triangulation().number_of_vertices() << " vertices" << std::endl;
+  std::cerr << "check_and_repopulate_edges()\n";
+  std::cerr << c3t3_.number_of_vertices_in_complex() << " corners" << std::endl;
+  std::cerr << c3t3_.triangulation().number_of_vertices() << " vertices" << std::endl;
 #endif
 
   Vertex_set vertices;
@@ -2622,7 +2621,7 @@ Protect_edges_sizing_field<C3T3, MD, Sf>::
 check_and_fix_vertex_along_edge(const Vertex_handle& v, ErasedVeOutIt out)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "check_and_fix_vertex_along_edge("
+  std::cerr << "check_and_fix_vertex_along_edge("
             << disp_vert(v)
             << " dim=" << get_dimension(v)
             << " index=" << CGAL::IO::oformat(c3t3_.index(v))
@@ -2653,9 +2652,9 @@ check_and_fix_vertex_along_edge(const Vertex_handle& v, ErasedVeOutIt out)
   typename Adjacent_vertices::const_iterator ivl = --(adjacent_vertices.end());
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-  Rcpp::Rcerr << adjacent_vertices.size() << " incident vertices" << std::endl;
-  Rcpp::Rcerr << "ivb: " << *(ivb->first) << " // " << ivb->second << std::endl;
-  Rcpp::Rcerr << "ivl: " << *(ivl->first) << " // " << ivl->second << std::endl;
+  std::cerr << adjacent_vertices.size() << " incident vertices" << std::endl;
+  std::cerr << "ivb: " << *(ivb->first) << " // " << ivb->second << std::endl;
+  std::cerr << "ivl: " << *(ivl->first) << " // " << ivl->second << std::endl;
 #endif
 
   const Curve_index& curve_index = ivb->second;
@@ -2675,7 +2674,7 @@ check_and_fix_vertex_along_edge(const Vertex_handle& v, ErasedVeOutIt out)
   walk_along_edge(v, previous, curve_index, -orientation, std::front_inserter(to_repopulate));
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr <<  "to_repopulate.size()=" << to_repopulate.size() << "\n";
+  std::cerr <<  "to_repopulate.size()=" << to_repopulate.size() << "\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG
 
   // Check whether a complete circle has been discovered or not
@@ -2687,7 +2686,7 @@ check_and_fix_vertex_along_edge(const Vertex_handle& v, ErasedVeOutIt out)
                     std::back_inserter(to_repopulate));
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr <<  "to_repopulate.size()=" << to_repopulate.size() << "\n";
+    std::cerr <<  "to_repopulate.size()=" << to_repopulate.size() << "\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG
   }
 
@@ -2747,7 +2746,7 @@ is_sampling_dense_enough(const Vertex_handle& v1, const Vertex_handle& v2,
   if(arc_length > (size_v1 + size_v2))
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "Note: on curve #" << curve_index << ", between "
+    std::cerr << "Note: on curve #" << curve_index << ", between "
               << disp_vert(v1) << " and " << disp_vert(v2) << ", the "
               << "arc length is " << arc_length << " and the"
               << " sum of radii is " << size_v1 + size_v2 << std::endl;
@@ -2756,7 +2755,7 @@ is_sampling_dense_enough(const Vertex_handle& v1, const Vertex_handle& v2,
     if(!do_balls_intersect(v2, v1))
     {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-      Rcpp::Rcerr << "     And spheres do NOT intersect!\n";
+      std::cerr << "     And spheres do NOT intersect!\n";
 #endif // CGAL_MESH_3_PROTECTION_DEBUG & 1
       return false;
     }
@@ -2770,9 +2769,9 @@ is_sampling_dense_enough(const Vertex_handle& v1, const Vertex_handle& v2,
                                                       cw(v1_wp), cw(v2_wp));
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
     if(cov)
-      Rcpp::Rcerr << "      But the curve is locally covered\n";
+      std::cerr << "      But the curve is locally covered\n";
     else
-      Rcpp::Rcerr << "      And the curve is NOT locally covered\n";
+      std::cerr << "      And the curve is NOT locally covered\n";
 #endif
     return cov;
   }
@@ -2796,7 +2795,7 @@ orientation_of_walk(const Vertex_handle& start,
                     Curve_index curve_index) const
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-  Rcpp::Rcerr << "orientation_of_walk("
+  std::cerr << "orientation_of_walk("
             << c3t3_.triangulation().point(start) << ", "
             << c3t3_.triangulation().point(next) << ")" << std::endl;
 #endif
@@ -2804,7 +2803,7 @@ orientation_of_walk(const Vertex_handle& start,
   Bare_point start_p, next_p;
   boost::tie(start_p, next_p) = get_positions_with_unknown_orientation(start, next, curve_index);
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-  Rcpp::Rcerr << "positions to determine orientation: " << start_p << " " << next_p << std::endl;
+  std::cerr << "positions to determine orientation: " << start_p << " " << next_p << std::endl;
 #endif
 
   if(domain_.is_loop(curve_index))
@@ -2834,7 +2833,7 @@ walk_along_edge(const Vertex_handle& start, const Vertex_handle& next,
                 ErasedVeOutIt out) const
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
-  Rcpp::Rcerr << "walk_along_edge("
+  std::cerr << "walk_along_edge("
             << c3t3_.triangulation().point(start) << ", "
             << c3t3_.triangulation().point(next)
             << ", orientation: " << orientation << ")" << std::endl;
@@ -2843,7 +2842,7 @@ walk_along_edge(const Vertex_handle& start, const Vertex_handle& next,
 #if CGAL_MESH_3_PROTECTION_DEBUG & 4
   if(!c3t3_.is_in_complex(start, next))
   {
-    Rcpp::Rcerr << "ERROR: the edge (" << c3t3_.triangulation().point(start) << " , "
+    std::cerr << "ERROR: the edge (" << c3t3_.triangulation().point(start) << " , "
               << c3t3_.triangulation().point(next) << ") is not in complex!\n";
     dump_c3t3(c3t3_, "dump-bug");
     dump_c3t3_edges(c3t3_, "dump-bug-c3t3");
@@ -2930,7 +2929,7 @@ repopulate(InputIterator begin, InputIterator last,
            ErasedVeOutIt out)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "repopulate(begin=" << disp_vert(*begin) << "\n"
+  std::cerr << "repopulate(begin=" << disp_vert(*begin) << "\n"
             << "           last=" << disp_vert(*last)  << "\n"
             << "           distance(begin, last)=" << std::distance(begin, last) << ",\n"
             << "           curve_index=" << CGAL::IO::oformat(curve_index) << ",\n"
@@ -2960,22 +2959,22 @@ repopulate(InputIterator begin, InputIterator last,
   while(++current != last)
   {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-    Rcpp::Rcerr << "Removal of ";
-    if(is_special(*current)) Rcpp::Rcerr << "SPECIAL ";
-    Rcpp::Rcerr << "protecting ball "
+    std::cerr << "Removal of ";
+    if(is_special(*current)) std::cerr << "SPECIAL ";
+    std::cerr << "protecting ball "
               << c3t3_.triangulation().point((*current));
     switch(get_dimension(*current))
     {
     case 0:
-      Rcpp::Rcerr << " on corner #";
+      std::cerr << " on corner #";
       break;
     case 1:
-      Rcpp::Rcerr << " on curve #";
+      std::cerr << " on curve #";
       break;
     default:
-      Rcpp::Rcerr << " ERROR dim=" << get_dimension(*current)  << " curve_index=";
+      std::cerr << " ERROR dim=" << get_dimension(*current)  << " curve_index=";
     }
-    Rcpp::Rcerr  << CGAL::IO::oformat(c3t3_.index(*current)) << std::endl;
+    std::cerr  << CGAL::IO::oformat(c3t3_.index(*current)) << std::endl;
 #endif // CGAL_MESH_3_PROTECTION_DEBUG
     *out++ = *current;
     remove_from_correspondence_map(*current, curve_index);
@@ -2997,7 +2996,7 @@ analyze_and_repopulate(InputIterator begin, InputIterator last,
                        ErasedVeOutIt out)
 {
 #if CGAL_MESH_3_PROTECTION_DEBUG & 1
-  Rcpp::Rcerr << "analyze_and_repopulate(begin=" << disp_vert(*begin) << "\n"
+  std::cerr << "analyze_and_repopulate(begin=" << disp_vert(*begin) << "\n"
             << "                       last=" << disp_vert(*last) << "\n"
             << "                       distance(begin, last)=" << std::distance(begin, last) << ",\n"
             << "                       curve_index=" << CGAL::IO::oformat(curve_index) << ",\n"
@@ -3095,7 +3094,7 @@ repopulate_edges_around_corner(const Vertex_handle& v, ErasedVeOutIt out)
   CGAL_precondition(c3t3_.is_in_complex(v));
 
 #if CGAL_MESH_3_PROTECTION_DEBUG & 2
-  Rcpp::Rcerr << "repopulate_edges_around_corner: " << c3t3_.triangulation().point(v) << std::endl;
+  std::cerr << "repopulate_edges_around_corner: " << c3t3_.triangulation().point(v) << std::endl;
 #endif
 
   Adjacent_vertices adjacent_vertices;

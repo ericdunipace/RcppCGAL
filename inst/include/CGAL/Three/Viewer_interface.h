@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Three/include/CGAL/Three/Viewer_interface.h $
-// $Id: Viewer_interface.h 10cdb75 2021-06-02T17:20:47+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Three/include/CGAL/Three/Viewer_interface.h $
+// $Id: Viewer_interface.h 8f1c510 2021-08-10T15:21:33+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -71,6 +71,7 @@ public:
    PROGRAM_SOLID_WIREFRAME,     //! Used to render edges with width superior to 1.
    PROGRAM_NO_INTERPOLATION,   //! Used to render faces without interpolating their color.
    PROGRAM_HEAT_INTENSITY,      //! Used to render special item in Display_property_plugin
+   PROGRAM_TETRA_FILTERING,     //! Used in Scene_tetrahedra_item with Tetrahedra_filtering_plugin
    NB_OF_PROGRAMS               //! Holds the number of different programs in this enum.
   };
 

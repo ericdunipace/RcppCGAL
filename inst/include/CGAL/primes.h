@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Modular_arithmetic/include/CGAL/primes.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Modular_arithmetic/include/CGAL/primes.h $
 // $Id: primes.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_PRIMES_H
 #define CGAL_PRIMES_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 namespace CGAL {
@@ -307,9 +306,9 @@ int get_next_lower_prime(int current_prime){
         int r = 1;
         for(int j=3; (j <= i/2 && (r != 0)); j++){
             r = i % j;
-//                Rcpp::Rcout<<"i " <<i<<std::endl;
-//                Rcpp::Rcout<<"j " <<j<<std::endl;
-//                Rcpp::Rcout<<"i%j " <<i%j<<std::endl;
+//                std::cout<<"i " <<i<<std::endl;
+//                std::cout<<"j " <<j<<std::endl;
+//                std::cout<<"i%j " <<i%j<<std::endl;
             if(j==i/2 && r != 0)
                 is_prime = true;
         }

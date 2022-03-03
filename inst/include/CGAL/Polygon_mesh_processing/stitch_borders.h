@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/stitch_borders.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/stitch_borders.h $
 // $Id: stitch_borders.h abe1f6e 2021-02-22T16:51:35+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_STITCH_BORDERS_H
 #define CGAL_POLYGON_MESH_PROCESSING_STITCH_BORDERS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/boost/graph/helpers.h>
@@ -217,7 +216,7 @@ public:
     typedef typename boost::property_traits<VPM>::reference                 Point_ref;
 
 #ifdef CGAL_PMP_STITCHING_DEBUG
-    Rcpp::Rcout << "update_representatives(" << cycle_halfedges.size() << ", "
+    std::cout << "update_representatives(" << cycle_halfedges.size() << ", "
                                            << filtered_stitchable_halfedges.size() << ")" << std::endl;
 #endif
 
@@ -254,7 +253,7 @@ public:
         put(m_candidate_halfedges, walker_h, false);
 
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-        Rcpp::Rcout << "walker at : " << edge(walker_h, m_pmesh) << std::endl;
+        std::cout << "walker at : " << edge(walker_h, m_pmesh) << std::endl;
         ++border_length;
 #endif
 
@@ -273,14 +272,14 @@ public:
         while(ignore_till_back_at_curr_p) // can have multiple loops at curr_v
         {
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-          Rcpp::Rcout << "Ignoring a cycle starting at " << curr_v << " pos: " << curr_p << std::endl;
+          std::cout << "Ignoring a cycle starting at " << curr_v << " pos: " << curr_p << std::endl;
 #endif
 
           // walk the cycle to be ignored
           do
           {
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-            Rcpp::Rcout << "Ignoring " << edge(walker_h, m_pmesh)
+            std::cout << "Ignoring " << edge(walker_h, m_pmesh)
                       << "(" << source(walker_h, m_pmesh) << " " << target(walker_h, m_pmesh) << ")" << std::endl;
 #endif
             CGAL_assertion(walker_h != h);
@@ -298,7 +297,7 @@ public:
       }
 
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-      Rcpp::Rcout << "new cycle rep: " << edge(h, m_pmesh)
+      std::cout << "new cycle rep: " << edge(h, m_pmesh)
                 << "\n\t" << source(h, m_pmesh) << "\t(" << get(vpm, source(h, m_pmesh)) << ")"
                 << "\n\t" << target(h, m_pmesh) << "\t(" << get(vpm, target(h, m_pmesh)) << ")\n"
                 << " length: " << border_length << std::endl;
@@ -401,7 +400,7 @@ OutputIterator collect_duplicated_stitchable_boundary_edges(const HalfedgeRange&
   std::vector<bool> manifold_halfedge_pairs;
 
 #ifdef CGAL_PMP_STITCHING_DEBUG
-  Rcpp::Rcout << "Collecting stitchable pair from a hrange of size: " << halfedge_range.size()
+  std::cout << "Collecting stitchable pair from a hrange of size: " << halfedge_range.size()
             << " (total: " << halfedges(pmesh).size() << ")" << std::endl;
 #endif
 
@@ -460,7 +459,7 @@ OutputIterator collect_duplicated_stitchable_boundary_edges(const HalfedgeRange&
 #ifdef CGAL_PMP_STITCHING_DEBUG
           const halfedge_descriptor h = halfedge_pairs[k].first;
           const halfedge_descriptor hn = halfedge_pairs[k].second;
-          Rcpp::Rcout << "Stitch "
+          std::cout << "Stitch "
                     << edge(h, pmesh) << " (" << get(vpm, source(h, pmesh)) << ") - (" << get(vpm, target(h, pmesh)) << ") and "
                     << edge(hn, pmesh) << " (" << get(vpm, source(hn, pmesh)) << ") - (" << get(vpm, target(hn, pmesh)) << ")" << std::endl;
 #endif
@@ -490,7 +489,7 @@ OutputIterator collect_duplicated_stitchable_boundary_edges(const HalfedgeRange&
 #ifdef CGAL_PMP_STITCHING_DEBUG
         const halfedge_descriptor h = halfedge_pairs[i].first;
         const halfedge_descriptor hn = halfedge_pairs[i].second;
-        Rcpp::Rcout << "Stitch "
+        std::cout << "Stitch "
                   << edge(h, pmesh) << " (" << get(vpm, source(h, pmesh)) << ") - (" << get(vpm, target(h, pmesh)) << ") and "
                   << edge(hn, pmesh) << " (" << get(vpm, source(hn, pmesh)) << ") - (" << get(vpm, target(hn, pmesh)) << ")" << std::endl;
 #endif
@@ -562,8 +561,8 @@ void run_stitch_borders(PolygonMesh& pmesh,
     halfedge_descriptor h2 = hk.second;
 
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-      Rcpp::Rcout << "Actually stitching:\n";
-      Rcpp::Rcout << edge(h1, pmesh) << "\n\t" << source(h1, pmesh) << "\t(" << get(vpm, source(h1, pmesh)) << ")"
+      std::cout << "Actually stitching:\n";
+      std::cout << edge(h1, pmesh) << "\n\t" << source(h1, pmesh) << "\t(" << get(vpm, source(h1, pmesh)) << ")"
                                    << "\n\t" << target(h1, pmesh) << "\t(" << get(vpm, target(h1, pmesh)) << ")\n"
                 << edge(h2, pmesh) << "\n\t" << source(h2, pmesh) << "\t(" << get(vpm, source(h2, pmesh)) << ")"
                                    << "\n\t" << target(h2, pmesh) << "\t(" << get(vpm, target(h2, pmesh)) << ")" << std::endl;
@@ -657,7 +656,7 @@ void run_stitch_borders(PolygonMesh& pmesh,
   for(vertex_descriptor vd : vertices_to_delete)
   {
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-    Rcpp::Rcout << "Delete vertex: " << vd << std::endl;
+    std::cout << "Delete vertex: " << vd << std::endl;
 #endif
     remove_vertex(vd, pmesh);
   }
@@ -801,13 +800,13 @@ std::size_t stitch_halfedge_range(const std::vector<HalfedgePair>& to_stitch,
 
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
   typedef typename boost::graph_traits<PolygonMesh>::halfedge_descriptor  halfedge_descriptor;
-  Rcpp::Rcout << to_stitch.size() << " tentative halfedge pair(s) to stitch:\n";
+  std::cout << to_stitch.size() << " tentative halfedge pair(s) to stitch:\n";
   for(const auto& hp : to_stitch)
   {
     const halfedge_descriptor h = hp.first;
     const halfedge_descriptor hn = hp.second;
 
-    Rcpp::Rcout << edge(h, pmesh) << "\n\t" << source(h, pmesh) << "\t(" << get(vpm, source(h, pmesh)) << ")"
+    std::cout << edge(h, pmesh) << "\n\t" << source(h, pmesh) << "\t(" << get(vpm, source(h, pmesh)) << ")"
                                 << "\n\t" << target(h, pmesh) << "\t(" << get(vpm, target(h, pmesh)) << ")\n"
               << edge(hn, pmesh) << "\n\t" << source(hn, pmesh) << "\t(" << get(vpm, source(hn, pmesh)) << ")"
                                  << "\n\t" << target(hn, pmesh) << "\t(" << get(vpm, target(hn, pmesh)) << ")" << std::endl;
@@ -903,7 +902,7 @@ std::size_t zip_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfed
       break;
 
 #ifdef CGAL_PMP_STITCHING_DEBUG
-    Rcpp::Rcout << "Walking border from halfedge: " << edge(bh, pmesh) << std::endl;
+    std::cout << "Walking border from halfedge: " << edge(bh, pmesh) << std::endl;
 #endif
 
     CGAL_assertion(is_border(bh, pmesh));
@@ -932,7 +931,7 @@ std::size_t zip_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfed
       break;
 
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-    Rcpp::Rcout << "Starting stitching from halfedge: "
+    std::cout << "Starting stitching from halfedge: "
               << get(vpm, source(edge(start_h, pmesh), pmesh)) << " "
               << get(vpm, target(edge(start_h, pmesh), pmesh)) << std::endl;
 #endif
@@ -963,7 +962,7 @@ std::size_t zip_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfed
         hedges_to_stitch.emplace_back(curr_hn, curr_h);
 
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-      Rcpp::Rcout << "expand zip with:\n"
+      std::cout << "expand zip with:\n"
                 << edge(curr_h, pmesh) << "\n\t" << source(curr_h, pmesh) << "\t(" << get(vpm, source(curr_h, pmesh)) << ")"
                                     << "\n\t" << target(curr_h, pmesh) << "\t(" << get(vpm, target(curr_h, pmesh)) << ")\n"
                 << edge(curr_hn, pmesh) << "\n\t" << source(curr_hn, pmesh) << "\t(" << get(vpm, source(curr_hn, pmesh)) << ")"
@@ -998,7 +997,7 @@ std::size_t zip_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfed
     if(!hedges_to_stitch.empty())
     {
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-      Rcpp::Rcout << hedges_to_stitch.size() " halfedge pairs to stitch on border containing:\n"
+      std::cout << hedges_to_stitch.size() " halfedge pairs to stitch on border containing:\n"
                 << edge(h, pmesh) << "\n\t" << source(h, pmesh) << "\t(" << get(vpm, source(h, pmesh)) << ")"
                                   << "\n\t" << target(h, pmesh) << "\t(" << get(vpm, target(h, pmesh)) << ")" << std::endl;
 #endif
@@ -1010,7 +1009,7 @@ std::size_t zip_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfed
       if(local_stitches == 0) // refused to stitch this halfedge pair range due to manifold issue
       {
 #ifdef CGAL_PMP_STITCHING_DEBUG_PP
-        Rcpp::Rcout << "Failed to stitch this range!" << std::endl;
+        std::cout << "Failed to stitch this range!" << std::endl;
 #endif
 
         for(const auto& hp : hedges_to_stitch)
@@ -1319,14 +1318,14 @@ std::size_t stitch_borders(const BorderHalfedgeRange& boundary_cycle_representat
   bool per_cc = choose_parameter(get_parameter(np, internal_np::apply_per_connected_component), false);
 
 #ifdef CGAL_PMP_STITCHING_DEBUG
-  Rcpp::Rcout << "------- Stitch cycles (#1)... (" << boundary_cycle_representatives.size() << " cycle(s))" << std::endl;
+  std::cout << "------- Stitch cycles (#1)... (" << boundary_cycle_representatives.size() << " cycle(s))" << std::endl;
 #endif
 
   std::size_t res = stitch_boundary_cycles(boundary_cycle_representatives, pmesh, cycle_maintainer, np);
 
 #ifdef CGAL_PMP_STITCHING_DEBUG
-  Rcpp::Rcout << "------- Stitched " << res << " halfedge pairs in boundary cycles" << std::endl;
-  Rcpp::Rcout << "------- Stitch all..." << std::endl;
+  std::cout << "------- Stitched " << res << " halfedge pairs in boundary cycles" << std::endl;
+  std::cout << "------- Stitch all..." << std::endl;
 #endif
 
   const auto& to_consider = cycle_maintainer.halfedges_to_consider();
@@ -1338,8 +1337,8 @@ std::size_t stitch_borders(const BorderHalfedgeRange& boundary_cycle_representat
   res += stitch_halfedge_range(to_stitch, to_consider, pmesh, vpm, cycle_maintainer);
 
 #ifdef CGAL_PMP_STITCHING_DEBUG
-  Rcpp::Rcout << "------- Stitched " << res << " halfedge pairs after cycles & general" << std::endl;
-  Rcpp::Rcout << "------- Stitch cycles (#2)... (" << new_representatives.size() << " cycle(s))" << std::endl;
+  std::cout << "------- Stitched " << res << " halfedge pairs after cycles & general" << std::endl;
+  std::cout << "------- Stitch cycles (#2)... (" << new_representatives.size() << " cycle(s))" << std::endl;
 #endif
 
   const auto& new_representatives = cycle_maintainer.cycle_representatives();
@@ -1349,7 +1348,7 @@ std::size_t stitch_borders(const BorderHalfedgeRange& boundary_cycle_representat
   res += stitch_boundary_cycles(new_representatives, pmesh, dummy_cycle_maintainer, np);
 
 #ifdef CGAL_PMP_STITCHING_DEBUG
-  Rcpp::Rcout << "------- Stitched " << res << " (total)" << std::endl;
+  std::cout << "------- Stitched " << res << " (total)" << std::endl;
 #endif
 
   return res;

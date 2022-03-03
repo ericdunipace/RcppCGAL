@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/RS/bisection_refiner_1.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/RS/bisection_refiner_1.h $
 // $Id: bisection_refiner_1.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_RS_BISECTION_REFINER_1_H
 #define CGAL_RS_BISECTION_REFINER_1_H
 
-#include <Rcpp.h>
 #include <CGAL/Polynomial_traits_d.h>
 #include "signat_1.h"
 #include "Gmpfr_make_unique.h"
@@ -49,7 +48,7 @@ operator()(const Polynomial<Gmpz> &pol,Gmpfr &left,Gmpfr &right,int prec){
         typedef CGAL::RS_AK1::Signat_1<Polynomial,Gmpfr>
                                                         Signat;
         CGAL_precondition(left<=right);
-        //Rcpp::Rcout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
+        //std::cout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
 
         CGAL_RS_GMPFR_MAKE_UNIQUE(left,temp_left);
         CGAL_RS_GMPFR_MAKE_UNIQUE(right,temp_right);
@@ -96,7 +95,7 @@ operator()(const Polynomial<Gmpz> &pol,Gmpfr &left,Gmpfr &right,int prec){
         }
         mpfr_clear(center);
         CGAL_postcondition(left<=right);
-        //Rcpp::Rcout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
+        //std::cout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
         return;
 }
 
@@ -110,7 +109,7 @@ operator()(const Polynomial<Gmpq> &pol,Gmpfr &left,Gmpfr &right,int prec){
         typedef CGAL::RS_AK1::Signat_1<Polynomial,Gmpfr>
                                                         Signat;
         CGAL_precondition(left<=right);
-        //Rcpp::Rcout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
+        //std::cout<<"refining ["<<left<<","<<right<<"]"<<std::endl;
 
         CGAL_RS_GMPFR_MAKE_UNIQUE(left,temp_left);
         CGAL_RS_GMPFR_MAKE_UNIQUE(right,temp_right);
@@ -157,7 +156,7 @@ operator()(const Polynomial<Gmpq> &pol,Gmpfr &left,Gmpfr &right,int prec){
         }
         mpfr_clear(center);
         CGAL_postcondition(left<=right);
-        //Rcpp::Rcout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
+        //std::cout<<"ref root is ["<<left<<","<<right<<"]"<<std::endl;
         return;
 }
 

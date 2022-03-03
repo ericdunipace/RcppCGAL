@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/locate.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/locate.h $
 // $Id: locate.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_LOCATE_H
 #define CGAL_POLYGON_MESH_PROCESSING_LOCATE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/locate.h>
 
 #include <CGAL/AABB_face_graph_triangle_primitive.h>
@@ -178,9 +177,9 @@ snap_coordinates_to_border(std::array<FT, 3>& coords,
                            const FT tolerance = std::numeric_limits<FT>::epsilon())
 {
 #ifdef CGAL_PMP_LOCATE_DEBUG
-  Rcpp::Rcout << "Pre-snapping: " << coords[0] << " " << coords[1] << " " << coords[2] << std::endl;
-  Rcpp::Rcout << "Sum: " << coords[0] + coords[1] + coords[2] << std::endl;
-  Rcpp::Rcout << "tolerance: " << tolerance << std::endl;
+  std::cout << "Pre-snapping: " << coords[0] << " " << coords[1] << " " << coords[2] << std::endl;
+  std::cout << "Sum: " << coords[0] + coords[1] + coords[2] << std::endl;
+  std::cout << "tolerance: " << tolerance << std::endl;
 #endif
 
   // To still keep a sum roughly equals to 1, keep in memory the small changes
@@ -214,10 +213,10 @@ snap_coordinates_to_border(std::array<FT, 3>& coords,
   }
 
 #ifdef CGAL_PMP_LOCATE_DEBUG
-  Rcpp::Rcout << "Post-snapping: " << coords[0] << " "
+  std::cout << "Post-snapping: " << coords[0] << " "
                                  << coords[1] << " "
                                  << coords[2] << std::endl;
-  Rcpp::Rcout << "Sum: " << coords[0] + coords[1] + coords[2] << std::endl;
+  std::cout << "Sum: " << coords[0] + coords[1] + coords[2] << std::endl;
 #endif
 
   return snapped;
@@ -1155,8 +1154,8 @@ locate_in_face(const typename internal::Location_traits<TriangleMesh, NamedParam
 
   if(snap_tolerance != FT(0) && !is_in_face(coords, tm))
   {
-    Rcpp::Rcerr << "Warning: point " << query << " is not in the input face" << std::endl;
-    Rcpp::Rcerr << "Coordinates: " << coords[0] << " " << coords[1] << " " << coords[2] << std::endl;
+    std::cerr << "Warning: point " << query << " is not in the input face" << std::endl;
+    std::cerr << "Coordinates: " << coords[0] << " " << coords[1] << " " << coords[2] << std::endl;
 
     // Try to to snap the coordinates, hoping the problem is just a -1e-17ish epsilon
     // pushing the coordinates over the edge

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Visibility_2/include/CGAL/Simple_polygon_visibility_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Visibility_2/include/CGAL/Simple_polygon_visibility_2.h $
 // $Id: Simple_polygon_visibility_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_SIMPLE_POLYGON_VISIBILITY_2_H
 #define CGAL_SIMPLE_POLYGON_VISIBILITY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Visibility_2.h>
 
 
@@ -251,7 +250,7 @@ namespace CGAL {
       }
     }
     if(is_degenerate){
-      //Rcpp::Rcout << is_degenerate << std::endl;
+      //std::cout << is_degenerate << std::endl;
       std::vector<Segment_2> segments;
 
       for(typename std::vector<Point_2>::size_type i = 0;i < points.size() - 1; ++i)
@@ -261,7 +260,7 @@ namespace CGAL {
       CGAL::insert(out_arr, segments.begin(), segments.end());
     }else{
       points.pop_back();
-      //Rcpp::Rcout << " ordanary " << std::endl;
+      //std::cout << " ordanary " << std::endl;
       typename VARR::Vertex_handle v_last, v_first;
       v_last = v_first =
         out_arr.insert_in_face_interior(points[0],out_arr.unbounded_face());

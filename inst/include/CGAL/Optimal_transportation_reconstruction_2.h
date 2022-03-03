@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Optimal_transportation_reconstruction_2/include/CGAL/Optimal_transportation_reconstruction_2.h $
-// $Id: Optimal_transportation_reconstruction_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Optimal_transportation_reconstruction_2/include/CGAL/Optimal_transportation_reconstruction_2.h $
+// $Id: Optimal_transportation_reconstruction_2.h 9847fd7 2022-01-03T19:15:11+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando de Goes, Pierre Alliez, Ivo Vigan, Clément Jamin
@@ -12,7 +12,6 @@
 #ifndef CGAL_OPTIMAL_TRANSPORTATION_RECONSTRUCTION_2_H_
 #define CGAL_OPTIMAL_TRANSPORTATION_RECONSTRUCTION_2_H_
 
-#include <Rcpp.h>
 #include <CGAL/license/Optimal_transportation_reconstruction_2.h>
 
 
@@ -156,6 +155,7 @@ public:
 
   typedef typename Triangulation::MultiIndex            MultiIndex;
 
+  /// \endcond
   /// @}
 
 protected:
@@ -173,8 +173,6 @@ protected:
 
   PointPMap point_pmap;
   MassPMap  mass_pmap;
-
-  /// \endcond
 
 public:
 
@@ -249,7 +247,7 @@ public:
   /*!
         Determines how much console output the algorithm generates.
         If set to a value larger than 0
-        details about the reconstruction process are written to `Rcpp::Rcerr`.
+        details about the reconstruction process are written to `std::cerr`.
 
         \param verbose The verbosity level.
    */
@@ -314,6 +312,7 @@ public:
   }
 
   FT tolerance() const { return m_tolerance; }
+  /// \endcond
 
   /// @}
 
@@ -439,7 +438,7 @@ public:
   void insert_loose_bbox(const Bbox_2& bbox) {
     CGAL::Real_timer timer;
     if (m_verbose > 0)
-      Rcpp::Rcerr << "insert loose bbox...";
+      std::cerr << "insert loose bbox...";
 
     double dl = (std::max)((bbox.xmax()-bbox.xmin()) / 2.,
                            (bbox.ymax()-bbox.ymin()) / 2.);
@@ -454,7 +453,7 @@ public:
     insert_point(point_2(bbox.xmax()+dl, bbox.ymin()-dl), true, nb++);
 
     if (m_verbose > 0)
-      Rcpp::Rcerr << "done (" << nb << " vertices, "
+      std::cerr << "done (" << nb << " vertices, "
                 << timer.time() << " s)" << std::endl;
   }
 
@@ -462,7 +461,7 @@ public:
   void init(Iterator begin, Iterator beyond) {
     CGAL::Real_timer timer;
     if (m_verbose > 0)
-      Rcpp::Rcerr << "init...";
+      std::cerr << "init...";
 
     timer.start();
     int nb = static_cast<int>(m_dt.number_of_vertices());
@@ -473,7 +472,7 @@ public:
     }
 
     if (m_verbose > 0)
-      Rcpp::Rcerr << "done (" << nb << " vertices, "
+      std::cerr << "done (" << nb << " vertices, "
                 << timer.time() << " s)"
                 << std::endl;
   }
@@ -499,14 +498,14 @@ public:
   void assign_samples(Iterator begin, Iterator end) {
     CGAL::Real_timer timer;
     if (m_verbose > 0)
-      Rcpp::Rcerr << "assign samples...";
+      std::cerr << "assign samples...";
 
     timer.start();
     m_dt.assign_samples(begin, end);
     m_dt.reset_all_costs();
 
     if (m_verbose > 0)
-      Rcpp::Rcerr << "done (" << timer.time() << " s)" << std::endl;
+      std::cerr << "done (" << timer.time() << " s)" << std::endl;
   }
 
   void reassign_samples() {
@@ -533,7 +532,7 @@ public:
     Vertex_handle t = m_dt.target_vertex(edge);
 
     if (m_verbose > 1) {
-      Rcpp::Rcerr << std::endl << "do collapse ("
+      std::cerr << std::endl << "do collapse ("
           << s->id() << "->" << t->id() << ") ... " << std::endl;
     }
 
@@ -553,7 +552,7 @@ public:
     bool ok = m_dt.check_kernel_test(edge);
     if (!ok) {
       if (m_verbose > 1)
-        Rcpp::Rcerr << "do_collapse: kernel test failed: " << std::endl;
+        std::cerr << "do_collapse: kernel test failed: " << std::endl;
       return false;
     }
     //
@@ -572,7 +571,7 @@ public:
     }
 
     if (m_verbose > 1) {
-      Rcpp::Rcerr << "done" << std::endl;
+      std::cerr << "done" << std::endl;
     }
 
     return true;
@@ -584,7 +583,7 @@ public:
     Vertex_handle t = m_dt.target_vertex(edge);
 
     if (m_verbose > 1) {
-      Rcpp::Rcerr << "simulate collapse ("
+      std::cerr << "simulate collapse ("
         << s->id() << "->" << t->id() << ") ... " << std::endl;
     }
 
@@ -599,13 +598,13 @@ public:
           copy_hull.end(), m_verbose);
       if (!ok) {
         if (m_verbose > 1)
-          Rcpp::Rcerr << "simulation: failed (make collapsible)" << std::endl;
+          std::cerr << "simulation: failed (make collapsible)" << std::endl;
         return false;
       }
       ok = copy.check_validity_test();
       if (!ok) {
         if (m_verbose > 1)
-          Rcpp::Rcerr << "simulation: failed (validity test)" << std::endl;
+          std::cerr << "simulation: failed (validity test)" << std::endl;
         return false;
       }
     }
@@ -613,7 +612,7 @@ public:
     ok = copy.check_kernel_test(copy_edge);
     if (!ok) {
       if (m_verbose > 1)
-        Rcpp::Rcerr << "simulation: failed (kernel test)" << std::endl;
+        std::cerr << "simulation: failed (kernel test)" << std::endl;
       return false;
     }
 
@@ -622,7 +621,7 @@ public:
     ok = copy.check_validity_test();
     if (!ok) {
       if (m_verbose > 1)
-        Rcpp::Rcerr << "simulation: failed (validity test)" << std::endl;
+        std::cerr << "simulation: failed (validity test)" << std::endl;
       return false;
     }
 
@@ -637,7 +636,7 @@ public:
     restore_samples(samples.begin(), samples.end());
 
     if (m_verbose > 1) {
-      Rcpp::Rcerr << "done" << std::endl;
+      std::cerr << "done" << std::endl;
     }
 
     return true;
@@ -1161,10 +1160,6 @@ public:
     }
   }
 
-  /// \endcond
-
-
-  /// \cond SKIP_IN_MANUAL
   Vector compute_gradient(Vertex_handle vertex) const {
     Vector grad = m_traits.construct_vector_2_object()(FT(0), FT(0));
     Edge_circulator ecirc = m_dt.incident_edges(vertex);
@@ -1419,13 +1414,13 @@ public:
         nb_solid++;
     }
 
-    Rcpp::Rcerr << "STATS" << std::endl;
-    Rcpp::Rcerr << "# vertices : " << m_dt.number_of_vertices()-4 << std::endl;
-    Rcpp::Rcerr << "# isolated vertices : " << number_of_isolated_vertices() << std::endl;
-    Rcpp::Rcerr << "# triangles: " << m_dt.number_of_faces() << std::endl;
-    Rcpp::Rcerr << "# edges: " << m_dt.tds().number_of_edges() << std::endl;
-    Rcpp::Rcerr << "# solid: " << nb_solid << std::endl;
-    Rcpp::Rcerr << "# ghost: " << nb_ghost << std::endl;
+    std::cerr << "STATS" << std::endl;
+    std::cerr << "# vertices : " << m_dt.number_of_vertices()-4 << std::endl;
+    std::cerr << "# isolated vertices : " << number_of_isolated_vertices() << std::endl;
+    std::cerr << "# triangles: " << m_dt.number_of_faces() << std::endl;
+    std::cerr << "# edges: " << m_dt.tds().number_of_edges() << std::endl;
+    std::cerr << "# solid: " << nb_solid << std::endl;
+    std::cerr << "# ghost: " << nb_ghost << std::endl;
   }
 
 
@@ -1516,7 +1511,7 @@ public:
     m_tolerance = (FT)(-1.);
     CGAL::Real_timer timer;
     if (m_verbose > 0)
-      Rcpp::Rcerr << "reconstruct until " << np << " V";
+      std::cerr << "reconstruct until " << np << " V";
 
     timer.start();
     std::size_t N = np + 4;
@@ -1529,7 +1524,7 @@ public:
     }
 
     if (m_verbose)
-      Rcpp::Rcerr << " done" << " (" << performed
+      std::cerr << " done" << " (" << performed
                 << " iters, " << m_dt.number_of_vertices() - 4 << " V "
                 << timer.time() << " s)"
                 << std::endl;
@@ -1549,7 +1544,7 @@ public:
     m_tolerance = (FT)(-1.);
     CGAL::Real_timer timer;
     if (m_verbose > 0)
-      Rcpp::Rcerr << "reconstruct " << steps;
+      std::cerr << "reconstruct " << steps;
 
     timer.start();
     unsigned int performed = 0;
@@ -1561,7 +1556,7 @@ public:
     }
 
     if (m_verbose > 0)
-      Rcpp::Rcerr << " done" << " (" << performed << "/"
+      std::cerr << " done" << " (" << performed << "/"
                 << steps << " iters, " << m_dt.number_of_vertices() - 4
                 << " V, " << timer.time() << " s)"
                 << std::endl;
@@ -1587,7 +1582,7 @@ public:
     m_tolerance = tolerance;
     CGAL::Real_timer timer;
     if (m_verbose > 0)
-      Rcpp::Rcerr << "reconstruct under tolerance " << tolerance;
+      std::cerr << "reconstruct under tolerance " << tolerance;
 
     timer.start();
     unsigned int performed = 0;
@@ -1595,7 +1590,7 @@ public:
       performed++;
 
     if (m_verbose > 0)
-      Rcpp::Rcerr << " done" << " (" << performed
+      std::cerr << " done" << " (" << performed
                 << " iters, " << m_dt.number_of_vertices() - 4
                 << " V, " << timer.time() << " s)"
                 << std::endl;
@@ -1608,7 +1603,7 @@ public:
   void relocate_all_points() {
     CGAL::Real_timer timer;
     if (m_verbose > 0)
-      Rcpp::Rcerr << "relocate all points" << "...";
+      std::cerr << "relocate all points" << "...";
 
     timer.start();
     m_mindex.clear(); // pqueue must be recomputed
@@ -1645,7 +1640,7 @@ public:
     }
 
     if (m_verbose > 0)
-      Rcpp::Rcerr << "done" << " (" << timer.time() << " s)" << std::endl;
+      std::cerr << "done" << " (" << timer.time() << " s)" << std::endl;
   }
 
   /// @}
@@ -1786,8 +1781,6 @@ public:
       e_it++;
     }
   }
-  /// \endcond
-
 
   /// \cond SKIP_IN_MANUAL
   const Triangulation& tds() const { return m_dt; }

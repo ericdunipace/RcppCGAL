@@ -20,7 +20,7 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.3.1/CGAL_Core/include/CGAL/CORE/CoreDefs.h $
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4/CGAL_Core/include/CGAL/CORE/CoreDefs.h $
  * $Id: CoreDefs.h 3e03d50 2021-05-05T15:32:22+02:00 Maxime Gimeno
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
@@ -28,7 +28,6 @@
 #ifndef _CORE_COREDEFS_H_
 #define _CORE_COREDEFS_H_
 
-#include <Rcpp.h>
 #include <CGAL/CORE/extLong.h>
 #include <CGAL/disable_warnings.h>
 
@@ -120,7 +119,7 @@ CGAL_GLOBAL_STATE_VAR(extLong, defAbsPrec, CORE_posInfty)
     See also defOutputDigits.
     */
 /*  QUESTION: the following comment seems to contradict the above comment:
-        "controls the printout precision of Rcpp::Rcout for BigFloat"
+        "controls the printout precision of std::cout for BigFloat"
     Perhaps, we should merge defOutputDigits and defBigFloatOutputDigits?
     */
 #ifdef CGAL_NO_ATOMIC
@@ -133,10 +132,10 @@ CGAL_GLOBAL_STATE_VAR(extLong, defAbsPrec, CORE_posInfty)
 /** This value can be CORE_INFTY */
 CGAL_GLOBAL_STATE_VAR(extLong, defInputDigits, CORE_posInfty)
 
-/// controls the printout precision of Rcpp::Rcout for Real and Expr
+/// controls the printout precision of std::cout for Real and Expr
 /** This value cannot be CORE_INFTY
     See also defBigFloatOutputDigits.
-    (it really should be an int, as in Rcpp::Rcout.setprecision(int)). */
+    (it really should be an int, as in std::cout.setprecision(int)). */
 #ifdef CGAL_NO_ATOMIC
 CGAL_GLOBAL_STATE_VAR(long, defOutputDigits, 10) // == get_static_defBigFloatOutputDigits()
 #else
@@ -243,7 +242,7 @@ inline extLong setDefaultInputDigits(const extLong &d) {
 
 /// set default output digits (for Expr, Real)
 inline long setDefaultOutputDigits(long d = get_static_defOutputDigits(),
-                                   std::ostream& o = Rcpp::Rcout) {
+                                   std::ostream& o = std::cout) {
   long old = get_static_defOutputDigits();
   get_static_defOutputDigits() = d;
   o.precision(d);
@@ -308,7 +307,7 @@ inline bool setRationalReduceFlag(bool f) {
 /** We recommend calling it before anything else.  Originally motivated
     by need to get around gnu's compiler bug in which the variable
     "defAbsPrec" was not properly initialized.  But it has other uses,
-    e.g., overriding the default Rcpp::Rcout precision (most systems
+    e.g., overriding the default std::cout precision (most systems
     initializes this value to 6) to our own */
 inline void CORE_init(long d) {
   get_static_defAbsPrec() = CORE_posInfty;
@@ -316,12 +315,12 @@ inline void CORE_init(long d) {
 }
 
 /// change to scientific output format
-inline void setScientificFormat(std::ostream& o = Rcpp::Rcout) {
+inline void setScientificFormat(std::ostream& o = std::cout) {
   o.setf(std::ios::scientific, std::ios::floatfield);
 }
 
 /// change to positional output format
-inline void setPositionalFormat(std::ostream& o = Rcpp::Rcout) {
+inline void setPositionalFormat(std::ostream& o = std::cout) {
   o.setf(std::ios::fixed, std::ios::floatfield);
 }
 

@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/internal/OM_iterator_from_circulator.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/internal/OM_iterator_from_circulator.h $
 // $Id: OM_iterator_from_circulator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_OM_ITERATOR_FROM_CICULATOR_H
 #define CGAL_OM_ITERATOR_FROM_CICULATOR_H
 
-#include <Rcpp.h>
 #include <iostream>
 #include <cstddef>
 
@@ -128,7 +127,7 @@ public:
     return *this;
   }
   Self  operator++(int) {
-    Rcpp::Rcerr << "operator++(int)" << std::endl;
+    std::cerr << "operator++(int)" << std::endl;
     Self tmp = *this;
     ++*this;
     return tmp;

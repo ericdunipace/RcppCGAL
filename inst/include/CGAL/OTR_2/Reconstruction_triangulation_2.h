@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Reconstruction_triangulation_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Reconstruction_triangulation_2.h $
 // $Id: Reconstruction_triangulation_2.h 263ad6b 2020-08-20T18:25:01+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_RECONSTRUCTION_TRIANGULATION_2_H
 #define CGAL_RECONSTRUCTION_TRIANGULATION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Optimal_transportation_reconstruction_2.h>
 
 
@@ -608,7 +607,7 @@ public:
     Face_handle face = Base::locate(point);
 
     if (face == Face_handle() || Base::is_infinite(face)) {
-      //Rcpp::Rcout << "free bird" << std::endl;
+      //std::cout << "free bird" << std::endl;
       return false;
     }
 
@@ -636,7 +635,7 @@ public:
     }
 
     if (nearest_face == Face_handle()) {
-      //Rcpp::Rcout << "free bird" << std::endl;
+      //std::cout << "free bird" << std::endl;
       return false;
     }
 
@@ -691,7 +690,7 @@ public:
 
   void assign_sample_to_vertex(Sample_* sample, Vertex_handle vertex) const {
     /*if (vertex->sample()) {
-      Rcpp::Rcout << "assign to vertex: vertex already has sample"
+      std::cout << "assign to vertex: vertex already has sample"
           << std::endl;
     }*/
 
@@ -961,7 +960,7 @@ public:
   // (a,c,i) + (c,a,j)
   void collapse_cyclic_edge(const Edge& bc, int verbose = 0) {
     if (verbose > 1)
-      Rcpp::Rcout << "collapse_cyclic_edge ... ";
+      std::cout << "collapse_cyclic_edge ... ";
 
     Edge cb = twin_edge(bc);
     Face_handle abc = bc.first;
@@ -984,14 +983,14 @@ public:
     this->delete_vertex(b);
 
     if (verbose > 1)
-      Rcpp::Rcout << "done" << std::endl;
+      std::cout << "done" << std::endl;
   }
 
   void print_edge(Rec_edge_2 edge) const {
     int i = ((edge).edge()).second;
     Point a = ((edge).edge()).first->vertex((i+1)%3)->point();
     Point b = ((edge).edge()).first->vertex((i+2)%3)->point();
-    Rcpp::Rcout <<"( " << (edge).priority()  <<  ") ( " << a << " , " << b << " )" << std::endl;
+    std::cout <<"( " << (edge).priority()  <<  ") ( " << a << " , " << b << " )" << std::endl;
   }
 
   bool is_p_infinity(const std::pair<bool,boost::optional<FT> >& p) const
@@ -1062,7 +1061,7 @@ public:
       if ( is_m_infinity(Dac) && is_m_infinity(Dbd) )
       {
         if (verbose > 1)
-          Rcpp::Rcerr << "--- No flips available ---"  << std::endl;
+          std::cerr << "--- No flips available ---"  << std::endl;
         return false;
       }
 
@@ -1084,15 +1083,15 @@ public:
       if (value + CGAL_EPS < Dbc)
       {
                         /*
-        Rcpp::Rcerr.precision(10);
-        Rcpp::Rcerr << "--- Flip makes kernel worse ---" << std::endl;
-        Rcpp::Rcerr << Dac << " or " << Dbd << " vs " << Dbc << std::endl;
-        Rcpp::Rcerr << "a: " << a->point() << std::endl;
-        Rcpp::Rcerr << "b: " << b->point() << std::endl;
-        Rcpp::Rcerr << "c: " << c->point() << std::endl;
-        Rcpp::Rcerr << "d: " << d->point() << std::endl;
-        Rcpp::Rcerr << "t: " << target->point() << std::endl;
-        Rcpp::Rcerr << "diff = " << Dbc - (std::max)(Dac, Dbd) << std::endl;
+        std::cerr.precision(10);
+        std::cerr << "--- Flip makes kernel worse ---" << std::endl;
+        std::cerr << Dac << " or " << Dbd << " vs " << Dbc << std::endl;
+        std::cerr << "a: " << a->point() << std::endl;
+        std::cerr << "b: " << b->point() << std::endl;
+        std::cerr << "c: " << c->point() << std::endl;
+        std::cerr << "d: " << d->point() << std::endl;
+        std::cerr << "t: " << target->point() << std::endl;
+        std::cerr << "diff = " << Dbc - (std::max)(Dac, Dbd) << std::endl;
                                 */
         return false;
       }
@@ -1121,7 +1120,7 @@ public:
     }
 
     if (verbose > 1)
-      Rcpp::Rcerr  << "Nb flips: "  << nb_flips << std::endl;
+      std::cerr  << "Nb flips: "  << nb_flips << std::endl;
 
     return true;
   }

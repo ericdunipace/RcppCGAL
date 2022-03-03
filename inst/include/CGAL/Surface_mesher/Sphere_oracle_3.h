@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/Surface_mesher/Sphere_oracle_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/Surface_mesher/Sphere_oracle_3.h $
 // $Id: Sphere_oracle_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_SURFACE_MESHER_SPHERE_ORACLE_3_H
 #define CGAL_SURFACE_MESHER_SPHERE_ORACLE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -68,7 +67,7 @@ namespace CGAL {
     {
 #ifdef CGAL_SURFACE_MESHER_DEBUG_CONSTRUCTORS
 #  ifndef CGAL_SURFACE_MESHER_IMPLICIT_SURFACE_ORACLE_3_H
-      Rcpp::Rcerr << "CONS: Sphere_oracle_3\n";
+      std::cerr << "CONS: Sphere_oracle_3\n";
 #  endif
 #endif
     }
@@ -285,7 +284,7 @@ namespace CGAL {
           intersection_line_sphere_lambda(sphere, a, b);
 
 #ifdef CGAL_SURFACE_MESHER_DEBUG_IMPLICIT_ORACLE
-        Rcpp::Rcerr << "Clip segment. Roots=("
+        std::cerr << "Clip segment. Roots=("
                   << root_1 << ", " << root_2 << ")\n";
 #endif
         if( number_of_roots < 2 )

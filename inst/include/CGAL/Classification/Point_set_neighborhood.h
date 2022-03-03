@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/Point_set_neighborhood.h $
-// $Id: Point_set_neighborhood.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Classification/include/CGAL/Classification/Point_set_neighborhood.h $
+// $Id: Point_set_neighborhood.h 833e511 2021-11-10T11:31:42+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -73,7 +73,9 @@ class Point_set_neighborhood
     My_point_property_map (const PointRange *input, PointMap point_map)
       : input (input), point_map (point_map) { }
 
-    friend reference get (const My_point_property_map& ppmap, key_type i)
+    // we did not put `reference` here on purpose as the recommanded default
+    // is `Identity_property_map<Point_3>` and not `Identity_property_map<const Point_3>`
+    friend decltype(auto) get (const My_point_property_map& ppmap, key_type i)
     { return get(ppmap.point_map, *(ppmap.input->begin()+std::size_t(i))); }
   };
 

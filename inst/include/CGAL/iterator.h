@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/iterator.h $
-// $Id: iterator.h 758ae80 2020-07-30T17:33:00+02:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/STL_Extension/include/CGAL/iterator.h $
+// $Id: iterator.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1379,22 +1379,14 @@ public:
   template<BOOST_VARIANT_ENUM_PARAMS(typename T)>
   Self& operator=(const boost::variant<BOOST_VARIANT_ENUM_PARAMS(T) >& t) {
     internal::Output_visitor<Self> visitor(this);
-    #if BOOST_VERSION==105800
     t.apply_visitor(visitor);
-    #else
-    boost::apply_visitor(visitor, t);
-    #endif
     return *this;
   }
 
   template<BOOST_VARIANT_ENUM_PARAMS(typename T)>
   Self& operator=(const boost::optional< boost::variant<BOOST_VARIANT_ENUM_PARAMS(T) > >& t) {
     internal::Output_visitor<Self> visitor(this);
-    #if BOOST_VERSION==105800
-    if(t) t->apply_visitor(visitor);
-    #else
     if(t)  boost::apply_visitor(visitor, *t);
-    #endif
     return *this;
   }
 

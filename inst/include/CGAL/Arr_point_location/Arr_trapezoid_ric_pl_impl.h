@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_trapezoid_ric_pl_impl.h $
-// $Id: Arr_trapezoid_ric_pl_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_trapezoid_ric_pl_impl.h $
+// $Id: Arr_trapezoid_ric_pl_impl.h 6642407 2020-07-29T18:08:32+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_ARR_TRAPEZOID_RIC_POINT_LOCATION_FUNCTIONS_H
 #define CGAL_ARR_TRAPEZOID_RIC_POINT_LOCATION_FUNCTIONS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -25,7 +24,7 @@
 #define CGAL_TRAP_DEBUG
 
 #ifdef CGAL_TRG_DEBUG
-        #define CGAL_TRAP_PRINT_DEBUG(expr)   Rcpp::Rcout << expr << std::endl
+        #define CGAL_TRAP_PRINT_DEBUG(expr)   std::cout << expr << std::endl
 #else
         #define CGAL_TRAP_PRINT_DEBUG(expr)
 #endif
@@ -55,7 +54,7 @@ Arr_trapezoid_ric_point_location<Arrangement_2>::locate(const Point_2& p) const
     CGAL_TRAP_PRINT_DEBUG("UNBOUNDED_TRAPEZOID");
 
     Face_const_handle ubf =
-      _get_unbounded_face(tr, p, Are_all_sides_oblivious_category());
+      _get_unbounded_face(tr, p, All_sides_oblivious_category());
 
     //check isolated vertices
       Isolated_vertex_const_iterator   iso_verts_it;
@@ -93,7 +92,7 @@ Arr_trapezoid_ric_point_location<Arrangement_2>::locate(const Point_2& p) const
         return make_result(h);
       else {
         //ixx
-        Rcpp::Rcerr << "curve is: "<< h->curve() <<" point is: "<< p <<std::endl;
+        std::cerr << "curve is: "<< h->curve() <<" point is: "<< p <<std::endl;
         CGAL_error();
       }
     }
@@ -342,7 +341,7 @@ _check_isolated_for_vertical_ray_shoot (Halfedge_const_handle halfedge_found,
   // If the closest feature is a valid halfedge, take its incident face.
   // Otherwise, take the unbounded face.
   if (halfedge_found == invalid_he)
-    face = _get_unbounded_face(tr, p, Are_all_sides_oblivious_category());
+    face = _get_unbounded_face(tr, p, All_sides_oblivious_category());
   else
     face = halfedge_found->face();
 

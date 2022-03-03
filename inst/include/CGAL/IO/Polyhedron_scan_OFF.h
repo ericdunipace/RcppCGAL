@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polyhedron/include/CGAL/IO/Polyhedron_scan_OFF.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polyhedron/include/CGAL/IO/Polyhedron_scan_OFF.h $
 // $Id: Polyhedron_scan_OFF.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_IO_POLYHEDRON_SCAN_OFF_H
 #define CGAL_IO_POLYHEDRON_SCAN_OFF_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polyhedron.h>
 
 #include <CGAL/Polyhedron_3.h>
@@ -62,9 +61,9 @@ void Polyhedron_scan_OFF<HDS>:: operator()(HDS& target)
   {
     if(scanner.verbose())
     {
-      Rcpp::Rcerr << " " << std::endl;
-      Rcpp::Rcerr << "Polyhedron_scan_OFF<HDS>::" << std::endl;
-      Rcpp::Rcerr << "operator(): input error: file format is not in "
+      std::cerr << " " << std::endl;
+      std::cerr << "Polyhedron_scan_OFF<HDS>::" << std::endl;
+      std::cerr << "operator(): input error: file format is not in "
                    "OFF." << std::endl;
     }
     m_in.clear( std::ios::badbit);
@@ -112,9 +111,9 @@ void Polyhedron_scan_OFF<HDS>:: operator()(HDS& target)
     {
       if(scanner.verbose())
       {
-        Rcpp::Rcerr << " " << std::endl;
-        Rcpp::Rcerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
-        Rcpp::Rcerr << "operator()(): input error: facet " << i
+        std::cerr << " " << std::endl;
+        std::cerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
+        std::cerr << "operator()(): input error: facet " << i
                   << " has fewer than 3 vertices." << std::endl;
       }
 
@@ -147,9 +146,9 @@ void Polyhedron_scan_OFF<HDS>:: operator()(HDS& target)
     if(! B.remove_unconnected_vertices())
     {
       if(scanner.verbose()) {
-        Rcpp::Rcerr << " " << std::endl;
-        Rcpp::Rcerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
-        Rcpp::Rcerr << "operator()(): input error: cannot "
+        std::cerr << " " << std::endl;
+        std::cerr << "Polyhedron_scan_OFF<Traits>::" << std::endl;
+        std::cerr << "operator()(): input error: cannot "
                      "successfully remove isolated vertices."
                   << std::endl;
       }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Visibility_2/include/CGAL/Rotational_sweep_visibility_2.h $
-// $Id: Rotational_sweep_visibility_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Visibility_2/include/CGAL/Rotational_sweep_visibility_2.h $
+// $Id: Rotational_sweep_visibility_2.h d370326 2021-10-27T14:45:10+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_ROTATIONAL_SWEEP_VISIBILITY_2_H
 #define CGAL_ROTATIONAL_SWEEP_VISIBILITY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Visibility_2.h>
 
 
@@ -121,7 +120,7 @@ private:
         return 1;
       case LEFT_TURN:
         return 2;
-      default: CGAL_assume(false);
+      default: CGAL_unreachable();
       }
       return -1;
     }
@@ -216,7 +215,7 @@ private:
                 == Visibility_2::orientation_2(geom_traits, s2, t2, s1);
           else
             return true;
-        default: CGAL_assume(false);
+        default: CGAL_unreachable();
         }
         break;
       case LEFT_TURN:
@@ -235,11 +234,11 @@ private:
                 == Visibility_2::orientation_2(geom_traits, s2, t2, s1);
           else
             return true;
-        default: CGAL_assume(false);
+        default: CGAL_unreachable();
         }
       }
 
-      CGAL_assume(false);
+      CGAL_unreachable();
       return false;
     }
 
@@ -567,7 +566,7 @@ private:
     }
 
     //angular sweep begins
-//    Rcpp::Rcout<<active_edges.size()<<std::endl;
+//    std::cout<<active_edges.size()<<std::endl;
     for (typename VHs::size_type i=0; i!=vs.size(); i++) {
       VH vh = vs[i];
       EH closest_e = *active_edges.begin();
@@ -677,7 +676,7 @@ private:
   }
 
   void print_edge(const EH e) const {
-    Rcpp::Rcout << e->source()->point() <<"->"<< e->target()->point() <<std::endl;
+    std::cout << e->source()->point() <<"->"<< e->target()->point() <<std::endl;
   }
 
   //compute the intersection of ray(q->dp) and segment(s, t)

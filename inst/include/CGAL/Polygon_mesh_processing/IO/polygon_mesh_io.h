@@ -6,7 +6,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h $
 // $Id: polygon_mesh_io.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_PMP_IO_POLYGON_MESH_IO_H
 #define CGAL_PMP_IO_POLYGON_MESH_IO_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing.h>
 
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>
@@ -105,7 +104,7 @@ bool read_polygon_mesh(const std::string& fname,
   if(!CGAL::IO::read_polygon_soup(fname, points, faces))
   {
     if(verbose)
-      Rcpp::Rcerr << "Warning: cannot read polygon soup" << std::endl;
+      std::cerr << "Warning: cannot read polygon soup" << std::endl;
     return false;
   }
 
@@ -116,13 +115,13 @@ bool read_polygon_mesh(const std::string& fname,
   if(!PMP::orient_polygon_soup(points, faces))
   {
     if(verbose)
-      Rcpp::Rcerr << "Some duplication happened during polygon soup orientation" << std::endl;
+      std::cerr << "Some duplication happened during polygon soup orientation" << std::endl;
   }
 
   if(!PMP::is_polygon_soup_a_polygon_mesh(faces))
   {
     if(verbose)
-      Rcpp::Rcerr << "Warning: polygon soup does not describe a polygon mesh" << std::endl;
+      std::cerr << "Warning: polygon soup does not describe a polygon mesh" << std::endl;
     return false;
   }
 

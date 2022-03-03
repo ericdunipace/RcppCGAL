@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polygon_mesh.h $
-// $Id: Triangulate_hole_polygon_mesh.h b64c963 2020-10-21T11:55:58+02:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polygon_mesh.h $
+// $Id: Triangulate_hole_polygon_mesh.h 625848e 2021-10-04T13:21:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_HOLE_FILLING_TRIANGULATE_HOLE_POLYHEDRON_3_H
 #define CGAL_HOLE_FILLING_TRIANGULATE_HOLE_POLYHEDRON_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 
@@ -125,7 +124,7 @@ triangulate_hole_polygon_mesh(PolygonMesh& pmesh,
       #ifndef CGAL_TEST_SUITE
       CGAL_warning_msg(false, "Returning no output. Non-manifold vertex is found on boundary!");
       #else
-      Rcpp::Rcerr << "W: Returning no output. Non-manifold vertex is found on boundary!\n";
+      std::cerr << "W: Returning no output. Non-manifold vertex is found on boundary!\n";
       #endif
       return std::make_pair(out,
                             CGAL::internal::Weight_min_max_dihedral_and_area::NOT_VALID());
@@ -192,7 +191,7 @@ triangulate_hole_polygon_mesh(PolygonMesh& pmesh,
   ;
 
   #ifdef CGAL_PMP_HOLE_FILLING_DEBUG
-  std:cerr << "Hole filling: " << timer.time() << " sc." << std::endl; timer.reset();
+  std::cerr << "Hole filling: " << timer.time() << " sc." << std::endl; timer.reset();
   #endif
   return std::make_pair(tracer.out, weight);
 }

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesher/include/CGAL/IO/Complex_2_in_triangulation_3_file_writer.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesher/include/CGAL/IO/Complex_2_in_triangulation_3_file_writer.h $
 // $Id: Complex_2_in_triangulation_3_file_writer.h 580a1ef 2020-05-22T15:31:50+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_IO_COMPLEX_2_IN_TRIANGULATION_3_FILE_WRITER_H
 #define CGAL_IO_COMPLEX_2_IN_TRIANGULATION_3_FILE_WRITER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>
@@ -359,8 +358,8 @@ bool output_surface_facets_to_off (std::ostream& os,
 // //             int indices[3];
 // //             int index = 0;
 // //             for (int i=0; i<3; i++)
-// //               Rcpp::Rcerr << ( indices[index++] = V[(*fit).first->vertex(tr.vertex_triple_index(fit->second, i))] ) << ", ";
-// //             Rcpp::Rcerr << "\n";
+// //               std::cerr << ( indices[index++] = V[(*fit).first->vertex(tr.vertex_triple_index(fit->second, i))] ) << ", ";
+// //             std::cerr << "\n";
 // //             if( builder.test_facet(indices+0, indices+3) )
 // //               builder.add_facet(indices+0, indices+3);
 // //             else

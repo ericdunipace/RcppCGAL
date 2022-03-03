@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_quadratic_refinement_rep_bfi.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_quadratic_refinement_rep_bfi.h $
 // $Id: Algebraic_real_quadratic_refinement_rep_bfi.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -19,7 +19,6 @@
 #ifndef CGAL_ALGEBRAIC_REAL_QUADRATIC_REFINEMENT_REP_BFI_H
 #define CGAL_ALGEBRAIC_REAL_QUADRATIC_REFINEMENT_REP_BFI_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>
@@ -466,7 +465,7 @@ protected:
         // correct sign if needed
         if( s*CGAL::sign(CGAL::upper(eval) ) != CGAL::POSITIVE ){
 
-            //Rcpp::Rcout << "APPROX FAILED-------------------------------"<<std::endl;
+            //std::cout << "APPROX FAILED-------------------------------"<<std::endl;
             s = this->polynomial().sign_at(m);
             if ( s != CGAL::ZERO ) {
                 _set_prec(2*prec_);

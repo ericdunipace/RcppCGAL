@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Three/include/CGAL/Three/Scene_item.h $
-// $Id: Scene_item.h cc99fd9 2021-02-19T16:02:12+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Three/include/CGAL/Three/Scene_item.h $
+// $Id: Scene_item.h 1a9a578 2021-06-18T10:54:35+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -331,7 +331,7 @@ public Q_SLOTS:
   //!This function is called by `Scene::changeGroup` and should not be
   //!called manually.
   virtual void moveToGroup(Scene_group_item* group);
-  void setRenderingMode(int m) { setRenderingMode((RenderingMode)m);}
+  void setRenderingMode(int m) { setRenderingMode(static_cast<RenderingMode>(m));}
   //!Sets the rendering mode of the item.
   //!@see RenderingMode
   virtual void setRenderingMode(RenderingMode m) {

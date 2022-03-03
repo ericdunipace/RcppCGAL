@@ -6,16 +6,14 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/WKT/traits_polygon.h $
-// $Id: traits_polygon.h 490a726 2020-01-20T10:42:46+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/WKT/traits_polygon.h $
+// $Id: traits_polygon.h e6c767d 2021-05-12T15:45:07+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
 
 #ifndef CGAL_IO_WKT_TRAITS_POLYGON_H
 #define CGAL_IO_WKT_TRAITS_POLYGON_H
-
-#if BOOST_VERSION >= 105600 && (! defined(BOOST_GCC) || BOOST_GCC >= 40500)
 
 #include <CGAL/Polygon_2.h>
 #include <CGAL/Polygon_with_holes_2.h>
@@ -101,5 +99,4 @@ struct range_value<CGAL::Polygon_2<K> >
 
 } // namespace boost
 
-#endif // BOOST VERSION CHECKS
 #endif // CGAL_IO_WKT_TRAITS_POLYGON_H

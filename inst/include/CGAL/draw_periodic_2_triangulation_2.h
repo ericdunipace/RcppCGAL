@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_2_triangulation_2/include/CGAL/draw_periodic_2_triangulation_2.h $
-// $Id: draw_periodic_2_triangulation_2.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_2_triangulation_2/include/CGAL/draw_periodic_2_triangulation_2.h $
+// $Id: draw_periodic_2_triangulation_2.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Jasmeet Singh <jasmeet.singh.mec11@iitbhu.ac.in>
@@ -263,7 +263,7 @@ void draw(const CGAL_P2T2_TYPE& ap2t2,
   {
     CGAL::Qt::init_ogl_context(4,3);
     int argc=1;
-    const char* argv[2]={"p2t2_viewer","\0"};
+    const char* argv[2]={"p2t2_viewer", nullptr};
     QApplication app(argc,const_cast<char**>(argv));
     DefaultColorFunctorP2T2 fcolor;
     SimplePeriodic2Triangulation2ViewerQt<CGAL_P2T2_TYPE,

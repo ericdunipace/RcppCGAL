@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/TDS_2/include/CGAL/Triangulation_data_structure_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/TDS_2/include/CGAL/Triangulation_data_structure_2.h $
 // $Id: Triangulation_data_structure_2.h cff3cdb 2021-08-12T10:23:57+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_TRIANGULATION_DATA_STRUCTURE_2_H
 #define CGAL_TRIANGULATION_DATA_STRUCTURE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/TDS_2.h>
 
 
@@ -401,7 +400,7 @@ public:
 
   Vertex_handle collapse_edge(Edge e)
   {
-    Rcpp::Rcout << "before collapse"<<std::endl;
+    std::cout << "before collapse"<<std::endl;
     Face_handle fh = e.first;
     int i = e.second;
     Vertex_handle vh = fh->vertex(cw(i));
@@ -429,7 +428,7 @@ public:
     delete_face(fh);
     delete_face(nh);
     delete_vertex(wh);
-    Rcpp::Rcout << "after collapse"<<std::endl;
+    std::cout << "after collapse"<<std::endl;
     return vh;
   }
 

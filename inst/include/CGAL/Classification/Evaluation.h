@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Classification/include/CGAL/Classification/Evaluation.h $
-// $Id: Evaluation.h 76d1fe8 2021-01-07T16:45:08+01:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Classification/include/CGAL/Classification/Evaluation.h $
+// $Id: Evaluation.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -333,7 +333,7 @@ public:
   /// @{
 
   /*!
-    \brief outputs the evaluation in a simple ASCII format to the stream `os`.
+    \brief outputs the evaluation in a simple \ascii format to the stream `os`.
   */
   friend std::ostream& operator<< (std::ostream& os, const Evaluation& evaluation)
   {

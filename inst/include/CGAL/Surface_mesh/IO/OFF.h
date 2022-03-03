@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Surface_mesh/include/CGAL/Surface_mesh/IO/OFF.h $
-// $Id: OFF.h cf69d32 2021-05-12T11:40:20+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh/include/CGAL/Surface_mesh/IO/OFF.h $
+// $Id: OFF.h a34debc 2021-06-23T22:56:35+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -580,7 +580,7 @@ bool write_OFF_with_or_without_vnormals(std::ostream& os,
 ///   \cgalParamNBegin{stream_precision}
 ///     \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
 ///     \cgalParamType{int}
-///     \cgalParamDefault{`the precision of the stream `os``}
+///     \cgalParamDefault{the precision of the stream `os`}
 ///   \cgalParamNEnd
 /// \cgalNamedParamsEnd
 ///

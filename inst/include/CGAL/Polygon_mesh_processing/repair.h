@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair.h $
 // $Id: repair.h 40338b2 2020-10-09T16:50:29+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REPAIR_H
 #define CGAL_POLYGON_MESH_PROCESSING_REPAIR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/Polygon_mesh_processing/manifoldness.h>
@@ -187,7 +186,7 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
   Output_iterator out = choose_parameter<Output_iterator>(get_parameter(np, internal_np::output_iterator));
 
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL
-  Rcpp::Rcout << "default threshold? " << is_default_area_threshold << " " << is_default_volume_threshold << std::endl;
+  std::cout << "default threshold? " << is_default_area_threshold << " " << is_default_volume_threshold << std::endl;
 #endif
 
   FT bbox_diagonal = FT(0), threshold_value = FT(0);
@@ -205,11 +204,11 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
     threshold_value = bbox_diagonal / FT(100); // default filter is 1%
 
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL
-    Rcpp::Rcout << "bb xmin xmax: " << bb.xmin() << " " << bb.xmax() << std::endl;
-    Rcpp::Rcout << "bb ymin ymax: " << bb.ymin() << " " << bb.ymax() << std::endl;
-    Rcpp::Rcout << "bb zmin zmax: " << bb.zmin() << " " << bb.zmax() << std::endl;
-    Rcpp::Rcout << "bbox_diagonal: " << bbox_diagonal << std::endl;
-    Rcpp::Rcout << "threshold_value: " << threshold_value << std::endl;
+    std::cout << "bb xmin xmax: " << bb.xmin() << " " << bb.xmax() << std::endl;
+    std::cout << "bb ymin ymax: " << bb.ymin() << " " << bb.ymax() << std::endl;
+    std::cout << "bb zmin zmax: " << bb.zmin() << " " << bb.zmax() << std::endl;
+    std::cout << "bbox_diagonal: " << bbox_diagonal << std::endl;
+    std::cout << "threshold_value: " << threshold_value << std::endl;
 #endif
   }
 
@@ -230,7 +229,7 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
   std::size_t num = connected_components(tmesh, face_cc, np);
 
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL
-  Rcpp::Rcout << num << " different connected components" << std::endl;
+  std::cout << num << " different connected components" << std::endl;
 #endif
 
   if(!dry_run)
@@ -250,8 +249,8 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
     }
 
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL
-  Rcpp::Rcout << "area threshold: " << area_threshold << std::endl;
-  Rcpp::Rcout << "total area: " << total_area << std::endl;
+  std::cout << "area threshold: " << area_threshold << std::endl;
+  std::cout << "total area: " << total_area << std::endl;
 #endif
   }
 
@@ -293,8 +292,8 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
     }
 
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL
-    Rcpp::Rcout << "volume threshold: " << volume_threshold << std::endl;
-    Rcpp::Rcout << "total volume: " << total_volume << std::endl;
+    std::cout << "volume threshold: " << volume_threshold << std::endl;
+    std::cout << "total volume: " << total_volume << std::endl;
 #endif
   }
 
@@ -304,7 +303,7 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
   for(std::size_t i=0; i<num; ++i)
   {
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL
-    Rcpp::Rcout << "CC " << i << " has area: " << component_areas[i]
+    std::cout << "CC " << i << " has area: " << component_areas[i]
               << " and volume: " << component_volumes[i] << std::endl;
 #endif
 
@@ -317,7 +316,7 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
   }
 
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL
-  Rcpp::Rcout << "Removing " << res << " CCs" << std::endl;
+  std::cout << "Removing " << res << " CCs" << std::endl;
 #endif
 
   if(dry_run)

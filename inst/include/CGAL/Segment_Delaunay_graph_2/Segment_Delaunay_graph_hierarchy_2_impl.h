@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Segment_Delaunay_graph_hierarchy_2_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Segment_Delaunay_graph_hierarchy_2_impl.h $
 // $Id: Segment_Delaunay_graph_hierarchy_2_impl.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -957,11 +957,11 @@ is_valid(bool verbose, int level) const
   //verify correctness of triangulation at all levels
   for(unsigned int i = 0; i < sdg_hierarchy_2__maxlevel; ++i) {
     if ( verbose ) {
-      Rcpp::Rcerr << "Level " << i << ": " << std::flush;
+      std::cerr << "Level " << i << ": " << std::flush;
     }
     result = result && hierarchy[i]->is_valid(verbose, level);
     if ( verbose ) {
-      Rcpp::Rcerr << std::endl;
+      std::cerr << std::endl;
     }
   }
   //verify that lower level has no down pointers
@@ -996,15 +996,15 @@ print_error_message() const
   CGAL_STATIC_THREAD_LOCAL_VARIABLE(int, once, 0);
   if(once == 0){
     ++once;
-    Rcpp::Rcerr << std::endl;
-    Rcpp::Rcerr << "ATTENTION:" << std::endl;
-    Rcpp::Rcerr << "A segment-segment intersection was found."
+    std::cerr << std::endl;
+    std::cerr << "ATTENTION:" << std::endl;
+    std::cerr << "A segment-segment intersection was found."
               << std::endl;
-    Rcpp::Rcerr << "The Segment_Delaunay_graph_hierarchy_2 class is not"
+    std::cerr << "The Segment_Delaunay_graph_hierarchy_2 class is not"
               << " configured to handle this situation." << std::endl;
-    Rcpp::Rcerr << "Please look at the documentation on how to handle"
+    std::cerr << "Please look at the documentation on how to handle"
               << " this behavior." << std::endl;
-    Rcpp::Rcerr << std::endl;
+    std::cerr << std::endl;
   }
 }
 

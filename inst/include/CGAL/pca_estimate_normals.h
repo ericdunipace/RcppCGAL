@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Point_set_processing_3/include/CGAL/pca_estimate_normals.h $
-// $Id: pca_estimate_normals.h 9939011 2020-06-21T15:54:21+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/pca_estimate_normals.h $
+// $Id: pca_estimate_normals.h 3b7754f 2021-09-20T12:44:38+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret
@@ -159,7 +159,7 @@ pca_estimate_normals(
   using parameters::choose_parameter;
   using parameters::get_parameter;
 
-  CGAL_TRACE("Calls pca_estimate_normals()\n");
+  CGAL_TRACE_STREAM << "Calls pca_estimate_normals()\n";
 
   // basic geometric types
   typedef typename CGAL::GetPointMap<PointRange, NamedParameters>::type PointMap;
@@ -192,13 +192,15 @@ pca_estimate_normals(
   // precondition: at least 2 nearest neighbors
   CGAL_point_set_processing_precondition(k >= 2);
 
-  std::size_t memory = CGAL::Memory_sizer().virtual_size(); CGAL_TRACE("  %ld Mb allocated\n", memory>>20);
-  CGAL_TRACE("  Creates KD-tree\n");
+  std::size_t memory = CGAL::Memory_sizer().virtual_size();
+  CGAL_TRACE_STREAM << (memory >> 20) << " Mb allocated\n";
+  CGAL_TRACE_STREAM << "  Creates KD-tree\n";
 
   Neighbor_query neighbor_query (points, point_map);
 
-  memory = CGAL::Memory_sizer().virtual_size(); CGAL_TRACE("  %ld Mb allocated\n", memory>>20);
-  CGAL_TRACE("  Computes normals\n");
+  memory = CGAL::Memory_sizer().virtual_size();
+  CGAL_TRACE_STREAM << (memory >> 20) << " Mb allocated\n";
+  CGAL_TRACE_STREAM << "  Computes normals\n";
 
   std::size_t nb_points = points.size();
 
@@ -223,8 +225,9 @@ pca_estimate_normals(
 
   callback_wrapper.join();
 
-  memory = CGAL::Memory_sizer().virtual_size(); CGAL_TRACE("  %ld Mb allocated\n", memory>>20);
-  CGAL_TRACE("End of pca_estimate_normals()\n");
+  memory = CGAL::Memory_sizer().virtual_size();
+  CGAL_TRACE_STREAM << (memory >> 20) << " Mb allocated\n";
+  CGAL_TRACE_STREAM << "End of pca_estimate_normals()\n";
 }
 
 /// \cond SKIP_IN_MANUAL

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/STL_Extension/include/CGAL/assertions.h $
-// $Id: assertions.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/STL_Extension/include/CGAL/assertions.h $
+// $Id: assertions.h 2d9280e 2021-10-27T16:09:32+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -42,10 +42,6 @@
 #  define CGAL_NO_PRECONDITIONS
 #  define CGAL_NO_POSTCONDITIONS
 #  define CGAL_NO_WARNINGS
-#endif
-
-#ifdef CGAL_CFG_NO_CPP0X_STATIC_ASSERT
-#include <boost/static_assert.hpp>
 #endif
 
 namespace CGAL {
@@ -110,47 +106,17 @@ inline bool possibly(Uncertain<bool> c);
 #  define CGAL_assume_code(CODE) CGAL_assertion_code(CODE)
 #endif // no CGAL_NO_ASSERTIONS
 
-#ifndef CGAL_CFG_NO_CPP0X_STATIC_ASSERT
+#  ifdef CGAL_UNREACHABLE
+#    define CGAL_unreachable() CGAL_UNREACHABLE()
+#  else // not def CGAL_UNREACHABLE
+#    define CGAL_unreachable()  CGAL_assertion(false)
+#  endif // CGAL_UNREACHABLE
 
-#  if defined(CGAL_NO_ASSERTIONS)
-
-#    define CGAL_static_assertion(EX) \
-     static_assert(true, "")
-
-#    define CGAL_static_assertion_msg(EX,MSG) \
-     static_assert(true, "")
-
-#  else // no CGAL_NO_ASSERTIONS
-
-#    define CGAL_static_assertion(EX) \
+# define CGAL_static_assertion(EX) \
      static_assert(EX, #EX)
 
-#    define CGAL_static_assertion_msg(EX,MSG) \
+# define CGAL_static_assertion_msg(EX,MSG) \
      static_assert(EX, MSG)
-
-#  endif // no CGAL_NO_ASSERTIONS
-
-#else // if CGAL_CFG_NO_CPP0X_STATIC_ASSERT is true
-
-#  if defined(CGAL_NO_ASSERTIONS)
-
-#    define CGAL_static_assertion(EX) \
-     BOOST_STATIC_ASSERT(true) CGAL_UNUSED
-
-#    define CGAL_static_assertion_msg(EX,MSG) \
-     BOOST_STATIC_ASSERT(true) CGAL_UNUSED
-
-#  else // no CGAL_NO_ASSERTIONS
-
-#    define CGAL_static_assertion(EX) \
-     BOOST_STATIC_ASSERT(EX) CGAL_UNUSED
-
-#    define CGAL_static_assertion_msg(EX,MSG) \
-     BOOST_STATIC_ASSERT(EX) CGAL_UNUSED
-
-#  endif // no CGAL_NO_ASSERTIONS
-
-#endif // if CGAL_CFG_NO_CPP0X_STATIC_ASSERT is true
 
 #if defined(CGAL_NO_ASSERTIONS) || !defined(CGAL_CHECK_EXACTNESS)
 #  define CGAL_exactness_assertion(EX) (static_cast<void>(0))

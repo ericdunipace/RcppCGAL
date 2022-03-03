@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_triangulation_pl_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_triangulation_pl_impl.h $
 // $Id: Arr_triangulation_pl_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_ARR_TRIANGULATION_POINT_LOCATION_FUNCTIONS_H
 #define CGAL_ARR_TRIANGULATION_POINT_LOCATION_FUNCTIONS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 
@@ -24,7 +23,7 @@
 //#define CGAL_TRG_DEBUG
 
 #ifdef CGAL_TRG_DEBUG
-        #define CGAL_TRG_PRINT_DEBUG(expr)   Rcpp::Rcout << expr << std::endl
+        #define CGAL_TRG_PRINT_DEBUG(expr)   std::cout << expr << std::endl
 #else
         #define CGAL_TRG_PRINT_DEBUG(expr)
 #endif
@@ -180,10 +179,10 @@ Arr_triangulation_point_location<Arrangement_2>::locate (const Point_2& p) const
 
   if (face_found == this->arrangement()->unbounded_face()) {
     if (! found_unbounded) {
-      Rcpp::Rcerr<< "NOT GOOD - face not found" << std::endl;
+      std::cerr<< "NOT GOOD - face not found" << std::endl;
       //debug - print some more info
-      Rcpp::Rcout << "p = "<< p <<std::endl;
-      Rcpp::Rcout << "v0 = "<< v0->point()
+      std::cout << "p = "<< p <<std::endl;
+      std::cout << "v0 = "<< v0->point()
         <<", v1 = "<< v1->point()
         <<", v2 = "<<v2->point() <<std::endl;
     }
@@ -248,7 +247,7 @@ void Arr_triangulation_point_location<Arrangement_2>::build_triangulation()
 
     //check if source point is equal to destination point
     if (m_traits->equal_2_object()(pm_p1, pm_p2)) {
-      Rcpp::Rcerr << "WARNING: source point is equal to destination point!!! "
+      std::cerr << "WARNING: source point is equal to destination point!!! "
                 << pm_p1 << std::endl;
       CDT_Vertex_handle cdt_vh1 = cdt.insert(cdt_p1);
       cdt_vh1->info() = pm_vh1;

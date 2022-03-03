@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Event_line_builder.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Event_line_builder.h $
 // $Id: Event_line_builder.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -15,7 +15,6 @@
 #ifndef CGAL_ACK_EVENT_LINE_BUILDER
 #define CGAL_ACK_EVENT_LINE_BUILDER 1
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/Algebraic_structure_traits.h>
@@ -650,14 +649,14 @@ protected:
 
         long old_prec = CGAL::get_precision(BFI());
 
-        //Rcpp::Rcout << "p=" << p <<  std::endl;
-        //Rcpp::Rcout << "q=" << q <<  std::endl;
+        //std::cout << "p=" << p <<  std::endl;
+        //std::cout << "q=" << q <<  std::endl;
 
         long prec=16;
 
         while(true) {
             CGAL::set_precision(BFI(),prec);
-            //Rcpp::Rcout << "Increased to " << prec << std::endl;
+            //std::cout << "Increased to " << prec << std::endl;
             BFI isol_iv
                 = CGAL::hull(CGAL::convert_to_bfi(bit_des.left_bound(c)),
                              CGAL::convert_to_bfi(bit_des.right_bound(c)));
@@ -665,10 +664,10 @@ protected:
             if(! CGAL::in_zero(q_iv)) {
                 BFI p_iv = alpha_kernel.convert_to_bfi_object()(p);
                 BFI approx_iv = p_iv/q_iv;
-                //Rcpp::Rcout << "p_iv=[" << CGAL::lower(p_iv) << "," << CGAL::upper(p_iv) << "]" << std::endl;
-                //Rcpp::Rcout << "q_iv=[" << CGAL::lower(q_iv) << "," << CGAL::upper(q_iv) << "]"  << std::endl;
-                //Rcpp::Rcout << "isol_iv=[" << CGAL::lower(isol_iv) << "," << CGAL::upper(isol_iv) << "]" << std::endl;
-                //Rcpp::Rcout << "approx_iv=[" << CGAL::lower(approx_iv) << "," << CGAL::upper(approx_iv) << "]"  << std::endl;
+                //std::cout << "p_iv=[" << CGAL::lower(p_iv) << "," << CGAL::upper(p_iv) << "]" << std::endl;
+                //std::cout << "q_iv=[" << CGAL::lower(q_iv) << "," << CGAL::upper(q_iv) << "]"  << std::endl;
+                //std::cout << "isol_iv=[" << CGAL::lower(isol_iv) << "," << CGAL::upper(isol_iv) << "]" << std::endl;
+                //std::cout << "approx_iv=[" << CGAL::lower(approx_iv) << "," << CGAL::upper(approx_iv) << "]"  << std::endl;
                 if(CGAL::subset(approx_iv,isol_iv)) {
                     break;
                 }

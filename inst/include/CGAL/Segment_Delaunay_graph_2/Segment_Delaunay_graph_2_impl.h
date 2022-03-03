@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Segment_Delaunay_graph_2_impl.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Segment_Delaunay_graph_2_impl.h $
 // $Id: Segment_Delaunay_graph_2_impl.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -1479,8 +1479,8 @@ equalize_degrees(const Vertex_handle& v, Self& small_d,
   CGAL_assertion( l.size() <= deg );
   if ( l.size() == deg ) { return; }
 #if 0
-  Rcpp::Rcerr << "size of l  : " << l.size() << std::endl;
-  Rcpp::Rcerr << "degree of v: " << deg << std::endl;
+  std::cerr << "size of l  : " << l.size() << std::endl;
+  std::cerr << "degree of v: " << deg << std::endl;
 #endif
 
   //  typedef std::map<Edge,Edge>  Edge_map;
@@ -1530,10 +1530,10 @@ equalize_degrees(const Vertex_handle& v, Self& small_d,
     Vertex_handle vlrg_trg = fc->vertex(cw(id));
     if ( vmap[vsml_src] != vlrg_src || vmap[vsml_trg] != vlrg_trg ) {
       Edge e_small_prev = l.previous(e_small);
-      Rcpp::Rcerr << "size of l: " << l.size() << std::endl;
+      std::cerr << "size of l: " << l.size() << std::endl;
       l.remove(e_small);
 
-      Rcpp::Rcerr << "size of l: " << l.size() << std::endl;
+      std::cerr << "size of l: " << l.size() << std::endl;
 
       Edge e_small_new = small_d.flip(e_small);
       Edge e_small_new_sym = small_d.sym_edge(e_small_new);
@@ -1553,9 +1553,9 @@ equalize_degrees(const Vertex_handle& v, Self& small_d,
       e_small = small_d.sym_edge(to_list1);
 
       l.insert_after(e_small_prev, e_small);
-      Rcpp::Rcerr << "size of l: " << l.size() << std::endl;
+      std::cerr << "size of l: " << l.size() << std::endl;
       l.insert_after(e_small, small_d.sym_edge(to_list2));
-      Rcpp::Rcerr << "size of l: " << l.size() << std::endl;
+      std::cerr << "size of l: " << l.size() << std::endl;
     } else {
       e_small = l.next(e_small);
       ++fc;
@@ -1564,8 +1564,8 @@ equalize_degrees(const Vertex_handle& v, Self& small_d,
   } while ( fc != fc_start );
 
 #if 0
-  Rcpp::Rcerr << "size of l  : " << l.size() << std::endl;
-  Rcpp::Rcerr << "degree of v: " << deg << std::endl;
+  std::cerr << "size of l  : " << l.size() << std::endl;
+  std::cerr << "degree of v: " << deg << std::endl;
 #endif
 
 #if !defined(CGAL_NO_ASSERTIONS) && !defined(NDEBUG)
@@ -1762,8 +1762,8 @@ fill_hole(const Self& small_d, const Vertex_handle& v, const List& l,
           std::map<Vertex_handle,Vertex_handle>& vmap)
 {
 #if 0
-  Rcpp::Rcerr << "size of l  : " << l.size() << std::endl;
-  Rcpp::Rcerr << "degree of v: " << degree(v) << std::endl;
+  std::cerr << "size of l  : " << l.size() << std::endl;
+  std::cerr << "degree of v: " << degree(v) << std::endl;
 #endif
 
   typedef std::map<Edge,Edge>  Edge_map;
@@ -2669,7 +2669,7 @@ is_valid(bool verbose, int level) const
 
   if (number_of_vertices() <= 1) {
     if ( verbose && number_of_vertices() == 1 ) {
-      Rcpp::Rcerr << "SDGDS is ok... " << std::flush;
+      std::cerr << "SDGDS is ok... " << std::flush;
     }
     return true;
   }
@@ -2678,7 +2678,7 @@ is_valid(bool verbose, int level) const
   bool result = data_structure().is_valid(verbose, level);
 
   if ( result && verbose ) {
-    Rcpp::Rcerr << "SDGDS is ok... " << std::flush;
+    std::cerr << "SDGDS is ok... " << std::flush;
   }
 
   if (level == 0) { return result; }
@@ -2709,10 +2709,10 @@ is_valid(bool verbose, int level) const
   }
 
   if ( result && verbose ) {
-    Rcpp::Rcerr << "Segment Delaunay graph is ok..." << std::flush;
+    std::cerr << "Segment Delaunay graph is ok..." << std::flush;
   }
   if ( !result && verbose ) {
-    Rcpp::Rcerr << "Segment Delaunay graph is NOT valid..." << std::flush;
+    std::cerr << "Segment Delaunay graph is NOT valid..." << std::flush;
   }
 
   return result;
@@ -2734,15 +2734,15 @@ print_error_message() const
   CGAL_STATIC_THREAD_LOCAL_VARIABLE(int, once, 0);
   if(once == 0){
     ++once;
-    Rcpp::Rcerr << std::endl;
-    Rcpp::Rcerr << "ATTENTION:" << std::endl;
-    Rcpp::Rcerr << "A segment-segment intersection was found."
+    std::cerr << std::endl;
+    std::cerr << "ATTENTION:" << std::endl;
+    std::cerr << "A segment-segment intersection was found."
               << std::endl;
-    Rcpp::Rcerr << "The Segment_Delaunay_graph_2 class is not configured"
+    std::cerr << "The Segment_Delaunay_graph_2 class is not configured"
               << " to handle this situation." << std::endl;
-    Rcpp::Rcerr << "Please look at the documentation on how to handle"
+    std::cerr << "Please look at the documentation on how to handle"
               << " this behavior." << std::endl;
-    Rcpp::Rcerr << std::endl;
+    std::cerr << std::endl;
   }
 }
 

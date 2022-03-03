@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/IO/polygon_mesh_io.h $
-// $Id: polygon_mesh_io.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/IO/polygon_mesh_io.h $
+// $Id: polygon_mesh_io.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -12,7 +12,6 @@
 #ifndef CGAL_BOOST_GRAPH_POLYGON_MESH_IO_H
 #define CGAL_BOOST_GRAPH_POLYGON_MESH_IO_H
 
-#include <Rcpp.h>
 #include <CGAL/boost/graph/IO/3MF.h>
 #include <CGAL/boost/graph/IO/GOCAD.h>
 #include <CGAL/boost/graph/IO/INP.h>
@@ -137,7 +136,7 @@ bool read_polygon_mesh(const std::string& fname,
   if(ext == std::string())
   {
     if(verbose)
-      Rcpp::Rcerr << "Error: cannot read from file without extension" << std::endl;
+      std::cerr << "Error: cannot read from file without extension" << std::endl;
     return false;
   }
 
@@ -158,7 +157,7 @@ bool read_polygon_mesh(const std::string& fname,
 
   if(verbose)
   {
-    Rcpp::Rcerr << "Error: unknown input file extension: " << ext << "\n"
+    std::cerr << "Error: unknown input file extension: " << ext << "\n"
               << "Please refer to the documentation for the list of supported file formats" << std::endl;
   }
 
@@ -215,7 +214,7 @@ bool read_polygon_mesh(const std::string& fname, Graph& g)
  *     \cgalParamDescription{a parameter used to set the precision (i.e. how many digits are generated) of the output stream}
  *     \cgalParamType{int}
  *     \cgalParamDefault{`6`}
- *     \cgalParamExtra{This parameter is only meaningful while using ASCII encoding.}
+ *     \cgalParamExtra{This parameter is only meaningful while using \ascii encoding.}
  *   \cgalParamNEnd
  *
  *   \cgalParamNBegin{verbose}
@@ -240,7 +239,7 @@ bool write_polygon_mesh(const std::string& fname,
   if(ext == std::string())
   {
     if(verbose)
-      Rcpp::Rcerr << "Error: trying to output to file without extension" << std::endl;
+      std::cerr << "Error: trying to output to file without extension" << std::endl;
     return false;
   }
 
@@ -261,7 +260,7 @@ bool write_polygon_mesh(const std::string& fname,
 
   if(verbose)
   {
-    Rcpp::Rcerr << "Error: unknown output file extension: " << ext << "\n"
+    std::cerr << "Error: unknown output file extension: " << ext << "\n"
               << "Please refer to the documentation for the list of supported file formats" << std::endl;
   }
 

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Kernel_23/include/CGAL/Point_2.h $
-// $Id: Point_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Kernel_23/include/CGAL/Point_2.h $
+// $Id: Point_2.h e7357ac 2021-07-19T14:53:27+02:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,6 @@
 #ifndef CGAL_POINT_2_H
 #define CGAL_POINT_2_H
 
-#include <Rcpp.h>
 #include <CGAL/Origin.h>
 #include <CGAL/Bbox_2.h>
 #include <CGAL/assertions.h>
@@ -68,6 +67,10 @@ public:
 
   Point_2(const RPoint_2& p)
     : RPoint_2(p)
+  {}
+
+  Point_2(RPoint_2&& p)
+    : RPoint_2(std::move(p))
   {}
 
   explicit
@@ -246,8 +249,8 @@ extract(std::istream& is, Point_2<R>& p, const Cartesian_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        Rcpp::Rcerr << "" << std::endl;
-        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
+        std::cerr << "" << std::endl;
+        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
     }
     if (is)
@@ -273,8 +276,8 @@ extract(std::istream& is, Point_2<R>& p, const Homogeneous_tag&)
         break;
     default:
         is.setstate(std::ios::failbit);
-        Rcpp::Rcerr << "" << std::endl;
-        Rcpp::Rcerr << "Stream must be in ascii or binary mode" << std::endl;
+        std::cerr << "" << std::endl;
+        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
   }
   if (is)

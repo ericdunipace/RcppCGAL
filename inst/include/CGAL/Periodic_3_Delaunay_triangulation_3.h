@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_Delaunay_triangulation_3.h $
-// $Id: Periodic_3_Delaunay_triangulation_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_3_triangulation_3/include/CGAL/Periodic_3_Delaunay_triangulation_3.h $
+// $Id: Periodic_3_Delaunay_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -16,14 +16,13 @@
 #ifndef CGAL_PERIODIC_3_DELAUNAY_TRIANGULATION_3_H
 #define CGAL_PERIODIC_3_DELAUNAY_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_triangulation_3.h>
 
 #include <CGAL/Periodic_3_triangulation_3.h>
 #include <CGAL/spatial_sort.h>
 
 // Needed by remove to fill the hole.
-#include <CGAL/internal/Periodic_3_Delaunay_triangulation_remove_traits_3.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Periodic_3_Delaunay_triangulation_remove_traits_3.h>
 #include <CGAL/Delaunay_triangulation_3.h>
 
 #include <iostream>
@@ -981,8 +980,8 @@ remove_if_no_cover_change(Vertex_handle v)
 
   if(!Base::periodic_remove(v, remover, cover_manager, true /*abort if cover change*/))
   {
-//    Rcpp::Rcerr << "Warning: removing " << &*v << " (" << v->point() << ") would change cover" << std::endl;
-//    Rcpp::Rcerr << "Aborted removal." << std::endl;
+//    std::cerr << "Warning: removing " << &*v << " (" << v->point() << ") would change cover" << std::endl;
+//    std::cerr << "Aborted removal." << std::endl;
     return false; // removing would cause a cover change
   }
 
@@ -1199,19 +1198,19 @@ is_valid(bool verbose, int level) const
 {
   if(!Base::is_valid(verbose, level)) {
     if(verbose)
-      Rcpp::Rcerr << "Delaunay: invalid base" << std::endl;
+      std::cerr << "Delaunay: invalid base" << std::endl;
     return false;
   }
 
   Conflict_tester tester(this);
   if(!is_valid_conflict(tester, verbose, level)) {
     if(verbose)
-      Rcpp::Rcerr << "Delaunay: conflict problems" << std::endl;
+      std::cerr << "Delaunay: conflict problems" << std::endl;
     return false;
   }
 
   if(verbose)
-    Rcpp::Rcerr << "Delaunay valid triangulation" << std::endl;
+    std::cerr << "Delaunay valid triangulation" << std::endl;
   return true;
 }
 
@@ -1224,10 +1223,10 @@ is_valid(Cell_handle ch, bool verbose, int level) const
   if(!Base::is_valid(ch, verbose, level)) {
     error = true;
     if(verbose) {
-      Rcpp::Rcerr << "geometrically invalid cell" << std::endl;
+      std::cerr << "geometrically invalid cell" << std::endl;
       for(int i=0; i<4; i++)
-        Rcpp::Rcerr << ch->vertex(i)->point() << ", ";
-      Rcpp::Rcerr << std::endl;
+        std::cerr << ch->vertex(i)->point() << ", ";
+      std::cerr << std::endl;
     }
   }
 
@@ -1249,12 +1248,12 @@ is_valid(Cell_handle ch, bool verbose, int level) const
               != ON_UNBOUNDED_SIDE) {
             error = true;
             if(verbose) {
-              Rcpp::Rcerr << "Delaunay invalid cell" << std::endl;
+              std::cerr << "Delaunay invalid cell" << std::endl;
               for(int i=0; i<4; i++) {
                 Periodic_point pp = periodic_point(ch,i);
-                Rcpp::Rcerr <<"("<<pp.first <<","<<pp.second<< "), ";
+                std::cerr <<"("<<pp.first <<","<<pp.second<< "), ";
               }
-              Rcpp::Rcerr << std::endl;
+              std::cerr << std::endl;
             }
           }
         }

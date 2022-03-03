@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polynomial/include/CGAL/Polynomial/polynomial_gcd_implementations.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polynomial/include/CGAL/Polynomial/polynomial_gcd_implementations.h $
 // $Id: polynomial_gcd_implementations.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #define CGAL_POLYNOMIAL_GCD_IMPLEMENTATIONS_H
 
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Polynomial.h>
 #include <CGAL/Real_timer.h>
@@ -86,7 +85,7 @@ inline
 Polynomial<NT> gcd_Euclidean_ring(
         Polynomial<NT> p1, Polynomial<NT> p2
 ) {
-//    Rcpp::Rcout<<" gcd_Field"<<std::endl;
+//    std::cout<<" gcd_Field"<<std::endl;
     // handle trivial cases
     if (p1.is_zero()){
         if (p2.is_zero()) return Polynomial<NT>(NT(1));
@@ -131,7 +130,7 @@ NT content_utcf_(const Polynomial<NT>& p)
 template <class NT>
 inline
 Polynomial<NT> gcd_utcf_Integral_domain( Polynomial<NT> p1, Polynomial<NT> p2){
-  // Rcpp::Rcout<<" gcd_utcf_Integral_domain"<<std::endl;
+  // std::cout<<" gcd_utcf_Integral_domain"<<std::endl;
   typedef Polynomial<NT> POLY;
 
   // handle trivial cases

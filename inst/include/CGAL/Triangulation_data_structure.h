@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Triangulation/include/CGAL/Triangulation_data_structure.h $
-// $Id: Triangulation_data_structure.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation/include/CGAL/Triangulation_data_structure.h $
+// $Id: Triangulation_data_structure.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -23,9 +23,9 @@
 #include <CGAL/Triangulation_face.h>
 #include <CGAL/Triangulation_ds_vertex.h>
 #include <CGAL/Triangulation_ds_full_cell.h>
-#include <CGAL/internal/Combination_enumerator.h>
-#include <CGAL/internal/Triangulation/utilities.h>
-#include <CGAL/internal/Triangulation/Triangulation_ds_iterators.h>
+#include <CGAL/Triangulation/internal/Combination_enumerator.h>
+#include <CGAL/Triangulation/internal/utilities.h>
+#include <CGAL/Triangulation/internal/Triangulation_ds_iterators.h>
 
 #include <algorithm>
 #include <vector>

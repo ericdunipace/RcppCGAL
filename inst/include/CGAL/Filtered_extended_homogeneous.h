@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Nef_2/include/CGAL/Filtered_extended_homogeneous.h $
-// $Id: Filtered_extended_homogeneous.h 6bae0e3 2021-09-09T11:09:16+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_2/include/CGAL/Filtered_extended_homogeneous.h $
+// $Id: Filtered_extended_homogeneous.h 74c029c 2021-09-09T11:44:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_FILTERED_EXTENDED_HOMOGENEOUS_H
 #define CGAL_FILTERED_EXTENDED_HOMOGENEOUS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -34,10 +33,10 @@
 #ifdef  KERNEL_CHECK
 #include <CGAL/Extended_homogeneous.h>
 #define CHECK(c1,c2) CGAL_assertion((c1) == (c2));
-#define PRINT_CHECK_ENABLED Rcpp::Rcout << "kernel check enabled!\n"
+#define PRINT_CHECK_ENABLED std::cout << "kernel check enabled!\n"
 #else
 #define CHECK(c1,c2)
-#define PRINT_CHECK_ENABLED Rcpp::Rcout << "no kernel check!\n"
+#define PRINT_CHECK_ENABLED std::cout << "no kernel check!\n"
 #endif
 
 #ifdef KERNEL_ANALYSIS
@@ -46,7 +45,7 @@
 #define INCTOTAL(c) c##_total++
 #define INCEXCEPTION(c) c##_exception++
 #define PRINT_STATISTICS(c) \
-Rcpp::Rcout << #c##" " << c##_exception << "/" << c##_total << std::endl
+std::cout << #c##" " << c##_exception << "/" << c##_total << std::endl
 #else
 #define DEFCOUNTER(c)
 #define INCTOTAL(c)
@@ -165,7 +164,7 @@ std::istream& operator>>(std::istream& is, SPolynomial<RT>& p)
     case CGAL::IO::BINARY :
       CGAL::read(is,m);CGAL::read(is,n);break;
     default:
-    CGAL_error_msg("\nStream must be in ascii or binary mode\n");
+    CGAL_error_msg("\nStream must be in ASCII or binary mode\n");
       break;
   }
   return is;
@@ -334,7 +333,7 @@ std::istream& operator>>(std::istream& is, Extended_point<RT>& p)
     case CGAL::IO::BINARY :
       CGAL::read(is,x);CGAL::read(is,y);CGAL::read(is,w); break;
     default:
-    CGAL_error_msg("\nStream must be in ascii or binary mode\n");
+    CGAL_error_msg("\nStream must be in ASCII or binary mode\n");
       break;
   }
   p = Extended_point<RT>(x,y,w);
@@ -1337,8 +1336,8 @@ bool strictly_ordered_ccw(const Direction_2& d1,
 
 void print_statistics() const
 {
-  Rcpp::Rcout << "Statistics of filtered kernel:\n";
-  Rcpp::Rcout << "total failed double filter stages = (now needs CGAL_PROFILE)\n";
+  std::cout << "Statistics of filtered kernel:\n";
+  std::cout << "total failed double filter stages = (now needs CGAL_PROFILE)\n";
   PRINT_CHECK_ENABLED;
   PRINT_STATISTICS(or2);
   PRINT_STATISTICS(or1);

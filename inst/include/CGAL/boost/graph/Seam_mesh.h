@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/BGL/include/CGAL/boost/graph/Seam_mesh.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/Seam_mesh.h $
 // $Id: Seam_mesh.h 5d41446 2020-09-22T11:53:27+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -12,7 +12,6 @@
 #ifndef CGAL_SEAM_MESH_H
 #define CGAL_SEAM_MESH_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/boost/graph/iterator.h>
@@ -967,7 +966,7 @@ public:
     std::pair<TM_edge_descriptor, bool> tmed = CGAL::edge(tm_vd_s, tm_vd_t, tm);
     if(!tmed.second) {
 #ifdef SEAM_MESH_DEBUG
-      Rcpp::Rcerr << "Warning: Ignored a constraint because it is not a valid edge of the mesh" << std::endl;
+      std::cerr << "Warning: Ignored a constraint because it is not a valid edge of the mesh" << std::endl;
 #endif
       return false;
     }
@@ -975,7 +974,7 @@ public:
     if(!is_border(tmed.first, tm)) { // ignore seams that are also a border edge
       if(get(sem, tmed.first) == true) {
 #ifdef SEAM_MESH_DEBUG
-        Rcpp::Rcerr << "Warning: Ignored a constraint because it is already marked as a seam" << std::endl;
+        std::cerr << "Warning: Ignored a constraint because it is already marked as a seam" << std::endl;
 #endif
         return false;
       }
@@ -986,7 +985,7 @@ public:
       ++number_of_seams;
     } else {
 #ifdef SEAM_MESH_DEBUG
-      Rcpp::Rcerr << "Warning: Ignored a constraint because it is on the border of the mesh" << std::endl;
+      std::cerr << "Warning: Ignored a constraint because it is on the border of the mesh" << std::endl;
 #endif
       return false;
     }
@@ -1094,7 +1093,7 @@ public:
     // Check the file type
     std::string str = filename;
     if( (str.length()) < 14 || (str.substr(str.length() - 14) != ".selection.txt") ) {
-      Rcpp::Rcerr << "Error: seams must be given by a *.selection.txt file" << std::endl;
+      std::cerr << "Error: seams must be given by a *.selection.txt file" << std::endl;
       return tmhd;
     }
 
@@ -1108,7 +1107,7 @@ public:
     // skip two lines to get the istream to be at the beginning of the third line
     if(!std::getline(in, line) || !std::getline(in, line)) {
 #ifdef SEAM_MESH_DEBUG
-      Rcpp::Rcerr << "Error: no seams in input file: " << filename << std::endl;
+      std::cerr << "Error: no seams in input file: " << filename << std::endl;
 #endif
       return tmhd;
     }

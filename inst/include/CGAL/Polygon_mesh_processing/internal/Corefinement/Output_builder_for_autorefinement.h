@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Output_builder_for_autorefinement.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Output_builder_for_autorefinement.h $
 // $Id: Output_builder_for_autorefinement.h 4b26935 2020-11-24T18:11:27+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -13,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_OUTPUT_BUILDER_FOR_AUTOREFINEMENT_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_OUTPUT_BUILDER_FOR_AUTOREFINEMENT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/corefinement.h>
 
 #include <CGAL/disable_warnings.h>
@@ -1059,9 +1058,9 @@ public:
     }
 
 #ifdef CGAL_COREFINEMENT_DEBUG
-    Rcpp::Rcout << "patches_to_keep " <<  patches_to_keep << "\n";
-    Rcpp::Rcout << "coplanar_patches " << coplanar_patches << "\n";
-    Rcpp::Rcout << "patch_status_not_set " << patch_status_not_set << "\n";
+    std::cout << "patches_to_keep " <<  patches_to_keep << "\n";
+    std::cout << "coplanar_patches " << coplanar_patches << "\n";
+    std::cout << "patch_status_not_set " << patch_status_not_set << "\n";
 #endif
 
     //collect edges to stitch before removing patches

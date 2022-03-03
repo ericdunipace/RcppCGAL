@@ -6,8 +6,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Stream_support/include/CGAL/IO/WKT.h $
-// $Id: WKT.h f5e5ebe 2021-05-04T14:45:43+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/WKT.h $
+// $Id: WKT.h a3d1765 2021-07-19T14:18:40+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -15,9 +15,6 @@
 #ifndef CGAL_IO_WKT_H
 #define CGAL_IO_WKT_H
 
-#if defined(DOXYGEN_RUNNING) || (BOOST_VERSION >= 105600 && (!defined(BOOST_GCC) || BOOST_GCC >= 40500))
-
-#include <Rcpp.h>
 #include <CGAL/Point_2.h>
 #include <CGAL/Point_3.h>
 #include <CGAL/Polygon_2.h>
@@ -96,7 +93,7 @@ bool read_point_WKT(std::istream& in,
       }
       catch(...)
       {
-        Rcpp::Rcerr << "error." << std::endl;
+        std::cerr << "error." << std::endl;
         return false;
       }
 
@@ -142,7 +139,7 @@ bool read_multi_point_WKT(std::istream& in,
       try{
         boost::geometry::read_wkt(line, gc);
       } catch(...){
-        Rcpp::Rcerr << "error." << std::endl;
+        std::cerr << "error." << std::endl;
         return false;
       }
       break;
@@ -188,7 +185,7 @@ bool read_linestring_WKT(std::istream& in,
       try{
         boost::geometry::read_wkt(line, gc);
       } catch(...){
-        Rcpp::Rcerr << "error." << std::endl;
+        std::cerr << "error." << std::endl;
         return false;
       }
       break;
@@ -239,7 +236,7 @@ bool read_multi_linestring_WKT(std::istream& in,
       }
       catch(...)
       {
-        Rcpp::Rcerr << "error." << std::endl;
+        std::cerr << "error." << std::endl;
         return false;
       }
 
@@ -595,7 +592,5 @@ using IO::write_polygon_WKT;
 #endif
 
 } // namespace CGAL
-
-#endif // BOOST VERSION CHECKS
 
 #endif // CGAL_IO_WKT_H

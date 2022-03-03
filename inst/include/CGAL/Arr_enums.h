@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.3.1/Arrangement_on_surface_2/include/CGAL/Arr_enums.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4/Arrangement_on_surface_2/include/CGAL/Arr_enums.h $
 // $Id: Arr_enums.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
@@ -14,7 +14,6 @@
 #ifndef CGAL_ARR_ENUM_H
 #define CGAL_ARR_ENUM_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/disable_warnings.h>
@@ -179,7 +178,7 @@ OutputStream& operator<<(
     }
     break;
   case ::CGAL::IO::BINARY:
-    Rcpp::Rcerr << "BINARY format not yet implemented" << std::endl;
+    std::cerr << "BINARY format not yet implemented" << std::endl;
     break;
   default:
     os << static_cast< int >(ps);
