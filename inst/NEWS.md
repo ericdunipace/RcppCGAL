@@ -1,5 +1,5 @@
 # Changes in version 5.4
-Updated the package to CGAL v5.4.
+Updated the package to CGAL v5.4. Caught a bug when replacing CGAL error outputs where it didn't properly include Rcpp. Moved all Rcpp includes to the tops of files to prevent this in the future.
 
 # Changes in version 5.3.1.1 (#issue-1092895079)
 Updated the package to edit out references to `std::cerr` and `std::cout` when copying header files. Should prevent error for CRAN checks when attempting to use this package for other R packages on CRAN.
