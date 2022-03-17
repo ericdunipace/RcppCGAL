@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013-06  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_BILATERAL_SMOOTH_POINT_SET_H
 #define CGAL_BILATERAL_SMOOTH_POINT_SET_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/disable_warnings.h>

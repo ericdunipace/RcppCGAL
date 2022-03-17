@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2020  Geometry Factory
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_IO_OBJ_H
 #define CGAL_IO_OBJ_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/OBJ/File_writer_wavefront.h>
 #include <CGAL/IO/Generic_writer.h>
 #include <CGAL/IO/io.h>

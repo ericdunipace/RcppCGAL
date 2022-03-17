@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -12,7 +13,6 @@
 #ifndef CGAL_BOOST_GRAPH_INITIALIZED_INTERNAL_INDEX_MAPS_HELPERS
 #define CGAL_BOOST_GRAPH_INITIALIZED_INTERNAL_INDEX_MAPS_HELPERS
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 #include <CGAL/boost/graph/Named_function_parameters.h>
 #include <CGAL/boost/graph/properties.h>

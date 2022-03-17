@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_PRIMES_H
 #define CGAL_PRIMES_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 namespace CGAL {

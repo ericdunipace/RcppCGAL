@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012 INRIA Sophia-Antipolis (France).
 // Copyright (c) 2017 GeometryFactory Sarl (France).
 // All rights reserved.
@@ -13,7 +14,6 @@
 #ifndef CGAL_CLASSIFICATION_CLASSIFY_H
 #define CGAL_CLASSIFICATION_CLASSIFY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/boost/graph/alpha_expansion_graphcut.h>

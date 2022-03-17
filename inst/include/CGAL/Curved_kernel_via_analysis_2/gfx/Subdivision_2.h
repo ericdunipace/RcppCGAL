@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -21,7 +22,6 @@
 
 #warning this file is considered obsolete
 
-#include <Rcpp.h>
 #include <vector>
 #include <CGAL/Polynomial.h>
 #include <CGAL/Interval_nt.h>

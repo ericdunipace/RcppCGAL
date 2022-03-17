@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_SMS_2_PULLOUT_DIRECTIONS_SINGLE_MOLD_TRANSLATIONAL_CASTING_H
 #define CGAL_SMS_2_PULLOUT_DIRECTIONS_SINGLE_MOLD_TRANSLATIONAL_CASTING_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Set_movable_separability_2.h>
 
 

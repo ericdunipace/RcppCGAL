@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_ADVANCING_FRONT_SURFACE_RECONSTRUCTION_H
 #define CGAL_ADVANCING_FRONT_SURFACE_RECONSTRUCTION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Advancing_front_surface_reconstruction.h>
 
 #include <CGAL/disable_warnings.h>

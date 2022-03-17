@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006-2013 INRIA Nancy-Grand Est (France). All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -14,7 +15,6 @@
 #ifndef CGAL_RS_BISECTION_REFINER_1_H
 #define CGAL_RS_BISECTION_REFINER_1_H
 
-#include <Rcpp.h>
 #include <CGAL/Polynomial_traits_d.h>
 #include "signat_1.h"
 #include "Gmpfr_make_unique.h"

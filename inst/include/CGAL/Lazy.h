@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005,2006  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_LAZY_H
 #define CGAL_LAZY_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>

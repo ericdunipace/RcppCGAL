@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009-2010 INRIA Sophia-Antipolis (France).
 // Copyright (c) 2014-2017 GeometryFactory Sarl (France)
 // All rights reserved.
@@ -14,7 +15,6 @@
 #ifndef CGAL_POLYHEDRAL_COMPLEX_MESH_DOMAIN_3_H
 #define CGAL_POLYHEDRAL_COMPLEX_MESH_DOMAIN_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>

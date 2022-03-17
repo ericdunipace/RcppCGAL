@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2019 GeometryFactory (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REPAIR_DEGENERACIES_H
 #define CGAL_POLYGON_MESH_PROCESSING_REPAIR_DEGENERACIES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/Polygon_mesh_processing/shape_predicates.h>

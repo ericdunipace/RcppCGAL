@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -14,7 +15,6 @@
 //
 // Author(s)     : Wieger Wesselink <wieger@cs.ruu.nl>
 
-#include <Rcpp.h>
 #include <CGAL/algorithm.h>
 #include <CGAL/assertions.h>
 #include <CGAL/determinant.h>

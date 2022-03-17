@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2000  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_NEF_2_DEBUG_H
 #define CGAL_NEF_2_DEBUG_H
 
-#include <Rcpp.h>
 #include <iostream>
 
 #ifdef NDEBUG

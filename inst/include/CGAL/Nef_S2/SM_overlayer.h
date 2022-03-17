@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2000  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_SM_OVERLAYER_H
 #define CGAL_SM_OVERLAYER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_S2.h>
 
 

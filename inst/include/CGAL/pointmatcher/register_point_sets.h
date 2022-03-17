@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2019  GeometryFactory(France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_POINTMATCHER_REGISTER_POINT_SETS_H
 #define CGAL_POINTMATCHER_REGISTER_POINT_SETS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #if defined(CGAL_LINKED_WITH_POINTMATCHER) || defined(DOXYGEN_RUNNING)

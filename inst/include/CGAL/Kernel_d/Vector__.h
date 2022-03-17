@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_VECTOR___H
 #define CGAL_VECTOR___H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/memory.h>
 #include <CGAL/Kernel_d/debug.h>

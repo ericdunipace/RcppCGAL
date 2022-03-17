@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015 GeometryFactory (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_HOLE_FILLING_TRIANGULATE_HOLE_POLYLINE_H
 #define CGAL_HOLE_FILLING_TRIANGULATE_HOLE_POLYLINE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 

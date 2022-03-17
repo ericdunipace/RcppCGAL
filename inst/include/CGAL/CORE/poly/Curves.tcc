@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 /****************************************************************************
  * Core Library Version 1.7, August 2004
  * Copyright (c) 1995-2004 Exact Computation Project
@@ -24,7 +25,6 @@
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
-#include <Rcpp.h>
 #include <sstream>
 
 //CONSTRUCTORS FOR THE BIPOLY CLASS

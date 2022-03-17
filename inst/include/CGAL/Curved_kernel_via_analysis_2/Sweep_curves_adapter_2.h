@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007,2008,2009,2010,2011 Max-Planck-Institute Saarbruecken (Germany),
 // and Tel-Aviv University (Israel).  All rights reserved.
 //
@@ -20,7 +21,6 @@
  * \c Curved_kernel_via_analysis_2 with \c SoX::sweep_curves
  */
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #include <boost/optional.hpp>

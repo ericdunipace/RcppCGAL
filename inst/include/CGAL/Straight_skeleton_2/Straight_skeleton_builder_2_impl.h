@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005, 2006 Fernando Luis Cacciola Carballal. All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org).
@@ -11,7 +12,6 @@
 #ifndef CGAL_STRAIGHT_SKELETON_BUILDER_2_IMPL_H
 #define CGAL_STRAIGHT_SKELETON_BUILDER_2_IMPL_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Straight_skeleton_2.h>
 
 #include <CGAL/number_type_config.h>

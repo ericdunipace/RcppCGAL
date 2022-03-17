@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013
 // INRIA Saclay - Ile de France (France).
 // All rights reserved.
@@ -16,7 +17,6 @@
 
 #ifndef CGAL_MPZF_H
 #define CGAL_MPZF_H
-#include <Rcpp.h>
 #include <cstdlib>
 #include <algorithm>
 #include <climits>

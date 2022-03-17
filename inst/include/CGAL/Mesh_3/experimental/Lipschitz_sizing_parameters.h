@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016 GeometryFactory (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_LIP_SIZING_PARAMETERS_H
 #define CGAL_LIP_SIZING_PARAMETERS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <map>

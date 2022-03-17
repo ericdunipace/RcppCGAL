@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_AFSR_WRITE_TRIPLE_INDICES_H
 #define CGAL_AFSR_WRITE_TRIPLE_INDICES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Advancing_front_surface_reconstruction.h>
 
 

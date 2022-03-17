@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007,2008,2009,2010,2011 Max-Planck-Institute Saarbruecken (Germany),
 // and Tel-Aviv University (Israel).  All rights reserved.
 //
@@ -21,7 +22,6 @@
  * \brief defines \c Make_x_monotone_2 functor
  */
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/iterator.h>
 #include <CGAL/Handle_with_policy.h>

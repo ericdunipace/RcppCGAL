@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -19,7 +20,6 @@
 #ifndef CGAL_ALGORITHM_H
 #define CGAL_ALGORITHM_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/utils.h>
 #include <CGAL/enum.h>

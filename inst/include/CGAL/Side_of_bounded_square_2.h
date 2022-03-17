@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015  Università della Svizzera italiana.
 // All rights reserved.
 //
@@ -18,7 +19,6 @@
 #ifndef CGAL_SIDE_OF_BOUNDED_SQUARE_2_H
 #define CGAL_SIDE_OF_BOUNDED_SQUARE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 

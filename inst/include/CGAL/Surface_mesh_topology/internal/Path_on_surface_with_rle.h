@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2019 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_PATH_ON_SURFACE_WITH_RLE_H
 #define CGAL_PATH_ON_SURFACE_WITH_RLE_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <list>

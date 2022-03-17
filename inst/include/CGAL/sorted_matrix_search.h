@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1998-2003  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_SORTED_MATRIX_SEARCH_H
 #define CGAL_SORTED_MATRIX_SEARCH_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Matrix_search.h>
 
 

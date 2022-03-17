@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 GeometryFactory (France) and Telecom Paris (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_TETRAHEDRAL_REMESHING_FMLS_H
 #define CGAL_TETRAHEDRAL_REMESHING_FMLS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 // -------------------------------------------

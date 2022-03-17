@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2002-2008 Max-Planck-Institute Saarbruecken (Germany)
 //
 // This file is part of CGAL (www.cgal.org)
@@ -20,7 +21,6 @@
 #ifndef CGAL_POLYNOMIAL_MODULAR_GCD_UTCF_ALGORITHM_M_H
 #define CGAL_POLYNOMIAL_MODULAR_GCD_UTCF_ALGORITHM_M_H 1
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Residue.h>
 #include <CGAL/Polynomial/modular_gcd.h>

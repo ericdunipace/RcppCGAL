@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008  INRIA Sophia-Antipolis (France).
 // Copyright (c) 2009  GeometryFactory (France).
 // All rights reserved.
@@ -14,7 +15,6 @@
 #ifndef CGAL_AABB_POLYHEDRAL_ORACLE_H
 #define CGAL_AABB_POLYHEDRAL_ORACLE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 

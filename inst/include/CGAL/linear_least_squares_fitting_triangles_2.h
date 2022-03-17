@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_LINEAR_LEAST_SQUARES_FITTING_TRIANGLES_2_H
 #define CGAL_LINEAR_LEAST_SQUARES_FITTING_TRIANGLES_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Principal_component_analysis.h>
 
 

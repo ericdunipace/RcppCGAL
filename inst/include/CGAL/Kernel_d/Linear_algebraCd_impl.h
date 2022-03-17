@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1999
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -18,7 +19,6 @@
 #ifndef CGAL_LINEAR_ALGEBRACD_C
 #define CGAL_LINEAR_ALGEBRACD_C
 
-#include <Rcpp.h>
 #include <algorithm>
 #include <functional>
 

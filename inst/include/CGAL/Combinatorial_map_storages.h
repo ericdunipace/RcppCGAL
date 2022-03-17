@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_COMBINATORIAL_MAP_STORAGES_H
 #define CGAL_COMBINATORIAL_MAP_STORAGES_H 1
 
-#include <Rcpp.h>
 #include <CGAL/Compact_container.h>
 #include <CGAL/Concurrent_compact_container.h>
 #include <CGAL/Dart.h>

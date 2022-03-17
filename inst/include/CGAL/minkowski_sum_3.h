@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_MINKOWSKI_SUM_3_H
 #define CGAL_MINKOWSKI_SUM_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Minkowski_sum_3.h>
 
 

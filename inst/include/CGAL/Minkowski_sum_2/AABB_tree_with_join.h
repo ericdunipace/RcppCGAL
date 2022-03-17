@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008,2011  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_AABB_TREE_WITH_JOIN_H
 #define CGAL_AABB_TREE_WITH_JOIN_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Minkowski_sum_2.h>
 
 

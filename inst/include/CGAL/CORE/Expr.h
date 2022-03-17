@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 /****************************************************************************
  * Core Library Version 1.7, August 2004
  * Copyright (c) 1995-2004 Exact Computation Project
@@ -28,7 +29,6 @@
 
 // We need to include BigFloat.h here because there is a circular dependency
 // between Expr and BigFloat.
-#include <Rcpp.h>
 #include <CGAL/CORE/BigFloat.h>
 
 #ifndef _CORE_EXPR_H_

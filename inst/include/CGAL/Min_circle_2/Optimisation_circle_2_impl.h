@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2001
 // ETH Zurich (Switzerland).  All rights reserved.
 //

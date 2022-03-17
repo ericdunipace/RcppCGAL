@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -18,7 +19,6 @@
 #ifndef CGAL_MESH_3_MESH_STANDARD_CELL_CRITERIA_H
 #define CGAL_MESH_3_MESH_STANDARD_CELL_CRITERIA_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 

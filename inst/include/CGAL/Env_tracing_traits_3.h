@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2007 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -22,7 +23,6 @@
 #ifndef CGAL_ENV_TRACE_TRAITS_H
 #define CGAL_ENV_TRACE_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Envelope_3.h>
 
 

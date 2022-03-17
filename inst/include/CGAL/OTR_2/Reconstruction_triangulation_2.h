@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014  INRIA Sophia-Antipolis (France), INRIA Lorraine LORIA.
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_RECONSTRUCTION_TRIANGULATION_2_H
 #define CGAL_RECONSTRUCTION_TRIANGULATION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Optimal_transportation_reconstruction_2.h>
 
 

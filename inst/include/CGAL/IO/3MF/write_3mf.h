@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2019  Geometry Factory
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 
 #ifdef CGAL_LINKED_WITH_3MF
 
-#include <Rcpp.h>
 #include <CGAL/IO/Color.h>
 
 #include <CGAL/boost/graph/iterator.h>

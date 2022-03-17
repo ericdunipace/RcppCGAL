@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003,2004,2005,2006  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_2_H
 #define CGAL_SEGMENT_DELAUNAY_GRAPH_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_2.h>
 
 #include <CGAL/disable_warnings.h>

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2007  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 //                 Franz Wessendorp
 //                 Kaspar Fischer
 
-#include <Rcpp.h>
 #include <CGAL/QP_solver/Initialization.h>
 #include <CGAL/NT_converter.h>
 

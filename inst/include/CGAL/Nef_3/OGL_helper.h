@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2002  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_NEF_OPENGL_HELPER_H
 #define CGAL_NEF_OPENGL_HELPER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 

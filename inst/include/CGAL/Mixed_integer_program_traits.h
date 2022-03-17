@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018  Liangliang Nan. All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -11,7 +12,6 @@
 #ifndef CGAL_MIXED_INTEGER_PROGRAM_TRAITS_H
 #define CGAL_MIXED_INTEGER_PROGRAM_TRAITS_H
 
-#include <Rcpp.h>
 #include <string>
 #include <vector>
 #include <unordered_map>

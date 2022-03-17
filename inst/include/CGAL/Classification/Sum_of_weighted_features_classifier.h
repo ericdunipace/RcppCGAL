@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012 INRIA Sophia-Antipolis (France).
 // Copyright (c) 2017 GeometryFactory Sarl (France).
 // All rights reserved.
@@ -13,7 +14,6 @@
 #ifndef CLASSIFICATION_SUM_OF_WEIGHTED_FEATURES_CLASSIFIER_H
 #define CLASSIFICATION_SUM_OF_WEIGHTED_FEATURES_CLASSIFIER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/Classification/Feature_set.h>

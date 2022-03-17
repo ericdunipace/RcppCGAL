@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2008  INRIA Sophia-Antipolis (France).
 //               2008 GeometryFactory, Sophia Antipolis (France)
 // All rights reserved.
@@ -16,7 +17,6 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 
 namespace CGAL {

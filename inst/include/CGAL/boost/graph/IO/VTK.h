@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2020  GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -12,7 +13,6 @@
 #ifndef CGAL_BGL_IO_VTK_H
 #define CGAL_BGL_IO_VTK_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/VTK.h>
 
 #include <CGAL/boost/graph/Euler_operations.h>

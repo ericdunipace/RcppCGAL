@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012-2016 GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_MESH_3_FACET_TOPOLOGICAL_CRITERION_WITH_ADJACENCY_H
 #define CGAL_MESH_3_FACET_TOPOLOGICAL_CRITERION_WITH_ADJACENCY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Mesh_3/mesh_standard_criteria.h>

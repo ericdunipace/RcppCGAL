@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2007  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -16,7 +17,6 @@
 #ifndef CGAL_QP_SOLVER_H
 #define CGAL_QP_SOLVER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/QP_solver.h>
 
 #include <CGAL/disable_warnings.h>

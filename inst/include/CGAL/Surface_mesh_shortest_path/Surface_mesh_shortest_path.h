@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014 GeometryFactory
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_SURFACE_MESH_SHORTEST_PATH_SURFACE_MESH_SHORTEST_PATH_H
 #define CGAL_SURFACE_MESH_SHORTEST_PATH_SURFACE_MESH_SHORTEST_PATH_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_shortest_path.h>
 
 #include <CGAL/disable_warnings.h>

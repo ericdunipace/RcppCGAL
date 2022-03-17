@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2011 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_LINEAR_CELL_COMPLEX_CONSTRUCTORS_H
 #define CGAL_LINEAR_CELL_COMPLEX_CONSTRUCTORS_H 1
 
-#include <Rcpp.h>
 #include <CGAL/IO/OFF.h>
 #include <CGAL/Linear_cell_complex_incremental_builder.h>
 

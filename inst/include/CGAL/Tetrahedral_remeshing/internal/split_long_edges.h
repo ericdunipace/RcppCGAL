@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 GeometryFactory (France) and Telecom Paris (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_INTERNAL_SPLIT_LONG_EDGES_H
 #define CGAL_INTERNAL_SPLIT_LONG_EDGES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <boost/bimap.hpp>

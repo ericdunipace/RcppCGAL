@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_MINIBALL_PIVOT_C
 #define CGAL_MINIBALL_PIVOT_C
 
-#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 

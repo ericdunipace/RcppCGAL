@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_BARYCENTRIC_MEAN_VALUE_COORDINATES_2_H
 #define CGAL_BARYCENTRIC_MEAN_VALUE_COORDINATES_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Barycentric_coordinates_2.h>
 
 // Internal includes.

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003,2004,2006  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_APOLLONIUS_GRAPH_2_INFINITE_EDGE_TEST_C2_H
 #define CGAL_APOLLONIUS_GRAPH_2_INFINITE_EDGE_TEST_C2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Apollonius_graph_2.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018-2020  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_IO_WKT_H
 #define CGAL_IO_WKT_H
 
-#include <Rcpp.h>
 #include <CGAL/Point_2.h>
 #include <CGAL/Point_3.h>
 #include <CGAL/Polygon_2.h>

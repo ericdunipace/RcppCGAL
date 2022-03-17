@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008,2009,2010,2011 Max-Planck-Institute Saarbruecken (Germany),
 // and Tel-Aviv University (Israel).  All rights reserved.
 //
@@ -22,7 +23,6 @@
  * and where some operations are filtered.
  */
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_impl.h>
 #include <CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_functors.h>

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2013 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_PERIODIC_2_ORIENTATION_2_H
 #define CGAL_INTERNAL_STATIC_FILTERS_PERIODIC_2_ORIENTATION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_2_triangulation_2.h>
 
 #include <CGAL/Profile_counter.h>

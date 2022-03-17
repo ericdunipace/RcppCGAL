@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 /****************************************************************************
  * Core Library Version 1.7, August 2004
  * Copyright (c) 1995-2004 Exact Computation Project
@@ -29,7 +30,6 @@
 #ifndef _CORE_EXPRREP_H_
 #define _CORE_EXPRREP_H_
 
-#include <Rcpp.h>
 #include <CGAL/CORE/Real.h>
 #include <CGAL/CORE/Filter.h>
 #include <CGAL/CORE/poly/Sturm.h>

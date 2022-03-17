@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003-2006  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_SURFACE_MESHER_STANDARD_CRITERIA_H
 #define CGAL_SURFACE_MESHER_STANDARD_CRITERIA_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 

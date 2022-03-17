@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012  Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_TD_DAG_NODE_H
 #define CGAL_TD_DAG_NODE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013-2015  The University of Western Sydney, Australia.
 // All rights reserved.
 //
@@ -18,7 +19,6 @@
 #ifndef CGAL_CONSTRUCT_THETA_GRAPH_2_H
 #define CGAL_CONSTRUCT_THETA_GRAPH_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005,2006,2007,2008,2009,2010,2011,2012,2013 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -20,7 +21,6 @@
 #ifndef CGAL_ARRANGEMENT_ON_SURFACE_2_IMPL_H
 #define CGAL_ARRANGEMENT_ON_SURFACE_2_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #ifndef CGAL_ARRANGEMENT_ON_SURFACE_INSERT_VERBOSE

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018 GeometryFactory (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_MERGE_BORDER_VERTICES_H
 #define CGAL_POLYGON_MESH_PROCESSING_MERGE_BORDER_VERTICES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/boost/graph/helpers.h>

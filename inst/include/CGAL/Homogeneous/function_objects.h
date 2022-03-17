@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1999-2004
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_HOMOGENEOUS_FUNCTION_OBJECTS_H
 #define CGAL_HOMOGENEOUS_FUNCTION_OBJECTS_H
 
-#include <Rcpp.h>
 #include <CGAL/Kernel/function_objects.h>
 #include <CGAL/Cartesian/function_objects.h>
 #include <CGAL/Kernel/Return_base_tag.h>

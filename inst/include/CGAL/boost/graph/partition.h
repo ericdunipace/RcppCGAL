@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2017 GeometryFactory (France).
 // All rights reserved.
 //
@@ -19,7 +20,6 @@
 * free functions of this package.
 */
 
-#include <Rcpp.h>
 #include <CGAL/boost/graph/METIS/partition_graph.h>
 #include <CGAL/boost/graph/METIS/partition_dual_graph.h>
 

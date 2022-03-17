@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1999
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_POINT_3_H
 #define CGAL_POINT_3_H
 
-#include <Rcpp.h>
 #include <CGAL/Origin.h>
 #include <CGAL/representation_tags.h>
 #include <CGAL/assertions.h>

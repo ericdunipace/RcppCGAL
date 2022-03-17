@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_SURFACE_MESH_IO_PLY_H
 #define CGAL_SURFACE_MESH_IO_PLY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh.h>
 
 #include <CGAL/Surface_mesh/Surface_mesh_fwd.h>

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_CD3_EXTERNAL_STRUCTURE_BUILDER_H
 #define CGAL_CD3_EXTERNAL_STRUCTURE_BUILDER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_decomposition_3.h>
 
 

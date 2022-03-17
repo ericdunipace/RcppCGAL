@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2019 GeometryFactory Sarl (France)
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_SMALL_UNORDERED_MAP_H
 #define CGAL_SMALL_UNORDERED_MAP_H
 
-#include <Rcpp.h>
 #include <array>
 #include <iostream>
 

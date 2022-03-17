@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005,2008,2009,2010,2011 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_ARR_LANDMARKS_SPECIFIED_POINTS_GENERATOR_H
 #define CGAL_ARR_LANDMARKS_SPECIFIED_POINTS_GENERATOR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 

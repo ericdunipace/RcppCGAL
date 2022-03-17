@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_SQRT_EXTENSION_ALGEBRAIC_STRUCTURE_TRAITS_H
 #define CGAL_SQRT_EXTENSION_ALGEBRAIC_STRUCTURE_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 namespace CGAL {

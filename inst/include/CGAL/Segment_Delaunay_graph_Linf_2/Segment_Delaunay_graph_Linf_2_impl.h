@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015  Università della Svizzera italiana.
 // All rights reserved.
 //

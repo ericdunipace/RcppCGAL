@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2019 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_POLYGONAL_SCHEMA_H
 #define CGAL_POLYGONAL_SCHEMA_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Polygonal_schema_fwd.h>

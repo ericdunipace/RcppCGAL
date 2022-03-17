@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 
 #ifdef CGAL_LINKED_WITH_TBB
 
-#include <Rcpp.h>
 #include <CGAL/Bbox_3.h>
 
 #include <atomic>

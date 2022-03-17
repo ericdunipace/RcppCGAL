@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005,2006,2008,2009,2010,2011 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_ARR_TRIANGULATION_POINT_LOCATION_FUNCTIONS_H
 #define CGAL_ARR_TRIANGULATION_POINT_LOCATION_FUNCTIONS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 

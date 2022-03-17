@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005  INRIA (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_TWO_VERTICES_PARAMETERIZER_3_H_INCLUDED
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_TWO_VERTICES_PARAMETERIZER_3_H_INCLUDED
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/disable_warnings.h>

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2017 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_BOOST_GRAPH_TRAITS_LINEAR_CELL_COMPLEX_FOR_COMBINATORIAL_MAP_H
 #define CGAL_BOOST_GRAPH_TRAITS_LINEAR_CELL_COMPLEX_FOR_COMBINATORIAL_MAP_H
 
-#include <Rcpp.h>
 #include <utility>
 #include <iterator>
 

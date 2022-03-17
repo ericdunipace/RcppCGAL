@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -17,7 +18,6 @@
 #ifndef CGAL_MESH_3_TET_SOUP_TO_C3T3_H
 #define CGAL_MESH_3_TET_SOUP_TO_C3T3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/disable_warnings.h>

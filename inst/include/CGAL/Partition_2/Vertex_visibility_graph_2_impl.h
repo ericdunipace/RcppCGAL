@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2000  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //

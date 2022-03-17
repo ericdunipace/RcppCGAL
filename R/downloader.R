@@ -121,8 +121,9 @@
     tx  <- readLines(f, warn = FALSE)
     search <- grep(pattern = "std::cerr|std::cout|abort\\(|exit\\(", x = tx)
     if (length(search)==0) next
-    first <- grep("#include", tx)[1]
-    tx[first]  <- sub(pattern = "#include",   replacement = "#include <Rcpp.h>\n#include", x = tx[first])
+    # first <- grep("#include", tx)[1]
+    # tx[first]  <- sub(pattern = "#include",   replacement = "#include <Rcpp.h>\n#include", x = tx[first])
+    tx[1] <- paste0("#include <Rcpp.h>\n", tx[1])
     tx[search]  <- gsub(pattern = "std::cerr", replacement = "Rcpp::Rcerr", x = tx[search])
     tx[search]  <- gsub(pattern = "std::cout", replacement = "Rcpp::Rcout", x = tx[search])
     tx[search]  <- gsub(pattern = "std::abort\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])

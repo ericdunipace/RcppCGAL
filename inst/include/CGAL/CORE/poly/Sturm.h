@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 /****************************************************************************
  * Core Library Version 1.7, August 2004
  * Copyright (c) 1995-2004 Exact Computation Project
@@ -49,7 +50,6 @@
 #ifndef CORE_STURM_H
 #define CORE_STURM_H
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 #include "CGAL/CORE/BigFloat.h"
 #include "CGAL/CORE/Expr.h"

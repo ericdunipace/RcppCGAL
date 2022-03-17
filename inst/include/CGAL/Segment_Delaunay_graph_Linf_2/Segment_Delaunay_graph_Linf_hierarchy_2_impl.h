@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015  Università della Svizzera italiana.
 // All rights reserved.
 //
@@ -1002,7 +1003,6 @@ is_valid(bool verbose, int level) const
 
 #define DEBUGVALIDHIER true
 
-#include <Rcpp.h>
 #include <CGAL/license/Segment_Delaunay_graph_Linf_2.h>
 
 //#undef DEBUGVALIDHIER

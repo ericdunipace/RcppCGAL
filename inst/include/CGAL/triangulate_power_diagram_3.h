@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005 Rijksuniversiteit Groningen (Netherlands)
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_TRIANGULATE_POWER_DIAGRAM_3_H
 #define CGAL_TRIANGULATE_POWER_DIAGRAM_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_IO_POLYHEDRON_SCAN_OFF_H
 #define CGAL_IO_POLYHEDRON_SCAN_OFF_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polyhedron.h>
 
 #include <CGAL/Polyhedron_3.h>

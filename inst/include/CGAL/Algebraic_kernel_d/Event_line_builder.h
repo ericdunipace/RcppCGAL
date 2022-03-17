@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006-2009 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_ACK_EVENT_LINE_BUILDER
 #define CGAL_ACK_EVENT_LINE_BUILDER 1
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/Algebraic_structure_traits.h>

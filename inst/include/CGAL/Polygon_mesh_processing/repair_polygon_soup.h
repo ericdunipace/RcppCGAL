@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018 GeometryFactory (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REPAIR_POLYGON_SOUP
 #define CGAL_POLYGON_MESH_PROCESSING_REPAIR_POLYGON_SOUP
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/boost/graph/Named_function_parameters.h>

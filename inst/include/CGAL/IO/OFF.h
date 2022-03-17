@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2020 GeometryFactory
 //
 // This file is part of CGAL (www.cgal.org);
@@ -11,7 +12,6 @@
 #ifndef CGAL_IO_OFF_H
 #define CGAL_IO_OFF_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/OFF/Scanner_OFF.h>
 #include <CGAL/IO/OFF/File_scanner_OFF.h>
 #include <CGAL/IO/OFF/File_writer_OFF.h>

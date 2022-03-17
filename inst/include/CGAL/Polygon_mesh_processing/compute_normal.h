@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2019 GeometryFactory (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_COMPUTE_NORMAL_H
 #define CGAL_POLYGON_MESH_PROCESSING_COMPUTE_NORMAL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/Compute_normal.h>
 
 #include <CGAL/Polygon_mesh_processing/internal/named_function_params.h>

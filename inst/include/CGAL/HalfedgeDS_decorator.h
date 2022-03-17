@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_HALFEDGEDS_DECORATOR_H
 #define CGAL_HALFEDGEDS_DECORATOR_H 1
 
-#include <Rcpp.h>
 #include <CGAL/HalfedgeDS_items_decorator.h>
 #include <CGAL/HalfedgeDS_const_decorator.h>
 #include <CGAL/HalfedgeDS_iterator.h>

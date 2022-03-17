@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2002  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -17,7 +18,6 @@
 #ifndef CGAL_POLYGON_MESH_TO_NEF_3_H
 #define CGAL_POLYGON_MESH_TO_NEF_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 

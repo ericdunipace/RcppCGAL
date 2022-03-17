@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2008  Inria Loria (France).
 /*
  * author:  Bruno Levy, INRIA, project ALICE
@@ -31,7 +32,6 @@
 #ifndef __OPENNL_LINEAR_SOLVER__
 #define __OPENNL_LINEAR_SOLVER__
 
-#include <Rcpp.h>
 #include <CGAL/OpenNL/conjugate_gradient.h>
 #include <CGAL/OpenNL/bicgstab.h>
 #include <CGAL/OpenNL/preconditioner.h>

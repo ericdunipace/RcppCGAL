@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015 GeometryFactory
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_INTERNAL_MESH_3_INTERNAL_GRAPH_MANIPULATIONS
 #define CGAL_INTERNAL_MESH_3_INTERNAL_GRAPH_MANIPULATIONS
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 

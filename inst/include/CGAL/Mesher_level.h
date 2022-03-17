@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2005  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESHER_LEVEL_H
 #define CGAL_MESHER_LEVEL_H
 
-#include <Rcpp.h>
 #include <string>
 
 namespace CGAL {

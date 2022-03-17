@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_POLYNOMIAL_STURM_HABICHT
 #define CGAL_POLYNOMIAL_STURM_HABICHT 1
 
-#include <Rcpp.h>
 #include <vector>
 #include <algorithm>
 #include <CGAL/Polynomial/bezout_matrix.h>

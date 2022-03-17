@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2017 GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CLASSIFICATION_INTERNAL_VERBOSITY_H
 #define CLASSIFICATION_INTERNAL_VERBOSITY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 // General verbosity

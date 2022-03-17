@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009-2010 INRIA Sophia-Antipolis (France).
 // Copyright (c) 2010-2017 GeometryFactory Sarl (France)
 // All rights reserved.
@@ -23,7 +24,6 @@
 #ifndef CGAL_MESH_3_PROTECT_EDGES_SIZING_FIELD_H
 #define CGAL_MESH_3_PROTECT_EDGES_SIZING_FIELD_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>

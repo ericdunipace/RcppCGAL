@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2002-2004,2007
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_CORE_EXPR_H
 #define CGAL_CORE_EXPR_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/number_type_basic.h>

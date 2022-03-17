@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2006  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESH_3_POISSON_REFINE_CELLS_3_H
 #define CGAL_MESH_3_POISSON_REFINE_CELLS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 

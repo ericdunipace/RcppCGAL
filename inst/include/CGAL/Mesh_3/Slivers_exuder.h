@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2007  INRIA Sophia-Antipolis (France).
 // Copyright (c) 2008 GeometryFactory, Sophia Antipolis (France)
 // Copyright (c) 2009  INRIA Sophia-Antipolis (France).
@@ -15,7 +16,6 @@
 #ifndef CGAL_MESH_3_SLIVERS_EXUDER_H
 #define CGAL_MESH_3_SLIVERS_EXUDER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>

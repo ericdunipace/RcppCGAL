@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006-2009 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -17,7 +18,6 @@
 #ifndef CGAL_BOUND_BETWEEN_1_H
 #define CGAL_BOUND_BETWEEN_1_H 1
 
-#include <Rcpp.h>
 #include <iterator>
 
 #include <CGAL/basic.h>

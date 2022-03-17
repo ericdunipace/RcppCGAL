@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2001,2011  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_CONVEX_HULL_3_H
 #define CGAL_CONVEX_HULL_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Convex_hull_3.h>
 
 #include <CGAL/algorithm.h>

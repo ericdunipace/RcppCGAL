@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015  Università della Svizzera italiana.
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_QT_SEGMENT_DELAUNAY_GRAPH_LINF_GRAPHICS_ITEM_H
 #define CGAL_QT_SEGMENT_DELAUNAY_GRAPH_LINF_GRAPHICS_ITEM_H
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 

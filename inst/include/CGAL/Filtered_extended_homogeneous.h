@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2000  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_FILTERED_EXTENDED_HOMOGENEOUS_H
 #define CGAL_FILTERED_EXTENDED_HOMOGENEOUS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_2.h>
 
 #include <CGAL/disable_warnings.h>

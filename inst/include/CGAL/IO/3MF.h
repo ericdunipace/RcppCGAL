@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2020 GeometryFactory
 //
 // This file is part of CGAL (www.cgal.org);
@@ -11,7 +12,6 @@
 #ifndef CGAL_IO_3MF_H
 #define CGAL_IO_3MF_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/3MF/read_3mf.h>
 #include <CGAL/IO/3MF/write_3mf.h>
 #include <CGAL/IO/Color.h>

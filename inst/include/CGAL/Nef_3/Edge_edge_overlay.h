@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_EDGE_EDGE_OVERLAY_H
 #define CGAL_EDGE_EDGE_OVERLAY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 

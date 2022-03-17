@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2019 GeometryFactory SARL (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_PMP_INTERNAL_AABB_TRAVERSAL_TRAITS_WITH_HAUSDORFF_DISTANCE
 #define CGAL_PMP_INTERNAL_AABB_TRAVERSAL_TRAITS_WITH_HAUSDORFF_DISTANCE
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/distance.h>
 
 // STL includes.

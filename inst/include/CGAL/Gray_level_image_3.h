@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2007  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_MESH_3_GRAY_LEVEL_IMAGE_3_H
 #define CGAL_MESH_3_GRAY_LEVEL_IMAGE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 

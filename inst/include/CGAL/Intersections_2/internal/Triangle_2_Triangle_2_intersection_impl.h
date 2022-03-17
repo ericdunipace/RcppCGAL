@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -14,7 +15,6 @@
 //
 // Author(s)     : Geert-Jan Giezeman
 
-#include <Rcpp.h>
 #include <CGAL/Triangle_2.h>
 #include <CGAL/kernel_assertions.h>
 #include <CGAL/number_utils.h>

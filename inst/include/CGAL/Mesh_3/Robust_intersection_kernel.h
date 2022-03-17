@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -16,7 +17,6 @@
 #ifndef CGAL_MESH_3_ROBUST_INTERSECTION_KERNEL_3_H
 #define CGAL_MESH_3_ROBUST_INTERSECTION_KERNEL_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 

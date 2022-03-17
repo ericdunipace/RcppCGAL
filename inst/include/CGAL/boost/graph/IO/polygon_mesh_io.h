@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020  GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -12,7 +13,6 @@
 #ifndef CGAL_BOOST_GRAPH_POLYGON_MESH_IO_H
 #define CGAL_BOOST_GRAPH_POLYGON_MESH_IO_H
 
-#include <Rcpp.h>
 #include <CGAL/boost/graph/IO/3MF.h>
 #include <CGAL/boost/graph/IO/GOCAD.h>
 #include <CGAL/boost/graph/IO/INP.h>

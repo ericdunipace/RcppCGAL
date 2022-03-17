@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_MATRIX___H
 #define CGAL_MATRIX___H
 
-#include <Rcpp.h>
 #include <CGAL/Kernel_d/Vector__.h>
 #include <CGAL/use.h>
 #include <CGAL/tss.h>

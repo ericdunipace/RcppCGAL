@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1999-2004,2006-2009, 2017  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -16,7 +17,6 @@
 #ifndef CGAL_PERIODIC_3_DELAUNAY_TRIANGULATION_3_H
 #define CGAL_PERIODIC_3_DELAUNAY_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_triangulation_3.h>
 
 #include <CGAL/Periodic_3_triangulation_3.h>

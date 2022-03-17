@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007  INRIA (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_IMPLICIT_FCT_DELAUNAY_TRIANGULATION_H
 #define CGAL_IMPLICIT_FCT_DELAUNAY_TRIANGULATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 #include <CGAL/disable_warnings.h>

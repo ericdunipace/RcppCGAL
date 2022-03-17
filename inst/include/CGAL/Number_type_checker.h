@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2007
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_NUMBER_TYPE_CHECKER_H
 #define CGAL_NUMBER_TYPE_CHECKER_H
 
-#include <Rcpp.h>
 #include <CGAL/number_type_basic.h>
 #include <sstream>
 

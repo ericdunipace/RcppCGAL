@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_WEIGHTED_POINT_2_H
 #define CGAL_WEIGHTED_POINT_2_H
 
-#include <Rcpp.h>
 #include <CGAL/Origin.h>
 #include <CGAL/representation_tags.h>
 #include <CGAL/assertions.h>

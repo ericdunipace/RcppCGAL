@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009  GeometryFactory (France)
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_INTERNAL_PROJECTION_TRAITS_BASE_3_H
 #define CGAL_INTERNAL_PROJECTION_TRAITS_BASE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/Profile_timer.h>
 #include <CGAL/intersections.h>
 #include <CGAL/predicates/sign_of_determinant.h>

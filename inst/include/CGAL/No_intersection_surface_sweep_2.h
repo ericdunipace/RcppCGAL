@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006,2007,2009,2010,2011 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_NO_INTERSECTION_SURFACE_SWEEP_2_H
 #define CGAL_NO_INTERSECTION_SURFACE_SWEEP_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_sweep_2.h>
 
 /*! \file

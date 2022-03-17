@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2011  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_HILBERT_SORT_MIDDLE_d_H
 #define CGAL_HILBERT_SORT_MIDDLE_d_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <functional>
 #include <cstddef>

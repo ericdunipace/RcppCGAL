@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_MS3_GAUSSIAN_MAP
 #define CGAL_MS3_GAUSSIAN_MAP
 
-#include <Rcpp.h>
 #include <CGAL/license/Minkowski_sum_3.h>
 
 

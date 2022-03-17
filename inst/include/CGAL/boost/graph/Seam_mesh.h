@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016  GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -12,7 +13,6 @@
 #ifndef CGAL_SEAM_MESH_H
 #define CGAL_SEAM_MESH_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/boost/graph/iterator.h>

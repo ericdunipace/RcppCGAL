@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016 GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -11,7 +12,6 @@
 #ifndef CGAL_POINT_SET_IO_LAS_H
 #define CGAL_POINT_SET_IO_LAS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_3.h>
 
 #ifdef CGAL_LINKED_WITH_LASLIB

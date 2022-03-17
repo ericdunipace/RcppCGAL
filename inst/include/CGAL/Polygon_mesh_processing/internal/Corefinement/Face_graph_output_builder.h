@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016 GeometryFactory (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_INTERNAL_FACE_GRAPH_OUTPUT_BUILDER_H
 #define CGAL_POLYGON_MESH_PROCESSING_INTERNAL_FACE_GRAPH_OUTPUT_BUILDER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/corefinement.h>
 
 

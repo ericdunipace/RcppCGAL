@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -21,7 +22,6 @@
 #ifndef CGAL_POLYNOMIAL_GCD_NTL_H
 #define CGAL_POLYNOMIAL_GCD_NTL_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #ifndef CGAL_USE_NTL

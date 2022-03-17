@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_KERNEL_D_DEBUG_H
 #define CGAL_KERNEL_D_DEBUG_H
 
-#include <Rcpp.h>
 #include <iostream>
 #include <string>
 #include <sstream>

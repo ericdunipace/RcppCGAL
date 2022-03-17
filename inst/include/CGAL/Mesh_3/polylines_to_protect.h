@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015,2016 GeometryFactory
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESH_3_POLYLINES_TO_PROTECT_H
 #define CGAL_MESH_3_POLYLINES_TO_PROTECT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 

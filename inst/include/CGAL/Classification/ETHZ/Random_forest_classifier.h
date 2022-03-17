@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2017 GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_CLASSIFICATION_ETHZ_RANDOM_FOREST_CLASSIFIER_H
 #define CGAL_CLASSIFICATION_ETHZ_RANDOM_FOREST_CLASSIFIER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Classification.h>
 
 #include <CGAL/Classification/Feature_set.h>

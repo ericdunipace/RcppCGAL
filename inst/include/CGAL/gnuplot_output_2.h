@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013-2015  The University of Western Sydney, Australia.
 // All rights reserved.
 //
@@ -20,7 +21,6 @@
 #ifndef GNUPLOT_OUTPUT_2_H
 #define GNUPLOT_OUTPUT_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 

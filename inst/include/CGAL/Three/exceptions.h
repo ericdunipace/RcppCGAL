@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016  GeometryFactory Sarl (France)
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_THREE_EXCEPTIONS_H
 #define CGAL_THREE_EXCEPTIONS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Three.h>
 
 

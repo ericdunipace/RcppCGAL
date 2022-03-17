@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008 Max-Planck-Institute Saarbruecken (Germany)
 //
 // This file is part of CGAL (www.cgal.org)
@@ -17,7 +18,6 @@
 #ifndef CGAL_POLYNOMIAL_BEZOUT_MATRIX_H
 #define CGAL_POLYNOMIAL_BEZOUT_MATRIX_H
 
-#include <Rcpp.h>
 #include <algorithm>
 
 #include <CGAL/basic.h>

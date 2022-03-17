@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2000  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_PARTITION_VERTEX_MAP_H
 #define CGAL_PARTITION_VERTEX_MAP_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 

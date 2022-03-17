@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013-2015  The University of Western Sydney, Australia.
 // All rights reserved.
 //
@@ -19,7 +20,6 @@
 #ifndef CGAL_COMPUTE_CONE_BOUNDARIES_2_H
 #define CGAL_COMPUTE_CONE_BOUNDARIES_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Cone_spanners_2.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2002  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -16,7 +17,6 @@
 #ifndef CGAL_SNC_EXTERNAL_STRUCTURE_H
 #define CGAL_SNC_EXTERNAL_STRUCTURE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 

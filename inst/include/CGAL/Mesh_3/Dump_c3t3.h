@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012  GeometryFactory Sarl (France)
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESH_3_DUMP_C3T3_H
 #define CGAL_MESH_3_DUMP_C3T3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>

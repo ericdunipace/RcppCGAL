@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2017-2018 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_SURFACE_MESH_APPROXIMATION_VSA_MESH_APPROXIMATION_H
 #define CGAL_SURFACE_MESH_APPROXIMATION_VSA_MESH_APPROXIMATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_approximation.h>
 
 

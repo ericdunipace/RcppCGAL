@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018-2019 GeometryFactory (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_OPTIMAL_BOUNDING_BOX_POPULATION_H
 #define CGAL_OPTIMAL_BOUNDING_BOX_POPULATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Optimal_bounding_box.h>
 
 #include <CGAL/Optimal_bounding_box/internal/fitness_function.h>

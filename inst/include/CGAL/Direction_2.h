@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1999
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_DIRECTION_2_H
 #define CGAL_DIRECTION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/assertions.h>
 #include <boost/type_traits/is_same.hpp>
 #include <CGAL/kernel_assertions.h>

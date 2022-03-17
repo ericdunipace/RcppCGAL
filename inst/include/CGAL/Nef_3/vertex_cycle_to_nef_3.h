@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_NEF_VERTEX_CYCLE_TO_NEF_3_H
 #define CGAL_NEF_VERTEX_CYCLE_TO_NEF_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 

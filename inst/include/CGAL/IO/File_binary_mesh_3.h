@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_IO_FILE_BINARY_MESH_3_H
 #define CGAL_IO_FILE_BINARY_MESH_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 

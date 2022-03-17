@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_PMP_IO_POLYGON_MESH_IO_H
 #define CGAL_PMP_IO_POLYGON_MESH_IO_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing.h>
 
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup.h>

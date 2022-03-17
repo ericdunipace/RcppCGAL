@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003-2008  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -18,7 +19,6 @@
 #ifdef CGAL_INTERSECTION_MAP_FOR_XMONOTONIC_ARC_WITH_SAME_SUPPORTING_CIRCLE
 #define CGAL_USEFUL_MAPS_FOR_THE_CIRCULAR_KERNEL
 
-#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 #endif

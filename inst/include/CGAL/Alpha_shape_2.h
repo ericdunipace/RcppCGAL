@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997, 2012  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_ALPHA_SHAPE_2_H
 #define CGAL_ALPHA_SHAPE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Alpha_shapes_2.h>
 
 #include <CGAL/Alpha_shapes_2/internal/Lazy_alpha_nt_2.h>

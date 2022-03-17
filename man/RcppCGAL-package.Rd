@@ -6,7 +6,7 @@
 \alias{RcppCGAL-package}
 \title{RcppCGAL: Rcpp Integration for CGAL}
 \description{
-Creates a header only package to link to the CGAL (Computational Geometry Algorithms Library) header files in Rcpp. There are a variety of potential uses for the software such as Hilbert sorting, KDtree nearest neighbors, and convex hull algorithms. There is only one R function in this package, which returns the current version of the CGAL library included. For more information about how to use the header files, see the CGAL documentation at <https://www.cgal.org>. Currently includes the CGAL 5.3.1 stable release.
+Creates a header only package to link to the CGAL (Computational Geometry Algorithms Library) header files in Rcpp. There are a variety of potential uses for the software such as Hilbert sorting, KDtree nearest neighbors, and convex hull algorithms. There is only one R function in this package, which returns the current version of the CGAL library included. For more information about how to use the header files, see the CGAL documentation at <https://www.cgal.org>. Currently includes the CGAL 5.4 stable release.
 }
 \examples{
 \dontrun{
@@ -22,12 +22,16 @@ Creates a header only package to link to the CGAL (Computational Geometry Algori
 }
 }
 \references{
-The CGAL Project. (2021). {CGAL} User and Reference Manual (5.2.1). Retrieved from https://doc.cgal.org/5.3.1/Manual/packages.html
+The CGAL Project. (2022). {CGAL} User and Reference Manual (5.4). Retrieved from <https://doc.cgal.org/5.4/Manual/packages.html>
 }
 \seealso{
 Useful links:
 \itemize{
   \item Report bugs at \url{https://github.com/ericdunipace/RcppCGAL/issues}
 }
+
+}
+\author{
+\strong{Maintainer}: Eric Dunipace \email{edunipace@mail.harvard.edu} (\href{https://orcid.org/0000-0001-8909-213X}{ORCID})
 
 }

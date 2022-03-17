@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2000  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -31,7 +32,6 @@
 #ifndef CGAL_PARTITION_Y_MONOTONE_H
 #define CGAL_PARTITION_Y_MONOTONE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 

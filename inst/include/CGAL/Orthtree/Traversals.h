@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007-2020  INRIA (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_ORTHTREE_TRAVERSALS_H
 #define CGAL_ORTHTREE_TRAVERSALS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Orthtree.h>
 
 #include <iostream>

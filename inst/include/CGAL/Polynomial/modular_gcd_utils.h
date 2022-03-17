@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2002-2008 Max-Planck-Institute Saarbruecken (Germany)
 //
 // This file is part of CGAL (www.cgal.org)
@@ -19,7 +20,6 @@
 #ifndef CGAL_POLYNOMIAL_MODULAR_GCD_UTILS_H
 #define CGAL_POLYNOMIAL_MODULAR_GCD_UTILS_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <vector>
 #include <CGAL/Polynomial.h>

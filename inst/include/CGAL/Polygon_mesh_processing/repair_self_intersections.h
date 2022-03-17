@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2020 GeometryFactory (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_REPAIR_SELF_INTERSECTIONS_H
 #define CGAL_POLYGON_MESH_PROCESSING_REPAIR_SELF_INTERSECTIONS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/repair.h>
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>

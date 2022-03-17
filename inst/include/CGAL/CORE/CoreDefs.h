@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 /****************************************************************************
  * Core Library Version 1.7, August 2004
  * Copyright (c) 1995-2004 Exact Computation Project
@@ -28,7 +29,6 @@
 #ifndef _CORE_COREDEFS_H_
 #define _CORE_COREDEFS_H_
 
-#include <Rcpp.h>
 #include <CGAL/CORE/extLong.h>
 #include <CGAL/disable_warnings.h>
 

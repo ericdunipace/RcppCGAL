@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2010-2011 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_COMBINATORIAL_MAP_FUNCTORS_H
 #define CGAL_COMBINATORIAL_MAP_FUNCTORS_H
 
-#include <Rcpp.h>
 #include <CGAL/Dart_const_iterators.h>
 #include <CGAL/Combinatorial_map/internal/Combinatorial_map_internal_functors.h>
 #include <vector>

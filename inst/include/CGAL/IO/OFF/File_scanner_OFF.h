@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_IO_OFF_FILE_SCANNER_OFF_H
 #define CGAL_IO_OFF_FILE_SCANNER_OFF_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 
 #include <CGAL/IO/binary_file_io.h>

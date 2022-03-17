@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_BASIC_VIEWER_QT_H
 #define CGAL_BASIC_VIEWER_QT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 #include <iostream>
 #include <tuple>

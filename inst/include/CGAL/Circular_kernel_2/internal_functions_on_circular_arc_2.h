@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003-2008  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -18,7 +19,6 @@
 #ifndef CGAL_CIRCULAR_KERNEL_PREDICATES_ON_CIRCULAR_ARC_2_H
 #define CGAL_CIRCULAR_KERNEL_PREDICATES_ON_CIRCULAR_ARC_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 

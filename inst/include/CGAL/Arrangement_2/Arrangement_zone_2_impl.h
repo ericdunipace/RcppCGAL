@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005,2006,2007,2009,2010,2011 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_ARRANGEMENT_ZONE_2_IMPL_H
 #define CGAL_ARRANGEMENT_ZONE_2_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 /*! \file

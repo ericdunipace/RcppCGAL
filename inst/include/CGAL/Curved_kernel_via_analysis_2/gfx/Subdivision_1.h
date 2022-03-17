@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -19,7 +20,6 @@
 #ifndef CGAL_CKVA_SUBDIVISION_1_H
 #define CGAL_CKVA_SUBDIVISION_1_H 1
 
-#include <Rcpp.h>
 #include <vector>
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/member.hpp>

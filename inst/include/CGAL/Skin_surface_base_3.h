@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005 Rijksuniversiteit Groningen (Netherlands)
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_SKIN_SURFACE_BASE_3_H
 #define CGAL_SKIN_SURFACE_BASE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>

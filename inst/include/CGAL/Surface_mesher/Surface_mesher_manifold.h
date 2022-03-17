@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003-2007  INRIA Sophia-Antipolis (France).
 // Copyright (c) 2008       GeometryFactory, Sophia Antipolis (France)
 // All rights reserved.
@@ -14,7 +15,6 @@
 #ifndef CGAL_SURFACE_MESHER_MANIFOLD_H
 #define CGAL_SURFACE_MESHER_MANIFOLD_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesher.h>
 
 #include <CGAL/disable_warnings.h>

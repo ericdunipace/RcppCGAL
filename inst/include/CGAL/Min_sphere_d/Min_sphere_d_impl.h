@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -11,7 +12,6 @@
 // Author(s)     : Sven Schoenherr <sven@inf.fu-berlin.de>
 //                 Bernd Gaertner
 
-#include <Rcpp.h>
 #include <iterator>
 
 namespace CGAL {

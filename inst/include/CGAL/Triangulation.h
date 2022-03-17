@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009-2014 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_TRIANGULATION_H
 #define CGAL_TRIANGULATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation.h>
 
 #include <CGAL/disable_warnings.h>

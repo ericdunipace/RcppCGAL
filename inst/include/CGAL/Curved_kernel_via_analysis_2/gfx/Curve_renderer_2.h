@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -23,7 +24,6 @@
 #define CGAL_AK_ENABLE_DEPRECATED_INTERFACE 1
 #endif
 
-#include <Rcpp.h>
 #include <vector>
 #include <stack>
 #include <cmath>

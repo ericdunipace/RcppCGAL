@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2000  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_WIDTH_3_H
 #define CGAL_WIDTH_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polytope_distance_d.h>
 
 

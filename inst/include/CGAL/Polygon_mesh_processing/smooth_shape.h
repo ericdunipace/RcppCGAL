@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018-2019 GeometryFactory (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_SMOOTH_SHAPE_H
 #define CGAL_POLYGON_MESH_PROCESSING_SMOOTH_SHAPE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #if defined(CGAL_EIGEN3_ENABLED)

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -26,7 +27,6 @@
 // - parallel versions : per-thread and summing on all threads.
 // - Timer vs Real_timer ?
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <iostream>
 #include <iomanip>

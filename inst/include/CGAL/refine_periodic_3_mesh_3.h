@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009, 2014 INRIA Sophia-Antipolis (France).
 // Copyright (c) 2017 GeometryFactory (France).
 // All rights reserved.
@@ -15,7 +16,6 @@
 #ifndef CGAL_REFINE_PERIODIC_3_MESH_3_H
 #define CGAL_REFINE_PERIODIC_3_MESH_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_mesh_3.h>
 
 #include <CGAL/Mesh_3/config.h>

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013  GeometryFactory (France). All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org).
@@ -12,7 +13,6 @@
 #ifndef CGAL_MCFSKEL_CURVE_SKELETON_H
 #define CGAL_MCFSKEL_CURVE_SKELETON_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_skeletonization.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2000  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -50,7 +51,6 @@
 #ifndef  CGAL_VERTEX_VISIBILITY_GRAPH_2_H
 #define  CGAL_VERTEX_VISIBILITY_GRAPH_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Partition_2.h>
 
 #include <CGAL/Partition_2/Rotation_tree_2.h>

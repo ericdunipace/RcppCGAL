@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_NATURAL_NEIGHBORS_3_H
 #define CGAL_NATURAL_NEIGHBORS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Interpolation.h>
 
 #include <CGAL/tags.h>

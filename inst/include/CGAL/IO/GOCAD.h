@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 GeometryFactory
 //
 // This file is part of CGAL (www.cgal.org);
@@ -13,7 +14,6 @@
 #ifndef CGAL_IO_GOCAD_H
 #define CGAL_IO_GOCAD_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/helpers.h>
 #include <CGAL/IO/io.h>
 

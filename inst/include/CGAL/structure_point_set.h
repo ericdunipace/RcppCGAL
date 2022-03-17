@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_STRUCTURE_POINT_SET_3_H
 #define CGAL_STRUCTURE_POINT_SET_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/disable_warnings.h>

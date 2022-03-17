@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_SHAPE_DETECTION_REGION_GROWING_INTERNAL_UTILS_H
 #define CGAL_SHAPE_DETECTION_REGION_GROWING_INTERNAL_UTILS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Shape_detection.h>
 
 // STL includes.

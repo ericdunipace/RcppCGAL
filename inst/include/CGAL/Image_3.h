@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2008  INRIA Sophia-Antipolis (France).
 //               2008 GeometryFactory
 // All rights reserved.
@@ -14,7 +15,6 @@
 #ifndef CGAL_IMAGE_3_H
 #define CGAL_IMAGE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/basic.h>

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006-2009 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -20,7 +21,6 @@
 #ifndef CGAL_ALGEBRAIC_KERNEL_D_FLOAT_TRAITS_H
 #define CGAL_ALGEBRAIC_KERNEL_D_FLOAT_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #if CGAL_USE_LEDA

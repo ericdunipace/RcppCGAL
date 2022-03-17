@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014  GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -12,7 +13,6 @@
 #ifndef CGAL_OM_ITERATOR_FROM_CICULATOR_H
 #define CGAL_OM_ITERATOR_FROM_CICULATOR_H
 
-#include <Rcpp.h>
 #include <iostream>
 #include <cstddef>
 

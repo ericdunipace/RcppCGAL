@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #else

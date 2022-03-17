@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 /****************************************************************************
  * Core Library Version 1.7, August 2004
  * Copyright (c) 1995-2004 Exact Computation Project
@@ -25,7 +26,6 @@
 #ifndef _CORE_BIGFLOATREP_H_
 #define _CORE_BIGFLOATREP_H_
 
-#include <Rcpp.h>
 #include <CGAL/CORE/BigRat.h>
 #include <CGAL/CORE/CoreAux.h>
 #include <CGAL/CORE/CoreDefs.h>

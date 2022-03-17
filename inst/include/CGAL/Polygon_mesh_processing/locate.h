@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014, 2017, 2018 GeometryFactory (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_LOCATE_H
 #define CGAL_POLYGON_MESH_PROCESSING_LOCATE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/locate.h>
 
 #include <CGAL/AABB_face_graph_triangle_primitive.h>

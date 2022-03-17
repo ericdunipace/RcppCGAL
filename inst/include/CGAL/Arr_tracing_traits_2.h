@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007,2009,2010,2011 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_ARR_TRACING_TRAITS_H
 #define CGAL_ARR_TRACING_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 #include <CGAL/disable_warnings.h>

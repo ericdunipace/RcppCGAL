@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2001
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -18,7 +19,6 @@
 #ifndef CGAL_RANDOM_POLYGON_2_SWEEP_H
 #define CGAL_RANDOM_POLYGON_2_SWEEP_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/enum.h>

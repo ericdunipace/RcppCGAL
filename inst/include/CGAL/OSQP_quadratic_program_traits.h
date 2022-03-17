@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020-2021 GeometryFactory SARL (France).
 // All rights reserved.
 //
@@ -17,7 +18,6 @@
 #if defined(CGAL_USE_OSQP) || defined(DOXYGEN_RUNNING)
 
 // STL includes.
-#include <Rcpp.h>
 #include <tuple>
 #include <vector>
 #include <utility>

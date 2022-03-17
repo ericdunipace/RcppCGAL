@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_BOX_INTERSECTION_D_SEGMENT_TREE_H
 #define CGAL_BOX_INTERSECTION_D_SEGMENT_TREE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Box_intersection_d.h>
 
 #include <CGAL/basic.h>

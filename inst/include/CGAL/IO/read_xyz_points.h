@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007-09  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_POINT_SET_PROCESSING_READ_XYZ_POINTS_H
 #define CGAL_POINT_SET_PROCESSING_READ_XYZ_POINTS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/property_map.h>

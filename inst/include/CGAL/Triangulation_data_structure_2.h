@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2010  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_TRIANGULATION_DATA_STRUCTURE_2_H
 #define CGAL_TRIANGULATION_DATA_STRUCTURE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/TDS_2.h>
 
 

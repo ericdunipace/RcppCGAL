@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2005  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESHES_DOUBLE_MAP_CONTAINER_H
 #define CGAL_MESHES_DOUBLE_MAP_CONTAINER_H
 
-#include <Rcpp.h>
 #include <set>
 #include <iostream>
 #include <CGAL/Double_map.h>

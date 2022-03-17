@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018-2020  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_IO_VTK_H
 #define CGAL_IO_VTK_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/VTK/VTK_reader.h>
 #include <CGAL/IO/VTK/VTK_writer.h>
 

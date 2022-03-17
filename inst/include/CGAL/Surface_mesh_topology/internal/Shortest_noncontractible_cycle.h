@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_SHORTEST_NONCONTRACTIBLE_CYCLE_H
 #define CGAL_SHORTEST_NONCONTRACTIBLE_CYCLE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_topology.h>
 
 #include <CGAL/Path_on_surface.h>

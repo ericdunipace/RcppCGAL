@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2020  GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -12,7 +13,6 @@
 #ifndef CGAL_BGL_IO_OFF_H
 #define CGAL_BGL_IO_OFF_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/OFF.h>
 #include <CGAL/IO/helpers.h>
 #include <CGAL/boost/graph/IO/Generic_facegraph_builder.h>

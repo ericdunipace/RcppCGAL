@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2019  Geometry Factory
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_SURFACE_MESH_IO_3MF_H
 #define CGAL_SURFACE_MESH_IO_3MF_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh.h>
 
 #include <CGAL/Surface_mesh/Surface_mesh_fwd.h>

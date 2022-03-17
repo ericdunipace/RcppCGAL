@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2006  INRIA Sophia-Antipolis (France).
 // Copyright (c) 2009  INRIA Sophia-Antipolis (France).
 // All rights reserved.
@@ -14,7 +15,6 @@
 #ifndef CGAL_IO_FILE_MEDIT_H
 #define CGAL_IO_FILE_MEDIT_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Mesh_3/config.h>

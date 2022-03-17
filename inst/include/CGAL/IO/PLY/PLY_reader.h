@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2017 GeometryFactory
 //
 // This file is part of CGAL (www.cgal.org);
@@ -11,7 +12,6 @@
 #ifndef CGAL_IO_PLY_PLY_READER_H
 #define CGAL_IO_PLY_PLY_READER_H
 
-#include <Rcpp.h>
 #include <CGAL/Container_helper.h>
 #include <CGAL/IO/io.h>
 #include <CGAL/is_iterator.h>

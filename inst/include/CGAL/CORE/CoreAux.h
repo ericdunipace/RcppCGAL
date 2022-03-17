@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 /****************************************************************************
  * Core Library Version 1.7, August 2004
  * Copyright (c) 1995-2004 Exact Computation Project
@@ -25,7 +26,6 @@
 #ifndef _CORE_COREAUX_H_
 #define _CORE_COREAUX_H_
 
-#include <Rcpp.h>
 #include <iostream>
 #include <fstream>
 #include "CGAL/CORE/Impl.h"

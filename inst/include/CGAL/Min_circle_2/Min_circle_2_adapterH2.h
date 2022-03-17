@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2001
 // ETH Zurich (Switzerland).  All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MIN_CIRCLE_2_ADAPTERH2_H
 #define CGAL_MIN_CIRCLE_2_ADAPTERH2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 

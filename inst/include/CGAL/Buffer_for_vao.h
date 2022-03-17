@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2018  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_VBO_BUFFER_FILLER_H
 #define CGAL_VBO_BUFFER_FILLER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/GraphicsView.h>
 
 #include <CGAL/Projection_traits_3.h>

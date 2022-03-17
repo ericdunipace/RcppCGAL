@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESH_TO_POINT_SET_HAUSDORFF_DISTANCE_H
 #define CGAL_MESH_TO_POINT_SET_HAUSDORFF_DISTANCE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/distance.h>
 
 

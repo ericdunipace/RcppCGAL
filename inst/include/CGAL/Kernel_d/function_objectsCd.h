@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2000,2001
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_FUNCTION_OBJECTSCD_H
 #define CGAL_FUNCTION_OBJECTSCD_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/enum.h>
 #include <CGAL/use.h>

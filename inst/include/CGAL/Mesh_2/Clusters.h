@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2005  INRIA Sophia-Antipolis (France).
 // Copyright (c) 2010       GeometryFactory Sarl (France)
 // All rights reserved.
@@ -14,7 +15,6 @@
 #ifndef CGAL_MESH_2_CLUSTERS_H
 #define CGAL_MESH_2_CLUSTERS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 

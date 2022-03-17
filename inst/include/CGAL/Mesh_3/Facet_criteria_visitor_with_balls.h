@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -18,7 +19,6 @@
 #ifndef CGAL_MESH_3_FACET_CRITERIA_VISITOR_WITH_BALLS_H
 #define CGAL_MESH_3_FACET_CRITERIA_VISITOR_WITH_BALLS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Mesh_3/mesh_standard_criteria.h>

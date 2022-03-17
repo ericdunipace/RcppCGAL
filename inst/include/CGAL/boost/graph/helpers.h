@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014 GeometryFactory (France). All rights reserved.
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_BOOST_GRAPH_HELPERS_H
 #define CGAL_BOOST_GRAPH_HELPERS_H
 
-#include <Rcpp.h>
 #include <CGAL/boost/graph/iterator.h>
 #include <CGAL/boost/graph/properties.h>
 #include <CGAL/boost/graph/internal/Has_member_clear.h>

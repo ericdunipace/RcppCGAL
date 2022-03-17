@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2001  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_APPROX_MIN_ELL_D_DEBUG_H
 #define CGAL_APPROX_MIN_ELL_D_DEBUG_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Bounding_volumes.h>
 
 

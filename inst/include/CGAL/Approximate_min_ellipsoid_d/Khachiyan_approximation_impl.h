@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2001  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -17,7 +18,6 @@
 // accompanying documentation sheet (and not to the above paper), see
 // the file(s) in documentation/.
 
-#include <Rcpp.h>
 #include <numeric>
 
 #include <CGAL/tags.h>

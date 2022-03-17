@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 GeometryFactory SARL (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_SHAPE_REGULARIZATION_MULTIPLE_PRINCIPAL_DIRECTIONS_2_H
 #define CGAL_SHAPE_REGULARIZATION_MULTIPLE_PRINCIPAL_DIRECTIONS_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Shape_regularization.h>
 
 // Boost includes.

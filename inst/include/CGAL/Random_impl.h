@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2001
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -20,7 +21,6 @@
 #define CGAL_INLINE_FUNCTION
 #endif
 
-#include <Rcpp.h>
 #include <ctime>
 #include <iostream>
 #include <sstream>

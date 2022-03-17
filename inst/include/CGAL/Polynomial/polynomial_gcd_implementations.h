@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #define CGAL_POLYNOMIAL_GCD_IMPLEMENTATIONS_H
 
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Polynomial.h>
 #include <CGAL/Real_timer.h>

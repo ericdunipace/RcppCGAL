@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005  Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_ENVELOPE_OVERLAY_2_H
 #define CGAL_ENVELOPE_OVERLAY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Envelope_3.h>
 
 

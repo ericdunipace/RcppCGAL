@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015 GeometryFactory (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_FAIR_POLYHEDRON_3_H
 #define CGAL_POLYGON_MESH_PROCESSING_FAIR_POLYHEDRON_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 

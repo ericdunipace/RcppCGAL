@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006,2007,2008,2009,2010,2011 Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_ARR_PLANE_3_h
 #define CGAL_ARR_PLANE_3_h
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 

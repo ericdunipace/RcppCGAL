@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2001  Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_SNAP_ROUNDING_2_H
 #define CGAL_SNAP_ROUNDING_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Snap_rounding_2.h>
 
 

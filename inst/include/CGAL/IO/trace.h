@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007-09  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 // This file is part of CGAL (www.cgal.org)
@@ -11,7 +12,6 @@
 #ifndef CGAL_IO_TRACE_H
 #define CGAL_IO_TRACE_H
 
-#include <Rcpp.h>
 #include <iostream>
 
 /// \cond SKIP_IN_MANUAL

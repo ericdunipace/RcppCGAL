@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2001,2004  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_ORIENTATION_2_H
 #define CGAL_INTERNAL_STATIC_FILTERS_ORIENTATION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/Profile_counter.h>
 #include <CGAL/determinant.h>
 #include <CGAL/Filtered_kernel/internal/Static_filters/Static_filter_error.h>

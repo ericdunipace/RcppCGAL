@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_LEDA_BIGFLOAT_INTERVAL_H
 #define CGAL_LEDA_BIGFLOAT_INTERVAL_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/LEDA_basic.h>

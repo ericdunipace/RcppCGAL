@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013 Technical University Braunschweig (Germany).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_TRIANGULAR_EXPANSION_VISIBILITY_2_H
 #define CGAL_TRIANGULAR_EXPANSION_VISIBILITY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Visibility_2.h>
 
 

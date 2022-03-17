@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 GeometryFactory (France) and Telecom Paris (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_TR_INTERNAL_COMPUTE_C3T3_STATISTICS_H
 #define CGAL_TR_INTERNAL_COMPUTE_C3T3_STATISTICS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Tetrahedral_remeshing.h>
 
 #include <limits>

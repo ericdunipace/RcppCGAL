@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006-2009 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -18,7 +19,6 @@
 #ifndef CGAL_REFINE_ZERO_AGAINST_H
 #define CGAL_REFINE_ZERO_AGAINST_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 
 #include <CGAL/Polynomial.h>

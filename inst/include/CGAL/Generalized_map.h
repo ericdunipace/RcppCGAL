@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016 CNRS and LIRIS' Establishments (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_GENERALIZED_MAP_H
 #define CGAL_GENERALIZED_MAP_H 1
 
-#include <Rcpp.h>
 #include <CGAL/Generalized_map_fwd.h>
 #include <CGAL/Combinatorial_map/internal/Combinatorial_map_utility.h>
 #include <CGAL/Generalized_map/internal/Generalized_map_group_functors.h>

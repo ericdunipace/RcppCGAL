@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007  Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_CONNECT_HOLES_H
 #define CGAL_CONNECT_HOLES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Boolean_set_operations_2.h>
 
 #include <CGAL/disable_warnings.h>

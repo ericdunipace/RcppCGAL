@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003,2004,2005,2006  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //

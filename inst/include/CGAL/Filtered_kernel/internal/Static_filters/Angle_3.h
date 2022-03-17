@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2011 GeometryFactory Sarl (France)
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_INTERNAL_STATIC_FILTERS_ANGLE_3_H
 #define CGAL_INTERNAL_STATIC_FILTERS_ANGLE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/Bbox_3.h>
 #include <CGAL/Profile_counter.h>
 #include <CGAL/Filtered_kernel/internal/Static_filters/Static_filter_error.h>

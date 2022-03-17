@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2000
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -16,7 +17,6 @@
 #ifndef CGAL_CHAINED_MAP_H
 #define CGAL_CHAINED_MAP_H
 
-#include <Rcpp.h>
 #include <CGAL/memory.h>
 #include <iostream>
 

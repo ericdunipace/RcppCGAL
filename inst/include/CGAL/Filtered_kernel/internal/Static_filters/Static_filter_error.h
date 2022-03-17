@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1999,2000  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -26,7 +27,6 @@
 // - Remove the degree stuff, it's only meant for debug (?).
 // - Add __attribute__((const)) for optimizing ?
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/FPU.h>
 

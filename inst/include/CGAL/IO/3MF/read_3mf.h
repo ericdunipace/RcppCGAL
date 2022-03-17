@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2019  Geometry Factory
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #define CGAL_IO_READ_3MF_H
 
 
-#include <Rcpp.h>
 #include <CGAL/IO/Color.h>
 
 #include <CGAL/Kernel_traits.h>

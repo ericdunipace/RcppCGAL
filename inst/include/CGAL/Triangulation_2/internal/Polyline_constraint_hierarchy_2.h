@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POLYLINE_CONSTRAINT_HIERARCHY_2_H
 #define CGAL_POLYLINE_CONSTRAINT_HIERARCHY_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_2.h>
 
 

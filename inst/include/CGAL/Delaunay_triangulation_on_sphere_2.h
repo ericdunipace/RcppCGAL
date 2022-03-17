@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997, 2012, 2019 INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_DELAUNAY_TRIANGULATION_ON_SPHERE_2_H
 #define CGAL_DELAUNAY_TRIANGULATION_ON_SPHERE_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_on_sphere_2.h>
 
 #include <CGAL/Triangulation_on_sphere_2.h>

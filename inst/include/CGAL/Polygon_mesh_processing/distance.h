@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015 GeometryFactory (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_DISTANCE_H
 #define CGAL_POLYGON_MESH_PROCESSING_DISTANCE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/distance.h>
 
 #include <CGAL/Polygon_mesh_processing/internal/mesh_to_point_set_hausdorff_distance.h>

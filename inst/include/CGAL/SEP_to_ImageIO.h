@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016, 2017 GeometryFactory
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_SEP_READER_IMAGEIO_HPP
 #define CGAL_SEP_READER_IMAGEIO_HPP
 
-#include <Rcpp.h>
 #include "SEP_header.h"
 #include <CGAL/ImageIO.h>
 #include <CGAL/Image_3.h>

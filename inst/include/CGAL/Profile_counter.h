@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 //r Copyright (c) 2005,2006,2008  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -42,7 +43,6 @@
 //   - lock counters in parallel mode
 //     (e.g. time spent spinning, and/or number of locks taken or forbidden...)
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <iostream>
 #include <sstream>

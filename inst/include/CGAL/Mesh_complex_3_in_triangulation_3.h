@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009-2014 INRIA Sophia-Antipolis (France).
 // Copyright (c) 2010-2013 GeometryFactory Sarl (France).
 // All rights reserved.
@@ -18,7 +19,6 @@
 #ifndef CGAL_MESH_COMPLEX_3_IN_TRIANGULATION_3_H
 #define CGAL_MESH_COMPLEX_3_IN_TRIANGULATION_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #include <CGAL/Mesh_3/Mesh_complex_3_in_triangulation_3_fwd.h>

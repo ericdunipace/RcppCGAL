@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2017 GeometryFactory (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_RANDOM_PERTURBATION_H
 #define CGAL_POLYGON_MESH_PROCESSING_RANDOM_PERTURBATION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Polygon_mesh_processing/meshing_hole_filling.h>
 
 #include <CGAL/disable_warnings.h>

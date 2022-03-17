@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2006  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_3_H
 #define CGAL_MESH_2_TRIANGULATION_MESHER_LEVEL_TRAITS_3_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <vector>

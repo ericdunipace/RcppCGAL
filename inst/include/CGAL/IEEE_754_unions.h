@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1999
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -17,7 +18,6 @@
 #ifndef CGAL_IEEE_754_UNIONS_H
 #define CGAL_IEEE_754_UNIONS_H
 
-#include <Rcpp.h>
 #include <iomanip>
 #include <iostream>
 

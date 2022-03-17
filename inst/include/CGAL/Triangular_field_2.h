@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_TRIANGULAR_FIELD_2_H_
 #define CGAL_TRIANGULAR_FIELD_2_H_
 
-#include <Rcpp.h>
 #include <CGAL/license/Stream_lines_2.h>
 
 

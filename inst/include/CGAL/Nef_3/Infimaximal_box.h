@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2002  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_INFIMAXIMAL_BOX_H
 #define CGAL_INFIMAXIMAL_BOX_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 

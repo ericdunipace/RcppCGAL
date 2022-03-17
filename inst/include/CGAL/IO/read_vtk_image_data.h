@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2008  INRIA Sophia-Antipolis (France).
 //               2008 GeometryFactory
 // All rights reserved.
@@ -14,7 +15,6 @@
 #ifndef CGAL_IO_READ_VTK_IMAGE_DATA_H
 #define CGAL_IO_READ_VTK_IMAGE_DATA_H
 
-#include <Rcpp.h>
 #include <CGAL/Image_3.h>
 #include <CGAL/Image_3_vtk_interface.h>
 

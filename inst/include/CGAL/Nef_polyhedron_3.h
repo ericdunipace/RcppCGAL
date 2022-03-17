@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2002,2005 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -17,7 +18,6 @@
 #ifndef CGAL_NEF_POLYHEDRON_3_H
 #define CGAL_NEF_POLYHEDRON_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 #include <CGAL/disable_warnings.h>

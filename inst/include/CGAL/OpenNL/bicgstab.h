@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005-2008  Inria Loria (France).
 /*
  * author:  Bruno Levy, INRIA, project ALICE
@@ -31,7 +32,6 @@
 #ifndef __OPENNL_BICGSTAB__
 #define __OPENNL_BICGSTAB__
 
-#include <Rcpp.h>
 #include <CGAL/OpenNL/blas.h>
 #include <CGAL/assertions.h>
 

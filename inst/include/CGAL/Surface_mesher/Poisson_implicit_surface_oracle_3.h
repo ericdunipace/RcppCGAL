@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003-2007  INRIA Sophia-Antipolis (France).
 // Copyright (c) 2008,2011  GeometryFactory Sarl (France)
 // All rights reserved.
@@ -14,7 +15,6 @@
 #ifndef CGAL_SURFACE_MESHER_POISSON_IMPLICIT_SURFACE_ORACLE_3_H
 #define CGAL_SURFACE_MESHER_POISSON_IMPLICIT_SURFACE_ORACLE_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014
 // INRIA Saclay-Ile de France (France)
 //
@@ -11,7 +12,6 @@
 
 #ifndef CGAL_KD_TYPE_WP_H
 #define CGAL_KD_TYPE_WP_H
-#include <Rcpp.h>
 #include <CGAL/NewKernel_d/store_kernel.h>
 #include <CGAL/boost/iterator/counting_iterator.hpp>
 namespace CGAL {

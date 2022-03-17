@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015 GeometryFactory
 //
 // This file is part of CGAL (www.cgal.org);
@@ -12,7 +13,6 @@
 #ifndef CGAL_IO_STL_STL_READER_H
 #define CGAL_IO_STL_STL_READER_H
 
-#include <Rcpp.h>
 #include <CGAL/IO/io.h>
 #include <CGAL/IO/helpers.h>
 

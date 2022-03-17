@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006-2009 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -23,7 +24,6 @@
 #ifndef CGAL_ALGEBRAIC_CURVE_KERNEL_D_2_H
 #define CGAL_ALGEBRAIC_CURVE_KERNEL_D_2_H
 
-#include <Rcpp.h>
 #include <limits>
 #include <CGAL/iterator.h>
 #include <CGAL/assertions.h>

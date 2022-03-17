@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_INTERNAL_VCM_VORONOI_COVARIANCE_3_HPP
 #define CGAL_INTERNAL_VCM_VORONOI_COVARIANCE_3_HPP
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 

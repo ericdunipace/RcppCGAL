@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006  Tel-Aviv University (Israel).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_ENVELOPE_DIVIDE_AND_CONQUER_2_IMPL_H
 #define CGAL_ENVELOPE_DIVIDE_AND_CONQUER_2_IMPL_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Envelope_2.h>
 
 

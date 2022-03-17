@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2009-2010 INRIA Sophia-Antipolis (France).
 // Copyright (c) 2010-2017 GeometryFactory Sarl (France)
 // All rights reserved.
@@ -29,7 +30,6 @@
 //   (unordered sets, improving 'unchecked_vertices', etc.)
 // - No wonky indentation :)
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_3_mesh_3.h>
 
 #include <CGAL/Mesh_3/io_signature.h>

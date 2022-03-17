@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2011 Tel-Aviv University (Israel), INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_RATIONAL_FUNCTION_CANONICALIZED_PAIR_H
 #define CGAL_RATIONAL_FUNCTION_CANONICALIZED_PAIR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Arrangement_on_surface_2.h>
 
 

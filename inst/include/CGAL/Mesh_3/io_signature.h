@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2006  INRIA Sophia-Antipolis (France).
 // Copyright (c) 2011  GeometryFactory Sarl (France)
 // All rights reserved.
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESH_3_IO_SIGNATURE_H
 #define CGAL_MESH_3_IO_SIGNATURE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Triangulation_3.h>
 
 #define CGAL_MESH_3_IO_H // the old include macro, tested by other files

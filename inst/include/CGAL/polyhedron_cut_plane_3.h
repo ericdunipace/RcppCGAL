@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2000, 2006  ETH Zurich (Switzerland).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_POLYHEDRON_CUT_PLANE_3_H
 #define CGAL_POLYHEDRON_CUT_PLANE_3_H 1
 
-#include <Rcpp.h>
 #include <CGAL/license/Polyhedron.h>
 
 #include <CGAL/disable_warnings.h>

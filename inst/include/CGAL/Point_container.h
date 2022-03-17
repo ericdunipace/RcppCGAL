@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2002,2011 Utrecht University (The Netherlands).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #ifndef CGAL_POINT_CONTAINER_H
 #define CGAL_POINT_CONTAINER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Spatial_searching.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2014
 // INRIA Saclay-Ile de France (France)
 //
@@ -11,7 +12,6 @@
 
 #ifndef CGAL_KD_COAFFINE_H
 #define CGAL_KD_COAFFINE_H
-#include <Rcpp.h>
 #include <vector>
 #include <algorithm>
 #include <iterator>

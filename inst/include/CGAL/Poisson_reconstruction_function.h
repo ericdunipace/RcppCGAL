@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007-09  INRIA (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_POISSON_RECONSTRUCTION_FUNCTION_H
 #define CGAL_POISSON_RECONSTRUCTION_FUNCTION_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Poisson_surface_reconstruction_3.h>
 
 #include <CGAL/disable_warnings.h>

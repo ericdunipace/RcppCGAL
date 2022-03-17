@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2021  GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -11,7 +12,6 @@
 
 #ifndef CGAL_BGL_IO_TDS_2_OFF_H
 #define CGAL_BGL_IO_TDS_2_OFF_H
-#include <Rcpp.h>
 #include <CGAL/IO/OFF.h>
 #include <CGAL/Triangulation_data_structure_2.h>
 

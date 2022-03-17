@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -24,7 +25,6 @@
 #ifndef CGAL_CKVA_CURVE_RENDERER_INTERNALS_H
 #define CGAL_CKVA_CURVE_RENDERER_INTERNALS_H 1
 
-#include <Rcpp.h>
 #include <vector>
 #include <stack>
 // #include <boost/multi_index_container.hpp>

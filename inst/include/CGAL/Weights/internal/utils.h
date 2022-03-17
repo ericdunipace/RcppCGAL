@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 GeometryFactory SARL (France).
 // All rights reserved.
 //
@@ -15,7 +16,6 @@
 #define CGAL_WEIGHTS_INTERNAL_UTILS_H
 
 // STL includes.
-#include <Rcpp.h>
 #include <cmath>
 #include <string>
 #include <memory>

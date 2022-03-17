@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2021 GeometryFactory
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESH_3_GENERATE_LABEL_WEIGHTS_H
 #define CGAL_MESH_3_GENERATE_LABEL_WEIGHTS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/Image_3.h>

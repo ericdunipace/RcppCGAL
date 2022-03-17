@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1999-2004,2006-2009,2014-2016   INRIA Nancy - Grand Est (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_PERIODIC_4_HYPERBOLIC_TRIANGULATION_2_H
 #define CGAL_PERIODIC_4_HYPERBOLIC_TRIANGULATION_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Periodic_4_hyperbolic_triangulation_2.h>
 
 #include <CGAL/basic.h>

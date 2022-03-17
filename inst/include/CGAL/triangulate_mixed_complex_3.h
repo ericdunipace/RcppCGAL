@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005 Rijksuniversiteit Groningen (Netherlands)
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_TRIANGULATE_MIXED_COMPLEX_3
 #define CGAL_TRIANGULATE_MIXED_COMPLEX_3
 
-#include <Rcpp.h>
 #include <CGAL/license/Skin_surface_3.h>
 
 // #include <CGAL/Unique_hash_map.h>

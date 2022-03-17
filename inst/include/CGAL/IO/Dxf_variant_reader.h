@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003-2008  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -22,7 +23,6 @@
 #ifndef CGAL_IO_DXF_VARIANT_READER_H
 #define CGAL_IO_DXF_VARIANT_READER_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Circular_kernel_2.h>
 
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_MEMORY_SIZER_H
 #define CGAL_MEMORY_SIZER_H
 
-#include <Rcpp.h>
 #include <CGAL/config.h>
 #include <CGAL/assertions.h>
 

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2020
 //
 // Utrecht University (The Netherlands),
@@ -18,7 +19,6 @@
 #ifndef CGAL_IO_H
 #define CGAL_IO_H
 
-#include <Rcpp.h>
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/IO/io_tags.h>

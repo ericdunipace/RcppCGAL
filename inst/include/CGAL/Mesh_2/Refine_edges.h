@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2006  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESH_2_REFINE_EDGES_H
 #define CGAL_MESH_2_REFINE_EDGES_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 

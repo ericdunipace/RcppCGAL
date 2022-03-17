@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2004-2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -14,7 +15,6 @@
 #ifndef CGAL_CKVA_CURVE_RENDERER_TRAITS_H
 #define CGAL_CKVA_CURVE_RENDERER_TRAITS_H
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/function_objects.h>
 

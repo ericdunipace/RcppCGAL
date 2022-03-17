@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2000  Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_SNC_FM_DECORATOR_H
 #define CGAL_SNC_FM_DECORATOR_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Nef_3.h>
 
 #ifdef CGAL_I_DO_WANT_TO_USE_GENINFO

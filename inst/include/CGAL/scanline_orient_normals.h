@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2020 GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_SCANLINE_ORIENT_NORMALS_H
 #define CGAL_SCANLINE_ORIENT_NORMALS_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_processing_3.h>
 
 #include <CGAL/squared_distance_3.h>

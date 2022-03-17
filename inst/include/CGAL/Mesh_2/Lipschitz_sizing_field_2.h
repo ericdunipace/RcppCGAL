@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2013 INRIA Sophia-Antipolis (France),
 //               2014-2015 GeometryFactory (France).
 // All rights reserved.
@@ -15,7 +16,6 @@
 #ifndef CGAL_LIPSCHITZ_SIZING_FIELD_2_H
 #define CGAL_LIPSCHITZ_SIZING_FIELD_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 #include <CGAL/disable_warnings.h>

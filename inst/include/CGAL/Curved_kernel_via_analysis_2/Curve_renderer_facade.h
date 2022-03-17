@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008,2009,2010,2011 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -57,7 +58,6 @@
 // I still breathe !!!
 #define STILL_ALIVE Rcpp::Rcout << __LINE__ << "\n";
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/tss.h>
 #include <CGAL/Bbox_2.h>

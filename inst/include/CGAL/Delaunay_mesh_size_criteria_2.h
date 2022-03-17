@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003-2004  INRIA Sophia-Antipolis (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_DELAUNAY_MESH_SIZE_CRITERIA_2_H
 #define CGAL_DELAUNAY_MESH_SIZE_CRITERIA_2_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_2.h>
 
 #include <CGAL/disable_warnings.h>

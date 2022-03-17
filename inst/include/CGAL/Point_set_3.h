@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016  GeometryFactory Sarl (France).
 // All rights reserved.
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_POINT_SET_3_H
 #define CGAL_POINT_SET_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_3.h>
 
 #include <typeindex>

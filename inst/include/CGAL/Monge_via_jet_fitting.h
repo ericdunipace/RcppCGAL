@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2007  INRIA Sophia-Antipolis (France), INRIA Lorraine LORIA.
 // All rights reserved.
 //
@@ -11,7 +12,6 @@
 #ifndef CGAL_MONGE_VIA_JET_FITTING_H_
 #define CGAL_MONGE_VIA_JET_FITTING_H_
 
-#include <Rcpp.h>
 #include <CGAL/license/Jet_fitting_3.h>
 
 

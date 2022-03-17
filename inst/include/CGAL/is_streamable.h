@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2012  GeometryFactory Sarl (France)
 // All rights reserved.
 //
@@ -10,7 +11,6 @@
 #ifndef CGAL_IS_STREAMABLE_H
 #define CGAL_IS_STREAMABLE_H
 
-#include <Rcpp.h>
 #include <boost/type_traits/remove_reference.hpp>
 #include <boost/type_traits/remove_cv.hpp>
 #include <boost/static_assert.hpp>

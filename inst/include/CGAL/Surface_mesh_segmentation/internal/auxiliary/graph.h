@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2001  Yuri Boykov
 // All rights reserved.
 //
@@ -109,7 +110,6 @@ a minimum cut on the following graph:
 
 ///////////////////////////////////////////////////
 
-#include <Rcpp.h>
 #include <iostream>
 #include "graph.h"
 

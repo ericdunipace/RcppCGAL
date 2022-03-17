@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 1997-2013
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
@@ -44,7 +45,6 @@
 #ifdef CGAL_INCLUDE_WINDOWS_DOT_H
 // Mimic users including this file which defines min max macros
 // and other names leading to name clashes
-#include <Rcpp.h>
 #include <windows.h>
 #endif
 

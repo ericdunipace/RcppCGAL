@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2016 GeometryFactory (France).  All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
@@ -11,7 +12,6 @@
 #ifndef CGAL_POINT_SET_IO_PLY_H
 #define CGAL_POINT_SET_IO_PLY_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Point_set_3.h>
 
 #include <CGAL/boost/graph/Named_function_parameters.h>

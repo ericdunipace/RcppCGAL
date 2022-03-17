@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2008 Max-Planck-Institute Saarbruecken (Germany).
 // All rights reserved.
 //
@@ -24,7 +25,6 @@
 #endif
 
 
-#include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Polynomial.h>
 

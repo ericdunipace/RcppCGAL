@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2005  INRIA (France).
 // All rights reserved.
 //
@@ -12,7 +13,6 @@
 #ifndef CGAL_SURFACE_MESH_PARAMETERIZATION_SQUARE_BORDER_PARAMETERIZER_3_H
 #define CGAL_SURFACE_MESH_PARAMETERIZATION_SQUARE_BORDER_PARAMETERIZER_3_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Surface_mesh_parameterization.h>
 
 #include <CGAL/disable_warnings.h>

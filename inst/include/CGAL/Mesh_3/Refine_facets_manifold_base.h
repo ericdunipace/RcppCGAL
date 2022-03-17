@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2003-2007  INRIA Sophia-Antipolis (France).
 // Copyright (c) 2008,2013  GeometryFactory, Sophia Antipolis (France)
 //
@@ -13,7 +14,6 @@
 #ifndef CGAL_MESH_3_REFINE_FACETS_MANIFOLD_BASE_H
 #define CGAL_MESH_3_REFINE_FACETS_MANIFOLD_BASE_H
 
-#include <Rcpp.h>
 #include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/disable_warnings.h>

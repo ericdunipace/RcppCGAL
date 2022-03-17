@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 // Copyright (c) 2015-2020 GeometryFactory SARL (France).
 // All rights reserved.
 //
@@ -17,7 +18,6 @@
 #define CGAL_DEPRECATED_HEADER "<CGAL/Weights/internal/pmp_weights_deprecated.h>"
 #define CGAL_DEPRECATED_MESSAGE_DETAILS \
   "This part of the package is deprecated since the version 5.4 of CGAL!"
-#include <Rcpp.h>
 #include <CGAL/Installation/internal/deprecation_warning.h>
 
 // README:
