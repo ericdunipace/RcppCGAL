@@ -119,6 +119,17 @@
   tx <- first <- search <- NULL
   for (f in files) {
     tx  <- readLines(f, warn = FALSE)
+    if (grepl("Uncertain.h",f ) ) { # avoid warning for boolean operators in other packages with CRAN clang checks
+      # browser()
+      lines <- grep(pattern = "return Uncertain<bool>", x = tx)
+      tx[lines] <- gsub(pattern = "\\|", 
+                        replacement = "\\|\\|",
+                        x = tx[lines])
+      tx[lines] <- gsub(pattern = "&", 
+                        replacement = "&&",
+                        x = tx[lines])
+      writeLines(tx, con=f)
+    }
     search <- grep(pattern = "std::cerr|std::cout|abort\\(|exit\\(", x = tx)
     if (length(search)==0) next
     # first <- grep("#include", tx)[1]
