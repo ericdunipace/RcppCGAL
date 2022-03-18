@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^deprecated
+^cran-comments\.md$
+^\.github$
+^\.git$
+^README\.md$  
+^inst/include$
+^inst/saveCheck/OUTPUT_CHANGED$
+^saveCheck$
+^revdep$
