@@ -7,7 +7,7 @@
 .cgal.cerr.remover(pkg_path = NULL)
 }
 \arguments{
-\item{overwrite}{TRUE FALSE, default is FALSE}
+\item{pkg_path}{character giving path to the package}
 }
 \value{
 None.
@@ -16,6 +16,6 @@ None.
 Removes std::cerr references from files.
 }
 \details{
-downloads the CGAL package from the web to not piss off picky CRAN
+changes the downloaded files to R outputs
 }
 \keyword{internal}

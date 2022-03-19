@@ -85,11 +85,11 @@
 
 #' Removes std::cerr references from files.
 #'
-#' @param overwrite TRUE FALSE, default is FALSE
+#' @param pkg_path character giving path to the package
 #'
 #' @return None.
 #' 
-#' @details downloads the CGAL package from the web to not piss off picky CRAN
+#' @details changes the downloaded files to R outputs
 #' 
 #' @keywords internal
 .cgal.cerr.remover <- function(pkg_path = NULL) {
@@ -122,12 +122,12 @@
     if (grepl("Uncertain.h",f ) ) { # avoid warning for boolean operators in other packages with CRAN clang checks
       # browser()
       lines <- grep(pattern = "return Uncertain<bool>", x = tx)
-      tx[lines] <- gsub(pattern = "\\|", 
+      tx[lines] <- gsub(pattern = "(?:(\\|)(?!\1))+", 
                         replacement = "\\|\\|",
-                        x = tx[lines])
-      tx[lines] <- gsub(pattern = "&", 
+                        x = tx[lines], perl = TRUE)
+      tx[lines] <- gsub(pattern = "(?:(&)(?!\1))+", 
                         replacement = "&&",
-                        x = tx[lines])
+                        x = tx[lines], perl = TRUE)
       writeLines(tx, con=f)
     }
     search <- grep(pattern = "std::cerr|std::cout|abort\\(|exit\\(", x = tx)
