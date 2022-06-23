@@ -9,3 +9,4 @@
 ^inst/saveCheck/OUTPUT_CHANGED$
 ^saveCheck$
 ^revdep$
+^CRAN-RELEASE$
