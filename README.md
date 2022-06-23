@@ -41,7 +41,7 @@ Note: this must be done *before* the package is loaded by `R`.
 We provide an example of how to perform Hilbert sorting using an R matrix:
 
 ```c++
-// [[// [[Rcpp::depends(RcppCGAL)]]
+// [[Rcpp::depends(RcppCGAL)]]
 // [[Rcpp::depends(BH)]]
 // [[Rcpp::depends(RcppEigen)]]
 // [[Rcpp::plugins(cpp14)]]  
