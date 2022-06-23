@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Combinatorial_map/include/CGAL/Combinatorial_map.h $
-// $Id: Combinatorial_map.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Combinatorial_map/include/CGAL/Combinatorial_map.h $
+// $Id: Combinatorial_map.h f3db661 2022-03-09T14:13:31+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -3377,7 +3377,7 @@ namespace CGAL {
       CGAL_assertion( is_without_boundary(dimension) );
 
       CGAL::Unique_hash_map< Dart_handle, Dart_handle,
-        typename Self::Hash_function > dual;
+                             typename Self::Hash_function > dual(Dart_handle(), darts().size());
       Dart_handle d, d2, res = amap.null_handle;
 
       // We clear amap. TODO return a new amap ?

@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Poisson_surface_reconstruction_3/include/CGAL/Poisson_reconstruction_function.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Poisson_surface_reconstruction_3/include/CGAL/Poisson_reconstruction_function.h $
 // $Id: Poisson_reconstruction_function.h 3b7754f 2021-09-20T12:44:38+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

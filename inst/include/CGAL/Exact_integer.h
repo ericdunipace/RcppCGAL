@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Number_types/include/CGAL/Exact_integer.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Exact_integer.h $
 // $Id: Exact_integer.h 350b917 2021-04-11T14:50:44+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

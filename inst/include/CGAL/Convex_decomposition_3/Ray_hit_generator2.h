@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator2.h $
 // $Id: Ray_hit_generator2.h 2d9dc6c 2021-09-29T11:46:58+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

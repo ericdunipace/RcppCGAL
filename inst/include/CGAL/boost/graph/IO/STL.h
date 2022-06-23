@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/BGL/include/CGAL/boost/graph/IO/STL.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/IO/STL.h $
 // $Id: STL.h ad79d37 2021-09-29T11:46:30+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

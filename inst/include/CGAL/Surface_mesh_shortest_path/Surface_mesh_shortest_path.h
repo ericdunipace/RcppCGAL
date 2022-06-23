@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_shortest_path/include/CGAL/Surface_mesh_shortest_path/Surface_mesh_shortest_path.h $
-// $Id: Surface_mesh_shortest_path.h 81d9556 2021-02-10T10:06:45+01:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_shortest_path/include/CGAL/Surface_mesh_shortest_path/Surface_mesh_shortest_path.h $
+// $Id: Surface_mesh_shortest_path.h a35555b 2022-02-22T15:19:17+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stephen Kiazyk
@@ -332,7 +332,7 @@ private:
   };
 
 private:
-  const Traits& m_traits;
+  const Traits m_traits;
   const Triangle_mesh& m_graph;
 
   Vertex_index_map m_vertexIndexMap;

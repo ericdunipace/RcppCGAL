@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/grid_simplify_point_set.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/grid_simplify_point_set.h $
 // $Id: grid_simplify_point_set.h 9939011 2020-06-21T15:54:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

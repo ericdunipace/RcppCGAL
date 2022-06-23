@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/Color.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Stream_support/include/CGAL/IO/Color.h $
 // $Id: Color.h 115fa5a 2021-12-14T14:01:21+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

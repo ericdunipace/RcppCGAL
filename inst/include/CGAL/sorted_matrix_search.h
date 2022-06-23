@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Matrix_search/include/CGAL/sorted_matrix_search.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Matrix_search/include/CGAL/sorted_matrix_search.h $
 // $Id: sorted_matrix_search.h 1e249af 2020-11-10T19:21:21+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

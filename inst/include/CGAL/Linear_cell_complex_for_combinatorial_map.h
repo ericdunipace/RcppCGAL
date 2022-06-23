@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Linear_cell_complex/include/CGAL/Linear_cell_complex_for_combinatorial_map.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Linear_cell_complex/include/CGAL/Linear_cell_complex_for_combinatorial_map.h $
 // $Id: Linear_cell_complex_for_combinatorial_map.h 3a33334 2020-06-17T10:55:47+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

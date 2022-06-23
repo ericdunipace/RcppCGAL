@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_processing_3/include/CGAL/edge_aware_upsample_point_set.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/edge_aware_upsample_point_set.h $
 // $Id: edge_aware_upsample_point_set.h 343ef10 2021-04-06T15:13:00+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

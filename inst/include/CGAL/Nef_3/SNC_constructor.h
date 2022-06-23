@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_3/include/CGAL/Nef_3/SNC_constructor.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/SNC_constructor.h $
 // $Id: SNC_constructor.h 43115e4 2021-05-05T21:57:47+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

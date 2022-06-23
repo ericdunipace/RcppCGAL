@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Point_set_3/include/CGAL/Point_set_3/IO/OFF.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_3/include/CGAL/Point_set_3/IO/OFF.h $
 // $Id: OFF.h a34debc 2021-06-23T22:56:35+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

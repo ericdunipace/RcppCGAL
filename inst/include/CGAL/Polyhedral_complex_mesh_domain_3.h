@@ -5,7 +5,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Mesh_3/include/CGAL/Polyhedral_complex_mesh_domain_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Polyhedral_complex_mesh_domain_3.h $
 // $Id: Polyhedral_complex_mesh_domain_3.h e6bacfb 2021-11-12T10:44:41+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

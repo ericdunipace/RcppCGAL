@@ -7,8 +7,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/GraphicsView/include/CGAL/Qt/qglviewer_impl.h $
-// $Id: qglviewer_impl.h 3640099 2021-09-28T15:36:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/qglviewer_impl.h $
+// $Id: qglviewer_impl.h 213da31 2022-05-16T16:20:13+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY
@@ -808,7 +808,7 @@ void CGAL::QGLViewer::setCamera(qglviewer::Camera *const camera) {
 
   camera->setSceneRadius(sceneRadius());
   camera->setSceneCenter(sceneCenter());
-  camera->setScreenWidthAndHeight(width(), height());
+  camera->setScreenWidthAndHeight(width(), height(), devicePixelRatio());
 
   // Disconnect current camera from this viewer.
   disconnect(this->camera()->frame(), SIGNAL(manipulated()), this,
@@ -1148,7 +1148,9 @@ void CGAL::QGLViewer::beginSelection(const QPoint &point)
 {
   makeCurrent();
   glEnable(GL_SCISSOR_TEST);
-  glScissor(point.x(), camera()->screenHeight()-1-point.y(), 1, 1);
+  glScissor(point.x() * devicePixelRatio(),
+            (camera()->screenHeight() - point.y()) * devicePixelRatio() - 1, 1,
+            1);
 }
 
 /*! This method is called by select() after scene elements were drawn by
@@ -2370,7 +2372,7 @@ CGAL_INLINE_FUNCTION
 void CGAL::QGLViewer::resizeGL(int width, int height) {
   QOpenGLWidget::resizeGL(width, height);
   glViewport(0, 0, GLint(width), GLint(height));
-  camera()->setScreenWidthAndHeight(this->width(), this->height());
+  camera()->setScreenWidthAndHeight(this->width(), this->height(), this->devicePixelRatio());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -3188,10 +3190,11 @@ void CGAL::QGLViewer::drawVisualHints() {
     mvpMatrix.ortho(-1,1,-1,1,-1,1);
     size=30*devicePixelRatio();
     rendering_program.setUniformValue("mvp_matrix", mvpMatrix);
-    glViewport(GLint((camera()->projectedCoordinatesOf(camera()->pivotPoint()).x-size/2)*devicePixelRatio()),
-               GLint((height() - camera()->projectedCoordinatesOf(camera()->pivotPoint()).y-size/2)*devicePixelRatio()), size, size);
-    glScissor (GLint((camera()->projectedCoordinatesOf(camera()->pivotPoint()).x-size/2)*devicePixelRatio()),
-               GLint((height() - camera()->projectedCoordinatesOf(camera()->pivotPoint()).y-size/2)*devicePixelRatio()), size, size);
+    const auto point_2d = camera()->projectedCoordinatesOf(camera()->pivotPoint());
+    glViewport(GLint(point_2d.x*devicePixelRatio()-size/2),
+               GLint((height() - point_2d.y)*devicePixelRatio()-size/2), size, size);
+    glScissor (GLint(point_2d.x*devicePixelRatio()-size/2),
+               GLint((height() - point_2d.y)*devicePixelRatio()-size/2), size, size);
     rendering_program.setUniformValue("color", QColor(::Qt::black));
     glDisable(GL_DEPTH_TEST);
     glDrawArrays(GL_LINES, 0, static_cast<GLsizei>(4));

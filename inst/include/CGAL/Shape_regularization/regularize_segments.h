@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Shape_regularization/include/CGAL/Shape_regularization/regularize_segments.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_regularization/include/CGAL/Shape_regularization/regularize_segments.h $
 // $Id: regularize_segments.h 9acece5 2021-08-12T17:11:09+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

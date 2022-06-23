@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Nef_S2/include/CGAL/Nef_polyhedron_S2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_S2/include/CGAL/Nef_polyhedron_S2.h $
 // $Id: Nef_polyhedron_S2.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

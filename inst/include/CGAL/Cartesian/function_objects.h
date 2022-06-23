@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Cartesian_kernel/include/CGAL/Cartesian/function_objects.h $
-// $Id: function_objects.h 1fb32e7 2021-10-27T17:20:28+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/Cartesian/function_objects.h $
+// $Id: function_objects.h 9a2d782 2022-03-15T12:42:56+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -3031,6 +3031,18 @@ namespace CartesianKernelFunctors {
 
       return construct_vector(vx, vy, vz);
     }
+
+    Vector_3
+    operator()( Origin, const Point_3& q, const Point_3& r ) const
+    {
+      // Cross product oq * or
+      FT vx = q.y()*r.z() - r.y()*q.z();
+      FT vy = q.z()*r.x() - r.z()*q.x();
+      FT vz = q.x()*r.y() - r.x()*q.y();
+      typename K::Construct_vector_3 construct_vector;
+
+      return construct_vector(vx, vy, vz);
+    }
   };
 
   template <typename K>
@@ -4301,6 +4313,15 @@ namespace CartesianKernelFunctors {
 
     result_type
     operator()( const Vector_3& u, const Vector_3& v, const Vector_3& w) const
+    {
+      return orientationC3(u.x(), u.y(), u.z(),
+                           v.x(), v.y(), v.z(),
+                           w.x(), w.y(), w.z());
+    }
+
+    result_type
+    operator()( Origin, const Point_3& u,
+                const Point_3& v, const Point_3& w) const
     {
       return orientationC3(u.x(), u.y(), u.z(),
                            v.x(), v.y(), v.z(),

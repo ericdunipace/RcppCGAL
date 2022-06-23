@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Number_types/include/CGAL/Quotient.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Quotient.h $
 // $Id: Quotient.h 8d32692 2021-09-09T15:48:59+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

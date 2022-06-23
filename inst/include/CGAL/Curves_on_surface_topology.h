@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Curves_on_surface_topology.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_topology/include/CGAL/Curves_on_surface_topology.h $
 // $Id: Curves_on_surface_topology.h b58c05e 2020-08-13T17:59:32-04:00 Youmu
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

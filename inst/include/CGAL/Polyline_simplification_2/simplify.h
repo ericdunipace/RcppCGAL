@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polyline_simplification_2/include/CGAL/Polyline_simplification_2/simplify.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polyline_simplification_2/include/CGAL/Polyline_simplification_2/simplify.h $
 // $Id: simplify.h b7e688c 2021-10-12T09:05:42+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

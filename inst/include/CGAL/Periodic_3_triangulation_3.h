@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_3.h $
-// $Id: Periodic_3_triangulation_3.h 5945e48 2021-09-17T08:14:06+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_3.h $
+// $Id: Periodic_3_triangulation_3.h 4eac47f 2022-03-09T12:57:23+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -3206,7 +3206,7 @@ periodic_remove(Vertex_handle v, PointRemover& remover, CoverManager& cover_mana
   // in Euclidean space and make a map from the vertices in remover.tmp
   // towards the vertices in *this
 
-  Unique_hash_map<VertexE_handle,Vertex_handle> vmap;
+  Unique_hash_map<VertexE_handle,Vertex_handle> vmap(Vertex_handle(), vertices.size());
   CellE_handle ch;
   remover.tmp.clear();
 
@@ -4146,7 +4146,7 @@ operator<< (std::ostream& os,const Periodic_3_triangulation_3<GT,TDS>& tr)
     return os;
 
   // write the vertices
-  Unique_hash_map<Vertex_handle, std::size_t > V;
+  Unique_hash_map<Vertex_handle, std::size_t > V(0, tr.number_of_vertices());
   std::size_t i=0;
   if(tr.is_1_cover()) {
     for(Vertex_iterator it=tr.vertices_begin(); it!=tr.vertices_end(); ++it) {

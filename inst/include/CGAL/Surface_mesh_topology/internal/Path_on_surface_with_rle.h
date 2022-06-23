@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Path_on_surface_with_rle.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Path_on_surface_with_rle.h $
 // $Id: Path_on_surface_with_rle.h 7f63f3d 2021-10-04T15:53:36+02:00 Mael
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Filtered_kernel/include/CGAL/Lazy.h $
-// $Id: Lazy.h 74c029c 2021-09-09T11:44:36+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Filtered_kernel/include/CGAL/Lazy.h $
+// $Id: Lazy.h 04fa75e 2022-03-11T09:12:17+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -800,7 +800,7 @@ struct Approx_converter
   template < typename T >
   decltype(auto)
   operator()(const T&t) const
-  { return t.approx(); }
+  { return approx(t); }
 
   const Null_vector&
   operator()(const Null_vector& n) const
@@ -825,7 +825,7 @@ struct Exact_converter
   template < typename T >
   decltype(auto)
   operator()(const T&t) const
-  { return t.exact(); }
+  { return exact(t); }
 
   const Null_vector&
   operator()(const Null_vector& n) const

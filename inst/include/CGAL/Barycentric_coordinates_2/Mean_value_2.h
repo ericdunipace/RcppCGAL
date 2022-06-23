@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Mean_value_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Mean_value_2.h $
 // $Id: Mean_value_2.h 92434bf 2021-09-21T17:10:58+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

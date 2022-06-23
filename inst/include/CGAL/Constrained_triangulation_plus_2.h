@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Triangulation_2/include/CGAL/Constrained_triangulation_plus_2.h $
-// $Id: Constrained_triangulation_plus_2.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_2/include/CGAL/Constrained_triangulation_plus_2.h $
+// $Id: Constrained_triangulation_plus_2.h 48c462b 2022-03-09T13:46:55+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -634,7 +634,7 @@ public:
   file_output(std::ostream& os) const
   {
     os << static_cast<const Tr&>(*this);
-    Unique_hash_map<Vertex_handle,int> V;
+    Unique_hash_map<Vertex_handle,int> V(0, number_of_vertices());
     int inum = 0;
     for(Vertex_iterator vit = vertices_begin(); vit != vertices_end() ; ++vit){
       if(! is_infinite(vit)){
@@ -1187,7 +1187,8 @@ intersect(Face_handle f, int i,
             << " , #" << vd->time_stamp() << "= " << vd->point()
             << " , Exact_intersections_tag)\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Point pi;
+  Point pi(ORIGIN); // initialize although we are sure that it will be
+                    // set by the intersection, but to quiet a warning
   Intersection_tag itag = Intersection_tag();
   CGAL_triangulation_assertion_code( bool ok = )
   intersection(geom_traits(), pa, pb, pc, pd, pi, itag );

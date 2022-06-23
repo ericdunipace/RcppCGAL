@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Minimal_quadrangulation.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Minimal_quadrangulation.h $
 // $Id: Minimal_quadrangulation.h 93c2d79 2021-02-26T18:14:26+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

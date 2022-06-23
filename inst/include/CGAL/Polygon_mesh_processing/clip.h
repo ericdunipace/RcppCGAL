@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/clip.h $
-// $Id: clip.h 94ee9b1 2021-10-07T14:27:16+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/clip.h $
+// $Id: clip.h 6f6bd08 2022-02-22T12:42:41+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -87,7 +87,7 @@ clip_to_bbox(const Plane_3& plane,
   }};
 
   // description of faces of the bbox
-  constexpr std::array<int, 24> face_indices
+  static constexpr std::array<int, 24> face_indices
     { { 0, 1, 2, 3,
         2, 1, 5, 6,
         3, 2, 6, 7,
@@ -95,7 +95,7 @@ clip_to_bbox(const Plane_3& plane,
         4, 0, 3, 7,
         6, 5, 4, 7 } };
 
-  constexpr std::array<int, 24> edge_indices
+  static constexpr std::array<int, 24> edge_indices
     { { 0,  1,  2, 3,
         1,  4,  5, 6,
         2,  6,  7, 8,

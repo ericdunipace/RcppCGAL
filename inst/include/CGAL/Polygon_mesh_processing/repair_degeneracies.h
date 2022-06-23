@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_degeneracies.h $
-// $Id: repair_degeneracies.h 2337757 2021-09-14T21:43:41+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_degeneracies.h $
+// $Id: repair_degeneracies.h 6e10413 2022-03-09T11:33:24+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sebastien Loriot,
@@ -188,6 +188,7 @@ bool is_collapse_geometrically_valid(typename boost::graph_traits<TriangleMesh>:
 }
 */
 
+// @todo handle boundary edges
 template <class TriangleMesh, typename VPM, typename Traits>
 boost::optional<typename Traits::FT>
 get_collapse_volume(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor h,
@@ -203,9 +204,9 @@ get_collapse_volume(typename boost::graph_traits<TriangleMesh>::halfedge_descrip
 
   const typename Traits::Point_3 origin(ORIGIN);
 
-// @todo handle boundary edges
-
   h = opposite(h, tmesh); // Euler::collapse edge keeps the target and removes the source
+
+  typename Traits::Compute_volume_3 volume = gt.compute_volume_3_object();
 
   // source is kept, target is removed
   Point_ref kept = get(vpm, source(h, tmesh));
@@ -1266,7 +1267,7 @@ bool remove_degenerate_edges(const EdgeRange& edge_range,
     all_removed = true;
     std::set<edge_descriptor> degenerate_edges_to_remove;
     degenerate_edges(local_edge_range, tmesh, std::inserter(degenerate_edges_to_remove,
-                                                            degenerate_edges_to_remove.end()));
+                                                            degenerate_edges_to_remove.end()), np);
 
 #ifdef CGAL_PMP_REMOVE_DEGENERATE_FACES_DEBUG
     Rcpp::Rcout << "Found " << degenerate_edges_to_remove.size() << " null edges.\n";

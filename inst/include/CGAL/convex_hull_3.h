@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Convex_hull_3/include/CGAL/convex_hull_3.h $
-// $Id: convex_hull_3.h 61d42c3 2021-12-16T13:49:45+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_hull_3/include/CGAL/convex_hull_3.h $
+// $Id: convex_hull_3.h 9ecb90c 2022-01-26T19:07:34+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -703,7 +703,6 @@ ch_quickhull_3_scan(TDS_2& tds,
      }
      Vertex_handle vh = tds.star_hole(edges.begin(), edges.end(), visible_set.begin(), visible_set.end());
      vh->point() = farthest_pt;
-     vh->info() = 0;
 
      // now partition the set of outside set points among the new facets.
 
@@ -775,8 +774,8 @@ ch_quickhull_face_graph(std::list<typename Traits::Point_3>& points,
   typedef typename std::list<Point_3>::iterator               P3_iterator;
 
   typedef Triangulation_data_structure_2<
-    Convex_hull_vertex_base_2<int, GT3_for_CH3<Traits> >,
-    Convex_hull_face_base_2<int, Traits> >                    Tds;
+    Convex_hull_vertex_base_2<GT3_for_CH3<Traits> >,
+    Convex_hull_face_base_2<Traits> >                         Tds;
 
   typedef typename Tds::Vertex_handle                         Vertex_handle;
   typedef typename Tds::Face_handle                           Face_handle;
@@ -822,7 +821,6 @@ ch_quickhull_face_graph(std::list<typename Traits::Point_3>& points,
     Vertex_handle v2 = tds.create_vertex(); v2->set_point(*point3_it);
     Vertex_handle v3 = tds.create_vertex(); v3->set_point(*max_it);
 
-    v0->info() = v1->info() = v2->info() = v3->info() = 0;
     Face_handle f0 = tds.create_face(v0,v1,v2);
     Face_handle f1 = tds.create_face(v3,v1,v0);
     Face_handle f2 = tds.create_face(v3,v2,v1);

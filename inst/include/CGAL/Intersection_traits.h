@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Intersections_2/include/CGAL/Intersection_traits.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_2/include/CGAL/Intersection_traits.h $
 // $Id: Intersection_traits.h 9ed943e 2021-06-23T17:38:22+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

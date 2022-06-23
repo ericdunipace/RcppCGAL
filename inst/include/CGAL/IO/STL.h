@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Stream_support/include/CGAL/IO/STL.h $
-// $Id: STL.h 4eb1464 2021-11-09T11:21:24+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Stream_support/include/CGAL/IO/STL.h $
+// $Id: STL.h 78f9324 2022-03-09T11:33:17+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -85,7 +85,6 @@ bool read_STL(std::istream& is,
               )
 {
   const bool verbose = parameters::choose_parameter(parameters::get_parameter(np, internal_np::verbose), false);
-  const bool binary = CGAL::parameters::choose_parameter(CGAL::parameters::get_parameter(np, internal_np::use_binary_mode), true);
 
   if(!is.good())
   {
@@ -94,7 +93,6 @@ bool read_STL(std::istream& is,
     return false;
   }
 
-  int pos = 0;
   // Ignore all initial whitespace
   unsigned char c;
 
@@ -105,22 +103,10 @@ bool read_STL(std::istream& is,
       is.unget(); // move back to the first interesting char
       break;
     }
-    ++pos;
   }
 
   if(!is.good()) // reached the end
     return true;
-
-  // If we have gone beyond 80 characters and have not read anything yet,
-  // then this must be an ASCII file.
-  if(pos > 80)
-  {
-    if(binary)
-      return false;
-    return internal::parse_ASCII_STL(is, points, facets, verbose);
-  }
-
-  // We are within the first 80 characters, both ASCII and binary are possible
 
   // Read the 5 first characters to check if the first word is "solid"
   std::string s;
@@ -134,7 +120,6 @@ bool read_STL(std::istream& is,
      is.read(reinterpret_cast<char*>(&word[5]), sizeof(c)))
   {
     s = std::string(word, 5);
-    pos += 5;
   }
   else
   {

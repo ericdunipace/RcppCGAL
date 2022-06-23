@@ -1,0 +1,729 @@
+plot(x[,1],y)
+plot(x[,2],y)
+plot(x[,3],y)
+plot(x[,4],y)
+plot(x[,5],y)
+plogis(y)
+hist(plogis(y))
+hist(tanh(y))
+hist(log1p(exp(y)))
+hist(plogis(log1p(exp(y))))
+hist(y)
+hist(1/y)
+hist(plogis(1/y))
+hist(plogis(1/sqrt(y)))
+hist(plogis(1/(y)^2))
+hist(plogis(1/(y)^3))
+hist(plogis(1/(y)^10))
+hist(plogis(1/(y)^11))
+hist(plogis((y)^11))
+hist(plogis((y)^-3))
+hist(plogis((y)^-(1/3)))
+hist(plogis((y)^-(1/5)))
+x <- matrix(runif(1000*5), nrow=1000, ncol=5)
+y <- apply(x, 1, fried)
+hist(plogis(y))
+fried <- function(xx)#
+{#
+  ###########################################################################
+  ##
+  # FRIEDMAN FUNCTION#
+  ##
+  # Authors: Sonja Surjanovic, Simon Fraser University#
+  #          Derek Bingham, Simon Fraser University#
+  # Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.#
+  ##
+  # Copyright 2013. Derek Bingham, Simon Fraser University.#
+  ##
+  # THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY#
+  # FOR THE USE OF THIS SOFTWARE.  If software is modified to produce#
+  # derivative works, such modified software should be clearly marked.#
+  # Additionally, this program is free software; you can redistribute it #
+  # and/or modify it under the terms of the GNU General Public License as #
+  # published by the Free Software Foundation; version 2.0 of the License. #
+  # Accordingly, this program is distributed in the hope that it will be #
+  # useful, but WITHOUT ANY WARRANTY; without even the implied warranty #
+  # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU #
+  # General Public License for more details.#
+  ##
+  # For function details and reference information, see:#
+  # http://www.sfu.ca/~ssurjano/#
+  ##
+  ###########################################################################
+  ##
+  # INPUT:#
+  ##
+  # xx = c(x1, x2, x3, x4, x5)#
+  ##
+  ###########################################################################
+  x1 <- xx[1]#
+  x2 <- xx[2]#
+  x3 <- xx[3]#
+  x4 <- xx[4]#
+  x5 <- xx[5]#
+  term1 <- 10 * sin(pi*x1*x2)#
+  term2 <- 20 * (x3-0.5)^2#
+  term3 <- 10*x4#
+  term4 <- 5*x5#
+  y <- term1 + term2 + term3 + term4 + rnorm(1)#
+  return(y)#
+}
+y <- apply(x, 1, fried)
+hist(plogis(y))
+x <- matrix(runif(1000*5)*2 - 1, nrow=1000, ncol=5)
+y <- apply(x, 1, fried)
+hist(plogis(y))
+hist(y)
+fried <- function(xx)#
+{#
+  ###########################################################################
+  ##
+  # FRIEDMAN FUNCTION#
+  ##
+  # Authors: Sonja Surjanovic, Simon Fraser University#
+  #          Derek Bingham, Simon Fraser University#
+  # Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.#
+  ##
+  # Copyright 2013. Derek Bingham, Simon Fraser University.#
+  ##
+  # THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY#
+  # FOR THE USE OF THIS SOFTWARE.  If software is modified to produce#
+  # derivative works, such modified software should be clearly marked.#
+  # Additionally, this program is free software; you can redistribute it #
+  # and/or modify it under the terms of the GNU General Public License as #
+  # published by the Free Software Foundation; version 2.0 of the License. #
+  # Accordingly, this program is distributed in the hope that it will be #
+  # useful, but WITHOUT ANY WARRANTY; without even the implied warranty #
+  # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU #
+  # General Public License for more details.#
+  ##
+  # For function details and reference information, see:#
+  # http://www.sfu.ca/~ssurjano/#
+  ##
+  ###########################################################################
+  ##
+  # INPUT:#
+  ##
+  # xx = c(x1, x2, x3, x4, x5)#
+  ##
+  ###########################################################################
+  x1 <- xx[1]#
+  x2 <- xx[2]#
+  x3 <- xx[3]#
+  x4 <- xx[4]#
+  x5 <- xx[5]#
+  term1 <- 10 * sin(pi*x1*x2)#
+  term2 <- 20 * (x3-0.5)^2#
+  term3 <- 10*x4#
+  term4 <- 5*x5#
+  y <- term1 + term2 + term3 + term4 + rnorm(1)#
+  return(y)#
+}#
+grlee09 <- function(xx)#
+{#
+  ###########################################################################
+  ##
+  # GRAMACY & LEE (2009) FUNCTION#
+  ##
+  # Authors: Sonja Surjanovic, Simon Fraser University#
+  #          Derek Bingham, Simon Fraser University#
+  # Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.#
+  ##
+  # Copyright 2013. Derek Bingham, Simon Fraser University.#
+  ##
+  # THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY#
+  # FOR THE USE OF THIS SOFTWARE.  If software is modified to produce#
+  # derivative works, such modified software should be clearly marked.#
+  # Additionally, this program is free software; you can redistribute it #
+  # and/or modify it under the terms of the GNU General Public License as #
+  # published by the Free Software Foundation; version 2.0 of the License. #
+  # Accordingly, this program is distributed in the hope that it will be #
+  # useful, but WITHOUT ANY WARRANTY; without even the implied warranty #
+  # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU #
+  # General Public License for more details.#
+  ##
+  # For function details and reference information, see:#
+  # http://www.sfu.ca/~ssurjano/#
+  ##
+  ###########################################################################
+  ##
+  # INPUT:#
+  ##
+  # xx = c(x1, x2, x3, x4, x5, x6)#
+  ##
+  ###########################################################################
+  x1 <- xx[1]#
+  x2 <- xx[2]#
+  x3 <- xx[3]#
+  x4 <- xx[4]#
+  x5 <- xx[5]#
+  x6 <- xx[6]#
+  term1 <- exp(sin((0.9*(x1+0.48))^10))#
+  term2 <- x2 * x3#
+  term3 <- x4#
+  y <- term1 + term2 + term3#
+  return(y)#
+}#
+#
+require(mvtnorm)#
+#
+x <- rmvnorm(1000, rep(0,5), diag(1,5,5))#
+#
+y <- apply(x, 1, fried)#
+y2 <- apply(x,1, grlee09)
+hist(y2)
+hist(plogis(y2))
+qchisq(0.95, 4)
+qchisq(0.95, 1)
+qchisq(0.95, .001)
+Y <- rnorm(1000)
+hist(dnorm(Y))
+rho <- 0.5
+data <- mvrnorm(1000, c(0,0), matrix(c(1,rho,rho,1)2,2))
+data <- mvrnorm(1000, c(0,0), matrix(c(1,rho,rho,1),2,2))
+data <- mvtnorm::rmvnorm(1000, c(0,0), matrix(c(1,rho,rho,1),2,2))
+X  <- data[,1]
+Y <- data[,2]
+str(data)
+pnorm(Y)
+hist(pnorm(Y))
+pnorm(Y, mean=X*rho, sd = sqrt(1-rho^2))
+hist(pnorm(Y, mean=X*rho, sd = sqrt(1-rho^2)))
+hist(dnorm(Y, mean=X*rho, sd = sqrt(1-rho^2)))
+hist(pnorm(Y)/pnorm(pnorm(Y, mean=X*rho, sd = sqrt(1-rho^2))))
+hist(pnorm(Y)/pnorm(Y, mean=X*rho, sd = sqrt(1-rho^2)))
+require(inla)
+3*1/tan(pi*0.99/2))
+3*1/tan(pi*0.99/2)
+3*10/tan(pi*0.99/2)
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(x)*x#
+}#
+#
+curve(fun,x_range[1], x_range[5])
+curve
+x_range <- c(-1,5)
+x_range
+curve(fun, x_range[1], x_range[2])
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(8*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(2*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])
+x <- rnorm(n, 2.25, 0.1)
+n <- 100
+n <- 100#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x)#
+points(x=x,y=y)
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(2*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 100#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.001)#
+points(x=x,y=y)
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(2*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 100#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.1)#
+points(x=x,y=y)
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(2*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 100#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.5)#
+points(x=x,y=y, pch=".")
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(2*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 100#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.25)#
+points(x=x,y=y, pch=".")
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(2*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 1000#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.25)#
+points(x=x,y=y, pch=".")
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+lines(x = x, y = vals)
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(2*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 1000#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.25)#
+points(x=x,y=y, pch=".")#
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+lines(x = x, y = vals, col="blue")
+library(ggplot2)
+??geom
+<span class="skimlinks-unlinked">data.frame(x=c(0,2</span>)
+ggplot2(data.frame(x=c(0,2), aes(x)) + stat_function(fun=function(x)x^2, geom="line", aes(colour="square"))
+)
+ggplot(data.frame(x=c(0,2), aes(x)) + stat_function(fun=function(x)x^2, geom="line", aes(colour="square"))
+)
+ggplot(data.frame(x=c(0,2)), aes(x)) + stat_function(fun=function(x)x^2, geom="line", aes(colour="square"))
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x, y)) +#
+stat_function(data=data.frame(z=c(0,2)),aes(x=z), #
+fun=fun, geom="line", aes(colour="square")) +#
+geom_points()
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x, y)) +#
+stat_function(data=data.frame(z=c(0,2)),mapping = aes(x=z), #
+fun=fun, geom="line", aes(colour="square")) +#
+geom_points()
+ggplot(data=df, aes(x, y)) +#
+stat_function(data=data.frame(z=c(0,2)),mapping = aes(x=z), #
+fun=fun, geom="line")
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x, y)) +#
+stat_function(data=data.frame(x=c(0,2)), #
+fun=fun, geom="line")
+ggplot(data=df, aes(x, y)) +#
+stat_function(data=data.frame(x=c(0,2)), fun = fun, geom="line")
+ggplot(data=df, aes(x, y)) +#
+stat_function(aex(x = c(0,2)), fun = fun, geom="line") +#
+geom_points()
+ggplot(data=df, aes(x, y)) +#
+stat_function(aes(x = c(0,2)), fun = fun, geom="line")
+ggplot(data=df, aes(x, y)) +#
+stat_function(data = data.frame(x=c(-1,5)), fun = fun, geom="line")
+ggplot(data = data.frame(x = x_range)) + stat_function(fun = fun, geom="line")
+ggplot(data = data.frame(x = x_range)) + stat_function(fun = function(x){fun(x)}, geom="line")
+library(ggplot2)#
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos(2*pi*x)+x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 1000#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.25)#
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+#
+points(x = x,y = y, pch = ".")#
+lines(x = x, y = vals, col = "blue")#
+#
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x, y))#
+ggplot(data = data.frame(x = x_range)) + stat_function(fun = function(x){fun(x)}, geom="line")
+ggplot(data = data.frame(x = x_range))
+ggplot(data = data.frame(x = x_range)) + stat_function(fun = fun, geom="line")
+ggplot(data = data.frame(x = x_range)) + stat_function(fun = exp, geom="line")
+ggplot(data = data.frame(x = x_range), aes(x = x)) + stat_function(fun = fun, geom="line")
+ggplot(data = data.frame(x = x_range), aes(x = x)) + stat_function(fun = fun, geom="line", n = 1000)
+ggplot() + stat_function(data = data.frame(x = x_range), aes(x = x) + fun = fun, geom="line", n = 1000)
+ggplot() + stat_function(data = data.frame(x = x_range), aes(x = x), fun = fun, geom="line", n = 1000)
+ggplot(data=df, aes(x = x, y = y)) + #
+#ggplot() + #
+stat_function(data = data.frame(x = x_range), aes(x = x), fun = fun, geom="line", n = 1000)
+ggplot(data=df, aes(x = x, y = y)) + #
+#ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000)
+ggplot(data=df, aes(x = x, y = y)) + #
+#ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y))
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.5)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.1)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.05)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.05, shape = 20)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.5, shape = 20, size = 1)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.5, shape = 20, size = 0.5)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.1, shape = 20, size = 0.5)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5)
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5, color = "blue")
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smoot(data = df, aes(x = x, y = y), method = "lm")
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm")
+ggplot() + #
+stat_function(aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw()
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000)
+ggplot(data = df, aes(x = x, y = y)) + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000)
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw()
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 100#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.25)#
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+#
+#points(x = x,y = y, pch = ".")#
+#lines(x = x, y = vals, col = "blue")#
+#
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x = x, y = y))#
+#
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw()
+n <- 10#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.25)#
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+#
+#points(x = x,y = y, pch = ".")#
+#lines(x = x, y = vals, col = "blue")#
+#
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x = x, y = y))#
+#
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw()
+library(ggplot2)#
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos( 3/2 * pi * x ) + x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 10#
+x <- rnorm(n, 2.25, 0.1)#
+y <- fun(x) + rnorm(n,0,0.25)#
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+#
+#points(x = x,y = y, pch = ".")#
+#lines(x = x, y = vals, col = "blue")#
+#
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x = x, y = y))#
+#
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw()
+library(ggplot2)#
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos( 3/2 * pi * x ) + x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 100#
+x <- rnorm(n, 2.5, 0.25)#
+y <- fun(x) + rnorm(n,0,0.25)#
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+#
+#points(x = x,y = y, pch = ".")#
+#lines(x = x, y = vals, col = "blue")#
+#
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x = x, y = y))#
+#
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw()
+n <- 100#
+x <- rnorm(n, 2.25, 0.25)#
+y <- fun(x) + rnorm(n,0,0.25)#
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+#
+#points(x = x,y = y, pch = ".")#
+#lines(x = x, y = vals, col = "blue")#
+#
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x = x, y = y))#
+#
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.2, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw()
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.5, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw()
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.5, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw() +#
+ylab("f(x)") + xlab("x")
+library(ggplot2)#
+set.seed(23987)#
+#
+x_range <- c(-1,5)#
+fun <- function(x) {#
+  cos( 3/2 * pi * x ) + x#
+}#
+#
+curve(fun, x_range[1], x_range[2])#
+#
+n <- 100#
+x <- rnorm(n, 2.25, 0.25)#
+y <- fun(x) + rnorm(n,0,0.25)#
+fit <- lm(fun(x) ~ x)#
+vals <- fitted.values(fit)#
+#
+#points(x = x,y = y, pch = ".")#
+#lines(x = x, y = vals, col = "blue")#
+#
+df <- data.frame(x,y)#
+ggplot(data=df, aes(x = x, y = y))#
+#
+ggplot() + #
+stat_function(data = data.frame(x_range = x_range),#
+aes(x = x_range), fun = fun, geom="line", n = 1000) +#
+geom_point(data = df, aes(x = x, y = y), alpha = 0.5, shape = 20, size = 0.5) +#
+geom_smooth(data = df, aes(x = x, y = y), method = "lm") +#
+theme_bw() +#
+ylab("f(x)") + xlab("x")
+x <- runif(1e5)
+sum(x/sum(x) * log(x/sum(x)))
+x <- runif(1e2)
+sum(x/sum(x) * log(x/sum(x)))
+x <- runif(1e7)
+sum(x/sum(x) * log(x/sum(x)))
+y <- runif(1e7)
+sum(y/sum(y) * log(y/sum(y)))
+proc.time
+proc.time()
+tab <- read.table(file = file.choose())
+tab
+str(tab)
+tab <- tab[-1,]
+grepl("+", tab[,1])
+str(tab)
+grepl("+", tab)
+grepl("\+", tab)
+grepl("\\+", tab)
+tab
+grepl("\\+", tab)
+tab <- read.table(file = file.choose())
+tab <- tab[-(1:2),]
+tab <- tab[!grepl("\\+", tab)]
+tab
+nums <- lapply(strsplit(tab, "_"), function(ll) ll[2])
+nums
+nums <- sapply(strsplit(tab, "_"), function(ll) ll[2])
+nums
+paste(nums, collapse = ",")
+file.choose()
+dat<- read.table("/Users/eifer/Desktop/conv.txt")
+dat <- data[-1,]
+head(dat)
+dat<- read.table("/Users/eifer/Desktop/conv.txt")
+dat <- dat[-(1:2),]
+paste(sapply(strsplit(dat, x = "_"), function(x) x[2]), collapse = "','")
+head(dat)
+grepl("\+", dat)
+grepl("\\+", dat)
+dat<- read.table("/Users/eifer/Desktop/conv.txt")
+dat <- dat[-(1:2),]
+dat <- dat[!grepl("\\+", dat)]
+paste(sapply(strsplit(dat, x = "_"), function(x) x[2]), collapse = "','")
+dat
+strsplit(dat, x = "_")
+strsplit("_", x = dat)
+paste(sapply(strsplit("_", x = dat), function(x) x[2]), collapse = "','")
+paste(sapply(strsplit("_", x = dat), function(x) x[2]), collapse = ",")
+install.packages("onion")
+install.packages(c("rgl","Rvcg"))
+install.packages("cgal4h")
+install.packages("covr")
+install.packages("cpp11")
+"~0 + .:.:.:.:. + .:.:.:.  + .:.:. +  .:.  + ."
+"~0 + .:.:.:.:.
++ .:.:.:.  + .:.:. +  .:.  + ."
+as.formula(~0 + .:.:.:.:.
++ .:.:.:.  + .:.:. +  .:.  + .)
+form <- as.formula(~0 + .:.:.:.:.
++ .:.:.:.  + .:.:. +  .:.  + .)
+form
+str(form)
+nsim <- 1000;#
+n <- 2^(2:12)#
+x <- rnorm(nsim)#
+y <- n^(1/2)#
+plot(log(n), log(y))
+nsim <- 1000;#
+n <- 2^(2:12)#
+x <- rnorm(nsim)#
+y <- (n^(-1/2))#
+plot(log(n), log(y))
+points(log(n), log(n)^(-2) )
+plot(log(n), log(n)^(-2) )
+plot(log(n), log(s) )
+nsim <- 1000;#
+n <- 2^(2:12)#
+x <- rnorm(nsim)#
+y <- (n^(-1/2))#
+s <- exp(n^(-2))#
+plot(log(n), log(y))#
+plot(log(n), log(n)^(-2) )#
+plot(log(n), log(s) )
+plot(log(n), log(y))
+s <- exp(n)^(-2)
+y <- (n^(-1/2))#
+s <- exp(n)^(-2)
+nsim <- 1000;#
+n <- 2^(2:12)#
+x <- rnorm(nsim)#
+y <- (n^(-1/2))#
+s <- exp(n)^(-2)#
+plot(log(n), log(y))#
+plot(log(n), log(n)^(-2) )#
+plot(log(n), log(s) )
+plot(log(n), log(-log(n) ))
+-log(n)
+plot(log(n), log(log(n) ))
+plot(log(n), -log(log(n) ))
+points(log(n), log(y))
+plot(n, y)
+plot(n, exp(-log(log(n)))
+plot(n, exp(-log(log(n))))
+plot(n, y)
+points(n, exp(-log(log(n))))
+plot(log(n), log(y))
+plot(log(n), -log(log(n) ))
+plot(log(n), log(y))
+points(log(n), -log(log(n) ))
+plot(n, y)
+points(n, exp(-log(log(n))))
+points(n, 1/log(n))
+lines(n, 1/log(n))
+plot(n, y)#
+points(n, exp(-log(log(n))))#
+lines(n, 1/log(n))
+plot(log(n), log(y))#
+points(log(n), -log(log(n) ))
+rhub::platforms()
+list.packages()
+packages??
+?
+asdf
+packages?
+?
+adsf
+??packages
+packages()
+base::packages
+base::package
+??base::package
+installed.packages()
+library(causalOT)
+list.packages()
+packages??
+?
+adsf
+??packages
+a
+.packages(TRUE)
+file.choose()
+setwd("/Users/eifer/GoogleDrive/R/RcppCGAL/")
+RcppCGAL:::.cgal.cerr.remover.github()
+RcppCGAL:::.cgal.cerr.remover.github()
+q("no")

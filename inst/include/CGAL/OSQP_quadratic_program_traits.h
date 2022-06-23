@@ -4,7 +4,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Solver_interface/include/CGAL/OSQP_quadratic_program_traits.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Solver_interface/include/CGAL/OSQP_quadratic_program_traits.h $
 // $Id: OSQP_quadratic_program_traits.h 072c1bf 2021-08-03T18:17:14+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polyline.h $
-// $Id: Triangulate_hole_polyline.h d26246b 2021-09-01T17:46:33+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polyline.h $
+// $Id: Triangulate_hole_polyline.h e855b27 2022-03-02T15:13:16+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1245,7 +1245,7 @@ bool is_planar_2(
   const Squared_distance_3 squared_distance_3 =
     traits.compute_squared_distance_3_object();
 
-  const std::size_t n = points.size() - 1; // the first equals to the last
+  const double n = static_cast<double>(points.size() - 1); // the first equals to the last
   if (n < 3) {
     return false; // cant be a plane!
   }
@@ -1257,8 +1257,8 @@ bool is_planar_2(
   // Compute covariance matrix.
   FT xx = FT(0), yy = FT(0), zz = FT(0);
   FT xy = FT(0), xz = FT(0), yz = FT(0);
-  for (std::size_t i = 0; i < n; ++i) {
-    const Point_3& p = points[i];
+  for (const Point_3& p : points)
+  {
     const FT dx = p.x() - centroid.x();
     const FT dy = p.y() - centroid.y();
     const FT dz = p.z() - centroid.z();
@@ -1279,15 +1279,14 @@ bool is_planar_2(
   }
 
   // Here, avg_squared_distance is a little bit more tolerant than avg_distance^2.
-  CGAL_assertion(avg_normal != typename Traits::Vector_3());
   const Plane_3 plane = Plane_3(centroid, avg_normal);
   FT avg_squared_distance = FT(0);
-  for (std::size_t i = 0; i < n; ++i) {
-    const Point_3& p = points[i];
+  for (const Point_3& p : points)
+  {
     const Point_3  q = projection_3(plane, p);
     avg_squared_distance += CGAL::abs(squared_distance_3(p, q));
   }
-  avg_squared_distance /= static_cast<FT>(n);
+  avg_squared_distance /= FT(n);
   // Rcpp::Rcout << "avg squared distance: " << avg_squared_distance << std::endl;
 
   CGAL_assertion(max_squared_distance >= FT(0));
@@ -1328,7 +1327,7 @@ triangulate_hole_polyline_with_cdt(const PointRange& points,
   }
 
   FT x = FT(0), y = FT(0), z = FT(0);
-  std::size_t num_normals = 0;
+  int num_normals = 0;
   const Point_3& ref_point = P[0];
   const std::size_t size = P.size() - 1;
   for (std::size_t i = 1; i < size - 1; ++i) {
@@ -1363,11 +1362,14 @@ triangulate_hole_polyline_with_cdt(const PointRange& points,
   }
 
   // Setting the final normal.
-  x /= static_cast<FT>(num_normals);
-  y /= static_cast<FT>(num_normals);
-  z /= static_cast<FT>(num_normals);
+  FT ft_nn(num_normals);
+  x /= ft_nn;
+  y /= ft_nn;
+  z /= ft_nn;
   const Vector_3 avg_normal = Vector_3(x, y, z);
   // Rcpp::Rcout << "avg normal: " << avg_normal << std::endl;
+
+  if (avg_normal==NULL_VECTOR) return false;
 
   // Checking the hole planarity.
   if (!is_planar_2(P, avg_normal, max_squared_distance, traits)) {

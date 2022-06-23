@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4/Polyhedron/include/CGAL/IO/Polyhedron_OFF_iostream.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polyhedron/include/CGAL/IO/Polyhedron_OFF_iostream.h $
 // $Id: Polyhedron_OFF_iostream.h 0a13731 2021-05-06T10:27:12+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
