@@ -17,9 +17,10 @@
   is_url <- function(x) any(grepl("^(http|ftp)s?://", x), grepl("^(http|ftp)s://", x))
   
   pkg_path = dirname(system.file(".", package = "RcppCGAL"))
+  own_cgal_isdir <- isTRUE(nzchar(own_cgal) && !is_url(own_cgal))
   
   # Check for CGAL file in 'include' directory.
-  if (! overwrite) {
+  if (! overwrite && ! own_cgal_isdir) {
     possible_file <- file.path(pkg_path, "include", "CGAL")
     if (file.exists(possible_file)) {
       return(possible_file)
@@ -27,7 +28,7 @@
   }
   
   # Check for CGAL file in 'inst/include' directory.
-  if (! overwrite) {
+  if (! overwrite && ! own_cgal_isdir) {
     possible_file <- file.path(pkg_path, "inst", "include", "CGAL")
     if (file.exists(possible_file)) {
       return(possible_file)
@@ -39,10 +40,10 @@
     dir.create(dest_folder)
   }
   
-  if (nzchar(own_cgal) && !is_url(own_cgal)) {
+  if (own_cgal_isdir) {
     if (!file.exists(own_cgal))
       stop(sprintf("Environment variable CGAL_DIR is set to '%s' but file does not exists, unset environment variable or provide valid path to CGAL file.", own_cgal))
-    file.rename(from = own_cgal, to = dest_folder)
+    file.copy(from = own_cgal, to = dest_folder)
     return(own_cgal)
   }
   
