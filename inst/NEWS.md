@@ -1,3 +1,6 @@
+# Changes in version 5.5.1
+CRAN was throwing warnings in Windows versions. Additionally, the automatic download on install threw some problems on cluster computing.
+
 # Changes in version 5.4.1
 Clang-14 throws a warning for some bitwise logical operators in "Uncertain.h". I updated the downloader function to change these instances.
 

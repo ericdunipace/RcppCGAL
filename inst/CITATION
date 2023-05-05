@@ -4,14 +4,14 @@ citEntry(entry = "Misc",
   title        = "{RcppCGAL}: Rcpp Integration for CGAL",
   author       = personList(person(given = "Eric A.", family = "Dunipace", role = c("cre","aut")),
                   person("the CGAL team", role = "aut")),
-  year         = "2022",
+  year         = "2023",
   url = "https://CRAN.R-project.org/package=RcppCGAL",
-  version = "5.4.1",
-  date = "2022-01-06",
+  version = "5.5.1",
+  date = "2023-03-28",
 
   textVersion  =
-  paste("Eric A. Dunipace and the CGAL Team (2022).",
+  paste("Eric A. Dunipace and the CGAL Team (2023).",
         "RcppCGAL: Rcpp Integration for CGAL",
-        "version 5.4.1",
+        "version 5.5.1",
         "URL https://cran.r-project.org/web/packages/RcppCGAL/index.html.")
 )

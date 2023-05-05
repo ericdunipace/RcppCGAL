@@ -1,10 +1,16 @@
+
+cgal_install <- function(cgal_path = NULL, version = NULL) {
+  
+}
+
+
 #' Downloads CGAL files
 #'
 #' @param overwrite TRUE FALSE, default is FALSE
 #'
 #' @return file name
 #' 
-#' @details downloads the CGAL package from the web to not piss off picky CRAN
+#' @details downloads the CGAL package from the web
 #' 
 #' @keywords internal
 .cgal.downloader <- function(overwrite = FALSE) {
@@ -38,12 +44,15 @@
   dest_folder <- file.path(pkg_path, "include")
   if (!file.exists(dest_folder)) {
     dir.create(dest_folder)
+  } else if (overwrite) {
+    unlink(dest_folder, recursive = TRUE)
+    dir.create(dest_folder)
   }
   
   if (own_cgal_isdir) {
     if (!file.exists(own_cgal))
       stop(sprintf("Environment variable CGAL_DIR is set to '%s' but file does not exists, unset environment variable or provide valid path to CGAL file.", own_cgal))
-    file.copy(from = own_cgal, to = dest_folder)
+    file.copy(from = own_cgal, to = dest_folder, recursive = TRUE)
     return(own_cgal)
   }
   
@@ -158,5 +167,48 @@
   return(invisible())
 }
 
-
-
+#' Updates CGAL header files if you so choose.
+#'
+#' @param CGAL_DIR The path to your CGAL include files
+#' @param version The version of CGAL to install from the web.
+#'
+#' @return None.
+#' 
+#' @details Removes the old header files and updates them. Will either
+#' copy files from a local directory or redownload from GitHub if the
+#' correct version is given. The local directory is given precedence
+#' if both are provided.
+#' 
+#' @examples 
+#' \dontrun{
+#' cgal_update(CGAL_DIR = "path/to/include/CGAL") # from a local directory
+#' }
+cgal_update <- function(CGAL_DIR = NULL, version = NULL) {
+  
+  # test both not null
+  if((missing(version) || is.null(version)) &&
+    (missing(CGAL_DIR) || is.null(CGAL_DIR))) {
+    stop("Must specify version or CGAL_DIR")
+  }
+  
+  
+  # set local dir
+  if(!missing(CGAL_DIR) && !is.null(CGAL_DIR)) {
+    Sys.setenv("CGAL_DIR" = CGAL_DIR)
+  }
+  
+  # run downloader function
+  .cgal.downloader(overwrite = TRUE)
+  
+  # change headers to make safe
+  .cgal.cerr.remover()
+  
+  # set version
+  if(missing(CGAL_DIR) || is.null(CGAL_DIR)) {
+    pkg_path = dirname(system.file(".", package = "RcppCGAL"))
+    buildnumFile <- file.path(pkg_path, "VERSION")
+    writeLines(text = paste0(version,"\n"), buildnumFile)
+    cgal_version()
+  }
+  return(invisible())
+}
