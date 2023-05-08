@@ -1,5 +1,70 @@
 
-cgal_install <- function(cgal_path = NULL, version = NULL) {
+#' CGAL header file installer
+#'
+#' @param cgal_path Path to CGAL files on your machine, a URL. If NULL will downloaded latest version from GitHub. Default is NULL.
+#' @param version Desired version to search for from the GitHub. If NULL, will download latest.
+#' @param clean_files Whether to remove calls to C std::err from header files to avoid errors in R. Default is TRUE
+#' @param force Whether to force downloading the header files if they're already found in the package. Default is FALSE
+#'
+#' @return NULL
+#' @export
+cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, force = FALSE) {
+  force <- isTRUE(force)
+  clean_files <- isTRUE(clean_files)
+  
+  if( .cgal_exists(silent = TRUE) && !force ) {
+    return(invisible(NULL))
+  } else if (.cgal_exists(silent = TRUE) && force) {
+    warning("CGAL already exists. This will overwrite the current directory")
+  }
+  
+  cgal_path <- .cgal_url(cgal_path, version)
+  
+  .cgal.downloader(cgal_path, force)
+  if(clean_files) .cgal.cerr.remover()
+  
+  return(invisible(NULL))
+}
+
+#' Gets CGAL URL
+#'
+#' @param cgal_path Path to CGAL files on your machine, a URL. If NULL will downloaded latest version from GitHub. Default is NULL.
+#' @param version Desired version to search for from the GitHub. If NULL, will download latest.
+#'
+#' @details to be used by [RcppCGAL::cgal_install()]
+#' @return
+#'
+#' @keywords internal
+.cgal_url <- function(cgal_path, version) {
+  
+  if ( missing(cgal_path) || is.null(cgal_path) ) {
+    cgal_path <- Sys.getenv("CGAL_DIR")
+  }
+  
+  if ( missing(cgal_path) || is.null(cgal_path) || cgal_path == "" ) {
+    
+    all_gh <- gh::gh("GET /repos/{owner}/{repo}/releases", 
+                     owner = "CGAL",
+                     repo = "cgal")
+    if (missing(version) || is.null(version)) {
+      select_vers <- 1L
+      
+    } else {
+      allvers <- sapply(all_gh, `[[`, "tag_name")
+      select_vers <- grep(version, allvers)
+    }
+    select_gh <- all_gh[[select_vers]]
+    assets    <- select_gh$assets
+    which.as  <- which(sapply(assets, function(a) grepl("CGAL-([0-9][0-9.]*)\\.tar\\.xz",a$name)))
+    cgal_path <- assets[[which.as]]$browser_download_url
+    cgal_vers <- gsub("v", "", select_gh[["tag_name"]])
+    
+    .save_cgal_version(version = cgal_vers, own = FALSE)
+  } else {
+    .save_cgal_version(version = cgal_path, own = TRUE)
+  }
+  
+  return(cgal_path)
   
 }
 
@@ -13,20 +78,19 @@ cgal_install <- function(cgal_path = NULL, version = NULL) {
 #' @details downloads the CGAL package from the web
 #' 
 #' @keywords internal
-.cgal.downloader <- function(overwrite = FALSE) {
+.cgal.downloader <- function(cgal_path, overwrite = FALSE) {
   old_options <- options(timeout = getOption("timeout"))
   on.exit(options(old_options))
   options(timeout = 1e4)
   if(!is.logical(overwrite) || length(overwrite) != 1L || is.na(overwrite)) stop("`overwrite` must be TRUE or FALSE")
   
-  own_cgal <- Sys.getenv("CGAL_DIR")
   is_url <- function(x) any(grepl("^(http|ftp)s?://", x), grepl("^(http|ftp)s://", x))
   
   pkg_path = dirname(system.file(".", package = "RcppCGAL"))
-  own_cgal_isdir <- isTRUE(nzchar(own_cgal) && !is_url(own_cgal))
+  cgal_path_isdir <- isTRUE(nzchar(cgal_path) && !is_url(cgal_path))
   
   # Check for CGAL file in 'include' directory.
-  if (! overwrite && ! own_cgal_isdir) {
+  if (! overwrite && ! cgal_path_isdir) {
     possible_file <- file.path(pkg_path, "include", "CGAL")
     if (file.exists(possible_file)) {
       return(possible_file)
@@ -34,7 +98,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL) {
   }
   
   # Check for CGAL file in 'inst/include' directory.
-  if (! overwrite && ! own_cgal_isdir) {
+  if (! overwrite && ! cgal_path_isdir) {
     possible_file <- file.path(pkg_path, "inst", "include", "CGAL")
     if (file.exists(possible_file)) {
       return(possible_file)
@@ -49,23 +113,24 @@ cgal_install <- function(cgal_path = NULL, version = NULL) {
     dir.create(dest_folder)
   }
   
-  if (own_cgal_isdir) {
-    if (!file.exists(own_cgal))
-      stop(sprintf("Environment variable CGAL_DIR is set to '%s' but file does not exists, unset environment variable or provide valid path to CGAL file.", own_cgal))
-    file.copy(from = own_cgal, to = dest_folder, recursive = TRUE)
-    return(own_cgal)
+  if (cgal_path_isdir) {
+    if (!file.exists(cgal_path)) {
+      stop(sprintf("Environment variable CGAL_DIR is set to '%s' but file does not exists, unset environment variable or provide valid path to CGAL file.", cgal_path))
+    }
+    file.copy(from = cgal_path, to = dest_folder, recursive = TRUE)
+    return(cgal_path)
   }
   
-  buildnumFile <- file.path(pkg_path, "VERSION")
-  version <- readLines(buildnumFile)
+  # buildnumFile <- file.path(pkg_path, "VERSION")
+  # version <- readLines(buildnumFile)
   
   dest_file <- file.path(dest_folder, "CGAL_zip")
   
   # Download if CGAL doesn't already exist or user specifies force overwrite
-  if (nzchar(own_cgal) && is_url(own_cgal)) {
-    cgal_url <- own_cgal
+  if ( nzchar(cgal_path) && is_url(cgal_path) ) {
+    cgal_url <- cgal_path
   } else {
-    cgal_url <- paste0("https://github.com/CGAL/cgal/releases/download/v",version,"/CGAL-",version,"-library.tar.xz")
+    stop("Path is not a valid character or URL. Please report this bug.")
   }
   
   # Save to temporary file first to protect against incomplete downloads
@@ -76,13 +141,15 @@ cgal_install <- function(cgal_path = NULL, version = NULL) {
   utils::download.file(url = cgal_url, destfile = temp_file, mode = "wb", cacheOK = FALSE, quiet = TRUE)
   
   # Apply sanity checks
-  if(!file.exists(temp_file))
+  if ( !file.exists(temp_file) )
     stop("Error: Transfer failed. Please download ", cgal_url, " and place CGAL include directory in ", dest_folder)
   
   utils::untar(tarfile = temp_file, exdir = dest_folder)
-  unzip_file <- paste0("CGAL-",version)
+  # unzip_file <- paste0("CGAL-",version)
+  unzip_file  <- list.dirs(dest_folder, 
+                           recursive = FALSE, full.names = FALSE)
   target_file <- file.path(dest_folder, "CGAL")
-  source_file <- file.path(dest_folder, unzip_file,"include","CGAL")
+  source_file <- file.path(dest_folder, unzip_file, "include","CGAL")
   
   # Move good file into final position
   file.rename(source_file, target_file)
@@ -91,80 +158,6 @@ cgal_install <- function(cgal_path = NULL, version = NULL) {
   
   
   return(target_file[file.exists(target_file)])
-}
-
-#' Removes std::cerr references from files.
-#'
-#' @param pkg_path character giving path to the package
-#'
-#' @return None.
-#' 
-#' @details changes the downloaded files to R outputs
-#' 
-#' @keywords internal
-.cgal.cerr.remover <- function(pkg_path = NULL) {
-  
-  if (is.null(pkg_path)) {
-    pkg_path <- dirname(system.file(".", package = "RcppCGAL"))
-  }
-  dest_folder <- file.path(pkg_path, "include", "CGAL")
-  
-  # check to see if changes have already been done before
-  change_log_dir <- file.path(pkg_path, "saveCheck")
-  stored_change_log <- file.path(change_log_dir, "OUTPUT_CHANGED")
-  
-  if(!file.exists(stored_change_log)) {
-    if(!dir.exists(change_log_dir)) dir.create(change_log_dir)
-    file.create(stored_change_log)
-  }
-  CHANGED <- readLines(stored_change_log)
-  if(isTRUE(CHANGED == "TRUE")) {
-    return(invisible())
-  }
-  
-  # change files
-  cat("\nChanging CGAL's message output to R's output...\n")
-  files <- list.files(path = dest_folder, all.files = TRUE,
-                      full.names = TRUE, recursive = TRUE)
-  tx <- first <- search <- NULL
-  for (f in files) {
-    tx  <- readLines(f, warn = FALSE)
-    if (grepl("Uncertain.h",f ) ) { # avoid warning for boolean operators in other packages with CRAN clang checks
-      # browser()
-      lines <- grep(pattern = "return Uncertain<bool>", x = tx)
-      tx[lines] <- gsub(pattern = "(?:(\\|)(?!\1))+", 
-                        replacement = "\\|\\|",
-                        x = tx[lines], perl = TRUE)
-      tx[lines] <- gsub(pattern = "(?:(&)(?!\1))+", 
-                        replacement = "&&",
-                        x = tx[lines], perl = TRUE)
-      writeLines(tx, con=f)
-    }
-    search <- grep(pattern = "std::cerr|std::cout|abort\\(|exit\\(", x = tx)
-    if (length(search)==0) next
-    # first <- grep("#include", tx)[1]
-    # tx[first]  <- sub(pattern = "#include",   replacement = "#include <Rcpp.h>\n#include", x = tx[first])
-    tx[1] <- paste0("#include <Rcpp.h>\n", tx[1])
-    tx[search]  <- gsub(pattern = "std::cerr", replacement = "Rcpp::Rcerr", x = tx[search])
-    tx[search]  <- gsub(pattern = "std::cout", replacement = "Rcpp::Rcout", x = tx[search])
-    tx[search]  <- gsub(pattern = "std::abort\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = "abort\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = "std::exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = "exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = "std::exit\\(0\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = "std::exit\\(1\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
-    writeLines(tx, con=f)
-  }
-  CHANGED <- "TRUE"
-  writeLines(CHANGED, con = stored_change_log)
-  return(invisible())
-}
-
-# for use on my machine to change files uploaded to github
-.cgal.cerr.remover.github <- function() {
-  path <- file.path(getwd(), "inst")
-  .cgal.cerr.remover(path)
-  return(invisible())
 }
 
 #' Updates CGAL header files if you so choose.
@@ -183,32 +176,11 @@ cgal_install <- function(cgal_path = NULL, version = NULL) {
 #' \dontrun{
 #' cgal_update(CGAL_DIR = "path/to/include/CGAL") # from a local directory
 #' }
-cgal_update <- function(CGAL_DIR = NULL, version = NULL) {
-  
-  # test both not null
-  if((missing(version) || is.null(version)) &&
-    (missing(CGAL_DIR) || is.null(CGAL_DIR))) {
-    stop("Must specify version or CGAL_DIR")
-  }
-  
-  
-  # set local dir
-  if(!missing(CGAL_DIR) && !is.null(CGAL_DIR)) {
-    Sys.setenv("CGAL_DIR" = CGAL_DIR)
-  }
+cgal_update <- function(cgal_path = NULL, version = NULL) {
   
   # run downloader function
-  .cgal.downloader(overwrite = TRUE)
+  cgal_install(cgal_path = cgal_path, version = version, force = TRUE)
   
-  # change headers to make safe
-  .cgal.cerr.remover()
   
-  # set version
-  if(missing(CGAL_DIR) || is.null(CGAL_DIR)) {
-    pkg_path = dirname(system.file(".", package = "RcppCGAL"))
-    buildnumFile <- file.path(pkg_path, "VERSION")
-    writeLines(text = paste0(version,"\n"), buildnumFile)
-    cgal_version()
-  }
   return(invisible())
 }

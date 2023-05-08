@@ -4,12 +4,12 @@
 \alias{cgal_update}
 \title{Updates CGAL header files if you so choose.}
 \usage{
-cgal_update(CGAL_DIR = NULL, version = NULL)
+cgal_update(cgal_path = NULL, version = NULL)
 }
 \arguments{
-\item{CGAL_DIR}{The path to your CGAL include files}
-
 \item{version}{The version of CGAL to install from the web.}
+
+\item{CGAL_DIR}{The path to your CGAL include files}
 }
 \value{
 None.

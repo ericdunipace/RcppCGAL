@@ -1,8 +1,8 @@
 Package: RcppCGAL
 Type: Package
 Title: Rcpp Integration for CGAL 
-Version: 5.5.1
-Date: 2023-03-28
+Version: 5.5.2
+Date: 2023-05-08
 Authors@R: 
     person("Eric", "Dunipace", 
         role = c("aut", "cre"),
@@ -18,9 +18,10 @@ Description: Creates a header only package to link to the CGAL
   package, which returns the current version of the CGAL library 
   included. For more information about how to use the header files, 
   see the CGAL documentation at <https://www.cgal.org>. Currently
-  includes the CGAL 5.5.1 stable release.
+  includes the CGAL 5.5.2 stable release.
 License: GPL (>=3)
-Imports: utils, Rcpp
+Imports: utils, Rcpp, gh
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
+Encoding: UTF-8

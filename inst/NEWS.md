@@ -1,5 +1,15 @@
-# Changes in version 5.5.1
-CRAN was throwing warnings in Windows versions. Additionally, the automatic download on install threw some problems on cluster computing.
+# Changes in version 5.5.2
+
+## New features
+* Added a new feature to automatically find the latest GitHub release (currently 5.5.2). Unfortunately, this requires an additional import: the `gh` package.
+* Users will also have to use the new `cgal_install()` function to download the header files AFTER installation. This can be circumvented via some environmental options as listed in the installation vignette
+* There's now an installation  vignette!
+* Made the cleaning up of the calls to `std::cerr` optional with default to clean them up. See documentation for `cgal_install()`.
+
+## Minor improvements and Bug Fixes
+* CRAN was throwing warnings in Windows versions. 
+* Additionally, the automatic download on install threw some problems on cluster computing. Should be fixed now (#)
+* `cgal_version()` will now display the guessed version from GitHub OR the file/url path used to download/install the headerfiles.
 
 # Changes in version 5.4.1
 Clang-14 throws a warning for some bitwise logical operators in "Uncertain.h". I updated the downloader function to change these instances.

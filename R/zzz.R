@@ -1,9 +1,13 @@
 # downloads CGAL if necessary
 .onLoad <- function(libname, pkgname) {
-  file <- .cgal.downloader()
-  # cgal overwrite std::cerr
-  .cgal.cerr.remover()
-  return(invisible(file))
+  
+  install_cgal_check <- Sys.getenv("CGAL_DOWNLOAD")
+  
+  if( install_cgal_check == "1") {
+    cgal_install(force = TRUE)
+  }
+
+  .cgal_exists()
 }
 
 .onAttach <- function(libname, pkgname) {
