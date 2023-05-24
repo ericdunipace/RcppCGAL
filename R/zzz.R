@@ -2,23 +2,25 @@
 .onLoad <- function(libname, pkgname) {
   
   install_cgal_check <- Sys.getenv("CGAL_DOWNLOAD")
-  # on_cran <- !identical(Sys.getenv("NOT_CRAN"), "true")
+  not_interact <- interactive()
+  on_cran <- !identical(Sys.getenv("NOT_CRAN"), "true")
   
-  if( install_cgal_check == "1" ) {
+  if( install_cgal_check == "1" #|| (not_interact && on_cran)
+      ) {
     cgal_install(clean_files = TRUE, force = TRUE)
   }
 
 }
 
 .onAttach <- function(libname, pkgname) {
-  if ( interactive() ) {
+  if ( interactive() ) { # will ask user if they want to install header files if they are in interactive mode
     if (!cgal_is_installed()) {
-      install <- tryCatch(utils::askYesNo("RcppCGAL needs to download the header files. Do you want to continue?"),
+      install <- tryCatch(utils::askYesNo("No CGAL header files. Download latest version?"),
                           error = function(e) FALSE)
       if (!is.na(install) &&  install )  {
         cgal_install()
       } else {
-        message("CGAL header files not installed. To download use the `cgal_install()` function.")
+        cat("CGAL header files are not installed. To download use the `cgal_install()` function.")
       }
     }
   }
