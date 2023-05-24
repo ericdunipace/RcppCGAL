@@ -23,15 +23,15 @@
         cat("CGAL header files are not installed. To download use the `cgal_install()` function.")
       }
     }
+  } else {
+    if (!cgal_is_installed()) {
+      packageStartupMessage("\nCGAL header files not found on installation. You should run `cgal_install()` to make sure they're installed in the package"
+                            , domain = NULL, appendLF = TRUE)
+    }
   }
   
   packageStartupMessage("For more information about how to use the header files, see the CGAL documentation  at <https://www.cgal.org>.\n
 Also, if using this package for commercial purposes, please see <https://www.cgal.org/license.html> for more details about licensing the CGAL header files.\n
 Please cite this package if you use it. See citation('RcppCGAL').", domain = NULL, appendLF = TRUE)
-  
-  if (!cgal_is_installed()) {
-    packageStartupMessage("\nCGAL header files not found on installation. You should run `cgal_install()` to make sure they're installed in the package"
-                          , domain = NULL, appendLF = TRUE)
-  }
   
 }
