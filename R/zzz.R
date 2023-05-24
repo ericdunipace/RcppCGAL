@@ -2,12 +2,12 @@
 .onLoad <- function(libname, pkgname) {
   
   install_cgal_check <- Sys.getenv("CGAL_DOWNLOAD")
-  not_interact <- interactive()
+  not_interact <- !interactive()
   on_cran <- !identical(Sys.getenv("NOT_CRAN"), "true")
   
-  if( install_cgal_check == "1" #|| (not_interact && on_cran)
+  if(curl::has_internet() && install_cgal_check != "0" #|| (not_interact && on_cran)
       ) {
-    cgal_install(clean_files = TRUE, force = TRUE)
+    cgal_install()
   }
 
 }
@@ -35,3 +35,13 @@ Also, if using this package for commercial purposes, please see <https://www.cga
 Please cite this package if you use it. See citation('RcppCGAL').", domain = NULL, appendLF = TRUE)
   
 }
+
+
+# is_online <- function(site="http://www.google.com/") {
+#   tryCatch({
+#     readLines(site,n=1)
+#     TRUE
+#   },
+#   warning = function(w) invokeRestart("muffleWarning"),
+#   error = function(e) FALSE)
+# }

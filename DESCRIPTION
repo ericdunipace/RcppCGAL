@@ -20,7 +20,7 @@ Description: Creates a header only package to link to the CGAL
   see the CGAL documentation at <https://www.cgal.org>. Currently
   includes the CGAL 5.5.2 stable release.
 License: GPL (>=3)
-Imports: utils, Rcpp, gh
+Imports: utils, Rcpp, gh, curl
 Suggests: knitr
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
