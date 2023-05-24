@@ -15,16 +15,20 @@
   dest_folder <- file.path(pkg_path, "include", "CGAL")
   
   # check to see if changes have already been done before
-  change_log_dir <- file.path(pkg_path, "saveCheck")
-  stored_change_log <- file.path(change_log_dir, "OUTPUT_CHANGED")
-  
-  if(!file.exists(stored_change_log)) {
-    if(!dir.exists(change_log_dir)) dir.create(change_log_dir)
-    file.create(stored_change_log)
-  }
-  CHANGED <- readLines(stored_change_log)
-  if(isTRUE(CHANGED == "TRUE")) {
-    return(invisible())
+  # change_log_dir <- file.path(pkg_path, "saveCheck")
+  # stored_change_log <- file.path(change_log_dir, "OUTPUT_CHANGED")
+  # 
+  # if(!file.exists(stored_change_log)) {
+  #   if(!dir.exists(change_log_dir)) dir.create(change_log_dir)
+  #   file.create(stored_change_log)
+  # }
+  # CHANGED <- readLines(stored_change_log)
+  # if(isTRUE(CHANGED == "TRUE")) {
+  #   return(invisible())
+  # }
+  CHANGED <- isTRUE(cgal_pkg_state$CLEANED)
+  if(CHANGED) {
+    return(invisible(NULL))
   }
   
   # change files
@@ -56,13 +60,13 @@
     tx[search]  <- gsub(pattern = "abort\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
     tx[search]  <- gsub(pattern = "std::exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
     tx[search]  <- gsub(pattern = "exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = "std::exit\\(0\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
+    tx[search]  <- gsub(pattern = "std::exit\\(0\\)", replacement = 'return(0)', x = tx[search])
     tx[search]  <- gsub(pattern = "std::exit\\(1\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
     writeLines(tx, con=f)
   }
-  CHANGED <- "TRUE"
-  writeLines(CHANGED, con = stored_change_log)
-  return(invisible())
+  cgal_pkg_state$CLEANED <- TRUE
+  # assign("cgal_pkg_state", "cgal_pkg_state", pos = "package:RcppCGAL")
+  return(invisible(NULL))
 }
 
 

@@ -4,17 +4,18 @@
 #' @param cgal_path Path to CGAL files on your machine, a URL. If NULL will downloaded latest version from GitHub. Default is NULL.
 #' @param version Desired version to search for from the GitHub. If NULL, will download latest.
 #' @param clean_files Whether to remove calls to C std::err from header files to avoid errors in R. Default is TRUE
-#' @param force Whether to force downloading the header files if they're already found in the package. Default is FALSE
+#' @param force Whether to force downloading and install the header files if they're already found in the package. Default is FALSE
 #'
 #' @return NULL
 #' @export
 cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, force = FALSE) {
   force <- isTRUE(force)
   clean_files <- isTRUE(clean_files)
+  cgal_exists <- cgal_is_installed()
   
-  if( .cgal_exists(silent = TRUE) && !force ) {
+  if(cgal_exists  && !force ) {
     return(invisible(NULL))
-  } else if (.cgal_exists(silent = TRUE) && force) {
+  } else if (cgal_exists && force) {
     warning("CGAL already exists. This will overwrite the current directory")
   }
   
@@ -32,11 +33,10 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
 #' @param version Desired version to search for from the GitHub. If NULL, will download latest.
 #'
 #' @details to be used by [RcppCGAL::cgal_install()]
-#' @return
+#' @return URL to use or path as a character vector
 #'
 #' @keywords internal
 .cgal_url <- function(cgal_path, version) {
-  
   if ( missing(cgal_path) || is.null(cgal_path) ) {
     cgal_path <- Sys.getenv("CGAL_DIR")
   }
@@ -92,7 +92,9 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   # Check for CGAL file in 'include' directory.
   if (! overwrite && ! cgal_path_isdir) {
     possible_file <- file.path(pkg_path, "include", "CGAL")
+    
     if (file.exists(possible_file)) {
+      cgal_pkg_state$VERSION <- cgal_pkg_state$OLD_VERSION
       return(possible_file)
     }
   }
@@ -101,6 +103,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   if (! overwrite && ! cgal_path_isdir) {
     possible_file <- file.path(pkg_path, "inst", "include", "CGAL")
     if (file.exists(possible_file)) {
+      cgal_pkg_state$VERSION <- cgal_pkg_state$OLD_VERSION
       return(possible_file)
     }
   }
@@ -123,7 +126,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   
   # buildnumFile <- file.path(pkg_path, "VERSION")
   # version <- readLines(buildnumFile)
-  
+  cgal_pkg_state$CLEANED <- FALSE
   dest_file <- file.path(dest_folder, "CGAL_zip")
   
   # Download if CGAL doesn't already exist or user specifies force overwrite
@@ -158,29 +161,4 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   
   
   return(target_file[file.exists(target_file)])
-}
-
-#' Updates CGAL header files if you so choose.
-#'
-#' @param CGAL_DIR The path to your CGAL include files
-#' @param version The version of CGAL to install from the web.
-#'
-#' @return None.
-#' 
-#' @details Removes the old header files and updates them. Will either
-#' copy files from a local directory or redownload from GitHub if the
-#' correct version is given. The local directory is given precedence
-#' if both are provided.
-#' 
-#' @examples 
-#' \dontrun{
-#' cgal_update(CGAL_DIR = "path/to/include/CGAL") # from a local directory
-#' }
-cgal_update <- function(cgal_path = NULL, version = NULL) {
-  
-  # run downloader function
-  cgal_install(cgal_path = cgal_path, version = version, force = TRUE)
-  
-  
-  return(invisible())
 }

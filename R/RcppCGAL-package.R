@@ -1,5 +1,5 @@
 #' @references 
-#' The CGAL Project. (2022). {CGAL} User and Reference Manual (5.4). Retrieved from <https://doc.cgal.org/5.4/Manual/packages.html>
+#' The CGAL Project. (2023). {CGAL} User and Reference Manual (5.5.2). Retrieved from <https://doc.cgal.org/5.4/Manual/packages.html>
 #' @examples
 #' \dontrun{
 #' # To use this in a C++ file make sure you add an appropriate
@@ -20,3 +20,9 @@
 #' @importFrom Rcpp evalCpp
 ## usethis namespace: end
 NULL
+
+# environment to save whether header files have been cleaned
+# and best guess of possible version
+cgal_pkg_state <- list2env(list(CLEANED = FALSE,
+                       VERSION = NA_character_,
+                       OLD_VERSION = NA_character_))

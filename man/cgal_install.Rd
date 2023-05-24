@@ -4,14 +4,21 @@
 \alias{cgal_install}
 \title{CGAL header file installer}
 \usage{
-cgal_install(cgal_path = NULL, version = NULL, force = FALSE)
+cgal_install(
+  cgal_path = NULL,
+  version = NULL,
+  clean_files = TRUE,
+  force = FALSE
+)
 }
 \arguments{
 \item{cgal_path}{Path to CGAL files on your machine, a URL. If NULL will downloaded latest version from GitHub. Default is NULL.}
 
 \item{version}{Desired version to search for from the GitHub. If NULL, will download latest.}
 
-\item{force}{Whether to force downloading the header files if they're already found in the package. Default is FALSE}
+\item{clean_files}{Whether to remove calls to C std::err from header files to avoid errors in R. Default is TRUE}
+
+\item{force}{Whether to force downloading and install the header files if they're already found in the package. Default is FALSE}
 }
 \description{
 CGAL header file installer
