@@ -20,7 +20,7 @@
       if (!is.na(install) &&  install )  {
         cgal_install()
       } else {
-        cat("CGAL header files are not installed. To download use the `cgal_install()` function.")
+        packageStartupMessage("CGAL header files are not installed. To download use the `cgal_install()` function.", domain = NULL, appendLF = TRUE)
       }
     }
   } else {
