@@ -14,6 +14,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   cgal_exists <- cgal_is_installed()
   
   if(cgal_exists  && !force ) {
+    message("CGAL already installed. To reinstall, set force = TRUE.")
     return(invisible(NULL))
   } else if (cgal_exists && force) {
     warning("CGAL already exists. This will overwrite the current directory")
