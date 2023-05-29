@@ -4,6 +4,7 @@
 ^cran-comments\.md$
 ^\.github$
 ^\.git$
+^\.gitignore$
 ^README\.md$  
 ^inst/include$
 ^inst/saveCheck/OUTPUT_CHANGED$
@@ -12,3 +13,5 @@
 ^CRAN-RELEASE$
 ^CRAN-SUBMISSION$
 ^include$
+^\.Rapp.history$
+^\.Rhistory$
