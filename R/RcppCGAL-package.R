@@ -23,6 +23,9 @@ NULL
 
 # environment to save whether header files have been cleaned
 # and best guess of possible version
-cgal_pkg_state <- list2env(list(CLEANED = FALSE,
-                       VERSION = NA_character_,
-                       OLD_VERSION = NA_character_))
+cgal_pkg_state <- list2env(list(
+                        ASK_INSTALL = FALSE,
+                        CLEANED = FALSE,
+                        OLD_VERSION = NA_character_,
+                        VERSION = NA_character_,
+                        WARNED = FALSE))

@@ -1,11 +1,18 @@
-.cgal_exists <- function(silent = FALSE) {
-  exists <- cgal_is_installed()
-  
-  if (!exists) {
-    if(!silent) return("\nCGAL header files not found on installation. You should run `cgal_install()` to make sure they're installed in the package")
+.cgal_download_check <- function(silent = FALSE) {
+  interact <- interactive()
+  if (interact  && !cgal_is_installed() && isFALSE(cgal_pkg_state$ASK_INSTALL) ) { # will ask user if they want to install header files if they are in interactive mode
+    cgal_pkg_state$ASK_INSTALL <- TRUE
+    install <- tryCatch(utils::askYesNo("No CGAL header files. Download latest version?"),
+                        error = function(e) FALSE)
+    if (!is.na(install) &&  install )  {
+      cgal_install()
+    }
   }
-  
-  return(invisible(exists))
+  if (interact && !cgal_is_installed() && isFALSE(cgal_pkg_state$WARNED) && !silent) {
+    packageStartupMessage("\nCGAL header files not found on installation. You should run `cgal_install()` to make sure they're installed in the package.\n"
+                          , domain = NULL, appendLF = TRUE)
+    cgal_pkg_state$WARNED <- TRUE
+  }
   
   
 }
