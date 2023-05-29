@@ -25,6 +25,8 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   .cgal.downloader(cgal_path, force)
   if(clean_files) .cgal.cerr.remover()
   
+  # reset warnings and such so if uninstalled will re-prompt to DL
+  cgal_pkg_state$WARNED <- cgal_pkg_state$ASK_INSTALL <- FALSE
   return(invisible(NULL))
 }
 
