@@ -22,7 +22,7 @@ cgal_install(cgal_path = NULL, version = NULL,
              clean_files = TRUE, force = FALSE)
 
 ```
-The functions should take care of the rest! You will have the latest version of CGAL from GitHub.
+The functions should take care of the rest! You will have the latest version of CGAL from GitHub. This should also happen by default on package installation if there is an internet connection.
 
 ### You want to install a particular version from the GitHub
 If you have a particular version of the CGAL headers you would like from the GitHub, use the version argument and keep `cgal_path = NULL`.
@@ -58,7 +58,7 @@ cgal_install(cgal_path = "https://some/url/cgalheaders.tar.gz", version = NULL,
 ## Installation with system environment flags
 In some case, you may want to install the CGAL header files by default on installation and perhaps you may have a custom path. In this case, you can set two environmental variables.
 
-The first, `CGAL_DIR`, will specify a directory or URL to search for the CGAL header files like above. If it is not set, the package will simply download the latest version. In the shell on Unix machines, you can do
+The first, `CGAL_DIR`, will specify a directory or URL to search for the CGAL header files like above. If it is not set, the package will simply download the latest version or by using the argument of `cgal_path` in the `cgal_install` function. In the shell on Unix/Linux machines, you can do
 ```{bash, eval = FALSE}
 export CGAL_DIR="https://some/url/cgalheaders.tar.gz"
 ```
@@ -79,6 +79,9 @@ Sys.setenv(CGAL_DOWNLOAD="1")
 ```
 
 Then you can install the package and everything should flow automatically.
+```{bash, eval = FALSE}
+install.packages("RcppCGAL")
+```
 
 ## Updating header files
 The process of updating the files is simple. We can just follow the same procedures as above using the `cgal_install` function but set `force = TRUE`:
