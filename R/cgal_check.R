@@ -1,16 +1,21 @@
+# If interactive will ask to DL and then warn if not downloaded
 .cgal_download_check <- function(silent = FALSE) {
   interact <- interactive()
+  warn_mess <- "\nCGAL header files not found on installation. You should run `cgal_install()` to make sure they're installed in the package.\n"
+  
   if (interact  && !cgal_is_installed() && isFALSE(cgal_pkg_state$ASK_INSTALL) ) { # will ask user if they want to install header files if they are in interactive mode
     cgal_pkg_state$ASK_INSTALL <- TRUE
     install <- tryCatch(utils::askYesNo("No CGAL header files. Download latest version?"),
                         error = function(e) FALSE)
     if (!is.na(install) &&  install )  {
       cgal_install()
+    } else {
+      packageStartupMessage(warn_mess, domain = NULL, appendLF = TRUE)
+      cgal_pkg_state$WARNED <- TRUE
     }
   }
-  if (interact && !cgal_is_installed() && isFALSE(cgal_pkg_state$WARNED) && !silent) {
-    packageStartupMessage("\nCGAL header files not found on installation. You should run `cgal_install()` to make sure they're installed in the package.\n"
-                          , domain = NULL, appendLF = TRUE)
+  if (!cgal_is_installed() && isFALSE(cgal_pkg_state$WARNED) && !silent) {
+    packageStartupMessage(warn_mess, domain = NULL, appendLF = TRUE)
     cgal_pkg_state$WARNED <- TRUE
   }
   
