@@ -1,17 +1,16 @@
-citHeader("To cite RcppCGAL in publications use:")
-
-citEntry(entry = "Misc",
+utils::bibentry(
+ bibtype       = "Manual",
   title        = "{RcppCGAL}: Rcpp Integration for CGAL",
-  author       = personList(person(given = "Eric A.", family = "Dunipace", role = c("cre","aut")),
-                  person("the CGAL team", role = "aut")),
-  year         = "2022",
+  author       = c(person(given = "Eric A.", family = "Dunipace", role = c("cre","aut")),
+                   person("the CGAL team", role = "aut")),
+  year         = "2023",
   url = "https://CRAN.R-project.org/package=RcppCGAL",
-  version = "5.4.1",
-  date = "2022-01-06",
-
+  version = "5.5.2",
+  date = "2023-05-08",
+  mheader = "To cite RcppCGAL in publications use:",
   textVersion  =
-  paste("Eric A. Dunipace and the CGAL Team (2022).",
+  paste("Eric A. Dunipace and the CGAL Team (2023).",
         "RcppCGAL: Rcpp Integration for CGAL",
-        "version 5.4.1",
+        "version 5.5.2",
         "URL https://cran.r-project.org/web/packages/RcppCGAL/index.html.")
 )

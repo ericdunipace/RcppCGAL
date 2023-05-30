@@ -4,7 +4,7 @@
 \alias{.cgal.downloader}
 \title{Downloads CGAL files}
 \usage{
-.cgal.downloader(overwrite = FALSE)
+.cgal.downloader(cgal_path, overwrite = FALSE)
 }
 \arguments{
 \item{overwrite}{TRUE FALSE, default is FALSE}
@@ -16,6 +16,6 @@ file name
 Downloads CGAL files
 }
 \details{
-downloads the CGAL package from the web to not piss off picky CRAN
+downloads the CGAL package from the web
 }
 \keyword{internal}
