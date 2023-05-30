@@ -1,5 +1,7 @@
 # Package RcppCGAL
 
+## Changes in 5.5.2.9000
+
 ## Changes in 5.5.2
 
 ### New features
