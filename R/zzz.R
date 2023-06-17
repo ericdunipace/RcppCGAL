@@ -8,9 +8,9 @@
   no_cgal      <- !cgal_is_installed()
   
   if(no_cgal && has_internet && install_cgal && !interact ) {
-    tryCatch(cgal_install(),
-             error = function(e) {NULL},
-             warning = function(w){NULL})
+    tryCatch(suppressMessages(cgal_install()),
+             error = .cgal_install_error_catch
+             )
   }
   
   .cgal_download_check() # will see if interactive and ask to download
@@ -21,9 +21,12 @@
   
   .cgal_download_check() # will see if interactive and ask to download
   
-  packageStartupMessage("For more information about how to use the header files, see the CGAL documentation  at <https://www.cgal.org>.\n
-Also, if using this package for commercial purposes, please see <https://www.cgal.org/license.html> for more details about licensing the CGAL header files.\n
-Please cite this package if you use it. See citation('RcppCGAL').", domain = NULL, appendLF = TRUE)
+  packageStartupMessage("For more information about how to use the header files, see the CGAL documentation  at <https://www.cgal.org>. For more details on the license of the CGAL header files, lease see <https://www.cgal.org/license.html>. The header files as used in this package are under the GPL (v3+) license.\n
+Please cite this package if you use it. See citation('RcppCGAL').\n", domain = NULL, appendLF = TRUE)
+  
+  if ( cgal_is_installed() && !is.na(.cgal_version_check()) ) {
+    packageStartupMessage(cgal_pkg_state$VERSION, domain = NULL, appendLF = TRUE)
+  }
   
 }
 

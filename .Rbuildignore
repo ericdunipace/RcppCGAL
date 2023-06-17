@@ -15,3 +15,5 @@
 ^include$
 ^\.Rapp.history$
 ^\.Rhistory$
+^VERSION$
+^AUTO_INSTALL_ERROR$

@@ -6,7 +6,7 @@
 \alias{RcppCGAL-package}
 \title{RcppCGAL: Rcpp Integration for CGAL}
 \description{
-Creates a header only package to link to the CGAL (Computational Geometry Algorithms Library) header files in Rcpp. There are a variety of potential uses for the software such as Hilbert sorting, KDtree nearest neighbors, and convex hull algorithms. There is only one R function in this package, which returns the current version of the CGAL library included. For more information about how to use the header files, see the CGAL documentation at \url{https://www.cgal.org}. Currently includes the CGAL 5.5.2 stable release.
+Creates a header only package to link to the CGAL (Computational Geometry Algorithms Library) header files in Rcpp. There are a variety of potential uses for the software such as Hilbert sorting, KDtree nearest neighbors, and convex hull algorithms. For more information about how to use the header files, see the CGAL documentation at \url{https://www.cgal.org}. Currently downloads the latest stable CGAL release from GitHub.
 }
 \examples{
 \dontrun{

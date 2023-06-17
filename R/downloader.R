@@ -9,9 +9,14 @@
 #' @return NULL
 #' @export
 cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, force = FALSE) {
+
+  # make conditions TRUE or FALSE
   force <- isTRUE(force)
   clean_files <- isTRUE(clean_files)
   cgal_exists <- cgal_is_installed()
+  
+  # remove previous auto install error file if exists
+  .delete_error_file()
   
   if(cgal_exists  && !force ) {
     message("CGAL already installed. To reinstall, set force = TRUE.")
@@ -44,26 +49,61 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
     cgal_path <- Sys.getenv("CGAL_DIR")
   }
   
+  # if need to download the files
   if ( missing(cgal_path) || is.null(cgal_path) || cgal_path == "" ) {
     
+    # get info from GitHub
     all_gh <- gh::gh("GET /repos/{owner}/{repo}/releases", 
                      owner = "CGAL",
                      repo = "cgal")
+    
+    # choose proper release
     if (missing(version) || is.null(version)) {
-      select_vers <- 1L
+      
+      # don't select beta versions
+      max_assets <- length(all_gh)
+      non_beta_rel <- sapply(all_gh, function(a) !grepl("beta",a$assets[[1]]$name))
+      
+      # check can find non beta releases
+      if (all(isFALSE(non_beta_rel))) {
+        stop("Wasn't able to find any non-beta CGAL releases on the GitHub. This is likely a bug. Please report this.")
+      }
+      
+      # try last stable release
+      select_vers <- min((1:max_assets)[non_beta_rel])
       
     } else {
+      
+      # get desired version
       allvers <- sapply(all_gh, `[[`, "tag_name")
       select_vers <- grep(version, allvers)
+      
     }
+    
+    # pull out selected asset version
     select_gh <- all_gh[[select_vers]]
     assets    <- select_gh$assets
-    which.as  <- which(sapply(assets, function(a) grepl("CGAL-([0-9][0-9.]*)\\.tar\\.xz",a$name)))
+    
+    # select the proper download file (updated 6/2023 to include beta versions)
+    which.as  <- which(sapply(assets, function(a) grepl("CGAL-([0-9][0-9.]*)(-beta[0-9]?)?\\.tar\\.xz",a$name)))
+    
+    # check that has selected a version properly
+    if ( length(which.as) == 0 ) {
+      names.to.print <- sapply(assets, function(a) a$name)
+      error.desc <- paste0(c("Unable to find the latest GitHub release of the CGAL header files. Likely the regex failed to find the correct file. Please report this error. Here are the file names it did find:", names.to.print), collapse = "\n")
+      stop(error.desc)
+    }
+    
+    # get URL
     cgal_path <- assets[[which.as]]$browser_download_url
+    
+    # extract version
     cgal_vers <- gsub("v", "", select_gh[["tag_name"]])
     
+    # save version number
     .save_cgal_version(version = cgal_vers, own = FALSE)
   } else {
+    # save file path
     .save_cgal_version(version = cgal_path, own = TRUE)
   }
   
@@ -82,9 +122,13 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
 #' 
 #' @keywords internal
 .cgal.downloader <- function(cgal_path, overwrite = FALSE) {
+  
+  # increase timeout because of downloads
   old_options <- options(timeout = getOption("timeout"))
   on.exit(options(old_options))
   options(timeout = 1e4)
+  
+  # warn if overwrite
   if(!is.logical(overwrite) || length(overwrite) != 1L || is.na(overwrite)) stop("`overwrite` must be TRUE or FALSE")
   
   is_url <- function(x) any(grepl("^(http|ftp)s?://", x), grepl("^(http|ftp)s://", x))
@@ -141,8 +185,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   
   # Save to temporary file first to protect against incomplete downloads
   temp_file <- paste(dest_file, "tar.xz", sep = ".")
-  cat("Performing one-time download of CGAL from\n")
-  cat("    ", cgal_url, "\n")
+  message(paste0("Performing one-time download of CGAL from\n    ", cgal_url, "\n"))
   utils::flush.console()
   utils::download.file(url = cgal_url, destfile = temp_file, mode = "wb", cacheOK = FALSE, quiet = TRUE)
   

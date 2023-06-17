@@ -1,6 +1,10 @@
 # Package RcppCGAL
 
-## Changes in 5.5.2.9000
+## Changes in 5.5.3
+
+### Minor improvements and Bug Fixes
+* The new CGAL 5.6-beta wasn't being found by the package. This should now be fixed
+* Also tried to make some package messages and errors more informative
 
 ## Changes in 5.5.2
 

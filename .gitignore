@@ -11,3 +11,5 @@ inst/AUTHORS
 .DS_Store
 saveCheck
 include
+VERSION
+AUTO_INSTALL_ERROR

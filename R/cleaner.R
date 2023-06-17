@@ -32,7 +32,7 @@
   }
   
   # change files
-  cat("\nChanging CGAL's message output to R's output...\n")
+  message("\nChanging CGAL's message output to R's output...\n")
   files <- list.files(path = dest_folder, all.files = TRUE,
                       full.names = TRUE, recursive = TRUE)
   tx <- first <- search <- NULL

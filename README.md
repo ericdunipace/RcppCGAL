@@ -33,7 +33,7 @@ CGAL git repository. If you already have one downloaded that you prefer to use,
 you can specify the environmental variable `CGAL_DIR` and `R` will use that
 instead:
 ```R
-Sys.setenv("CGAL_DIR" = "path/to/CGAL/include")
+Sys.setenv("CGAL_DIR" = "path/to/CGAL")
 ```
 Note: this must be done *before* the package is loaded by `R`.
 
@@ -116,6 +116,5 @@ usual `R` `matrix` or `data.frame`.
 Eric Dunipace
 
 ## License
-This package is provided under the GPL v3+. Note: if you wish to use CGAL for commercial purposes, you must obtain a license from
-the [GeometryFactory](https://geometryfactory.com).
+This package is provided under the GPL v3+. For the header files themselves, please see the information at the CGAL site: [https://www.cgal.org/license.html](https://www.cgal.org/license.html)
 
