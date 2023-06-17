@@ -133,7 +133,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   
   is_url <- function(x) any(grepl("^(http|ftp)s?://", x), grepl("^(http|ftp)s://", x))
   
-  pkg_path = dirname(system.file(".", package = "RcppCGAL"))
+  pkg_path <- .rcppcgal_package_path()
   cgal_path_isdir <- isTRUE(nzchar(cgal_path) && !is_url(cgal_path))
   
   # Check for CGAL file in 'include' directory.
@@ -142,23 +142,26 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
     
     if (file.exists(possible_file)) {
       cgal_pkg_state$VERSION <- cgal_pkg_state$OLD_VERSION
+      message(sprintf("Found possible file at %s. To overwrite, set `force = TRUE` and run `cgal_install` again", possible_file))
       return(possible_file)
     }
   }
   
   # Check for CGAL file in 'inst/include' directory.
-  if (! overwrite && ! cgal_path_isdir) {
-    possible_file <- file.path(pkg_path, "inst", "include", "CGAL")
-    if (file.exists(possible_file)) {
-      cgal_pkg_state$VERSION <- cgal_pkg_state$OLD_VERSION
-      return(possible_file)
-    }
-  }
+  # if (! overwrite && ! cgal_path_isdir) {
+  #   possible_file <- file.path(pkg_path, "inst", "include", "CGAL")
+  #   if (file.exists(possible_file)) {
+  #     cgal_pkg_state$VERSION <- cgal_pkg_state$OLD_VERSION
+  #     return(possible_file)
+  #   }
+  # }
   
   dest_folder <- file.path(pkg_path, "include")
   if (!file.exists(dest_folder)) {
+    # create desitination folder
     dir.create(dest_folder)
   } else if (overwrite) {
+    # delete old files if overwriting
     unlink(dest_folder, recursive = TRUE)
     dir.create(dest_folder)
   }
@@ -168,6 +171,15 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
       stop(sprintf("Environment variable CGAL_DIR is set to '%s' but file does not exists, unset environment variable or provide valid path to CGAL file.", cgal_path))
     }
     file.copy(from = cgal_path, to = dest_folder, recursive = TRUE)
+    
+    # check if need to rename
+    cgal_copy <- list.files(dest_folder)
+    if(cgal_copy != "CGAL") {
+      cur_file <- file.path(dest_folder, cgal_copy)
+      final_file <- file.path(dest_folder, "CGAL")
+      file.rename(from = cur_file, to = final_file)
+    }
+    
     return(cgal_path)
   }
   

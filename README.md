@@ -35,6 +35,10 @@ instead:
 ```R
 Sys.setenv("CGAL_DIR" = "path/to/CGAL")
 ```
+Typically, the folder with all the header files is called `CGAL`. For example, on my Mac with a Homebrew install of CGAL, I would do
+```R
+Sys.setenv("CGAL_DIR" = "/usr/local/Cellar/cgal/5.5.2/include/CGAL")
+```
 Note: this must be done *before* the package is installed by `R`.
 
 Alternatively, there is a function `cgal_install()` to download the header files after installation. This can be used to update to a new version of the header files or select an old version, if you wish. See the Installation vignette in the package.
