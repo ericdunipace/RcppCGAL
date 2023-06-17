@@ -29,15 +29,15 @@ You may also install from github directly using the
 `devtools::install_github` function.
 
 By default, the package will try to download the header files from the
-CGAL git repository. If you already have one downloaded that you prefer to use,
+CGAL GitHub repository. If you already have one downloaded that you prefer to use,
 you can specify the environmental variable `CGAL_DIR` and `R` will use that
 instead:
 ```R
 Sys.setenv("CGAL_DIR" = "path/to/CGAL")
 ```
-Note: this must be done *before* the package is loaded by `R`.
+Note: this must be done *before* the package is installed by `R`.
 
-Alternatively, there is a function `cgal_install()` to download the header files or after install. This can be used to update or select an old version, if you wish. See the Installation vignette in the package.
+Alternatively, there is a function `cgal_install()` to download the header files after installation. This can be used to update to a new version of the header files or select an old version, if you wish. See the Installation vignette in the package.
 
 ### Example
 We provide an example of how to perform Hilbert sorting using an R matrix:

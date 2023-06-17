@@ -1,5 +1,5 @@
 #' @references 
-#' The CGAL Project. (2023). {CGAL} User and Reference Manual (5.5.2). Retrieved from <https://doc.cgal.org/5.4/Manual/packages.html>
+#' The CGAL Project. (2023). {CGAL} User and Reference Manual. Retrieved from <https://doc.cgal.org/latest/Manual/index.html>
 #' @examples
 #' \dontrun{
 #' # To use this in a C++ file make sure you add an appropriate

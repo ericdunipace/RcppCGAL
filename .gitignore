@@ -13,3 +13,4 @@ saveCheck
 include
 VERSION
 AUTO_INSTALL_ERROR
+pkg_check
