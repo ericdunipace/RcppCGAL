@@ -25,4 +25,4 @@ NeedsCompilation: no
 RoxygenNote: 7.2.3
 Encoding: UTF-8
 VignetteBuilder: knitr
-Config/Needs: rmarkdown
+Config/Needs/vignette: rmarkdown
