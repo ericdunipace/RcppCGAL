@@ -23,11 +23,9 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: |
+              any::rcmdcheck
+              rmarkdown
           needs: check
-      
-      - name: Setup vignette dependency
-        run: |
-          R -e 'install.packages("rmarkdown")' 
 
       - uses: r-lib/actions/check-r-package@v2
