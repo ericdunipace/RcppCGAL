@@ -25,7 +25,7 @@ jobs:
         with:
           extra-packages: |
               any::rcmdcheck
-              rmarkdown
+              any::rmarkdown
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
