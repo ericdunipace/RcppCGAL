@@ -120,5 +120,5 @@ usual `R` `matrix` or `data.frame`.
 Eric Dunipace
 
 ## License
-This package is provided under the GPL v3+. For the header files themselves, please see the information at the CGAL site: [https://www.cgal.org/license.html](https://www.cgal.org/license.html)
+This package is provided under the GPL-3. For the use of the header files outside this package, please see the information at the CGAL site: [https://www.cgal.org/license.html](https://www.cgal.org/license.html)
 
