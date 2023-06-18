@@ -17,9 +17,9 @@ Description: Creates a header only package to link to the CGAL
   and convex hull algorithms. For more information about how to use the header files, 
   see the CGAL documentation at <https://www.cgal.org>. Currently
   downloads the latest stable CGAL release from GitHub.
-License: GPL 3
+License: GPL-3
 Imports: utils, Rcpp, gh, curl
-Suggests: knitr
+Suggests: knitr, rmarkdown
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
 RoxygenNote: 7.2.3
