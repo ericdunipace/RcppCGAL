@@ -14,13 +14,13 @@ cgal_version <- function() {
   if (is.na(vers)) {
     pkg_path <- .rcppcgal_package_path()
     buildnumFile <- file.path(pkg_path, "VERSION")
-    
+
     # only update version variable if file exists
     if (file.exists(buildnumFile)) {
       vers <- readLines(buildnumFile)
       cgal_pkg_state$VERSION <- vers
-    } 
-    
+    }
+
   }
   return(cgal_pkg_state$VERSION)
 }
@@ -40,14 +40,20 @@ cgal_version <- function() {
   cgal_pkg_state$OLD_VERSION <- cgal_pkg_state$VERSION
   
   # create environmental variable
-  if(!own) {
+  if (!own) {
     cgal_pkg_state$VERSION <- paste0("This is CGAL version ", version)
   } else {
     cgal_pkg_state$VERSION <- paste0("Supplied own CGAL from ", version)
   }
-  
   #save version number
   pkg_path <- .rcppcgal_package_path()
   buildnumFile <- file.path(pkg_path, "VERSION")
   writeLines(text =  cgal_pkg_state$VERSION, buildnumFile)
+}
+
+.delete_cgal_version <- function() {
+  pkg_path <- .rcppcgal_package_path()
+  buildnumFile <- file.path(pkg_path, "VERSION")
+  if (file.exists(buildnumFile)) unlink(buildnumFile)
+  
 }

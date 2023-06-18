@@ -29,10 +29,12 @@
   
   # warn about not being installed
   if (!cgal_is_installed() && isFALSE(cgal_pkg_state$WARNED) && !silent) {
+    
     packageStartupMessage(warn_mess, domain = NULL, appendLF = TRUE)
     cgal_pkg_state$WARNED <- TRUE
+    cgal_pkg_state$VERSION <- NA
+    .delete_cgal_version()
   }
-  
   
 }
 

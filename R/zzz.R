@@ -21,7 +21,7 @@
   
   .cgal_download_check() # will see if interactive and ask to download
   
-  packageStartupMessage("For more information about how to use the header files, see the CGAL documentation  at <https://www.cgal.org>. For more details on the license of the CGAL header files, lease see <https://www.cgal.org/license.html>. The header files as used in this package are under the GPL (v3+) license.\n
+  packageStartupMessage("For more information about how to use the header files, see the CGAL documentation  at <https://www.cgal.org>. The header files as setup by this package are under a GPL 3 license. For more details on the license of the CGAL header files, please see <https://www.cgal.org/license.html>.\n
 Please cite this package if you use it. See citation('RcppCGAL').\n", domain = NULL, appendLF = TRUE)
   
   if ( cgal_is_installed() && !is.na(.cgal_version_check()) ) {
