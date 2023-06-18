@@ -19,9 +19,10 @@ Description: Creates a header only package to link to the CGAL
   downloads the latest stable CGAL release from GitHub.
 License: GPL-3
 Imports: utils, Rcpp, gh, curl
-Suggests: knitr, rmarkdown
+Suggests: knitr
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
 RoxygenNote: 7.2.3
 Encoding: UTF-8
 VignetteBuilder: knitr
+Config/Needs: rmarkdown
