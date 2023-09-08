@@ -48,7 +48,8 @@
     #                     replacement = "&&",
     #                     x = tx[lines], perl = TRUE)
     #   writeLines(tx, con=f)
-    # }
+    # } # this code is no longer neaded after issue
+    
     search <- grep(pattern = "std::cerr|std::cout|abort\\(|exit\\(", x = tx)
     if (length(search)==0) next
     # first <- grep("#include", tx)[1]
@@ -57,11 +58,11 @@
     tx[search]  <- gsub(pattern = "std::cerr", replacement = "Rcpp::Rcerr", x = tx[search])
     tx[search]  <- gsub(pattern = "std::cout", replacement = "Rcpp::Rcout", x = tx[search])
     tx[search]  <- gsub(pattern = "std::abort\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = " abort\\(\\)", replacement = 'Rcpp::stop("Abort Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = "std::exit\\(\\)", replacement = 'Rcpp::stop("Exit Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = " exit\\(\\)", replacement = 'Rcpp::stop("Exit Error")', x = tx[search])
-    tx[search]  <- gsub(pattern = "std::exit\\(0\\)", replacement = 'Rcpp::stop("Exit Success")', x = tx[search])
-    tx[search]  <- gsub(pattern = "std::exit\\(1\\)", replacement = 'Rcpp::stop("Exit Error")', x = tx[search])
+    tx[search]  <- gsub(pattern = " abort\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
+    tx[search]  <- gsub(pattern = "std::exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
+    tx[search]  <- gsub(pattern = " exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
+    tx[search]  <- gsub(pattern = "std::exit\\(0\\)", replacement = 'Rcpp::stop("Success")', x = tx[search])
+    tx[search]  <- gsub(pattern = "std::exit\\(1\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
     writeLines(tx, con=f)
   }
   cgal_pkg_state$CLEANED <- TRUE

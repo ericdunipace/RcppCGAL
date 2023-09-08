@@ -67,7 +67,7 @@ or you can set it in R directly
 Sys.setenv(CGAL_DIR="https://some/url/cgalheaders.tar.gz")
 ```
 
-The second variable, `CGAL_DOWNLOAD`, will let R know to install the header files automatically when installing the `RcppCGAL` package. If `CGAL_DOWNLOAD` is any other value than 0, the header files will be automatically downloaded. If `CGAL_DOWNLOAD=0` , the header files will not be downloaded. This mean that in most cases, i.e. on CRAN, the header files will be downloaded as long as there is an internet connection. You can set this variable via the shell
+The second variable, `CGAL_DOWNLOAD`, will let R know to install the header files automatically when installing the `RcppCGAL` package. If `CGAL_DOWNLOAD` is any other value than 0, the header files will be automatically downloaded. If `CGAL_DOWNLOAD=0` , the header files will not be downloaded. This means that in most cases, i.e. on CRAN, the header files will be downloaded as long as there is an internet connection. You can set this variable via the shell
 
 or in R
 ```{bash, eval = FALSE}
