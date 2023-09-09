@@ -55,6 +55,9 @@
     # first <- grep("#include", tx)[1]
     # tx[first]  <- sub(pattern = "#include",   replacement = "#include <Rcpp.h>\n#include", x = tx[first])
     tx[1] <- paste0("#include <Rcpp.h>\n", tx[1])
+    tx[search]  <- gsub(pattern = "std::tuple<Locate_type, int, int> exit\\(\\) const", 
+                    replacement="std::tuple<Locate_type, int, int\\> exit_tmp\\(\\) const", 
+                    x = tx[search])
     tx[search]  <- gsub(pattern = "std::cerr", replacement = "Rcpp::Rcerr", x = tx[search])
     tx[search]  <- gsub(pattern = "std::cout", replacement = "Rcpp::Rcout", x = tx[search])
     tx[search]  <- gsub(pattern = "std::abort\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
@@ -63,6 +66,9 @@
     tx[search]  <- gsub(pattern = " exit\\(\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
     tx[search]  <- gsub(pattern = "std::exit\\(0\\)", replacement = 'Rcpp::stop("Success")', x = tx[search])
     tx[search]  <- gsub(pattern = "std::exit\\(1\\)", replacement = 'Rcpp::stop("Error")', x = tx[search])
+    tx[search]  <- gsub(pattern = "std::tuple<Locate_type, int, int> exit_tmp\\(\\) const", 
+                    replacement="std::tuple<Locate_type, int, int\\> exit\\(\\) const", 
+                    x = tx[search])
     writeLines(tx, con=f)
   }
   cgal_pkg_state$CLEANED <- TRUE
