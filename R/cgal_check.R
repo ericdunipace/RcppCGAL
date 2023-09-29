@@ -20,7 +20,7 @@
     install <- tryCatch(utils::askYesNo("No CGAL header files. Download latest version?"),
                         error = function(e) FALSE)
     if (!is.na(install) &&  install )  {
-      cgal_install()
+      cgal_install(cgal_path = cgal_pkg_state$DEFAULT_URL)
     } else {
       packageStartupMessage(warn_mess, domain = NULL, appendLF = TRUE)
       cgal_pkg_state$WARNED <- TRUE

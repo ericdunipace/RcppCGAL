@@ -6,11 +6,25 @@
   # on_cran      <- !identical(Sys.getenv("NOT_CRAN"), "true")
   has_internet <- curl::has_internet()
   no_cgal      <- !cgal_is_installed()
+  default_url  <- cgal_pkg_state$DEFAULT_URL
+  default_vers <- cgal_pkg_state$DEFAULT_VERSION
   
   if(no_cgal && has_internet && install_cgal && !interact ) {
-    tryCatch(suppressMessages(cgal_install()),
+    # to comply with CRAN, must download a fixed version of files by default.
+    # this will check for environment variable otherwise will pass default
+    if (Sys.getenv("CGAL_DIR") != "") {
+      default_url <- NULL
+    }
+    
+    tryCatch(suppressMessages(cgal_install(cgal_path = default_url)),
              error = .cgal_install_error_catch
              )
+    
+    if (Sys.getenv("CGAL_DIR") != "") {
+      # needs another check currently to save proper version
+      .save_cgal_version(version = default_vers, own = FALSE)
+    }
+    
   }
   
   .cgal_download_check() # will see if interactive and ask to download

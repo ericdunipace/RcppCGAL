@@ -25,6 +25,8 @@ NULL
 # and best guess of possible version
 cgal_pkg_state <- list2env(list(
                         ASK_INSTALL = FALSE,
+                        DEFAULT_URL = "https://github.com/CGAL/cgal/releases/download/v5.6/CGAL-5.6.tar.xz",
+                        DEFAULT_VERSION = "5.6",
                         CLEANED = FALSE,
                         OLD_VERSION = NA_character_,
                         VERSION = NA_character_,
