@@ -20,7 +20,7 @@
              error = .cgal_install_error_catch
              )
     
-    if (Sys.getenv("CGAL_DIR") != "") {
+    if (Sys.getenv("CGAL_DIR") == "") {
       # needs another check currently to save proper version
       .save_cgal_version(version = default_vers, own = FALSE)
     }

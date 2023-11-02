@@ -41,7 +41,7 @@ cgal_version <- function() {
   
   # create environmental variable
   if (!own) {
-    cgal_pkg_state$VERSION <- paste0("This is CGAL version ", version)
+    cgal_pkg_state$VERSION <- paste0("This is CGAL version ", version, ".")
   } else {
     cgal_pkg_state$VERSION <- paste0("Supplied own CGAL from ", version)
   }
