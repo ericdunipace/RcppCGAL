@@ -7,11 +7,9 @@ src/*.so
 src/*.dll
 deprecated
 cran-comments.md
-inst/AUTHORS
 .DS_Store
 saveCheck
 include
-inst/include/CGAL
 VERSION
 AUTO_INSTALL_ERROR
 pkg_check

@@ -46,7 +46,7 @@ cgal_predownloader <- function(cgal_path, pkg_path, DL) {
   target_file <- untar_tarball(temp_file,
                                dest_folder)
   
-  unlink(dests$temp_file)
+  unlink(temp_file)
   return(target_file[file.exists(target_file)])
 }
 
