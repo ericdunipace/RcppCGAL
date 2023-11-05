@@ -30,6 +30,11 @@ if (tar_exists && not_set) {
 } else {
   CLEANED <- FALSE
   if (not_set) {
+    message(
+      paste0("Default header bundle not found. Downloading default version ",
+             DEFAULT_VERSION
+             )
+    )
     env_cgal <- DEFAULT_URL
   } else {
     message(paste0("Getting CGAL files from\n    ", env_cgal, "\n"))

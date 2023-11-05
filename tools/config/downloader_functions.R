@@ -40,7 +40,7 @@ cgal_predownloader <- function(cgal_path, pkg_path, DL) {
     return(cgal_path)
   }
   
-  dests <- download_tarball(dest_folder, cgal_path, pkg_path, overwrite)
+  temp_file <- download_tarball(dest_folder, cgal_path, pkg_path, overwrite)
   
   
   target_file <- untar_tarball(temp_file,
