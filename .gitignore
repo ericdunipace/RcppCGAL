@@ -9,8 +9,8 @@ deprecated
 cran-comments.md
 .DS_Store
 saveCheck
-include
 VERSION
 AUTO_INSTALL_ERROR
 pkg_check
 R/pkg_state.R
+inst/include/CGAL/
