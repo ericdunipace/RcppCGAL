@@ -21,5 +21,16 @@ cgal_install(
 \item{force}{Whether to force downloading and install the header files if they're already found in the package. Default is FALSE}
 }
 \description{
-CGAL header file installer
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+}
+\examples{
+\dontrun{
+# cgal_install(cgal_path = "url/to/cgal",
+#              clean_files = TRUE, force = TRUE)
+# ->
+# set_cgal("url/to/cgal")
+# do not restart R or you will lose the environmental variable
+# install.packages("RcppCGAL")
+}
+
 }

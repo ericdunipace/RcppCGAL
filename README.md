@@ -1,6 +1,6 @@
 <!-- badges: start -->
-  [![R-CMD-check](https://github.com/ericdunipace/RcppCGAL/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ericdunipace/RcppCGAL/actions/workflows/R-CMD-check.yaml)
-  [![](http://www.r-pkg.org/badges/version/RcppCGAL)](http://www.r-pkg.org/pkg/RcppCGAL)
+ [![R-CMD-check](https://github.com/ericdunipace/RcppCGAL/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ericdunipace/RcppCGAL/actions/workflows/R-CMD-check.yaml)
+ [![](https://www.r-pkg.org/badges/version/RcppCGAL)](https://www.r-pkg.org/pkg/RcppCGAL)
   <!-- badges: end -->
   
 ## RcppCGAL: CGAL Headers for R
@@ -28,7 +28,7 @@ Alternatively, you can download or clone the git repository. Then you can instal
 devtools::install("RcppCGAL")
 ```
 You may also install from github directly using the
-`devtools::install_github` function.
+`devtools::install_github()` function.
 
 By default, the package will try to download the header files from the
 CGAL GitHub repository. If you already have one downloaded that you prefer to use,
@@ -37,13 +37,19 @@ instead:
 ```R
 Sys.setenv("CGAL_DIR" = "path/to/CGAL")
 ```
+or, if the function is already installed, you can use the `set_cgal()` function in the package
+```R
+set_cgal("path/to/CGAL")
+```
+and then re-install.
+
 Typically, the folder with all the header files is called `CGAL`. For example, on my Mac with a Homebrew install of CGAL, I would do
 ```R
 Sys.setenv("CGAL_DIR" = "/usr/local/Cellar/cgal/5.5.2/include/CGAL")
 ```
 Note: this must be done *before* the package is installed by `R`.
 
-Alternatively, there is a function `cgal_install()` to download the header files after installation. This can be used to update to a new version of the header files or select an old version, if you wish. See the Installation vignette in the package.
+By default, the package will use the 5.6.0 version of the CGAL that is bundled in the tarball.
 
 ### Example
 We provide an example of how to perform Hilbert sorting using an R matrix:

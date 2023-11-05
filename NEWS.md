@@ -1,5 +1,18 @@
 # Package RcppCGAL
 
+## Changes in 5.6.0
+
+### Major updates
+* CRAN snafu due to me being busy and not responding to requests for update. Package was archived. 
+* Dependent package added a function that caused an error due to my simple cerr checking function replacing an erroneous exit function in the CGAL (#11). User `tylermorganwall` found bug and helped fix. Thank you!
+* Package now is bundled with a fixed version of CGAL header files
+* Will download from CGAL release if that's problematic
+* User can supply own files via CGAL_DIR
+* deprecating the `cgal_install()` function. Still usable but will give a soft warning using `lifecycle` package.
+
+### New features
+* added a `set_cgal` function (and `unset_cgal()`) to help users who may have trouble setting the environmental variables on their own.
+
 ## Changes in 5.5.3
 
 ### Minor improvements and Bug Fixes

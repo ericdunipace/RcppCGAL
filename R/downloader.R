@@ -1,5 +1,56 @@
+# TODO: removed downloader functions to the configure stage. Remove functions below set_cgal once cgal_install removed.
+
+#' Set the CGAL header file directory
+#'
+#' @param path character vector. either a URL or system path
+#'
+#' @description
+#' This package will set the `CGAL_DIR` environmental variable if you don't know how. Then you can re-install the `RcppCGAL` package and the installation should use your preferred source of the CGAL library. Note the cleaner functions will run automatically and replace the calls to std::err and exit in the C code. They have been tested on CGAL 5.6 so are not guaranteed to work with other versions of the CGAL headers.
+#' 
+#'
+#' @return Invisibley returns TRUE if the `CGAL_DIR` variable was successfully set or or FALSE if it was not.
+#' 
+#' @seealso [unset_cgal()]
+#' 
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # set_cgal("path/to/include/CGAL")
+#' }
+set_cgal <- function(path) {
+  
+  Sys.setenv("CGAL_DIR" = path)
+}
+
+#' Unset the CGAL header file directory
+#'
+#' @param ... Not used at this time
+#'
+#' @description
+#' This package will remove the `CGAL_DIR` environmental variable.
+#' 
+#'
+#' @return Invisibley returns TRUE if the `CGAL_DIR` variable was successfully removed or or FALSE if it was not.
+#' 
+#' @seealso [unset_cgal()]
+#' 
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # unset_cgal()
+#' }
+unset_cgal <- function(...) {
+  
+  Sys.unsetenv("CGAL_DIR")
+}
 
 #' CGAL header file installer
+#' 
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
 #'
 #' @param cgal_path Path to CGAL files on your machine, a URL. If NULL will downloaded latest version from GitHub. Default is NULL.
 #' @param version Desired version to search for from the GitHub. If NULL, will download latest.
@@ -7,9 +58,28 @@
 #' @param force Whether to force downloading and install the header files if they're already found in the package. Default is FALSE
 #'
 #' @return NULL
+#' 
 #' @export
+#' 
+#' @examples
+#' \dontrun{
+#' # cgal_install(cgal_path = "url/to/cgal",
+#' #              clean_files = TRUE, force = TRUE)
+#' # ->
+#' # set_cgal("url/to/cgal")
+#' # do not restart R or you will lose the environmental variable
+#' # install.packages("RcppCGAL")
+#' }
+#' 
 cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, force = FALSE) {
-
+  
+  #deprication warning
+  lifecycle::deprecate_soft(
+    when = "5.6.0",
+    what = "cgal_install",
+    details = "Please use the function `set_cgal()` instead. `cgal_install()` will not be supported in the next version of RcppCGAL"
+  )
+  
   # make conditions TRUE or FALSE
   force <- isTRUE(force)
   clean_files <- isTRUE(clean_files)
@@ -27,7 +97,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   
   cgal_path <- .cgal_url(cgal_path, version)
   
-  .cgal.downloader(cgal_path, force)
+  .cgal.downloader(cgal_path, .rcppcgal_package_path(), force)
   if(clean_files) .cgal.cerr.remover()
   
   # reset warnings and such so if uninstalled will re-prompt to DL
@@ -52,10 +122,34 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   # if need to download the files
   if ( missing(cgal_path) || is.null(cgal_path) || cgal_path == "" ) {
     
+    cgal_path <- cgal_pkg_state$DEFAULT_URL
+    
+    .save_cgal_version(version = cgal_pkg_state$VERSION, own = FALSE)
+    
+  } else {
+    # save file path
+    .save_cgal_version(version = cgal_path, own = TRUE)
+  }
+  
+  return(cgal_path)
+  
+}
+
+# cran objects to the github downlaod
+.cgal_url_depricated <- function(cgal_path, version) {
+  if ( missing(cgal_path) || is.null(cgal_path) ) {
+    cgal_path <- Sys.getenv("CGAL_DIR")
+  }
+  
+  # if need to download the files
+  if ( missing(cgal_path) || is.null(cgal_path) || cgal_path == "" ) {
+    
     # get info from GitHub
-    all_gh <- gh::gh("GET /repos/{owner}/{repo}/releases", 
-                     owner = "CGAL",
-                     repo = "cgal")
+    # uncomment if needed
+    # all_gh <- gh::gh("GET /repos/{owner}/{repo}/releases",
+    #                  owner = "CGAL",
+    #                  repo = "cgal")
+    all_gh <- NULL # comment this out if choosing to use gh
     
     # choose proper release
     if (missing(version) || is.null(version)) {
@@ -102,6 +196,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
     
     # save version number
     .save_cgal_version(version = cgal_vers, own = FALSE)
+    
   } else {
     # save file path
     .save_cgal_version(version = cgal_path, own = TRUE)
@@ -111,6 +206,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   
 }
 
+is_url <- function(x) any(grepl("^(http|ftp)s?://", x), grepl("^(http|ftp)s://", x))
 
 #' Downloads CGAL files
 #'
@@ -121,7 +217,7 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
 #' @details downloads the CGAL package from the web
 #' 
 #' @keywords internal
-.cgal.downloader <- function(cgal_path, overwrite = FALSE) {
+.cgal.downloader <- function(cgal_path, pkg_path, overwrite = FALSE) {
   
   # increase timeout because of downloads
   old_options <- options(timeout = getOption("timeout"))
@@ -131,9 +227,6 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   # warn if overwrite
   if(!is.logical(overwrite) || length(overwrite) != 1L || is.na(overwrite)) stop("`overwrite` must be TRUE or FALSE")
   
-  is_url <- function(x) any(grepl("^(http|ftp)s?://", x), grepl("^(http|ftp)s://", x))
-  
-  pkg_path <- .rcppcgal_package_path()
   cgal_path_isdir <- isTRUE(nzchar(cgal_path) && !is_url(cgal_path))
   
   # Check for CGAL file in 'include' directory.
@@ -146,6 +239,20 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
       return(possible_file)
     }
   }
+  
+  dests <- .download_tarball(cgal_path, pkg_path, overwrite)
+  
+  
+  target_file <- .untar_tarball(dests$temp_file,
+                                dests$dest_folder)
+  
+  
+  return(target_file[file.exists(target_file)])
+}
+
+.download_tarball <- function(cgal_path, pkg_path, overwrite = FALSE) {
+  
+  cgal_path_isdir <- isTRUE(nzchar(cgal_path) && !is_url(cgal_path))
   
   # Check for CGAL file in 'inst/include' directory.
   # if (! overwrite && ! cgal_path_isdir) {
@@ -205,6 +312,13 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   if ( !file.exists(temp_file) )
     stop("Error: Transfer failed. Please download ", cgal_url, " and place CGAL include directory in ", dest_folder)
   
+  return(list(temp_file = temp_file,
+              dest_folder = dest_folder))
+  
+}
+
+.untar_tarball <- function(temp_file, dest_folder) {
+  
   utils::untar(tarfile = temp_file, exdir = dest_folder)
   # unzip_file <- paste0("CGAL-",version)
   unzip_file  <- list.dirs(dest_folder, 
@@ -214,9 +328,10 @@ cgal_install <- function(cgal_path = NULL, version = NULL, clean_files = TRUE, f
   
   # Move good file into final position
   file.rename(source_file, target_file)
+  
+  # Delete temp files
   unlink(temp_file)
   unlink(file.path(dest_folder, unzip_file), recursive = TRUE)
   
-  
-  return(target_file[file.exists(target_file)])
+  return(target_file)
 }

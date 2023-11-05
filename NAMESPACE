@@ -3,4 +3,6 @@
 export(cgal_install)
 export(cgal_is_installed)
 export(cgal_version)
+export(set_cgal)
+export(unset_cgal)
 importFrom(Rcpp,evalCpp)

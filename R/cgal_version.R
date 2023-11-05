@@ -1,3 +1,5 @@
+# TODO: remove functions below comment on line 32
+
 #' Return CGAL version
 #'
 #' @return prints the CGAL version of the package
@@ -11,20 +13,23 @@ cgal_version <- function() {
 
 .cgal_version_check <- function() {
   vers <- cgal_pkg_state$VERSION
-  if (is.na(vers)) {
-    pkg_path <- .rcppcgal_package_path()
-    buildnumFile <- file.path(pkg_path, "VERSION")
-
-    # only update version variable if file exists
-    if (file.exists(buildnumFile)) {
-      vers <- readLines(buildnumFile)
-      cgal_pkg_state$VERSION <- vers
-    }
-
-  }
+  # if (is.na(vers)) {
+  #   pkg_path <- .rcppcgal_package_path()
+  #   buildnumFile <- file.path(pkg_path, "VERSION")
+  # 
+  #   # only update version variable if file exists
+  #   if (file.exists(buildnumFile)) {
+  #     vers <- readLines(buildnumFile)
+  #     cgal_pkg_state$VERSION <- vers
+  #   }
+  # 
+  # }
   return(cgal_pkg_state$VERSION)
 }
 
+
+
+### Consider removing functions below
 
 #' Function to write CGAL version
 #'

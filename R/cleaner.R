@@ -1,3 +1,5 @@
+# TODO: Move to tools/config sections only
+
 #' Removes std::cerr references from files.
 #'
 #' @param pkg_path character giving path to the package
@@ -26,10 +28,10 @@
   # if(isTRUE(CHANGED == "TRUE")) {
   #   return(invisible())
   # }
-  CHANGED <- isTRUE(cgal_pkg_state$CLEANED)
-  if(CHANGED) {
-    return(invisible(NULL))
-  }
+  # CHANGED <- isTRUE(cgal_pkg_state$CLEANED)
+  # if(CHANGED) {
+  #   return(invisible(NULL))
+  # }
   
   # change files
   message("\nChanging CGAL's message output to R's output...\n")
@@ -71,7 +73,7 @@
                     x = tx[search])
     writeLines(tx, con=f)
   }
-  cgal_pkg_state$CLEANED <- TRUE
+  # cgal_pkg_state$CLEANED <- TRUE
   # assign("cgal_pkg_state", "cgal_pkg_state", pos = "package:RcppCGAL")
   return(invisible(NULL))
 }

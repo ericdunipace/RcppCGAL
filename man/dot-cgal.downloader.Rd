@@ -4,7 +4,7 @@
 \alias{.cgal.downloader}
 \title{Downloads CGAL files}
 \usage{
-.cgal.downloader(cgal_path, overwrite = FALSE)
+.cgal.downloader(cgal_path, pkg_path, overwrite = FALSE)
 }
 \arguments{
 \item{overwrite}{TRUE FALSE, default is FALSE}

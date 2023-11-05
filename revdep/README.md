@@ -1,24 +1,25 @@
 # Platform
 
-|field    |value                                                                                      |
-|:--------|:------------------------------------------------------------------------------------------|
-|version  |R version 4.3.1 (2023-06-16)                                                               |
-|os       |macOS Ventura 13.5.1                                                                       |
-|system   |aarch64, darwin20                                                                          |
-|ui       |RStudio                                                                                    |
-|language |(EN)                                                                                       |
-|collate  |en_US.UTF-8                                                                                |
-|ctype    |en_US.UTF-8                                                                                |
-|tz       |America/Los_Angeles                                                                        |
-|date     |2023-09-07                                                                                 |
-|rstudio  |2023.06.1+524 Mountain Hydrangea (desktop)                                                 |
-|pandoc   |3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown) |
+|field    |value                                    |
+|:--------|:----------------------------------------|
+|version  |R version 4.3.2 (2023-10-31)             |
+|os       |macOS Sonoma 14.0                        |
+|system   |aarch64, darwin20                        |
+|ui       |RStudio                                  |
+|language |(EN)                                     |
+|collate  |en_US.UTF-8                              |
+|ctype    |en_US.UTF-8                              |
+|tz       |America/Los_Angeles                      |
+|date     |2023-11-04                               |
+|rstudio  |2023.09.1+494 Desert Sunflower (desktop) |
+|pandoc   |2.19.2 @ /usr/local/bin/pandoc           |
 
 # Dependencies
 
-|package  |old |new        |Δ  |
-|:--------|:---|:----------|:--|
-|RcppCGAL |NA  |5.5.3.9000 |*  |
+|package  |old |new   |Δ  |
+|:--------|:---|:-----|:--|
+|RcppCGAL |NA  |5.6.0 |*  |
+|rlang    |NA  |1.1.1 |*  |
 
 # Revdeps
 

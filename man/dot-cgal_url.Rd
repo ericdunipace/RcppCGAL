@@ -18,6 +18,6 @@ URL to use or path as a character vector
 Gets CGAL URL
 }
 \details{
-to be used by [RcppCGAL::cgal_install()]
+to be used by \code{\link[=cgal_install]{cgal_install()}}
 }
 \keyword{internal}

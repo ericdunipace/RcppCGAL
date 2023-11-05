@@ -9,56 +9,20 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This document will briefly cover the installation process of the header files for users since there are some possible environmental variables that can be used to aid in the download/installation of the CGAL header files on your machine. By default, and due to CRAN dependencies relying on the headers for C++ files, the package will download the latest header files from the CGAL GitHub. If you wish for more control or there is an error, read on!
+This document will briefly cover the installation process of the header files for users since there are some possible environmental variables that can be used to aid in the download/installation of the CGAL header files on your machine. By default, the package is bundled with header version `r RcppCGAL:::cgal_pkg_state$DEFAULT_VERSION`. If you wish for more control or there is an error, read on!
 
 ## Installation without system environment flags
 The process of installing is, hopefully, quite simple for most users. 
 
-### You just want the latest version
+### You just want the default `r RcppCGAL:::cgal_pkg_state$DEFAULT_VERSION` version
 If you don't have any strong desires, do the following:
 ``` {r, eval = FALSE}
 install.packages("RcppCGAL")
-cgal_install(cgal_path = NULL, version = NULL,
-             clean_files = TRUE, force = FALSE)
-
 ```
-The functions should take care of the rest! You will have the latest version of CGAL from GitHub. This should also happen by default on package installation if there is an internet connection.
+You will have the CGAL header files!
 
-### You want to install a particular version from the GitHub
-If you have a particular version of the CGAL headers you would like from the GitHub, use the version argument and keep `cgal_path = NULL`.
-
-``` {r, eval = FALSE}
-install.packages("RcppCGAL")
-cgal_install(cgal_path = NULL, version = "5.5.1",
-             clean_files = TRUE, force = FALSE)
-
-```
-
-### You have a local install you want to use
-If you have already installed the CGAL header files and just want to use that, you just need to specify the system path to the CGAL folder in the argument `cgal_path`.
-``` {r, eval = FALSE}
-install.packages("RcppCGAL")
-cgal_install(cgal_path = "path/to/CGAL", version = NULL,
-             clean_files = TRUE, force = FALSE)
-
-```
-The function will then copy the files into the R package directory.
-
-### You have a particular URL you want to download the headers from
-This is similar to the previous example; you just need to specify the exact location of the header files you want to download.
-
-``` {r, eval = FALSE}
-install.packages("RcppCGAL")
-cgal_install(cgal_path = "https://some/url/cgalheaders.tar.gz", version = NULL,
-             clean_files = TRUE, force = FALSE)
-
-```
-
-
-## Installation with system environment flags
-In some case, you may want to install the CGAL header files by default on installation and perhaps you may have a custom path. In this case, you can set two environmental variables.
-
-The first, `CGAL_DIR`, will specify a directory or URL to search for the CGAL header files like above. If it is not set, the package will simply download the latest version or by using the argument of `cgal_path` in the `cgal_install` function. In the shell on Unix/Linux machines, you can do
+### You want to install a particular version from a URL
+All you have to do is set the environment variable `CGAL_DIR`. In the shell on Unix/Linux machines, you can do
 ```{bash, eval = FALSE}
 export CGAL_DIR="https://some/url/cgalheaders.tar.gz"
 ```
@@ -67,31 +31,35 @@ or you can set it in R directly
 Sys.setenv(CGAL_DIR="https://some/url/cgalheaders.tar.gz")
 ```
 
-The second variable, `CGAL_DOWNLOAD`, will let R know to install the header files automatically when installing the `RcppCGAL` package. If `CGAL_DOWNLOAD` is any other value than 0, the header files will be automatically downloaded. If `CGAL_DOWNLOAD=0` , the header files will not be downloaded. This means that in most cases, i.e. on CRAN, the header files will be downloaded as long as there is an internet connection. You can set this variable via the shell
+If you have already installed the package, you can use
+```{r, eval = FALSE}
+set_cgal("https://some/url/cgalheaders.tar.gz")
+```
+and then re-install package.
 
-or in R
+### You have a local install you want to use
+If you have already installed the CGAL header files and just want to use that, you just need to specify the system path to the CGAL folder, much the same as setting a URL above.
+
+In the Linux/Unix shell you can do
 ```{bash, eval = FALSE}
-export CGAL_DOWNLOAD="1"
+export CGAL_DIR="path/to/include/CGAL"
 ```
 or you can set it in R directly
 ```{r, eval = FALSE}
-Sys.setenv(CGAL_DOWNLOAD="1")
+Sys.setenv(CGAL_DIR="path/to/include/CGAL")
 ```
 
-Then you can install the package and everything should flow automatically.
-```{bash, eval = FALSE}
-install.packages("RcppCGAL")
+If you have already installed the package, you can use
+```{r, eval = FALSE}
+set_cgal("path/to/include/CGAL)
 ```
-
-## Updating header files
-The process of updating the files is simple. We can just follow the same procedures as above using the `cgal_install` function but set `force = TRUE`:
-``` {r, eval = FALSE}
-cgal_install(cgal_path = NULL, version = NULL,
-             clean_files = TRUE, force = TRUE)
-
-```
-No need to install the whole package again. This will also give you a warning saying it will overwrite the current header files.
+and then re-install package.
 
 ## To clean or not to clean
-Pretty much you should always clean the header files---i.e., leave `clean_files = TRUE` untouched. The reason is that the CGAL header files have calls to `std::exit`, `std::cerr`, and `std::cout`, which can can cause R to crash or for messages to not appear on the R consol. By default, `RcppCGAL` will search for these funtions and replace them with the `Rcpp` equivalents; however, should you find this isn't happening, please raise an issue on the GitHub!
+By default, the package will clean any header files that are provided into the `CGAL_DIR` environmental variable. The reason for this is that the CGAL header files have calls to `std::exit`, `std::cerr`, and `std::cout`, which can can cause R to crash or for messages to not appear on the R consol. By default, `RcppCGAL` will search for these funtions and replace them with the `Rcpp` equivalents; however, should you find this isn't happening, please raise an issue on the GitHub!
+
+At this time, the package does leaving the header files *un*cleaned. If for some reason you have a use case where you would like them not cleaned, please raise an issue on the GitHub for this package!
+
+## Changes from last version install procedure
+The last version had an `cgal_install()` function to download the header files on load. This function has been soft deprecated in favor of the default process since some packages may be installed as read only.
 

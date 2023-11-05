@@ -6,7 +6,6 @@
 ^\.git$
 ^\.gitignore$
 ^README\.md$  
-^inst/include$
 ^inst/saveCheck/OUTPUT_CHANGED$
 ^saveCheck$
 ^revdep$
@@ -15,6 +14,7 @@
 ^include$
 ^\.Rapp.history$
 ^\.Rhistory$
-^VERSION$
 ^AUTO_INSTALL_ERROR$
 ^pkg_check$
+^VERSION$
+^inst/include/CGAL$
