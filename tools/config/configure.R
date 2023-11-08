@@ -42,7 +42,7 @@ if (tar_exists && not_set) {
   }
   source_file("R/cleaner.R")
   cgal_predownloader(env_cgal, "inst", DL)
-  .cgal.cerr.remover("inst/include/CGAL")
+  .cgal.cerr.remover("inst") # automatically adds include/CGAL as of now
   CLEANED <- TRUE
 }
 

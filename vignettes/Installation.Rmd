@@ -58,7 +58,7 @@ and then re-install package.
 ## To clean or not to clean
 By default, the package will clean any header files that are provided into the `CGAL_DIR` environmental variable. The reason for this is that the CGAL header files have calls to `std::exit`, `std::cerr`, and `std::cout`, which can can cause R to crash or for messages to not appear on the R consol. By default, `RcppCGAL` will search for these funtions and replace them with the `Rcpp` equivalents; however, should you find this isn't happening, please raise an issue on the GitHub!
 
-At this time, the package does leaving the header files *un*cleaned. If for some reason you have a use case where you would like them not cleaned, please raise an issue on the GitHub for this package!
+At this time, the package does leaving the header files uncleaned. If for some reason you have a use case where you would like them not cleaned, please raise an issue on the GitHub for this package!
 
 ## Changes from last version install procedure
 The last version had an `cgal_install()` function to download the header files on load. This function has been soft deprecated in favor of the default process since some packages may be installed as read only.

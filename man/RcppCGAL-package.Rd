@@ -27,6 +27,7 @@ The CGAL Project. (2023). {CGAL} User and Reference Manual. Retrieved from \url{
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://github.com/ericdunipace/RcppCGAL}
   \item Report bugs at \url{https://github.com/ericdunipace/RcppCGAL/issues}
 }
 
