@@ -1,7 +1,7 @@
 <!-- badges: start -->
- [![R-CMD-check](https://github.com/ericdunipace/RcppCGAL/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ericdunipace/RcppCGAL/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/ericdunipace/RcppCGAL/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ericdunipace/RcppCGAL/actions/workflows/R-CMD-check.yaml)
  [![](https://www.r-pkg.org/badges/version/RcppCGAL)](https://www.r-pkg.org/pkg/RcppCGAL)
-  <!-- badges: end -->
+<!-- badges: end -->
   
 ## RcppCGAL: CGAL Headers for R
 
