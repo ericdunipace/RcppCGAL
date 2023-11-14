@@ -22,15 +22,5 @@ cgal_install(
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-}
-\examples{
-\dontrun{
-# cgal_install(cgal_path = "url/to/cgal",
-#              clean_files = TRUE, force = TRUE)
-# ->
-# set_cgal("url/to/cgal")
-# do not restart R or you will lose the environmental variable
-# install.packages("RcppCGAL")
-}
-
+This function previously installed or updated the CGAL header files. It has been hard deprecated instead of soft deprecated due to CRAN request.
 }

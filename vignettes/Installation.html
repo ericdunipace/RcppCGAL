@@ -12,7 +12,7 @@
 
 <meta name="author" content="Eric Dunipace" />
 
-<meta name="date" content="2023-11-05" />
+<meta name="date" content="2023-11-07" />
 
 <title>Installation</title>
 
@@ -340,7 +340,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Installation</h1>
 <h4 class="author">Eric Dunipace</h4>
-<h4 class="date">2023-11-05</h4>
+<h4 class="date">2023-11-07</h4>
 
 
 
@@ -348,14 +348,14 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 header files for users since there are some possible environmental
 variables that can be used to aid in the download/installation of the
 CGAL header files on your machine. By default, the package is bundled
-with header version 5.6. If you wish for more control or there is an
+with header version 5.6.0. If you wish for more control or there is an
 error, read on!</p>
 <div id="installation-without-system-environment-flags" class="section level2">
 <h2>Installation without system environment flags</h2>
 <p>The process of installing is, hopefully, quite simple for most
 users.</p>
-<div id="you-just-want-the-default-5.6-version" class="section level3">
-<h3>You just want the default 5.6 version</h3>
+<div id="you-just-want-the-default-5.6.0-version" class="section level3">
+<h3>You just want the default 5.6.0 version</h3>
 <p>If you don’t have any strong desires, do the following:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;RcppCGAL&quot;</span>)</span></code></pre></div>
 <p>You will have the CGAL header files!</p>
@@ -396,10 +396,9 @@ R to crash or for messages to not appear on the R consol. By default,
 <code>RcppCGAL</code> will search for these funtions and replace them
 with the <code>Rcpp</code> equivalents; however, should you find this
 isn’t happening, please raise an issue on the GitHub!</p>
-<p>At this time, the package does leaving the header files
-<em>un</em>cleaned. If for some reason you have a use case where you
-would like them not cleaned, please raise an issue on the GitHub for
-this package!</p>
+<p>At this time, the package does leaving the header files uncleaned. If
+for some reason you have a use case where you would like them not
+cleaned, please raise an issue on the GitHub for this package!</p>
 </div>
 <div id="changes-from-last-version-install-procedure" class="section level2">
 <h2>Changes from last version install procedure</h2>

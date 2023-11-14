@@ -3,12 +3,13 @@
 ## Changes in 5.6.0
 
 ### Major updates
-* CRAN snafu due to me being busy and not responding to requests for update. Package was archived. 
-* Dependent package added a function that caused an error due to my simple cerr checking function replacing an erroneous exit function in the CGAL (#11). User `tylermorganwall` found bug and helped fix. Thank you!
-* Package now is bundled with a fixed version of CGAL header files
-* Will download from CGAL release if that's problematic
-* User can supply own files via CGAL_DIR
-* deprecating the `cgal_install()` function. Still usable but will give a soft warning using `lifecycle` package.
+* Snafu due to me being busy and not responding to requests for update from CRAN. Package was archived. 
+* Update to fix an issue in a dependent package caused my simple checking function replacing a non-standard library exit function in the CGAL header files (Issue #11). User `tylermorganwall` found bug and fixed. Thank you!
+* Package now is bundled with a fixed version (5.6.0) of CGAL header files
+* Will download from CGAL release 5.6.0 if those files are somehow missing
+* User can supply own head files via `CGAL_DIR` as before
+* Deprecating the `cgal_install()` function. Will give a error via `lifecycle` package. Planned to soft deprecate but CRAN objected.
+* Removed dependency on `gh` package
 
 ### New features
 * added a `set_cgal` function (and `unset_cgal()`) to help users who may have trouble setting the environmental variables on their own.

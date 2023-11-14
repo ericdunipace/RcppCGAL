@@ -12,9 +12,10 @@ not_set     <- isTRUE(env_cgal  == "")
 
 DL          <- isTRUE(Sys.getenv("CGAL_DOWNLOAD")  != "0")
 
+# functions to clean and download if needed
 helper_path <- file.path("tools","config","downloader_functions.R")
 
-# package environment variables. needs '' to be put in correctly
+# package environment variables
 DEFAULT_URL <- "https://github.com/CGAL/cgal/releases/download/v5.6/CGAL-5.6.tar.xz"
 DEFAULT_VERSION <- "5.6.0"
 VERSION <- paste0("This is CGAL version ", DEFAULT_VERSION, ".")
@@ -40,19 +41,11 @@ if (tar_exists && not_set) {
     message(paste0("Getting CGAL files from\n    ", env_cgal, "\n"))
     VERSION  <- paste0("Supplied own CGAL from ", env_cgal)
   }
-  source_file("R/cleaner.R")
   cgal_predownloader(env_cgal, "inst", DL)
   .cgal.cerr.remover("inst") # automatically adds include/CGAL as of now
   CLEANED <- TRUE
 }
 
-define(DEFAULT_URL = paste0("'",DEFAULT_URL,"'"))
-define(DEFAULT_VERSION = paste0("'",DEFAULT_VERSION,"'"))
+if (isFALSE(CLEANED)) warning("Cleaning of CGAL header files failed!")
+
 define(VERSION = paste0("'",VERSION,"'"))
-define(CLEANED = CLEANED)
-
-
-
-
-
-

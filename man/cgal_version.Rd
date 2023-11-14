@@ -12,3 +12,6 @@ prints the CGAL version of the package
 \description{
 Return CGAL version
 }
+\examples{
+cgal_version()
+}

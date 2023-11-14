@@ -12,6 +12,9 @@ logical value
 \description{
 Check if CGAL header files exist in RcppCGAL package
 }
+\details{
+This function will perform a very simple check to see if the CGAL folder exists in the include directory and that it is non-empty. If the folder exists and is non-empty, the function returns \code{TRUE}; otherwise the function returns \code{FALSE}.
+}
 \examples{
 cgal_is_installed()
 }
