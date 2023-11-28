@@ -8,7 +8,8 @@
 * Package now is bundled with a fixed version (5.6.0) of CGAL header files
 * Will download from CGAL release 5.6.0 if those files are somehow missing
 * User can supply own head files via `CGAL_DIR` as before
-* Deprecating the `cgal_install()` function. Will give a error via `lifecycle` package. Planned to soft deprecate but CRAN objected.
+* Whether a user supplies their own header files is now no longer recorded due to CRAN objection and them not reading response emails.
+* Deprecating the `cgal_install()` function. Had planned to give an error via `lifecycle` package; however, CRAN maintainers are not reading their emails and assume the function is still working. Previously, planned to soft deprecate but CRAN objected.
 * Removed dependency on `gh` package
 
 ### New features

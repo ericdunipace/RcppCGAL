@@ -18,7 +18,7 @@ Description: Creates a header only package to link to the CGAL
   see the CGAL documentation at <https://www.cgal.org>. Currently
   downloads the CGAL version 5.6 stable release.
 License: GPL-3
-Imports: Rcpp, lifecycle
+Imports: Rcpp
 Suggests: 
     knitr,
     rmarkdown,

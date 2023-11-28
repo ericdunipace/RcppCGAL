@@ -1,5 +1,0 @@
-# environment to save whether header files have been cleaned
-# VERSION populated with version from package or user supplied
-cgal_pkg_state <- list2env(list(
-  VERSION = @VERSION@,
-  WARNED = FALSE))

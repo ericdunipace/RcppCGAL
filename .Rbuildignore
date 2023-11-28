@@ -18,3 +18,4 @@
 ^pkg_check$
 ^VERSION$
 ^inst/include/CGAL$
+^R/pkg_state.R.in$

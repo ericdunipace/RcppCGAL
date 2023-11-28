@@ -48,4 +48,4 @@ if (tar_exists && not_set) {
 
 if (isFALSE(CLEANED)) warning("Cleaning of CGAL header files failed!")
 
-define(VERSION = paste0("'",VERSION,"'"))
+# define(VERSION = paste0("'",VERSION,"'"))
