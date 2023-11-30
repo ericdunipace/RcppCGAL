@@ -1,4 +1,7 @@
 // [[Rcpp::plugins(cpp14)]]  
+// [[Rcpp::depends(RcppCGAL)]]
+// [[Rcpp::depends(Rcpp)]]
+
 #include <Rcpp.h>
 #include <CGAL/basic.h>
 #include <CGAL/Cartesian_d.h>
