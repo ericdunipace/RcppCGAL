@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                              |
 |ctype    |en_US.UTF-8                              |
 |tz       |America/Los_Angeles                      |
-|date     |2023-11-29                               |
+|date     |2023-12-01                               |
 |rstudio  |2023.09.1+494 Desert Sunflower (desktop) |
 |pandoc   |2.19.2 @ /usr/local/bin/pandoc           |
 

@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' # set_cgal("path/to/include/CGAL")
+#' set_cgal("path/to/include/CGAL")
 #' }
 set_cgal <- function(path) {
   
@@ -39,7 +39,7 @@ set_cgal <- function(path) {
 #'
 #' @examples
 #' \dontrun{
-#' # unset_cgal()
+#' unset_cgal()
 #' }
 unset_cgal <- function(...) {
   
