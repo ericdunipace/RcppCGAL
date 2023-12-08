@@ -17,7 +17,7 @@ This package will remove the \code{CGAL_DIR} environmental variable.
 }
 \examples{
 \dontrun{
-# unset_cgal()
+unset_cgal()
 }
 }
 \seealso{

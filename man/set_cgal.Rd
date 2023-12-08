@@ -17,7 +17,7 @@ This package will set the \code{CGAL_DIR} environmental variable if you don't kn
 }
 \examples{
 \dontrun{
-# set_cgal("path/to/include/CGAL")
+set_cgal("path/to/include/CGAL")
 }
 }
 \seealso{
