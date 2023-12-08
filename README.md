@@ -15,7 +15,7 @@ This package allows for the easy linking of the CGAL header files into R package
 Much like the `BH` package, the `RcppCGAL` package can be used via the `LinkingTo:` field in the `DESCRIPTION` file in R packages. This will allow access to the header files in C/C++ source code.
 
 ### Version
-This package currently downloads the latest stable release from the CGAL GitHub.
+This package currently bundles the 5.6 stable release.
 
 ### Installation
 To install this package, you can install the version from CRAN:
@@ -45,7 +45,7 @@ and then re-install.
 
 Typically, the folder with all the header files is called `CGAL`. For example, on my Mac with a Homebrew install of CGAL, I would do
 ```R
-Sys.setenv("CGAL_DIR" = "/usr/local/Cellar/cgal/5.5.2/include/CGAL")
+Sys.setenv("CGAL_DIR" = "/usr/local/Cellar/cgal/5.6/include/CGAL")
 ```
 Note: this must be done *before* the package is installed by `R`.
 
