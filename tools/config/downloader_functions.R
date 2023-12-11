@@ -98,7 +98,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   target_file <- file.path(dest_folder, "CGAL")
   
   tmp_dir_ <- "uz_tmp90"
-  dir.create(tmp_dir_)
+  dir.create(file.path("~",tmp_dir_))
   
   if (isTRUE(own)) {
     utils::untar(tarfile = temp_file, exdir = tmp_dir_)
