@@ -13,7 +13,7 @@ cgal_predownloader <- function(cgal_path, pkg_path, DL) {
   
   cgal_path_isdir <- isTRUE(nzchar(cgal_path) && !is_url(cgal_path))
   
-  dest_folder <- file.path(pkg_path, "include")
+  dest_folder <- file.path(pkg_path)
   if (!file.exists(dest_folder)) {
     # create desitination folder
     dir.create(dest_folder)
@@ -88,8 +88,9 @@ download_tarball <- function(dest_folder, cgal_path, pkg_path, overwrite = FALSE
 }
 
 untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
+  
   message("  Unzipping the CGAL file\n")
-  utils::untar(tarfile = temp_file, exdir = dest_folder)
+  utils::untar(tarfile = temp_file, exdir = dest_folder, verbose = TRUE)
   # unzip_file <- paste0("CGAL-",version)
   unzip_file  <- list.dirs(dest_folder, 
                            recursive = FALSE, full.names = FALSE)
@@ -100,7 +101,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
     file.path(dest_folder, unzip_file, "include","CGAL")
   }
   
-  message("  Moving CGAL file to its final location\n")
+  message("  Moving CGAL folder to its final location\n")
   # Move good file into final position
   file.rename(source_file, target_file)
   
