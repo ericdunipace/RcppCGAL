@@ -88,7 +88,7 @@ download_tarball <- function(dest_folder, cgal_path, pkg_path, overwrite = FALSE
 }
 
 untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
-  
+  message("  Unzipping the CGAL file\n")
   utils::untar(tarfile = temp_file, exdir = dest_folder)
   # unzip_file <- paste0("CGAL-",version)
   unzip_file  <- list.dirs(dest_folder, 
@@ -100,7 +100,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
     file.path(dest_folder, unzip_file, "include","CGAL")
   }
   
-  
+  message("  Moving CGAL file to its final location\n")
   # Move good file into final position
   file.rename(source_file, target_file)
   
