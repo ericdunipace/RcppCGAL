@@ -22,8 +22,7 @@ Imports: Rcpp
 Suggests: 
     knitr,
     rmarkdown,
-    spelling,
-    testthat (>= 3.0.0)
+    spelling
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
 RoxygenNote: 7.2.3
