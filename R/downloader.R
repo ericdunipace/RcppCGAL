@@ -47,3 +47,39 @@ unset_cgal <- function(...) {
 }
 
 
+# following function just exists to avoid warning about utils, which is needed for configure
+.not_needed <- function(temp_file, dest_folder, own = FALSE) {
+  message("  Unzipping the CGAL file\n")
+  if (!file.exists(dest_folder)) {
+    dir.create(dest_folder)
+  }
+  
+  target_file <- file.path(dest_folder, "CGAL")
+  
+  tmp_dir_ <- file.path("~","uz_tmp90")
+  dir.create(tmp_dir_)
+  
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal")
+  unzip_file  <- list.dirs(tmp_dir_, 
+                           recursive = FALSE, full.names = FALSE)
+  
+  if (isTRUE(own)) {
+    source_file <- file.path(tmp_dir_, unzip_file)
+  } else {
+    source_file <- file.path(tmp_dir_,unzip_file, "include","CGAL")
+  }
+  
+  message("  Moving CGAL folder to its final location\n")
+  # Move good file into final position
+  if (!file.exists(target_file)) dir.create(target_file)
+  file.rename(source_file, target_file)
+  
+  # Delete temp files
+  unlink(tmp_dir_, recursive = TRUE)
+  unlink(temp_file, recursive = TRUE)
+  
+  return(target_file)
+}
+
+
+
