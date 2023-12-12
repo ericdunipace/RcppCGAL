@@ -100,7 +100,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   tmp_dir_ <- file.path("~","uz_tmp90")
   dir.create(tmp_dir_)
   
-  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal", verbose = TRUE)
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal")
   unzip_file  <- list.dirs(tmp_dir_, 
                            recursive = FALSE, full.names = FALSE)
   
