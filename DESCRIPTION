@@ -18,7 +18,7 @@ Description: Creates a header only package to link to the 'CGAL'
   see the 'CGAL' documentation at <https://www.cgal.org>. Currently
   downloads the 'CGAL' version 5.6 stable release.
 License: GPL-3
-Imports: Rcpp
+Imports: Rcpp, utils
 Suggests: 
     knitr,
     rmarkdown,
@@ -32,4 +32,3 @@ Biarch: TRUE
 Roxygen: list(markdown = TRUE)
 Language: en-US
 URL: https://github.com/ericdunipace/RcppCGAL
-Config/testthat/edition: 3

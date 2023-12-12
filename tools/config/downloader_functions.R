@@ -97,18 +97,17 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   
   target_file <- file.path(dest_folder, "CGAL")
   
-  tmp_dir_ <- "uz_tmp90"
-  dir.create(file.path("~",tmp_dir_))
+  tmp_dir_ <- file.path("~","uz_tmp90")
+  dir.create(tmp_dir_)
+  
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal", verbose = TRUE)
+  unzip_file  <- list.dirs(tmp_dir_, 
+                           recursive = FALSE, full.names = FALSE)
   
   if (isTRUE(own)) {
-    utils::untar(tarfile = temp_file, exdir = tmp_dir_)
-    unzip_file  <- list.dirs(tmp_dir_, 
-                             recursive = FALSE, full.names = FALSE)
     source_file <- file.path(tmp_dir_, unzip_file)
   } else {
-    top_dir <- utils::untar(tarfile = temp_file, exdir = tmp_dir_, list = TRUE)[1]
-    utils::untar(tarfile = temp_file, exdir = tmp_dir_, files = file.path(top_dir,"include","CGAL"))
-    source_file <- file.path(tmp_dir_,top_dir, "include","CGAL")
+    source_file <- file.path(tmp_dir_,unzip_file, "include","CGAL")
   }
   
   message("  Moving CGAL folder to its final location\n")
@@ -117,7 +116,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   file.rename(source_file, target_file)
   
   # Delete temp files
-  unlink(file.path("~",tmp_dir_), recursive = TRUE)
+  unlink(tmp_dir_, recursive = TRUE)
   unlink(temp_file, recursive = TRUE)
   
   return(target_file)
