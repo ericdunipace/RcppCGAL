@@ -90,14 +90,14 @@ download_tarball <- function(dest_folder, cgal_path, pkg_path, overwrite = FALSE
 }
 
 untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
-  message("  Unzipping the CGAL file\n")
+  # message("  Unzipping the CGAL file\n")
   if (!file.exists(dest_folder)) {
     dir.create(dest_folder)
   }
   
   target_file <- file.path(dest_folder, "CGAL")
   
-  tmp_dir_ <- file.path("~","uz_tmp90")
+  tmp_dir_ <- file.path("uz_tmp90") # can add "~" for root file.path("~","uz_tmp90")
   dir.create(tmp_dir_)
   
   utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal")
@@ -107,10 +107,10 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   if (isTRUE(own)) {
     source_file <- file.path(tmp_dir_, unzip_file)
   } else {
-    source_file <- file.path(tmp_dir_,unzip_file, "include","CGAL")
+    source_file <- file.path(tmp_dir_, unzip_file, "include","CGAL")
   }
   
-  message("  Moving CGAL folder to its final location\n")
+  # message("  Moving CGAL folder to its final location\n")
   # Move good file into final position
   if (!file.exists(target_file)) dir.create(target_file)
   file.rename(source_file, target_file)
