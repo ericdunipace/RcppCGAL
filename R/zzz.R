@@ -4,6 +4,7 @@
   install_cgal <- isTRUE(Sys.getenv("CGAL_DOWNLOAD")  != "0")
   interact     <- interactive()
   no_cgal      <- !cgal_is_installed()
+  # utils::adist
   
   .cgal_download_check() # will see if header files are found
   

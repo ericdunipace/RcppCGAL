@@ -5,7 +5,7 @@
 dir_path    <- file.path("inst","include")
 path_to_tar <- file.path(dir_path, "CGAL_zip.tar.xz")
 tar_exists  <- file.exists(path_to_tar)
-if (tar_exists) define(CGAL_TEMP_TAR_PATH = path_to_tar)
+# if (tar_exists) define(CGAL_TEMP_TAR_PATH = path_to_tar)
 
 env_cgal    <- Sys.getenv("CGAL_DIR")
 not_set     <- isTRUE(env_cgal  == "")
@@ -14,14 +14,16 @@ DL          <- isTRUE(Sys.getenv("CGAL_DOWNLOAD")  != "0")
 
 # functions to clean and download if needed
 helper_path <- file.path("tools","config","downloader_functions.R")
+if (file.exists(helper_path)) {
+  source_file(helper_path)
+} else {
+  stop("Configure helper functions not found!")
+}
 
 # package environment variables
 DEFAULT_URL <- "https://github.com/CGAL/cgal/releases/download/v5.6/CGAL-5.6.tar.xz"
 DEFAULT_VERSION <- "5.6.0"
 VERSION <- paste0("This is CGAL version ", DEFAULT_VERSION, ".")
-
-
-if (file.exists(helper_path)) source_file(helper_path)
 
 if (tar_exists && not_set) {
   CLEANED <- TRUE
@@ -41,7 +43,7 @@ if (tar_exists && not_set) {
     message(paste0("Getting CGAL files from\n    ", env_cgal, "\n"))
     VERSION  <- paste0("Supplied own CGAL from ", env_cgal)
   }
-  cgal_predownloader(env_cgal, "inst", DL)
+  cgal_predownloader(env_cgal, ".", DL)
   .cgal.cerr.remover("inst") # automatically adds include/CGAL as of now
   CLEANED <- TRUE
 }

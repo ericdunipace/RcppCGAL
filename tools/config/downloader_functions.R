@@ -13,7 +13,9 @@ cgal_predownloader <- function(cgal_path, pkg_path, DL) {
   
   cgal_path_isdir <- isTRUE(nzchar(cgal_path) && !is_url(cgal_path))
   
-  dest_folder <- file.path(pkg_path, "include")
+  dest_folder <- file.path(pkg_path, "inst", "include")
+  dl_folder <- file.path(pkg_path, "inst")
+  
   if (!file.exists(dest_folder)) {
     # create desitination folder
     dir.create(dest_folder)
@@ -40,7 +42,7 @@ cgal_predownloader <- function(cgal_path, pkg_path, DL) {
     return(cgal_path)
   }
   
-  temp_file <- download_tarball(dest_folder, cgal_path, pkg_path, overwrite)
+  temp_file <- download_tarball(".", cgal_path, pkg_path, overwrite)
   
   
   target_file <- untar_tarball(temp_file,
@@ -64,7 +66,7 @@ download_tarball <- function(dest_folder, cgal_path, pkg_path, overwrite = FALSE
   # buildnumFile <- file.path(pkg_path, "VERSION")
   # version <- readLines(buildnumFile)
   # cgal_pkg_state$CLEANED <- FALSE
-  dest_file <- file.path(dest_folder, "CGAL_zip")
+  dest_file <- file.path(pkg_path, dest_folder, "CGAL_zip")
   
   # Download if CGAL doesn't already exist or user specifies force overwrite
   if ( nzchar(cgal_path) && is_url(cgal_path) ) {
@@ -88,24 +90,39 @@ download_tarball <- function(dest_folder, cgal_path, pkg_path, overwrite = FALSE
 }
 
 untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
-  
-  utils::untar(tarfile = temp_file, exdir = dest_folder)
-  # unzip_file <- paste0("CGAL-",version)
-  unzip_file  <- list.dirs(dest_folder, 
-                           recursive = FALSE, full.names = FALSE)
-  target_file <- file.path(dest_folder, "CGAL")
-  source_file <- if (isTRUE(own)) {
-    file.path(dest_folder, unzip_file)
-  } else {
-    file.path(dest_folder, unzip_file, "include","CGAL")
+  # message("  Unzipping the CGAL file\n")
+  if (!file.exists(dest_folder)) {
+    dir.create(dest_folder)
   }
   
+  target_file <- file.path(dest_folder, "CGAL")
   
+  tmp_dir_ <- file.path("uz_tmp90") # can add "~" for root file.path("~","uz_tmp90")
+  dir.create(tmp_dir_)
+  
+  whichtar <- if (.Platform$OS.type == "windows") {
+    "internal" #windows server Tar fails for some reason
+  } else {
+    Sys.getenv("TAR")
+  }
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = whichtar)
+  unzip_file  <- list.dirs(tmp_dir_, 
+                           recursive = FALSE, full.names = FALSE)
+  
+  if (isTRUE(own)) {
+    source_file <- file.path(tmp_dir_, unzip_file)
+  } else {
+    source_file <- file.path(tmp_dir_, unzip_file, "include","CGAL")
+  }
+  
+  # message("  Moving CGAL folder to its final location\n")
   # Move good file into final position
+  if (!file.exists(target_file)) dir.create(target_file)
   file.rename(source_file, target_file)
   
   # Delete temp files
-  unlink(file.path(dest_folder, unzip_file), recursive = TRUE)
+  unlink(tmp_dir_, recursive = TRUE)
+  unlink(temp_file, recursive = TRUE)
   
   return(target_file)
 }
