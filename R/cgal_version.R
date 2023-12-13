@@ -6,7 +6,7 @@
 #' @examples 
 #' cgal_version()
 cgal_version <- function() {
-  vers <- cgal_pkg_state$VERSION
+  vers <- cgal_pkg_state$HEADER_SOURCE
   # if (is.na(vers)) stop("There has been an error where the version was not set. Please report this bug.")
   message(vers)
 }

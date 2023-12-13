@@ -122,7 +122,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   
   # Delete temp files
   unlink(tmp_dir_, recursive = TRUE)
-  unlink(temp_file, recursive = TRUE)
+  if(isFALSE(own))  unlink(temp_file, recursive = TRUE)
   
   return(target_file)
 }
