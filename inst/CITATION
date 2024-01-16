@@ -1,16 +1,15 @@
 utils::bibentry(
  bibtype       = "Manual",
   title        = "{RcppCGAL}: Rcpp Integration for CGAL",
-  author       = c(person(given = "Eric A.", family = "Dunipace", role = c("cre","aut")),
-                   person("the CGAL team", role = "aut")),
-  year         = "2023",
+  author       = c(person(given = "Eric A.", family = "Dunipace", role = c("cre","aut"))),
+  year         = "2024",
   url = "https://CRAN.R-project.org/package=RcppCGAL",
-  version = "5.5.2",
-  date = "2023-05-08",
+  version = "5.6.1",
+  date = "2024-01-16",
   mheader = "To cite RcppCGAL in publications use:",
   textVersion  =
-  paste("Eric A. Dunipace and the CGAL Team (2023).",
+  paste("Eric A. Dunipace.",
         "RcppCGAL: Rcpp Integration for CGAL",
-        "version 5.5.2",
+        "version 5.6.1",
         "URL https://cran.r-project.org/web/packages/RcppCGAL/index.html.")
 )

@@ -2,6 +2,13 @@
 
 # Package RcppCGAL
 
+## Changes in 5.6.1
+
+### Minor improvements and Bug Fixes
+* Adding Tyler Morgan-Wall to contributors to appropriately reflect patch in last version
+* Windows Server 2022 was hanging on the untar stage. Using native R tar on Windows machines seems to fix
+* Still using 5.6 version CGAL header files.
+
 ## Changes in 5.6.0
 
 ### Major updates

@@ -1,5 +1,5 @@
-# environment to save whether header files have been cleaned
-# HEADER_SOURCE populated if the bundled or user supplied headers are used
+# environment to record whether user overrides default headers
+# HEADER_SOURCE populated to denote if the bundled headers or user supplied headers are used
 cgal_pkg_state <- list2env(list(
   HEADER_SOURCE = @SOURCE@,
   WARNED = FALSE))

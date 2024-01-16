@@ -101,7 +101,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   dir.create(tmp_dir_)
   
   whichtar <- if (.Platform$OS.type == "windows") {
-    "internal" #windows server Tar fails for some reason
+    "internal" #windows server tar function fails for some reason
   } else {
     Sys.getenv("TAR")
   }

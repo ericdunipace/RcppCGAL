@@ -2,14 +2,18 @@ Package: RcppCGAL
 Type: Package
 Title: 'Rcpp' Integration for 'CGAL' 
 Version: 5.6.1
-Date: 2023-12-12
+Date: 2024-01-16
 Authors@R: 
-    person("Eric", "Dunipace", 
+    c(
+    person(given = "Eric", family = "Dunipace", 
         role = c("aut", "cre"),
         email = "edunipace@mail.harvard.edu",
-        comment = c(ORCID = "0000-0001-8909-213X"))
-Author: Eric Dunipace [aut, cre] (<https://orcid.org/0000-0001-8909-213X>)
-Maintainer: Eric Dunipace <edunipace@mail.harvard.edu>
+        comment = c(ORCID = "0000-0001-8909-213X")),
+    person(given = "Tyler", "Morgan-Wall", 
+        role = c("ctb"),
+        email = "tylermw@gmail.com"),
+    person("The CGAL team", role = "cph")
+    )
 Description: Creates a header only package to link to the 'CGAL' 
   (Computational Geometry Algorithms Library)
   header files in 'Rcpp'. There are a variety of potential uses for 
