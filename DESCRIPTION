@@ -1,7 +1,7 @@
 Package: RcppCGAL
 Type: Package
 Title: 'Rcpp' Integration for 'CGAL' 
-Version: 5.6.1
+Version: 5.6.1.9000
 Date: 2024-01-16
 Authors@R: 
     c(
