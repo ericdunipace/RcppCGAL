@@ -1,2 +1,3 @@
 ^include/CGAL_zip.tar.xz$
 ^inst/include/CGAL_zip.tar.xz$
+^RcppCGAL.Rcheck$

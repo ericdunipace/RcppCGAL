@@ -17,3 +17,5 @@
 ^AUTO_INSTALL_ERROR$
 ^pkg_check$
 ^VERSION$
+^RcppCGAL.Rcheck$
+^pkg_state.R$

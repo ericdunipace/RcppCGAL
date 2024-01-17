@@ -22,4 +22,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Eric Dunipace \email{edunipace@mail.harvard.edu} (\href{https://orcid.org/0000-0001-8909-213X}{ORCID})
 
+Other contributors:
+\itemize{
+  \item Tyler Morgan-Wall \email{tylermw@gmail.com} [contributor]
+  \item The CGAL Project [copyright holder]
+}
+
 }

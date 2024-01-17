@@ -13,3 +13,5 @@ VERSION
 AUTO_INSTALL_ERROR
 pkg_check
 inst/include/CGAL/
+RcppCGAL.Rcheck/**
+pkg_state.R

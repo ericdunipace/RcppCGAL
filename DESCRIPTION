@@ -12,7 +12,7 @@ Authors@R:
     person(given = "Tyler", "Morgan-Wall", 
         role = c("ctb"),
         email = "tylermw@gmail.com"),
-    person("The CGAL team", role = "cph")
+    person("The CGAL Project", role = "cph")
     )
 Description: Creates a header only package to link to the 'CGAL' 
   (Computational Geometry Algorithms Library)
