@@ -1,5 +1,3 @@
-# TODO: removed downloader functions to the configure stage. Remove functions below set_cgal once cgal_install removed.
-
 #' Set the CGAL header file directory
 #'
 #' @param path character vector. either a URL or system path
@@ -49,6 +47,7 @@ unset_cgal <- function(...) {
 
 # following function just exists to avoid warning about utils, which is needed for configure
 .not_needed <- function(temp_file, dest_folder, own = FALSE) {
+  stop("Don't run this function.")
   message("  Unzipping the CGAL file\n")
   if (!file.exists(dest_folder)) {
     dir.create(dest_folder)
