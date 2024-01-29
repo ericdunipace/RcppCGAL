@@ -108,7 +108,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   # utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = whichtar)
   
   # using system TAR causes windwos server builds to hang
-  utils::untar(tarfile = temp_file, exdir = tmp_dir_, verbose = TRUE)
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_,  verbose = TRUE)
   unzip_file  <- list.dirs(tmp_dir_, 
                            recursive = FALSE, full.names = FALSE)
   
