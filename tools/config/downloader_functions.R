@@ -97,7 +97,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   
   target_file <- file.path(dest_folder, "CGAL")
   
-  tmp_dir_ <- file.path(dest_folder, "uz_tmp90") # can add "~" for root file.path("~","uz_tmp90")
+  tmp_dir_ <- file.path(target_file, "uz_tmp90") # can add "~" for root file.path("~","uz_tmp90")
   dir.create(tmp_dir_)
   
   # whichtar <- if (.Platform$OS.type == "windows") {
