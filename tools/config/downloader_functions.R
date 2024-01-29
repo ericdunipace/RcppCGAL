@@ -120,8 +120,8 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   
   # message("  Moving CGAL folder to its final location\n")
   # Move good file into final position
-  # if (!file.exists(target_file)) dir.create(target_file)
-  file.rename(source_file, target_file)
+  if (!file.exists(target_file)) dir.create(target_file)
+  file.rename(source_file, target_file, overwrite = TRUE)
   
   # Delete temp files
   unlink(tmp_dir_, recursive = TRUE)
