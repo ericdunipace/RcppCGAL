@@ -97,7 +97,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   
   target_file <- file.path(dest_folder, "CGAL")
   
-  tmp_dir_ <- file.path("uz_tmp90") # can add "~" for root file.path("~","uz_tmp90")
+  tmp_dir_ <- file.path(dest_folder, "uz_tmp90") # can add "~" for root file.path("~","uz_tmp90")
   dir.create(tmp_dir_)
   
   # whichtar <- if (.Platform$OS.type == "windows") {
@@ -108,7 +108,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   # utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = whichtar)
   
   # using system TAR causes windwos server builds to hang
-  utils::untar(tarfile = temp_file, exdir = tmp_dir_,  verbose = TRUE)
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_)
   unzip_file  <- list.dirs(tmp_dir_, 
                            recursive = FALSE, full.names = FALSE)
   

@@ -47,4 +47,4 @@ jobs:
         with:
           upload-snapshots: true
           
-    timeout-minutes: 20
+    timeout-minutes: 10
