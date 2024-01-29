@@ -1,8 +1,8 @@
 Package: RcppCGAL
 Type: Package
 Title: 'Rcpp' Integration for 'CGAL' 
-Version: 5.6.1.9000
-Date: 2024-01-16
+Version: 5.6.2
+Date: 2024-01-29
 Authors@R: 
     c(
     person(given = "Eric", family = "Dunipace", 
@@ -23,7 +23,6 @@ Description: Creates a header only package to link to the 'CGAL'
   downloads the 'CGAL' version 5.6 stable release.
 License: GPL-3
 Imports: Rcpp, utils
-LinkingTo: BH
 Suggests: 
     knitr,
     rmarkdown,

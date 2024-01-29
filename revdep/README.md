@@ -10,15 +10,15 @@
 |collate  |en_US.UTF-8                         |
 |ctype    |en_US.UTF-8                         |
 |tz       |America/Los_Angeles                 |
-|date     |2024-01-16                          |
+|date     |2024-01-28                          |
 |rstudio  |2023.12.0+369 Ocean Storm (desktop) |
-|pandoc   |3.1.9 @ /opt/homebrew/bin/pandoc    |
+|pandoc   |3.1.11.1 @ /opt/homebrew/bin/pandoc |
 
 # Dependencies
 
 |package  |old   |new    |Δ  |
 |:--------|:-----|:------|:--|
-|RcppCGAL |5.6.0 |5.6.1  |*  |
+|RcppCGAL |5.6.1 |5.6.2  |*  |
 |Rcpp     |NA    |1.0.12 |*  |
 
 # Revdeps
