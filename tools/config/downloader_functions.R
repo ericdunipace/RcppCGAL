@@ -100,12 +100,12 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   tmp_dir_ <- file.path("uz_tmp90") # can add "~" for root file.path("~","uz_tmp90")
   dir.create(tmp_dir_)
   
-  whichtar <- if (.Platform$OS.type == "windows") {
-    "internal" #windows server tar function fails for some reason
-  } else {
-    Sys.getenv("TAR")
-  }
-  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = whichtar)
+  # whichtar <- if (.Platform$OS.type == "windows") {
+  #   "internal" #windows server tar function fails for some reason
+  # } else {
+  #   Sys.getenv("TAR")
+  # }
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal")
   
   # using system TAR causes windwos server builds to hang
   # utils::untar(tarfile = temp_file, exdir = tmp_dir_)
