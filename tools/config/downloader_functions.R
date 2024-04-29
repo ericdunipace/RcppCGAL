@@ -18,7 +18,7 @@ cgal_predownloader <- function(cgal_path, pkg_path, DL) {
   
   if (!file.exists(dest_folder)) {
     # create desitination folder
-    dir.create(dest_folder)
+    dir.create(dest_folder, recursive = TRUE)
   } else if (overwrite) {
     # delete old files if overwriting
     unlink(dest_folder, recursive = TRUE)
