@@ -4,12 +4,12 @@ utils::bibentry(
   author       = c(person(given = "Eric A.", family = "Dunipace", role = c("cre","aut"))),
   year         = "2024",
   url = "https://CRAN.R-project.org/package=RcppCGAL",
-  version = "5.6.1",
-  date = "2024-01-16",
+  version = "5.6.2",
+  date = "2024-01-29",
   mheader = "To cite RcppCGAL in publications use:",
   textVersion  =
   paste("Eric A. Dunipace.",
         "RcppCGAL: Rcpp Integration for CGAL",
-        "version 5.6.1",
+        "version 5.6.2",
         "URL https://cran.r-project.org/web/packages/RcppCGAL/index.html.")
 )
