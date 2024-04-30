@@ -10,7 +10,6 @@
 ### Bug Fix
 * Caught bug that was causing Windows binaries not to have the header files bundled with them. Should be squashed with a test to make sure this doesn't happen in the future.
 
-
 ## Changes in 5.6.1
 
 ### Minor improvements and Bug Fixes
