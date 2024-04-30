@@ -1,5 +1,3 @@
-# RcppCGAL (development version)
-
 # Package RcppCGAL
 
 ## Changes in 5.6.3
