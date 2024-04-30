@@ -8,11 +8,16 @@
 
 ### Description
 
-This package provides access to the Computational Geometry Algorithms Library ([CGAL](https://www.cgal.org)) in [R](https://www.r-project.org).  [CGAL](https://www.cgal.org) provides access to methods like KDtree, Hilbert sorting, convex hull calculation, and many more.
+This package provides access to the Computational Geometry Algorithms Library 
+([CGAL](https://www.cgal.org)) in [R](https://www.r-project.org).  
+[CGAL](https://www.cgal.org) provides access to methods like KDtree, Hilbert sorting, 
+convex hull calculation, and many more.
 
-This package allows for the easy linking of the CGAL header files into R packages without having to download and manually add the appropriate CGAL header file into an R package.
+This package allows for the easy linking of the CGAL header files into R packages without having to 
+download and manually add the appropriate CGAL header file into an R package.
 
-Much like the `BH` package, the `RcppCGAL` package can be used via the `LinkingTo:` field in the `DESCRIPTION` file in R packages. This will allow access to the header files in C/C++ source code.
+Much like the `BH` package, the `RcppCGAL` package can be used via the `LinkingTo:` 
+field in the `DESCRIPTION` file in R packages. This will allow access to the header files in C/C++ source code.
 
 ### Version
 This package currently bundles the 5.6 stable release.
@@ -30,8 +35,8 @@ devtools::install("RcppCGAL")
 You may also install from github directly using the
 `devtools::install_github()` function.
 
-By default, the package will try to download the header files from the
-CGAL GitHub repository. If you already have one downloaded that you prefer to use,
+By default, the package will use the header files bundled with the package. However,
+if you already have a version of the CGAL headers that you prefer to use,
 you can specify the environmental variable `CGAL_DIR` and `R` will use that
 instead:
 ```R
@@ -43,16 +48,15 @@ set_cgal("path/to/CGAL")
 ```
 and then re-install.
 
-Typically, the folder with all the header files is called `CGAL`. For example, on my Mac with a Homebrew install of CGAL, I would do
+Typically, the folder with all the header files is called `CGAL`. 
+For example, on my Mac with a Homebrew install of CGAL, I would do
 ```R
 Sys.setenv("CGAL_DIR" = "/usr/local/Cellar/cgal/5.6/include/CGAL")
 ```
 Note: this must be done *before* the package is installed by `R`.
 
-By default, the package will use the 5.6.0 version of the CGAL that is bundled in the tarball.
-
 ### Example
-We provide an example of how to perform Hilbert sorting using an R matrix:
+We provide an example of how to perform Hilbert sorting using an `R` matrix:
 
 ```c++
 // [[Rcpp::depends(RcppCGAL)]]
