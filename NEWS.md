@@ -3,7 +3,7 @@
 ## Changes in 5.6.3
 
 ### Minor improvements and Bug Fixes
-* Updating to CGAL headers version 5.6.1 to prevent bugs that may arise in 5.6 version.
+* Updating to CGAL headers version 5.6.1.
 
 ## Changes in 5.6.2
 
