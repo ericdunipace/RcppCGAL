@@ -1,5 +1,10 @@
 # Package RcppCGAL
 
+## Changes in 5.6.3
+
+### Minor improvements and Bug Fixes
+* Updating to CGAL headers version 5.6.1.
+
 ## Changes in 5.6.2
 
 ### Bug Fix
