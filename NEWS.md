@@ -1,5 +1,10 @@
 # Package RcppCGAL
 
+## Changes in 5.6.4
+
+### Minor improvements and Bug Fixes
+* Fixing error caused by RcppCGAL via my own attempt to patch a UBSAN issue. Rolling back to basic 5.6.1 release from CGAL web.
+
 ## Changes in 5.6.3
 
 ### Minor improvements and Bug Fixes
