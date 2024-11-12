@@ -1,8 +1,8 @@
 Package: RcppCGAL
 Type: Package
 Title: 'Rcpp' Integration for 'CGAL' 
-Version: 5.6.4
-Date: 2024-07-04
+Version: 6.0.1
+Date: 2024-11-11
 Authors@R: 
     c(
     person(given = "Eric", family = "Dunipace", 
@@ -30,7 +30,7 @@ Suggests:
     testthat (>= 3.0.0)
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 VignetteBuilder: knitr
 Biarch: TRUE
