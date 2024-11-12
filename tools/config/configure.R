@@ -21,8 +21,8 @@ if (file.exists(helper_path)) {
 }
 
 # package environment variables, set one time
-DEFAULT_URL <- "https://github.com/CGAL/cgal/releases/download/v5.6.1/CGAL-5.6.1.tar.xz"
-DEFAULT_VERSION <- "5.6.1"
+DEFAULT_URL <- "https://github.com/CGAL/cgal/releases/download/v6.0.1/CGAL-6.0.1.tar.xz"
+DEFAULT_VERSION <- "6.0.1"
 HEADER_SOURCE <- paste0("This is CGAL version ", DEFAULT_VERSION, ".")
 
 if (tar_exists && not_set) {
