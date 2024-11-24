@@ -56,7 +56,7 @@ using C compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
 using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
 using C++14
 using SDK: ‘MacOSX15.1.sdk’
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/approxOT/RcppEigen/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/approxOT/BH/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -DCGAL_NO_GMP=1 -I../inst/include -fPIC  -falign-functions=64 -Wall -g -O2   -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/approxOT/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/approxOT/RcppEigen/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/approxOT/BH/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -DCGAL_NO_GMP=1 -I../inst/include -fPIC  -falign-functions=64 -Wall -g -O2   -c RcppExports.cpp -o RcppExports.o
 In file included from RcppExports.cpp:4:
 ...
   281 | class Input_rep<std::optional<T>>
@@ -133,7 +133,7 @@ Run `revdepcheck::revdep_details(, "interpolation")` for more info
 using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
 using C++17
 using SDK: ‘MacOSX15.1.sdk’
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/BH/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -I/opt/homebrew/Cellar/gmp/6.3.0/include -fPIC  -falign-functions=64 -Wall -g -O2  -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/BH/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -I/opt/homebrew/Cellar/gmp/6.3.0/include -fPIC  -g -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c RcppExports.cpp -o RcppExports.o
 In file included from RcppExports.cpp:4:
 In file included from ./interpolation_types.h:5:
 ...
@@ -160,9 +160,9 @@ ERROR: compilation failed for package ‘interpolation’
 using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
 using C++17
 using SDK: ‘MacOSX15.1.sdk’
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/old/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/BH/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -I/opt/homebrew/Cellar/gmp/6.3.0/include -fPIC  -falign-functions=64 -Wall -g -O2  -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/old/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/BH/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -I/opt/homebrew/Cellar/gmp/6.3.0/include -fPIC  -falign-functions=64 -Wall -g -O2  -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c interpolation.cpp -o interpolation.o
-interpolation.cpp:190:42: warning: unused typedef 'Value_access' [-Wunused-local-typedef]
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/old/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/BH/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -I/opt/homebrew/Cellar/gmp/6.3.0/include -fPIC  -g -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/old/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/interpolation/BH/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -I/opt/homebrew/Cellar/gmp/6.3.0/include -fPIC  -g -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c interpolation.cpp -o interpolation.o
+clang++ -arch arm64 -std=gnu++17 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/Library/Frameworks/R.framework/Resources/lib -L/opt/R/arm64/lib -o interpolation.so RcppExports.o interpolation.o -L/opt/homebrew/Cellar/gmp/6.3.0/lib -lgmp -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
 ...
 ** R
 ** byte-compile and prepare package for lazy loading
@@ -262,7 +262,7 @@ using C compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
 using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
 using C++14
 using SDK: ‘MacOSX15.1.sdk’
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/BH/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/RcppEigen/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/RcppProgress/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/RSpectra/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/BH/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/RcppEigen/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/RcppProgress/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/RcppCGAL/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WpProj/RSpectra/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c RcppExports.cpp -o RcppExports.o
 In file included from RcppExports.cpp:4:
 ...
   281 | class Input_rep<std::optional<T>>
