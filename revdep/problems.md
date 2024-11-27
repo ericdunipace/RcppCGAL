@@ -177,6 +177,84 @@ clang++ -arch arm64 -std=gnu++17 -dynamiclib -Wl,-headerpad_max_install_names -u
 
 
 ```
+# WeightedTreemaps
+
+<details>
+
+* Version: 0.1.3
+* GitHub: https://github.com/m-jahn/WeightedTreemaps
+* Source code: https://github.com/cran/WeightedTreemaps
+* Date/Publication: 2024-11-04 22:30:02 UTC
+* Number of recursive dependencies: 60
+
+Run `revdepcheck::revdep_details(, "WeightedTreemaps")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘WeightedTreemaps’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/checks.noindex/WeightedTreemaps/new/WeightedTreemaps.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘WeightedTreemaps’ ...
+** package ‘WeightedTreemaps’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
+using C++17
+using SDK: ‘MacOSX15.1.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/BH/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/RcppCGAL/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -DCGAL_NO_GMP=1 -DBOOST_NO_AUTO_PTR -fPIC  -g -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/BH/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/new/RcppCGAL/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -DCGAL_NO_GMP=1 -DBOOST_NO_AUTO_PTR -fPIC  -g -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c voronoiDiagram.cpp -o voronoiDiagram.o
+In file included from voronoiDiagram.cpp:13:
+...
+  119 |    explicit BOOST_MP_FORCEINLINE BOOST_MP_CXX14_CONSTEXPR number(const V& v, typename std::enable_if<
+      |                                                           ^
+/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/BH/include/boost/multiprecision/number.hpp:126:44: note: candidate constructor [with V = long]
+  126 |    explicit BOOST_MP_FORCEINLINE constexpr number(const V& v, typename std::enable_if<
+      |                                            ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+1 warning and 20 errors generated.
+make: *** [voronoiDiagram.o] Error 1
+ERROR: compilation failed for package ‘WeightedTreemaps’
+* removing ‘/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/checks.noindex/WeightedTreemaps/new/WeightedTreemaps.Rcheck/WeightedTreemaps’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘WeightedTreemaps’ ...
+** package ‘WeightedTreemaps’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.4)’
+using C++17
+using SDK: ‘MacOSX15.1.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/BH/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/old/RcppCGAL/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -DCGAL_NO_GMP=1 -DBOOST_NO_AUTO_PTR -fPIC  -g -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/BH/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/WeightedTreemaps/Rcpp/include' -I'/Users/eifer/GoogleDrive/R/RcppCGAL/revdep/library.noindex/RcppCGAL/old/RcppCGAL/include' -I/opt/R/arm64/include   -DCGAL_HEADER_ONLY=1 -DCGAL_NO_GMP=1 -DBOOST_NO_AUTO_PTR -fPIC  -g -O3 -mtune=native -arch arm64 -ftemplate-depth-256 -DSTAN_THREADS  -c voronoiDiagram.cpp -o voronoiDiagram.o
+In file included from voronoiDiagram.cpp:13:
+...
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (WeightedTreemaps)
+
+
+```
 # WpProj
 
 <details>

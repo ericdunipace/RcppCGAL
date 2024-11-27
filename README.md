@@ -20,7 +20,7 @@ Much like the `BH` package, the `RcppCGAL` package can be used via the `LinkingT
 field in the `DESCRIPTION` file in R packages. This will allow access to the header files in C/C++ source code.
 
 ### Version
-This package currently bundles the 5.6 stable release.
+This package currently bundles the 6.0.1 stable release.
 
 ### Installation
 To install this package, you can install the version from CRAN:

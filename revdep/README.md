@@ -16,17 +16,18 @@
 
 # Dependencies
 
-|package  |old   |new   |Δ  |
-|:--------|:-----|:-----|:--|
-|RcppCGAL |5.6.4 |6.0.1 |*  |
+|package  |old   | new|Δ  |
+|:--------|:-----|---:|:--|
+|RcppCGAL |5.6.4 |   6|*  |
 
 # Revdeps
 
-## Failed to check (3)
+## Failed to check (4)
 
-|package       |version |error     |warning |note |
-|:-------------|:-------|:---------|:-------|:----|
+|package          |version |error     |warning |note |
+|:----------------|:-------|:---------|:-------|:----|
 |[approxOT](failures.md#approxot)|1.1     |__+1__    |-1      |-1   |
 |[interpolation](failures.md#interpolation)|0.1.1   |__+1__    |        |     |
+|[WeightedTreemaps](failures.md#weightedtreemaps)|0.1.3   |__+1__    |        |     |
 |[WpProj](failures.md#wpproj)|0.2     |-1 __+1__ |-1      |-1   |
 
