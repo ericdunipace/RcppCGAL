@@ -55,8 +55,7 @@ unset_cgal <- function(...) {
   
   target_file <- file.path(dest_folder, "CGAL")
   
-  tmp_dir_ <- file.path("~","uz_tmp90")
-  dir.create(tmp_dir_)
+  tmp_dir_ <- tempfile(pattern = "uz_tmp90") 
   
   utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal")
   unzip_file  <- list.dirs(tmp_dir_, 
@@ -65,7 +64,7 @@ unset_cgal <- function(...) {
   if (isTRUE(own)) {
     source_file <- file.path(tmp_dir_, unzip_file)
   } else {
-    source_file <- file.path(tmp_dir_,unzip_file, "include","CGAL")
+    source_file <- file.path(tmp_dir_,unzip_file, "include","CGAL","")
   }
   
   message("  Moving CGAL folder to its final location\n")
