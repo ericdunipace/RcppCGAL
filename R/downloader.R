@@ -70,7 +70,7 @@ unset_cgal <- function(...) {
   message("  Moving CGAL folder to its final location\n")
   # Move good file into final position
   if (!file.exists(source_file)) stop("Error! The headerfiles were not decompressed properly!")
-  if (!file.exists(target_file)) dir.create(target_file)
+  # if (!file.exists(target_file)) dir.create(target_file)
   file.rename(source_file, target_file)
   
   # Delete temp files
