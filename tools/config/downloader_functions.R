@@ -97,7 +97,8 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   
   target_file <- file.path(dest_folder, "CGAL")
   
-  tmp_dir_ <- tempdir(check = TRUE) 
+  tmp_dir_ <- file.path(tempdir(), "uz_tmp_90")
+  dir.create(tmp_dir_)
   
   whichtar <- if (.Platform$OS.type == "windows") {
     "internal" #windows server tar function fails for some reason
@@ -112,9 +113,9 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
                            recursive = FALSE, full.names = FALSE)
   
   if (isTRUE(own)) {
-    source_file <- file.path(tmp_dir_, unzip_file,"")
+    source_file <- file.path(tmp_dir_, unzip_file)
   } else {
-    source_file <- file.path(tmp_dir_, unzip_file, "include","CGAL","")
+    source_file <- file.path(tmp_dir_, unzip_file, "include","CGAL")
   }
   
   # message("  Moving CGAL folder to its final location\n")
@@ -124,7 +125,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   file.rename(source_file, target_file)
   
   # Delete temp files
-  # unlink(tmp_dir_, recursive = TRUE)
+  unlink(tmp_dir_, recursive = TRUE)
   if(isFALSE(own))  unlink(temp_file, recursive = TRUE)
   
   return(target_file)
