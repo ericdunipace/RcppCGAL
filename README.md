@@ -22,6 +22,11 @@ field in the `DESCRIPTION` file in R packages. This will allow access to the hea
 ### Version
 This package currently bundles the 6.0.1 stable release.
 
+### Other versions
+It's important to note that the version number of the package roughly corresponds (as best I'm able to) with the version of the CGAL header files.
+
+This can be important to make note of as future versions of the CGAL header files may cause breaking changes in your packages. This last happened with the switch from 5.x to 6.x when the flag for ignoring GMP changed!
+
 ### Installation
 To install this package, you can install the version from CRAN:
 ```R

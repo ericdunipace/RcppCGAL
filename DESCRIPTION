@@ -2,7 +2,7 @@ Package: RcppCGAL
 Type: Package
 Title: 'Rcpp' Integration for 'CGAL' 
 Version: 6.0
-Date: 2024-11-24
+Date: 2024-12-09
 Authors@R: 
     c(
     person(given = "Eric", family = "Dunipace", 
