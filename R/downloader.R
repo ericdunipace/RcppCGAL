@@ -62,7 +62,7 @@ unset_cgal <- function(...) {
                            recursive = FALSE, full.names = FALSE)
   
   if (isTRUE(own)) {
-    source_file <- file.path(tmp_dir_, unzip_file)
+    source_file <- file.path(tmp_dir_, unzip_file,"")
   } else {
     source_file <- file.path(tmp_dir_,unzip_file, "include","CGAL","")
   }
