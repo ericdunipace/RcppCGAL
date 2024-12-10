@@ -97,7 +97,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   
   target_file <- file.path(dest_folder, "CGAL")
   
-  tmp_dir_ <- tempdir() 
+  tmp_dir_ <- tempdir(check = TRUE) 
   
   whichtar <- if (.Platform$OS.type == "windows") {
     "internal" #windows server tar function fails for some reason
