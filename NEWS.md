@@ -1,5 +1,8 @@
 # Package RcppCGAL
 
+## Changes in 6.0
+* Updating header files to CGAL header files to 6.0.1. Note that the compiler flag to disable GMP has changed. As a work around, users can use both flags in there 'Makevars' file: "-DCGAL_NO_GMP=1 -DCGAL_DISABLE_GMP=1".
+
 ## Changes in 5.6.4
 
 ### Minor improvements and Bug Fixes
