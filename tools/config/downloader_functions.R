@@ -108,7 +108,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   } else {
     Sys.getenv("TAR")
   }
-  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = Sys.getenv("TAR"))
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal")
   
   # using system TAR causes windwos server builds to hang
   # utils::untar(tarfile = temp_file, exdir = tmp_dir_)
