@@ -108,7 +108,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   } else {
     Sys.getenv("TAR")
   }
-  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = whichtar)
+  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = Sys.getenv("TAR"))
   
   # using system TAR causes windwos server builds to hang
   # utils::untar(tarfile = temp_file, exdir = tmp_dir_)
@@ -124,7 +124,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   # message("  Moving CGAL folder to its final location\n")
   # Move good file into final position
   # if (!file.exists(target_file)) dir.create(target_file)
-  if (length(source_file) == 0 || !file.exists(source_file)) stop("Error! The headerfiles were not decompressed properly!")
+  if (length(source_file) == 0 || !file.exists(source_file)) stop(sprintf("Error! The headerfiles were not decompressed properly! unzip file = '%s', temp file = '%s'", temp_file, tmp_dir_ ))
   file.rename(source_file, target_file)
   
   # Delete temp files
