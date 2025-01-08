@@ -89,6 +89,30 @@ download_tarball <- function(dest_folder, cgal_path, pkg_path, overwrite = FALSE
   
 }
 
+untar_with_fallback <- function(tarfile, exdir = ".", tar = Sys.getenv("TAR"), ...) {
+  # Try using system tar first
+  try_system_tar <- try({
+    utils::untar(tarfile, exdir = exdir, tar = tar...)
+    return(TRUE)
+  }, silent = TRUE)
+  
+  # If system tar fails, fall back to R's internal tar
+  if (inherits(try_system_tar, "try-error")) {
+    message("System tar failed. Falling back to internal tar.")
+    try_internal_tar <- try({
+      utils::untar(tarfile, exdir = exdir, tar = "internal", ...)
+      return(TRUE)
+    }, silent = TRUE)
+    
+    # Check if internal tar also fails
+    if (inherits(try_internal_tar, "try-error")) {
+      stop("Both system tar and internal tar failed to extract the archive.")
+    }
+  }
+  
+  message("Extraction completed successfully.")
+}
+
 untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   # message("  Unzipping the CGAL file\n")
   if (!file.exists(dest_folder)) {
@@ -108,7 +132,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   } else {
     Sys.getenv("TAR")
   }
-  utils::untar(tarfile = temp_file, exdir = tmp_dir_, tar = "internal")
+  untar_with_fallback(tarfile = temp_file, exdir = tmp_dir_, tar = whichtar)
   
   # using system TAR causes windwos server builds to hang
   # utils::untar(tarfile = temp_file, exdir = tmp_dir_)
