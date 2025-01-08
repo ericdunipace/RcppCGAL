@@ -96,6 +96,7 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   }
   
   target_file <- file.path(dest_folder, "CGAL")
+  if (!file.exists(temp_file)) stop("Error! Can't find the tar file!")
   
   # tmp_dir_ <- file.path(tempdir(), "uz_tmp_90")
   # dir.create(tmp_dir_)
