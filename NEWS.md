@@ -1,5 +1,10 @@
 # Package RcppCGAL
 
+## Changes in 6.0.1
+### Minor improvements and Bug Fixes
+* Fixing a bug where some builds of Fedora Linux wouldn't untar header files
+* Moving `rmarkdown` to imports so package won't fail building if vignettes are built without suggests
+
 ## Changes in 6.0
 * Updating header files to CGAL header files to 6.0.1. 
 * Note that CGAL 6.0 requires C++17 standard.
