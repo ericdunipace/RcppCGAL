@@ -1,5 +1,15 @@
 # Package RcppCGAL
 
+## Changes in 6.0.1
+### Minor improvements and Bug Fixes
+* Fixing a bug where some builds of Fedora Linux wouldn't untar header files
+* Moving `rmarkdown` to imports so package won't fail building if vignettes are built without suggests
+
+## Changes in 6.0
+* Updating header files to CGAL header files to 6.0.1. 
+* Note that CGAL 6.0 requires C++17 standard.
+* Note that the compiler flag to disable GMP has changed in the 6.0 version of CGAL. As a work around, users can use both flags in their 'Makevars' file: "-DCGAL_NO_GMP=1 -DCGAL_DISABLE_GMP=1". CGAL_NO_GMP was the old flag and CGAL_DISABLE_GMP is the new one.
+
 ## Changes in 5.6.4
 
 ### Minor improvements and Bug Fixes
