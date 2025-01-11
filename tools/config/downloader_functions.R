@@ -92,7 +92,7 @@ download_tarball <- function(dest_folder, cgal_path, pkg_path, overwrite = FALSE
 untar_with_fallback <- function(tarfile, exdir = ".", tar = Sys.getenv("TAR"), ...) {
   # Try using system tar first
   try_system_tar <- try({
-    utils::untar(tarfile, exdir = exdir, tar = tar...)
+    utils::untar(tarfile, exdir = exdir, tar = tar, ...)
     return(TRUE)
   }, silent = TRUE)
   
