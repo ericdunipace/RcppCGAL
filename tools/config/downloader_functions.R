@@ -229,3 +229,105 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   return(invisible(NULL))
 }
 
+
+read_bib <- function(path) {
+  paste(readLines(path, encoding = "UTF-8"), collapse = "\n")
+}
+
+# --- Helper: Extract author field robustly (brace-depth aware) ---
+extract_author_fields <- function(text) {
+  m <- gregexpr("author\\s*=\\s*", text, ignore.case = TRUE, perl = TRUE)[[1]]
+  if (m[1] == -1) return(character())
+  vals <- character(length(m))
+  for (i in seq_along(m)) {
+    start_eq <- m[i] + attr(m, "match.length")[i] - 1
+    j <- start_eq + 1
+    while (j <= nchar(text) && substr(text, j, j) %in% c(" ", "\t", "\n", "\r")) j <- j + 1
+    ch <- substr(text, j, j)
+    if (ch == "\"") {
+      j <- j + 1; brace_depth <- 0L; start_val <- j
+      while (j <= nchar(text)) {
+        cch <- substr(text, j, j)
+        if (cch == "{") brace_depth <- brace_depth + 1L
+        else if (cch == "}") brace_depth <- max(0L, brace_depth - 1L)
+        else if (cch == "\"" && brace_depth == 0L) break
+        j <- j + 1
+      }
+      vals[i] <- substr(text, start_val, j - 1)
+    } else if (ch == "{") {
+      j <- j + 1; brace_depth <- 1L; start_val <- j
+      while (j <= nchar(text) && brace_depth > 0L) {
+        cch <- substr(text, j, j)
+        if (cch == "{") brace_depth <- brace_depth + 1L
+        else if (cch == "}") brace_depth <- brace_depth - 1L
+        j <- j + 1
+      }
+      vals[i] <- substr(text, start_val, j - 2)
+    } else {
+      start_val <- j
+      while (j <= nchar(text) && !substr(text, j, j) %in% c(",", "\n", "\r")) j <- j + 1
+      vals[i] <- trimws(substr(text, start_val, j - 1))
+    }
+  }
+  vals
+}
+
+# --- Helper: Convert LaTeX accent codes to Unicode ---
+latex_to_unicode <- function(x) {
+  conv <- c(
+    "\\\\\"{a}" = "ä", "\\\\\"{A}" = "Ä",
+    "\\\\\"{o}" = "ö", "\\\\\"{O}" = "Ö",
+    "\\\\\"{u}" = "ü", "\\\\\"{U}" = "Ü",
+    "\\\\\"a" = "ä", "\\\\\"A" = "Ä",
+    "\\\\\"o" = "ö", "\\\\\"O" = "Ö",
+    "\\\\\"u" = "ü", "\\\\\"U" = "Ü",
+    "\\\\\"e" = "ë", "\\\\\"E" = "Ë",
+    "\\\\\"i" = "ï", "\\\\\"I" = "Ï",
+    "\\\\~a" = "ã", "\\\\~A" = "Ã",
+    "\\\\-d" = "đ", "\\\\-D" = "Đ",
+    "\\\\'a" = "á", "\\\\'A" = "Á",
+    "\\\\'e" = "é", "\\\\'E" = "É",
+    "\\\\'i" = "í", "\\\\'I" = "Í",
+    "\\\\'o" = "ó", "\\\\'O" = "Ó",
+    "\\\\'u" = "ú", "\\\\'U" = "Ú",
+    "\\\\`a" = "à", "\\\\`e" = "è", "\\\\`i" = "ì", "\\\\`o" = "ò", "\\\\`u" = "ù",
+    "\\\\~n" = "ñ", "\\\\~N" = "Ñ",
+    "\\\\c{c}" = "ç", "\\\\c{C}" = "Ç",
+    "\\\\c{S}" = "Ş", "\\\\c{s}" = "ş",
+    "\\\\i" = "ı", "\\\\I" = "İ",
+    "\\\\^a" = "â", "\\\\^e" = "ê", "\\\\^i" = "î", "\\\\^o" = "ô", "\\\\^u" = "û",
+    "\\\\ss" = "ß",
+    "\\\\ae" = "æ", "\\\\AE" = "Æ",
+    "\\\\oe" = "œ", "\\\\OE" = "Œ",
+    "\\\\o" = "ø", "\\\\O" = "Ø"
+  )
+  for (pat in names(conv)) {
+    x <- gsub(pat, conv[[pat]], x, perl = TRUE)
+  }
+  # remove any remaining braces used for grouping
+  gsub("[{}]", "", x)
+}
+
+clean_name <- function(x) {
+  x <- trimws(x)
+  if (startsWith(x, "{") && endsWith(x, "}")) {
+    x <- substr(x, 2, nchar(x) - 1)
+  }
+  x <- gsub("\\s+", " ", x)
+  latex_to_unicode(x)
+}
+
+# --- Main extraction function ---
+extract_all_authors <- function(bib_path,
+                                out_unique = "authors_unique.txt") {
+  txt <- read_bib(bib_path)
+  fields <- extract_author_fields(txt)
+  parts <- unlist(strsplit(fields, "\\s+and\\s+", perl = TRUE), use.names = FALSE)
+  parts <- parts[nzchar(trimws(parts))]
+  parts <- vapply(parts, clean_name, character(1))
+  # writeLines(parts, out_full, useBytes = TRUE)
+  writeLines(sort(unique(parts)), out_unique, useBytes = TRUE)
+  cat(sprintf("Wrote to %s (%d unique authors)\n",
+              out_unique, length(unique(parts))))
+}
+
