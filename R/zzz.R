@@ -5,6 +5,8 @@
   interact     <- interactive()
   no_cgal      <- !cgal_is_installed()
   # utils::adist
+  # knitr::opts_knit$get("rmarkdown.pandoc.to")
+  # rmarkdown::pandoc_version()
   
   .cgal_download_check() # will see if header files are found
   

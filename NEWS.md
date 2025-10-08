@@ -1,5 +1,9 @@
 # Package RcppCGAL
 
+## Changes in 6.1
+* Updating header files to version 6.1
+* removing 
+
 ## Changes in 6.0.1
 ### Minor improvements and Bug Fixes
 * Fixing a bug where some builds of Fedora Linux wouldn't untar header files
