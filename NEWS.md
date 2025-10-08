@@ -2,7 +2,7 @@
 
 ## Changes in 6.1
 * Updating header files to version 6.1
-* removing 
+* Moving `rmarkdown` and `knitr` back to Suggests given there is a flag for unused packages for them
 
 ## Changes in 6.0.1
 ### Minor improvements and Bug Fixes
