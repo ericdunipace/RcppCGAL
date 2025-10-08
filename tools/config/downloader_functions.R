@@ -92,13 +92,13 @@ download_tarball <- function(dest_folder, cgal_path, pkg_path, overwrite = FALSE
 untar_with_fallback <- function(tarfile, exdir = ".", tar = Sys.getenv("TAR"), ...) {
   # Try using system tar first
   try_system_tar <- try({
-    utils::untar(tarfile, exdir = exdir, tar = tar...)
+    utils::untar(tarfile, exdir = exdir, tar = tar, ...)
     return(TRUE)
   }, silent = TRUE)
   
   # If system tar fails, fall back to R's internal tar
   if (inherits(try_system_tar, "try-error")) {
-    message("System tar failed. Falling back to internal tar.")
+    message("Informational message: System tar failed. Falling back to internal tar. Note: this is not an error.")
     try_internal_tar <- try({
       utils::untar(tarfile, exdir = exdir, tar = "internal", ...)
       return(TRUE)
@@ -127,15 +127,16 @@ untar_tarball <- function(temp_file, dest_folder, own = FALSE) {
   tmp_dir_ <- file.path("uz_tmp90") # can add "~" for root file.path("~","uz_tmp90")
   dir.create(tmp_dir_)
   
+  # using system TAR causes windwos server builds to hang
   whichtar <- if (.Platform$OS.type == "windows") {
-    "internal" #windows server tar function fails for some reason
+    "internal" # windows server tar function hangs indefinitely for some reason on git actions
   } else {
     Sys.getenv("TAR")
   }
   untar_with_fallback(tarfile = temp_file, exdir = tmp_dir_, tar = whichtar)
+  # utils::untar(tarfile = temp_file, exdir = tmp_dir_) 
+  # using error catching version of untar which defaults to internal R tar if system tar handle "xz" files
   
-  # using system TAR causes windwos server builds to hang
-  # utils::untar(tarfile = temp_file, exdir = tmp_dir_)
   unzip_file  <- list.dirs(tmp_dir_, 
                            recursive = FALSE, full.names = FALSE)
   
