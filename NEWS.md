@@ -1,3 +1,5 @@
+# RcppCGAL (development version)
+
 # Package RcppCGAL
 
 ## Changes in 6.1
