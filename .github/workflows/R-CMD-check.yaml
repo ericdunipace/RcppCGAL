@@ -44,7 +44,8 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - uses: r-lib/actions/check-r-package@v2
+      - id: rcmdcheck
+        uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
 
@@ -52,9 +53,17 @@ jobs:
         if: always()
         shell: bash
         run: |
-          status=$(sed -n 's/^Status: //p' check/00check.log | tail -n 1)
+          check_log=$(find check -type f -name 00check.log -print -quit 2>/dev/null || true)
+          status=""
+          if [[ -n "$check_log" ]]; then
+            status=$(sed -n 's/^Status: //p' "$check_log" | tail -n 1 || true)
+          fi
           if [[ -z "$status" ]]; then
-            status="FAILED (no R CMD check status produced)"
+            if [[ '${{ steps.rcmdcheck.outcome }}' == 'success' ]]; then
+              status="OK"
+            else
+              status="FAILED (no R CMD check status produced)"
+            fi
           fi
           printf '* %s, R-%s: %s\n' \
             '${{ matrix.config.os }}' '${{ matrix.config.r }}' "$status" \
@@ -73,7 +82,8 @@ jobs:
   revdep:
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && github.base_ref == 'main')
+      (github.event_name == 'pull_request' &&
+      (github.base_ref == 'main' || github.base_ref == 'master'))
     runs-on: ubuntu-latest
     timeout-minutes: 360
     env:
@@ -108,7 +118,8 @@ jobs:
   release-summary:
     if: >-
       always() && (github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && github.base_ref == 'main'))
+      (github.event_name == 'pull_request' &&
+      (github.base_ref == 'main' || github.base_ref == 'master')))
     needs: [R-CMD-check, revdep]
     runs-on: ubuntu-latest
 
