@@ -54,6 +54,7 @@ jobs:
         shell: bash
         run: |
           check_log=$(find check -type f -name 00check.log -print -quit 2>/dev/null || true)
+          summary_file="check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}.md"
           status=""
           if [[ -n "$check_log" ]]; then
             status=$(sed -n 's/^Status: //p' "$check_log" | tail -n 1 || true)
@@ -65,9 +66,58 @@ jobs:
               status="FAILED (no R CMD check status produced)"
             fi
           fi
-          printf '* %s, R-%s: %s\n' \
-            '${{ matrix.config.os }}' '${{ matrix.config.r }}' "$status" \
-            > check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}.md
+
+          case "$RUNNER_OS" in
+            macOS)
+              platform="$(sw_vers -productName) $(sw_vers -productVersion)"
+              ;;
+            Linux)
+              . /etc/os-release
+              platform="${PRETTY_NAME:-Linux}"
+              ;;
+            Windows)
+              platform=$(powershell -NoProfile -Command \
+                '(Get-CimInstance Win32_OperatingSystem).Caption' | tr -d '\r')
+              ;;
+            *)
+              platform="$RUNNER_OS"
+              ;;
+          esac
+          r_version=$(Rscript -e 'cat(getRversion())')
+
+          {
+            printf '* %s, R-%s: %s\n' "$platform" "$r_version" "$status"
+            if [[ -n "$check_log" ]]; then
+              awk '
+                function trim(value) {
+                  sub(/^[[:space:]]+/, "", value)
+                  sub(/[[:space:]]+$/, "", value)
+                  return value
+                }
+                function flush_note() {
+                  sub(/^\* checking /, "", note)
+                  sub(/ \.\.\. NOTE$/, "", note)
+                  printf "  * %s%s\n", note, detail == "" ? "" : ": " detail
+                }
+                /^\* checking .* \.\.\. NOTE$/ {
+                  if (in_note) flush_note()
+                  note = $0
+                  detail = ""
+                  in_note = 1
+                  next
+                }
+                in_note && (/^\* checking / || /^Status:/) {
+                  flush_note()
+                  in_note = 0
+                }
+                in_note {
+                  line = trim($0)
+                  if (line != "") detail = detail (detail == "" ? "" : " ") line
+                }
+                END { if (in_note) flush_note() }
+              ' "$check_log"
+            fi
+          } > "$summary_file"
 
       - name: Upload check summary
         if: always()
@@ -105,6 +155,10 @@ jobs:
       - name: Check reverse dependencies
         shell: Rscript {0}
         run: |
+          # Use CRAN metadata for the reverse-dependency set, not the runner's
+          # Ubuntu-specific Posit Package Manager snapshot.
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
+
           revdepcheck::revdep_reset()
 
           revdepcheck::revdep_check(
@@ -113,14 +167,14 @@ jobs:
             bioc = FALSE
           )
 
-          revdepcheck::revdep_add(
-            packages = revdepcheck::cran_revdeps(
-              "RcppCGAL",
-              dependencies = TRUE,
-              bioc = FALSE,
-              cran = TRUE
-            )
+          cran_revdeps <- revdepcheck::cran_revdeps(
+            "RcppCGAL",
+            dependencies = TRUE,
+            bioc = FALSE,
+            cran = TRUE
           )
+          writeLines(sort(cran_revdeps), "revdep/ci-cran-revdeps.txt")
+          revdepcheck::revdep_add(packages = cran_revdeps)
 
           revdepcheck::revdep_check(
             num_workers = 2,
@@ -175,7 +229,12 @@ jobs:
             echo
             echo '## revdepcheck results'
             if [[ -f revdep/cran.md ]]; then
-              awk 'NR != 1 || $0 != "## revdepcheck results"' revdep/cran.md
+              if [[ -f revdep/ci-cran-revdeps.txt ]]; then
+                cran_count=$(grep -cve '^[[:space:]]*$' revdep/ci-cran-revdeps.txt || true)
+                echo "Selected ${cran_count} CRAN reverse dependencies for this run."
+                echo
+              fi
+              awk 'NR != 1 && !/^We checked [0-9]+ reverse dependencies/' revdep/cran.md
             else
               echo 'No CRAN reverse-dependency report was generated.'
             fi
