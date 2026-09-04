@@ -67,14 +67,14 @@ jobs:
           fi
           printf '* %s, R-%s: %s\n' \
             '${{ matrix.config.os }}' '${{ matrix.config.r }}' "$status" \
-            > check-summary.md
+            > check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}.md
 
       - name: Upload check summary
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}
-          path: check-summary.md
+          path: check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}.md
           if-no-files-found: warn
           
     timeout-minutes: 10
@@ -105,7 +105,28 @@ jobs:
       - name: Check reverse dependencies
         shell: Rscript {0}
         run: |
-          revdepcheck::revdep_check(num_workers = 2)
+          revdepcheck::revdep_reset()
+
+          revdepcheck::revdep_check(
+            num_workers = 2,
+            timeout = as.difftime(240, units = "mins"),
+            bioc = FALSE
+          )
+
+          revdepcheck::revdep_add(
+            packages = revdepcheck::cran_revdeps(
+              "RcppCGAL",
+              dependencies = TRUE,
+              bioc = FALSE,
+              cran = TRUE
+            )
+          )
+
+          revdepcheck::revdep_check(
+            num_workers = 2,
+            timeout = as.difftime(240, units = "mins"),
+            bioc = FALSE
+          )
 
       - name: Upload reverse dependency results
         if: always()
@@ -154,7 +175,7 @@ jobs:
             echo
             echo '## revdepcheck results'
             if [[ -f revdep/cran.md ]]; then
-              cat revdep/cran.md
+              awk 'NR != 1 || $0 != "## revdepcheck results"' revdep/cran.md
             else
               echo 'No CRAN reverse-dependency report was generated.'
             fi
