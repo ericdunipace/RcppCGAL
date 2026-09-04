@@ -97,7 +97,11 @@ jobs:
                 function flush_note() {
                   sub(/^\* checking /, "", note)
                   sub(/ \.\.\. NOTE$/, "", note)
-                  printf "  * %s%s\n", note, detail == "" ? "" : ": " detail
+                  if (detail == "") {
+                    printf "  * %s\n", note
+                  } else {
+                    printf "  * %s: %s\n", note, detail
+                  }
                 }
                 /^\* checking .* \.\.\. NOTE$/ {
                   if (in_note) flush_note()
@@ -112,7 +116,13 @@ jobs:
                 }
                 in_note {
                   line = trim($0)
-                  if (line != "") detail = detail (detail == "" ? "" : " ") line
+                  if (line != "") {
+                    if (detail == "") {
+                      detail = line
+                    } else {
+                      detail = detail " " line
+                    }
+                  }
                 }
                 END { if (in_note) flush_note() }
               ' "$check_log"
