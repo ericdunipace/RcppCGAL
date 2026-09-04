@@ -5,6 +5,7 @@ on:
     branches: [main, master, dev]
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
 
 name: R-CMD-check
 
@@ -28,7 +29,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -43,8 +44,208 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - uses: r-lib/actions/check-r-package@v2
+      - id: rcmdcheck
+        uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+
+      - name: Record check summary
+        if: always()
+        shell: bash
+        run: |
+          check_log=$(find check -type f -name 00check.log -print -quit 2>/dev/null || true)
+          summary_file="check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}.md"
+          status=""
+          if [[ -n "$check_log" ]]; then
+            status=$(sed -n 's/^Status: //p' "$check_log" | tail -n 1 || true)
+          fi
+          if [[ -z "$status" ]]; then
+            if [[ '${{ steps.rcmdcheck.outcome }}' == 'success' ]]; then
+              status="OK"
+            else
+              status="FAILED (no R CMD check status produced)"
+            fi
+          fi
+
+          case "$RUNNER_OS" in
+            macOS)
+              platform="$(sw_vers -productName) $(sw_vers -productVersion)"
+              ;;
+            Linux)
+              . /etc/os-release
+              platform="${PRETTY_NAME:-Linux}"
+              ;;
+            Windows)
+              platform=$(powershell -NoProfile -Command \
+                '(Get-CimInstance Win32_OperatingSystem).Caption' | tr -d '\r')
+              ;;
+            *)
+              platform="$RUNNER_OS"
+              ;;
+          esac
+          r_version=$(Rscript -e 'cat(as.character(getRversion()))')
+
+          {
+            printf '* %s, R-%s: %s\n' "$platform" "$r_version" "$status"
+            if [[ -n "$check_log" ]]; then
+              awk '
+                function trim(value) {
+                  sub(/^[[:space:]]+/, "", value)
+                  sub(/[[:space:]]+$/, "", value)
+                  return value
+                }
+                function flush_note() {
+                  sub(/^\* checking /, "", note)
+                  sub(/ \.\.\. NOTE$/, "", note)
+                  if (detail == "") {
+                    printf "  * %s\n", note
+                  } else {
+                    printf "  * %s: %s\n", note, detail
+                  }
+                }
+                /^\* checking .* \.\.\. NOTE$/ {
+                  if (in_note) flush_note()
+                  note = $0
+                  detail = ""
+                  in_note = 1
+                  next
+                }
+                in_note && (/^\* checking / || /^Status:/) {
+                  flush_note()
+                  in_note = 0
+                }
+                in_note {
+                  line = trim($0)
+                  if (line != "") {
+                    if (detail == "") {
+                      detail = line
+                    } else {
+                      detail = detail " " line
+                    }
+                  }
+                }
+                END { if (in_note) flush_note() }
+              ' "$check_log"
+            fi
+          } > "$summary_file"
+
+      - name: Upload check summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}
+          path: check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}.md
+          if-no-files-found: warn
           
     timeout-minutes: 10
+
+  revdep:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' &&
+      (github.base_ref == 'main' || github.base_ref == 'master'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: github::r-lib/revdepcheck
+          needs: check
+
+      - name: Check reverse dependencies
+        shell: Rscript {0}
+        run: |
+          # Use CRAN metadata for the reverse-dependency set, not the runner's
+          # Ubuntu-specific Posit Package Manager snapshot.
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+          revdepcheck::revdep_reset()
+
+          revdepcheck::revdep_check(
+            num_workers = 2,
+            timeout = as.difftime(240, units = "mins"),
+            bioc = FALSE
+          )
+
+          cran_revdeps <- revdepcheck::cran_revdeps(
+            "RcppCGAL",
+            dependencies = TRUE,
+            bioc = FALSE,
+            cran = TRUE
+          )
+          writeLines(sort(cran_revdeps), "revdep/ci-cran-revdeps.txt")
+          revdepcheck::revdep_add(packages = cran_revdeps)
+
+          revdepcheck::revdep_check(
+            num_workers = 2,
+            timeout = as.difftime(240, units = "mins"),
+            bioc = FALSE
+          )
+
+      - name: Upload reverse dependency results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: revdep-results
+          path: revdep/
+          if-no-files-found: warn
+
+  release-summary:
+    if: >-
+      always() && (github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' &&
+      (github.base_ref == 'main' || github.base_ref == 'master')))
+    needs: [R-CMD-check, revdep]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download platform-check summaries
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          pattern: check-summary-*
+          path: check-summaries
+          merge-multiple: true
+
+      - name: Download reverse dependency results
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: revdep-results
+          path: revdep
+
+      - name: Publish release summary
+        shell: bash
+        run: |
+          {
+            echo '# Release checks'
+            echo
+            echo '## Platform checks'
+            if compgen -G 'check-summaries/*.md' > /dev/null; then
+              cat check-summaries/*.md
+            else
+              echo '* No platform-check summaries were available.'
+            fi
+            echo
+            echo '## revdepcheck results'
+            if [[ -f revdep/cran.md ]]; then
+              if [[ -f revdep/ci-cran-revdeps.txt ]]; then
+                cran_count=$(grep -cve '^[[:space:]]*$' revdep/ci-cran-revdeps.txt || true)
+                echo "Selected ${cran_count} CRAN reverse dependencies for this run."
+                echo
+              fi
+              awk 'NR != 1 && !/^We checked [0-9]+ reverse dependencies/' revdep/cran.md
+            else
+              echo 'No CRAN reverse-dependency report was generated.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
