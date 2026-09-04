@@ -83,7 +83,7 @@ jobs:
               platform="$RUNNER_OS"
               ;;
           esac
-          r_version=$(Rscript -e 'cat(getRversion())')
+          r_version=$(Rscript -e 'cat(as.character(getRversion()))')
 
           {
             printf '* %s, R-%s: %s\n' "$platform" "$r_version" "$status"
