@@ -1,0 +1,47 @@
+name: Reverse dependency checks
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new commit to the same PR supersedes an in-progress reverse-dependency run.
+concurrency:
+  group: revdep-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  revdep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::revdepcheck
+          needs: check
+
+      - name: Check reverse dependencies
+        shell: Rscript {0}
+        run: |
+          revdepcheck::revdep_check(num_workers = 2)
+
+      - name: Upload reverse dependency results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: revdep-results
+          path: revdep/
+          if-no-files-found: warn

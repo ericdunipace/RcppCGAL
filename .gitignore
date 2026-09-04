@@ -15,4 +15,4 @@ pkg_check
 inst/include/CGAL/
 RcppCGAL.Rcheck/**
 pkg_state.R
-revdep
+revdep/
