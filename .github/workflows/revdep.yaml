@@ -38,6 +38,16 @@ jobs:
         run: |
           revdepcheck::revdep_check(num_workers = 2)
 
+      - name: Publish CRAN report
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f revdep/cran.md ]]; then
+            cat revdep/cran.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No CRAN reverse-dependency report was generated." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Upload reverse dependency results
         if: always()
         uses: actions/upload-artifact@v4
