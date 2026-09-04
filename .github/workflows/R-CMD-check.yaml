@@ -5,6 +5,7 @@ on:
     branches: [main, master, dev]
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
 
 name: R-CMD-check
 
@@ -28,7 +29,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -46,5 +47,104 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+
+      - name: Record check summary
+        if: always()
+        shell: bash
+        run: |
+          status=$(sed -n 's/^Status: //p' check/00check.log | tail -n 1)
+          if [[ -z "$status" ]]; then
+            status="FAILED (no R CMD check status produced)"
+          fi
+          printf '* %s, R-%s: %s\n' \
+            '${{ matrix.config.os }}' '${{ matrix.config.r }}' "$status" \
+            > check-summary.md
+
+      - name: Upload check summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}
+          path: check-summary.md
+          if-no-files-found: warn
           
     timeout-minutes: 10
+
+  revdep:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.base_ref == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::revdepcheck
+          needs: check
+
+      - name: Check reverse dependencies
+        shell: Rscript {0}
+        run: |
+          revdepcheck::revdep_check(num_workers = 2)
+
+      - name: Upload reverse dependency results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: revdep-results
+          path: revdep/
+          if-no-files-found: warn
+
+  release-summary:
+    if: >-
+      always() && (github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.base_ref == 'main'))
+    needs: [R-CMD-check, revdep]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download platform-check summaries
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          pattern: check-summary-*
+          path: check-summaries
+          merge-multiple: true
+
+      - name: Download reverse dependency results
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: revdep-results
+          path: revdep
+
+      - name: Publish release summary
+        shell: bash
+        run: |
+          {
+            echo '# Release checks'
+            echo
+            echo '## Platform checks'
+            if compgen -G 'check-summaries/*.md' > /dev/null; then
+              cat check-summaries/*.md
+            else
+              echo '* No platform-check summaries were available.'
+            fi
+            echo
+            echo '## revdepcheck results'
+            if [[ -f revdep/cran.md ]]; then
+              cat revdep/cran.md
+            else
+              echo 'No CRAN reverse-dependency report was generated.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

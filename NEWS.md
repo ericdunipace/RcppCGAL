@@ -1,5 +1,8 @@
 # Package RcppCGAL
 
+## Changes in 6.2.1
+* Updating header files to version 6.2.1
+
 ## Changes in 6.1
 * Updating header files to version 6.1
 * Moving `rmarkdown` and `knitr` back to Suggests given there is a flag for unused packages for them
