@@ -3,9 +3,13 @@
 ## Changes in 6.2.1
 * Updating header files to version 6.2.1
 
+## Changes in 6.2
+* Updating header files to version 6.2
+
 ## Changes in 6.1
 * Updating header files to version 6.1
 * Moving `rmarkdown` and `knitr` back to Suggests given there is a flag for unused packages for them
+* Minor bug fixes to internal code to download and package header files
 
 ## Changes in 6.0.1
 ### Minor improvements and Bug Fixes
