@@ -1,5 +1,5 @@
-#' @references 
-#' The CGAL Project. (2023). {CGAL} User and Reference Manual. Retrieved from <https://doc.cgal.org/latest/Manual/index.html>
+#' @references
+#' The CGAL Project. (2026). {CGAL} User and Reference Manual. Retrieved from <https://doc.cgal.org/latest/Manual/index.html>
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage
@@ -9,4 +9,3 @@
 #' @importFrom Rcpp evalCpp
 ## usethis namespace: end
 NULL
-
