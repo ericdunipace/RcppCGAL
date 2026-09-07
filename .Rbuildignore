@@ -19,3 +19,5 @@
 ^VERSION$
 ^RcppCGAL.Rcheck$
 ^pkg_state.R$
+^doc$
+^Meta$

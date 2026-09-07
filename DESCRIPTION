@@ -2,7 +2,7 @@ Package: RcppCGAL
 Type: Package
 Title: 'Rcpp' Integration for 'CGAL' 
 Version: 6.2.1
-Date: 2026-09-04
+Date: 2026-09-06
 Authors@R: 
     c(
     person(given = "Eric", family = "Dunipace", 
@@ -30,6 +30,7 @@ Suggests:
     testthat (>= 3.0.0)
 BugReports: https://github.com/ericdunipace/RcppCGAL/issues
 NeedsCompilation: no
+RoxygenNote: 7.3.3
 Encoding: UTF-8
 VignetteBuilder: knitr
 Biarch: TRUE

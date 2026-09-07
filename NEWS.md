@@ -1,5 +1,12 @@
 # Package RcppCGAL
 
+## Changes in 6.x
+* Updated stale vignette html files.
+* Added `lifecycle` to imports
+* `cgal_version()` soft-deprecated in favor of `cgal_header_info()`
+* Added `cgal_bundled_version()` to return the version number of
+the bundled header files
+
 ## Changes in 6.2.1
 * Updating header files to version 6.2.1
 

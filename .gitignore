@@ -16,3 +16,5 @@ inst/include/CGAL/
 RcppCGAL.Rcheck/**
 pkg_state.R
 revdep/
+/doc/
+/Meta/

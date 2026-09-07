@@ -10,10 +10,13 @@ set_cgal(path)
 \item{path}{character vector. either a URL or system path}
 }
 \value{
-Invisibley returns TRUE if the \code{CGAL_DIR} variable was successfully set or or FALSE if it was not.
+Invisibly returns TRUE if the \code{CGAL_DIR} variable was successfully set or or FALSE if it was not.
 }
 \description{
 This package will set the \code{CGAL_DIR} environmental variable if you don't know how. Then you can re-install the \code{RcppCGAL} package and the installation should use your preferred source of the CGAL library. Note the cleaner functions will run automatically and replace the calls to std::err and exit in the C code. They have been tested on CGAL 5.6 so are not guaranteed to work with other versions of the CGAL headers.
+}
+\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \examples{
 \dontrun{

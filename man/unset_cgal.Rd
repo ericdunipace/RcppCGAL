@@ -15,6 +15,9 @@ Invisibley returns TRUE if the \code{CGAL_DIR} variable was successfully removed
 \description{
 This package will remove the \code{CGAL_DIR} environmental variable.
 }
+\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+}
 \examples{
 \dontrun{
 unset_cgal()

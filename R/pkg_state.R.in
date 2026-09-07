@@ -1,5 +1,7 @@
 # environment to record whether user overrides default headers
 # HEADER_SOURCE populated to denote if the bundled headers or user supplied headers are used
 cgal_pkg_state <- list2env(list(
+  BUNDLED_CGAL_VERSION = @BUNDLED_CGAL_VERSION@,
   HEADER_SOURCE = @SOURCE@,
-  WARNED = FALSE))
+  WARNED = FALSE
+))
