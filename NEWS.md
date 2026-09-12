@@ -1,11 +1,12 @@
 # Package RcppCGAL
 
-## Changes in 6.x
+## Changes in dev
 * Updated stale vignette html files.
-* Added `lifecycle` to imports
+* Added `lifecycle` to imports to allow deprecation badges and messages
 * `cgal_version()` soft-deprecated in favor of `cgal_header_info()`
 * Added `cgal_bundled_version()` to return the version number of
 the bundled header files
+* Found a bunch of other CRAN banned functions (e.g., `assert`, `rand`) and changed patch functions to catch and change them
 
 ## Changes in 6.2.1
 * Updating header files to version 6.2.1

@@ -22,6 +22,13 @@ if (file.exists(helper_path)) {
   stop("Configure helper functions not found!")
 }
 
+helper_path2 <- file.path("tools", "config", "semantic_patches.R")
+if (file.exists(helper_path2)) {
+  source_file(helper_path2)
+} else {
+  stop("Configure helper functions not found!")
+}
+
 # package environment variables, set one time
 DEFAULT_URL <- "https://github.com/CGAL/cgal/releases/download/v6.2.1/CGAL-6.2.1.tar.xz"
 DEFAULT_VERSION <- "6.2.1"
@@ -54,7 +61,7 @@ if (tar_exists && not_set) {
     )
   }
   cgal_predownloader(env_cgal, ".", DL)
-  .cgal.cerr.remover("inst") # automatically adds include/CGAL as of now
+  .patch_cgal_headers_for_R("inst") # automatically adds include/CGAL as of now
   CLEANED <- TRUE
 }
 

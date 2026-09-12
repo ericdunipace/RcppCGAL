@@ -18,3 +18,4 @@ pkg_state.R
 revdep/
 /doc/
 /Meta/
+inst/cgal-header-audit.csv

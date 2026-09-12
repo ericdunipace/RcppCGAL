@@ -21,3 +21,10 @@
 ^pkg_state.R$
 ^doc$
 ^Meta$
+^tools/compile-cgal-headers.R$
+^tools/tests/
+^tools/cran-probe/$
+^inst/cgal-header-audit.csv$
+^docs$
+^_pkgdown\.yml$
+^pkgdown$

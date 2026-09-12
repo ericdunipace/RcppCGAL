@@ -1,0 +1,65 @@
+name: CGAL header audit
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  cgal-audit:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: 'release' }
+          - { os: ubuntu-latest,   r: 'devel', http-user-agent: 'release' }
+          - { os: macos-latest, r: 'release' }
+          - { os: windows-latest, r: 'release' }
+
+    runs-on: ${{ matrix.config.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::Rcpp
+            any::rcmdcheck
+
+      - name: Test CGAL maintainer tooling
+        shell: Rscript {0}
+        run: |
+          testthat::test_file("tools/tests/test-semantic-patches.R")
+
+      - name: Install RcppCGAL
+        shell: Rscript {0}
+        run: |
+          install.packages(".", repos = NULL, type = "source")
+
+      - name: Compile header smoke tests
+        shell: Rscript {0}
+        run: |
+          source("tools/compile-cgal-headers.R")
+          compile_cgal_headers()
+
+      - name: Check compiled CGAL probe
+        shell: Rscript {0}
+        run: |
+          pkg <- pkgbuild::build(
+            "tools/cran-probe",
+            dest_path = tempdir()
+          )
+
+          result <- rcmdcheck::rcmdcheck(
+            pkg,
+            args = "--no-manual",
+            error_on = "warning"
+          )
