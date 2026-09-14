@@ -3,6 +3,8 @@ Type: Package
 Title: CI Probe for RcppCGAL
 Version: 0.0.0.9000
 Description: Internal CI package used to compile RcppCGAL headers.
+Authors@R: 
+    person("Eric", "Dunipace", , "edunipace@mail.harvard.edu", role = c("aut", "cre"))
 License: GPL-3
 Encoding: UTF-8
 LinkingTo: RcppCGAL, Rcpp, BH
