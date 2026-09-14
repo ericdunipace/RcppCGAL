@@ -43,6 +43,7 @@ jobs:
         shell: Rscript {0}
         run: |
           install.packages(".", repos = NULL, type = "source")
+          install.packages("BH")
 
       - name: Compile header smoke tests
         shell: Rscript {0}

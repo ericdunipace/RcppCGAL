@@ -5,6 +5,6 @@ Version: 0.0.0.9000
 Description: Internal CI package used to compile RcppCGAL headers.
 License: GPL-3
 Encoding: UTF-8
-LinkingTo: RcppCGAL, Rcpp
+LinkingTo: RcppCGAL, Rcpp, BH
 Imports: Rcpp
 NeedsCompilation: yes

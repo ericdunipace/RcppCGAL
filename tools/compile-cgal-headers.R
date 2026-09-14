@@ -14,6 +14,7 @@ compile_cgal_headers <- function() {
     code <- sprintf(
       '
 // [[Rcpp::depends(RcppCGAL)]]
+// [[Rcpp::depends(BH)]]
 
 #include <Rcpp.h>
 #include <%s>
