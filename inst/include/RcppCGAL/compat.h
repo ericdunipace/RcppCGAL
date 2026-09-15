@@ -1,6 +1,13 @@
 #ifndef RCPPCGAL_COMPAT_H
 #define RCPPCGAL_COMPAT_H
 
+#if !defined(CGAL_USE_GMP) && \
+    !defined(CGAL_NO_GMP) && \
+    !defined(CGAL_DISABLE_GMP)
+# define CGAL_NO_GMP 1
+# define CGAL_DISABLE_GMP 1
+#endif
+
 #include <Rcpp.h>
 #include <R_ext/Random.h>
 #include <cstddef>
