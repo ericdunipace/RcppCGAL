@@ -41,7 +41,6 @@ HEADER_SOURCE <- paste0(
 if (tar_exists && not_set) {
   CLEANED <- TRUE
   untar_tarball(path_to_tar, dir_path, TRUE)
-  .cgal.patch.headers("inst")
   # unlink(path_to_tar)
 } else {
   CLEANED <- FALSE

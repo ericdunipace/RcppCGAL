@@ -667,6 +667,48 @@
   .cgal_add_compat(lines)
 }
 
+.cgal_patch_repair_polygon_soup <- function(lines, path) {
+  pattern <- paste(
+    "  if\\(polygon\\.size\\(\\) < 2\\)",
+    "  \\{",
+    "    reversed = false;",
+    "    return polygon;",
+    "  \\}",
+    sep = "\n"
+  )
+  replacement <- paste(
+    "  if(polygon.size() < 2)",
+    "  {",
+    "    reversed = false;",
+    "    Polygon canonical_polygon;",
+    "    CGAL::internal::resize(canonical_polygon, polygon.size());",
+    "    if(polygon.size() == 1)",
+    "      canonical_polygon[0] = polygon[0];",
+    "    return canonical_polygon;",
+    "  }",
+    sep = "\n"
+  )
+  .cgal_replace(
+    lines,
+    pattern,
+    replacement,
+    1L,
+    "construct_canonical_polygon size < 2 guard",
+    path
+  )
+}
+
+.cgal_patch_garland_heckbert <- function(lines, path) {
+  .cgal_replace(
+    lines,
+    "m_cost_matrices = get\\(Cost_property\\(\\), tmesh\\);",
+    "m_cost_matrices = get(Cost_property(), tmesh, Cost_matrix::Zero());",
+    1L,
+    "GarlandHeckbert Cost_property initialization",
+    path
+  )
+}
+
 # Apply all reviewed patches in memory, then write them together.
 .patch_cgal_headers <- function(cgal_root) {
   cgal_root <- normalizePath(cgal_root, mustWork = TRUE)
@@ -688,7 +730,9 @@
     "ImageIO_impl.h" = ".cgal_patch_imageio_stdout",
     "ImageIO/Attic/pnm_impl.h" = ".cgal_patch_imageio_writer_errors",
     "ImageIO/inr_impl.h" = ".cgal_patch_imageio_writer_errors",
-    "IO/Color_ostream.h" = ".cgal_patch_color_output"
+    "IO/Color_ostream.h" = ".cgal_patch_color_output",
+    "Polygon_mesh_processing/repair_polygon_soup.h" = ".cgal_patch_repair_polygon_soup",
+    "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h" = ".cgal_patch_garland_heckbert"
   )
 
   target_paths <- lapply(names(targets), function(relative) {
@@ -1127,81 +1171,8 @@
   invisible(audit_path)
 }
 
-
-.cgal.patch.headers <- function(pkg_path = NULL) {
-  if (is.null(pkg_path)) {
-    pkg_path <- dirname(system.file(".", package = "RcppCGAL"))
-  }
-  dest_folder <- file.path(pkg_path, "include", "CGAL")
-
-  # 1. Avoid GCC 12-15 -Warray-bounds false positive in construct_canonical_polygon
-  # when copying std::vector<std::size_t> inside `if (polygon.size() < 2)`
-  repair_file <- file.path(dest_folder, "Polygon_mesh_processing", "repair_polygon_soup.h")
-  if (file.exists(repair_file)) {
-    txt <- paste(readLines(repair_file, warn = FALSE), collapse = "\n")
-    old_block <- paste(
-      "  if(polygon.size() < 2)",
-      "  {",
-      "    reversed = false;",
-      "    return polygon;",
-      "  }",
-      sep = "\n"
-    )
-    new_block <- paste(
-      "  if(polygon.size() < 2)",
-      "  {",
-      "    reversed = false;",
-      "    Polygon canonical_polygon;",
-      "    CGAL::internal::resize(canonical_polygon, polygon.size());",
-      "    if(polygon.size() == 1)",
-      "      canonical_polygon[0] = polygon[0];",
-      "    return canonical_polygon;",
-      "  }",
-      sep = "\n"
-    )
-    if (grepl(old_block, txt, fixed = TRUE)) {
-      txt <- sub(old_block, new_block, txt, fixed = TRUE)
-      writeLines(txt, con = repair_file)
-    }
-  }
-
-  # 2. Explicitly zero-initialize Garland-Heckbert quadric property map matrices
-  gh_file <- file.path(
-    dest_folder,
-    "Surface_mesh_simplification", "Policies", "Edge_collapse", "internal",
-    "GarlandHeckbert_policy_base.h"
-  )
-  if (file.exists(gh_file)) {
-    txt <- paste(readLines(gh_file, warn = FALSE), collapse = "\n")
-    old_line <- "m_cost_matrices = get(Cost_property(), tmesh);"
-    new_line <- "m_cost_matrices = get(Cost_property(), tmesh, Cost_matrix::Zero());"
-    if (grepl(old_line, txt, fixed = TRUE)) {
-      txt <- sub(old_line, new_line, txt, fixed = TRUE)
-      writeLines(txt, con = gh_file)
-    }
-  }
-
-  # 3. Ensure default-constructed Eigen matrices in CGAL containers are zero-initialized
-  config_file <- file.path(dest_folder, "config.h")
-  if (file.exists(config_file)) {
-    tx <- readLines(config_file, warn = FALSE)
-    if (!any(grepl("EIGEN_INITIALIZE_MATRICES_BY_ZERO", tx, fixed = TRUE))) {
-      tx[1] <- paste0(
-        "#ifndef EIGEN_INITIALIZE_MATRICES_BY_ZERO\n",
-        "#define EIGEN_INITIALIZE_MATRICES_BY_ZERO\n",
-        "#endif\n",
-        tx[1]
-      )
-      writeLines(tx, con = config_file)
-    }
-  }
-
-  invisible(NULL)
-}
-
 .patch_cgal_headers_for_R <- function(pkg_path = NULL) {
   .patch_cgal_semantics(pkg_path)
-  .cgal.patch.headers(pkg_path)
   .rewrite_cgal_streams(pkg_path)
   .ensure_cgal_final_newlines(pkg_path)
   .validate_cgal_headers(pkg_path)

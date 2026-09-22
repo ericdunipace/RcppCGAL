@@ -227,6 +227,28 @@ color_output_fixture <- function() {
   )
 }
 
+repair_polygon_soup_fixture <- function() {
+  c(
+    "Polygon construct_canonical_polygon(const Polygon& polygon, bool& reversed)",
+    "{",
+    "  if(polygon.size() < 2)",
+    "  {",
+    "    reversed = false;",
+    "    return polygon;",
+    "  }",
+    "  return polygon;",
+    "}"
+  )
+}
+
+garland_heckbert_fixture <- function() {
+  c(
+    "void init(Triangle_mesh& tmesh) {",
+    "  m_cost_matrices = get(Cost_property(), tmesh);",
+    "}"
+  )
+}
+
 write_semantic_fixtures <- function(root) {
   write_fixture(root, "assertions_impl.h", assertion_fixture())
   write_fixture(root, "Compute_cone_boundaries_2.h", cone_fixture())
@@ -257,6 +279,16 @@ write_semantic_fixtures <- function(root) {
     "fprintf(stderr, \"writeInrimage: error: unable to open file '%s'\\n\", name );"
   )
   write_fixture(root, "IO/Color_ostream.h", color_output_fixture())
+  write_fixture(
+    root,
+    "Polygon_mesh_processing/repair_polygon_soup.h",
+    repair_polygon_soup_fixture()
+  )
+  write_fixture(
+    root,
+    "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h",
+    garland_heckbert_fixture()
+  )
 }
 
 testthat::test_that("final validation ignores comments, literals, and member calls", {
@@ -510,6 +542,18 @@ test_that("each reviewed patch makes its explicit semantic change", {
   expect_true(any(grepl("CLICOLOR_FORCE", color, fixed = TRUE)))
   expect_false(any(grepl("CGAL_FILENO", color, fixed = TRUE)))
   expect_true(any(grepl("return false", color, fixed = TRUE)))
+
+  repair <- .cgal_patch_repair_polygon_soup(
+    repair_polygon_soup_fixture(),
+    "Polygon_mesh_processing/repair_polygon_soup.h"
+  )
+  expect_true(any(grepl("CGAL::internal::resize(canonical_polygon, polygon.size());", repair, fixed = TRUE)))
+
+  gh <- .cgal_patch_garland_heckbert(
+    garland_heckbert_fixture(),
+    "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h"
+  )
+  expect_true(any(grepl("Cost_matrix::Zero()", gh, fixed = TRUE)))
 })
 
 test_that("recognized semantic patches compile as C++11 exceptions", {
@@ -539,7 +583,7 @@ test_that("the patch stage only changes the reviewed headers", {
   write_fixture(root, "unrelated.h", "void leave_me_alone() {}")
 
   changed <- .patch_cgal_headers(root)
-  expect_length(changed, 18L)
+  expect_length(changed, 20L)
   expect_true(any(grepl(
     "throw Assertion_exception",
     readLines(file.path(root, "assertions_impl.h"))
