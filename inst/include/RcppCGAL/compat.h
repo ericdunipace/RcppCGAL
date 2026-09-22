@@ -8,6 +8,10 @@
 # define CGAL_DISABLE_GMP 1
 #endif
 
+#ifndef EIGEN_INITIALIZE_MATRICES_BY_ZERO
+# define EIGEN_INITIALIZE_MATRICES_BY_ZERO
+#endif
+
 #include <Rcpp.h>
 #include <R_ext/Random.h>
 #include <cstddef>
