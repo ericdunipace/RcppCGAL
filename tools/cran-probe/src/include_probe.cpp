@@ -32,6 +32,10 @@
 // Intersections
 #include <CGAL/intersections.h>
 
+// Optional polygon mesh processing and Eigen-based simplification
+#include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h>
+
 // Misc
 #include <CGAL/number_utils.h>
 #include <CGAL/squared_distance_2.h>
