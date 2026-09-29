@@ -229,7 +229,11 @@ color_output_fixture <- function() {
 
 repair_polygon_soup_fixture <- function() {
   c(
-    "Polygon construct_canonical_polygon(const Polygon& polygon, bool& reversed)",
+    "#include <vector>",
+    "#include <cstddef>",
+    "namespace CGAL {",
+    "using Polygon = std::vector<std::size_t>;",
+    "inline Polygon construct_canonical_polygon(const Polygon& polygon, bool& reversed)",
     "{",
     "  if(polygon.size() < 2)",
     "  {",
@@ -237,14 +241,24 @@ repair_polygon_soup_fixture <- function() {
     "    return polygon;",
     "  }",
     "  return polygon;",
+    "}",
     "}"
   )
 }
 
 garland_heckbert_fixture <- function() {
   c(
-    "void init(Triangle_mesh& tmesh) {",
-    "  m_cost_matrices = get(Cost_property(), tmesh);",
+    "namespace CGAL {",
+    "struct Cost_matrix { static Cost_matrix Zero() { return Cost_matrix(); } };",
+    "struct Cost_property {};",
+    "struct Triangle_mesh {};",
+    "inline Cost_matrix get(Cost_property, Triangle_mesh&, Cost_matrix = Cost_matrix()) { return Cost_matrix(); }",
+    "struct GarlandHeckbert_probe {",
+    "  Cost_matrix m_cost_matrices;",
+    "  void init(Triangle_mesh& tmesh) {",
+    "    m_cost_matrices = get(Cost_property(), tmesh);",
+    "  }",
+    "};",
     "}"
   )
 }
@@ -547,7 +561,7 @@ test_that("each reviewed patch makes its explicit semantic change", {
     repair_polygon_soup_fixture(),
     "Polygon_mesh_processing/repair_polygon_soup.h"
   )
-  expect_true(any(grepl("CGAL::internal::resize(canonical_polygon, polygon.size());", repair, fixed = TRUE)))
+  expect_true(any(grepl("return polygon.empty() ? Polygon{} : Polygon{ polygon[0] };", repair, fixed = TRUE)))
 
   gh <- .cgal_patch_garland_heckbert(
     garland_heckbert_fixture(),
@@ -569,11 +583,47 @@ test_that("recognized semantic patches compile as C++11 exceptions", {
       "#include \"assertions_impl.h\"",
       "#include \"Compute_cone_boundaries_2.h\"",
       "#include \"Nef_3/OGL_helper.h\"",
+      "#include \"Polygon_mesh_processing/repair_polygon_soup.h\"",
+      "#include \"Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h\"",
       "int main() { return 0; }"
     ),
     probe
   )
   expect_equal(system2(compiler, c("-std=c++11", "-fsyntax-only", probe)), 0L)
+})
+
+test_that("bundled warning patches apply idempotently on unpacked headers", {
+  root <- tempfile("cgal-bundled-warnings-")
+  dir.create(root)
+  write_fixture(
+    root,
+    "Polygon_mesh_processing/repair_polygon_soup.h",
+    repair_polygon_soup_fixture()
+  )
+  write_fixture(
+    root,
+    "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h",
+    garland_heckbert_fixture()
+  )
+
+  changed <- .patch_cgal_bundled_warnings(root)
+  expect_length(changed, 2L)
+  expect_true(any(grepl(
+    "return polygon.empty() ? Polygon{} : Polygon{ polygon[0] };",
+    readLines(file.path(root, "Polygon_mesh_processing/repair_polygon_soup.h")),
+    fixed = TRUE
+  )))
+  expect_true(any(grepl(
+    "Cost_matrix::Zero()",
+    readLines(file.path(
+      root,
+      "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h"
+    )),
+    fixed = TRUE
+  )))
+
+  # Second invocation on already-patched headers is a no-op
+  expect_length(.patch_cgal_bundled_warnings(root), 0L)
 })
 
 test_that("the patch stage only changes the reviewed headers", {
