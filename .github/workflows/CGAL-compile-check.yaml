@@ -45,6 +45,32 @@ jobs:
           install.packages(".", repos = NULL, type = "source")
           install.packages("BH")
 
+      - name: Verify installed headers contain reviewed semantic patches
+        shell: Rscript {0}
+        run: |
+          source("tools/config/semantic_patches.R")
+          include <- system.file("include", "CGAL", package = "RcppCGAL")
+          if (!nzchar(include)) stop("Installed CGAL headers not found")
+          checks <- list(
+            .cgal_patch_repair_polygon_soup = list(
+              path = "Polygon_mesh_processing/repair_polygon_soup.h",
+              marker = "CGAL::internal::resize(canonical_polygon, polygon.size());"
+            ),
+            .cgal_patch_garland_heckbert = list(
+              path = "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h",
+              marker = "m_cost_matrices = get(Cost_property(), tmesh, Cost_matrix::Zero());"
+            )
+          )
+          for (patch in names(checks)) {
+            if (!exists(patch, mode = "function", inherits = FALSE)) next
+            header <- file.path(include, checks[[patch]]$path)
+            if (!file.exists(header) ||
+                !any(grepl(checks[[patch]]$marker,
+                           readLines(header, warn = FALSE), fixed = TRUE))) {
+              stop("Installed header does not contain ", patch, ": ", header)
+            }
+          }
+
       - name: Compile header smoke tests
         shell: Rscript {0}
         run: |
