@@ -34,7 +34,8 @@
 
 // Optional polygon mesh processing and Eigen-based simplification
 #include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>
-#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h>
+#include <CGAL/Surface_mesh.h>
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_plane_policies.h>
 
 // Misc
 #include <CGAL/number_utils.h>
@@ -43,8 +44,23 @@
 
 void rcppcgal_include_probe()
 {
-    // Intentionally empty.
-    //
-    // The purpose of this translation unit is to ensure that a broad set
-    // of public CGAL headers can coexist and compile in an R package.
+    // Compile the actual short-polygon template paths, not just their header.
+    using Kernel = CGAL::Exact_predicates_inexact_constructions_kernel;
+    std::vector<Kernel::Point_3> points{Kernel::Point_3(0, 0, 0)};
+    std::vector<std::size_t> empty_polygon;
+    std::vector<std::size_t> singleton_polygon{0};
+    bool reversed = true;
+    auto empty = CGAL::Polygon_mesh_processing::internal::
+        construct_canonical_polygon(points, empty_polygon, reversed, Kernel());
+    auto singleton = CGAL::Polygon_mesh_processing::internal::
+        construct_canonical_polygon(points, singleton_polygon, reversed, Kernel());
+    (void) empty;
+    (void) singleton;
+
+    // Instantiate the Eigen-backed property-map initialization.
+    using Mesh = CGAL::Surface_mesh<Kernel::Point_3>;
+    Mesh mesh;
+    CGAL::Surface_mesh_simplification::
+        GarlandHeckbert_plane_policies<Mesh, Kernel> policy(mesh);
+    (void) policy;
 }
