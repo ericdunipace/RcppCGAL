@@ -44,6 +44,7 @@ jobs:
         run: |
           install.packages(".", repos = NULL, type = "source")
           install.packages("BH")
+          install.packages("RcppEigen")
 
       - name: Verify installed headers contain reviewed semantic patches
         shell: Rscript {0}
