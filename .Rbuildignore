@@ -23,6 +23,7 @@
 ^Meta$
 ^tools/compile-cgal-headers.R$
 ^tools/tests/
+^tools/ci/
 ^tools/cran-probe/$
 ^inst/cgal-header-audit.csv$
 ^docs$

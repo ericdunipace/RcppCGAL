@@ -1,0 +1,98 @@
+name: CGAL PR rebuild check
+
+on:
+  pull_request:
+    branches: [main, master, dev]
+  push:
+    branches: [dev]
+    paths:
+      - ".github/workflows/CGAL-rebuild-check.yaml"
+      - "tools/ci/rebuild-cgal-bundle.R"
+      - "tools/config/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cgal-rebuild-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - name: Download pristine CGAL, patch, and generate candidate bundle
+        run: Rscript tools/ci/rebuild-cgal-bundle.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cgal-candidate-bundle
+          path: inst/include/CGAL_zip.tar.xz
+          if-no-files-found: error
+          retention-days: 7
+
+  check:
+    needs: rebuild
+    name: rebuilt-headers (${{ matrix.config.os }}, ${{ matrix.config.r }})
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest, r: release}
+          - {os: ubuntu-latest, r: devel, http-user-agent: release}
+          - {os: ubuntu-latest, r: oldrel-1}
+          - {os: macos-latest, r: release}
+          - {os: windows-latest, r: release}
+    runs-on: ${{ matrix.config.os }}
+    timeout-minutes: 20
+    env:
+      CGAL_DIR: ""
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: cgal-candidate-bundle
+          path: inst/include
+      - uses: r-lib/actions/setup-pandoc@v2
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          needs: check
+          extra-packages: |
+            any::BH
+            any::RcppEigen
+            any::pkgbuild
+            any::rcmdcheck
+      - name: Test CGAL maintainer tooling
+        shell: Rscript {0}
+        run: testthat::test_file("tools/tests/test-semantic-patches.R")
+      - name: Install RcppCGAL with the candidate bundle
+        id: install
+        shell: Rscript {0}
+        run: install.packages(".", repos = NULL, type = "source")
+      - name: R CMD check candidate RcppCGAL
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+      - name: Compile header smoke tests
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        shell: Rscript {0}
+        run: |
+          source("tools/compile-cgal-headers.R")
+          compile_cgal_headers()
+      - name: R CMD check compiled CGAL dummy package
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        shell: Rscript {0}
+        run: |
+          pkg <- pkgbuild::build("tools/cran-probe", dest_path = tempdir())
+          rcmdcheck::rcmdcheck(pkg, args = "--no-manual", error_on = "warning")
