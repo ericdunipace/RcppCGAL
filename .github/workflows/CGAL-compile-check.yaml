@@ -39,12 +39,68 @@ jobs:
         run: |
           testthat::test_file("tools/tests/test-semantic-patches.R")
 
+      - name: Record the headers shipped in the bundle
+        shell: Rscript {0}
+        run: |
+          # Inspect the archive directly, without configure or patch helpers.
+          archive <- "inst/include/CGAL_zip.tar.xz"
+          stopifnot(file.exists(archive))
+          extracted <- tempfile("cgal-shipped-")
+          dir.create(extracted)
+          utils::untar(archive, exdir = extracted)
+          roots <- list.dirs(extracted, recursive = FALSE, full.names = TRUE)
+          stopifnot(length(roots) == 1L)
+          root <- roots[[1L]]
+          stopifnot(file.exists(file.path(root, "basic.h")))
+          files <- sort(list.files(root, recursive = TRUE, all.files = TRUE))
+          manifest <- setNames(
+            unname(tools::md5sum(file.path(root, files))), files
+          )
+          stopifnot(length(manifest) > 0L, !anyNA(manifest))
+          saveRDS(manifest, file.path(
+            Sys.getenv("RUNNER_TEMP"), "rcppcgal-bundle-manifest.rds"
+          ))
+          unlink(extracted, recursive = TRUE)
+
       - name: Install RcppCGAL
+        env:
+          CGAL_DIR: ""
         shell: Rscript {0}
         run: |
           install.packages(".", repos = NULL, type = "source")
           install.packages("BH")
           install.packages("RcppEigen")
+
+      - name: Verify installation preserves the bundled headers
+        shell: Rscript {0}
+        run: |
+          expected <- readRDS(file.path(
+            Sys.getenv("RUNNER_TEMP"), "rcppcgal-bundle-manifest.rds"
+          ))
+          root <- system.file("include", "CGAL", package = "RcppCGAL")
+          stopifnot(nzchar(root), dir.exists(root))
+          files <- sort(list.files(root, recursive = TRUE, all.files = TRUE))
+          installed <- setNames(
+            unname(tools::md5sum(file.path(root, files))), files
+          )
+          stopifnot(!anyNA(installed))
+          missing <- setdiff(names(expected), names(installed))
+          added <- setdiff(names(installed), names(expected))
+          common <- intersect(names(expected), names(installed))
+          changed <- common[expected[common] != installed[common]]
+          differences <- c(
+            sprintf("missing: %s", missing),
+            sprintf("added: %s", added),
+            sprintf("changed: %s", changed)
+          )
+          if (length(missing) + length(added) + length(changed) > 0L) {
+            stop(paste(c(
+              "Installation changed the bundled CGAL headers.",
+              "Apply header fixes before generating CGAL_zip.tar.xz.",
+              head(differences, 20L)
+            ), collapse = "\n"), call. = FALSE)
+          }
+          message("Installed CGAL headers match the shipped bundle.")
 
       - name: Compile header smoke tests
         shell: Rscript {0}
