@@ -667,6 +667,72 @@
   .cgal_add_compat(lines)
 }
 
+.cgal_patch_repair_polygon_soup <- function(lines, path) {
+  pattern <- paste(
+    "  if\\(polygon\\.size\\(\\) < 2\\)",
+    "  \\{",
+    "    reversed = false;",
+    "    return polygon;",
+    "  \\}",
+    sep = "\n"
+  )
+  replacement <- paste(
+    "  if(polygon.size() < 2)",
+    "  {",
+    "    reversed = false;",
+    "    return polygon.empty() ? Polygon{} : Polygon{ polygon[0] };",
+    "  }",
+    sep = "\n"
+  )
+  .cgal_replace(
+    lines,
+    pattern,
+    replacement,
+    1L,
+    "construct_canonical_polygon size < 2 guard",
+    path
+  )
+}
+
+.cgal_patch_garland_heckbert <- function(lines, path) {
+  .cgal_replace(
+    lines,
+    "m_cost_matrices = get\\(Cost_property\\(\\), tmesh\\);",
+    "m_cost_matrices = get(Cost_property(), tmesh, Cost_matrix::Zero());",
+    1L,
+    "GarlandHeckbert Cost_property initialization",
+    path
+  )
+}
+
+# Idempotently apply compiler-warning patches to an unpacked bundled CGAL tree
+# if the bundled tarball has not yet been regenerated with these patches.
+.patch_cgal_bundled_warnings <- function(cgal_root) {
+  cgal_root <- normalizePath(cgal_root, mustWork = TRUE)
+  changed <- character()
+  repair_path <- file.path(cgal_root, "Polygon_mesh_processing/repair_polygon_soup.h")
+  if (file.exists(repair_path)) {
+    lines <- .cgal_read_lines(repair_path)
+    if (!any(grepl("Polygon\\{ polygon\\[0\\] \\}", lines))) {
+      .cgal_write_lines(repair_path, .cgal_patch_repair_polygon_soup(lines, repair_path))
+      changed <- c(changed, repair_path)
+    }
+  }
+
+  gh_path <- file.path(
+    cgal_root,
+    "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h"
+  )
+  if (file.exists(gh_path)) {
+    lines <- .cgal_read_lines(gh_path)
+    if (any(grepl("m_cost_matrices = get\\(Cost_property\\(\\), tmesh\\);", lines))) {
+      .cgal_write_lines(gh_path, .cgal_patch_garland_heckbert(lines, gh_path))
+      changed <- c(changed, gh_path)
+    }
+  }
+  invisible(changed)
+}
+
 # Apply all reviewed patches in memory, then write them together.
 .patch_cgal_headers <- function(cgal_root) {
   cgal_root <- normalizePath(cgal_root, mustWork = TRUE)
@@ -688,7 +754,9 @@
     "ImageIO_impl.h" = ".cgal_patch_imageio_stdout",
     "ImageIO/Attic/pnm_impl.h" = ".cgal_patch_imageio_writer_errors",
     "ImageIO/inr_impl.h" = ".cgal_patch_imageio_writer_errors",
-    "IO/Color_ostream.h" = ".cgal_patch_color_output"
+    "IO/Color_ostream.h" = ".cgal_patch_color_output",
+    "Polygon_mesh_processing/repair_polygon_soup.h" = ".cgal_patch_repair_polygon_soup",
+    "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h" = ".cgal_patch_garland_heckbert"
   )
 
   target_paths <- lapply(names(targets), function(relative) {
@@ -1126,7 +1194,6 @@
   message("No problematic calls found. Audit written to: ", audit_path)
   invisible(audit_path)
 }
-
 
 .patch_cgal_headers_for_R <- function(pkg_path = NULL) {
   .patch_cgal_semantics(pkg_path)

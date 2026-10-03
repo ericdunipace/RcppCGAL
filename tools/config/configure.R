@@ -41,6 +41,7 @@ HEADER_SOURCE <- paste0(
 if (tar_exists && not_set) {
   CLEANED <- TRUE
   untar_tarball(path_to_tar, dir_path, TRUE)
+  .patch_cgal_bundled_warnings(file.path(dir_path, "CGAL"))
   # unlink(path_to_tar)
 } else {
   CLEANED <- FALSE
