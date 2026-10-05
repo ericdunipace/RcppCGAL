@@ -1,4 +1,4 @@
-name: CGAL header audit
+name: "CGAL shipped bundle: unchanged install + downstream checks"
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
 
 jobs:
   cgal-audit:
+    name: Shipped bundle checks (${{ matrix.config.os }}, ${{ matrix.config.r }})
     strategy:
       fail-fast: false
       matrix:
@@ -34,7 +35,7 @@ jobs:
             any::Rcpp
             any::rcmdcheck
 
-      - name: Test CGAL maintainer tooling
+      - name: Test header patch transformations
         shell: Rscript {0}
         run: |
           testthat::test_file("tools/tests/test-semantic-patches.R")
@@ -62,7 +63,8 @@ jobs:
           ))
           unlink(extracted, recursive = TRUE)
 
-      - name: Install RcppCGAL
+      - name: Install RcppCGAL from the committed bundle
+        id: install
         env:
           CGAL_DIR: ""
         shell: Rscript {0}
@@ -72,6 +74,7 @@ jobs:
           install.packages("RcppEigen")
 
       - name: Verify installation preserves the bundled headers
+        id: preservation
         shell: Rscript {0}
         run: |
           expected <- readRDS(file.path(
@@ -96,19 +99,23 @@ jobs:
           if (length(missing) + length(added) + length(changed) > 0L) {
             stop(paste(c(
               "Installation changed the bundled CGAL headers.",
-              "Apply header fixes before generating CGAL_zip.tar.xz.",
+              "Remove bundled-header edits from the installation path.",
+              "Apply fixes during bundle generation and commit the regenerated inst/include/CGAL_zip.tar.xz.",
+              "Downloaded or user-supplied CGAL may still be patched; this check covers only the committed bundle.",
               head(differences, 20L)
             ), collapse = "\n"), call. = FALSE)
           }
           message("Installed CGAL headers match the shipped bundle.")
 
       - name: Compile header smoke tests
+        id: smoke
         shell: Rscript {0}
         run: |
           source("tools/compile-cgal-headers.R")
           compile_cgal_headers()
 
-      - name: Check compiled CGAL probe
+      - name: Check downstream dummy package; compiler warnings fail
+        id: dummy
         shell: Rscript {0}
         run: |
           pkg <- pkgbuild::build(
@@ -121,3 +128,34 @@ jobs:
             args = "--no-manual",
             error_on = "warning"
           )
+
+      - name: Explain shipped bundle check results
+        if: ${{ always() }}
+        env:
+          INSTALL_RESULT: ${{ steps.install.outcome }}
+          PRESERVATION_RESULT: ${{ steps.preservation.outcome }}
+          SMOKE_RESULT: ${{ steps.smoke.outcome }}
+          DUMMY_RESULT: ${{ steps.dummy.outcome }}
+        shell: Rscript {0}
+        run: |
+          results <- c(
+            Installation = Sys.getenv("INSTALL_RESULT"),
+            `Bundled headers unchanged` = Sys.getenv("PRESERVATION_RESULT"),
+            `Header smoke compilation` = Sys.getenv("SMOKE_RESULT"),
+            `Downstream dummy package` = Sys.getenv("DUMMY_RESULT")
+          )
+          results[results == ""] <- "not run"
+          lines <- c(
+            "## Shipped bundle checks",
+            "Installs the committed inst/include/CGAL_zip.tar.xz, verifies the installed CGAL files match it, then checks downstream use.",
+            paste(sprintf("- %s: %s", names(results), results), collapse = "\n")
+          )
+          if (Sys.getenv("PRESERVATION_RESULT") == "failure") lines <- c(lines,
+            "The preservation check failed. Inspect its diagnostics for changed, missing, or added headers. If installation modified them, remove those bundled-header edits from the installation path, apply fixes before bundling, and commit the regenerated archive. Downloaded or user-supplied CGAL may still be patched.",
+            "If the rebuilt-bundle workflow passes while this check fails, the candidate passed its tests but the committed bundle or its installation behavior still needs revision.")
+          if (Sys.getenv("INSTALL_RESULT") == "failure") lines <- c(lines,
+            "Installation failed. Inspect the installation diagnostics; downstream checks could not run.")
+          if (any(results[c(3L, 4L)] == "failure")) lines <- c(lines,
+            "The committed headers produced downstream compilation/check problems. Inspect the compiler and R CMD check diagnostics. Compiler warnings fail the dummy check; update the patch code and regenerate the committed bundle.")
+          cat(paste(lines, collapse = "\n\n"), "\n",
+              file = Sys.getenv("GITHUB_STEP_SUMMARY"), append = TRUE)
