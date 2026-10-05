@@ -19,3 +19,4 @@
 ^VERSION$
 ^RcppCGAL.Rcheck$
 ^pkg_state.R$
+^tools/ci/

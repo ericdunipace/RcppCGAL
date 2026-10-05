@@ -1,0 +1,56 @@
+name: "CGAL rebuild before package and downstream checks"
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master, dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cgal-rebuild-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - name: Download pristine CGAL, patch, and generate candidate bundle
+        id: bundle
+        run: Rscript tools/ci/rebuild-cgal-bundle.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cgal-candidate-bundle
+          path: inst/include/CGAL_zip.tar.xz
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Explain bundle generation result
+        if: ${{ always() }}
+        env:
+          BUNDLE_RESULT: ${{ steps.bundle.outcome }}
+        shell: Rscript {0}
+        run: |
+          result <- Sys.getenv("BUNDLE_RESULT")
+          lines <- c(
+            "## Generate the candidate bundle",
+            "Downloads pristine CGAL, applies the checked-out branch or PR's patch code, and generates a temporary archive for downstream checks.",
+            paste("Bundle generation:", result)
+          )
+          if (result == "failure") lines <- c(lines,
+            "Inspect the download and patch diagnostics above. Check the configured CGAL URL/version and whether the patch code supports those pristine headers.")
+          cat(paste(lines, collapse = "\n\n"), "\n",
+              file = Sys.getenv("GITHUB_STEP_SUMMARY"), append = TRUE)
+
+  package-checks:
+    needs: rebuild
+    uses: ./.github/workflows/R-CMD-check.yaml
+
