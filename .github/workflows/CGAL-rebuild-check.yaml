@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: cgal-rebuild-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   rebuild:
@@ -156,6 +156,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
+      actions: write
     steps:
       - name: Check out the exact commit that passed the checks
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -184,6 +185,7 @@ jobs:
           git add -- inst/include/CGAL_zip.tar.xz
           git -c core.hooksPath=/dev/null commit --only -m "Regenerate bundled CGAL headers" -- inst/include/CGAL_zip.tar.xz
           if git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
             echo "committed $(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
           else
             # Only a concurrent branch update is an expected, harmless rejection.
@@ -197,6 +199,15 @@ jobs:
             echo "::error::Bundle push failed while the tested branch was unchanged. Check token permissions, branch protection, and the push diagnostics."
             exit 1
           fi
+      - name: Re-run checks on the bot commit
+        if: steps.publish.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          gh workflow run CGAL-rebuild-check.yaml --ref "$GITHUB_REF_NAME"
+          echo "Started a follow-up run to check the newly committed bundle." >> "$GITHUB_STEP_SUMMARY"
       - name: Report unchanged header contents
         if: steps.compare.outputs.changed == 'false'
         shell: bash
