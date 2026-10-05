@@ -1,14 +1,10 @@
-name: "CGAL rebuilt bundle: PR patches + downstream checks"
+name: "CGAL rebuild before package and downstream checks"
 
 on:
+  push:
+    branches: [main, master, dev]
   pull_request:
     branches: [main, master, dev]
-  push:
-    branches: [dev]
-    paths:
-      - ".github/workflows/CGAL-rebuild-check.yaml"
-      - "tools/ci/rebuild-cgal-bundle.R"
-      - "tools/config/**"
   workflow_dispatch:
 
 permissions:
@@ -45,14 +41,22 @@ jobs:
         run: |
           result <- Sys.getenv("BUNDLE_RESULT")
           lines <- c(
-            "## Generate the PR candidate bundle",
-            "Downloads pristine CGAL, applies the checked-out PR's patch code, and generates a temporary archive for downstream checks.",
+            "## Generate the candidate bundle",
+            "Downloads pristine CGAL, applies the checked-out branch or PR's patch code, and generates a temporary archive for downstream checks.",
             paste("Bundle generation:", result)
           )
           if (result == "failure") lines <- c(lines,
             "Inspect the download and patch diagnostics above. Check the configured CGAL URL/version and whether the patch code supports those pristine headers.")
           cat(paste(lines, collapse = "\n\n"), "\n",
               file = Sys.getenv("GITHUB_STEP_SUMMARY"), append = TRUE)
+
+  package-checks:
+    needs: rebuild
+    uses: ./.github/workflows/R-CMD-check.yaml
+
+  shipped-bundle:
+    needs: rebuild
+    uses: ./.github/workflows/CGAL-compile-check.yaml
 
   check:
     needs: rebuild
@@ -98,11 +102,6 @@ jobs:
         id: install
         shell: Rscript {0}
         run: install.packages(".", repos = NULL, type = "source")
-      - name: R CMD check candidate RcppCGAL
-        id: package_check
-        uses: r-lib/actions/check-r-package@v2
-        with:
-          upload-snapshots: true
       - name: Compile header smoke tests
         id: smoke
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
@@ -122,14 +121,12 @@ jobs:
         if: ${{ always() }}
         env:
           INSTALL_RESULT: ${{ steps.install.outcome }}
-          PACKAGE_RESULT: ${{ steps.package_check.outcome }}
           SMOKE_RESULT: ${{ steps.smoke.outcome }}
           DUMMY_RESULT: ${{ steps.dummy.outcome }}
         shell: Rscript {0}
         run: |
           results <- c(
             Installation = Sys.getenv("INSTALL_RESULT"),
-            `R CMD check` = Sys.getenv("PACKAGE_RESULT"),
             `Header smoke compilation` = Sys.getenv("SMOKE_RESULT"),
             `Downstream dummy package` = Sys.getenv("DUMMY_RESULT")
           )

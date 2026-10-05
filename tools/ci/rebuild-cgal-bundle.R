@@ -38,9 +38,16 @@ rebuild_cgal_bundle <- function(pkg_path = ".", source_archive = NULL) {
   include <- file.path(candidate, "include")
   dir.create(include, recursive = TRUE)
   stopifnot(file.copy(candidates[[1L]], include, recursive = TRUE))
-  source(file.path(pkg_path, "tools", "config", "semantic_patches.R"),
-         local = TRUE)
-  .patch_cgal_headers_for_R(candidate)
+  patches <- file.path(pkg_path, "tools", "config", "semantic_patches.R")
+  if (file.exists(patches)) {
+    source(patches, local = TRUE)
+    .patch_cgal_headers_for_R(candidate)
+  } else {
+    # Older branches use this same sanitizer in their download install path.
+    source(file.path(pkg_path, "tools", "config", "downloader_functions.R"),
+           local = TRUE)
+    .cgal.cerr.remover(candidate)
+  }
 
   # A single CGAL root is accepted by the existing bundled install path.
   archive <- file.path(work, "CGAL_zip.tar.xz")

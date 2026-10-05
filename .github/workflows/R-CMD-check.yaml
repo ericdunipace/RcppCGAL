@@ -1,11 +1,7 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
-  push:
-    branches: [main, master, dev]
-  pull_request:
-    branches: [main, master, dev]
-  workflow_dispatch:
+  workflow_call:
 
 name: R-CMD-check
 
@@ -26,10 +22,16 @@ jobs:
           - {os: ubuntu-latest,   r: 'oldrel-1'}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      CGAL_DIR: ""
       R_KEEP_PKG_SOURCE: yes
 
     steps:
       - uses: actions/checkout@v4
+      - name: Use the rebuilt CGAL bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: cgal-candidate-bundle
+          path: inst/include
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -152,6 +154,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Use the rebuilt CGAL bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: cgal-candidate-bundle
+          path: inst/include
 
       - uses: r-lib/actions/setup-r@v2
         with:
