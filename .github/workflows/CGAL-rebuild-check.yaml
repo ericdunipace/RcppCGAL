@@ -12,21 +12,23 @@ permissions:
 
 concurrency:
   group: cgal-rebuild-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: r-lib/actions/setup-r@v2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
           r-version: release
+      - name: Verify bundle content comparison
+        run: Rscript tools/tests/test-bundle-changed.R
       - name: Download pristine CGAL, patch, and generate candidate bundle
         id: bundle
         run: Rscript tools/ci/rebuild-cgal-bundle.R
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: cgal-candidate-bundle
           path: inst/include/CGAL_zip.tar.xz
@@ -43,6 +45,7 @@ jobs:
           lines <- c(
             "## Generate the candidate bundle",
             "Downloads pristine CGAL, applies the checked-out branch or PR's patch code, and generates a temporary archive for downstream checks.",
+            "Contributors do not need to commit CGAL_zip.tar.xz. After merging to main or dev, the bundle is regenerated and committed automatically when the rebuilt-bundle checks pass.",
             paste("Bundle generation:", result)
           )
           if (result == "failure") lines <- c(lines,
@@ -76,18 +79,18 @@ jobs:
       CGAL_DIR: ""
       R_KEEP_PKG_SOURCE: yes
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: cgal-candidate-bundle
           path: inst/include
-      - uses: r-lib/actions/setup-pandoc@v2
-      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
           needs: check
           extra-packages: |
@@ -133,7 +136,7 @@ jobs:
           results[results == ""] <- "not run"
           lines <- c(
             "## Rebuilt bundle checks",
-            "Tests a temporary bundle rebuilt from pristine CGAL using the PR's patch code. This does not update the archive committed in the PR.",
+            "Tests a temporary bundle rebuilt from pristine CGAL using the checked-out patch code. Contributors do not need to commit CGAL_zip.tar.xz. After merging to main or dev, the bundle is regenerated and committed automatically when the rebuilt-bundle checks pass.",
             paste(sprintf("- %s: %s", names(results), results), collapse = "\n")
           )
           if (any(results == "failure")) lines <- c(lines,
@@ -142,3 +145,70 @@ jobs:
             "The candidate passed these checks. Also inspect the shipped-bundle check: a passing rebuild does not establish that the committed archive is current or that installation preserves it.")
           cat(paste(lines, collapse = "\n\n"), "\n",
               file = Sys.getenv("GITHUB_STEP_SUMMARY"), append = TRUE)
+
+  commit-bundle:
+    name: Commit regenerated bundle
+    if: >-
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev')
+    needs: [rebuild, package-checks, check]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - name: Check out the exact commit that passed the checks
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Download the tested bundle outside the working tree
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: cgal-candidate-bundle
+          path: ${{ runner.temp }}/new-bundle
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          r-version: release
+      - name: Compare header contents, ignoring archive metadata
+        id: compare
+        shell: bash
+        run: Rscript tools/ci/bundle-changed.R inst/include/CGAL_zip.tar.xz "$RUNNER_TEMP/new-bundle/CGAL_zip.tar.xz"
+      - name: Commit only the regenerated archive and push without force
+        id: publish
+        if: steps.compare.outputs.changed == 'true'
+        shell: bash
+        run: |
+          cp "$RUNNER_TEMP/new-bundle/CGAL_zip.tar.xz" inst/include/CGAL_zip.tar.xz
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -- inst/include/CGAL_zip.tar.xz
+          git -c core.hooksPath=/dev/null commit --only -m "Regenerate bundled CGAL headers" -- inst/include/CGAL_zip.tar.xz
+          if git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+            echo "committed $(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+          else
+            # Only a concurrent branch update is an expected, harmless rejection.
+            # Authentication, branch protection, and network failures still fail.
+            remote_sha=$(git ls-remote --exit-code origin "refs/heads/${GITHUB_REF_NAME}" | cut -f1)
+            if [[ -n "$remote_sha" && "$remote_sha" != "$GITHUB_SHA" ]]; then
+              echo "::notice::${GITHUB_REF_NAME} moved during the run; the newer run will regenerate the bundle."
+              echo "Branch moved; nothing pushed. The newer run will regenerate the bundle." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "::error::Bundle push failed while the tested branch was unchanged. Check token permissions, branch protection, and the push diagnostics."
+            exit 1
+          fi
+      - name: Re-run checks on the bot commit
+        if: steps.publish.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          gh workflow run CGAL-rebuild-check.yaml --ref "$GITHUB_REF_NAME"
+          echo "Started a follow-up run to check the newly committed bundle." >> "$GITHUB_STEP_SUMMARY"
+      - name: Report unchanged header contents
+        if: steps.compare.outputs.changed == 'false'
+        shell: bash
+        run: echo "unchanged, nothing committed" >> "$GITHUB_STEP_SUMMARY"
