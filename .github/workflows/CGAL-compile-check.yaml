@@ -96,7 +96,7 @@ jobs:
             stop(paste(c(
               "Installation changed the bundled CGAL headers.",
               "Remove bundled-header edits from the installation path.",
-              "Apply fixes during bundle generation and commit the regenerated inst/include/CGAL_zip.tar.xz.",
+              "Apply fixes during bundle generation. After merge, successful rebuilt-bundle checks commit the regenerated archive automatically.",
               "Downloaded or user-supplied CGAL may still be patched; this check covers only the committed bundle.",
               head(differences, 20L)
             ), collapse = "\n"), call. = FALSE)
@@ -147,11 +147,11 @@ jobs:
             paste(sprintf("- %s: %s", names(results), results), collapse = "\n")
           )
           if (Sys.getenv("PRESERVATION_RESULT") == "failure") lines <- c(lines,
-            "The preservation check failed. Inspect its diagnostics for changed, missing, or added headers. If installation modified them, remove those bundled-header edits from the installation path, apply fixes before bundling, and commit the regenerated archive. Downloaded or user-supplied CGAL may still be patched.",
+            "The preservation check failed. Inspect its diagnostics for changed, missing, or added headers. If installation modified them, remove those bundled-header edits from the installation path and apply fixes before bundling. After merge, successful rebuilt-bundle checks commit the regenerated archive automatically. Downloaded or user-supplied CGAL may still be patched.",
             "If the rebuilt-bundle workflow passes while this check fails, the candidate passed its tests but the committed bundle or its installation behavior still needs revision.")
           if (Sys.getenv("INSTALL_RESULT") == "failure") lines <- c(lines,
             "Installation failed. Inspect the installation diagnostics; downstream checks could not run.")
           if (any(results[c(3L, 4L)] == "failure")) lines <- c(lines,
-            "The committed headers produced downstream compilation/check problems. Inspect the compiler and R CMD check diagnostics. Compiler warnings fail the dummy check; update the patch code and regenerate the committed bundle.")
+            "The committed headers produced downstream compilation/check problems. Inspect the compiler and R CMD check diagnostics. Compiler warnings fail the dummy check; update the patch code. After merge, successful rebuilt-bundle checks regenerate and commit the archive automatically.")
           cat(paste(lines, collapse = "\n\n"), "\n",
               file = Sys.getenv("GITHUB_STEP_SUMMARY"), append = TRUE)
