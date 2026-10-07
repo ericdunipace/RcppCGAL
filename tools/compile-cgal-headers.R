@@ -5,7 +5,9 @@ compile_cgal_headers <- function() {
     "CGAL/spatial_sort.h",
     "CGAL/Spatial_sort_traits_adapter_d.h",
     "CGAL/boost/iterator/counting_iterator.hpp",
-    "CGAL/hilbert_sort.h"
+    "CGAL/hilbert_sort.h",
+    # Unqualified `cerr` after `using std::cerr;` (issue #29).
+    "CGAL/Min_sphere_of_spheres_d.h"
   )
 
   for (header in headers) {

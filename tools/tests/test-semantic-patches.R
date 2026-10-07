@@ -664,6 +664,69 @@ test_that("stream rewriting is defined once and only changes matching files", {
   expect_identical(readLines(file.path(root, "quiet.h")), "void quiet() {}")
 })
 
+test_that("stream using-declarations become aliases for unqualified uses", {
+  pkg <- tempfile("cgal-streams-using-")
+  root <- file.path(pkg, "include", "CGAL")
+  dir.create(root, recursive = TRUE)
+  write_fixture(
+    root,
+    "using.h",
+    c(
+      "inline bool f() {",
+      "  using std::cerr;",
+      "  using  std::cout ;",
+      "  using std::clog;",
+      "  using std::endl;",
+      "  cerr << \"bug\" << endl;",
+      "  cout << 1;",
+      "  clog << 2;",
+      "  return false;",
+      "}"
+    )
+  )
+
+  .rewrite_cgal_streams(pkg)
+  output <- readLines(file.path(root, "using.h"))
+  expect_true("  auto& cerr = Rcpp::Rcerr;" %in% output)
+  expect_true("  auto& cout = Rcpp::Rcout;" %in% output)
+  expect_true("  auto& clog = Rcpp::Rcerr;" %in% output)
+  expect_true("  using std::endl;" %in% output)
+  expect_false(any(grepl("std::(cerr|cout|clog)", output)))
+
+  compiler <- Sys.which(c("c++", "g++", "clang++"))
+  compiler <- compiler[nzchar(compiler)]
+  skip_if(length(compiler) == 0L, "no C++ compiler available")
+
+  # Stand-in for Rcpp's streams so the rewritten header can be compiled.
+  dir.create(file.path(pkg, "include", "RcppCGAL"))
+  writeLines(
+    c(
+      "#include <iostream>",
+      "namespace Rcpp {",
+      "static std::ostream& Rcout = std::cout;",
+      "static std::ostream& Rcerr = std::cerr;",
+      "}"
+    ),
+    file.path(pkg, "include", "RcppCGAL", "compat.h")
+  )
+  source_file <- file.path(pkg, "main.cpp")
+  writeLines(
+    c("#include <CGAL/using.h>", "int main() { return f() ? 1 : 0; }"),
+    source_file
+  )
+  status <- suppressWarnings(system2(
+    compiler[[1L]],
+    c(
+      "-std=c++17", "-fsyntax-only",
+      paste0("-I", shQuote(file.path(pkg, "include"))),
+      shQuote(source_file)
+    ),
+    stdout = TRUE,
+    stderr = TRUE
+  ))
+  expect_null(attr(status, "status"), info = paste(status, collapse = "\n"))
+})
+
 test_that("successful final validation writes an empty CSV audit", {
   pkg <- tempfile("cgal-semantic-validation-")
   root <- file.path(pkg, "include", "CGAL")

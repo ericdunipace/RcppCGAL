@@ -1,3 +1,5 @@
+# RcppCGAL (development version)
+
 # Package RcppCGAL
 
 ## Changes in dev
