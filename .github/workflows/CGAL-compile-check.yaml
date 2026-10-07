@@ -20,6 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
+      - name: Use the main Ubuntu archive instead of the Azure mirror
+        if: runner.os == 'Linux'
+        run: |
+          # setup-r apt-installs system packages, and azure.archive.ubuntu.com
+          # has stalled that step past the job timeout.
+          if [[ -f /etc/apt/apt-mirrors.txt ]]; then
+            echo "http://archive.ubuntu.com/ubuntu/" | sudo tee /etc/apt/apt-mirrors.txt
+          fi
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
           r-version: ${{ matrix.config.r }}
