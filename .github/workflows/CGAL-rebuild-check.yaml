@@ -1,0 +1,228 @@
+name: "CGAL rebuild before package and downstream checks"
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master, dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cgal-rebuild-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          r-version: release
+      - name: Verify bundle content comparison
+        run: Rscript tools/tests/test-bundle-changed.R
+      - name: Download pristine CGAL, patch, and generate candidate bundle
+        id: bundle
+        run: Rscript tools/ci/rebuild-cgal-bundle.R
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cgal-candidate-bundle
+          path: inst/include/CGAL_zip.tar.xz
+          if-no-files-found: error
+          retention-days: 7
+
+      # bash, not Rscript: this must still report when setup-r itself failed.
+      - name: Explain bundle generation result
+        if: ${{ always() }}
+        env:
+          BUNDLE_RESULT: ${{ steps.bundle.outcome }}
+        shell: bash
+        run: |
+          result="${BUNDLE_RESULT:-not run}"
+          {
+            echo "## Generate the candidate bundle"
+            echo
+            echo "Downloads pristine CGAL, applies the checked-out branch or PR's patch code, and generates a temporary archive for downstream checks."
+            echo
+            echo "Contributors do not need to commit CGAL_zip.tar.xz. After merging to dev, the bundle is regenerated and committed automatically when the rebuilt-bundle checks pass."
+            echo
+            echo "Bundle generation: ${result}"
+            if [[ "$result" == "failure" ]]; then
+              echo
+              echo "Inspect the download and patch diagnostics above. Check the configured CGAL URL/version and whether the patch code supports those pristine headers."
+            elif [[ "$result" == "skipped" || "$result" == "not run" ]]; then
+              echo
+              echo "Bundle generation did not run. Inspect the first failed setup step above (for example, setup-r timing out on a slow package mirror)."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  package-checks:
+    needs: rebuild
+    uses: ./.github/workflows/R-CMD-check.yaml
+
+  shipped-bundle:
+    needs: rebuild
+    uses: ./.github/workflows/CGAL-compile-check.yaml
+
+  check:
+    needs: rebuild
+    name: Rebuilt bundle downstream checks (${{ matrix.config.os }}, ${{ matrix.config.r }})
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest, r: release}
+          - {os: ubuntu-latest, r: devel, http-user-agent: release}
+          - {os: ubuntu-latest, r: oldrel-1}
+          - {os: macos-latest, r: release}
+          - {os: windows-latest, r: release}
+    runs-on: ${{ matrix.config.os }}
+    timeout-minutes: 30
+    env:
+      CGAL_DIR: ""
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: cgal-candidate-bundle
+          path: inst/include
+      - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          needs: check
+          extra-packages: |
+            any::BH
+            any::RcppEigen
+            any::pkgbuild
+            any::rcmdcheck
+      - name: Test header patch transformations
+        shell: Rscript {0}
+        run: testthat::test_file("tools/tests/test-semantic-patches.R")
+      - name: Install RcppCGAL with the candidate bundle
+        id: install
+        shell: Rscript {0}
+        run: install.packages(".", repos = NULL, type = "source")
+      - name: Compile header smoke tests
+        id: smoke
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        shell: Rscript {0}
+        run: |
+          source("tools/compile-cgal-headers.R")
+          compile_cgal_headers()
+      - name: Check downstream dummy package; compiler warnings fail
+        id: dummy
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        shell: Rscript {0}
+        run: |
+          pkg <- pkgbuild::build("tools/cran-probe", dest_path = tempdir())
+          rcmdcheck::rcmdcheck(pkg, args = "--no-manual", error_on = "warning")
+
+      - name: Explain rebuilt bundle check results
+        if: ${{ always() }}
+        env:
+          INSTALL_RESULT: ${{ steps.install.outcome }}
+          SMOKE_RESULT: ${{ steps.smoke.outcome }}
+          DUMMY_RESULT: ${{ steps.dummy.outcome }}
+        # bash (3.2-compatible for macOS), not Rscript: must report even when setup-r failed.
+        shell: bash
+        run: |
+          install="${INSTALL_RESULT:-not run}"
+          smoke="${SMOKE_RESULT:-not run}"
+          dummy="${DUMMY_RESULT:-not run}"
+          {
+            echo "## Rebuilt bundle checks"
+            echo
+            echo "Tests a temporary bundle rebuilt from pristine CGAL using the checked-out patch code. Contributors do not need to commit CGAL_zip.tar.xz. After merging to dev, the bundle is regenerated and committed automatically when the rebuilt-bundle checks pass."
+            echo
+            echo "- Installation: ${install}"
+            echo "- Header smoke compilation: ${smoke}"
+            echo "- Downstream dummy package: ${dummy}"
+            if [[ "$install $smoke $dummy" == *failure* ]]; then
+              echo
+              echo "Inspect the first failed step's diagnostics above. Installation or package-check failures require fixing the candidate package; smoke or dummy failures indicate downstream compilation/check problems with the candidate headers. Compiler warnings fail the dummy check."
+            fi
+            if [[ "$install" == success && "$smoke" == success && "$dummy" == success ]]; then
+              echo
+              echo "The candidate passed these checks. Also inspect the shipped-bundle check: a passing rebuild does not establish that the committed archive is current or that installation preserves it."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  commit-bundle:
+    name: Commit regenerated bundle
+    # dev only: the regenerated bundle reaches main through the dev -> main PR,
+    # which avoids pushing past main's branch protection and conflicting
+    # binary bundle commits on two branches.
+    if: >-
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      github.ref == 'refs/heads/dev'
+    needs: [rebuild, package-checks, check]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - name: Check out the exact commit that passed the checks
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Download the tested bundle outside the working tree
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: cgal-candidate-bundle
+          path: ${{ runner.temp }}/new-bundle
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          r-version: release
+      - name: Compare header contents, ignoring archive metadata
+        id: compare
+        shell: bash
+        run: Rscript tools/ci/bundle-changed.R inst/include/CGAL_zip.tar.xz "$RUNNER_TEMP/new-bundle/CGAL_zip.tar.xz"
+      - name: Commit only the regenerated archive and push without force
+        id: publish
+        if: steps.compare.outputs.changed == 'true'
+        shell: bash
+        run: |
+          cp "$RUNNER_TEMP/new-bundle/CGAL_zip.tar.xz" inst/include/CGAL_zip.tar.xz
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -- inst/include/CGAL_zip.tar.xz
+          git -c core.hooksPath=/dev/null commit --only -m "Regenerate bundled CGAL headers" -- inst/include/CGAL_zip.tar.xz
+          if git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"; then
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+            echo "committed $(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+          else
+            # Only a concurrent branch update is an expected, harmless rejection.
+            # Authentication, branch protection, and network failures still fail.
+            remote_sha=$(git ls-remote --exit-code origin "refs/heads/${GITHUB_REF_NAME}" | cut -f1)
+            if [[ -n "$remote_sha" && "$remote_sha" != "$GITHUB_SHA" ]]; then
+              echo "::notice::${GITHUB_REF_NAME} moved during the run; the newer run will regenerate the bundle."
+              echo "Branch moved; nothing pushed. The newer run will regenerate the bundle." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "::error::Bundle push failed while the tested branch was unchanged. Check token permissions, branch protection, and the push diagnostics."
+            exit 1
+          fi
+      - name: Re-run checks on the bot commit
+        if: steps.publish.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          gh workflow run CGAL-rebuild-check.yaml --ref "$GITHUB_REF_NAME"
+          echo "Started a follow-up run to check the newly committed bundle." >> "$GITHUB_STEP_SUMMARY"
+      - name: Report unchanged header contents
+        if: steps.compare.outputs.changed == 'false'
+        shell: bash
+        run: echo "unchanged, nothing committed" >> "$GITHUB_STEP_SUMMARY"

@@ -7,6 +7,6 @@ Authors@R:
     person("Eric", "Dunipace", , "edunipace@mail.harvard.edu", role = c("aut", "cre"))
 License: GPL-3
 Encoding: UTF-8
-LinkingTo: RcppCGAL, Rcpp, BH
+LinkingTo: RcppCGAL, Rcpp, BH, RcppEigen
 Imports: Rcpp
 NeedsCompilation: yes

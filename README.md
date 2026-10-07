@@ -60,6 +60,14 @@ Sys.setenv("CGAL_DIR" = "/usr/local/Cellar/cgal/5.6/include/CGAL")
 ```
 Note: this must be done *before* the package is installed by `R`.
 
+### Development
+
+Contributors do not need to build or commit `inst/include/CGAL_zip.tar.xz`.
+PR CI rebuilds a temporary bundle from pristine CGAL and the proposed patch code,
+then checks the package and downstream use. After merging to `dev` or `main`,
+a successful rebuild commits changed header contents automatically using
+GitHub Actions. See [contributor guidance](.github/CONTRIBUTING.md).
+
 ### Example
 We provide an example of how to perform Hilbert sorting using an `R` matrix:
 
