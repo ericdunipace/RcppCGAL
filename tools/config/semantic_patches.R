@@ -667,6 +667,12 @@
   .cgal_add_compat(lines)
 }
 
+# Upstream: https://github.com/CGAL/cgal/issues/9669 (fix proposed in #9670).
+# Copying a size-1 std::vector<std::size_t> here trips GCC 12+
+# -Wstringop-overflow/-Warray-bounds false positives. Build the copy with
+# CGAL::internal::resize, which the size >= 2 path already instantiates for
+# every Polygon type, so CGAL's own polygon types (e.g. the Indexes_range used
+# by autorefine_triangle_soup) still compile. Remove once upstream fixes it.
 .cgal_patch_repair_polygon_soup <- function(lines, path) {
   pattern <- paste(
     "  if\\(polygon\\.size\\(\\) < 2\\)",
@@ -680,7 +686,11 @@
     "  if(polygon.size() < 2)",
     "  {",
     "    reversed = false;",
-    "    return polygon.empty() ? Polygon{} : Polygon{ polygon[0] };",
+    "    Polygon canonical_polygon;",
+    "    CGAL::internal::resize(canonical_polygon, polygon.size());",
+    "    if(polygon.size() == 1)",
+    "      canonical_polygon[0] = polygon[0];",
+    "    return canonical_polygon;",
     "  }",
     sep = "\n"
   )
@@ -694,43 +704,37 @@
   )
 }
 
+# Upstream: https://github.com/CGAL/cgal/issues/9667 (fix proposed in #9668).
+# The dynamic cost map is created with an uninitialized default Mat_4, which
+# R CMD check reports as "is used uninitialized". Create it in the
+# member-initializer list with an explicit zero default: passing the Eigen
+# expression Cost_matrix::Zero() directly is ambiguous for Polyhedron_3 and
+# other HalfedgeDS meshes, and assigning in the body still warns for them.
+# initialize() writes every vertex's quadric before any read, so results are
+# unchanged. Note: CGAL 5.6's Surface_mesh dynamic get() has no default-value
+# overload, so this patch does not compile against CGAL_DIR trees from 5.x.
 .cgal_patch_garland_heckbert <- function(lines, path) {
+  pattern <- paste(
+    "    : m_quadric_calculator\\(quadric_calculator\\)",
+    "  \\{",
+    "    m_cost_matrices = get\\(Cost_property\\(\\), tmesh\\);",
+    "  \\}",
+    sep = "\n"
+  )
+  replacement <- paste(
+    "    : m_cost_matrices(get(Cost_property(), tmesh, Cost_matrix(Cost_matrix::Zero()))),",
+    "      m_quadric_calculator(quadric_calculator)",
+    "  { }",
+    sep = "\n"
+  )
   .cgal_replace(
     lines,
-    "m_cost_matrices = get\\(Cost_property\\(\\), tmesh\\);",
-    "m_cost_matrices = get(Cost_property(), tmesh, Cost_matrix::Zero());",
+    pattern,
+    replacement,
     1L,
     "GarlandHeckbert Cost_property initialization",
     path
   )
-}
-
-# Idempotently apply compiler-warning patches to an unpacked bundled CGAL tree
-# if the bundled tarball has not yet been regenerated with these patches.
-.patch_cgal_bundled_warnings <- function(cgal_root) {
-  cgal_root <- normalizePath(cgal_root, mustWork = TRUE)
-  changed <- character()
-  repair_path <- file.path(cgal_root, "Polygon_mesh_processing/repair_polygon_soup.h")
-  if (file.exists(repair_path)) {
-    lines <- .cgal_read_lines(repair_path)
-    if (!any(grepl("Polygon\\{ polygon\\[0\\] \\}", lines))) {
-      .cgal_write_lines(repair_path, .cgal_patch_repair_polygon_soup(lines, repair_path))
-      changed <- c(changed, repair_path)
-    }
-  }
-
-  gh_path <- file.path(
-    cgal_root,
-    "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h"
-  )
-  if (file.exists(gh_path)) {
-    lines <- .cgal_read_lines(gh_path)
-    if (any(grepl("m_cost_matrices = get\\(Cost_property\\(\\), tmesh\\);", lines))) {
-      .cgal_write_lines(gh_path, .cgal_patch_garland_heckbert(lines, gh_path))
-      changed <- c(changed, gh_path)
-    }
-  }
-  invisible(changed)
 }
 
 # Apply all reviewed patches in memory, then write them together.

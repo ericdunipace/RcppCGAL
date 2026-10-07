@@ -232,6 +232,9 @@ repair_polygon_soup_fixture <- function() {
     "#include <vector>",
     "#include <cstddef>",
     "namespace CGAL {",
+    "namespace internal {",
+    "template <typename P> void resize(P& p, std::size_t n) { p.resize(n); }",
+    "}",
     "using Polygon = std::vector<std::size_t>;",
     "inline Polygon construct_canonical_polygon(const Polygon& polygon, bool& reversed)",
     "{",
@@ -246,16 +249,25 @@ repair_polygon_soup_fixture <- function() {
   )
 }
 
+# Mirrors the upstream GarlandHeckbert_quadrics_storage constructor layout.
 garland_heckbert_fixture <- function() {
   c(
     "namespace CGAL {",
     "struct Cost_matrix { static Cost_matrix Zero() { return Cost_matrix(); } };",
     "struct Cost_property {};",
     "struct Triangle_mesh {};",
-    "inline Cost_matrix get(Cost_property, Triangle_mesh&, Cost_matrix = Cost_matrix()) { return Cost_matrix(); }",
-    "struct GarlandHeckbert_probe {",
-    "  Cost_matrix m_cost_matrices;",
-    "  void init(Triangle_mesh& tmesh) {",
+    "struct Vertex_cost_map {};",
+    "struct Quadric_calculator {};",
+    "inline Vertex_cost_map get(Cost_property, Triangle_mesh&) { return Vertex_cost_map(); }",
+    "inline Vertex_cost_map get(Cost_property, Triangle_mesh&, const Cost_matrix&) { return Vertex_cost_map(); }",
+    "struct GarlandHeckbert_quadrics_storage",
+    "{",
+    "  Vertex_cost_map m_cost_matrices;",
+    "  Quadric_calculator m_quadric_calculator;",
+    "  GarlandHeckbert_quadrics_storage(Triangle_mesh& tmesh,",
+    "                                   const Quadric_calculator& quadric_calculator)",
+    "    : m_quadric_calculator(quadric_calculator)",
+    "  {",
     "    m_cost_matrices = get(Cost_property(), tmesh);",
     "  }",
     "};",
@@ -561,13 +573,36 @@ test_that("each reviewed patch makes its explicit semantic change", {
     repair_polygon_soup_fixture(),
     "Polygon_mesh_processing/repair_polygon_soup.h"
   )
-  expect_true(any(grepl("return polygon.empty() ? Polygon{} : Polygon{ polygon[0] };", repair, fixed = TRUE)))
+  expected_repair <- repair_polygon_soup_fixture()
+  # Only the return inside the size < 2 guard changes; the final one stays.
+  guard_return <- grep("^    return polygon;$", expected_repair)
+  expect_length(guard_return, 1L)
+  expected_repair <- c(
+    expected_repair[seq_len(guard_return - 1L)],
+    "    Polygon canonical_polygon;",
+    "    CGAL::internal::resize(canonical_polygon, polygon.size());",
+    "    if(polygon.size() == 1)",
+    "      canonical_polygon[0] = polygon[0];",
+    "    return canonical_polygon;",
+    expected_repair[-seq_len(guard_return)]
+  )
+  expect_identical(repair, expected_repair)
 
   gh <- .cgal_patch_garland_heckbert(
     garland_heckbert_fixture(),
     "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h"
   )
-  expect_true(any(grepl("Cost_matrix::Zero()", gh, fixed = TRUE)))
+  expected_gh <- garland_heckbert_fixture()
+  initializer <- grep("m_quadric_calculator(quadric_calculator)", expected_gh, fixed = TRUE)
+  expect_length(initializer, 1L)
+  expected_gh <- c(
+    expected_gh[seq_len(initializer - 1L)],
+    "    : m_cost_matrices(get(Cost_property(), tmesh, Cost_matrix(Cost_matrix::Zero()))),",
+    "      m_quadric_calculator(quadric_calculator)",
+    "  { }",
+    expected_gh[-seq_len(initializer + 3L)]
+  )
+  expect_identical(gh, expected_gh)
 })
 
 test_that("recognized semantic patches compile as C++11 exceptions", {
@@ -592,38 +627,82 @@ test_that("recognized semantic patches compile as C++11 exceptions", {
   expect_equal(system2(compiler, c("-std=c++11", "-fsyntax-only", probe)), 0L)
 })
 
-test_that("bundled warning patches apply idempotently on unpacked headers", {
-  root <- tempfile("cgal-bundled-warnings-")
-  dir.create(root)
-  write_fixture(
-    root,
-    "Polygon_mesh_processing/repair_polygon_soup.h",
-    repair_polygon_soup_fixture()
-  )
-  write_fixture(
-    root,
-    "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h",
-    garland_heckbert_fixture()
-  )
+# Runs against the real headers in inst/include/CGAL_zip.tar.xz. In CI that is
+# the candidate bundle rebuilt from pristine CGAL with the checked-out patches;
+# it skips until the committed bundle carries the canonical-polygon patch.
+test_that("patched canonical polygons keep degenerate polygons unchanged", {
+  skip_if_not_installed("Rcpp")
+  skip_if_not_installed("BH")
+  archive <- file.path(source_root, "inst", "include", "CGAL_zip.tar.xz")
+  skip_if_not(file.exists(archive), "no CGAL bundle in inst/include")
 
-  changed <- .patch_cgal_bundled_warnings(root)
-  expect_length(changed, 2L)
-  expect_true(any(grepl(
-    "return polygon.empty() ? Polygon{} : Polygon{ polygon[0] };",
-    readLines(file.path(root, "Polygon_mesh_processing/repair_polygon_soup.h")),
-    fixed = TRUE
-  )))
-  expect_true(any(grepl(
-    "Cost_matrix::Zero()",
-    readLines(file.path(
-      root,
-      "Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_policy_base.h"
+  include <- tempfile("cgal-real-headers-")
+  dir.create(include)
+  repair <- "Polygon_mesh_processing/repair_polygon_soup.h"
+  members <- utils::untar(archive, list = TRUE)
+  member <- grep(paste0("^[^/]+/", repair, "$"), members, value = TRUE)
+  skip_if_not(length(member) == 1L, "bundle has no repair_polygon_soup.h")
+  utils::untar(archive, exdir = include)
+  bundle_root <- file.path(include, sub("/.*", "", member))
+  if (basename(bundle_root) != "CGAL") {
+    file.rename(bundle_root, file.path(include, "CGAL"))
+  }
+  skip_if_not(
+    any(grepl(
+      "CGAL::internal::resize(canonical_polygon, polygon.size());",
+      readLines(file.path(include, "CGAL", repair)),
+      fixed = TRUE
     )),
-    fixed = TRUE
-  )))
+    "bundle predates the canonical-polygon patch"
+  )
 
-  # Second invocation on already-patched headers is a no-op
-  expect_length(.patch_cgal_bundled_warnings(root), 0L)
+  # Absolute paths: sourceCpp compiles in its own build directory.
+  include_flags <- paste0("-I", shQuote(normalizePath(c(
+    include,
+    file.path(source_root, "inst", "include"),
+    system.file("include", package = "BH")
+  ))))
+  old_flags <- Sys.getenv("PKG_CPPFLAGS", unset = NA)
+  on.exit(
+    if (is.na(old_flags)) Sys.unsetenv("PKG_CPPFLAGS") else
+      Sys.setenv(PKG_CPPFLAGS = old_flags),
+    add = TRUE
+  )
+  Sys.setenv(PKG_CPPFLAGS = paste(include_flags, collapse = " "))
+
+  env <- new.env()
+  Rcpp::sourceCpp(
+    code = paste(
+      "#include <Rcpp.h>",
+      "#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>",
+      "#include <CGAL/Polygon_mesh_processing/repair_polygon_soup.h>",
+      "#include <vector>",
+      "// [[Rcpp::export]]",
+      "Rcpp::LogicalVector rcppcgal_degenerate_polygons() {",
+      "  typedef CGAL::Exact_predicates_inexact_constructions_kernel K;",
+      "  typedef std::vector<std::size_t> Polygon;",
+      "  std::vector<K::Point_3> points(1, K::Point_3(0, 0, 0));",
+      "  Rcpp::LogicalVector out(4);",
+      "  for (std::size_t n = 0; n < 2; ++n) {",
+      "    Polygon polygon(n, 0);",
+      "    bool reversed = true;",
+      "    Polygon canonical = CGAL::Polygon_mesh_processing::internal::",
+      "      construct_canonical_polygon(points, polygon, reversed, K());",
+      "    out[2 * n] = canonical == polygon;",
+      "    out[2 * n + 1] = !reversed;",
+      "  }",
+      "  return out;",
+      "}",
+      sep = "\n"
+    ),
+    env = env,
+    rebuild = TRUE
+  )
+  # Empty and single-vertex polygons: copy of the input, reversed == false.
+  expect_identical(
+    env$rcppcgal_degenerate_polygons(),
+    c(TRUE, TRUE, TRUE, TRUE)
+  )
 })
 
 test_that("the patch stage only changes the reviewed headers", {
