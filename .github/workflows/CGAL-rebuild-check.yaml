@@ -17,7 +17,7 @@ concurrency:
 jobs:
   rebuild:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
@@ -35,23 +35,30 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      # bash, not Rscript: this must still report when setup-r itself failed.
       - name: Explain bundle generation result
         if: ${{ always() }}
         env:
           BUNDLE_RESULT: ${{ steps.bundle.outcome }}
-        shell: Rscript {0}
+        shell: bash
         run: |
-          result <- Sys.getenv("BUNDLE_RESULT")
-          lines <- c(
-            "## Generate the candidate bundle",
-            "Downloads pristine CGAL, applies the checked-out branch or PR's patch code, and generates a temporary archive for downstream checks.",
-            "Contributors do not need to commit CGAL_zip.tar.xz. After merging to main or dev, the bundle is regenerated and committed automatically when the rebuilt-bundle checks pass.",
-            paste("Bundle generation:", result)
-          )
-          if (result == "failure") lines <- c(lines,
-            "Inspect the download and patch diagnostics above. Check the configured CGAL URL/version and whether the patch code supports those pristine headers.")
-          cat(paste(lines, collapse = "\n\n"), "\n",
-              file = Sys.getenv("GITHUB_STEP_SUMMARY"), append = TRUE)
+          result="${BUNDLE_RESULT:-not run}"
+          {
+            echo "## Generate the candidate bundle"
+            echo
+            echo "Downloads pristine CGAL, applies the checked-out branch or PR's patch code, and generates a temporary archive for downstream checks."
+            echo
+            echo "Contributors do not need to commit CGAL_zip.tar.xz. After merging to dev, the bundle is regenerated and committed automatically when the rebuilt-bundle checks pass."
+            echo
+            echo "Bundle generation: ${result}"
+            if [[ "$result" == "failure" ]]; then
+              echo
+              echo "Inspect the download and patch diagnostics above. Check the configured CGAL URL/version and whether the patch code supports those pristine headers."
+            elif [[ "$result" == "skipped" || "$result" == "not run" ]]; then
+              echo
+              echo "Bundle generation did not run. Inspect the first failed setup step above (for example, setup-r timing out on a slow package mirror)."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
   package-checks:
     needs: rebuild
@@ -74,7 +81,7 @@ jobs:
           - {os: macos-latest, r: release}
           - {os: windows-latest, r: release}
     runs-on: ${{ matrix.config.os }}
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       CGAL_DIR: ""
       R_KEEP_PKG_SOURCE: yes
@@ -126,34 +133,41 @@ jobs:
           INSTALL_RESULT: ${{ steps.install.outcome }}
           SMOKE_RESULT: ${{ steps.smoke.outcome }}
           DUMMY_RESULT: ${{ steps.dummy.outcome }}
-        shell: Rscript {0}
+        # bash (3.2-compatible for macOS), not Rscript: must report even when setup-r failed.
+        shell: bash
         run: |
-          results <- c(
-            Installation = Sys.getenv("INSTALL_RESULT"),
-            `Header smoke compilation` = Sys.getenv("SMOKE_RESULT"),
-            `Downstream dummy package` = Sys.getenv("DUMMY_RESULT")
-          )
-          results[results == ""] <- "not run"
-          lines <- c(
-            "## Rebuilt bundle checks",
-            "Tests a temporary bundle rebuilt from pristine CGAL using the checked-out patch code. Contributors do not need to commit CGAL_zip.tar.xz. After merging to main or dev, the bundle is regenerated and committed automatically when the rebuilt-bundle checks pass.",
-            paste(sprintf("- %s: %s", names(results), results), collapse = "\n")
-          )
-          if (any(results == "failure")) lines <- c(lines,
-            "Inspect the first failed step's diagnostics above. Installation or package-check failures require fixing the candidate package; smoke or dummy failures indicate downstream compilation/check problems with the candidate headers. Compiler warnings fail the dummy check.")
-          if (all(results == "success")) lines <- c(lines,
-            "The candidate passed these checks. Also inspect the shipped-bundle check: a passing rebuild does not establish that the committed archive is current or that installation preserves it.")
-          cat(paste(lines, collapse = "\n\n"), "\n",
-              file = Sys.getenv("GITHUB_STEP_SUMMARY"), append = TRUE)
+          install="${INSTALL_RESULT:-not run}"
+          smoke="${SMOKE_RESULT:-not run}"
+          dummy="${DUMMY_RESULT:-not run}"
+          {
+            echo "## Rebuilt bundle checks"
+            echo
+            echo "Tests a temporary bundle rebuilt from pristine CGAL using the checked-out patch code. Contributors do not need to commit CGAL_zip.tar.xz. After merging to dev, the bundle is regenerated and committed automatically when the rebuilt-bundle checks pass."
+            echo
+            echo "- Installation: ${install}"
+            echo "- Header smoke compilation: ${smoke}"
+            echo "- Downstream dummy package: ${dummy}"
+            if [[ "$install $smoke $dummy" == *failure* ]]; then
+              echo
+              echo "Inspect the first failed step's diagnostics above. Installation or package-check failures require fixing the candidate package; smoke or dummy failures indicate downstream compilation/check problems with the candidate headers. Compiler warnings fail the dummy check."
+            fi
+            if [[ "$install" == success && "$smoke" == success && "$dummy" == success ]]; then
+              echo
+              echo "The candidate passed these checks. Also inspect the shipped-bundle check: a passing rebuild does not establish that the committed archive is current or that installation preserves it."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
   commit-bundle:
     name: Commit regenerated bundle
+    # dev only: the regenerated bundle reaches main through the dev -> main PR,
+    # which avoids pushing past main's branch protection and conflicting
+    # binary bundle commits on two branches.
     if: >-
       (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
-      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev')
+      github.ref == 'refs/heads/dev'
     needs: [rebuild, package-checks, check]
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     permissions:
       contents: write
       actions: write

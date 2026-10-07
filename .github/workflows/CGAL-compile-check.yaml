@@ -132,26 +132,34 @@ jobs:
           PRESERVATION_RESULT: ${{ steps.preservation.outcome }}
           SMOKE_RESULT: ${{ steps.smoke.outcome }}
           DUMMY_RESULT: ${{ steps.dummy.outcome }}
-        shell: Rscript {0}
+        # bash (3.2-compatible for macOS), not Rscript: must report even when setup-r failed.
+        shell: bash
         run: |
-          results <- c(
-            Installation = Sys.getenv("INSTALL_RESULT"),
-            `Bundled headers unchanged` = Sys.getenv("PRESERVATION_RESULT"),
-            `Header smoke compilation` = Sys.getenv("SMOKE_RESULT"),
-            `Downstream dummy package` = Sys.getenv("DUMMY_RESULT")
-          )
-          results[results == ""] <- "not run"
-          lines <- c(
-            "## Shipped bundle checks",
-            "Installs the committed inst/include/CGAL_zip.tar.xz, verifies the installed CGAL files match it, then checks downstream use.",
-            paste(sprintf("- %s: %s", names(results), results), collapse = "\n")
-          )
-          if (Sys.getenv("PRESERVATION_RESULT") == "failure") lines <- c(lines,
-            "The preservation check failed. Inspect its diagnostics for changed, missing, or added headers. If installation modified them, remove those bundled-header edits from the installation path and apply fixes before bundling. After merge, successful rebuilt-bundle checks commit the regenerated archive automatically. Downloaded or user-supplied CGAL may still be patched.",
-            "If the rebuilt-bundle workflow passes while this check fails, the candidate passed its tests but the committed bundle or its installation behavior still needs revision.")
-          if (Sys.getenv("INSTALL_RESULT") == "failure") lines <- c(lines,
-            "Installation failed. Inspect the installation diagnostics; downstream checks could not run.")
-          if (any(results[c(3L, 4L)] == "failure")) lines <- c(lines,
-            "The committed headers produced downstream compilation/check problems. Inspect the compiler and R CMD check diagnostics. Compiler warnings fail the dummy check; update the patch code. After merge, successful rebuilt-bundle checks regenerate and commit the archive automatically.")
-          cat(paste(lines, collapse = "\n\n"), "\n",
-              file = Sys.getenv("GITHUB_STEP_SUMMARY"), append = TRUE)
+          install="${INSTALL_RESULT:-not run}"
+          preservation="${PRESERVATION_RESULT:-not run}"
+          smoke="${SMOKE_RESULT:-not run}"
+          dummy="${DUMMY_RESULT:-not run}"
+          {
+            echo "## Shipped bundle checks"
+            echo
+            echo "Installs the committed inst/include/CGAL_zip.tar.xz, verifies the installed CGAL files match it, then checks downstream use."
+            echo
+            echo "- Installation: ${install}"
+            echo "- Bundled headers unchanged: ${preservation}"
+            echo "- Header smoke compilation: ${smoke}"
+            echo "- Downstream dummy package: ${dummy}"
+            if [[ "$preservation" == failure ]]; then
+              echo
+              echo "The preservation check failed. Inspect its diagnostics for changed, missing, or added headers. If installation modified them, remove those bundled-header edits from the installation path and apply fixes before bundling. After merge, successful rebuilt-bundle checks commit the regenerated archive automatically. Downloaded or user-supplied CGAL may still be patched."
+              echo
+              echo "If the rebuilt-bundle workflow passes while this check fails, the candidate passed its tests but the committed bundle or its installation behavior still needs revision."
+            fi
+            if [[ "$install" == failure ]]; then
+              echo
+              echo "Installation failed. Inspect the installation diagnostics; downstream checks could not run."
+            fi
+            if [[ "$smoke" == failure || "$dummy" == failure ]]; then
+              echo
+              echo "The committed headers produced downstream compilation/check problems. Inspect the compiler and R CMD check diagnostics. Compiler warnings fail the dummy check; update the patch code. After merge, successful rebuilt-bundle checks regenerate and commit the archive automatically."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
