@@ -757,7 +757,17 @@
 }
 
 .cgal_rewrite_output <- function(lines) {
+  using_pattern <- function(stream) {
+    paste0(
+      "(?<![[:alnum:]_])using[[:space:]]+std::", stream, "[[:space:]]*;"
+    )
+  }
+  # A using-declaration must become a local alias so that later unqualified
+  # uses (e.g. `cerr << ...` in Min_sphere_of_spheres_d_impl.h) still resolve.
   rules <- list(
+    list(using_pattern("cout"), "auto& cout = Rcpp::Rcout;"),
+    list(using_pattern("cerr"), "auto& cerr = Rcpp::Rcerr;"),
+    list(using_pattern("clog"), "auto& clog = Rcpp::Rcerr;"),
     list("std::cout", "Rcpp::Rcout"),
     list("std::cerr", "Rcpp::Rcerr"),
     list("std::clog", "Rcpp::Rcerr"),
