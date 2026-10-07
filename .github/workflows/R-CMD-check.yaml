@@ -138,14 +138,15 @@ jobs:
           name: check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}
           path: check-summary-${{ matrix.config.os }}-${{ matrix.config.r }}.md
           if-no-files-found: warn
-          
-    timeout-minutes: 10
+
+    timeout-minutes: 30
 
   revdep:
+    # Release-only: runs on PRs into main/master, never on pushes or the
+    # follow-up dispatch that re-checks a regenerated bundle.
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' &&
-      (github.base_ref == 'main' || github.base_ref == 'master'))
+      github.event_name == 'pull_request' &&
+      (github.base_ref == 'main' || github.base_ref == 'master')
     runs-on: ubuntu-latest
     timeout-minutes: 360
     env:
@@ -209,9 +210,8 @@ jobs:
 
   release-summary:
     if: >-
-      always() && (github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' &&
-      (github.base_ref == 'main' || github.base_ref == 'master')))
+      always() && github.event_name == 'pull_request' &&
+      (github.base_ref == 'main' || github.base_ref == 'master')
     needs: [R-CMD-check, revdep]
     runs-on: ubuntu-latest
 
