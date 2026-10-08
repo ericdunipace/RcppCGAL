@@ -30,6 +30,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Tyler Morgan-Wall \email{tylermw@gmail.com} [contributor]
+  \item Michael Chirico [contributor]
   \item The CGAL Project [copyright holder]
 }
 

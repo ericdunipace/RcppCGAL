@@ -12,6 +12,8 @@ Authors@R:
     person(given = "Tyler", "Morgan-Wall", 
         role = c("ctb"),
         email = "tylermw@gmail.com"),
+    person(given = "Michael", family = "Chirico",
+        role = c("ctb")),
     person("The CGAL Project", role = "cph")
     )
 Description: Creates a header only package to link to the 'CGAL' 
