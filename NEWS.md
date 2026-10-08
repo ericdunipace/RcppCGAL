@@ -1,8 +1,6 @@
-# RcppCGAL (development version)
-
 # Package RcppCGAL
 
-## Changes in dev
+## Changes in 6.2.1.1
 * Updated stale vignette html files.
 * Added `lifecycle` to imports to allow deprecation badges and messages
 * `cgal_version()` soft-deprecated in favor of `cgal_header_info()`
