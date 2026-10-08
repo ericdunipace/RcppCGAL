@@ -1,4 +1,17 @@
+# RcppCGAL (development version)
+
 # Package RcppCGAL
+
+## Changes in dev
+* Updated stale vignette html files.
+* Added `lifecycle` to imports to allow deprecation badges and messages
+* `cgal_version()` soft-deprecated in favor of `cgal_header_info()`
+* Added `cgal_bundled_version()` to return the version number of
+the bundled header files
+* Found a bunch of other CRAN banned functions (e.g., `assert`, `rand`) and changed patch functions to catch and change them
+* `using std::cerr;` (and `cout`/`clog`) in CGAL headers now become aliases to R's streams, so unqualified `cerr << ...` (e.g., in `Min_sphere_of_spheres_d`) compiles again (#29)
+* Patched the Garland-Heckbert simplification policies to zero-initialize their cost matrices, removing an "is used uninitialized" warning that R CMD check reports in downstream packages (CGAL/cgal#9667; thanks @MichaelChirico, #28)
+* Patched `repair_polygon_soup()`'s canonical-polygon copy to avoid GCC `-Wstringop-overflow`/`-Warray-bounds` false positives; GCC 13 reports the former as a significant R CMD check warning in downstream packages (CGAL/cgal#9669; #28)
 
 ## Changes in 6.2.1
 * Updating header files to version 6.2.1

@@ -22,10 +22,21 @@ if (file.exists(helper_path)) {
   stop("Configure helper functions not found!")
 }
 
+helper_path2 <- file.path("tools", "config", "semantic_patches.R")
+if (file.exists(helper_path2)) {
+  source_file(helper_path2)
+} else {
+  stop("Configure helper functions not found!")
+}
+
 # package environment variables, set one time
 DEFAULT_URL <- "https://github.com/CGAL/cgal/releases/download/v6.2.1/CGAL-6.2.1.tar.xz"
 DEFAULT_VERSION <- "6.2.1"
-HEADER_SOURCE <- paste0("This is CGAL version ", DEFAULT_VERSION, ".")
+HEADER_SOURCE <- paste0(
+  "Using bundled CGAL headers, version ",
+  DEFAULT_VERSION,
+  "."
+)
 
 if (tar_exists && not_set) {
   CLEANED <- TRUE
@@ -43,10 +54,14 @@ if (tar_exists && not_set) {
     env_cgal <- DEFAULT_URL
   } else {
     message(paste0("Getting CGAL files from\n    ", env_cgal, "\n"))
-    HEADER_SOURCE <- paste0("Supplied own CGAL from ", env_cgal)
+    HEADER_SOURCE <- paste0(
+      "Using user-supplied CGAL headers from ",
+      env_cgal,
+      "."
+    )
   }
   cgal_predownloader(env_cgal, ".", DL)
-  .cgal.cerr.remover("inst") # automatically adds include/CGAL as of now
+  .patch_cgal_headers_for_R("inst") # automatically adds include/CGAL as of now
   CLEANED <- TRUE
 }
 
@@ -54,4 +69,7 @@ if (isFALSE(CLEANED)) {
   warning("Cleaning of CGAL header files failed!")
 }
 
-define(SOURCE = paste0("'", HEADER_SOURCE, "'"))
+define(
+  BUNDLED_CGAL_VERSION = paste0("'", DEFAULT_VERSION, "'"),
+  SOURCE = paste0("'", HEADER_SOURCE, "'")
+)

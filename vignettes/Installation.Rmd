@@ -9,12 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This document will briefly cover the installation process of the header files for users since there are some possible environmental variables that can be used to aid in the download/installation of the CGAL header files on your machine. By default, the package is bundled with header version `r RcppCGAL:::cgal_pkg_state$DEFAULT_VERSION`. If you wish for more control or there is an error, read on!
+This document will briefly cover the installation process of the header files for users since there are some possible environmental variables that can be used to aid in the download/installation of the CGAL header files on your machine. By default, the package is bundled with header version `r RcppCGAL:::cgal_pkg_state$BUNDLED_CGAL_VERSION`. If you wish for more control or there is an error, read on!
 
 ## Installation without system environment flags
 The process of installing is, hopefully, quite simple for most users. 
 
-### You just want the default `r RcppCGAL:::cgal_pkg_state$DEFAULT_VERSION` version
+### You just want the default `r RcppCGAL:::cgal_pkg_state$BUNDLED_CGAL_VERSION` version
 If you don't have any strong desires, do the following:
 ``` {r, eval = FALSE}
 install.packages("RcppCGAL")
