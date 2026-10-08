@@ -1,40 +1,91 @@
-name: "CGAL shipped bundle: unchanged install + downstream checks"
+name: "CGAL shipped bundle: current and unchanged by install"
+
+# The rebuilt-bundle checks prove the candidate headers work. These jobs cover
+# the committed inst/include/CGAL_zip.tar.xz, which is what ships:
+# - stale-bundle: on PRs into main/master and on dispatch (including the bot's
+#   follow-up run after it commits a regenerated bundle), the committed bundle
+#   must match the candidate rebuilt in this run, so the rebuilt-bundle results
+#   apply to it.
+# - install-preservation: installing must not change the bundled headers.
+# On dev PRs and pushes the committed bundle is expected to lag patch changes
+# until the bot regenerates it, so it is not compared or compiled there.
 
 on:
   workflow_call:
 
 jobs:
-  cgal-audit:
-    name: Shipped bundle checks (${{ matrix.config.os }}, ${{ matrix.config.r }})
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - { os: ubuntu-latest, r: 'release' }
-          - { os: ubuntu-latest,   r: 'devel', http-user-agent: 'release' }
-          - { os: macos-latest, r: 'release' }
-          - { os: windows-latest, r: 'release' }
+  stale-bundle:
+    name: Committed bundle matches rebuild
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' &&
+      (github.base_ref == 'main' || github.base_ref == 'master'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
 
-    runs-on: ${{ matrix.config.os }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Download the candidate bundle rebuilt in this run
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: cgal-candidate-bundle
+          path: ${{ runner.temp }}/candidate
+
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          r-version: release
+
+      - name: Compare committed and rebuilt header contents
+        id: compare
+        run: Rscript tools/ci/bundle-changed.R inst/include/CGAL_zip.tar.xz "$RUNNER_TEMP/candidate/CGAL_zip.tar.xz"
+
+      - name: Fail if the committed bundle is stale
+        if: steps.compare.outputs.changed == 'true'
+        run: |
+          echo "::error::inst/include/CGAL_zip.tar.xz does not match the bundle rebuilt from this branch's patch code. Merge the patch changes into dev, let the bot commit the regenerated bundle, then update this PR."
+          exit 1
+
+      # bash, not Rscript: must report even when setup-r failed.
+      - name: Explain committed bundle comparison
+        if: ${{ always() }}
+        env:
+          COMPARE_RESULT: ${{ steps.compare.outcome }}
+          CHANGED: ${{ steps.compare.outputs.changed }}
+        shell: bash
+        run: |
+          compare="${COMPARE_RESULT:-not run}"
+          {
+            echo "## Committed bundle matches rebuild"
+            echo
+            echo "Compares the CGAL files in the committed inst/include/CGAL_zip.tar.xz with the candidate rebuilt from pristine CGAL in this run, ignoring archive metadata."
+            echo
+            echo "- Comparison: ${compare}"
+            if [[ "$CHANGED" == true ]]; then
+              echo "- Result: stale; the committed bundle differs from the rebuild"
+              echo
+              echo "The rebuilt-bundle checks do not cover what ships until the bot regenerates the committed bundle. Merge the patch changes into dev and wait for the bot's \"Regenerate bundled CGAL headers\" commit before releasing."
+            elif [[ "$CHANGED" == false ]]; then
+              echo "- Result: current; the rebuilt-bundle checks apply to the committed bundle"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  install-preservation:
+    name: Install preserves the committed bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
-          r-version: ${{ matrix.config.r }}
+          r-version: release
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
-          extra-packages: |
-            any::Rcpp
-            any::rcmdcheck
-
-      - name: Test header patch transformations
-        shell: Rscript {0}
-        run: |
-          testthat::test_file("tools/tests/test-semantic-patches.R")
+          dependencies: '"hard"'
 
       - name: Record the headers shipped in the bundle
         shell: Rscript {0}
@@ -66,8 +117,6 @@ jobs:
         shell: Rscript {0}
         run: |
           install.packages(".", repos = NULL, type = "source")
-          install.packages("BH")
-          install.packages("RcppEigen")
 
       - name: Verify installation preserves the bundled headers
         id: preservation
@@ -103,63 +152,29 @@ jobs:
           }
           message("Installed CGAL headers match the shipped bundle.")
 
-      - name: Compile header smoke tests
-        id: smoke
-        shell: Rscript {0}
-        run: |
-          source("tools/compile-cgal-headers.R")
-          compile_cgal_headers()
-
-      - name: Check downstream dummy package; compiler warnings fail
-        id: dummy
-        shell: Rscript {0}
-        run: |
-          pkg <- pkgbuild::build(
-            "tools/cran-probe",
-            dest_path = tempdir()
-          )
-
-          result <- rcmdcheck::rcmdcheck(
-            pkg,
-            args = "--no-manual",
-            error_on = "warning"
-          )
-
-      - name: Explain shipped bundle check results
+      # bash, not Rscript: must report even when setup-r failed.
+      - name: Explain install preservation result
         if: ${{ always() }}
         env:
           INSTALL_RESULT: ${{ steps.install.outcome }}
           PRESERVATION_RESULT: ${{ steps.preservation.outcome }}
-          SMOKE_RESULT: ${{ steps.smoke.outcome }}
-          DUMMY_RESULT: ${{ steps.dummy.outcome }}
-        # bash (3.2-compatible for macOS), not Rscript: must report even when setup-r failed.
         shell: bash
         run: |
           install="${INSTALL_RESULT:-not run}"
           preservation="${PRESERVATION_RESULT:-not run}"
-          smoke="${SMOKE_RESULT:-not run}"
-          dummy="${DUMMY_RESULT:-not run}"
           {
-            echo "## Shipped bundle checks"
+            echo "## Install preserves the committed bundle"
             echo
-            echo "Installs the committed inst/include/CGAL_zip.tar.xz, verifies the installed CGAL files match it, then checks downstream use."
+            echo "Installs RcppCGAL from the committed inst/include/CGAL_zip.tar.xz and verifies the installed CGAL files match it."
             echo
             echo "- Installation: ${install}"
             echo "- Bundled headers unchanged: ${preservation}"
-            echo "- Header smoke compilation: ${smoke}"
-            echo "- Downstream dummy package: ${dummy}"
             if [[ "$preservation" == failure ]]; then
               echo
-              echo "The preservation check failed. Inspect its diagnostics for changed, missing, or added headers. If installation modified them, remove those bundled-header edits from the installation path and apply fixes before bundling. After merge, successful rebuilt-bundle checks commit the regenerated archive automatically. Downloaded or user-supplied CGAL may still be patched."
-              echo
-              echo "If the rebuilt-bundle workflow passes while this check fails, the candidate passed its tests but the committed bundle or its installation behavior still needs revision."
+              echo "Installation modified the bundled headers. Inspect the diagnostics for changed, missing, or added headers, remove those edits from the installation path, and apply fixes during bundle generation instead. Downloaded or user-supplied CGAL may still be patched."
             fi
             if [[ "$install" == failure ]]; then
               echo
-              echo "Installation failed. Inspect the installation diagnostics; downstream checks could not run."
-            fi
-            if [[ "$smoke" == failure || "$dummy" == failure ]]; then
-              echo
-              echo "The committed headers produced downstream compilation/check problems. Inspect the compiler and R CMD check diagnostics. Compiler warnings fail the dummy check; update the patch code. After merge, successful rebuilt-bundle checks regenerate and commit the archive automatically."
+              echo "Installation failed. Inspect the installation diagnostics."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
