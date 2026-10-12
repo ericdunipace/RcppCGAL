@@ -5,7 +5,6 @@
 ^\.github$
 ^\.git$
 ^\.gitignore$
-^README\.md$  
 ^inst/saveCheck/OUTPUT_CHANGED$
 ^saveCheck$
 ^revdep$
